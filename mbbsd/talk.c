@@ -1569,7 +1569,7 @@ static const char
 },
 *hlp_talkmisc[] = {
     "【其它】", NULL,
-    "  閱\讀信件",   "r",
+    "  閱讀信件",   "r",
     "  使用說明",    "h",
     NULL,
 },

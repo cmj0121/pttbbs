@@ -254,7 +254,7 @@ inline fav_t *get_fav_root(void){
 /**
  * 是否為有效的 entry
  */
-inline int valid_item(fav_type_t *ft){
+int valid_item(fav_type_t *ft){
     return ft->attr & FAVH_FAV;
 }
 

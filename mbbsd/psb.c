@@ -839,7 +839,7 @@ pae_input_processor(int key, int curr, int total GCC_UNUSED, int rows GCC_UNUSED
             if (vansf("確定要刪除 %s 嗎？ (y/N) ", cx->descs[curr]) == 'y')
                 unlink(cx->files[curr]);
             vmsgf("系統檔案[%s]: %s", cx->files[curr],
-                  !dashf(cx->files[curr]) ?  "刪除成功\ " : "未刪除");
+                  !dashf(cx->files[curr]) ?  "刪除成功 " : "未刪除");
             return PSB_NOP;
 
         case KEY_ENTER:

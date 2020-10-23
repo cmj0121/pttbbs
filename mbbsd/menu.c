@@ -616,7 +616,7 @@ static int x_admin_user(void);
 static int deprecate_userlist() {
     vs_hdr2(" " BBSNAME " ", " 已移至使用者名單");
     outs("\n"
-         "此功\能已移至使用者名單區。\n"
+         "此功能已移至使用者名單區。\n"
          "請至使用者名單 (Ctrl-U) 並按下對應的鍵。\n"
          "(在使用者名單按 h 會有完整說明)\n\n"
          "切換呼叫器:     Ctrl-U p\n"
@@ -643,7 +643,7 @@ static const commands_t m_admin_user[] = {
                                         "OLogin Log     最近上線記錄"},
     {u_list, PERM_SYSOP,		"Users List     列出註冊名單"},
     {search_user_bybakpwd, PERM_SYSOP|PERM_ACCOUNTS,
-                                        "DOld User data 查閱\備份使用者資料"},
+                                        "DOld User data 查閱備份使用者資料"},
     {NULL, 0, NULL}
 };
 
@@ -979,7 +979,7 @@ static const commands_t      cmdlist[] = {
 };
 
 int main_menu(void) {
-    domenu(M_MMENU, "主功\能表", (ISNEWMAIL(currutmp) ? 'M' : 'C'), cmdlist);
+    domenu(M_MMENU, "主功能表", (ISNEWMAIL(currutmp) ? 'M' : 'C'), cmdlist);
     return 0;
 }
 

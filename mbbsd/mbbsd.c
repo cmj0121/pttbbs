@@ -1229,7 +1229,7 @@ user_login(void)
 	check_mailbox_quota();
 
         if (!HasUserPerm(PERM_BASIC)) {
-            vs_hdr2(" 停權通知 ", " 部份功\能已被暫停使用");
+            vs_hdr2(" 停權通知 ", " 部份功能已被暫停使用");
             outs(ANSI_COLOR(1;31) "\n\n\t抱歉，你的帳號已被停權。\n"
                  "\t詳情請至 ViolateLaw 看板搜尋你的 ID。\n" ANSI_RESET);
             pressanykey();

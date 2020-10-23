@@ -1,6 +1,6 @@
 include Makefile.in
 
-SRC := $(wildcard *.c)
+SRC := $(wildcard *.c) big5.c
 OBJ := $(subst .c,.o,$(SRC))
 LIB := libsys.a
 
@@ -19,3 +19,6 @@ help:  			# show this message
 
 $(LIB): $(OBJ)
 	$(AR) -csr $@ $^
+
+big5.c:
+	./big5_gen.py > $@

@@ -2,4 +2,6 @@ SRCROOT := $(shell git rev-parse --show-toplevel)
 VAR_H   := $(SRCROOT)/include/var.h
 
 CC     := gcc
-CFLAGS := -I $(SRCROOT)/include -DBBSHOME='"$(HOME)"'
+CFLAGS := -Wl,--no-as-needed -I $(SRCROOT)/include -DBBSHOME='"$(HOME)"'
+
+COMMON_LIB := -L $(SRCROOT)/common/bbs -L $(SRCROOT)/common/sys -L $(SRCROOT)/common/osdep -lbbs -lsys -losdep

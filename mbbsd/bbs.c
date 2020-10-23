@@ -184,7 +184,7 @@ check_locked(fileheader_t *fhdr)
         scr = vscr_save();
         vs_hdr("結案並停止回應");
         move(5, 0);
-        outs("  請注意，本功\能 (m+L) 是「結案並終止回應」(禁回文推文)，\n"
+        outs("  請注意，本功能 (m+L) 是「結案並終止回應」(禁回文推文)，\n"
              "  一直都不是「鎖定文章(變唯讀)」。"
              "正牌「鎖定文章」是只有站長可用的 ^E。\n\n"
              "  所以終止回應後使用者仍可修改此檔。\n\n"
@@ -192,7 +192,7 @@ check_locked(fileheader_t *fhdr)
              "但短期內此行為不會改變。\n\n"
              "  請勿再提報此項為「鎖定有 bug」, 謝謝\n\n"
              ANSI_COLOR(1;31)
-             "  另外，此功\能目前有同步問題，"
+             "  另外，此功能目前有同步問題，"
              "已在線上的板友在離開看板前都有機會回應/推文。\n"
              ANSI_RESET
              );
@@ -574,7 +574,7 @@ readtitle(void)
 	brd_title = bp->title + 7;
 
     showtitle(currBM, brd_title);
-    outs("[←]離開 [→]閱\讀 [Ctrl-P]發表文章 [d]刪除 [z]精華區 [i]看板資訊/設定 [h]說明\n");
+    outs("[←]離開 [→]閱讀 [Ctrl-P]發表文章 [d]刪除 [z]精華區 [i]看板資訊/設定 [h]說明\n");
     buf[0] = 0;
 
 #ifdef USE_COOLDOWN
@@ -1264,7 +1264,7 @@ do_post_article(int edflags)
     int             money = 0;
     char            genbuf[PATHLEN];
     const char	    *owner;
-    char            ctype[8][5] = {"問題", "建議", "討論", "心得",
+    char            ctype[8][6] = {"問題", "建議", "討論", "心得",
 				   "閒聊", "請益", "情報",
 				   "公告" // TN_ANNOUNCE
 				  };
@@ -4280,7 +4280,7 @@ int check_cooldown(boardheader_t *bp)
 static int
 mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
 #ifndef USE_TIME_CAPSULE
-    vmsg("此功\能未開啟，請洽站長。");
+    vmsg("此功能未開啟，請洽站長。");
     return FULLUPDATE;
 #else
     char pattern[STRLEN];
@@ -4299,7 +4299,7 @@ mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
     assert(bp);
 
     if (!(bp->brdattr & BRD_BM_MASK_CONTENT)) {
-        vmsg("要開啟此項功\能請洽群組長。");
+        vmsg("要開啟此項功能請洽群組長。");
         return FULLUPDATE;
     }
 
@@ -4388,7 +4388,7 @@ static int
 b_moved_to_config()
 {
     if (currmode & MODE_BOARD) {
-	vmsg("這個功\能已移入看板設定 (i) 去了！");
+	vmsg("這個功能已移入看板設定 (i) 去了！");
 	return FULLUPDATE;
     }
     return DONOTHING;
@@ -4398,7 +4398,7 @@ static int
 moved_to_ctrl_e()
 {
     if (currmode & MODE_BOARD) {
-	vmsg("這個功\能已移入文章管理 (Ctrl-E) 去了！");
+	vmsg("這個功能已移入文章管理 (Ctrl-E) 去了！");
 	return FULLUPDATE;
     }
     return DONOTHING;

@@ -438,7 +438,7 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
 	move(21, 0);
 	clrtobot();
 	move(22, 0);
-	prints("此狀態下無法使用搜尋" AID_DISPLAYNAME "功\能");
+	prints("此狀態下無法使用搜尋" AID_DISPLAYNAME "功能");
 	pressanykey();
 	return FULLUPDATE;
     }
