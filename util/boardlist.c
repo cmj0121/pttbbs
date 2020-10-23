@@ -1,17 +1,17 @@
-/* ³o¬O¥Î¨Ó±N¾ğª¬¤ÀÃş¿é¥X¦¨ perl module (¥i¥Hµ¹¹³¬O man/ ¨Ï¥Î) */
+/* é€™æ˜¯ç”¨ä¾†å°‡æ¨¹ç‹€åˆ†é¡è¼¸å‡ºæˆ perl module (å¯ä»¥çµ¦åƒæ˜¯ man/ ä½¿ç”¨) */
 #include "bbs.h"
-/* ²£¥Í hash ªº¤º®e¦p¤U:
+/* ç”¢ç”Ÿ hash çš„å…§å®¹å¦‚ä¸‹:
 
-   $db{'tobid.BRDNAME'}  §â BRDNAME(¤j¤p¼g»İ¥¿½T) ¬d bid
-   $db{'parent.BID'}     ±q BID ¬d parent ªº bid
-   $db{'tobrdname.BID'}  ±q BID ¬d­^¤å¬İªO¦WºÙ
-   $db{'look.SBRDNAME'}  ±q¥ş³¡³£¬O¤p¼gªº SBRDNAME ¬d¥¿½Tªº¬İªO¤j¤p¼g
-   $db{'BID.isboard'}    ¬İ BID ¬O¬İªO(1)©Î¸s²Õ(0)
-   $db{'BID.brdname'}    ±q BID ¬d brdname
-   $db{'BID.title'}      ¬d BID ªº¤¤¤åªO¦W
-   $db{'BID.over18'}     ¬O§_¬° 18 ¸T
+   $db{'tobid.BRDNAME'}  æŠŠ BRDNAME(å¤§å°å¯«éœ€æ­£ç¢º) æŸ¥ bid
+   $db{'parent.BID'}     å¾ BID æŸ¥ parent çš„ bid
+   $db{'tobrdname.BID'}  å¾ BID æŸ¥è‹±æ–‡çœ‹æ¿åç¨±
+   $db{'look.SBRDNAME'}  å¾å…¨éƒ¨éƒ½æ˜¯å°å¯«çš„ SBRDNAME æŸ¥æ­£ç¢ºçš„çœ‹æ¿å¤§å°å¯«
+   $db{'BID.isboard'}    çœ‹ BID æ˜¯çœ‹æ¿(1)æˆ–ç¾¤çµ„(0)
+   $db{'BID.brdname'}    å¾ BID æŸ¥ brdname
+   $db{'BID.title'}      æŸ¥ BID çš„ä¸­æ–‡æ¿å
+   $db{'BID.over18'}     æ˜¯å¦ç‚º 18 ç¦
    $db{'BID.BM.0'} .. $db{'BID.BM.4'}
-                         ¸ÓªOªO¥D ID
+                         è©²æ¿æ¿ä¸» ID
  */
 int parent[MAX_BOARD];
 

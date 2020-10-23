@@ -1,23 +1,23 @@
 #include "bbs.h"
 
-// XXX TODO bvote ¸ò¹ê»Úªº vote control file ¦³®É·|¤£¦P¨B...
-// XXX TODO ¶}²¼ÁÙ¬Oµ¹¿W¥ßªº utility ©Î daemon ¥h¶]¤ñ¸û¦n
+// XXX TODO bvote è·Ÿå¯¦éš›çš„ vote control file æœ‰æ™‚æœƒä¸åŒæ­¥...
+// XXX TODO é–‹ç¥¨é‚„æ˜¯çµ¦ç¨ç«‹çš„ utility æˆ– daemon å»è·‘æ¯”è¼ƒå¥½
 
 #define MAX_VOTE_NR	(20)
 #define MAX_VOTE_PAGE	(5)
 #define ITEM_PER_PAGE	(30)
 
-static const char * const STR_bv_control = "control";	/* §ë²¼¤é´Á ¿ï¶µ */
-static const char * const STR_bv_desc    = "desc";	/* §ë²¼¥Øªº */
-static const char * const STR_bv_ballots = "ballots";	/* §ëªº²¼ (per byte) */
+static const char * const STR_bv_control = "control";	/* æŠ•ç¥¨æ—¥æœŸ é¸é … */
+static const char * const STR_bv_desc    = "desc";	/* æŠ•ç¥¨ç›®çš„ */
+static const char * const STR_bv_ballots = "ballots";	/* æŠ•çš„ç¥¨ (per byte) */
 static const char * const STR_bv_flags   = "flags";
-static const char * const STR_bv_comments= "comments";	/* §ë²¼ªÌªº«ØÄ³ */
-static const char * const STR_bv_limited = "limited";	/* ¨p¤H§ë²¼ */
-static const char * const STR_bv_limits  = "limits";	/* §ë²¼¸ê®æ­­¨î */
+static const char * const STR_bv_comments= "comments";	/* æŠ•ç¥¨è€…çš„å»ºè­° */
+static const char * const STR_bv_limited = "limited";	/* ç§äººæŠ•ç¥¨ */
+static const char * const STR_bv_limits  = "limits";	/* æŠ•ç¥¨è³‡æ ¼é™åˆ¶ */
 static const char * const STR_bv_title   = "vtitle";
 static const char * const STR_bv_lock    = "vlock";
-static const char * const STR_bv_logs    = "vlogs";     /* §ë²¼¬ö¿ı */
-static const char * const STR_bv_logconf = "logconf";   /* §ë²¼¬ö¿ı³]©w */
+static const char * const STR_bv_logs    = "vlogs";     /* æŠ•ç¥¨ç´€éŒ„ */
+static const char * const STR_bv_logconf = "logconf";   /* æŠ•ç¥¨ç´€éŒ„è¨­å®š */
 
 static const char * const STR_bv_results = "results";
 
@@ -109,7 +109,7 @@ b_suckinfile_invis(FILE * fp, const char *fname, const char *boardname)
 		    *post++ = '?';
 		    */
 		// mosaic method 2
-		strcpy(post, "(¬YÁô§Î¬İªO)\n");
+		strcpy(post, "(æŸéš±å½¢çœ‹æ¿)\n");
 	    }
 	    fputs(inbuf, fp);
 	    while (fgets(inbuf, sizeof(inbuf), sfp))
@@ -128,7 +128,7 @@ b_count(const char *buf, int counts[], short item_num, int *total)
     memset(counts, 0, item_num * sizeof(counts[0]));
     *total = 0;
     if ((fd = open(buf, O_RDONLY)) != -1) {
-	flock(fd, LOCK_EX);	/* Thor: ¨¾¤î¦h¤H¦P®Éºâ */
+	flock(fd, LOCK_EX);	/* Thor: é˜²æ­¢å¤šäººåŒæ™‚ç®— */
 	while (read(fd, &choice, sizeof(short)) == sizeof(short)) {
 	    if (choice >= item_num)
 		continue;
@@ -165,8 +165,8 @@ vote_report(const char *bname, const char *post_bname, const char *fname)
 
     setbpath(buf, post_bname);
     stampfile(buf, &header);
-    strlcpy(header.owner, "[°¨¸ô±´¤l]", sizeof(header.owner));
-    snprintf(header.title, sizeof(header.title), "[%s] ¬İªO ¿ï±¡³ø¾É", bname);
+    strlcpy(header.owner, "[é¦¬è·¯æ¢å­]", sizeof(header.owner));
+    snprintf(header.title, sizeof(header.title), "[%s] çœ‹æ¿ é¸æƒ…å ±å°", bname);
 
     Copy(fname, buf);
 
@@ -241,10 +241,10 @@ b_result_one(const vote_buffer_t *vbuf, boardheader_t * fh, int *total)
     setbfile(buf, bname, vbuf->title);
     if ((xfp = fopen(buf, "r"))) {
 	fgets(inbuf, sizeof(inbuf), xfp);
-	fprintf(tfp, "%s\n¡» §ë²¼¦WºÙ: %s\n\n", msg_separator, inbuf);
+	fprintf(tfp, "%s\nâ—† æŠ•ç¥¨åç¨±: %s\n\n", msg_separator, inbuf);
 	fclose(xfp);
     }
-    fprintf(tfp, "%s\n¡» §ë²¼¤¤¤î©ó: %s\n\n\n¡» ²¼¿ïÃD¥Ø´y­z:\n\n",
+    fprintf(tfp, "%s\nâ—† æŠ•ç¥¨ä¸­æ­¢æ–¼: %s\n\n\nâ—† ç¥¨é¸é¡Œç›®æè¿°:\n\n",
 	    msg_separator, Cdate(&closetime));
     fh->vtime = now;
 
@@ -254,13 +254,13 @@ b_result_one(const vote_buffer_t *vbuf, boardheader_t * fh, int *total)
     unlink(buf);
 
     // Report: result part
-    fprintf(tfp, "\n¡»§ë²¼µ²ªG:(¦@¦³ %d ¤H§ë²¼,¨C¤H³Ì¦h¥i§ë %hd ²¼)\n",
+    fprintf(tfp, "\nâ—†æŠ•ç¥¨çµæœ:(å…±æœ‰ %d äººæŠ•ç¥¨,æ¯äººæœ€å¤šå¯æŠ• %hd ç¥¨)\n",
 	    people_num, junk);
-    fprintf(tfp, "    ¿ï    ¶µ                                   Á`²¼¼Æ  ±o²¼²v  ±o²¼¤À¥¬\n");
+    fprintf(tfp, "    é¸    é …                                   ç¸½ç¥¨æ•¸  å¾—ç¥¨ç‡  å¾—ç¥¨åˆ†å¸ƒ\n");
     for (junk = 0; junk < item_num; junk++) {
 	fgets(inbuf, sizeof(inbuf), cfp);
 	chomp(inbuf);
-	fprintf(tfp, "    %-42s %3d ²¼ %6.2f%%  %6.2f%%\n", inbuf + 3, counts[junk],
+	fprintf(tfp, "    %-42s %3d ç¥¨ %6.2f%%  %6.2f%%\n", inbuf + 3, counts[junk],
 		(float)(counts[junk] * 100) / (float)(people_num),
 		(float)(counts[junk] * 100) / (float)(*total));
     }
@@ -269,17 +269,17 @@ b_result_one(const vote_buffer_t *vbuf, boardheader_t * fh, int *total)
     free(counts);
 
     // Report: comments part
-    fprintf(tfp, "%s\n¡» ¨Ï¥ÎªÌ«ØÄ³¡G\n\n", msg_separator);
+    fprintf(tfp, "%s\nâ—† ä½¿ç”¨è€…å»ºè­°ï¼š\n\n", msg_separator);
     setbfile(buf, bname, vbuf->comments);
     b_suckinfile(tfp, buf);
     unlink(buf);
 
-    fprintf(tfp, "%s\n¡» Á`²¼¼Æ = %d ²¼\n\n", msg_separator, *total);
+    fprintf(tfp, "%s\nâ—† ç¸½ç¥¨æ•¸ = %d ç¥¨\n\n", msg_separator, *total);
 
     // Report: logs part
     setbfile(buf, bname, vbuf->logs);
     if (dashf(buf)) {
-	fprintf(tfp, "%s\n¡» §ë²¼¬ö¿ı (¶È¨Ñ°Ñ¦Ò) ¡G\n\n", msg_separator);
+	fprintf(tfp, "%s\nâ—† æŠ•ç¥¨ç´€éŒ„ (åƒ…ä¾›åƒè€ƒ) ï¼š\n\n", msg_separator);
 	b_suckinfile(tfp, buf);
 	unlink(buf);
     }
@@ -380,7 +380,7 @@ b_closepolls(void)
 void
 auto_close_polls(void)
 {
-    /* ³Ì¦h¤@¤Ñ¶}²¼¤@¦¸ */
+    /* æœ€å¤šä¸€å¤©é–‹ç¥¨ä¸€æ¬¡ */
     if (now - SHM->close_vote_time > DAY_SECONDS) {
 	b_closepolls();
 	SHM->close_vote_time = now;
@@ -407,7 +407,7 @@ vote_view(const vote_buffer_t *vbuf, const char *bname)
 
     if ((fp = fopen(buf, "r"))) {
 	fgets(inbuf, sizeof(inbuf), fp);
-	prints("\n§ë²¼¦WºÙ: %s", inbuf);
+	prints("\næŠ•ç¥¨åç¨±: %s", inbuf);
 	fclose(fp);
     }
     setbfile(buf, bname, vbuf->control);
@@ -417,13 +417,13 @@ vote_view(const vote_buffer_t *vbuf, const char *bname)
     fscanf(fp, "%hd,%hd\n%d\n", &item_num, &i, &closetime);
     counts = (int *)malloc(item_num * sizeof(int));
 
-    prints("\n¡» ¹wª¾§ë²¼¬ö¨Æ: ¥Ø«e¦@¦³ %d ²¼,\n"
-	   "¥»¦¸§ë²¼±Nµ²§ô©ó %s\n", (int)(num / sizeof(short)),
+    prints("\nâ—† é çŸ¥æŠ•ç¥¨ç´€äº‹: ç›®å‰å…±æœ‰ %d ç¥¨,\n"
+	   "æœ¬æ¬¡æŠ•ç¥¨å°‡çµæŸæ–¼ %s\n", (int)(num / sizeof(short)),
 	   Cdate(&closetime));
 
-    /* Thor: ¶}©ñ ²¼¼Æ ¹wª¾ */
+    /* Thor: é–‹æ”¾ ç¥¨æ•¸ é çŸ¥ */
     setbfile(buf, bname, vbuf->flags);
-    prints("¦@¦³ %d ¤H§ë²¼\n", b_nonzeroNum(buf));
+    prints("å…±æœ‰ %d äººæŠ•ç¥¨\n", b_nonzeroNum(buf));
 
     setbfile(buf, bname, vbuf->ballots);
     b_count(buf, counts, item_num, &total);
@@ -439,7 +439,7 @@ vote_view(const vote_buffer_t *vbuf, const char *bname)
 #endif
         {
             move(num % 15 + 6, num / 15 * 40);
-            prints("  %-32s%3d ²¼", inbuf, counts[i]);
+            prints("  %-32s%3d ç¥¨", inbuf, counts[i]);
         }
 	total += counts[i];
 	if (num == 29) {
@@ -455,11 +455,11 @@ vote_view(const vote_buffer_t *vbuf, const char *bname)
     assert(0<=pos-1 && pos-1<MAX_BOARD);
     fhp = bcache + pos - 1;
     move(t_lines - 3, 0);
-    prints("¡» ¥Ø«eÁ`²¼¼Æ = %d ²¼", total);
-    getdata(b_lines - 1, 0, "(A)¨ú®ø§ë²¼ (B)´£¦­¶}²¼ (C)Ä~Äò¡H[C] ", genbuf,
+    prints("â—† ç›®å‰ç¸½ç¥¨æ•¸ = %d ç¥¨", total);
+    getdata(b_lines - 1, 0, "(A)å–æ¶ˆæŠ•ç¥¨ (B)ææ—©é–‹ç¥¨ (C)ç¹¼çºŒï¼Ÿ[C] ", genbuf,
 	    4, LCECHO);
     if (genbuf[0] == 'a') {
-	getdata(b_lines - 1, 0, "½Ğ¦A¦¸½T»{¨ú®ø§ë²¼ (Y/N) [N] ", genbuf,
+	getdata(b_lines - 1, 0, "è«‹å†æ¬¡ç¢ºèªå–æ¶ˆæŠ•ç¥¨ (Y/N) [N] ", genbuf,
 		4, LCECHO);
 	if (genbuf[0] != 'y')
 	    return FULLUPDATE;
@@ -519,7 +519,7 @@ vote_view_all(const char *bname)
 		fgets(inbuf, sizeof(inbuf), xfp);
 		fclose(xfp);
 	    } else
-		strlcpy(inbuf, "µL¼ĞÃD", sizeof(inbuf));
+		strlcpy(inbuf, "ç„¡æ¨™é¡Œ", sizeof(inbuf));
 	    prints("%s\n", inbuf);
 	}
     }
@@ -527,7 +527,7 @@ vote_view_all(const char *bname)
     if (x < 0)
 	return FULLUPDATE;
 
-    snprintf(buf, sizeof(buf), "­n¬İ´X¸¹§ë²¼ [%d] ", x);
+    snprintf(buf, sizeof(buf), "è¦çœ‹å¹¾è™ŸæŠ•ç¥¨ [%d] ", x);
     getdata(b_lines - 1, 0, buf, genbuf, 4, LCECHO);
 
 
@@ -554,25 +554,25 @@ vote_logconf_ask(vote_logconf_t *logconf) {
     vote_logconf_init(logconf);
 
     getdata(14, 0,
-	    "¬O§_°O¿ı§ë²¼±b¸¹¡G(y)°O¿ı§ë²¼±b¸¹[n]¤£°O¿ı:[N]",
+	    "æ˜¯å¦è¨˜éŒ„æŠ•ç¥¨å¸³è™Ÿï¼š(y)è¨˜éŒ„æŠ•ç¥¨å¸³è™Ÿ[n]ä¸è¨˜éŒ„:[N]",
 	    inbuf, 2, LCECHO);
     if (inbuf[0] == 'y')
 	logconf->log_id = 1;
 
     getdata(15, 0,
-	    "¬O§_°O¿ı§ë²¼IP¡G(y)°O¿ı§ë²¼IP[n]¤£°O¿ı:[N]",
+	    "æ˜¯å¦è¨˜éŒ„æŠ•ç¥¨IPï¼š(y)è¨˜éŒ„æŠ•ç¥¨IP[n]ä¸è¨˜éŒ„:[N]",
 	    inbuf, 2, LCECHO);
     if (inbuf[0] == 'y')
 	logconf->log_ip = 1;
 
     getdata(16, 0,
-	    "¬O§_°O¿ı§ë²¼®É¶¡¡G(y)°O¿ı§ë²¼®É¶¡[n]¤£°O¿ı:[N]",
+	    "æ˜¯å¦è¨˜éŒ„æŠ•ç¥¨æ™‚é–“ï¼š(y)è¨˜éŒ„æŠ•ç¥¨æ™‚é–“[n]ä¸è¨˜éŒ„:[N]",
 	    inbuf, 2, LCECHO);
     if (inbuf[0] == 'y')
 	logconf->log_date = 1;
 
     getdata(17, 0,
-	    "¬O§_°O¿ı§ë²¼¿ï¶µ¡G(y)°O¿ı§ë²¼¿ï¶µ[n]¤£°O¿ı:[N]",
+	    "æ˜¯å¦è¨˜éŒ„æŠ•ç¥¨é¸é …ï¼š(y)è¨˜éŒ„æŠ•ç¥¨é¸é …[n]ä¸è¨˜éŒ„:[N]",
 	    inbuf, 2, LCECHO);
     if (inbuf[0] == 'y')
 	logconf->log_choice = 1;
@@ -611,8 +611,8 @@ vote_logconf_load(const char *fpath, vote_logconf_t *logconf) {
 
 static void
 print_vote_logconf_feature(int enabled, const char *feature) {
-    prints("     ¥»¦¸§ë²¼±N %s" ANSI_RESET "°O¿ı¨Ã¤½¶}±zªº %s%s" ANSI_RESET "\n",
-	   enabled ? ANSI_COLOR(1;31) "·|   " : ANSI_COLOR(1;37) "¤£·| ",
+    prints("     æœ¬æ¬¡æŠ•ç¥¨å°‡ %s" ANSI_RESET "è¨˜éŒ„ä¸¦å…¬é–‹æ‚¨çš„ %s%s" ANSI_RESET "\n",
+	   enabled ? ANSI_COLOR(1;31) "æœƒ   " : ANSI_COLOR(1;37) "ä¸æœƒ ",
 	   enabled ? ANSI_COLOR(1;31) : ANSI_COLOR(1;37), feature);
 }
 
@@ -620,17 +620,17 @@ static void
 vote_logconf_print(const vote_logconf_t *logconf) {
     if (logconf->log_id && logconf->log_choice) {
         move(15, 5);
-        prints("½Ğ¯S§Oª`·N " ANSI_COLOR(1;31) "¥»¦¸§ë²¼¬°°O¦W§ë²¼¡A"
-		"±zªº±b¸¹»P§ë²¼¿ï¶µ±N¦P®É³Q°O¿ı¨Ã¤½¶}" ANSI_RESET);
+        prints("è«‹ç‰¹åˆ¥æ³¨æ„ " ANSI_COLOR(1;31) "æœ¬æ¬¡æŠ•ç¥¨ç‚ºè¨˜åæŠ•ç¥¨ï¼Œ"
+		"æ‚¨çš„å¸³è™Ÿèˆ‡æŠ•ç¥¨é¸é …å°‡åŒæ™‚è¢«è¨˜éŒ„ä¸¦å…¬é–‹" ANSI_RESET);
     }
 
     move(18, 0);
-    print_vote_logconf_feature(logconf->log_id, "±b¸¹ (ID)");
-    print_vote_logconf_feature(logconf->log_ip, "IP ¦ì§}");
-    print_vote_logconf_feature(logconf->log_date, "§ë²¼ªº®É¶¡");
-    print_vote_logconf_feature(logconf->log_choice, "§ë¤Uªº¿ï¶µ");
+    print_vote_logconf_feature(logconf->log_id, "å¸³è™Ÿ (ID)");
+    print_vote_logconf_feature(logconf->log_ip, "IP ä½å€");
+    print_vote_logconf_feature(logconf->log_date, "æŠ•ç¥¨çš„æ™‚é–“");
+    print_vote_logconf_feature(logconf->log_choice, "æŠ•ä¸‹çš„é¸é …");
 
-    vmsg("¸Ô¾\\§¹²¦«á½Ğ«ö¥ô·NÁäÄ~Äò");
+    vmsg("è©³é–±\å®Œç•¢å¾Œè«‹æŒ‰ä»»æ„éµç¹¼çºŒ");
 }
 
 static int
@@ -655,12 +655,12 @@ vote_maintain(const char *bname)
     if (fhp->bvote != 0) {
 
 	getdata(b_lines - 1, 0,
-		"(V)Æ[¹î¥Ø«e§ë²¼ (M)Á|¿ì·s§ë²¼ (A)¨ú®ø©Ò¦³§ë²¼ (Q)Ä~Äò [Q]",
+		"(V)è§€å¯Ÿç›®å‰æŠ•ç¥¨ (M)èˆ‰è¾¦æ–°æŠ•ç¥¨ (A)å–æ¶ˆæ‰€æœ‰æŠ•ç¥¨ (Q)ç¹¼çºŒ [Q]",
 		genbuf, 4, LCECHO);
 	if (genbuf[0] == 'v')
 	    return vote_view_all(bname);
 	else if (genbuf[0] == 'a') {
-            getdata(b_lines - 1, 0, "½Ğ¦A¦¸½T»{¨ú®ø©Ò¦³§ë²¼ (Y/N) [N] ", genbuf,
+            getdata(b_lines - 1, 0, "è«‹å†æ¬¡ç¢ºèªå–æ¶ˆæ‰€æœ‰æŠ•ç¥¨ (Y/N) [N] ", genbuf,
                     4, LCECHO);
             if (genbuf[0] != 'y')
                 return FULLUPDATE;
@@ -687,7 +687,7 @@ vote_maintain(const char *bname)
 	    return FULLUPDATE;
 	} else if (genbuf[0] != 'm') {
 	    if (fhp->bvote >= MAX_VOTE_NR)
-		vmsg("¤£±oÁ|¿ì¹L¦h§ë²¼");
+		vmsg("ä¸å¾—èˆ‰è¾¦éå¤šæŠ•ç¥¨");
 	    return FULLUPDATE;
 	}
     }
@@ -704,33 +704,33 @@ vote_maintain(const char *bname)
 	return FULLUPDATE;
 
     getdata(b_lines - 1, 0,
-	    "½T©w­nÁ|¿ì§ë²¼¶Ü¡H [y/N]: ",
+	    "ç¢ºå®šè¦èˆ‰è¾¦æŠ•ç¥¨å—ï¼Ÿ [y/N]: ",
 	    inbuf, 4, LCECHO);
     if (inbuf[0] != 'y')
 	return FULLUPDATE;
 
-    vs_hdr("Á|¿ì§ë²¼");
+    vs_hdr("èˆ‰è¾¦æŠ•ç¥¨");
     votebuf_init(&vbuf, x);
     setbfile(buf, bname, vbuf.lock);
     unlink(buf);
 
     clear();
     move(0, 0);
-    prints("²Ä %d ¸¹§ë²¼\n", x);
+    prints("ç¬¬ %d è™ŸæŠ•ç¥¨\n", x);
     setbfile(buf, bname, vbuf.title);
-    getdata(4, 0, "½Ğ¿é¤J§ë²¼¦WºÙ:", inbuf, 50, DOECHO);
+    getdata(4, 0, "è«‹è¼¸å…¥æŠ•ç¥¨åç¨±:", inbuf, 50, DOECHO);
     if (inbuf[0] == '\0')
-	strlcpy(inbuf, "¤£ª¾¦Wªº", sizeof(inbuf));
+	strlcpy(inbuf, "ä¸çŸ¥åçš„", sizeof(inbuf));
     fp = fopen(buf, "w");
     assert(fp);
     fputs(inbuf, fp);
     fclose(fp);
 
-    vmsg("«ö¥ô¦óÁä¶}©l½s¿è¦¹¦¸ [§ë²¼©v¦®]");
+    vmsg("æŒ‰ä»»ä½•éµé–‹å§‹ç·¨è¼¯æ­¤æ¬¡ [æŠ•ç¥¨å®—æ—¨]");
     setbfile(buf, bname, vbuf.desc);
     aborted = veditfile(buf);
     if (aborted == EDIT_ABORTED) {
-	vmsg("¨ú®ø¦¹¦¸§ë²¼");
+	vmsg("å–æ¶ˆæ­¤æ¬¡æŠ•ç¥¨");
 	return FULLUPDATE;
     }
     aborted = 0;
@@ -738,13 +738,13 @@ vote_maintain(const char *bname)
     unlink(buf);
 
     getdata(4, 0,
-	    "¬O§_­­©w§ë²¼ªÌ¦W³æ¡G(y)½s¿è¥i§ë²¼¤H­û¦W³æ[n]¥ô¦ó¤H¬Ò¥i§ë²¼:[N]",
+	    "æ˜¯å¦é™å®šæŠ•ç¥¨è€…åå–®ï¼š(y)ç·¨è¼¯å¯æŠ•ç¥¨äººå“¡åå–®[n]ä»»ä½•äººçš†å¯æŠ•ç¥¨:[N]",
 	    inbuf, 2, LCECHO);
     setbfile(buf, bname, vbuf.limited);
     if (inbuf[0] == 'y') {
 	fp = fopen(buf, "w");
 	assert(fp);
-	//fprintf(fp, "¦¹¦¸§ë²¼³]­­");
+	//fprintf(fp, "æ­¤æ¬¡æŠ•ç¥¨è¨­é™");
 	fclose(fp);
 	friend_edit(FRIEND_CANVOTE);
     } else {
@@ -752,18 +752,18 @@ vote_maintain(const char *bname)
 	    unlink(buf);
     }
     getdata(5, 0,
-	    "¬O§_­­©w§ë²¼¸ê®æ¡G(y)­­¨î§ë²¼¸ê®æ[n]¤£³]­­:[N]",
+	    "æ˜¯å¦é™å®šæŠ•ç¥¨è³‡æ ¼ï¼š(y)é™åˆ¶æŠ•ç¥¨è³‡æ ¼[n]ä¸è¨­é™:[N]",
 	    inbuf, 2, LCECHO);
     setbfile(buf, bname, vbuf.limits);
     if (inbuf[0] == 'y') {
 	fp = fopen(buf, "w");
-        // TODO regtime ¸ò LOGINDAYS ¨ä¹ê¥i¥H¦X¨Ö
+        // TODO regtime è·Ÿ LOGINDAYS å…¶å¯¦å¯ä»¥åˆä½µ
 	assert(fp);
-        // µù¥U®É¶¡ (¥H¤ë¬°³æ¦ì¡Adeprecated)
+        // è¨»å†Šæ™‚é–“ (ä»¥æœˆç‚ºå–®ä½ï¼Œdeprecated)
 	fprintf(fp, "%d\n", now - (MONTH_SECONDS * 0));
 	closetime = 0;
 	do {
-	    getdata(6, 0, STR_LOGINDAYS "¤U­­", inbuf, 6, DOECHO);
+	    getdata(6, 0, STR_LOGINDAYS "ä¸‹é™", inbuf, 6, DOECHO);
 	    closetime = atoi(inbuf);	// borrow variable
 	} while (closetime < 0);
 	fprintf(fp, "%d\n", closetime);
@@ -775,11 +775,11 @@ vote_maintain(const char *bname)
     }
 
     move(8, 0);
-    prints("¥H¤U³]©w¤§¬ÛÃö³W½d½Ğ°Ñ¾\\ BoardAnnouce ªO¸m©³¤½§i¡G\n");
-    prints("¡m[¤½§i] ¬İªO§ë²¼¥\\¯à§ó·s¡B¬ÛÃö³W½d¤½§i¡n\n");
+    prints("ä»¥ä¸‹è¨­å®šä¹‹ç›¸é—œè¦ç¯„è«‹åƒé–±\ BoardAnnouce æ¿ç½®åº•å…¬å‘Šï¼š\n");
+    prints("ã€Š[å…¬å‘Š] çœ‹æ¿æŠ•ç¥¨åŠŸ\èƒ½æ›´æ–°ã€ç›¸é—œè¦ç¯„å…¬å‘Šã€‹\n");
     prints("\n");
-    prints("­YªO¥D±ı©ó§ë²¼®É°O¿ı¥H¤U¥ô¦ó¤@¶µ¸ê°T¡A½Ğ¨Æ¥ı»P¬İªO¨Ï¥ÎªÌ·¾³q¡A\n");
-    prints("¨Ã©ó§ë²¼«e¦Ü¤Ö¤C¤é¡A¨Æ¥ı¤½§i±N°O¿ı¤§¶µ¥Ø¡A¹HªÌ±N¨ü³B¤À¡C\n");
+    prints("è‹¥æ¿ä¸»æ¬²æ–¼æŠ•ç¥¨æ™‚è¨˜éŒ„ä»¥ä¸‹ä»»ä½•ä¸€é …è³‡è¨Šï¼Œè«‹äº‹å…ˆèˆ‡çœ‹æ¿ä½¿ç”¨è€…æºé€šï¼Œ\n");
+    prints("ä¸¦æ–¼æŠ•ç¥¨å‰è‡³å°‘ä¸ƒæ—¥ï¼Œäº‹å…ˆå…¬å‘Šå°‡è¨˜éŒ„ä¹‹é …ç›®ï¼Œé•è€…å°‡å—è™•åˆ†ã€‚\n");
 
     setbfile(buf, bname, vbuf.logconf);
 
@@ -792,8 +792,8 @@ vote_maintain(const char *bname)
 	vote_logconf_ask(&logconf);
 
 	if (logconf.log_id && logconf.log_choice) {
-	    getdata(19, 0, "¥»¦¸§ë²¼³]©w¬°°O¦W§ë²¼¡A½Ğ¦A¦¸½T»{¬O§_°O¦W¡G"
-	    	    "(y)½T»{°O¦W[n]­«·s³]©w:[N]",
+	    getdata(19, 0, "æœ¬æ¬¡æŠ•ç¥¨è¨­å®šç‚ºè¨˜åæŠ•ç¥¨ï¼Œè«‹å†æ¬¡ç¢ºèªæ˜¯å¦è¨˜åï¼š"
+	    	    "(y)ç¢ºèªè¨˜å[n]é‡æ–°è¨­å®š:[N]",
 		    inbuf, 2, LCECHO);
 	    if (inbuf[0] != 'y')
 		continue;
@@ -804,7 +804,7 @@ vote_maintain(const char *bname)
     }
 
     clear();
-    getdata(0, 0, "¦¹¦¸§ë²¼¶i¦æ´X¤Ñ (1~30¤Ñ)¡H", inbuf, 4, DOECHO);
+    getdata(0, 0, "æ­¤æ¬¡æŠ•ç¥¨é€²è¡Œå¹¾å¤© (1~30å¤©)ï¼Ÿ", inbuf, 4, DOECHO);
 
     closetime = atoi(inbuf);
     if (closetime <= 0)
@@ -818,7 +818,7 @@ vote_maintain(const char *bname)
     assert(fp);
     fprintf(fp, "000,000\n%d\n", closetime);
 
-    outs("\n½Ğ¨Ì§Ç¿é¤J¿ï¶µ, «ö ENTER §¹¦¨³]©w");
+    outs("\nè«‹ä¾åºè¼¸å…¥é¸é …, æŒ‰ ENTER å®Œæˆè¨­å®š");
     num = 0;
     x = 0;	/* x is the page number */
     while (!aborted) {
@@ -842,7 +842,7 @@ vote_maintain(const char *bname)
 	    num = 0;
 	}
     }
-    snprintf(buf, sizeof(buf), "½Ğ°İ¨C¤H³Ì¦h¥i§ë´X²¼¡H([1]¡ã%d): ", x * ITEM_PER_PAGE + num);
+    snprintf(buf, sizeof(buf), "è«‹å•æ¯äººæœ€å¤šå¯æŠ•å¹¾ç¥¨ï¼Ÿ([1]âˆ¼%d): ", x * ITEM_PER_PAGE + num);
 
     getdata(t_lines - 3, 0, buf, inbuf, 3, DOECHO);
 
@@ -860,7 +860,7 @@ vote_maintain(const char *bname)
     if (substitute_record(fn_board, fhp, sizeof(*fhp), pos) == -1)
 	outs(err_board_update);
     reset_board(pos);
-    outs("¶}©l§ë²¼¤F¡I");
+    outs("é–‹å§‹æŠ•ç¥¨äº†ï¼");
 
     return FULLUPDATE;
 }
@@ -905,22 +905,22 @@ maybe_log_vote(const vote_logconf_t *logconf, const char *chosen, int nitems,
     genbuf[0] = 0;
 
     if (logconf->log_id) {
-	snprintf(tmpbuf, sizeof(tmpbuf), "§ë²¼¤H %-12s ", cuser.userid);
+	snprintf(tmpbuf, sizeof(tmpbuf), "æŠ•ç¥¨äºº %-12s ", cuser.userid);
 	strlcat(genbuf, tmpbuf, sizeof(genbuf));
     }
     if (logconf->log_ip) {
-	snprintf(tmpbuf, sizeof(tmpbuf), "§ë²¼¨Ó·½ %-15s ", cuser.lasthost);
+	snprintf(tmpbuf, sizeof(tmpbuf), "æŠ•ç¥¨ä¾†æº %-15s ", cuser.lasthost);
 	strlcat(genbuf, tmpbuf, sizeof(genbuf));
     }
     if (logconf->log_date) {
-	snprintf(tmpbuf, sizeof(tmpbuf), "§ë²¼®É¶¡ %-23s ", Cdate(&now));
+	snprintf(tmpbuf, sizeof(tmpbuf), "æŠ•ç¥¨æ™‚é–“ %-23s ", Cdate(&now));
 	strlcat(genbuf, tmpbuf, sizeof(genbuf));
     }
     if (genbuf[0])
 	strlcat(genbuf, "\n", sizeof(genbuf));
 
     if (logconf->log_choice) {
-	strlcat(genbuf, "§ë²¼¿ï¶µ ", sizeof(genbuf));
+	strlcat(genbuf, "æŠ•ç¥¨é¸é … ", sizeof(genbuf));
 	for (i = 0; i < nitems; i++)
 	    if (chosen[i]) {
 		snprintf(tmpbuf, sizeof(tmpbuf), "%d ", i + 1);
@@ -963,10 +963,10 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
     if (dashf(buf)) {
 	setbfile(buf, bname, FN_CANVOTE);
 	if (!file_exist_record(buf, cuser.userid)) {
-	    vmsg("¹ï¤£°_! ³o¬O¨p¤H§ë²¼..§A¨Ã¨S¦³¨üÁÜ­ò!");
+	    vmsg("å°ä¸èµ·! é€™æ˜¯ç§äººæŠ•ç¥¨..ä½ ä¸¦æ²’æœ‰å—é‚€å”·!");
 	    return FULLUPDATE;
 	} else {
-	    vmsg("®¥³ß§A¨üÁÜ¦¹¦¸¨p¤H§ë²¼.   <ÀËµø¦¹¦¸¨üÁÜ¦W³æ>");
+	    vmsg("æ­å–œä½ å—é‚€æ­¤æ¬¡ç§äººæŠ•ç¥¨.   <æª¢è¦–æ­¤æ¬¡å—é‚€åå–®>");
 	    more(buf, YEA);
 	}
     }
@@ -980,34 +980,34 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 	fclose(lfp);
 	// XXX if this is a private vote (limited), I think we don't need to check limits?
 	if (cuser.firstlogin > closetime)
-            reason = "µù¥U®É¶¡";
+            reason = "è¨»å†Šæ™‚é–“";
         else if (cuser.numlogindays < (uint32_t)limits_logins)
             reason = STR_LOGINDAYS;
 
         if (reason)
         {
-	    vmsgf("%s¥¼¹F§ë²¼¸ê®æ­­¨î", reason);
+	    vmsgf("%sæœªé”æŠ•ç¥¨è³‡æ ¼é™åˆ¶", reason);
 	    return FULLUPDATE;
 	}
     }
     if (vote_flag(vbuf, bname, '\0')) {
-	vmsg("¦¹¦¸§ë²¼¡A§A¤w§ë¹L¤F¡I");
+	vmsg("æ­¤æ¬¡æŠ•ç¥¨ï¼Œä½ å·²æŠ•éäº†ï¼");
 	return FULLUPDATE;
     }
 
     setbfile(buf, bname, vbuf->logconf);
     if (dashf(buf) && !vote_logconf_load(buf, &logconf)) {
-	vmsg("§ë²¼³]©w·l·´, ½Ğ¦Ü " BN_SYSOP " ¦^³ø!");
+	vmsg("æŠ•ç¥¨è¨­å®šææ¯€, è«‹è‡³ " BN_SYSOP " å›å ±!");
 	return FULLUPDATE;
     }
 
     clear();
     move(10, 0);
     prints(" " ANSI_COLOR(1;31)
-	   "½Ğ¸Ô²Ó¾\\Åª¥»¦¸§ë²¼±N°O¿ı¨Ã¤½¶}¤§¸ê°T¡A­Y¤£¦P·N½Ğ¨ú®ø§ë²¼¡C "
+	   "è«‹è©³ç´°é–±\è®€æœ¬æ¬¡æŠ•ç¥¨å°‡è¨˜éŒ„ä¸¦å…¬é–‹ä¹‹è³‡è¨Šï¼Œè‹¥ä¸åŒæ„è«‹å–æ¶ˆæŠ•ç¥¨ã€‚ "
 	   ANSI_RESET "\n");
     prints(" " ANSI_COLOR(1;31)
-	   "­Y±z§¹¦¨§ë²¼§Y¥Nªí±z¦P·N±N±z¥»¦¸§ë²¼ªº¥H¤U¸ê°T¤½¶}¡C "
+	   "è‹¥æ‚¨å®ŒæˆæŠ•ç¥¨å³ä»£è¡¨æ‚¨åŒæ„å°‡æ‚¨æœ¬æ¬¡æŠ•ç¥¨çš„ä»¥ä¸‹è³‡è¨Šå…¬é–‹ã€‚ "
 	   ANSI_RESET "\n");
     vote_logconf_print(&logconf);
 
@@ -1023,26 +1023,26 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
     }
 #endif
 
-    vs_hdr("§ë²¼½c");
+    vs_hdr("æŠ•ç¥¨ç®±");
 
     setbfile(buf, bname, vbuf->control);
     cfp = fopen(buf, "r");
     if (!cfp)
     {
-	vmsg("©êºp¡A¦¹§ë²¼¤w¨ú®ø©ÎµL®Ä¡C");
+	vmsg("æŠ±æ­‰ï¼Œæ­¤æŠ•ç¥¨å·²å–æ¶ˆæˆ–ç„¡æ•ˆã€‚");
 	return FULLUPDATE;
     }
 
     assert(cfp);
     fscanf(cfp, "%hd,%hd\n%d\n", &item_num, &tickets, &closetime);
-    chosen = (char *)malloc(item_num+100); // XXX dirty fix ªO¥D¼W¥[¿ï¶µªº°İÃD
+    chosen = (char *)malloc(item_num+100); // XXX dirty fix æ¿ä¸»å¢åŠ é¸é …çš„å•é¡Œ
     memset(chosen, 0, item_num+100);
     memset(choices, 0, sizeof(choices));
     max_page = (item_num - 1)/ ITEM_PER_PAGE + 1;
 
-    outs("§ë²¼¤è¦¡¡G½T©w¦n±zªº¿ï¾Ü«á¡A¿é¤J¨ä¥N½X(A, B, C...)§Y¥i¡C\n");
-    prints("¦¹¦¸§ë²¼§A¥i¥H§ë %1hd ²¼¡C«ö 0 ¨ú®ø§ë²¼, 1 §¹¦¨§ë²¼, "
-	    "> ¤U¤@­¶, < ¤W¤@­¶\n¦¹¦¸§ë²¼±Nµ²§ô©ó¡G%s \n\n",
+    outs("æŠ•ç¥¨æ–¹å¼ï¼šç¢ºå®šå¥½æ‚¨çš„é¸æ“‡å¾Œï¼Œè¼¸å…¥å…¶ä»£ç¢¼(A, B, C...)å³å¯ã€‚\n");
+    prints("æ­¤æ¬¡æŠ•ç¥¨ä½ å¯ä»¥æŠ• %1hd ç¥¨ã€‚æŒ‰ 0 å–æ¶ˆæŠ•ç¥¨, 1 å®ŒæˆæŠ•ç¥¨, "
+	    "> ä¸‹ä¸€é , < ä¸Šä¸€é \næ­¤æ¬¡æŠ•ç¥¨å°‡çµæŸæ–¼ï¼š%s \n\n",
 	   tickets, Cdate(&closetime));
 
 #define REDO_DRAW	1
@@ -1056,9 +1056,9 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 	    move(5, 0);
 	    clrtobot();
 
-	    /* ·Q¤£¨ì¦n¤èªk ¦]¬°¤£·Q¾ã­ÓÅª¶i memory
-	     * ¦Ó¥B¤j³¡¤Àªº§ë²¼¤£·|¶W¹L¤@­¶ ©Ò¥H¦A±qÀÉ®× scan */
-	    /* XXX §ë¨ì¤@¥bªO¥D¼W¥[¿ï¶µ«h chosen ¤Ó¤p */
+	    /* æƒ³ä¸åˆ°å¥½æ–¹æ³• å› ç‚ºä¸æƒ³æ•´å€‹è®€é€² memory
+	     * è€Œä¸”å¤§éƒ¨åˆ†çš„æŠ•ç¥¨ä¸æœƒè¶…éä¸€é  æ‰€ä»¥å†å¾æª”æ¡ˆ scan */
+	    /* XXX æŠ•åˆ°ä¸€åŠæ¿ä¸»å¢åŠ é¸é …å‰‡ chosen å¤ªå° */
 	    if (redo & REDO_SCAN) {
 		for (i = 0; i < curr_page; i++)
 		    for (j = 0; j < ITEM_PER_PAGE; j++)
@@ -1079,14 +1079,14 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 
 	vote[0] = vote[1] = '\0';
 	move(t_lines - 2, 0);
-	prints("§AÁÙ¥i¥H§ë %2d ²¼   [ ¥Ø«e©Ò¦b­¶¼Æ %2d / ¦@ %2d ­¶ (¥i¿é¤J '<' '>' ´«­¶) ]", tickets - i, curr_page + 1, max_page);
-	getdata(t_lines - 4, 0, "¿é¤J±zªº¿ï¾Ü: ", vote, sizeof(vote), DOECHO);
+	prints("ä½ é‚„å¯ä»¥æŠ• %2d ç¥¨   [ ç›®å‰æ‰€åœ¨é æ•¸ %2d / å…± %2d é  (å¯è¼¸å…¥ '<' '>' æ›é ) ]", tickets - i, curr_page + 1, max_page);
+	getdata(t_lines - 4, 0, "è¼¸å…¥æ‚¨çš„é¸æ“‡: ", vote, sizeof(vote), DOECHO);
 	*vote = toupper(*vote);
 
 #define CURRENT_CHOICE \
     chosen[curr_page * ITEM_PER_PAGE + vote[0] - 'A']
 	if (vote[0] == '0' || (!vote[0] && !i)) {
-	    outs("°O±o¦A¨Ó§ë³á!!");
+	    outs("è¨˜å¾—å†ä¾†æŠ•å–”!!");
 	    break;
 	} else if (vote[0] == '1' && i);
 	else if (!vote[0])
@@ -1109,9 +1109,9 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 	    redo = REDO_DRAW;
 	    continue;
 	}
-	else if (index(choices, vote[0]) == NULL)	/* µL®Ä */
+	else if (index(choices, vote[0]) == NULL)	/* ç„¡æ•ˆ */
 	    continue;
-	else if ( CURRENT_CHOICE ) { /* ¤w¿ï */
+	else if ( CURRENT_CHOICE ) { /* å·²é¸ */
 	    move(((vote[0] - 'A') % 15) + 5, (((vote[0] - 'A')) / 15) * 40);
 	    outc(' ');
 	    CURRENT_CHOICE = 0;
@@ -1128,11 +1128,11 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 	}
 
 	if (vote_flag(vbuf, bname, vote[0]) != 0)
-	    outs("­«½Æ§ë²¼! ¤£¤©­p²¼¡C");
+	    outs("é‡è¤‡æŠ•ç¥¨! ä¸äºˆè¨ˆç¥¨ã€‚");
 	else {
 	    setbfile(buf, bname, vbuf->ballots);
 	    if ((fd = OpenCreate(buf, O_WRONLY | O_APPEND)) == 0)
-		outs("µLªk§ë¤J²¼Ôo\n");
+		outs("ç„¡æ³•æŠ•å…¥ç¥¨åŒ­\n");
 	    else {
 		struct stat     statb;
 		char            buf[3], mycomments[3][74], b_comments[80];
@@ -1149,20 +1149,20 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 		fstat(fd, &statb);
 		close(fd);
 		getdata(b_lines - 2, 0,
-			"±z¹ï³o¦¸§ë²¼¦³¤°»òÄ_¶Qªº·N¨£¶Ü¡H(y/n)[N]",
+			"æ‚¨å°é€™æ¬¡æŠ•ç¥¨æœ‰ä»€éº¼å¯¶è²´çš„æ„è¦‹å—ï¼Ÿ(y/n)[N]",
 			buf, 3, DOECHO);
 		if (buf[0] == 'Y' || buf[0] == 'y') {
 		    do {
 			move(5, 0);
 			clrtobot();
-			outs("½Ğ°İ±z¹ï³o¦¸§ë²¼¦³¤°»òÄ_¶Qªº·N¨£¡H"
-			     "³Ì¦h¤T¦æ¡A«ö[Enter]µ²§ô");
+			outs("è«‹å•æ‚¨å°é€™æ¬¡æŠ•ç¥¨æœ‰ä»€éº¼å¯¶è²´çš„æ„è¦‹ï¼Ÿ"
+			     "æœ€å¤šä¸‰è¡Œï¼ŒæŒ‰[Enter]çµæŸ");
 			for (i = 0; (i < 3) &&
-			     getdata(7 + i, 0, "¡G",
+			     getdata(7 + i, 0, "ï¼š",
 				     mycomments[i], sizeof(mycomments[i]),
 				     DOECHO); i++);
-			getdata(b_lines - 2, 0, "(S)Àx¦s (E)­«·s¨Ó¹L "
-				"(Q)¨ú®ø¡H[S]", buf, 3, LCECHO);
+			getdata(b_lines - 2, 0, "(S)å„²å­˜ (E)é‡æ–°ä¾†é "
+				"(Q)å–æ¶ˆï¼Ÿ[S]", buf, 3, LCECHO);
 		    } while (buf[0] == 'e');
 		    if (buf[0] == 'q')
 			break;
@@ -1172,8 +1172,8 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 			FILE *fcm = fopen(b_comments, "a");
 			if (fcm) {
 			    fprintf(fcm,
-				    ANSI_COLOR(36) "¡³¨Ï¥ÎªÌ" ANSI_COLOR(1;36) " %s "
-				    ANSI_COLOR(;36) "ªº«ØÄ³¡G" ANSI_RESET "\n",
+				    ANSI_COLOR(36) "â—‹ä½¿ç”¨è€…" ANSI_COLOR(1;36) " %s "
+				    ANSI_COLOR(;36) "çš„å»ºè­°ï¼š" ANSI_RESET "\n",
 				    cuser.userid);
 			    for (i = 0; i < 3; i++)
 				fprintf(fcm, "    %s\n", mycomments[i]);
@@ -1189,7 +1189,7 @@ user_vote_one(const vote_buffer_t *vbuf, const char *bname)
 		setbfile(b_logs, bname, vbuf->logs);
 		maybe_log_vote(&logconf, chosen, item_num, b_logs);
 
-		outs("¤w§¹¦¨§ë²¼¡I\n");
+		outs("å·²å®ŒæˆæŠ•ç¥¨ï¼\n");
 	    }
 	}
 	break;
@@ -1206,10 +1206,10 @@ voteperm_msg(const char *bname)
     const char *msg;
 
     if (!HasBasicUserPerm(PERM_LOGINOK))
-	return "¹ï¤£°_! ±z¥¼§¹¦¨µù¥Uµ{§Ç, ÁÙ¨S¦³§ë²¼Åv³á!";
+	return "å°ä¸èµ·! æ‚¨æœªå®Œæˆè¨»å†Šç¨‹åº, é‚„æ²’æœ‰æŠ•ç¥¨æ¬Šå–”!";
 
     if (HasUserPerm(PERM_VIOLATELAW))
-        return "»@³æ¥¼Ãº²M¡AµLªk§ë²¼¡C";
+        return "ç½°å–®æœªç¹³æ¸…ï¼Œç„¡æ³•æŠ•ç¥¨ã€‚";
 
     if ((msg = banned_msg(bname)) != NULL)
         return msg;
@@ -1239,7 +1239,7 @@ user_vote(const char *bname)
     clear();
 
     if (bh->bvote == 0) {
-	vmsg("¥Ø«e¨Ã¨S¦³¥ô¦ó§ë²¼Á|¦æ¡C");
+	vmsg("ç›®å‰ä¸¦æ²’æœ‰ä»»ä½•æŠ•ç¥¨èˆ‰è¡Œã€‚");
 	return FULLUPDATE;
     }
     if ((msg = voteperm_msg(bname)) != NULL) {
@@ -1264,7 +1264,7 @@ user_vote(const char *bname)
 	    fgets(inbuf, sizeof(inbuf), fp);
 	    fclose(fp);
 	} else {
-	    strlcpy(inbuf, "µL¼ĞÃD", sizeof(inbuf));
+	    strlcpy(inbuf, "ç„¡æ¨™é¡Œ", sizeof(inbuf));
 	}
 	prints("%s\n", inbuf);
     }
@@ -1272,7 +1272,7 @@ user_vote(const char *bname)
     if (x < 0)
 	return FULLUPDATE;
 
-    snprintf(buf, sizeof(buf), "­n§ë´X¸¹§ë²¼ [%d] ", x);
+    snprintf(buf, sizeof(buf), "è¦æŠ•å¹¾è™ŸæŠ•ç¥¨ [%d] ", x);
     getdata(b_lines - 1, 0, buf, genbuf, 4, LCECHO);
     i = atoi(genbuf);
 
@@ -1291,7 +1291,7 @@ vote_results(const char *bname)
 
     setbfile(buf, bname, STR_bv_results);
     if (more(buf, YEA) == -1)
-	vmsg("¥Ø«e¨S¦³¥ô¦ó§ë²¼ªºµ²ªG¡C");
+	vmsg("ç›®å‰æ²’æœ‰ä»»ä½•æŠ•ç¥¨çš„çµæœã€‚");
     return FULLUPDATE;
 }
 

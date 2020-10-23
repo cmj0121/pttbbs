@@ -123,7 +123,7 @@ enum {
 # undef  BLCONF_CURRENT_USERID
 # define BLCONF_CURRENT_USERID    "guest"
 # undef  BLCONF_CURRENT_USERNICK
-# define BLCONF_CURRENT_USERNICK  "´ú¸Õ±b¸¹"
+# define BLCONF_CURRENT_USERNICK  "æ¸¬è©¦å¸³è™Ÿ"
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -1203,15 +1203,15 @@ static const char *bbsluaTocTags[] =
 
 static const char *bbsluaTocPrompts[] =
 {
-    "¬É­±ª©¥»",
-    "³Ì·sª©¥»",
+    "ç•Œé¢ç‰ˆæœ¬",
+    "æœ€æ–°ç‰ˆæœ¬",
 
     // BLCONF_PRINT_TOC_INDEX
-    "¦WºÙ",
-    "»¡©ú",
-    "§@ªÌ",
-    "ª©¥»",
-    "¤é´Á",
+    "åç¨±",
+    "èªªæ˜",
+    "ä½œè€…",
+    "ç‰ˆæœ¬",
+    "æ—¥æœŸ",
     NULL
 };
 
@@ -1322,8 +1322,8 @@ bbslua_logo(lua_State *L)
         move(y-1, 0);
         outs(ANSI_COLOR(0;31;47));
         fullmsg("");
-        fullmsg(" ¡¶ ¦¹µ{¦¡¯Ê¤Ö¬Û®e©Ê¸ê°T¡A±z¥i¯àµLªk¥¿±`°õ¦æ");
-        fullmsg("    ­Y°õ¦æ¥X²{¿ù»~¡A½Ğ¦V­ì§@ªÌ¨ú±o·sª©");
+        fullmsg(" â–² æ­¤ç¨‹å¼ç¼ºå°‘ç›¸å®¹æ€§è³‡è¨Šï¼Œæ‚¨å¯èƒ½ç„¡æ³•æ­£å¸¸åŸ·è¡Œ");
+        fullmsg("    è‹¥åŸ·è¡Œå‡ºç¾éŒ¯èª¤ï¼Œè«‹å‘åŸä½œè€…å–å¾—æ–°ç‰ˆ");
         fullmsg("");
     }
     else if (tocinterface > BBSLUA_INTERFACE_VER)
@@ -1333,10 +1333,10 @@ bbslua_logo(lua_State *L)
         outs(ANSI_COLOR(0;1;37;41));
         fullmsg("");
         snprintf(msg, sizeof(msg),
-                " ¡¶ ¦¹µ{¦¡¨Ï¥Î·sª©ªº BBS-Lua ³W®æ (%0.3f)¡A±z¥i¯àµLªk¥¿±`°õ¦æ",
+                " â–² æ­¤ç¨‹å¼ä½¿ç”¨æ–°ç‰ˆçš„ BBS-Lua è¦æ ¼ (%0.3f)ï¼Œæ‚¨å¯èƒ½ç„¡æ³•æ­£å¸¸åŸ·è¡Œ",
                 tocinterface);
         fullmsg(msg);
-        fullmsg("   ­Y°õ¦æ¥X²{¿ù»~¡A«ØÄ³±z­«·sµn¤J BBS «á¦A­«¸Õ");
+        fullmsg("   è‹¥åŸ·è¡Œå‡ºç¾éŒ¯èª¤ï¼Œå»ºè­°æ‚¨é‡æ–°ç™»å…¥ BBS å¾Œå†é‡è©¦");
         fullmsg("");
     }
     else if (tocinterface == BBSLUA_INTERFACE_VER)
@@ -1346,7 +1346,7 @@ bbslua_logo(lua_State *L)
     else
     {
         // should be comtaible
-        // prints("¬Û®e (%.03f)", tocinterface);
+        // prints("ç›¸å®¹ (%.03f)", tocinterface);
     }
 
     // print toc, if any.
@@ -1381,7 +1381,7 @@ bbslua_logo(lua_State *L)
     move(by-2, 0); outc('\n');
     outs(ANSI_COLOR(0;1;37;44));
     snprintf(msg, sizeof(msg),
-            " ¡½ BBS-Lua %.03f  (Build " __DATE__ " " __TIME__") ",
+            " â–  BBS-Lua %.03f  (Build " __DATE__ " " __TIME__") ",
             (double)BBSLUA_INTERFACE_VER);
     fullmsg(msg);
 
@@ -1389,9 +1389,9 @@ bbslua_logo(lua_State *L)
     {
         int sz = t_columns -1;
         const char
-            *prompt1 = "    ´£¿ô±z°õ¦æ¤¤ÀH®É¥i«ö ",
+            *prompt1 = "    æé†’æ‚¨åŸ·è¡Œä¸­éš¨æ™‚å¯æŒ‰ ",
             *prompt2 = "[Ctrl-C]",
-            *prompt3 = " ±j¨î¤¤Â_ BBS-Lua µ{¦¡";
+            *prompt3 = " å¼·åˆ¶ä¸­æ–· BBS-Lua ç¨‹å¼";
         sz -= strlen(prompt1);
         sz -= strlen(prompt2);
         sz -= strlen(prompt3);
@@ -1702,7 +1702,7 @@ bbslua(const char *fpath)
         if (bs)
             bbslua_detach(bs, sz);
         lua_close(L);
-        vmsg("BBS-Lua ¸ü¤J¿ù»~: ¥¼§t BBS-Lua µ{¦¡");
+        vmsg("BBS-Lua è¼‰å…¥éŒ¯èª¤: æœªå« BBS-Lua ç¨‹å¼");
         return 0;
     }
 
@@ -1734,7 +1734,7 @@ bbslua(const char *fpath)
         outs("\n");
         outs(errmsg);
         lua_close(L); // delay closing because we need to print out error message
-        vmsg("BBS-Lua ¸ü¤J¿ù»~: ½Ğ³qª¾§@ªÌ­×¥¿µ{¦¡½X¡C");
+        vmsg("BBS-Lua è¼‰å…¥éŒ¯èª¤: è«‹é€šçŸ¥ä½œè€…ä¿®æ­£ç¨‹å¼ç¢¼ã€‚");
         return 0;
     }
 
@@ -1743,7 +1743,7 @@ bbslua(const char *fpath)
 #endif
 
     bbslua_logo(L);
-    vmsgf("´£¿ô±z°õ¦æ¤¤ÀH®É¥i«ö [Ctrl-C] ±j¨î¤¤Â_ BBS-Lua µ{¦¡");
+    vmsgf("æé†’æ‚¨åŸ·è¡Œä¸­éš¨æ™‚å¯æŒ‰ [Ctrl-C] å¼·åˆ¶ä¸­æ–· BBS-Lua ç¨‹å¼");
 
     // ready for running
     clear();
@@ -1787,8 +1787,8 @@ bbslua(const char *fpath)
 
     // grayout(0, b_lines, GRAYOUT_DARK);
     move(b_lines, 0); clrtoeol();
-    vmsgf("BBS-Lua °õ¦æµ²§ô%s¡C",
-            blrt.abort ? " (¨Ï¥ÎªÌ¤¤Â_)" : r ? " (µ{¦¡¿ù»~)" : "");
+    vmsgf("BBS-Lua åŸ·è¡ŒçµæŸ%sã€‚",
+            blrt.abort ? " (ä½¿ç”¨è€…ä¸­æ–·)" : r ? " (ç¨‹å¼éŒ¯èª¤)" : "");
     BL_END_RUNTIME();
     clear();
 

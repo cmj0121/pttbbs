@@ -2,12 +2,12 @@
 #include "bbs.h"
 
 #define MAX_TIME (300)
-#define BRDSIZ   (8) 	/* ´Ñ½L³æÃä¤j¤p */
+#define BRDSIZ   (8) 	/* æ£‹ç›¤å–®é‚Šå¤§å° */
 
 #define NONE_CHESS "  "
-#define WHITE_CHESS "¡´"
-#define BLACK_CHESS "¡³"
-#define HINT_CHESS "¡­"
+#define WHITE_CHESS "â—"
+#define BLACK_CHESS "â—‹"
+#define HINT_CHESS "ï¼ƒ"
 #define NONE  0
 #define HINT  1
 #define BLACK 2
@@ -79,7 +79,7 @@ static const ChessConstants reversi_constants = {
     BRDSIZ,
     BRDSIZ,
     0,
-    "¶Â¥Õ´Ñ",
+    "é»‘ç™½æ£‹",
     "photo_reversi",
 #ifdef BN_REVERSI_LOG
     BN_REVERSI_LOG,
@@ -87,7 +87,7 @@ static const ChessConstants reversi_constants = {
     NULL,
 #endif
     { "", "" },
-    { "¥Õ´Ñ",  "¶Â´Ñ" },
+    { "ç™½æ£‹",  "é»‘æ£‹" },
 };
 
 static int
@@ -159,21 +159,21 @@ reversi_init_board(board_t board)
 static void
 reversi_drawline(const ChessInfo* info, int line){
     static const char* num_str[] =
-    {"", "¢°", "¢±", "¢²", "¢³", "¢´", "¢µ", "¢¶", "¢·"};
+    {"", "ï¼‘", "ï¼’", "ï¼“", "ï¼”", "ï¼•", "ï¼–", "ï¼—", "ï¼˜"};
     if(line)
 	move(line, STARTY);
 
     if (line == 0) {
-	prints(ANSI_COLOR(1;46) "  ¶Â¥Õ´Ñ¹ï¾Ô  " ANSI_COLOR(45)
+	prints(ANSI_COLOR(1;46) "  é»‘ç™½æ£‹å°æˆ°  " ANSI_COLOR(45)
 		"%30s VS %-20s%10s" ANSI_RESET,
 	       info->user1.userid, info->user2.userid,
-	       info->mode == CHESS_MODE_WATCH ? "[Æ[´Ñ¼Ò¦¡]" : "");
+	       info->mode == CHESS_MODE_WATCH ? "[è§€æ£‹æ¨¡å¼]" : "");
     } else if (line == 2)
-	outs("  ¢Ï  ¢Ğ  ¢Ñ  ¢Ò  ¢Ó  ¢Ô  ¢Õ  ¢Ö");
+	outs("  ï¼¡  ï¼¢  ï¼£  ï¼¤  ï¼¥  ï¼¦  ï¼§  ï¼¨");
     else if (line == 3)
-	outs("¢z¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢{");
+	outs("â”Œâ”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”");
     else if (line == 19)
-	outs("¢|¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢}");
+	outs("â””â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”˜");
     else if (line == 20)
 	prints("  (" BLACK_CHESS ") %-15s%2d%*s",
 		info->myturn ? info->user1.userid : info->user2.userid,
@@ -186,16 +186,16 @@ reversi_drawline(const ChessInfo* info, int line){
 		34 - 24, "");
     else if (line > 3 && line < 19) {
 	if ((line & 1) == 1)
-	    outs("¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t");
+	    outs("â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤");
 	else {
 	    int x = line / 2 - 1;
 	    int y;
 	    board_p board = (board_p) info->board;
 
 	    move(line, STARTY - 2);
-	prints("%s¢x", num_str[x]);
+	prints("%sâ”‚", num_str[x]);
 	    for(y = 1; y <= 8; ++y)
-		prints("%s¢x", CHESS_TYPE[(int) board[x][y]]);
+		prints("%sâ”‚", CHESS_TYPE[(int) board[x][y]]);
 	}
     }
 
@@ -231,14 +231,14 @@ reversi_prepare_play(ChessInfo* info)
 		ChessStepSend(info, &step);
 		ChessHistoryAppend(info, &step);
 	    }
-	    strcpy(info->last_movestr, "§A¥²¶·©ñ±ó³o¤@¨B!!");
+	    strcpy(info->last_movestr, "ä½ å¿…é ˆæ”¾æ£„é€™ä¸€æ­¥!!");
 	} else {
 	    if (info->mode == CHESS_MODE_VERSUS ||
 		info->mode == CHESS_MODE_PERSONAL) {
 		ChessStepReceive(info, &step);
 		ChessHistoryAppend(info, &step);
 	    }
-	    strcpy(info->last_movestr, "¹ï¤è¥²¶·©ñ±ó³o¤@¨B!!");
+	    strcpy(info->last_movestr, "å°æ–¹å¿…é ˆæ”¾æ£„é€™ä¸€æ­¥!!");
 	}
     }
 
@@ -303,9 +303,9 @@ reversi_prepare_step(ChessInfo* info, const reversi_step_t* step)
 	snprintf(info->last_movestr, sizeof(info->last_movestr),
 		"%c%d", step->loc.c - 1 + 'A', step->loc.r);
     else if (step->color == TURN_TO_COLOR(info->myturn))
-	strcpy(info->last_movestr, "§A¥²¶·©ñ±ó³o¤@¨B!!");
+	strcpy(info->last_movestr, "ä½ å¿…é ˆæ”¾æ£„é€™ä¸€æ­¥!!");
     else
-	strcpy(info->last_movestr, "¹ï¤è¥²¶·©ñ±ó³o¤@¨B!!");
+	strcpy(info->last_movestr, "å°æ–¹å¿…é ˆæ”¾æ£„é€™ä¸€æ­¥!!");
 }
 
 static void
@@ -364,7 +364,7 @@ reversi_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
     vcur_restore(cur);
 
     fprintf(fp, "\n");
-    fprintf(fp, "«ö z ¥i¶i¤J¥´ÃĞ¼Ò¦¡\n");
+    fprintf(fp, "æŒ‰ z å¯é€²å…¥æ‰“è­œæ¨¡å¼\n");
     fprintf(fp, "\n");
 
     fprintf(fp, "<reversilog>\nblack:%s\nwhite:%s\n",
@@ -410,7 +410,7 @@ reversi_loadlog(FILE *fp, ChessInfo *info)
 	    if (getuser(buf + 6, &rec))
 		reversi_init_user_userec(&rec, user);
 	} else if (buf[0] == '[') {
-	    /* "[ 1]¡´ ==> C4    [ 2]¡³ ==> C5"  */
+	    /* "[ 1]â— ==> C4    [ 2]â—‹ ==> C5"  */
 	    int         c, r;
 	    const char *p = buf;
 	    int i;
@@ -492,7 +492,7 @@ reversi(int s, ChessGameMode mode)
 int
 reversi_main(void)
 {
-    return ChessStartGame('r', SIG_REVERSI, "¶Â¥Õ´Ñ");
+    return ChessStartGame('r', SIG_REVERSI, "é»‘ç™½æ£‹");
 }
 
 int
@@ -505,7 +505,7 @@ reversi_personal(void)
 int
 reversi_watch(void)
 {
-    return ChessWatchGame(&reversi, REVERSI, "¶Â¥Õ´Ñ");
+    return ChessWatchGame(&reversi, REVERSI, "é»‘ç™½æ£‹");
 }
 
 ChessInfo*

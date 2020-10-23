@@ -7,15 +7,15 @@ void FormatCommentString(char *buf, size_t szbuf, int type,
 {
 #ifdef OLDRECOMMEND
     snprintf(buf, szbuf,
-             ANSI_COLOR(1;31) "¡÷ " ANSI_COLOR(33) "%s" ANSI_RESET
-             ANSI_COLOR(33) ":%-*s" ANSI_RESET "±À%s\n",
+             ANSI_COLOR(1;31) "â†’ " ANSI_COLOR(33) "%s" ANSI_RESET
+             ANSI_COLOR(33) ":%-*s" ANSI_RESET "æŽ¨%s\n",
              myid, maxlength, msg, tail);
 #else
     // TODO(piaip) Make bbs.c#recomment use same structure.
     // Now we just assume they are the same.
     enum { RECTYPE_SIZE = 3 };
     static const char *ctype[RECTYPE_SIZE] = {
-        "±À", "¼N", "¡÷",
+        "æŽ¨", "å™“", "â†’",
     };
     // Note attr2 is slightly different from ctype_attr in bbs.c#recommend
     static const char *ctype_attr2[RECTYPE_SIZE] = {
@@ -234,7 +234,7 @@ int CommentsDeleteFromTextFile(void *ctx, int i, const char *reason)
              (buf[pattern2_len] == ' ' || buf[pattern2_len] == ESC_CHR)))) {
             // Note reason is 40 chars in length.
             fprintf(out, ANSI_COLOR(1;30)
-                    "(%s §R°£ %s ªº±À¤å: %s)" ANSI_RESET "\n",
+                    "(%s åˆªé™¤ %s çš„æŽ¨æ–‡: %s)" ANSI_RESET "\n",
                     cuser.userid, req->userid, reason);
             found = 1;
         } else {
@@ -254,8 +254,8 @@ int CommentsDeleteFromTextFile(void *ctx, int i, const char *reason)
         if (rev > 0) {
             char revfn[PATHLEN];
             timecapsule_get_by_revision(filename, rev, revfn, sizeof(revfn));
-            log_filef(revfn, 0, "\n¡° §R°£±À¤å: %s %s²z¥Ñ: %s\n"
-                      "±À¤å¤º®e: %s: %s\n", Cdatelite(&now), cuser.userid,
+            log_filef(revfn, 0, "\nâ€» åˆªé™¤æŽ¨æ–‡: %s %sç†ç”±: %s\n"
+                      "æŽ¨æ–‡å…§å®¹: %s: %s\n", Cdatelite(&now), cuser.userid,
                       reason, req->userid, req->msg);
         }
 #endif

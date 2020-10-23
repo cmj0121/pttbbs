@@ -65,8 +65,8 @@ char *aidu2aidc(char *buf, const aidu_t orig_aidu)
   *(sp --) = '\0';
   while(sp >= buf)
   {
-    /* FIXME: ¯à«OÃÒ aidu2aidc_tablesize ¬O 2 ªº¾­¦¸ªº¸Ü¡A
-              ³o¸Ì¥i¥H§ï¥Î bitwise operation °µ */
+    /* FIXME: èƒ½ä¿è­‰ aidu2aidc_tablesize æ˜¯ 2 çš„å†ªæ¬¡çš„è©±ï¼Œ
+              é€™è£¡å¯ä»¥æ”¹ç”¨ bitwise operation åš */
     v = aidu % aidu2aidc_tablesize;
     aidu = aidu / aidu2aidc_tablesize;
     *(sp --) = aidu2aidc_table[v];
@@ -100,7 +100,7 @@ aidu_t aidc2aidu(const char *aidc)
   while(*sp != '\0' && /* ignore trailing spaces */ *sp != ' ')
   {
     aidu_t v = 0;
-    /* FIXME: ¬dªíªk·|¤£·|¤ñ¸û§Ö¡H */
+    /* FIXME: æŸ¥è¡¨æ³•æœƒä¸æœƒæ¯”è¼ƒå¿«ï¼Ÿ */
     if(*sp >= '0' && *sp <= '9')
       v = *sp - '0';
     else if(*sp >= 'A' && *sp <= 'Z')
@@ -221,7 +221,7 @@ int do_search_aid(SearchAIDResult_t *r)
   if(r == NULL)
     return -1;
   r->n = -1;
-  if(!getdata(b_lines, 0, "·j´M" AID_DISPLAYNAME ": #", aidc, 15 + IDLEN, LCECHO))
+  if(!getdata(b_lines, 0, "æœå°‹" AID_DISPLAYNAME ": #", aidc, 15 + IDLEN, LCECHO))
   {
     move(b_lines, 0);
     clrtoeol();
@@ -233,7 +233,7 @@ int do_search_aid(SearchAIDResult_t *r)
     move(21, 0);
     clrtobot();
     move(22, 0);
-    prints("¦¹ª¬ºA¤UµLªk·j´M" AID_DISPLAYNAME);
+    prints("æ­¤ç‹€æ…‹ä¸‹ç„¡æ³•æœå°‹" AID_DISPLAYNAME);
     pressanykey();
     return -1;
   }
@@ -265,7 +265,7 @@ int do_search_aid(SearchAIDResult_t *r)
         if(enter_board(bname) < 0)
         {
           r->n = -1;
-          emsg = "¿ù»~¡GµLªk¶i¤J«ü©wªº¬İªO %s";
+          emsg = "éŒ¯èª¤ï¼šç„¡æ³•é€²å…¥æŒ‡å®šçš„çœ‹æ¿ %s";
         }
       }
     }
@@ -278,13 +278,13 @@ int do_search_aid(SearchAIDResult_t *r)
   if(r->n < 0)
   {
     if(aidu == 0)
-      emsg = "¤£¦Xªkªº" AID_DISPLAYNAME "¡A½Ğ½T©w¿é¤J¬O¥¿½Tªº";
+      emsg = "ä¸åˆæ³•çš„" AID_DISPLAYNAME "ï¼Œè«‹ç¢ºå®šè¼¸å…¥æ˜¯æ­£ç¢ºçš„";
     else if(emsg == NULL)
     {
       if(bname[0] != '\0')
-        emsg = "¬İªO %s ¤º§ä¤£¨ì³o­Ó" AID_DISPLAYNAME "¡A¥i¯à¬O¤å³¹¤w¸g®ø¥¢¡A©Î¬O§ä¿ù¬İªO¤F";
+        emsg = "çœ‹æ¿ %s å…§æ‰¾ä¸åˆ°é€™å€‹" AID_DISPLAYNAME "ï¼Œå¯èƒ½æ˜¯æ–‡ç« å·²ç¶“æ¶ˆå¤±ï¼Œæˆ–æ˜¯æ‰¾éŒ¯çœ‹æ¿äº†";
       else
-        emsg = "§ä¤£¨ì³o­Ó" AID_DISPLAYNAME "¡A¥i¯à¬O¤å³¹¤w¸g®ø¥¢¡A©Î¬O§ä¿ù¬İªO¤F";
+        emsg = "æ‰¾ä¸åˆ°é€™å€‹" AID_DISPLAYNAME "ï¼Œå¯èƒ½æ˜¯æ–‡ç« å·²ç¶“æ¶ˆå¤±ï¼Œæˆ–æ˜¯æ‰¾éŒ¯çœ‹æ¿äº†";
     }
     move(21, 0);
     clrtoeol();

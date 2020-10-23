@@ -27,16 +27,16 @@ reset_garbage(void)
 	    SHM->Ptouchtime = 1;
     }
     /*
-     * ¤£¾ã­Óreload? for(n=0;n<=SHM->last_film;n++) printf("\n**%d**\n %s
+     * ä¸æ•´å€‹reload? for(n=0;n<=SHM->last_film;n++) printf("\n**%d**\n %s
      * \n",n,SHM->notes[n]);
      */
     SHM->Puptime = 0;
     reload_pttcache();
 
-    printf("\n°ÊºA¬İªO¼Æ[%d]\n", SHM->last_film);
+    printf("\nå‹•æ…‹çœ‹æ¿æ•¸[%d]\n", SHM->last_film);
     /*
-     * for(n=0; n<MAX_MOVIE_SECTION; n++) printf("sec%d=> °_ÂI:%d
-     * ¤U¦¸­n´«ªº:%d\n ",n,SHM->n_notes[n], SHM->next_refresh[n]);
+     * for(n=0; n<MAX_MOVIE_SECTION; n++) printf("sec%d=> èµ·é»:%d
+     * ä¸‹æ¬¡è¦æ›çš„:%d\n ",n,SHM->n_notes[n], SHM->next_refresh[n]);
      * printf("\n");
      */
 }
@@ -67,7 +67,7 @@ keeplog(const char *fpath, const char *board, const char *title, const char *sym
      * printf("keep record:[%s][%s][%s][%s]\n",fpath, board, title,genbuf);
      */
     strlcpy(fhdr.title, title, sizeof(fhdr.title));
-    strlcpy(fhdr.owner, "[¾ú¥v¦Ñ®v]", sizeof(fhdr.owner));
+    strlcpy(fhdr.owner, "[æ­·å²è€å¸«]", sizeof(fhdr.owner));
     setbfile(genbuf, board, FN_DIR);
     append_record(genbuf, &fhdr, sizeof(fhdr));
     /* XXX: bid of cache.c's getbnum starts from 1 */
@@ -176,7 +176,7 @@ output_today(struct tm *ptime, int *act, int peak_hour_login, int day_login)
     }
 
     fprintf(fp, "\t\t\t" ANSI_COLOR(1;33;46)
-            "¨C¤p®É¤W¯¸¤H¦¸²Î­p [%04d/%02d/%02d]" ANSI_RESET "\n\n", 
+            "æ¯å°æ™‚ä¸Šç«™äººæ¬¡çµ±è¨ˆ [%04d/%02d/%02d]" ANSI_RESET "\n\n", 
 	    ptime->tm_year + 1900, ptime->tm_mon + 1, ptime->tm_mday);
 
     for (i = 0; i < 24; i++) {
@@ -189,15 +189,15 @@ output_today(struct tm *ptime, int *act, int peak_hour_login, int day_login)
         if (bars*2 > bar_max_width)
             bars = bar_max_width/2;
         while (bars-- > 0)
-            fputs("¢i", fp);
+            fputs("â–ˆ", fp);
 
         // print number and newline
         fputs(ANSI_COLOR(33), fp);
         fprintf(fp, " %d" ANSI_RESET "\n", hour_count);
     }
 
-    fprintf(fp, ANSI_COLOR(1;36) "\n  Á`¦@¤W¯¸¤H¦¸¡G" ANSI_COLOR(37) "%-7d"
-            ANSI_COLOR(36) " ¥­§¡¨Ï¥Î¤H¼Æ¡G" ANSI_COLOR(37) "%d\n",
+    fprintf(fp, ANSI_COLOR(1;36) "\n  ç¸½å…±ä¸Šç«™äººæ¬¡ï¼š" ANSI_COLOR(37) "%-7d"
+            ANSI_COLOR(36) " å¹³å‡ä½¿ç”¨äººæ•¸ï¼š" ANSI_COLOR(37) "%d\n",
 	    day_login, day_login / 24);
     fclose(fp);
 
@@ -216,7 +216,7 @@ update_history(struct tm *ptime, int peak_hour, int peak_hour_login, int day_log
     if ((fp = fopen("etc/history.data", "r+")) == NULL)
 	return 1;
 
-    /* ³Ì¦h¦P®É¤W½u */
+    /* æœ€å¤šåŒæ™‚ä¸Šç·š */
     if (fscanf(fp, "%d %d %d %d", &max_day_login, &max_hour_login, &max_reg, &max_online) != 4)
 	goto out;
 
@@ -225,12 +225,12 @@ update_history(struct tm *ptime, int peak_hour, int peak_hour_login, int day_log
 
     resolve_fcache();
     peak_online = SHM->max_user;
-    printf("¦¹®É¬q³Ì¦h¦P®É¤W½u:%d ¹L¥h:%d\n", peak_online, max_online);
+    printf("æ­¤æ™‚æ®µæœ€å¤šåŒæ™‚ä¸Šç·š:%d éå»:%d\n", peak_online, max_online);
 
     if (peak_online > max_online) {
 	localtime4_r(&SHM->max_time, &tm);
-	fprintf(fp1, "¡· ¡i%02d/%02d/%02d %02d:%02d¡j"
-		ANSI_COLOR(32) "¦P®É¦b§{¤º¤H¼Æ" ANSI_RESET "­º¦¸¹F¨ì " ANSI_COLOR(1;36) "%d" ANSI_RESET " ¤H\n",
+	fprintf(fp1, "â— ã€%02d/%02d/%02d %02d:%02dã€‘"
+		ANSI_COLOR(32) "åŒæ™‚åœ¨åŠå…§äººæ•¸" ANSI_RESET "é¦–æ¬¡é”åˆ° " ANSI_COLOR(1;36) "%d" ANSI_RESET " äºº\n",
 		tm.tm_mon + 1, tm.tm_mday, tm.tm_year % 100, tm.tm_hour, tm.tm_min, peak_online);
 	max_online = peak_online;
     }
@@ -240,20 +240,20 @@ update_history(struct tm *ptime, int peak_hour, int peak_hour_login, int day_log
 
     if (tm.tm_hour == 0) {
 	if (peak_hour_login > max_hour_login) {
-	    fprintf(fp1, "¡º ¡i%02d/%02d/%02d %02d¡j   "
-		    ANSI_COLOR(1;32) "³æ¤@¤p®É¤W½u¤H¦¸" ANSI_RESET "­º¦¸¹F¨ì " ANSI_COLOR(1;35) "%d" ANSI_RESET " ¤H¦¸\n",
+	    fprintf(fp1, "â—‡ ã€%02d/%02d/%02d %02dã€‘   "
+		    ANSI_COLOR(1;32) "å–®ä¸€å°æ™‚ä¸Šç·šäººæ¬¡" ANSI_RESET "é¦–æ¬¡é”åˆ° " ANSI_COLOR(1;35) "%d" ANSI_RESET " äººæ¬¡\n",
 		    ptime->tm_mon + 1, ptime->tm_mday, ptime->tm_year % 100, peak_hour, peak_hour_login);
 	    max_hour_login = peak_hour_login;
 	}
 	if (day_login > max_day_login) {
-	    fprintf(fp1, "¡» ¡i%02d/%02d/%02d¡j      "
-		    ANSI_COLOR(1;32) "³æ¤é¤W½u¤H¦¸" ANSI_RESET "­º¦¸¹F¨ì " ANSI_COLOR(1;33) "%d" ANSI_RESET " ¤H¦¸\n",
+	    fprintf(fp1, "â—† ã€%02d/%02d/%02dã€‘      "
+		    ANSI_COLOR(1;32) "å–®æ—¥ä¸Šç·šäººæ¬¡" ANSI_RESET "é¦–æ¬¡é”åˆ° " ANSI_COLOR(1;33) "%d" ANSI_RESET " äººæ¬¡\n",
 		    ptime->tm_mon + 1, ptime->tm_mday, ptime->tm_year % 100, day_login);
 	    max_day_login = day_login;
 	}
 	if (SHM->number > max_reg + max_reg / 10) {
-	    fprintf(fp1, "¡¹ ¡i%02d/%02d/%02d¡j      "
-		    ANSI_COLOR(1;32) "Á`µù¥U¤H¼Æ" ANSI_RESET "´£¤É¨ì " ANSI_COLOR(1;31) "%d" ANSI_RESET " ¤H\n",
+	    fprintf(fp1, "â˜… ã€%02d/%02d/%02dã€‘      "
+		    ANSI_COLOR(1;32) "ç¸½è¨»å†Šäººæ•¸" ANSI_RESET "æå‡åˆ° " ANSI_COLOR(1;31) "%d" ANSI_RESET " äºº\n",
 		    ptime->tm_mon + 1, ptime->tm_mday, ptime->tm_year % 100, SHM->number);
 	    max_reg = SHM->number;
 	}
@@ -325,7 +325,7 @@ none:
 		fprintf(fp1, "%s", buf);
 	fclose(fp);
     } else
-	fprintf(fp1, "¥»¤é¸`¤é¼x¨D¤¤");
+	fprintf(fp1, "æœ¬æ—¥ç¯€æ—¥å¾µæ±‚ä¸­");
 
 out:
     fclose(fp1);
@@ -371,7 +371,7 @@ main(/*int argc, char **argv*/)
     const char log_file[] = "usies";
     char            buf[256], buf1[256];
     FILE           *fp;
-    int             act[ACT_ELEMENTS];	/* ¦¸¼Æ/²Ö­p®É¶¡/pointer */
+    int             act[ACT_ELEMENTS];	/* æ¬¡æ•¸/ç´¯è¨ˆæ™‚é–“/pointer */
     time_t          now;
     struct tm       tm_now, tm_adjusted;
 
@@ -386,7 +386,7 @@ main(/*int argc, char **argv*/)
 
     memset(act, 0, sizeof(act));
 
-    printf("¦¸¼Æ/²Ö­p®É¶¡\n");
+    printf("æ¬¡æ•¸/ç´¯è¨ˆæ™‚é–“\n");
     parse_usies(log_file, act);
 
     peak_hour_login = peak_hour = 0;
@@ -400,47 +400,47 @@ main(/*int argc, char **argv*/)
     }
 
     /* -------------------------------------------------------------- */
-    printf("¤W¯¸¤H¦¸²Î­p\n");
+    printf("ä¸Šç«™äººæ¬¡çµ±è¨ˆ\n");
     output_today(&tm_adjusted, act, peak_hour_login, day_login);
     /* -------------------------------------------------------------- */
 
-    printf("¾ú¥v¨Æ¥ó³B²z\n");
-    /* Ptt ¾ú¥v¨Æ¥ó³B²z */
+    printf("æ­·å²äº‹ä»¶è™•ç†\n");
+    /* Ptt æ­·å²äº‹ä»¶è™•ç† */
     update_history(&tm_adjusted, peak_hour, peak_hour_login, day_login);
 
     if (tm_now.tm_hour == 0) {
         Copy("etc/today", "etc/yesterday");
 	/* system("rm -f note.dat"); */
 
-	keeplog("etc/today", BN_RECORD, "¤W¯¸¤H¦¸²Î­p", NULL);
-	keeplog(FN_MONEY, BN_SECURITY, "¥»¤éª÷¿ú©¹¨Ó°O¿ı", NULL);
-	keeplog("etc/illegal_money", BN_SECURITY, "¥»¤é¹HªkÁÈ¿ú°O¿ı", NULL);
-	keeplog("etc/osong.log", BN_SECURITY, "¥»¤éÂIºq°O¿ı", NULL);
-	keeplog("etc/chicken", BN_RECORD, "Âû³õ³ø§i", NULL);
+	keeplog("etc/today", BN_RECORD, "ä¸Šç«™äººæ¬¡çµ±è¨ˆ", NULL);
+	keeplog(FN_MONEY, BN_SECURITY, "æœ¬æ—¥é‡‘éŒ¢å¾€ä¾†è¨˜éŒ„", NULL);
+	keeplog("etc/illegal_money", BN_SECURITY, "æœ¬æ—¥é•æ³•è³ºéŒ¢è¨˜éŒ„", NULL);
+	keeplog("etc/osong.log", BN_SECURITY, "æœ¬æ—¥é»æ­Œè¨˜éŒ„", NULL);
+	keeplog("etc/chicken", BN_RECORD, "é›å ´å ±å‘Š", NULL);
 
         // Restore etc/yesterday because keeplog removes it.
         Copy("etc/yesterday", "etc/today");
 
-	snprintf(buf, sizeof(buf), "[¦w¥ş³ø§i] ¨Ï¥ÎªÌ¤W½uºÊ±± [%02d/%02d:%02d]",
+	snprintf(buf, sizeof(buf), "[å®‰å…¨å ±å‘Š] ä½¿ç”¨è€…ä¸Šç·šç›£æ§ [%02d/%02d:%02d]",
 		tm_now.tm_mon + 1, tm_now.tm_mday, tm_now.tm_hour);
 	keeplog("usies", "Security", buf, "usies");
         // usies is removed - so we have to also delete .act
         remove(act_file);
-	printf("[¦w¥ş³ø§i] ¨Ï¥ÎªÌ¤W½uºÊ±±\n");
+	printf("[å®‰å…¨å ±å‘Š] ä½¿ç”¨è€…ä¸Šç·šç›£æ§\n");
 
 	sprintf(buf, "-%02d%02d%02d",
 		tm_adjusted.tm_year % 100, tm_adjusted.tm_mon + 1, tm_adjusted.tm_mday);
 
-	printf("À£ÁY¨Ï¥ÎªÌ¤W½uºÊ±±\n");
+	printf("å£“ç¸®ä½¿ç”¨è€…ä¸Šç·šç›£æ§\n");
 	gzip(log_file, "usies", buf);
 	gzip("etc/mailog", "mailog", buf);
 
-	/* Ptt ¸`¤é³B²z */
-	printf("¸`¤é³B²z\n");
+	/* Ptt ç¯€æ—¥è™•ç† */
+	printf("ç¯€æ—¥è™•ç†\n");
 	update_holiday_list(&tm_now);
 
-	/* Ptt Åwªïµe­±³B²z */
-	printf("Åwªïµe­±³B²z\n");
+	/* Ptt æ­¡è¿ç•«é¢è™•ç† */
+	printf("æ­¡è¿ç•«é¢è™•ç†\n");
 
 	if ((fp = fopen("etc/Welcome.date", "r"))) {
 	    char            temp[50];
@@ -456,13 +456,13 @@ main(/*int argc, char **argv*/)
 	}
 
 	if (tm_now.tm_wday == 0)
-	    keeplog("etc/week", BN_RECORD, "¥»¶g¼öªù¸ÜÃD", NULL);
+	    keeplog("etc/week", BN_RECORD, "æœ¬é€±ç†±é–€è©±é¡Œ", NULL);
 
 	if (tm_now.tm_mday == 1)
-	    keeplog("etc/month", BN_RECORD, "¥»¤ë¼öªù¸ÜÃD", NULL);
+	    keeplog("etc/month", BN_RECORD, "æœ¬æœˆç†±é–€è©±é¡Œ", NULL);
 
 	if (tm_now.tm_yday == 1)
-	    keeplog("etc/year", BN_RECORD, "¦~«×¼öªù¸ÜÃD", NULL);
+	    keeplog("etc/year", BN_RECORD, "å¹´åº¦ç†±é–€è©±é¡Œ", NULL);
     } else if (tm_now.tm_hour == 3 && tm_now.tm_wday == 6) {
 	const char fn1[] = "tmp";
 	const char fn2[] = "suicide";
@@ -477,17 +477,17 @@ main(/*int argc, char **argv*/)
     }
 
     /* Ptt reset Ptt's share memory */
-    printf("­«³]cache »Pfcache\n");
+    printf("é‡è¨­cache èˆ‡fcache\n");
 
     update_holiday(&tm_now);
 
     SHM->Puptime = 0;
     resolve_fcache();
     reset_garbage();
-    printf("°ÊºA¬İªO¸ê°T: last_usong=%d, last_film=%d\n", 
+    printf("å‹•æ…‹çœ‹æ¿è³‡è¨Š: last_usong=%d, last_film=%d\n", 
 	    SHM->last_usong, SHM->last_film);
 
-    printf("­pºâ¶i¯¸µe­±¼Æ: ");
+    printf("è¨ˆç®—é€²ç«™ç•«é¢æ•¸: ");
     for (i = 0; i < 5; ++i) {
 	sprintf(buf, "etc/Welcome_login.%d", i);
 	if (access(buf, 0) < 0)

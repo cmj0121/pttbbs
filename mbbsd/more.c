@@ -162,7 +162,7 @@ common_pager_exit_handler(int r, const char *fpath)
 	    if (HasUserPerm(PERM_BASIC))
 	    {
 		char buf[PATHLEN];
-		getdata(b_lines - 1, 0, "§â³o½g¤å³¹¦¬¤J¨ì¼È¦sÀÉ¡H[y/N] ",
+		getdata(b_lines - 1, 0, "æŠŠé€™ç¯‡æ–‡ç« æ”¶å…¥åˆ°æš«å­˜æª”ï¼Ÿ[y/N] ",
 			buf, 4, LCECHO);
 		if (buf[0] != 'y')
 		    break;
@@ -292,9 +292,9 @@ int more(const char *fpath, int promptend)
 
 	    // print prompt bar
 	    snprintf(buf, sizeof(buf),
-		    "  ÂsÄı P.%d  ", 1 + (lineno / (t_lines-2)));
+		    "  ç€è¦½ P.%d  ", 1 + (lineno / (t_lines-2)));
 	    vs_footer(buf,
-	    " (¡÷¡õ[PgUp][PgDn][Home][End])´å¼Ğ²¾°Ê\t(¡ö/q)µ²§ô");
+	    " (â†’â†“[PgUp][PgDn][Home][End])æ¸¸æ¨™ç§»å‹•\t(â†/q)çµæŸ");
 	}
 	// process key
 	switch((vk = vkey())) {
@@ -352,33 +352,33 @@ int more(const char *fpath, int promptend)
 
 static const char
 *hlp_nav [] =
-{ "¡iÂsÄı«ü¥O¡j", NULL,
-    "  ¤U½g¤å³¹  ", "f",
-    "  «e½g¤å³¹  ", "b",
-    "  ¦P¥DÃD¤U½g", "]  +",
-    "  ¦P¥DÃD«e½g", "[  -",
-    "  ¦P¥DÃD­º½g", "=",
-    "  ¦P¥DÃD´`§Ç", "t",
-    "  ¦P§@ªÌ«e½g", "A",
-    "  ¦P§@ªÌ¤U½g", "a",
+{ "ã€ç€è¦½æŒ‡ä»¤ã€‘", NULL,
+    "  ä¸‹ç¯‡æ–‡ç«   ", "f",
+    "  å‰ç¯‡æ–‡ç«   ", "b",
+    "  åŒä¸»é¡Œä¸‹ç¯‡", "]  +",
+    "  åŒä¸»é¡Œå‰ç¯‡", "[  -",
+    "  åŒä¸»é¡Œé¦–ç¯‡", "=",
+    "  åŒä¸»é¡Œå¾ªåº", "t",
+    "  åŒä½œè€…å‰ç¯‡", "A",
+    "  åŒä½œè€…ä¸‹ç¯‡", "a",
     NULL,
 },
 *hlp_reply [] =
-{ "¡i¦^À³«ü¥O¡j", NULL,
-    "  ±ÀÂË¤å³¹", "% X",
-    "  ¦^«H¦^¤å", "r",
-    "  ¥ş³¡¦^ÂĞ", "y",
+{ "ã€å›æ‡‰æŒ‡ä»¤ã€‘", NULL,
+    "  æ¨è–¦æ–‡ç« ", "% X",
+    "  å›ä¿¡å›æ–‡", "r",
+    "  å…¨éƒ¨å›è¦†", "y",
     NULL,
 },
 *hlp_spc [] =
-{ "¡i¯S®í«ü¥O¡j", NULL,
-    "  ¬d¸ß¸ê°T  ", "Q",
-    "  ¤å³¹¥N½X·j´M", "#",
-    "  ¦s¤J¼È¦sÀÉ", "^T",
-    "  ¤Á´«¬İªO  ", "s",
-    "  ´Ñ§½¥´ÃĞ  ", "z",
+{ "ã€ç‰¹æ®ŠæŒ‡ä»¤ã€‘", NULL,
+    "  æŸ¥è©¢è³‡è¨Š  ", "Q",
+    "  æ–‡ç« ä»£ç¢¼æœå°‹", "#",
+    "  å­˜å…¥æš«å­˜æª”", "^T",
+    "  åˆ‡æ›çœ‹æ¿  ", "s",
+    "  æ£‹å±€æ‰“è­œ  ", "z",
 #if defined(USE_BBSLUA) && !defined(DISABLE_BBSLUA_IN_PAGER)
-    "  °õ¦æBBSLua", "L l",
+    "  åŸ·è¡ŒBBSLua", "L l",
 #endif
     NULL,
 };
@@ -416,11 +416,11 @@ static int
 common_pmore_footer_handler(int ratio GCC_UNUSED, int width,
                             void *ctx GCC_UNUSED)
 {
-#define FOOTERMSG_MAIL_LONG  "(y)¦^«H (h)»¡©ú (¡ö/q)Â÷¶} "
-#define FOOTERMSG_READ_LONG  "(y)¦^À³(X%)±À¤å(h)»¡©ú(¡ö)Â÷¶} "
-#define FOOTERMSG_READ_MID   "(y)¦^À³(X/%)±À¤å (¡ö)Â÷¶} "
-#define FOOTERMSG_SHORT	     "(h)»¡©ú (¡ö/q)Â÷¶} "
-#define FOOTERMSG_VERYSHORT  "(¡öq)Â÷¶} "
+#define FOOTERMSG_MAIL_LONG  "(y)å›ä¿¡ (h)èªªæ˜ (â†/q)é›¢é–‹ "
+#define FOOTERMSG_READ_LONG  "(y)å›æ‡‰(X%)æ¨æ–‡(h)èªªæ˜(â†)é›¢é–‹ "
+#define FOOTERMSG_READ_MID   "(y)å›æ‡‰(X/%)æ¨æ–‡ (â†)é›¢é–‹ "
+#define FOOTERMSG_SHORT	     "(h)èªªæ˜ (â†/q)é›¢é–‹ "
+#define FOOTERMSG_VERYSHORT  "(â†q)é›¢é–‹ "
 #define FOOTERATTR_KEY	     ANSI_COLOR(31)
 #define FOOTERATTR_TEXT	     ANSI_COLOR(30)
 

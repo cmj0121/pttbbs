@@ -37,16 +37,16 @@
 
 #define VCLR_INPUT_FIELD	ANSI_COLOR(0;7)
 
-#define VMSG_PAUSE		" ½Ğ«ö¥ô·NÁäÄ~Äò "
-#define VMSG_PAUSE_PAD		"¢e"
-#define VMSG_MSG_FLOAT		" [«ö¥ô·NÁäÄ~Äò]"
-#define VMSG_MSG_PREFIX		" ¡» "
-#define VMSG_HDR_PREFIX		"¡i "
-#define VMSG_HDR_POSTFIX	" ¡j"
+#define VMSG_PAUSE		" è«‹æŒ‰ä»»æ„éµç¹¼çºŒ "
+#define VMSG_PAUSE_PAD		"â–„"
+#define VMSG_MSG_FLOAT		" [æŒ‰ä»»æ„éµç¹¼çºŒ]"
+#define VMSG_MSG_PREFIX		" â—† "
+#define VMSG_HDR_PREFIX		"ã€ "
+#define VMSG_HDR_POSTFIX	" ã€‘"
 
-#define VMSG_QPREF_TITLE        "½Ğ³]©w¤U¦C¿ï¶µ"
-#define VMSG_QPREF_ENTRY        "¥i¨Ï¥Î¿ï¶µ: "
-#define VMSG_QPREF_PROMPT       "½Ğ«ö¼Æ¦r©Î¤è¦VÁä½Õ¾ã¡A©Î¨ä¥¦¥ô·NÁäµ²§ô"
+#define VMSG_QPREF_TITLE        "è«‹è¨­å®šä¸‹åˆ—é¸é …"
+#define VMSG_QPREF_ENTRY        "å¯ä½¿ç”¨é¸é …: "
+#define VMSG_QPREF_PROMPT       "è«‹æŒ‰æ•¸å­—æˆ–æ–¹å‘éµèª¿æ•´ï¼Œæˆ–å…¶å®ƒä»»æ„éµçµæŸ"
 
 // CONSTANT DEFINITION -------------------------------------------------
 #define VCOL_MAXW		(INT16_MAX)

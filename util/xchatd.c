@@ -4,8 +4,8 @@
 #include <netdb.h>
 
 #define SERVER_USAGE
-#undef  MONITOR                 /* ºÊ·ş chatroom ¬¡°Ê¥H¸Ñ¨MªÈ¯É */
-#undef  DEBUG                   /* µ{¦¡°£¿ù¤§¥Î */
+#undef  MONITOR                 /* ç›£ç£ chatroom æ´»å‹•ä»¥è§£æ±ºç³¾ç´› */
+#undef  DEBUG                   /* ç¨‹å¼é™¤éŒ¯ä¹‹ç”¨ */
 
 #ifdef  DEBUG
 #define MONITOR
@@ -14,23 +14,23 @@
 #define REJECT_NICK_BY_USERID
 
 /* self-test:
- * random test, ÀH¾÷²£¥Í¦UºØ client input, ¥Øªº¬°§ä¨ìÅı server
- * crash ªºª¬ªp, ¦]¦¹ client ¨Ã¥¼ÀËÅç server ¶Ç¹L¨Óªº data.
- * server ¤]¤£·|Åª¨ú bbs ¹ê»ÚªºÀÉ®×©Î SHM.
- * ®Ú¾Ú gcov(1) ¦¹ self-test coverage ¬ù 90%
+ * random test, éš¨æ©Ÿç”¢ç”Ÿå„ç¨® client input, ç›®çš„ç‚ºæ‰¾åˆ°è®“ server
+ * crash çš„ç‹€æ³, å› æ­¤ client ä¸¦æœªæª¢é©— server å‚³éä¾†çš„ data.
+ * server ä¹Ÿä¸æœƒè®€å– bbs å¯¦éš›çš„æª”æ¡ˆæˆ– SHM.
+ * æ ¹æ“š gcov(1) æ­¤ self-test coverage ç´„ 90%
  *
- * ¦p¦ó´ú¸Õ:
- * define SELFTEST & SELFTESTER, °õ¦æ®ÉÀH·N¥[°Ñ¼Æ(argc>1)´N·|¶] test child.
- * test server ¶È¶i¦æ 100 ¬í.
+ * å¦‚ä½•æ¸¬è©¦:
+ * define SELFTEST & SELFTESTER, åŸ·è¡Œæ™‚éš¨æ„åŠ åƒæ•¸(argc>1)å°±æœƒè·‘ test child.
+ * test server åƒ…é€²è¡Œ 100 ç§’.
  *
  * Hint:
- * °t¦X valgrind ´M§ä memory related bug.
+ * é…åˆ valgrind å°‹æ‰¾ memory related bug.
  */
 //#define SELFTEST
 //#define SELFTESTER
 
 #ifdef SELFTEST
-// ¥t¶} port
+// å¦é–‹ port
 #undef NEW_CHATPORT
 #define NEW_CHATPORT 12333
 // only test 100 secs
@@ -47,7 +47,7 @@
 /* name of the main room (always exists) */
 
 #define MAIN_NAME       "main"
-#define MAIN_TOPIC      "²i¯ù¥i°^¦è¤Ñ¦ò"
+#define MAIN_TOPIC      "çƒ¹èŒ¶å¯è²¢è¥¿å¤©ä½›"
 
 #define ROOM_LOCKED     1
 #define ROOM_SECRET     2
@@ -63,23 +63,23 @@
 
 #define RESTRICTED(usr) (usr->uflag == 0)       /* guest */
 #define CHATSYSOP(usr)  (usr->uflag & ( PERM_SYSOP | PERM_CHATROOM))
-/* Thor: SYSOP »P CHATROOM³£¬O chatÁ`ºŞ */
-#define PERM_ROOMOP     PERM_CHAT       /* Thor: ­É PERM_CHAT¬° PERM_ROOMOP */
-#define PERM_HANDUP     PERM_BM		/* ­É PERM_BM ¬°¦³¨S¦³Á|¤â¹L */
-#define PERM_SAY        PERM_NOTOP	/* ­É PERM_NOTOP ¬°¦³¨S¦³µoªíÅv */
+/* Thor: SYSOP èˆ‡ CHATROOMéƒ½æ˜¯ chatç¸½ç®¡ */
+#define PERM_ROOMOP     PERM_CHAT       /* Thor: å€Ÿ PERM_CHATç‚º PERM_ROOMOP */
+#define PERM_HANDUP     PERM_BM		/* å€Ÿ PERM_BM ç‚ºæœ‰æ²’æœ‰èˆ‰æ‰‹é */
+#define PERM_SAY        PERM_NOTOP	/* å€Ÿ PERM_NOTOP ç‚ºæœ‰æ²’æœ‰ç™¼è¡¨æ¬Š */
 
-/* ¶i¤J®É»İ²MªÅ              */
-/* Thor: ROOMOP¬°©Ğ¶¡ºŞ²z­û */
+/* é€²å…¥æ™‚éœ€æ¸…ç©º              */
+/* Thor: ROOMOPç‚ºæˆ¿é–“ç®¡ç†å“¡ */
 #define ROOMOP(usr)  (usr->uflag & ( PERM_ROOMOP | PERM_SYSOP | PERM_CHATROOM))
 #define CLOAK(usr)      (usr->uflag & PERM_CLOAK)
 #define HANDUP(usr)  (usr->uflag & PERM_HANDUP) 
 #define SAY(usr)      (usr->uflag & PERM_SAY)
-/* Thor: ²á¤Ñ«ÇÁô¨­³N */
+/* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 
 #define CHATID_LEN  (8)
 #define TOPIC_LEN   (48)
 
-// °T®§¦â±m (WOW style is good!)
+// è¨Šæ¯è‰²å½© (WOW style is good!)
 #define COLOR_PRIVATEMSG    ANSI_COLOR(1;35)
 #define COLOR_ANNOUNCE	    ANSI_COLOR(1;33)
 
@@ -99,7 +99,7 @@ struct ChatUser
     ChatRoom *room;
     UserList *ignore;
     int sock;                     /* user socket */
-    int userno;			  /* userno ¬O PASSWD ¨Óªº unum, ´X¥G¬O°ß¤@ªº */
+    int userno;			  /* userno æ˜¯ PASSWD ä¾†çš„ unum, å¹¾ä¹æ˜¯å”¯ä¸€çš„ */
     int uflag;
     int isize;                    /* current size of ibuf */
     uint32_t numlogindays;	  /* login counter */
@@ -148,10 +148,10 @@ static int totaluser;           /* current number of connections */
 static char chatbuf[256];       /* general purpose buffer */
 static int common_client_command;
 
-static char msg_not_op[] = "¡» ±z¤£¬O³o¶¡²á¤Ñ«Çªº Op";
-static char msg_no_such_id[] = "¡» ¥Ø«e¨S¦³¤H¨Ï¥Î [%s] ³o­Ó²á¤Ñ¥N¸¹";
-static char msg_no_such_uid[] = "¡» ¥Ø«e¨S¦³ [%s] ³o­Ó¨Ï¥ÎªÌ ID";
-static char msg_not_here[] = "¡» [%s] ¤£¦b³o¶¡²á¤Ñ«Ç";
+static char msg_not_op[] = "â—† æ‚¨ä¸æ˜¯é€™é–“èŠå¤©å®¤çš„ Op";
+static char msg_no_such_id[] = "â—† ç›®å‰æ²’æœ‰äººä½¿ç”¨ [%s] é€™å€‹èŠå¤©ä»£è™Ÿ";
+static char msg_no_such_uid[] = "â—† ç›®å‰æ²’æœ‰ [%s] é€™å€‹ä½¿ç”¨è€… ID";
+static char msg_not_here[] = "â—† [%s] ä¸åœ¨é€™é–“èŠå¤©å®¤";
 
 time4_t boot_time;
 
@@ -316,8 +316,8 @@ debug_room()
 static int valid_chatid(register char *id) {
     register int ch, len;
     
-    if (DBCS_strcasestr(id, "¡»") ||
-        DBCS_strcasestr(id, "¡°"))
+    if (DBCS_strcasestr(id, "â—†") ||
+        DBCS_strcasestr(id, "â€»"))
         return 0;
     for(len = 0; (ch = *id); id++) {
 	/* Thor: check for endless */
@@ -480,7 +480,7 @@ list_add_id(UserList **list, const char *id)
 	return 0;
 
     if((node = (UserList *) malloc(sizeof(UserList)))) {
-	/* Thor: ¨¾¤îªÅ¶¡¤£°÷ */
+	/* Thor: é˜²æ­¢ç©ºé–“ä¸å¤  */
 	strlcpy(node->userid, id, sizeof(node->userid));
 	node->userno = uid;
 	node->next = *list;
@@ -496,7 +496,7 @@ list_add(UserList **list, ChatUser *user)
     UserList *node;
 
     if((node = (UserList *) malloc(sizeof(UserList)))) {
-	/* Thor: ¨¾¤îªÅ¶¡¤£°÷ */
+	/* Thor: é˜²æ­¢ç©ºé–“ä¸å¤  */
 	strcpy(node->userid, user->userid);
 	node->userno = user->userno;
 	node->next = *list;
@@ -517,7 +517,7 @@ list_delete(UserList **list, char *userid)
 	    free(node);
 	    return 1;
 	}
-	list = &node->next;         /* Thor: list­n¸òµÛ«e¶i */
+	list = &node->next;         /* Thor: listè¦è·Ÿè‘—å‰é€² */
     }
 
     return 0;
@@ -563,15 +563,15 @@ Xdo_send(int nfds, fd_set *wset, char *msg)
     /* Thor: for future reservation bug */
 
     zerotv.tv_sec = 0;
-    zerotv.tv_usec = 16384;  /* Ptt: §ï¦¨16384 Á×§K¤£«ö®Éfor loop¦Ycpu time
-				16384 ¬ù¨C¬í64¦¸ */
+    zerotv.tv_usec = 16384;  /* Ptt: æ”¹æˆ16384 é¿å…ä¸æŒ‰æ™‚for loopåƒcpu time
+				16384 ç´„æ¯ç§’64æ¬¡ */
 #ifdef SELFTEST
     zerotv.tv_usec = 0;
 #endif
 
     sr = select(nfds + 1, NULL, wset, NULL, &zerotv);
 
-    /* FIXME ­Y select() timeout, ©Î¦³ªº write ready ¦³ªº¨S¦³. «h¥i¯à·|º|±µ msg? */
+    /* FIXME è‹¥ select() timeout, æˆ–æœ‰çš„ write ready æœ‰çš„æ²’æœ‰. å‰‡å¯èƒ½æœƒæ¼æ¥ msg? */
     if (sr > 0)
     {
 	register int len;
@@ -581,7 +581,7 @@ Xdo_send(int nfds, fd_set *wset, char *msg)
 	{
 	    if (FD_ISSET(nfds, wset))
 	    {
-		send(nfds, msg, len, 0);/* Thor: ¦pªGbufferº¡¤F, ¤´·| block */
+		send(nfds, msg, len, 0);/* Thor: å¦‚æœbufferæ»¿äº†, ä»æœƒ block */
 		if (--sr <= 0)
 		    return;
 	    }
@@ -705,7 +705,7 @@ exit_room(ChatUser *user, int mode, char *msg)
 	{
 	    case EXIT_LOGOUT:
 
-		sprintf(chatbuf, "¡» %s (%s) Â÷¶}¤F ...", chatid, user->userid);
+		sprintf(chatbuf, "â—† %s (%s) é›¢é–‹äº† ...", chatid, user->userid);
 		if (msg && *msg)
 		{
 		    strcat(chatbuf, ": ");
@@ -715,15 +715,15 @@ exit_room(ChatUser *user, int mode, char *msg)
 
 	    case EXIT_LOSTCONN:
 
-		sprintf(chatbuf, "¡» %s (%s) ¦¨¤FÂ_½uªº­·ºåÅo", chatid, user->userid);
+		sprintf(chatbuf, "â—† %s (%s) æˆäº†æ–·ç·šçš„é¢¨ç®å›‰", chatid, user->userid);
 		break;
 
 	    case EXIT_KICK:
 
-		sprintf(chatbuf, "¡» «¢«¢¡I%s (%s) ³Q½ğ¥X¥h¤F", chatid, user->userid);
+		sprintf(chatbuf, "â—† å“ˆå“ˆï¼%s (%s) è¢«è¸¢å‡ºå»äº†", chatid, user->userid);
 		break;
 	}
-	if (!CLOAK(user))         /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+	if (!CLOAK(user))         /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	    send_to_room(room, chatbuf, user->userno, MSG_MESSAGE);
 
 	if (list_belong(room->invite, user->userno)) {
@@ -739,7 +739,7 @@ exit_room(ChatUser *user, int mode, char *msg)
 
     /* Now, room->occupants==0 */
     if (room != &mainroom)
-    {                           /* Thor: ¤H¼Æ¬°0®É,¤£¬Omainroom¤~free */
+    {                           /* Thor: äººæ•¸ç‚º0æ™‚,ä¸æ˜¯mainroomæ‰free */
 	register ChatRoom *next;
 
 	sprintf(chatbuf, "- %s", room->name);
@@ -760,7 +760,7 @@ exit_room(ChatUser *user, int mode, char *msg)
 /* ----------------------------------------------------- */
 
 /* ----------------------------------------------------- */
-/* (.ACCT) ¨Ï¥ÎªÌ±b¸¹ (account) subroutines              */
+/* (.ACCT) ä½¿ç”¨è€…å¸³è™Ÿ (account) subroutines              */
 /* ----------------------------------------------------- */
 
 static void
@@ -777,7 +777,7 @@ chat_topic(ChatUser *cu, char *msg)
 
     if (*msg == '\0')
     {
-	send_to_user(cu, "¡° ½Ğ«ü©w¸ÜÃD", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» è«‹æŒ‡å®šè©±é¡Œ", 0, MSG_MESSAGE);
 	return;
     }
 
@@ -792,8 +792,8 @@ chat_topic(ChatUser *cu, char *msg)
 
     room_changed(room);
 
-    sprintf(chatbuf, "¡» %s ±N¸ÜÃD§ï¬° " ANSI_COLOR(1;32) "%s" ANSI_RESET, cu->chatid, topic);
-    if (!CLOAK(cu))               /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    sprintf(chatbuf, "â—† %s å°‡è©±é¡Œæ”¹ç‚º " ANSI_COLOR(1;32) "%s" ANSI_RESET, cu->chatid, topic);
+    if (!CLOAK(cu))               /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	send_to_room(room, chatbuf, 0, MSG_MESSAGE);
 }
 
@@ -815,8 +815,8 @@ chat_xinfo(ChatUser *cu, char *msg)
     int dd =  uptime / DAY_SECONDS, 
 	hh = (uptime % DAY_SECONDS) / 3600,
 	mm = (uptime % 3600) / 60;
-    sprintf(chatbuf, "¡ó ¨t²Î¸ê°T: XCHAT ª©¥» %d.%02d - " __DATE__ 
-	    "¡A¤w°õ¦æ %d ¤Ñ %d ¤p®É %d ¤À",
+    sprintf(chatbuf, "â˜‰ ç³»çµ±è³‡è¨Š: XCHAT ç‰ˆæœ¬ %d.%02d - " __DATE__ 
+	    "ï¼Œå·²åŸ·è¡Œ %d å¤© %d å°æ™‚ %d åˆ†",
 	    XCHAT_VERSION_MAJOR, XCHAT_VERSION_MINOR, dd, hh, mm);
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 }
@@ -832,14 +832,14 @@ chat_nick(ChatUser *cu, char *msg)
 
     if (!valid_chatid(chatid))
     {
-	send_to_user(cu, "¡° ³o­Ó²á¤Ñ¥N¸¹¬O¤£¥¿½Tªº", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» é€™å€‹èŠå¤©ä»£è™Ÿæ˜¯ä¸æ­£ç¢ºçš„", 0, MSG_MESSAGE);
 	return;
     }
 
     xuser = cuser_by_chatid(chatid);
     if (xuser != NULL && xuser != cu)
     {
-	send_to_user(cu, "¡° ¤w¸g¦³¤H±¶¨¬¥ıµnÅo", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» å·²ç¶“æœ‰äººæ·è¶³å…ˆç™»å›‰", 0, MSG_MESSAGE);
 	return;
     }
 
@@ -847,14 +847,14 @@ chat_nick(ChatUser *cu, char *msg)
     // Having chatid same as other's real id may be confusing.
     if (is_validuserid(chatid) && searchuser(chatid, NULL) > 0 &&
         strcasecmp(chatid, cu->userid) != 0) {
-	send_to_user(cu, "¡° ¦¹¥N¸¹»P¯¸¤º¨ä¥¦¨Ï¥ÎªÌ ID ­«½Æ¡A"
-                     "¬°Á×§Kª§Ä³«ØÄ³¤£­n¨Ï¥Î", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» æ­¤ä»£è™Ÿèˆ‡ç«™å…§å…¶å®ƒä½¿ç”¨è€… ID é‡è¤‡ï¼Œ"
+                     "ç‚ºé¿å…çˆ­è­°å»ºè­°ä¸è¦ä½¿ç”¨", 0, MSG_MESSAGE);
 	return;
     }
 #endif
 
-    snprintf(chatbuf, sizeof(chatbuf), "¡° %s ±N²á¤Ñ¥N¸¹§ï¬° " ANSI_COLOR(1;33) "%s" ANSI_RESET, cu->chatid, chatid);
-    if (!CLOAK(cu))               /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    snprintf(chatbuf, sizeof(chatbuf), "â€» %s å°‡èŠå¤©ä»£è™Ÿæ”¹ç‚º " ANSI_COLOR(1;33) "%s" ANSI_RESET, cu->chatid, chatid);
+    if (!CLOAK(cu))               /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	send_to_room(cu->room, chatbuf, cu->userno, MSG_MESSAGE);
 
     strlcpy(cu->chatid, chatid, sizeof(cu->chatid));
@@ -872,14 +872,14 @@ chat_list_rooms(ChatUser *cuser, char *msg)
 
     if (RESTRICTED(cuser))
     {
-	send_to_user(cuser, "¡° ±z¨S¦³Åv­­¦C¥X²{¦³ªº²á¤Ñ«Ç", 0, MSG_MESSAGE);
+	send_to_user(cuser, "â€» æ‚¨æ²’æœ‰æ¬Šé™åˆ—å‡ºç¾æœ‰çš„èŠå¤©å®¤", 0, MSG_MESSAGE);
 	return;
     }
 
     if (common_client_command)
 	send_to_user(cuser, "", 0, MSG_ROOMLISTSTART);
     else
-	send_to_user(cuser, ANSI_COLOR(7) " ²á¤Ñ«Ç¦WºÙ  ¢x¤H¼Æ¢x¸ÜÃD "
+	send_to_user(cuser, ANSI_COLOR(7) " èŠå¤©å®¤åç¨±  â”‚äººæ•¸â”‚è©±é¡Œ "
 		// 48-4 spaces for max topic length
 		"                                        "  
 		ANSI_RESET, 0, MSG_MESSAGE);
@@ -894,13 +894,13 @@ chat_list_rooms(ChatUser *cuser, char *msg)
 	    }
 	    else
 	    {
-		snprintf(chatbuf, sizeof(chatbuf), " %-12s¢x%4d¢x%s", cr->name, cr->occupants, cr->topic);
+		snprintf(chatbuf, sizeof(chatbuf), " %-12sâ”‚%4dâ”‚%s", cr->name, cr->occupants, cr->topic);
 		if (LOCKED(cr))
-		    strcat(chatbuf, " [Âê¦í]");
+		    strcat(chatbuf, " [é–ä½]");
 		if (SECRET(cr))
-		    strcat(chatbuf, " [¯µ±K]");
+		    strcat(chatbuf, " [ç§˜å¯†]");
 		if (OPENTOPIC(cr))
-		    strcat(chatbuf, " [¸ÜÃD]");
+		    strcat(chatbuf, " [è©±é¡Œ]");
 		send_to_user(cuser, chatbuf, 0, MSG_MESSAGE);
 	    }
 
@@ -931,7 +931,7 @@ chat_do_user_list(ChatUser *cu, char *msg, ChatRoom *theroom)
     if (common_client_command)
 	send_to_user(cu, "", 0, MSG_USERLISTSTART);
     else
-	send_to_user(cu, ANSI_COLOR(7) " ²á¤Ñ¥N¸¹¢x¨Ï¥ÎªÌ¥N¸¹  ¢x²á¤Ñ«Ç      " ANSI_RESET, 0, MSG_MESSAGE);
+	send_to_user(cu, ANSI_COLOR(7) " èŠå¤©ä»£è™Ÿâ”‚ä½¿ç”¨è€…ä»£è™Ÿ  â”‚èŠå¤©å®¤      " ANSI_RESET, 0, MSG_MESSAGE);
 
     for (user = mainuser; user; user = user->unext)
     {
@@ -947,7 +947,7 @@ chat_do_user_list(ChatUser *cu, char *msg, ChatRoom *theroom)
 		continue;
 	}
 
-	if (CLOAK(user))            /* Thor: Áô¨­³N */
+	if (CLOAK(user))            /* Thor: éš±èº«è¡“ */
 	    continue;
 
 
@@ -960,7 +960,7 @@ chat_do_user_list(ChatUser *cu, char *msg, ChatRoom *theroom)
 	if (common_client_command)
 	{
 	    if (!room)
-		continue;               /* Xshadow: ÁÙ¨S¶i¤J¥ô¦ó©Ğ¶¡ªº´N¤£¦C¥X */
+		continue;               /* Xshadow: é‚„æ²’é€²å…¥ä»»ä½•æˆ¿é–“çš„å°±ä¸åˆ—å‡º */
 
 	    snprintf(chatbuf, sizeof(chatbuf), "%s %s %s %s", user->chatid, user->userid, room->name, user->lasthost);
 	    if (ROOMOP(user))
@@ -968,7 +968,7 @@ chat_do_user_list(ChatUser *cu, char *msg, ChatRoom *theroom)
 	}
 	else
 	{
-	    snprintf(chatbuf, sizeof(chatbuf), " %-8s¢x%-12s¢x%s", user->chatid, user->userid, room ? room->name : "[¦bªù¤f±r«Ş]");
+	    snprintf(chatbuf, sizeof(chatbuf), " %-8sâ”‚%-12sâ”‚%s", user->chatid, user->userid, room ? room->name : "[åœ¨é–€å£å¾˜å¾Š]");
 	    if (ROOMOP(user))
 		strcat(chatbuf, " [Op]");
 	}
@@ -996,15 +996,15 @@ chat_list_by_room(ChatUser *cu, char *msg)
     {
 	if ((whichroom = croom_by_roomid(roomstr)) == NULL)
 	{
-	    snprintf(chatbuf, sizeof(chatbuf), "¡° ¨S¦³ [%s] ³o­Ó²á¤Ñ«Ç", roomstr);
+	    snprintf(chatbuf, sizeof(chatbuf), "â€» æ²’æœ‰ [%s] é€™å€‹èŠå¤©å®¤", roomstr);
 	    send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	    return;
 	}
 
 	if (whichroom != cu->room && SECRET(whichroom) && !CHATSYSOP(cu))
-	{                           /* Thor: ­n¤£­n´ú¦P¤@roomÁöSECRET¦ı¥i¥H¦C?
-				     * Xshadow: §Ú§ï¦¨¦P¤@ room ´N¥i¥H¦C */
-	    send_to_user(cu, "¡° µLªk¦C¥X¦b¯µ±K²á¤Ñ«Çªº¨Ï¥ÎªÌ", 0, MSG_MESSAGE);
+	{                           /* Thor: è¦ä¸è¦æ¸¬åŒä¸€roomé›–SECRETä½†å¯ä»¥åˆ—?
+				     * Xshadow: æˆ‘æ”¹æˆåŒä¸€ room å°±å¯ä»¥åˆ— */
+	    send_to_user(cu, "â€» ç„¡æ³•åˆ—å‡ºåœ¨ç§˜å¯†èŠå¤©å®¤çš„ä½¿ç”¨è€…", 0, MSG_MESSAGE);
 	    return;
 	}
     }
@@ -1023,11 +1023,11 @@ chat_chatroom(ChatUser *cu, char *msg)
 {
     (void)msg;
     if (common_client_command)
-	send_to_user(cu, "§å½ğ½ğ¯ùÃÀÀ] 4 21", 0, MSG_CHATROOM);
+	send_to_user(cu, "æ‰¹è¸¢è¸¢èŒ¶è—é¤¨ 4 21", 0, MSG_CHATROOM);
 }
 
 static void
-chat_map_chatids(ChatUser *cu, ChatRoom *whichroom) /* Thor: ÁÙ¨S¦³§@¤£¦P¶¡ªº */
+chat_map_chatids(ChatUser *cu, ChatRoom *whichroom) /* Thor: é‚„æ²’æœ‰ä½œä¸åŒé–“çš„ */
 {
     int c;
     ChatRoom *myroom, *room;
@@ -1035,7 +1035,7 @@ chat_map_chatids(ChatUser *cu, ChatRoom *whichroom) /* Thor: ÁÙ¨S¦³§@¤£¦P¶¡ªº */
 
     myroom = whichroom;
     send_to_user(cu,
-		 ANSI_COLOR(7) " ²á¤Ñ¥N¸¹ ¨Ï¥ÎªÌ¥N¸¹  ¢x ²á¤Ñ¥N¸¹ ¨Ï¥ÎªÌ¥N¸¹  ¢x ²á¤Ñ¥N¸¹ ¨Ï¥ÎªÌ¥N¸¹ " ANSI_RESET, 0, MSG_MESSAGE);
+		 ANSI_COLOR(7) " èŠå¤©ä»£è™Ÿ ä½¿ç”¨è€…ä»£è™Ÿ  â”‚ èŠå¤©ä»£è™Ÿ ä½¿ç”¨è€…ä»£è™Ÿ  â”‚ èŠå¤©ä»£è™Ÿ ä½¿ç”¨è€…ä»£è™Ÿ " ANSI_RESET, 0, MSG_MESSAGE);
 
     c = 0;
 
@@ -1046,15 +1046,15 @@ chat_map_chatids(ChatUser *cu, ChatRoom *whichroom) /* Thor: ÁÙ¨S¦³§@¤£¦P¶¡ªº */
 	    continue;
 	if (myroom != room)
 	{
-	    if (RESTRICTED(cu) ||     /* Thor: ­n¥ıcheck room ¬O¤£¬OªÅªº */
+	    if (RESTRICTED(cu) ||     /* Thor: è¦å…ˆcheck room æ˜¯ä¸æ˜¯ç©ºçš„ */
 		(room && SECRET(room) && !CHATSYSOP(cu)))
 		continue;
 	}
-	if (CLOAK(user))            /* Thor:Áô¨­³N */
+	if (CLOAK(user))            /* Thor:éš±èº«è¡“ */
 	    continue;
 	sprintf(chatbuf + (c * 24), " %-8s%c%-12s%s",
 		user->chatid, ROOMOP(user) ? '*' : ' ',
-		user->userid, (c < 2 ? "¢x" : "  "));
+		user->userid, (c < 2 ? "â”‚" : "  "));
 	if (++c == 3)
 	{
 	    send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
@@ -1102,7 +1102,7 @@ chat_setroom(ChatUser *cu, char *msg)
     if (*modestr == '\0')
     {
 	send_to_user(cu,
-		     "¡° ½Ğ«ü©wª¬ºA: {[+(³]©w)][-(¨ú®ø)]}{[l(Âê¦í)][s(¯µ±K)][t(¶}©ñ¸ÜÃD)}", 0, MSG_MESSAGE);
+		     "â€» è«‹æŒ‡å®šç‹€æ…‹: {[+(è¨­å®š)][-(å–æ¶ˆ)]}{[l(é–ä½)][s(ç§˜å¯†)][t(é–‹æ”¾è©±é¡Œ)}", 0, MSG_MESSAGE);
 	return;
     }
 
@@ -1117,38 +1117,38 @@ chat_setroom(ChatUser *cu, char *msg)
 	case 'l':
 	case 'L':
 	    flag = ROOM_LOCKED;
-	    fstr = "Âê¦í";
+	    fstr = "é–ä½";
 	    break;
 
 	case 's':
 	case 'S':
 	    flag = ROOM_SECRET;
-	    fstr = "¯µ±K";
+	    fstr = "ç§˜å¯†";
 	    break;
 
 	case 't':
 	case 'T':
 	    flag = ROOM_OPENTOPIC;
-	    fstr = "¶}©ñ¸ÜÃD";
+	    fstr = "é–‹æ”¾è©±é¡Œ";
 	    break;
 	case 'h':
 	case 'H':
 	    flag = ROOM_HANDUP;
-	    fstr = "Á|¤âµo¨¥";
+	    fstr = "èˆ‰æ‰‹ç™¼è¨€";
 	    break;
 
 	default:
-	    sprintf(chatbuf, "¡° ª¬ºA¿ù»~¡G[%c]", *modestr);
+	    sprintf(chatbuf, "â€» ç‹€æ…‹éŒ¯èª¤ï¼š[%c]", *modestr);
 	    send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	}
 
-	/* Thor: check room ¬O¤£¬OªÅªº, À³¸Ó¤£¬OªÅªº */
+	/* Thor: check room æ˜¯ä¸æ˜¯ç©ºçš„, æ‡‰è©²ä¸æ˜¯ç©ºçš„ */
 	if (flag && (room->rflag & flag) != sign * flag)
 	{
 	    room->rflag ^= flag;
-	    sprintf(chatbuf, "¡° ¥»²á¤Ñ«Ç³Q %s %s [%s] ª¬ºA",
-		    chatid, sign ? "³]©w¬°" : "¨ú®ø", fstr);
-	    if (!CLOAK(cu))           /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+	    sprintf(chatbuf, "â€» æœ¬èŠå¤©å®¤è¢« %s %s [%s] ç‹€æ…‹",
+		    chatid, sign ? "è¨­å®šç‚º" : "å–æ¶ˆ", fstr);
+	    if (!CLOAK(cu))           /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 		send_to_room(room, chatbuf, 0, MSG_MESSAGE);
 	}
 	modestr++;
@@ -1167,7 +1167,7 @@ chat_private(ChatUser *cu, char *msg)
     recipient = nextword(&msg);
     xuser = (ChatUser *) fuzzy_cuser_by_chatid(recipient);
     if (xuser == NULL)
-    {                             /* Thor.0724: ¥Î userid¤]¥i¶Ç®¨®¨¸Ü */
+    {                             /* Thor.0724: ç”¨ useridä¹Ÿå¯å‚³æ‚„æ‚„è©± */
 	xuser = cuser_by_userid(recipient);
     }
 
@@ -1177,15 +1177,15 @@ chat_private(ChatUser *cu, char *msg)
     }
     else if (xuser == FUZZY_USER)
     {                             /* ambiguous */
-	strcpy(chatbuf, "¡° ½Ğ«ü©ú²á¤Ñ¥N¸¹");
+	strcpy(chatbuf, "â€» è«‹æŒ‡æ˜èŠå¤©ä»£è™Ÿ");
     }
     else if (*msg)
     {
 	userno = cu->userno;
 
-	// XXX valid size: ¹ï¤è¿é¤J®É­n¦b NICK: /m MYNICK MSG
-	// ©Ò¥H¿é¤Jªº MSG ³Ì¤j¬° 80-NICKLEN(8)*2-5
-	// prefix ªº¦r¦ê­n¤p¤ß¤£¯à¹Lªø
+	// XXX valid size: å°æ–¹è¼¸å…¥æ™‚è¦åœ¨ NICK: /m MYNICK MSG
+	// æ‰€ä»¥è¼¸å…¥çš„ MSG æœ€å¤§ç‚º 80-NICKLEN(8)*2-5
+	// prefix çš„å­—ä¸²è¦å°å¿ƒä¸èƒ½éé•·
 
 	sprintf(chatbuf, COLOR_PRIVATEMSG "*%s (%s)*" ANSI_RESET " ", cu->chatid, cu->userid);
 	strlcat(chatbuf, msg, sizeof(chatbuf));
@@ -1196,10 +1196,10 @@ chat_private(ChatUser *cu, char *msg)
     }
     else
     {
-	sprintf(chatbuf, "¡° ±z·Q¹ï %s »¡¤°»ò¸Ü©O¡H", xuser->chatid);
+	sprintf(chatbuf, "â€» æ‚¨æƒ³å° %s èªªä»€éº¼è©±å‘¢ï¼Ÿ", xuser->chatid);
     }
-    send_to_user(cu, chatbuf, userno, MSG_MESSAGE);       /* Thor: userno ­n§ï¦¨ 0
-							   * ¶Ü? */
+    send_to_user(cu, chatbuf, userno, MSG_MESSAGE);       /* Thor: userno è¦æ”¹æˆ 0
+							   * å—? */
 }
 
 static void
@@ -1215,16 +1215,16 @@ chat_query(ChatUser *cu, char *msg)
     if (xuser == NULL)
 	sprintf(chatbuf, msg_no_such_id, recipient);
     else if (xuser == FUZZY_USER)
-	strcpy(chatbuf, "¡° ½Ğ²M·¡«ü©ú¹ï¤èªº²á¤Ñ¥N¸¹"); // ambiguous
+	strcpy(chatbuf, "â€» è«‹æ¸…æ¥šæŒ‡æ˜å°æ–¹çš„èŠå¤©ä»£è™Ÿ"); // ambiguous
     else 
     {
 	snprintf(chatbuf, sizeof(chatbuf),
-		"¡° ²á¤Ñ¼ÊºÙ: %s ¡A" BBSMNAME " ID: %s (%s)",
+		"â€» èŠå¤©æš±ç¨±: %s ï¼Œ" BBSMNAME " ID: %s (%s)",
 		xuser->chatid, xuser->userid, xuser->nickname);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	snprintf(chatbuf, sizeof(chatbuf),
-		"   " STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "¡A"
-		"µoªí¹L %d ½g¤å³¹¡A³Ìªñ±q %s ¤W¯¸",
+		"   " STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "ï¼Œ"
+		"ç™¼è¡¨é %d ç¯‡æ–‡ç« ï¼Œæœ€è¿‘å¾ %s ä¸Šç«™",
 		xuser->numlogindays, xuser->numposts, xuser->lasthost);
     }
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
@@ -1238,7 +1238,7 @@ chat_cloak(ChatUser *cu, char *msg)
     if (CHATSYSOP(cu))
     {
 	cu->uflag ^= PERM_CLOAK;
-	sprintf(chatbuf, "¡» %s", CLOAK(cu) ? MSG_CLOAKED : MSG_UNCLOAK);
+	sprintf(chatbuf, "â—† %s", CLOAK(cu) ? MSG_CLOAKED : MSG_UNCLOAK);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
     }
 }
@@ -1253,7 +1253,7 @@ arrive_room(ChatUser *cuser, ChatRoom *room)
 {
     char *rname;
 
-    /* Xshadow: ¤£¥²°eµ¹¦Û¤v, ¤Ï¥¿´«©Ğ¶¡´N·|­«·s build user list */
+    /* Xshadow: ä¸å¿…é€çµ¦è‡ªå·±, åæ­£æ›æˆ¿é–“å°±æœƒé‡æ–° build user list */
     snprintf(chatbuf, sizeof(chatbuf), "+ %s %s %s %s", cuser->userid, cuser->chatid, room->name, cuser->lasthost);
     if (ROOMOP(cuser))
 	strcat(chatbuf, " Op");
@@ -1270,10 +1270,10 @@ arrive_room(ChatUser *cuser, ChatRoom *room)
     sprintf(chatbuf, "/t%s", room->topic);
     send_to_user(cuser, chatbuf, 0, 0);
 
-    sprintf(chatbuf, "¡° " ANSI_COLOR(1;32) "%s (%s)" ANSI_RESET " ¶i¤J "
-	    ANSI_COLOR(1;33) "[%s]" ANSI_RESET " ¥]´[",
+    sprintf(chatbuf, "â€» " ANSI_COLOR(1;32) "%s (%s)" ANSI_RESET " é€²å…¥ "
+	    ANSI_COLOR(1;33) "[%s]" ANSI_RESET " åŒ…å»‚",
 	    cuser->chatid, cuser->userid, rname);
-    if (!CLOAK(cuser))            /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    if (!CLOAK(cuser))            /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	send_to_room(room, chatbuf, cuser->userno, MSG_MESSAGE);
 }
 
@@ -1301,13 +1301,13 @@ enter_room(ChatUser *cuser, char *rname, char *msg)
 	room = (ChatRoom *) malloc(sizeof(ChatRoom));
 	if (room == NULL)
 	{
-	    send_to_user(cuser, "¡° µLªk¦A·sÅP¥]´[¤F", 0, MSG_MESSAGE);
+	    send_to_user(cuser, "â€» ç„¡æ³•å†æ–°é—¢åŒ…å»‚äº†", 0, MSG_MESSAGE);
 	    return 0;
 	}
 
 	memset(room, 0, sizeof(ChatRoom));
 	strlcpy(room->name, rname, sizeof(room->name));
-	strcpy(room->topic, "³o¬O¤@­Ó·s¤Ñ¦a");
+	strcpy(room->topic, "é€™æ˜¯ä¸€å€‹æ–°å¤©åœ°");
 
 	snprintf(chatbuf, sizeof(chatbuf), "+ %s 1 0 %s", room->name, room->topic);
 	send_to_room(ROOM_ALL, chatbuf, 0, MSG_ROOMNOTIFY);
@@ -1324,7 +1324,7 @@ enter_room(ChatUser *cuser, char *rname, char *msg)
     {
 	if (cuser->room == room)
 	{
-	    sprintf(chatbuf, "¡° ±z¥»¨Ó´N¦b [%s] ²á¤Ñ«ÇÅo :)", rname);
+	    sprintf(chatbuf, "â€» æ‚¨æœ¬ä¾†å°±åœ¨ [%s] èŠå¤©å®¤å›‰ :)", rname);
 	    send_to_user(cuser, chatbuf, 0, MSG_MESSAGE);
 	    return 0;
 	}
@@ -1333,7 +1333,7 @@ enter_room(ChatUser *cuser, char *rname, char *msg)
 	    (list_belong(room->ban, cuser->userno) ||
 	     (LOCKED(room) && !list_belong(room->invite, cuser->userno))))
 	{
-	    send_to_user(cuser, "¡° ¤º¦³´c¤ü¡A«D½Ğ²ö¤J", 0, MSG_MESSAGE);
+	    send_to_user(cuser, "â€» å…§æœ‰æƒ¡çŠ¬ï¼Œéè«‹è«å…¥", 0, MSG_MESSAGE);
 	    return 0;
 	}
     }
@@ -1360,7 +1360,7 @@ logout_user(ChatUser *cuser)
 
     FD_CLR(sock, &mainfds);
 
-#if 0   /* Thor: ¤]³\¤£®t³o¤@­Ó */
+#if 0   /* Thor: ä¹Ÿè¨±ä¸å·®é€™ä¸€å€‹ */
     if (sock >= maxfds)
 	maxfds = sock - 1;
 #endif
@@ -1423,13 +1423,13 @@ print_user_counts(ChatUser *cuser)
     number = MSG_MESSAGE;
 
     // welcome message here.
-    sprintf(chatbuf, "¡ó Åwªï¥úÁ{¡i§å½ğ½ğ²á¤Ñ«Ç¡j¡A¥Ø«e¶}¤F " 
-	    ANSI_COLOR(1;31) "%d" ANSI_RESET " ¶¡¥]´[¡C", roomc);
+    sprintf(chatbuf, "â˜‰ æ­¡è¿å…‰è‡¨ã€æ‰¹è¸¢è¸¢èŠå¤©å®¤ã€‘ï¼Œç›®å‰é–‹äº† " 
+	    ANSI_COLOR(1;31) "%d" ANSI_RESET " é–“åŒ…å»‚ã€‚", roomc);
     send_to_user(cuser, chatbuf, 0, number);
 
-    sprintf(chatbuf, "¡ó ½u¤W¦³ " ANSI_COLOR(1;36) "%d" ANSI_RESET " ¤H", userc);
+    sprintf(chatbuf, "â˜‰ ç·šä¸Šæœ‰ " ANSI_COLOR(1;36) "%d" ANSI_RESET " äºº", userc);
     if (suserc)
-	sprintf(chatbuf + strlen(chatbuf), " [%d ¤H¦b¯µ±K²á¤Ñ«Ç]", suserc);
+	sprintf(chatbuf + strlen(chatbuf), " [%d äººåœ¨ç§˜å¯†èŠå¤©å®¤]", suserc);
     send_to_user(cuser, chatbuf, 0, number);
 }
 
@@ -1455,13 +1455,13 @@ login_user(ChatUser *cu, char *msg)
 
     /*
      * Thor.0819: SECURED_CHATROOM : /! userid chatid passwd , userno
-     * el ¦bcheck§¹passwd«á¨ú±o
+     * el åœ¨checkå®Œpasswdå¾Œå–å¾—
      */
     /* Xshadow.0915: common client support : /-! userid chatid password */
 
-    /* ¶Ç°Ñ¼Æ¡Guserlevel, userid, chatid */
+    /* å‚³åƒæ•¸ï¼šuserlevel, userid, chatid */
 
-    /* client/server ª©¥»¨Ì¾Ú userid §ì .PASSWDS §PÂ_ userlevel */
+    /* client/server ç‰ˆæœ¬ä¾æ“š userid æŠ“ .PASSWDS åˆ¤æ–· userlevel */
 
     userid = nextword(&msg);
     chatid = nextword(&msg);
@@ -1474,9 +1474,9 @@ login_user(ChatUser *cu, char *msg)
     /* Thor.0730: parse space before passwd */
     passwd = msg;
 
-    /* Thor.0813: ¸õ¹L¤@ªÅ®æ§Y¥i, ¦]¬°¤Ï¥¿¦pªGchatid¦³ªÅ®æ, ±K½X¤]¤£¹ï */
-    /* ´Nºâ±K½X¹ï, ¤]¤£·|«ç»ò¼Ë:p */
-    /* ¥i¬O¦pªG±K½X²Ä¤@­Ó¦r¬OªÅ®æ, ¨º¸õ¤Ó¦hªÅ®æ·|¶i¤£¨Ó... */
+    /* Thor.0813: è·³éä¸€ç©ºæ ¼å³å¯, å› ç‚ºåæ­£å¦‚æœchatidæœ‰ç©ºæ ¼, å¯†ç¢¼ä¹Ÿä¸å° */
+    /* å°±ç®—å¯†ç¢¼å°, ä¹Ÿä¸æœƒæ€éº¼æ¨£:p */
+    /* å¯æ˜¯å¦‚æœå¯†ç¢¼ç¬¬ä¸€å€‹å­—æ˜¯ç©ºæ ¼, é‚£è·³å¤ªå¤šç©ºæ ¼æœƒé€²ä¸ä¾†... */
     if (*passwd == ' ')
 	passwd++;
 
@@ -1549,7 +1549,7 @@ login_user(ChatUser *cu, char *msg)
 
     cu->userno = utent;
     cu->uflag = level & ~(PERM_ROOMOP | PERM_CLOAK | PERM_HANDUP | PERM_SAY);
-    /* Thor: ¶i¨Ó¥ı²MªÅROOMOP(¦PPERM_CHAT), CLOAK */
+    /* Thor: é€²ä¾†å…ˆæ¸…ç©ºROOMOP(åŒPERM_CHAT), CLOAK */
     strcpy(cu->userid, userid);
     strlcpy(cu->chatid, chatid, sizeof(cu->chatid));
     // fill user information from acct
@@ -1590,7 +1590,7 @@ chat_ignore(ChatUser *cu, char *msg)
 
     if (RESTRICTED(cu))
     {
-	strcpy(chatbuf, "¡° ±z¨S¦³ ignore §O¤HªºÅv§Q");
+	strcpy(chatbuf, "â€» æ‚¨æ²’æœ‰ ignore åˆ¥äººçš„æ¬Šåˆ©");
     }
     else
     {
@@ -1605,21 +1605,21 @@ chat_ignore(ChatUser *cu, char *msg)
 
 	    if (list_belong_id(cu->ignore, ignoree))
 	    {
-		sprintf(chatbuf, "¡° %s ¤w¸g³Q­áµ²¤F", ignoree);
+		sprintf(chatbuf, "â€» %s å·²ç¶“è¢«å‡çµäº†", ignoree);
 	    } 
 	    else if (xuser == NULL)
 	    {
 		// try more harder to see if this user can be
 		// pre-ignored. Do not use xuser!
 		if (list_add_id(&(cu->ignore), ignoree))
-		    sprintf(chatbuf, "¡° %s ¤w¸g³Q­áµ²¤F", ignoree);
+		    sprintf(chatbuf, "â€» %s å·²ç¶“è¢«å‡çµäº†", ignoree);
 		else
 		    sprintf(chatbuf, msg_no_such_uid, ignoree);
 	    }
 	    else if (xuser == cu || CHATSYSOP(xuser) ||
 		     (ROOMOP(xuser) && (xuser->room == cu->room)))
 	    {
-		sprintf(chatbuf, "¡» ¤£¥i¥H©¿²¤ %s (%s)", 
+		sprintf(chatbuf, "â—† ä¸å¯ä»¥å¿½ç•¥ %s (%s)", 
 			xuser->chatid, xuser->userid);
 	    }
 	    else
@@ -1627,13 +1627,13 @@ chat_ignore(ChatUser *cu, char *msg)
 
 		if (list_belong(cu->ignore, xuser->userno))
 		{
-		    sprintf(chatbuf, "¡° %s (%s) ¤w¸g³Q­áµ²¤F", 
+		    sprintf(chatbuf, "â€» %s (%s) å·²ç¶“è¢«å‡çµäº†", 
 			    xuser->chatid, xuser->userid);
 		}
 		else
 		{
 		    list_add(&(cu->ignore), xuser);
-		    sprintf(chatbuf, "¡» ±N [%s] ¥´¤J§N®c¤F :p", xuser->chatid);
+		    sprintf(chatbuf, "â—† å°‡ [%s] æ‰“å…¥å†·å®®äº† :p", xuser->chatid);
 		}
 	    }
 	}
@@ -1646,7 +1646,7 @@ chat_ignore(ChatUser *cu, char *msg)
 		int len;
 		char buf[16];
 
-		send_to_user(cu, "¡» ³o¨Ç¤H³Q¥´¤J§N®c¤F¡G", 0, MSG_MESSAGE);
+		send_to_user(cu, "â—† é€™äº›äººè¢«æ‰“å…¥å†·å®®äº†ï¼š", 0, MSG_MESSAGE);
 		len = 0;
 		do
 		{
@@ -1665,7 +1665,7 @@ chat_ignore(ChatUser *cu, char *msg)
 	    }
 	    else
 	    {
-		strcpy(chatbuf, "¡» ±z¥Ø«e¨Ã¨S¦³ ignore ¥ô¦ó¤H");
+		strcpy(chatbuf, "â—† æ‚¨ç›®å‰ä¸¦æ²’æœ‰ ignore ä»»ä½•äºº");
 	    }
 	}
     }
@@ -1684,12 +1684,12 @@ chat_unignore(ChatUser *cu, char *msg)
     if (*ignoree)
     {
 	sprintf(chatbuf, (list_delete(&(cu->ignore), ignoree)) ?
-		"¡» [%s] ¤£¦A³Q§A§N¸¨¤F" :
-		"¡» ±z¨Ã¥¼©¿²¤ [%s]¡A½Ğ¥Î /ignore ÀË¬d¦Cªí¡C", ignoree);
+		"â—† [%s] ä¸å†è¢«ä½ å†·è½äº†" :
+		"â—† æ‚¨ä¸¦æœªå¿½ç•¥ [%s]ï¼Œè«‹ç”¨ /ignore æª¢æŸ¥åˆ—è¡¨ã€‚", ignoree);
     }
     else
     {
-	strcpy(chatbuf, "¡» ½Ğ«ü©ú¨Ï¥ÎªÌ ID");
+	strcpy(chatbuf, "â—† è«‹æŒ‡æ˜ä½¿ç”¨è€… ID");
     }
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 }
@@ -1712,12 +1712,12 @@ chat_unban(ChatUser *cu, char *msg)
     if (*unban)
     {
 	sprintf(chatbuf, (list_delete(list, unban)) ?
-		"¡» [%s] ¤£¦A³Q¦C¬°¶Â¦W³æ" :
-		"¡» [%s] ¨Ã¤£¦b¶Â¦W³æ¤¤¡A½Ğ¥Î /ban ÀË¬d¦Cªí", unban);
+		"â—† [%s] ä¸å†è¢«åˆ—ç‚ºé»‘åå–®" :
+		"â—† [%s] ä¸¦ä¸åœ¨é»‘åå–®ä¸­ï¼Œè«‹ç”¨ /ban æª¢æŸ¥åˆ—è¡¨", unban);
     }
     else
     {
-	strcpy(chatbuf, "¡» ½Ğ«ü©ú¨Ï¥ÎªÌ ID");
+	strcpy(chatbuf, "â—† è«‹æŒ‡æ˜ä½¿ç”¨è€… ID");
     }
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 }
@@ -1728,7 +1728,7 @@ chat_join(ChatUser *cu, char *msg)
 {
     if (RESTRICTED(cu))
     {
-	send_to_user(cu, "¡° ±z¨S¦³¥[¤J¨ä¥L²á¤Ñ«ÇªºÅv­­", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» æ‚¨æ²’æœ‰åŠ å…¥å…¶ä»–èŠå¤©å®¤çš„æ¬Šé™", 0, MSG_MESSAGE);
     }
     else
     {
@@ -1737,7 +1737,7 @@ chat_join(ChatUser *cu, char *msg)
 	if (*roomid)
 	    enter_room(cu, roomid, msg);
 	else
-	    send_to_user(cu, "¡° ½Ğ«ü©w²á¤Ñ«Çªº¦W¦r", 0, MSG_MESSAGE);
+	    send_to_user(cu, "â€» è«‹æŒ‡å®šèŠå¤©å®¤çš„åå­—", 0, MSG_MESSAGE);
     }
 }
 
@@ -1767,15 +1767,15 @@ chat_kick(ChatUser *cu, char *msg)
 
     room = cu->room;
     if (room != xuser->room || CLOAK(xuser))
-    {                             /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    {                             /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	sprintf(chatbuf, msg_not_here, twit);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
 
     if (CHATSYSOP(xuser))
-    {                             /* Thor: ½ğ¤£¨« CHATSYSOP */
-	sprintf(chatbuf, "¡» ¤£¥i¥H kick [%s]", twit);
+    {                             /* Thor: è¸¢ä¸èµ° CHATSYSOP */
+	sprintf(chatbuf, "â—† ä¸å¯ä»¥ kick [%s]", twit);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
@@ -1815,7 +1815,7 @@ chat_makeop(ChatUser *cu, char *msg)
 
     if (cu == xuser)
     {
-	sprintf(chatbuf, "¡° ±z¤w¸g¬OºŞ²z­û(Op)¤F¡AµLªk§ïÅÜ¦Û¤vªºÅv­­");
+	sprintf(chatbuf, "â€» æ‚¨å·²ç¶“æ˜¯ç®¡ç†å“¡(Op)äº†ï¼Œç„¡æ³•æ”¹è®Šè‡ªå·±çš„æ¬Šé™");
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
@@ -1823,7 +1823,7 @@ chat_makeop(ChatUser *cu, char *msg)
     room = cu->room;
 
     if (room != xuser->room || CLOAK(xuser))
-    {                             /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    {                             /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	sprintf(chatbuf, msg_not_here, xuser->chatid);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
@@ -1835,18 +1835,18 @@ chat_makeop(ChatUser *cu, char *msg)
 
     if (wasop == (ROOMOP(xuser) ? 1 : 0))
     {
-	// °Ê¤£¤F¥L
-	sprintf(chatbuf, "¡° µLªk§ïÅÜ¹ï¤èªººŞ²z­û(Op)Åv­­¡C");
+	// å‹•ä¸äº†ä»–
+	sprintf(chatbuf, "â€» ç„¡æ³•æ”¹è®Šå°æ–¹çš„ç®¡ç†å“¡(Op)æ¬Šé™ã€‚");
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
 
-    sprintf(chatbuf, "¡° %s %s %s ªººŞ²z­û(Op)Åv­­",
+    sprintf(chatbuf, "â€» %s %s %s çš„ç®¡ç†å“¡(Op)æ¬Šé™",
 	    cu->chatid, 
-	    ROOMOP(xuser) ? "´£ª@¤F" : "¸Ñ°£¤F",
+	    ROOMOP(xuser) ? "ææ˜‡äº†" : "è§£é™¤äº†",
 	    xuser->chatid);
 
-    if (!CLOAK(cu))               /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+    if (!CLOAK(cu))               /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	send_to_room(room, chatbuf, 0, MSG_MESSAGE);
 }
 
@@ -1881,16 +1881,16 @@ chat_invite(ChatUser *cu, char *msg)
 
     if (list_belong(*list, xuser->userno))
     {
-	sprintf(chatbuf, "¡° %s ¤w¸g±µ¨ü¹LÁÜ½Ğ¤F", xuser->chatid);
+	sprintf(chatbuf, "â€» %s å·²ç¶“æ¥å—éé‚€è«‹äº†", xuser->chatid);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
     list_add(list, xuser);
 
-    sprintf(chatbuf, "¡° %s ÁÜ½Ğ±z¨ì [%s] ²á¤Ñ«Ç",
+    sprintf(chatbuf, "â€» %s é‚€è«‹æ‚¨åˆ° [%s] èŠå¤©å®¤",
 	    cu->chatid, room->name);
-    send_to_user(xuser, chatbuf, 0, MSG_MESSAGE); /* Thor: ­n¤£­n¥i¥H ignore? */
-    sprintf(chatbuf, "¡° %s ¦¬¨ì±zªºÁÜ½Ğ¤F", xuser->chatid);
+    send_to_user(xuser, chatbuf, 0, MSG_MESSAGE); /* Thor: è¦ä¸è¦å¯ä»¥ ignore? */
+    sprintf(chatbuf, "â€» %s æ”¶åˆ°æ‚¨çš„é‚€è«‹äº†", xuser->chatid);
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 }
 
@@ -1911,14 +1911,14 @@ chat_ban(ChatUser *cu, char *msg)
 	UserList *list;
 	if(!(list = cu->room->ban))
 	{
-	    strcpy(chatbuf, "¡» ¥Ø«e¶Â¦W³æ¬OªÅªº");
+	    strcpy(chatbuf, "â—† ç›®å‰é»‘åå–®æ˜¯ç©ºçš„");
 	} 
 	else 
 	{
 	    int len;
 	    char buf[16];
 
-	    send_to_user(cu, "¡» ¶Â¦W³æ¦Cªí¡G", 0, MSG_MESSAGE);
+	    send_to_user(cu, "â—† é»‘åå–®åˆ—è¡¨ï¼š", 0, MSG_MESSAGE);
 	    len = 0;
 	    do
 	    {
@@ -1963,7 +1963,7 @@ chat_ban(ChatUser *cu, char *msg)
 
     if (list_belong(*list, unum))
     {
-	sprintf(chatbuf, "¡° %s ¤w¸g¦b¶Â¦W³æ¤º¤F", banned);
+	sprintf(chatbuf, "â€» %s å·²ç¶“åœ¨é»‘åå–®å…§äº†", banned);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 	return;
     }
@@ -1971,12 +1971,12 @@ chat_ban(ChatUser *cu, char *msg)
     if (xuser)
     {
 	list_add(list, xuser);
-	sprintf(chatbuf, "¡° %s (%s) ¤w³Q¥[¤J¶Â¦W³æ", xuser->chatid, xuser->userid);
+	sprintf(chatbuf, "â€» %s (%s) å·²è¢«åŠ å…¥é»‘åå–®", xuser->chatid, xuser->userid);
     }
     else
     {
 	list_add_id(list, banned);
-	sprintf(chatbuf, "¡° %s ¤w³Q¥[¤J¶Â¦W³æ", banned);
+	sprintf(chatbuf, "â€» %s å·²è¢«åŠ å…¥é»‘åå–®", banned);
     }
 
     send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
@@ -1988,18 +1988,18 @@ chat_broadcast(ChatUser *cu, char *msg)
 {
     if (!CHATSYSOP(cu))
     {
-	send_to_user(cu, "¡° ±z¨S¦³¦b²á¤Ñ«Ç¼s¼½ªºÅv¤O!", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» æ‚¨æ²’æœ‰åœ¨èŠå¤©å®¤å»£æ’­çš„æ¬ŠåŠ›!", 0, MSG_MESSAGE);
 	return;
     }
     if (*msg == '\0')
     {
-	send_to_user(cu, "¡° ½Ğ«ü©w¼s¼½¤º®e", 0, MSG_MESSAGE);
+	send_to_user(cu, "â€» è«‹æŒ‡å®šå»£æ’­å…§å®¹", 0, MSG_MESSAGE);
 	return;
     }
-    sprintf(chatbuf, ANSI_COLOR(1) "¡° " BBSNAME "²á¤Ñ«Ç¼s¼½¤¤ [%s]....." ANSI_RESET,
+    sprintf(chatbuf, ANSI_COLOR(1) "â€» " BBSNAME "èŠå¤©å®¤å»£æ’­ä¸­ [%s]....." ANSI_RESET,
 	    cu->chatid);
     send_to_room(ROOM_ALL, chatbuf, 0, MSG_MESSAGE);
-    sprintf(chatbuf, "¡» %s", msg);
+    sprintf(chatbuf, "â—† %s", msg);
     send_to_room(ROOM_ALL, chatbuf, 0, MSG_MESSAGE);
 }
 
@@ -2008,7 +2008,7 @@ static void
 chat_goodbye(ChatUser *cu, char *msg)
 {
     exit_room(cu, EXIT_LOGOUT, msg);
-    /* Thor: ­n¤£­n¥[ logout_user(cu) ? */
+    /* Thor: è¦ä¸è¦åŠ  logout_user(cu) ? */
 }
 
 
@@ -2018,97 +2018,97 @@ chat_goodbye(ChatUser *cu, char *msg)
 
 struct ChatAction
 {
-    char *verb;                   /* °Êµü */
-    char *chinese;                /* ¤¤¤åÂ½Ä¶ */
-    char *part1_msg;              /* ¤¶µü */
-    char *part2_msg;              /* °Ê§@ */
+    char *verb;                   /* å‹•è© */
+    char *chinese;                /* ä¸­æ–‡ç¿»è­¯ */
+    char *part1_msg;              /* ä»‹è© */
+    char *part2_msg;              /* å‹•ä½œ */
 };
 
 
 static ChatAction party_data[] =
 {
-    {"aluba", "ªü¾|¤Ú", "§â", "¬[¤W¬W¤lªü¾|¤Ú!!"},
-    {"adore", "´º¥õ", "¹ï", "ªº´º¥õ¦³¦p·Ê·Ê¦¿¤ô,³sºø¤£µ´¡K¡K"},
-    {"bearhug", "¼ö¾Ö", "¼ö±¡ªº¾Ö©ê", ""},
-    {"blade", "¤@¤M", "¤@¤M±Òµ{§â", "°e¤W¦è¤Ñ"},
-    {"bless", "¯¬ºÖ", "¯¬ºÖ", "¤ß·Q¨Æ¦¨"},
-    {"board", "¥D¾÷ªO", "§â", "§ì¥h¸÷¥D¾÷ªO"},
-    {"bokan", "®ğ¥\\", "Âù´x·L¦X¡A»W¶Õ«İµo¡K¡K¬ğµM¶¡¡A¹q¥ú¥E²{¡A¹ï", "¨Ï¥X¤F¢Ğo--¢Ùan¡I"},
-  {"bow", "Áù°`", "²¦®¥²¦·qªº¦V", "Áù°`"},
-  {"box", "¹õ¤§¤º", "¶}©l½üÂ\\¦¡²¾¦ì¡A¹ï", "§@¨xÅ¦§ğÀ»"},
-  {"boy", "¥­©³Áç", "±q­I«á®³¥X¤F¥­©³Áç¡A§â", "ºV©ü¤F"},
-  {"bye", "ÙTÙT", "¦V", "»¡ÙTÙT!!"},
-  {"call", "©I³ê", "¤jÁnªº©I³ê,°Ú~~", "°Ú~~~§A¦b­ş¸Ì°Ú°Ú°Ú°Ú~~~~"},
-  {"caress", "»´¼¾", "»´»´ªº¼¾ºNµÛ", ""},
-  {"clap", "¹ª´x", "¦V", "¼ö¯P¹ª´x"},
-  {"claw", "§ì§ì", "±q¿ß«}¼Ö¶é­É¤F°¦¿ß¤ö¡A§â", "§ì±o¦º¥h¬¡¨Ó"},
-  {"comfort", "¦w¼¢", "·Å¨¥¦w¼¢", ""},
-  {"cong", "®¥³ß", "±q­I«á®³¥X¤F©Ô¬¶¡AËé¡IËé¡I®¥³ß", ""},
-  {"cpr", "¤f¹ï¤f", "¹ïµÛ", "°µ¤f¹ï¤f¤H¤u©I§l"},
-  {"cringe", "¤^¼¦", "¦V", "¨õ°`©}½¥¡A·n§À¤^¼¦"},
-  {"cry", "¤j­ú", "¦V", "Àz°Ş¤j­ú"},
-  {"dance", "¸õ»R", "©Ô¤F", "ªº¤â½¡½¡°_»R"  },
-  {"destroy", "·´·À", "²½°_¤F¡y·¥¤j·´·À©G¤å¡z¡AÅF¦V", ""},
-  {"dogleg", "ª¯»L", "¹ï", "ª¯»L"},
-  {"drivel", "¬y¤f¤ô", "¹ïµÛ", "¬y¤f¤ô"},
-  {"envy", "¸r¼}", "¦V", "¬yÅS¥X¸r¼}ªº²´¥ú"},
-  {"eye", "°e¬îªi", "¹ï", "ÀW°e¬îªi"},
-  {"fire", "¾R°İ", "®³µÛ¤õ¬õªºÅK´Î¨«¦V", ""},
-  {"forgive", "­ì½Ì", "±µ¨ü¹Dºp¡A­ì½Ì¤F", ""},
-  {"french", "ªk¦¡§k", "§â¦ŞÀY¦ù¨ì", "³ïÄV¸Ì¡ã¡ã¡ã«z¡I¤@­Ó®öº©ªºªk°ê¤ó²`§k"},
-  {"giggle", "¶Ì¯º", "¹ïµÛ", "¶Ì¶Ìªº§b¯º"},
-  {"glue", "¸É¤ß", "¥Î¤T¬í½¦¡A§â", "ªº¤ßÂH¤F°_¨Ó"},
-  {"goodbye", "§i§O", "²\\²´¨L¨Lªº¦V", "§i§O"},
-  {"grin", "¦l¯º", "¹ï", "ÅS¥X¨¸´cªº¯º®e"},
-  {"growl", "©H­ı", "¹ï", "©H­ı¤£¤w"},
-  {"hand", "´¤¤â", "¸ò", "´¤¤â"},
-  {"hide", "¸ú", "¸ú¦b", "­I«á"},
-  {"hospitl", "°eÂå°|", "§â", "°e¶iÂå°|"},
-  {"hug", "¾Ö©ê", "»´»´¦a¾Ö©ê", ""},
-  {"hrk", "ª@Às®±", "¨IÃ­¤F¨­§Î¡A¶×»E¤F¤º«l¡A¹ï", "¨Ï¥X¤F¤@°O¢Öo--¢àyu--¢Ùan¡I¡I¡I"},
-  {"jab", "ÂW¤H", "·Å¬XªºÂWµÛ", ""},
-  {"judo", "¹LªÓºL", "§ì¦í¤F", "ªº¦çÃÌ¡AÂà¨­¡K¡K°Ú¡A¬O¤@°O¹LªÓºL¡I"},
-  {"kickout", "½ğ", "¥Î¤j¸}§â", "½ğ¨ì¤s¤U¥h¤F"},
-  {"kick", "½ğ¤H", "§â", "½ğªº¦º¥h¬¡¨Ó"},
-  {"kiss", "»´§k", "»´§k", "ªºÁyÀU"},
-  {"laugh", "¼J¯º", "¤jÁn¼J¯º", ""},
-  {"levis", "µ¹§Ú", "»¡¡Gµ¹§Ú", "¡I¨ä¾l§K½Í¡I"},
-  {"lick", "»Q", "¨g»Q", ""},
-  {"lobster", "À£¨î", "¬I®i°f½¼§Î©T©w¡A§â", "À£¨î¦b¦aªO¤W"},
-  {"love", "ªí¥Õ", "¹ï", "²`±¡ªºªí¥Õ"},
-  {"marry", "¨D±B", "±·µÛ¤E¦Ê¤E¤Q¤E¦·ª´ºÀ¦V", "¨D±B"},
-  {"no", "¤£­n°Ú", "«÷©R¹ïµÛ", "·nÀY~~~~¤£­n°Ú~~~~"},
-  {"nod", "ÂIÀY", "¦V", "ÂIÀYºÙ¬O"},
-  {"nudge", "³»¨{¤l", "¥Î¤â¨y³»", "ªºªÎ¨{¤l"},
-  {"pad", "©çªÓ»H", "»´©ç", "ªºªÓ»H"},
-  {"pettish", "¼»¼b", "¸ò", "ÜİÁnÜİ®ğ¦a¼»¼b"},
-  {"pili", "ÅRÆE", "¨Ï¥X §g¤l­· ¤Ñ¦a®Ú ¯ë­YÄb ¤T¦¡¦X¤@¥´¦V", "~~~~~~"},
-  {"pinch", "À¾¤H", "¥Î¤Oªº§â", "À¾ªº¶Â«C"},
-  {"roll", "¥´ºu", "©ñ¥X¦hº¸³Oªº­µ¼Ö,", "¦b¦a¤Wºu¨Óºu¥h"},
-  {"protect", "«OÅ@", "«OÅ@µÛ", ""},
-  {"pull", "©Ô", "¦º©R¦a©Ô¦í", "¤£©ñ"},
-  {"punch", "´~¤H", "¬½¬½´~¤F", "¤@¹y"},
-  {"rascal", "­A¿à", "¸ò", "­A¿à"},
-  {"recline", "¤JÃh", "Æp¨ì", "ªºÃh¸ÌºÎµÛ¤F¡K¡K"},
-  {"respond", "­t³d", "¦w¼¢", "»¡¡G¡y¤£­n­ú¡A§Ú·|­t³dªº¡K¡K¡z"},
-  {"shrug", "ÁqªÓ", "µL©`¦a¦V", "Áq¤FÁqªÓ»H"},
-  {"sigh", "¼Û®ğ", "¹ï", "¼Û¤F¤@¤f®ğ"},
-  {"slap", "¥´¦Õ¥ú", "°Ô°Ôªº¤Ú¤F", "¤@¹y¦Õ¥ú"},
-  {"smooch", "¾Ö§k", "¾Ö§kµÛ", ""},
-  {"snicker", "ÅÑ¯º", "¼K¼K¼K..ªº¹ï", "ÅÑ¯º"},
-  {"sniff", "¤£®h", "¹ï", "¶á¤§¥H»ó"},
-  {"spank", "¥´§¾§¾", "¥Î¤Ú´x¥´", "ªºÁv³¡"},
-  {"squeeze", "ºò¾Ö", "ºòºò¦a¾Ö©êµÛ", ""},
-  {"sysop", "¥l³ê", "¥s¥X¤F§å½ğ½ğ¡A§â", "½ò«ó¤F¡I"},
-  {"thank", "·PÁÂ", "¦V", "·PÁÂ±o¤­Åé§ë¦a"},
-  {"tickle", "·kÄo", "©B¼T!©B¼T!·k", "ªºÄo"},
-  {"wake", "·n¿ô", "»´»´¦a§â", "·n¿ô"},
-  {"wave", "´§¤â", "¹ïµÛ", "«÷©Rªº·n¤â"},
-  {"welcome", "Åwªï", "Åwªï", "¶i¨Ó¤K¨ö¤@¤U"},
-  {"what", "¤°»ò", "»¡¡G¡y", "­ù¤½½M±K«zÃ÷Å¥¬Y?¡H?¡S?¡z"},
-  {"whip", "Ã@¤l", "¤â¤W®³µÛÄúÀë¡A¥ÎÃ@¤lµh¥´", ""},
-  {"wink", "¯w²´", "¹ï", "¯«¯µªº¯w¯w²´·ú"},
-  {"zap", "²r§ğ", "¹ï", "ºÆ¨gªº§ğÀ»"},
+    {"aluba", "é˜¿é­¯å·´", "æŠŠ", "æ¶ä¸ŠæŸ±å­é˜¿é­¯å·´!!"},
+    {"adore", "æ™¯ä»°", "å°", "çš„æ™¯ä»°æœ‰å¦‚æ»”æ»”æ±Ÿæ°´,é€£ç¶¿ä¸çµ•â€¦â€¦"},
+    {"bearhug", "ç†±æ“", "ç†±æƒ…çš„æ“æŠ±", ""},
+    {"blade", "ä¸€åˆ€", "ä¸€åˆ€å•Ÿç¨‹æŠŠ", "é€ä¸Šè¥¿å¤©"},
+    {"bless", "ç¥ç¦", "ç¥ç¦", "å¿ƒæƒ³äº‹æˆ"},
+    {"board", "ä¸»æ©Ÿæ¿", "æŠŠ", "æŠ“å»è·ªä¸»æ©Ÿæ¿"},
+    {"bokan", "æ°£åŠŸ\", "é›™æŒå¾®åˆï¼Œè“„å‹¢å¾…ç™¼â€¦â€¦çªç„¶é–“ï¼Œé›»å…‰ä¹ç¾ï¼Œå°", "ä½¿å‡ºäº†ï¼¢o--ï¼«anï¼"},
+  {"bow", "é èº¬", "ç•¢æ­ç•¢æ•¬çš„å‘", "é èº¬"},
+  {"box", "å¹•ä¹‹å…§", "é–‹å§‹è¼ªæ“º\å¼ç§»ä½ï¼Œå°", "ä½œè‚è‡Ÿæ”»æ“Š"},
+  {"boy", "å¹³åº•é‹", "å¾èƒŒå¾Œæ‹¿å‡ºäº†å¹³åº•é‹ï¼ŒæŠŠ", "æ•²æ˜äº†"},
+  {"bye", "æ°æ°", "å‘", "èªªæ°æ°!!"},
+  {"call", "å‘¼å–š", "å¤§è²çš„å‘¼å–š,å•Š~~", "å•Š~~~ä½ åœ¨å“ªè£¡å•Šå•Šå•Šå•Š~~~~"},
+  {"caress", "è¼•æ’«", "è¼•è¼•çš„æ’«æ‘¸è‘—", ""},
+  {"clap", "é¼“æŒ", "å‘", "ç†±çƒˆé¼“æŒ"},
+  {"claw", "æŠ“æŠ“", "å¾è²“å’ªæ¨‚åœ’å€Ÿäº†éš»è²“çˆªï¼ŒæŠŠ", "æŠ“å¾—æ­»å»æ´»ä¾†"},
+  {"comfort", "å®‰æ…°", "æº«è¨€å®‰æ…°", ""},
+  {"cong", "æ­å–œ", "å¾èƒŒå¾Œæ‹¿å‡ºäº†æ‹‰ç‚®ï¼Œå‘¯ï¼å‘¯ï¼æ­å–œ", ""},
+  {"cpr", "å£å°å£", "å°è‘—", "åšå£å°å£äººå·¥å‘¼å¸"},
+  {"cringe", "ä¹æ†", "å‘", "å‘èº¬å±ˆè†ï¼Œæ–å°¾ä¹æ†"},
+  {"cry", "å¤§å“­", "å‘", "åšå••å¤§å“­"},
+  {"dance", "è·³èˆ", "æ‹‰äº†", "çš„æ‰‹ç¿©ç¿©èµ·èˆ"  },
+  {"destroy", "æ¯€æ»…", "ç¥­èµ·äº†ã€æ¥µå¤§æ¯€æ»…å’’æ–‡ã€ï¼Œè½Ÿå‘", ""},
+  {"dogleg", "ç‹—è…¿", "å°", "ç‹—è…¿"},
+  {"drivel", "æµå£æ°´", "å°è‘—", "æµå£æ°´"},
+  {"envy", "ç¾¨æ…•", "å‘", "æµéœ²å‡ºç¾¨æ…•çš„çœ¼å…‰"},
+  {"eye", "é€ç§‹æ³¢", "å°", "é »é€ç§‹æ³¢"},
+  {"fire", "éŠ¬å•", "æ‹¿è‘—ç«ç´…çš„éµæ£’èµ°å‘", ""},
+  {"forgive", "åŸè«’", "æ¥å—é“æ­‰ï¼ŒåŸè«’äº†", ""},
+  {"french", "æ³•å¼å»", "æŠŠèˆŒé ­ä¼¸åˆ°", "å–‰åš¨è£¡âˆ¼âˆ¼âˆ¼å“‡ï¼ä¸€å€‹æµªæ¼«çš„æ³•åœ‹æ°æ·±å»"},
+  {"giggle", "å‚»ç¬‘", "å°è‘—", "å‚»å‚»çš„å‘†ç¬‘"},
+  {"glue", "è£œå¿ƒ", "ç”¨ä¸‰ç§’è† ï¼ŒæŠŠ", "çš„å¿ƒé»äº†èµ·ä¾†"},
+  {"goodbye", "å‘Šåˆ¥", "æ·š\çœ¼æ±ªæ±ªçš„å‘", "å‘Šåˆ¥"},
+  {"grin", "å¥¸ç¬‘", "å°", "éœ²å‡ºé‚ªæƒ¡çš„ç¬‘å®¹"},
+  {"growl", "å’†å“®", "å°", "å’†å“®ä¸å·²"},
+  {"hand", "æ¡æ‰‹", "è·Ÿ", "æ¡æ‰‹"},
+  {"hide", "èº²", "èº²åœ¨", "èƒŒå¾Œ"},
+  {"hospitl", "é€é†«é™¢", "æŠŠ", "é€é€²é†«é™¢"},
+  {"hug", "æ“æŠ±", "è¼•è¼•åœ°æ“æŠ±", ""},
+  {"hrk", "æ˜‡é¾æ‹³", "æ²‰ç©©äº†èº«å½¢ï¼ŒåŒ¯èšäº†å…§å‹ï¼Œå°", "ä½¿å‡ºäº†ä¸€è¨˜ï¼¨o--ï¼²yu--ï¼«anï¼ï¼ï¼"},
+  {"jab", "æˆ³äºº", "æº«æŸ”çš„æˆ³è‘—", ""},
+  {"judo", "éè‚©æ‘”", "æŠ“ä½äº†", "çš„è¡£è¥Ÿï¼Œè½‰èº«â€¦â€¦å•Šï¼Œæ˜¯ä¸€è¨˜éè‚©æ‘”ï¼"},
+  {"kickout", "è¸¢", "ç”¨å¤§è…³æŠŠ", "è¸¢åˆ°å±±ä¸‹å»äº†"},
+  {"kick", "è¸¢äºº", "æŠŠ", "è¸¢çš„æ­»å»æ´»ä¾†"},
+  {"kiss", "è¼•å»", "è¼•å»", "çš„è‡‰é °"},
+  {"laugh", "å˜²ç¬‘", "å¤§è²å˜²ç¬‘", ""},
+  {"levis", "çµ¦æˆ‘", "èªªï¼šçµ¦æˆ‘", "ï¼å…¶é¤˜å…è«‡ï¼"},
+  {"lick", "èˆ”", "ç‹‚èˆ”", ""},
+  {"lobster", "å£“åˆ¶", "æ–½å±•é€†è¦å½¢å›ºå®šï¼ŒæŠŠ", "å£“åˆ¶åœ¨åœ°æ¿ä¸Š"},
+  {"love", "è¡¨ç™½", "å°", "æ·±æƒ…çš„è¡¨ç™½"},
+  {"marry", "æ±‚å©š", "æ§è‘—ä¹ç™¾ä¹åä¹æœµç«ç‘°å‘", "æ±‚å©š"},
+  {"no", "ä¸è¦å•Š", "æ‹¼å‘½å°è‘—", "æ–é ­~~~~ä¸è¦å•Š~~~~"},
+  {"nod", "é»é ­", "å‘", "é»é ­ç¨±æ˜¯"},
+  {"nudge", "é ‚è‚šå­", "ç”¨æ‰‹è‚˜é ‚", "çš„è‚¥è‚šå­"},
+  {"pad", "æ‹è‚©è†€", "è¼•æ‹", "çš„è‚©è†€"},
+  {"pettish", "æ’’å¬Œ", "è·Ÿ", "å—²è²å—²æ°£åœ°æ’’å¬Œ"},
+  {"pili", "éœ¹é‚", "ä½¿å‡º å›å­é¢¨ å¤©åœ°æ ¹ èˆ¬è‹¥æ‡º ä¸‰å¼åˆä¸€æ‰“å‘", "~~~~~~"},
+  {"pinch", "æ“°äºº", "ç”¨åŠ›çš„æŠŠ", "æ“°çš„é»‘é’"},
+  {"roll", "æ‰“æ»¾", "æ”¾å‡ºå¤šçˆ¾è¢çš„éŸ³æ¨‚,", "åœ¨åœ°ä¸Šæ»¾ä¾†æ»¾å»"},
+  {"protect", "ä¿è­·", "ä¿è­·è‘—", ""},
+  {"pull", "æ‹‰", "æ­»å‘½åœ°æ‹‰ä½", "ä¸æ”¾"},
+  {"punch", "æäºº", "ç‹ ç‹ æäº†", "ä¸€é “"},
+  {"rascal", "è€è³´", "è·Ÿ", "è€è³´"},
+  {"recline", "å…¥æ‡·", "é‘½åˆ°", "çš„æ‡·è£¡ç¡è‘—äº†â€¦â€¦"},
+  {"respond", "è² è²¬", "å®‰æ…°", "èªªï¼šã€ä¸è¦å“­ï¼Œæˆ‘æœƒè² è²¬çš„â€¦â€¦ã€"},
+  {"shrug", "è³è‚©", "ç„¡å¥ˆåœ°å‘", "è³äº†è³è‚©è†€"},
+  {"sigh", "æ­æ°£", "å°", "æ­äº†ä¸€å£æ°£"},
+  {"slap", "æ‰“è€³å…‰", "å•ªå•ªçš„å·´äº†", "ä¸€é “è€³å…‰"},
+  {"smooch", "æ“å»", "æ“å»è‘—", ""},
+  {"snicker", "ç«Šç¬‘", "å˜¿å˜¿å˜¿..çš„å°", "ç«Šç¬‘"},
+  {"sniff", "ä¸å±‘", "å°", "å—¤ä¹‹ä»¥é¼»"},
+  {"spank", "æ‰“å±å±", "ç”¨å·´æŒæ‰“", "çš„è‡€éƒ¨"},
+  {"squeeze", "ç·Šæ“", "ç·Šç·Šåœ°æ“æŠ±è‘—", ""},
+  {"sysop", "å¬å–š", "å«å‡ºäº†æ‰¹è¸¢è¸¢ï¼ŒæŠŠ", "è¸©æ‰äº†ï¼"},
+  {"thank", "æ„Ÿè¬", "å‘", "æ„Ÿè¬å¾—äº”é«”æŠ•åœ°"},
+  {"tickle", "æ”ç™¢", "å’•å˜°!å’•å˜°!æ”", "çš„ç™¢"},
+  {"wake", "æ–é†’", "è¼•è¼•åœ°æŠŠ", "æ–é†’"},
+  {"wave", "æ®æ‰‹", "å°è‘—", "æ‹¼å‘½çš„æ–æ‰‹"},
+  {"welcome", "æ­¡è¿", "æ­¡è¿", "é€²ä¾†å…«å¦ä¸€ä¸‹"},
+  {"what", "ä»€éº¼", "èªªï¼šã€", "å“©å…¬çå¯†å“‡éš´è½æŸ?ï¼Ÿ?ï¹–?ã€"},
+  {"whip", "é­å­", "æ‰‹ä¸Šæ‹¿è‘—è Ÿç‡­ï¼Œç”¨é­å­ç—›æ‰“", ""},
+  {"wink", "çœ¨çœ¼", "å°", "ç¥ç§˜çš„çœ¨çœ¨çœ¼ç›"},
+  {"zap", "çŒ›æ”»", "å°", "ç˜‹ç‹‚çš„æ”»æ“Š"},
   {NULL, NULL, NULL, NULL}
 };
 
@@ -2123,14 +2123,14 @@ party_action(ChatUser *cu, char *cmd, char *party)
 	if (!str_equal(cmd, verb))
 	    continue;
 	if (*party == '\0')
-	    party = "¤j®a";
+	    party = "å¤§å®¶";
 	else
 	{
 	    ChatUser *xuser;
 
 	    xuser = fuzzy_cuser_by_chatid(party);
 	    if (xuser == NULL)
-	    {                       /* Thor.0724: ¥Î userid¤]¹À³q */
+	    {                       /* Thor.0724: ç”¨ useridä¹Ÿå˜›é€š */
 		xuser = cuser_by_userid(party);
 	    }
 
@@ -2142,7 +2142,7 @@ party_action(ChatUser *cu, char *cmd, char *party)
 	    }
 	    else if (xuser == FUZZY_USER)
 	    {
-		sprintf(chatbuf, "¡° ½Ğ«ü©ú²á¤Ñ¥N¸¹");
+		sprintf(chatbuf, "â€» è«‹æŒ‡æ˜èŠå¤©ä»£è™Ÿ");
 		send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
 		return 0;
 	    }
@@ -2173,33 +2173,33 @@ party_action(ChatUser *cu, char *cmd, char *party)
 
 static ChatAction speak_data[] =
 {
-    { "ask", "¸ß°İ", "°İ", NULL },
-    { "chant", "ºq¹|", "°ªÁnºq¹|", NULL },
-    { "cheer", "³Üªö", "³Üªö", NULL },
-    { "chuckle", "»´¯º", "»´¯º", NULL },
-    { "curse", "·t·F", "·t·F", NULL },
-    { "demand", "­n¨D", "­n¨D", NULL },
-    { "frown", "½K¬ÜÀY", "ÂÙ¬Ü", NULL },
-    { "groan", "©D§u", "©D§u", NULL },
-    { "grumble", "µo¨cÄÌ", "µo¨cÄÌ", NULL },
-    { "guitar", "¼u°Û", "Ãä¼uµÛ¦N¥L¡AÃä°ÛµÛ", NULL },
-    { "hum", "³ä³ä", "³ä³ä¦Û»y", NULL },
-    { "moan", "«è¹Ä", "«è¹Ä", NULL },
-    { "notice", "±j½Õ", "±j½Õ", NULL },
-    { "order", "©R¥O", "©R¥O", NULL },
-    { "ponder", "¨H«ä", "¨H«ä", NULL },
-    { "pout", "äş¼L", "äşµÛ¼L»¡", NULL },
-    { "pray", "¬èÃ«", "¬èÃ«", NULL },
-    { "request", "Àµ¨D", "Àµ¨D", NULL },
-    { "shout", "¤j½|", "¤j½|", NULL },
-    { "sing", "°Ûºq", "°Ûºq", NULL },
-    { "smile", "·L¯º", "·L¯º", NULL },
-    { "smirk", "°²¯º", "°²¯º", NULL },
-    { "swear", "µo»}", "µo»}", NULL },
-    { "tease", "¼J¯º", "¼J¯º", NULL },
-    { "whimper", "¶ã«|", "¶ã«|ªº»¡", NULL },
-    { "yawn", "«¢¤í", "Ãä¥´«¢¤íÃä»¡", NULL },
-    { "yell", "¤j³Û", "¤j³Û", NULL },
+    { "ask", "è©¢å•", "å•", NULL },
+    { "chant", "æ­Œé Œ", "é«˜è²æ­Œé Œ", NULL },
+    { "cheer", "å–é‡‡", "å–é‡‡", NULL },
+    { "chuckle", "è¼•ç¬‘", "è¼•ç¬‘", NULL },
+    { "curse", "æš—å¹¹", "æš—å¹¹", NULL },
+    { "demand", "è¦æ±‚", "è¦æ±‚", NULL },
+    { "frown", "çšºçœ‰é ­", "è¹™çœ‰", NULL },
+    { "groan", "å‘»åŸ", "å‘»åŸ", NULL },
+    { "grumble", "ç™¼ç‰¢é¨·", "ç™¼ç‰¢é¨·", NULL },
+    { "guitar", "å½ˆå”±", "é‚Šå½ˆè‘—å‰ä»–ï¼Œé‚Šå”±è‘—", NULL },
+    { "hum", "å–ƒå–ƒ", "å–ƒå–ƒè‡ªèª", NULL },
+    { "moan", "æ€¨å˜†", "æ€¨å˜†", NULL },
+    { "notice", "å¼·èª¿", "å¼·èª¿", NULL },
+    { "order", "å‘½ä»¤", "å‘½ä»¤", NULL },
+    { "ponder", "æ²ˆæ€", "æ²ˆæ€", NULL },
+    { "pout", "å™˜å˜´", "å™˜è‘—å˜´èªª", NULL },
+    { "pray", "ç¥ˆç¦±", "ç¥ˆç¦±", NULL },
+    { "request", "æ‡‡æ±‚", "æ‡‡æ±‚", NULL },
+    { "shout", "å¤§ç½µ", "å¤§ç½µ", NULL },
+    { "sing", "å”±æ­Œ", "å”±æ­Œ", NULL },
+    { "smile", "å¾®ç¬‘", "å¾®ç¬‘", NULL },
+    { "smirk", "å‡ç¬‘", "å‡ç¬‘", NULL },
+    { "swear", "ç™¼èª“", "ç™¼èª“", NULL },
+    { "tease", "å˜²ç¬‘", "å˜²ç¬‘", NULL },
+    { "whimper", "å—šå’½", "å—šå’½çš„èªª", NULL },
+    { "yawn", "å“ˆæ¬ ", "é‚Šæ‰“å“ˆæ¬ é‚Šèªª", NULL },
+    { "yell", "å¤§å–Š", "å¤§å–Š", NULL },
     { NULL, NULL, NULL, NULL }
 };
 
@@ -2214,7 +2214,7 @@ speak_action(ChatUser *cu, char *cmd, char *msg)
     {
 	if (!str_equal(cmd, verb))
 	    continue;
-	sprintf(chatbuf, ANSI_COLOR(1;32) "%s " ANSI_COLOR(31) "%s¡G" ANSI_COLOR(33) " %s" ANSI_RESET,
+	sprintf(chatbuf, ANSI_COLOR(1;32) "%s " ANSI_COLOR(31) "%sï¼š" ANSI_COLOR(33) " %s" ANSI_RESET,
 		cu->chatid, cap->part1_msg, msg);
 	send_to_room(cu->room, chatbuf, cu->userno, MSG_MESSAGE);
 	return 0;
@@ -2230,53 +2230,53 @@ speak_action(ChatUser *cu, char *cmd, char *msg)
 
 static ChatAction condition_data[] =
 {
-    { "applaud", "©ç¤â", "°Ô°Ô°Ô°Ô°Ô°Ô°Ô....", NULL },
-    { "ayo", "­üËç³Ş", "­üËç³Ş~~~", NULL },
-    { "back", "§¤¦^¨Ó", "¦^¨Ó§¤¥¿Ä~Äò¾Ä¾Ô", NULL },
-    { "blood", "¦b¦å¤¤", "­Ë¦b¦åªy¤§¤¤", NULL },
-    { "blush", "Áy¬õ", "Áy³£¬õ¤F", NULL },
-    { "broke", "¤ß¸H", "ªº¤ß¯}¸H¦¨¤@¤ù¤@¤ùªº", NULL },
-    { "careles", "¨S¤H²z", "¶ã¡ã¡ã³£¨S¦³¤H²z§Ú :~~~~", NULL },
-    { "chew", "¶ß¥Ê¤l", "«Ü±y¶¢ªº¶ß°_¥Ê¤l¨Ó¤F", NULL },
-    { "climb", "ª¦¤s", "¦Û¤vºCºCª¦¤W¤s¨Ó¡K¡K", NULL },
-    { "cold", "·P«_¤F", "·P«_¤F,¶ı¶ı¤£Åı§Ú¥X¥hª± :~~~(", NULL },
-    { "cough", "«y¹Â", "«y¤F´XÁn", NULL },
-    { "die", "¼ÉÀÅ", "·í³õ¼ÉÀÅ", NULL },
-    { "faint", "©ü­Ë", "·í³õ©ü­Ë", NULL },
-    { "flop", "­»¿¼¥Ö", "½ò¨ì­»¿¼¥Ö... ·Æ­Ë¡I", NULL },
-    { "fly", "ÄÆÄÆµM", "ÄÆÄÆµM", NULL },
-    { "gold", "®³ª÷µP", "°ÛµÛ¡G¡yª÷£|£±£½ª÷£|£±£½  ¥X°ê¤ñÁÉ! ±o«a­x¡A®³ª÷µP¡A¥úºa­Ë¾H¨Ó¡I¡z", NULL },
-    { "gulu", "¨{¤l¾j", "ªº¨{¤lµo¥X©BÂP~~~©BÂP~~~ªºÁn­µ", NULL },
-    { "haha", "«z«¢«¢", "«z«¢«¢«¢.....^o^", NULL },
-    { "helpme", "¨D±Ï", "¤j³Û~~~±Ï©R°Ú~~~~", NULL },
-    { "hoho", "¨ş¨ş¯º", "¨ş¨ş¨ş¯º­Ó¤£°±", NULL },
-    { "happy", "°ª¿³", "°ª¿³±o¦b¦a¤W¥´ºu", NULL },
-    { "idle", "§b¦í¤F", "§b¦í¤F", NULL },
-    { "jacky", "®Ì®Ì", "µl¤l¯ëªº®Ì¨Ó®Ì¥h", NULL },
-    { "luck", "©¯¹B", "«z¡IºÖ®ğ°Õ¡I", NULL },
-    { "macarn", "¤@ºØ»R", "¶}©l¸õ°_¤F¢Ûa¢Ña¢àe¢Üa¡ã¡ã¡ã¡ã", NULL },
-    { "miou", "ØpØp", "ØpØp¤f­]¤f­]¡ã¡ã¡ã¡ã¡ã", NULL },
-    { "mouth", "«ó¼L", "«ó¼L¤¤!!", NULL },
-    { "nani", "«ç»ò·|", "¡G©`£®°Ú®º??", NULL },
-    { "nose", "¬y»ó¦å", "¬y»ó¦å", NULL },
-    { "puke", "¹Ã¦R", "¹Ã¦R¤¤", NULL },
-    { "rest", "¥ğ®§", "¥ğ®§¤¤¡A½Ğ¤Å¥´ÂZ", NULL },
-    { "reverse", "Â½¨{", "Â½¨{", NULL },
-    { "room", "¶}©Ğ¶¡", "r-o-O-m-r-O-¢İ-Mmm-rR¢à........", NULL },
-    { "shake", "·nÀY", "·n¤F·nÀY", NULL },
-    { "sleep", "ºÎµÛ", "­w¦bÁä½L¤WºÎµÛ¤F¡A¤f¤ô¬y¶iÁä½L¡A³y¦¨·í¾÷¡I", NULL },
-    { "so", "´NÂæ¤l", "´NÂæ¤l!!", NULL },
-    { "sorry", "¹Dºp", "¶ã°Ú!!§Ú¹ï¤£°_¤j®a,§Ú¹ï¤£°_°ê®aªÀ·|~~~~~~¶ã°Ú~~~~~", NULL },
-    { "story", "Á¿¥j", "¶}©lÁ¿¥j¤F", NULL },
-    { "strut", "·nÂ\\¨«", "¤j·n¤jÂ\\¦a¨«", NULL },
-    { "suicide", "¦Û±ş", "¦Û±ş", NULL },
-    { "tea", "ªw¯ù", "ªw¤F³ı¦n¯ù", NULL },
-    { "think", "«ä¦Ò", "¬nµÛÀY·Q¤F¤@¤U", NULL },
-    { "tongue", "¦R¦Ş", "¦R¤F¦R¦ŞÀY", NULL },
-    { "wall", "¼²Àğ", "¶]¥h¼²Àğ", NULL },
-    { "wawa", "«z«z", "«z«z«z~~~~~!!!!!  ~~~>_<~~~", NULL },
-    { "www", "¨L¨L", "¨L¨L¨L!!!", NULL },
-    { "zzz", "¥´©I", "©IÂP~~~~ZZzZz£C¢èZZzzZzzzZZ...", NULL },
+    { "applaud", "æ‹æ‰‹", "å•ªå•ªå•ªå•ªå•ªå•ªå•ª....", NULL },
+    { "ayo", "å”‰å‘¦å–‚", "å”‰å‘¦å–‚~~~", NULL },
+    { "back", "åå›ä¾†", "å›ä¾†åæ­£ç¹¼çºŒå¥®æˆ°", NULL },
+    { "blood", "åœ¨è¡€ä¸­", "å€’åœ¨è¡€æ³Šä¹‹ä¸­", NULL },
+    { "blush", "è‡‰ç´…", "è‡‰éƒ½ç´…äº†", NULL },
+    { "broke", "å¿ƒç¢", "çš„å¿ƒç ´ç¢æˆä¸€ç‰‡ä¸€ç‰‡çš„", NULL },
+    { "careles", "æ²’äººç†", "å—šâˆ¼âˆ¼éƒ½æ²’æœ‰äººç†æˆ‘ :~~~~", NULL },
+    { "chew", "å—‘ç“œå­", "å¾ˆæ‚ é–’çš„å—‘èµ·ç“œå­ä¾†äº†", NULL },
+    { "climb", "çˆ¬å±±", "è‡ªå·±æ…¢æ…¢çˆ¬ä¸Šå±±ä¾†â€¦â€¦", NULL },
+    { "cold", "æ„Ÿå†’äº†", "æ„Ÿå†’äº†,åª½åª½ä¸è®“æˆ‘å‡ºå»ç© :~~~(", NULL },
+    { "cough", "å’³å—½", "å’³äº†å¹¾è²", NULL },
+    { "die", "æš´æ–ƒ", "ç•¶å ´æš´æ–ƒ", NULL },
+    { "faint", "æ˜å€’", "ç•¶å ´æ˜å€’", NULL },
+    { "flop", "é¦™è•‰çš®", "è¸©åˆ°é¦™è•‰çš®... æ»‘å€’ï¼", NULL },
+    { "fly", "é£„é£„ç„¶", "é£„é£„ç„¶", NULL },
+    { "gold", "æ‹¿é‡‘ç‰Œ", "å”±è‘—ï¼šã€é‡‘ã„ã„ ËŠé‡‘ã„ã„ ËŠ  å‡ºåœ‹æ¯”è³½! å¾—å† è»ï¼Œæ‹¿é‡‘ç‰Œï¼Œå…‰æ¦®å€’é„§ä¾†ï¼ã€", NULL },
+    { "gulu", "è‚šå­é¤“", "çš„è‚šå­ç™¼å‡ºå’•åš•~~~å’•åš•~~~çš„è²éŸ³", NULL },
+    { "haha", "å“‡å“ˆå“ˆ", "å“‡å“ˆå“ˆå“ˆ.....^o^", NULL },
+    { "helpme", "æ±‚æ•‘", "å¤§å–Š~~~æ•‘å‘½å•Š~~~~", NULL },
+    { "hoho", "å‘µå‘µç¬‘", "å‘µå‘µå‘µç¬‘å€‹ä¸åœ", NULL },
+    { "happy", "é«˜èˆˆ", "é«˜èˆˆå¾—åœ¨åœ°ä¸Šæ‰“æ»¾", NULL },
+    { "idle", "å‘†ä½äº†", "å‘†ä½äº†", NULL },
+    { "jacky", "æ™ƒæ™ƒ", "ç—å­èˆ¬çš„æ™ƒä¾†æ™ƒå»", NULL },
+    { "luck", "å¹¸é‹", "å“‡ï¼ç¦æ°£å•¦ï¼", NULL },
+    { "macarn", "ä¸€ç¨®èˆ", "é–‹å§‹è·³èµ·äº†ï¼­aï¼£aï¼²eï¼®aâˆ¼âˆ¼âˆ¼âˆ¼", NULL },
+    { "miou", "å–µå–µ", "å–µå–µå£è‹—å£è‹—âˆ¼âˆ¼âˆ¼âˆ¼âˆ¼", NULL },
+    { "mouth", "æ‰å˜´", "æ‰å˜´ä¸­!!", NULL },
+    { "nani", "æ€éº¼æœƒ", "ï¼šå¥ˆã„å•Šæ??", NULL },
+    { "nose", "æµé¼»è¡€", "æµé¼»è¡€", NULL },
+    { "puke", "å˜”å", "å˜”åä¸­", NULL },
+    { "rest", "ä¼‘æ¯", "ä¼‘æ¯ä¸­ï¼Œè«‹å‹¿æ‰“æ“¾", NULL },
+    { "reverse", "ç¿»è‚š", "ç¿»è‚š", NULL },
+    { "room", "é–‹æˆ¿é–“", "r-o-O-m-r-O-ï¼¯-Mmm-rRï¼²........", NULL },
+    { "shake", "æ–é ­", "æ–äº†æ–é ­", NULL },
+    { "sleep", "ç¡è‘—", "è¶´åœ¨éµç›¤ä¸Šç¡è‘—äº†ï¼Œå£æ°´æµé€²éµç›¤ï¼Œé€ æˆç•¶æ©Ÿï¼", NULL },
+    { "so", "å°±é†¬å­", "å°±é†¬å­!!", NULL },
+    { "sorry", "é“æ­‰", "å—šå•Š!!æˆ‘å°ä¸èµ·å¤§å®¶,æˆ‘å°ä¸èµ·åœ‹å®¶ç¤¾æœƒ~~~~~~å—šå•Š~~~~~", NULL },
+    { "story", "è¬›å¤", "é–‹å§‹è¬›å¤äº†", NULL },
+    { "strut", "æ–æ“º\èµ°", "å¤§æ–å¤§æ“º\åœ°èµ°", NULL },
+    { "suicide", "è‡ªæ®º", "è‡ªæ®º", NULL },
+    { "tea", "æ³¡èŒ¶", "æ³¡äº†å£ºå¥½èŒ¶", NULL },
+    { "think", "æ€è€ƒ", "æ­ªè‘—é ­æƒ³äº†ä¸€ä¸‹", NULL },
+    { "tongue", "åèˆŒ", "åäº†åèˆŒé ­", NULL },
+    { "wall", "æ’ç‰†", "è·‘å»æ’ç‰†", NULL },
+    { "wawa", "å“‡å“‡", "å“‡å“‡å“‡~~~~~!!!!!  ~~~>_<~~~", NULL },
+    { "www", "æ±ªæ±ª", "æ±ªæ±ªæ±ª!!!", NULL },
+    { "zzz", "æ‰“å‘¼", "å‘¼åš•~~~~ZZzZzï½šï¼ºZZzzZzzzZZ...", NULL },
     { NULL, NULL, NULL, NULL }
 };
 
@@ -2308,9 +2308,9 @@ condition_action(ChatUser *cu, char *cmd)
 
 static char *dscrb[] =
 {
-    ANSI_COLOR(1;37) "¡i Verb + Nick¡G   °Êµü + ¹ï¤è¦W¦r ¡j" ANSI_COLOR(36) "   ¨Ò¡G//kick piggy" ANSI_RESET,
-    ANSI_COLOR(1;37) "¡i Verb + Message¡G°Êµü + ­n»¡ªº¸Ü ¡j" ANSI_COLOR(36) "   ¨Ò¡G//sing ¤Ñ¤Ñ¤ÑÂÅ" ANSI_RESET,
-    ANSI_COLOR(1;37) "¡i Verb¡G°Êµü ¡j    ¡ô¡õ¡GÂÂ¸Ü­«´£" ANSI_RESET, NULL
+    ANSI_COLOR(1;37) "ã€ Verb + Nickï¼š   å‹•è© + å°æ–¹åå­— ã€‘" ANSI_COLOR(36) "   ä¾‹ï¼š//kick piggy" ANSI_RESET,
+    ANSI_COLOR(1;37) "ã€ Verb + Messageï¼šå‹•è© + è¦èªªçš„è©± ã€‘" ANSI_COLOR(36) "   ä¾‹ï¼š//sing å¤©å¤©å¤©è—" ANSI_RESET,
+    ANSI_COLOR(1;37) "ã€ Verbï¼šå‹•è© ã€‘    â†‘â†“ï¼šèˆŠè©±é‡æ" ANSI_RESET, NULL
 };
 ChatAction *catbl[] =
 {
@@ -2324,7 +2324,7 @@ chat_partyinfo(ChatUser *cu, char *msg)
     if (!common_client_command)
 	return;                     /* only allow common client to retrieve it */
 
-    sprintf(chatbuf, "3 °Ê§@  ¥æ½Í  ª¬ºA");
+    sprintf(chatbuf, "3 å‹•ä½œ  äº¤è«‡  ç‹€æ…‹");
     send_to_user(cu, chatbuf, 0, MSG_PARTYINFO);
 }
 
@@ -2343,7 +2343,7 @@ chat_party(ChatUser *cu, char *msg)
 
     sprintf(chatbuf, "%d  %s", kind, kind == 2 ? "I" : "");
 
-    /* Xshadow: ¥u¦³ condition ¤~¬O immediate mode */
+    /* Xshadow: åªæœ‰ condition æ‰æ˜¯ immediate mode */
     send_to_user(cu, chatbuf, 0, MSG_PARTYLISTSTART);
 
     cap = catbl[kind];
@@ -2364,7 +2364,7 @@ chat_party(ChatUser *cu, char *msg)
 #define VERB_NO         10
 
 static void
-view_action_verb(ChatUser *cu, char cmd)       /* Thor.0726: ·s¥[°Êµü¤ÀÃşÅã¥Ü */
+view_action_verb(ChatUser *cu, char cmd)       /* Thor.0726: æ–°åŠ å‹•è©åˆ†é¡é¡¯ç¤º */
 {
     register int i;
     register char *p, *q, *data, *expn;
@@ -2375,21 +2375,21 @@ view_action_verb(ChatUser *cu, char cmd)       /* Thor.0726: ·s¥[°Êµü¤ÀÃşÅã¥Ü */
     data = chatbuf;
 
     if (cmd < '1' || cmd > '3')
-    {                             /* Thor.0726: ¼g±o¤£¦n, ·Q¿ìªk§ï¶i... */
+    {                             /* Thor.0726: å¯«å¾—ä¸å¥½, æƒ³è¾¦æ³•æ”¹é€²... */
 	for (i = 0; (p = dscrb[i]); i++)
 	{
-	    sprintf(data, "  [//]help %d          - MUD-like ªÀ¥æ°Êµü   ²Ä %d Ãş", i + 1, i + 1);
+	    sprintf(data, "  [//]help %d          - MUD-like ç¤¾äº¤å‹•è©   ç¬¬ %d é¡", i + 1, i + 1);
 	    send_to_user(cu, data, 0, MSG_MESSAGE);
 	    send_to_user(cu, p, 0, MSG_MESSAGE);
-	    send_to_user(cu, " ", 0, MSG_MESSAGE);    /* Thor.0726: ´«¦æ, »İ­n " "
-						       * ¶Ü? */
+	    send_to_user(cu, " ", 0, MSG_MESSAGE);    /* Thor.0726: æ›è¡Œ, éœ€è¦ " "
+						       * å—? */
 	}
     }
     else
     {
 	send_to_user(cu, dscrb[cmd-'1'], 0, MSG_MESSAGE);
 
-	expn = chatbuf + 100;       /* Thor.0726: À³¸Ó¤£·|overlap§a? */
+	expn = chatbuf + 100;       /* Thor.0726: æ‡‰è©²ä¸æœƒoverlapå§? */
 
 	*data = '\0';
 	*expn = '\0';
@@ -2406,7 +2406,7 @@ view_action_verb(ChatUser *cu, char cmd)       /* Thor.0726: ·s¥[°Êµü¤ÀÃşÅã¥Ü */
 	    if (((i + 1) % VERB_NO) == 0 || cap[i+1].verb==NULL)
 	    {
 		send_to_user(cu, data, 0, MSG_MESSAGE);
-		send_to_user(cu, expn, 0, MSG_MESSAGE); /* Thor.0726: Åã¥Ü¤¤¤åµù¸Ñ */
+		send_to_user(cu, expn, 0, MSG_MESSAGE); /* Thor.0726: é¡¯ç¤ºä¸­æ–‡è¨»è§£ */
 		*data = '\0';
 		*expn = '\0';
 	    }
@@ -2417,7 +2417,7 @@ view_action_verb(ChatUser *cu, char cmd)       /* Thor.0726: ·s¥[°Êµü¤ÀÃşÅã¥Ü */
 	    }
 	}
     }
-    /* send_to_user(cu, " ",0); *//* Thor.0726: ´«¦æ, »İ­n " " ¶Ü? */
+    /* send_to_user(cu, " ",0); *//* Thor.0726: æ›è¡Œ, éœ€è¦ " " å—? */
 }
 
 /* ----------------------------------------------------- */
@@ -2459,7 +2459,7 @@ static ChatCmd chatcmdlist[] =
     {NULL, NULL, 0}
 };
 
-/* Thor: 0 ¤£¥Î exact, 1 ­n exactly equal, 2 ¯µ±K«ü¥O */
+/* Thor: 0 ä¸ç”¨ exact, 1 è¦ exactly equal, 2 ç§˜å¯†æŒ‡ä»¤ */
 
 
 static int
@@ -2492,7 +2492,7 @@ command_execute(ChatUser *cu)
 
 	sprintf(buf, "%s:", cu->chatid);
 	sprintf(chatbuf, "%-10s%s", buf, msg);
-	if (!CLOAK(cu))           /* Thor: ²á¤Ñ«ÇÁô¨­³N */
+	if (!CLOAK(cu))           /* Thor: èŠå¤©å®¤éš±èº«è¡“ */
 	    send_to_room(cu->room, chatbuf, cu->userno, MSG_MESSAGE);
 	return 0;
     }
@@ -2506,7 +2506,7 @@ command_execute(ChatUser *cu)
 	cmd++;
 	if (!*cmd || str_equal(cmd, "help"))
 	{
-	    /* Thor.0726: °Êµü¤ÀÃş */
+	    /* Thor.0726: å‹•è©åˆ†é¡ */
 	    cmd = nextword(&msg);
 	    view_action_verb(cu, *cmd);
 	    match = 1;
@@ -2549,7 +2549,7 @@ command_execute(ChatUser *cu)
 
     if (!match)
     {
-	sprintf(chatbuf, "¡» «ü¥O¿ù»~¡G/%s", cmd);
+	sprintf(chatbuf, "â—† æŒ‡ä»¤éŒ¯èª¤ï¼š/%s", cmd);
 	send_to_user(cu, chatbuf, 0, MSG_MESSAGE);
     }
     return 0;
@@ -2635,8 +2635,8 @@ start_daemon()
 
     gethostname(buf, sizeof(buf));
 
-    /* Thor: ¸U¤@server©|¥¼±µ¨üconnection, ´N¦^¥hªº¸Ü, client ²Ä¤@¦¸·|¶i¤J¥¢±Ñ */
-    /* ©Ò¥H²¾¦Ü listen «á */
+    /* Thor: è¬ä¸€serverå°šæœªæ¥å—connection, å°±å›å»çš„è©±, client ç¬¬ä¸€æ¬¡æœƒé€²å…¥å¤±æ•— */
+    /* æ‰€ä»¥ç§»è‡³ listen å¾Œ */
 
     /* --------------------------------------------------- */
     /* detach daemon process                               */
@@ -2715,7 +2715,7 @@ free_resource(int fd)
     register ChatUser *user;
     register int sock, num;
 
-    /* ­«·s­pºâ maxfd */
+    /* é‡æ–°è¨ˆç®— maxfd */
     num = 0;
     for (user = mainuser; user; user = user->unext)
     {
@@ -3036,8 +3036,8 @@ main(int argc, char *argv[])
 	{
 	    tmaintain = uptime + CHAT_INTERVAL;
 
-	    /* client/server ª©¥»§Q¥Î ping-pong ¤èªk§PÂ_ user ¬O¤£¬OÁÙ¬¡µÛ */
-	    /* ¦pªG client ¤w¸gµ²§ô¤F¡A´NÄÀ©ñ¨ä resource */
+	    /* client/server ç‰ˆæœ¬åˆ©ç”¨ ping-pong æ–¹æ³•åˆ¤æ–· user æ˜¯ä¸æ˜¯é‚„æ´»è‘— */
+	    /* å¦‚æœ client å·²ç¶“çµæŸäº†ï¼Œå°±é‡‹æ”¾å…¶ resource */
 
 	    free_resource(msock);
 #ifdef SELFTEST
@@ -3095,8 +3095,8 @@ main(int argc, char *argv[])
 	}
 
 	for (cu = mainuser; cu && nfds>0; cu = cunext) {
-	    /* logout_user() ·| free(cu); ¥ı§â cu->next °O¤U¨Ó */
-	    /* FIXME ­Y­è¦n cu ¦b main room /kick cu->next, «h cu->next ·|³Q free ±¼ */
+	    /* logout_user() æœƒ free(cu); å…ˆæŠŠ cu->next è¨˜ä¸‹ä¾† */
+	    /* FIXME è‹¥å‰›å¥½ cu åœ¨ main room /kick cu->next, å‰‡ cu->next æœƒè¢« free æ‰ */
 	    cunext = cu->unext;
 	    csock = cu->sock;
 	    if (FD_ISSET(csock, xptr)) {

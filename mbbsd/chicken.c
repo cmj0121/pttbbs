@@ -1,23 +1,23 @@
 #include "bbs.h"
 
-#define NUM_KINDS   15		/* ¦³¦h¤ÖºØ°Êª« */
+#define NUM_KINDS   15		/* æœ‰å¤šå°‘ç¨®å‹•ç‰© */
 #define CHICKENLOG  "etc/chicken"
 #define CHICKEN_PIC "etc/chickens"
 
 static const char * const cage[17] = {
-    "½Ï¥Í", "¶g·³", "¥®¦~", "¤Ö¦~", "«C¬K", "«C¦~",
-    "«C¦~", "¬¡¤O", "§§¦~", "§§¦~", "§§¦~", "¤¤¦~",
-    "¤¤¦~", "¦Ñ¦~", "¦Ñ¦~", "¦Ñáàáà", "¥j§Æ"};
+    "èª•ç”Ÿ", "é€±æ­²", "å¹¼å¹´", "å°‘å¹´", "é’æ˜¥", "é’å¹´",
+    "é’å¹´", "æ´»åŠ›", "å£¯å¹´", "å£¯å¹´", "å£¯å¹´", "ä¸­å¹´",
+    "ä¸­å¹´", "è€å¹´", "è€å¹´", "è€æ‘³æ‘³", "å¤å¸Œ"};
 static const char * const chicken_type[NUM_KINDS] = {
-    "¤pÂû", "¬ü¤Ö¤k", "«i¤h", "»jµï",
-    "®£Às", "¦ÑÆN", "¿ß", "Äúµ§¤p·s",
-    "ª¯ª¯", "´cÅ]", "§ÔªÌ", "£««ó",
-    "°¨­^¤E", "´N¥i¤H", "ÅÚ²ú"};
+    "å°é›", "ç¾å°‘å¥³", "å‹‡å£«", "èœ˜è››",
+    "æé¾", "è€é·¹", "è²“", "è Ÿç­†å°æ–°",
+    "ç‹—ç‹—", "æƒ¡é­”", "å¿è€…", "ã„šæ‰",
+    "é¦¬è‹±ä¹", "å°±å¯äºº", "è˜¿è‰"};
 static const char * const chicken_food[NUM_KINDS] = {
-    "¹}®Æ", "Àç¾i«p¤ù", "Âû±Æ«K·í", "©øÂÎ",
-    "¦×", "¦×", "¿ß»æ°®", "¤pºµ»æ°®",
-    "ª¯­¹", "ÆF®ğ", "¶º¹Î", "«K·í",
-    "Âû»L", "¯º¸Ü¤å³¹", "¤ôªG¨F©Ô"};
+    "é£¼æ–™", "ç‡Ÿé¤Šåšç‰‡", "é›æ’ä¾¿ç•¶", "æ˜†èŸ²",
+    "è‚‰", "è‚‰", "è²“é¤…ä¹¾", "å°ç†Šé¤…ä¹¾",
+    "ç‹—é£Ÿ", "éˆæ°£", "é£¯åœ˜", "ä¾¿ç•¶",
+    "é›è…¿", "ç¬‘è©±æ–‡ç« ", "æ°´æœæ²™æ‹‰"};
 static const int egg_price[NUM_KINDS] = {
     5, 25, 30, 40,
     80, 50, 15, 35,
@@ -35,23 +35,23 @@ enum {
 };
 
 static const short time_change[NUM_KINDS][MAX_CHANGE] =
-     /* ¸É«~ ­¹ª« Åé­« Å¼¶Ã ¾Ç°İ §Ö¼Ö º¡·N ¯h³Ò ¯f®ğ º¡¦å */
+     /* è£œå“ é£Ÿç‰© é«”é‡ é«’äº‚ å­¸å• å¿«æ¨‚ æ»¿æ„ ç–²å‹ ç—…æ°£ æ»¿è¡€ */
 {
-    /* Âû   */ {1, 1,   30,  3,  3, 40,  9,   7, 3,   30},
-    /* ¤Ö¤k */ {1, 1,  110,  1, 41, 20,  9,  25, 7,  110},
-    /* «i¤h */ {1, 1,  200,  5, 33, 20, 15,  27, 1,  200},
-    /* »jµï */ {1, 1,   10,  5,  1,  5,  3,   4, 1,   10},
-    /* ®£Às */ {1, 1, 1000,  9,  4, 12,  3, 200, 1, 1000},
-    /* ¦ÑÆN */ {1, 1,   90,  7,  4, 12,  3,  20, 5,   90},
-    /* ¿ß   */ {1, 1,   30,  5,  4,  8,  3,   7, 4,   30},
-    /* ¤p·s */ {1, 1,  100,  9, 20, 50, 10,  24, 4,  100},
-    /* ª¯   */ {1, 1,   45,  8,  3, 40, 20,   9, 5,   45},
-    /* ´cÅ] */ {1, 1,   45, 10,  5, 21, 11,   9, 5,   45},
-    /* §ÔªÌ */ {1, 1,   45,  2, 25,  1,  1,   9, 5,   45},
-    /* ªü«ó */ {1, 1,  150,  4, 95, 25,  7,  25, 5,  175},
-    /* ó¿   */ {1, 1,  147,  2, 85, 20,  4,  25, 5,  145},
-    /* ´N¥i */ {1, 1,  200,  3, 50, 50, 10,  10, 2,  300},
-    /* ÅÚ²ú */ {1, 1,   80,  2,  2,  5,  7,  12, 1,  135},
+    /* é›   */ {1, 1,   30,  3,  3, 40,  9,   7, 3,   30},
+    /* å°‘å¥³ */ {1, 1,  110,  1, 41, 20,  9,  25, 7,  110},
+    /* å‹‡å£« */ {1, 1,  200,  5, 33, 20, 15,  27, 1,  200},
+    /* èœ˜è›› */ {1, 1,   10,  5,  1,  5,  3,   4, 1,   10},
+    /* æé¾ */ {1, 1, 1000,  9,  4, 12,  3, 200, 1, 1000},
+    /* è€é·¹ */ {1, 1,   90,  7,  4, 12,  3,  20, 5,   90},
+    /* è²“   */ {1, 1,   30,  5,  4,  8,  3,   7, 4,   30},
+    /* å°æ–° */ {1, 1,  100,  9, 20, 50, 10,  24, 4,  100},
+    /* ç‹—   */ {1, 1,   45,  8,  3, 40, 20,   9, 5,   45},
+    /* æƒ¡é­” */ {1, 1,   45, 10,  5, 21, 11,   9, 5,   45},
+    /* å¿è€… */ {1, 1,   45,  2, 25,  1,  1,   9, 5,   45},
+    /* é˜¿æ‰ */ {1, 1,  150,  4, 95, 25,  7,  25, 5,  175},
+    /* é¨œ   */ {1, 1,  147,  2, 85, 20,  4,  25, 5,  145},
+    /* å°±å¯ */ {1, 1,  200,  3, 50, 50, 10,  10, 2,  300},
+    /* è˜¿è‰ */ {1, 1,   80,  2,  2,  5,  7,  12, 1,  135},
 };
 
 static void
@@ -126,16 +126,16 @@ new_chicken(void)
 
     clear();
     move(2, 0);
-    outs("Åwªï¥úÁ{ " ANSI_COLOR(33) "¡·" ANSI_COLOR(37;44) " "
-	 BBSMNAME "Ãdª«¥«³õ " ANSI_COLOR(33;40) "¡·" ANSI_RESET ".. "
-	 "¥Ø«e³J»ù¡G\n"
-	 "(a)¤pÂû $5   (b)¬ü¤Ö¤k $25  (c)«i¤h    $30  (d)»jµï  $40  "
-	 "(e)®£Às $80\n"
-	 "(f)¦ÑÆN $50  (g)¿ß     $15  (h)Äúµ§¤p·s$35  (i)ª¯ª¯  $17  "
-	 "(j)´cÅ] $100\n"
-	 "(k)§ÔªÌ $85  (n)´N¥i¤H$100  (m)ÅÚ²ú    $77\n"
-	 "[0]¤£·Q¶R¤F $0\n");
-    i = vans("½Ğ¿ï¾Ü§A­n¾iªº°Êª«¡G");
+    outs("æ­¡è¿å…‰è‡¨ " ANSI_COLOR(33) "â—" ANSI_COLOR(37;44) " "
+	 BBSMNAME "å¯µç‰©å¸‚å ´ " ANSI_COLOR(33;40) "â—" ANSI_RESET ".. "
+	 "ç›®å‰è›‹åƒ¹ï¼š\n"
+	 "(a)å°é› $5   (b)ç¾å°‘å¥³ $25  (c)å‹‡å£«    $30  (d)èœ˜è››  $40  "
+	 "(e)æé¾ $80\n"
+	 "(f)è€é·¹ $50  (g)è²“     $15  (h)è Ÿç­†å°æ–°$35  (i)ç‹—ç‹—  $17  "
+	 "(j)æƒ¡é­” $100\n"
+	 "(k)å¿è€… $85  (n)å°±å¯äºº$100  (m)è˜¿è‰    $77\n"
+	 "[0]ä¸æƒ³è²·äº† $0\n");
+    i = vans("è«‹é¸æ“‡ä½ è¦é¤Šçš„å‹•ç‰©ï¼š");
 
     // since (o) is confusing to some people, we alias 'm' to 'o'.
     if (i == 'm') i = 'o';
@@ -154,13 +154,13 @@ new_chicken(void)
     price = egg_price[(int)mychicken.type];
     reload_money();
     if (cuser.money < price) {
-	vmsgf(MONEYNAME "¤£°÷¶R³J(­n %d)", price);
+	vmsgf(MONEYNAME "ä¸å¤ è²·è›‹(è¦ %d)", price);
 	return 0;
     }
 
     while (strlen(mychicken.name) < 3)
     {
-	getdata(8, 0, "À°¨e¨ú­Ó¦n¦W¦r¡G", mychicken.name,
+	getdata(8, 0, "å¹«ç‰ å–å€‹å¥½åå­—ï¼š", mychicken.name,
 		sizeof(mychicken.name), DOECHO);
     }
 
@@ -176,17 +176,17 @@ new_chicken(void)
     reload_money();
     if (cuser.money < price)
     {
-	vmsg("¿ú¤£°÷¤F¡C");
+	vmsg("éŒ¢ä¸å¤ äº†ã€‚");
 	return 0;
     }
-    pay(price, "Ãdª«³J");
+    pay(price, "å¯µç‰©è›‹");
 
     // flush it
     setuserfile(fn, FN_CHICKEN);
     fd = OpenCreate(fn, O_WRONLY);
     if (fd < 0)
     {
-	vmsg("¨t²Î¿ù»~: µLªk«Ø¥ß¸ê®Æ¡A½Ğ¦Ü " BN_BUGREPORT " ³ø§i¡C");
+	vmsg("ç³»çµ±éŒ¯èª¤: ç„¡æ³•å»ºç«‹è³‡æ–™ï¼Œè«‹è‡³ " BN_BUGREPORT " å ±å‘Šã€‚");
 	return 0;
     }
 
@@ -196,8 +196,8 @@ new_chicken(void)
     // log data
     log_filef(CHICKENLOG, LOG_CREAT,
               ANSI_COLOR(31) "%s " ANSI_RESET
-              "¾i¤F¤@°¦¥s" ANSI_COLOR(33) " %s " ANSI_RESET "ªº "
-              ANSI_COLOR(32) "%s" ANSI_RESET "  ©ó %s\n", cuser.userid,
+              "é¤Šäº†ä¸€éš»å«" ANSI_COLOR(33) " %s " ANSI_RESET "çš„ "
+              ANSI_COLOR(32) "%s" ANSI_RESET "  æ–¼ %s\n", cuser.userid,
               mychicken.name, chicken_type[(int)mychicken.type], Cdate(&now));
     return 1;
 }
@@ -213,12 +213,12 @@ show_chicken_stat(const chicken_t * thechicken, int age)
     // line 3: debuff
 
     localtime4_r(&thechicken->birthday, &ptime);
-    prints("¦W¦r: " ANSI_COLOR(33) "%s" ANSI_RESET
+    prints("åå­—: " ANSI_COLOR(33) "%s" ANSI_RESET
            " (" ANSI_COLOR(32) "%s" ANSI_RESET ")%*s"
-           "¥Í¤é:" ANSI_COLOR(33) "%d" ANSI_RESET "¦~"
-           ANSI_COLOR(33) "%d" ANSI_RESET "¤ë"
-           ANSI_COLOR(33) "%d" ANSI_RESET "¤é "
-	   "(" ANSI_COLOR(32) "%s %d·³" ANSI_RESET ")\n",
+           "ç”Ÿæ—¥:" ANSI_COLOR(33) "%d" ANSI_RESET "å¹´"
+           ANSI_COLOR(33) "%d" ANSI_RESET "æœˆ"
+           ANSI_COLOR(33) "%d" ANSI_RESET "æ—¥ "
+	   "(" ANSI_COLOR(32) "%s %dæ­²" ANSI_RESET ")\n",
 	   thechicken->name, chicken_type[(int)thechicken->type],
            (int)(30 - strlen(thechicken->name) -
             strlen(chicken_type[(int)thechicken->type])),
@@ -228,11 +228,11 @@ show_chicken_stat(const chicken_t * thechicken, int age)
     snprintf(hp_buf, sizeof(hp_buf), "%d / %d", thechicken->hp,
              thechicken->hp_max);
 
-    prints( "Åé¤O:" ANSI_COLOR(33) " %-19s" ANSI_RESET
-           " Åé­«:" ANSI_COLOR(33) "%-7.1f" ANSI_RESET
-           " ­¹ª«:" ANSI_COLOR(36) "%-7d" ANSI_RESET
-           " ÃÄ«~:" ANSI_COLOR(36) "%-7d" ANSI_RESET
-           " ¸É«~:" ANSI_COLOR(36) "%-7d" ANSI_RESET
+    prints( "é«”åŠ›:" ANSI_COLOR(33) " %-19s" ANSI_RESET
+           " é«”é‡:" ANSI_COLOR(33) "%-7.1f" ANSI_RESET
+           " é£Ÿç‰©:" ANSI_COLOR(36) "%-7d" ANSI_RESET
+           " è—¥å“:" ANSI_COLOR(36) "%-7d" ANSI_RESET
+           " è£œå“:" ANSI_COLOR(36) "%-7d" ANSI_RESET
            "\n",
            hp_buf,
 	   ((float)(thechicken->hp_max + (thechicken->weight / 50))) / 100,
@@ -240,12 +240,12 @@ show_chicken_stat(const chicken_t * thechicken, int age)
            thechicken->medicine,
 	   thechicken->oo);
 
-    prints( "§Ö¼Ö:" ANSI_COLOR(32) "%-7d" ANSI_RESET
-           " º¡·N:" ANSI_COLOR(32) "%-7d" ANSI_RESET
-           " ¾Ç°İ:" ANSI_COLOR(32) "%-7d" ANSI_RESET
-           " Å¼¶Ã:" ANSI_COLOR(31) "%-7d" ANSI_RESET
-           " ¥Í¯f:" ANSI_COLOR(31) "%-7d" ANSI_RESET
-           " ¯h³Ò:" ANSI_COLOR(31) "%-7d" ANSI_RESET
+    prints( "å¿«æ¨‚:" ANSI_COLOR(32) "%-7d" ANSI_RESET
+           " æ»¿æ„:" ANSI_COLOR(32) "%-7d" ANSI_RESET
+           " å­¸å•:" ANSI_COLOR(32) "%-7d" ANSI_RESET
+           " é«’äº‚:" ANSI_COLOR(31) "%-7d" ANSI_RESET
+           " ç”Ÿç—…:" ANSI_COLOR(31) "%-7d" ANSI_RESET
+           " ç–²å‹:" ANSI_COLOR(31) "%-7d" ANSI_RESET
            "\n",
 	   thechicken->happy,
            thechicken->satis,
@@ -268,7 +268,7 @@ show_chicken_data(chicken_t * thechicken)
     /* Ptt:debug */
     thechicken->type %= NUM_KINDS;
     clear();
-    showtitle(BBSMNAME2 "¾iÂû³õ", BBSName);
+    showtitle(BBSMNAME2 "é¤Šé›å ´", BBSName);
     move(1, 0);
 
     show_chicken_stat(thechicken, age);
@@ -280,45 +280,45 @@ show_chicken_data(chicken_t * thechicken)
     // status line - try harder to not exceed column 80.
 
     if (thechicken->sick > thechicken->hp / 5)
-	outs(ANSI_COLOR(5;31) "¯f­«!" ANSI_RESET);
+	outs(ANSI_COLOR(5;31) "ç—…é‡!" ANSI_RESET);
     else if (thechicken->sick)
-	outs("¥Í¯f¤F.");
+	outs("ç”Ÿç—…äº†.");
 
     if (thechicken->dirty > 150)
-	outs(ANSI_COLOR(31) "¤S¯ä¤SÅ¼." ANSI_RESET);
+	outs(ANSI_COLOR(31) "åˆè‡­åˆé«’." ANSI_RESET);
     else if (thechicken->dirty > 80)
-	outs("¦³ÂIÅ¼.");
+	outs("æœ‰é»é«’.");
     else if (thechicken->dirty < 20)
-	outs(ANSI_COLOR(32) "«Ü°®²b." ANSI_RESET);
+	outs(ANSI_COLOR(32) "å¾ˆä¹¾æ·¨." ANSI_RESET);
 
     if (thechicken->weight > thechicken->hp_max * 4)
-	outs(ANSI_COLOR(31) "§Ö¼µ¦º¤F." ANSI_RESET);
+	outs(ANSI_COLOR(31) "å¿«æ’æ­»äº†." ANSI_RESET);
     else if (thechicken->weight > thechicken->hp_max * 3)
-	outs(ANSI_COLOR(32) "¹¡¹Ê¹Ê." ANSI_RESET);
+	outs(ANSI_COLOR(32) "é£½å˜Ÿå˜Ÿ." ANSI_RESET);
     else if (thechicken->weight < (thechicken->hp_max / 4))
-	outs(ANSI_COLOR(31) "§Ö¾j¦º¤F." ANSI_RESET);
+	outs(ANSI_COLOR(31) "å¿«é¤“æ­»äº†." ANSI_RESET);
     else if (thechicken->weight < (thechicken->hp_max / 2))
-	outs("¾j¤F.");
+	outs("é¤“äº†.");
 
     if (thechicken->tired > thechicken->hp * 1.7)
-	outs(ANSI_COLOR(31) "²Ö¨ì©ü°g." ANSI_RESET);
+	outs(ANSI_COLOR(31) "ç´¯åˆ°æ˜è¿·." ANSI_RESET);
     else if (thechicken->tired > thechicken->hp)
-	outs("²Ö¤F.");
+	outs("ç´¯äº†.");
     else if (thechicken->tired < thechicken->hp / 4)
-	outs(ANSI_COLOR(32) "ºë¤O©ô²±." ANSI_RESET);
+	outs(ANSI_COLOR(32) "ç²¾åŠ›æ—ºç››." ANSI_RESET);
 
     if (thechicken->hp < thechicken->hp_max / 4)
-	outs(ANSI_COLOR(31) "Åé¤O¥ÎºÉ." ANSI_RESET);
+	outs(ANSI_COLOR(31) "é«”åŠ›ç”¨ç›¡." ANSI_RESET);
 
     if (thechicken->happy > 500)
-	outs(ANSI_COLOR(32) "«Ü§Ö¼Ö." ANSI_RESET);
+	outs(ANSI_COLOR(32) "å¾ˆå¿«æ¨‚." ANSI_RESET);
     else if (thechicken->happy < 100)
-	outs("¤£§Ö¼Ö.");
+	outs("ä¸å¿«æ¨‚.");
 
     if (thechicken->satis > 500)
-	outs(ANSI_COLOR(32) "«Üº¡¨¬." ANSI_RESET);
+	outs(ANSI_COLOR(32) "å¾ˆæ»¿è¶³." ANSI_RESET);
     else if (thechicken->satis < 50)
-	outs("¤£º¡¨¬.");
+	outs("ä¸æ»¿è¶³.");
 }
 
 // Actions
@@ -355,17 +355,17 @@ ch_clean(chicken_t *mychicken)
 static void
 ch_guess(chicken_t *mychicken)
 {
-    char           *guess[3] = {"°Å¤M", "¥ÛÀY", "¥¬"}, me, ch, win;
+    char           *guess[3] = {"å‰ªåˆ€", "çŸ³é ­", "å¸ƒ"}, me, ch, win;
 
     mychicken->happy += time_change[(int)mychicken->type][HAPPY] * 1.5;
     mychicken->satis += time_change[(int)mychicken->type][SATIS];
     mychicken->tired += time_change[(int)mychicken->type][TIREDSTRONG];
     move(20, 0);
     clrtobot();
-    outs("§A­n¥X[" ANSI_COLOR(32) "1" ANSI_RESET "]" ANSI_COLOR(33) "°Å¤M"
+    outs("ä½ è¦å‡º[" ANSI_COLOR(32) "1" ANSI_RESET "]" ANSI_COLOR(33) "å‰ªåˆ€"
          ANSI_RESET "(" ANSI_COLOR(32) "2" ANSI_RESET ")"
-	 ANSI_COLOR(33) "¥ÛÀY" ANSI_RESET "(" ANSI_COLOR(32) "3" ANSI_RESET ")"
-         ANSI_COLOR(33) "¥¬" ANSI_RESET ":\n");
+	 ANSI_COLOR(33) "çŸ³é ­" ANSI_RESET "(" ANSI_COLOR(32) "3" ANSI_RESET ")"
+         ANSI_COLOR(33) "å¸ƒ" ANSI_RESET ":\n");
     me = vkey();
     me -= '1';
     if (me > 2 || me < 0)
@@ -374,7 +374,7 @@ ch_guess(chicken_t *mychicken)
     ch = (me + win + 3) % 3;
     prints("%s:%s !      %s:%s !.....%s",
 	   cuser.userid, guess[(int)me], mychicken->name, guess[(int)ch],
-	   win == 0 ? "¥­¤â" : win < 0 ? "­C..Ä¹¤F :D!!" : "¶ã..§Ú¿é¤F :~");
+	   win == 0 ? "å¹³æ‰‹" : win < 0 ? "è€¶..è´äº† :D!!" : "å—š..æˆ‘è¼¸äº† :~");
     pressanykey();
 }
 
@@ -428,7 +428,7 @@ ch_buyitem(int money, const char *picture, int *item, chicken_t *mychicken GCC_U
         return;
 #endif
     snprintf(prompt, sizeof(prompt),
-             "³æ»ù $%d " MONEYNAME "¡A­n¶R¦h¤Ö¥÷©O: ", money);
+             "å–®åƒ¹ $%d " MONEYNAME "ï¼Œè¦è²·å¤šå°‘ä»½å‘¢: ", money);
 
     getdata_str(b_lines - 1, 0, prompt, buf, sizeof(buf), NUMECHO, "1");
     num = atoi(buf);
@@ -437,11 +437,11 @@ ch_buyitem(int money, const char *picture, int *item, chicken_t *mychicken GCC_U
     reload_money();
     if (cuser.money/money >= num) {
 	*item += num;
-        pay(money * num, "Ãdª«°Ó©±");
+        pay(money * num, "å¯µç‰©å•†åº—");
 	show_chicken_picture(picture);
         pressanykey();
     } else {
-	vmsg("²{ª÷¤£°÷ !!!");
+	vmsg("ç¾é‡‘ä¸å¤  !!!");
     }
     usleep(100000); // sleep 0.1s
 }
@@ -480,15 +480,15 @@ ch_kill(chicken_t *mychicken)
 {
     int        ans;
 
-    ans = vans("±ó¾i­n³Q»@ 100 ¤¸, ¬O§_­n±ó¾i?(y/N)");
+    ans = vans("æ£„é¤Šè¦è¢«ç½° 100 å…ƒ, æ˜¯å¦è¦æ£„é¤Š?(y/N)");
     if (ans == 'y') {
 
-	pay(100, "±ó¾iÃdª«¶O");
+	pay(100, "æ£„é¤Šå¯µç‰©è²»");
 	more(CHICKEN_PIC "/deadth", YEA);
 	log_filef(CHICKENLOG, LOG_CREAT,
-		 ANSI_COLOR(31) "%s " ANSI_RESET "§â "
+		 ANSI_COLOR(31) "%s " ANSI_RESET "æŠŠ "
                  ANSI_COLOR(33) "%s" ANSI_RESET ANSI_COLOR(32) " %s "
-		 ANSI_RESET "®_¤F ©ó %s\n", cuser.userid, mychicken->name,
+		 ANSI_RESET "å®°äº† æ–¼ %s\n", cuser.userid, mychicken->name,
 		 chicken_type[(int)mychicken->type], Cdate(&now));
 	mychicken->name[0] = 0;
     }
@@ -531,15 +531,15 @@ static void debug_rpt(const char *msg GCC_UNUSED, chicken_t *c GCC_UNUSED) {
 static void debug_timediff(chicken_t *c GCC_UNUSED) {
 #ifdef DBG_CHICKEN
     char buf[7];
-    vs_hdr2("Ãdª«", "´ú¸Õ");
-    getdata(2, 0, "­n¼ÒÀÀ´X¤p®É¥¼¶i¤Jªºª¬ºA¡H", buf, sizeof(buf), NUMECHO);
+    vs_hdr2("å¯µç‰©", "æ¸¬è©¦");
+    getdata(2, 0, "è¦æ¨¡æ“¬å¹¾å°æ™‚æœªé€²å…¥çš„ç‹€æ…‹ï¼Ÿ", buf, sizeof(buf), NUMECHO);
     syncnow();
     if (*buf)
         c->lastvisit = now - atoi(buf) * 60 * 60;
 #endif
 }
 
-/* ¨Ì®É¶¡ÅÜ°Êªº¸ê®Æ */
+/* ä¾æ™‚é–“è®Šå‹•çš„è³‡æ–™ */
 static void
 time_diff(chicken_t * thechicken)
 {
@@ -555,60 +555,60 @@ time_diff(chicken_t * thechicken)
 
     debug_rpt(NULL, thechicken);
 
-    if (theage > 13)		/* ¦Ñ¦º */
+    if (theage > 13)		/* è€æ­» */
 	ch_getting_old(&thechicken->hp_max, &thechicken->weight, diff, theage);
     debug_rpt("AFTER getting_old", thechicken);
 
     thechicken->lastvisit = now;
-    // ª`·N: ±q«e¦³­Ó¸£´İ§âÅã¥Üªº weight §ï¦¨ (max_hp + weight / 50) / 100
-    // ¥[¤W±q«eªº¦Ñ¤Æ¤½¦¡¾É­P¤@°ï¤HªºÃd³£¬O weight=1 ¡A±q¦¹ÅÜ¥X¤F©Ò¿×·t¶Â¾iªk¡C
-    // ¤@°ïÄê±¼¥¢¿Åªº¤½¦¡µL±q­×°_¡A´N¶Ã·d§a¡C
-    thechicken->weight -= thechicken->hp_max * diff / 540;	/* Åé­« */
+    // æ³¨æ„: å¾å‰æœ‰å€‹è…¦æ®˜æŠŠé¡¯ç¤ºçš„ weight æ”¹æˆ (max_hp + weight / 50) / 100
+    // åŠ ä¸Šå¾å‰çš„è€åŒ–å…¬å¼å°è‡´ä¸€å †äººçš„å¯µéƒ½æ˜¯ weight=1 ï¼Œå¾æ­¤è®Šå‡ºäº†æ‰€è¬‚æš—é»‘é¤Šæ³•ã€‚
+    // ä¸€å †çˆ›æ‰å¤±è¡¡çš„å…¬å¼ç„¡å¾ä¿®èµ·ï¼Œå°±äº‚æå§ã€‚
+    thechicken->weight -= thechicken->hp_max * diff / 540;	/* é«”é‡ */
     if (thechicken->weight < 1) {
-	thechicken->sick -= thechicken->weight / 10;	/* ¾j±o¯f®ğ¤W¤É */
+	thechicken->sick -= thechicken->weight / 10;	/* é¤“å¾—ç—…æ°£ä¸Šå‡ */
 	thechicken->weight = 1;
     }
     debug_rpt("AFTER weight-hp_max", thechicken);
 
-    /* §Ö¼Ö«× */
+    /* å¿«æ¨‚åº¦ */
     thechicken->happy -= diff / 60;
     if (thechicken->happy < 0)
 	thechicken->happy = 0;
 
-    /* ¾Ç°İ */
+    /* å­¸å• */
     thechicken->book -= delta[BOOK] * diff / (60 * 32);
     if (thechicken->book < 0)
 	thechicken->book = 0;
 
-    /* º¡·N«× */
+    /* æ»¿æ„åº¦ */
     thechicken->satis -= (diff / 180.0 * delta[SATIS]);
     if (thechicken->satis < 0)
 	thechicken->satis = 0;
 
-    /* Å¼¶Ã */
+    /* é«’äº‚ */
     thechicken->dirty += diff * delta[DIRTY] / 30;
     debug_rpt("AFTER dirty+=diff*delta/30", thechicken);
 
-    /* ¥Í¯f(Å¼¶Ã/Åé­«) */
+    /* ç”Ÿç—…(é«’äº‚/é«”é‡) */
     if (thechicken->dirty > 1000)
 	thechicken->sick += (thechicken->dirty - 400) / 10;
     if (thechicken->weight > 1)
 	thechicken->sick -= diff / 60;
     debug_rpt("AFTER weight>1?sick-=diff/60", thechicken);
 
-    /* ¯f®ğ«ìÅ@ */
+    /* ç—…æ°£æ¢è­· */
     if (thechicken->sick < 0)
 	thechicken->sick = 0;
     thechicken->tired -= (diff * delta[TIREDSTRONG] / 4);
 
-    /* ¯h³Ò */
+    /* ç–²å‹ */
     if (thechicken->tired < 0)
 	thechicken->tired = 0;
 
     /* hp_max */
     if (thechicken->hp >= thechicken->hp_max / 2)
 	thechicken->hp_max += delta[HP_MAX] * diff / (60 * 12);
-    /* hp«ìÅ@ */
+    /* hpæ¢è­· */
     if (!thechicken->sick)
 	thechicken->hp += delta[HP_MAX] * diff / (60 * 6);
     if (thechicken->hp > thechicken->hp_max)
@@ -620,13 +620,13 @@ time_diff(chicken_t * thechicken)
 static void
 check_sick(chicken_t *mychicken)
 {
-    /* Å¼¯fªº */
+    /* é«’ç—…çš„ */
     if (mychicken->tired > mychicken->hp * 0.3 && mychicken->dirty > 150)
 	mychicken->sick += (mychicken->dirty - 150) / 10;
-    /* ²Ö¯fªº */
+    /* ç´¯ç—…çš„ */
     if (mychicken->tired > mychicken->hp * 1.3)
 	mychicken->sick += time_change[(int)mychicken->type][SICK];
-    /* ¯f®ğ¤Ó­«ÁÙ°µ¨Æ´îhp */
+    /* ç—…æ°£å¤ªé‡é‚„åšäº‹æ¸›hp */
     if (mychicken->sick > mychicken->hp / 5) {
 	mychicken->hp -= (mychicken->sick - mychicken->hp / 5) / 4;
 	if (mychicken->hp < 0)
@@ -641,7 +641,7 @@ revive_chicken(chicken_t *thechicken, int admin)
     assert(thechicken);
     // check deadtype for what to do
 
-    strlcpy(thechicken->name, "[¾ß¦^¨Óªº]", sizeof(thechicken->name));
+    strlcpy(thechicken->name, "[æ’¿å›ä¾†çš„]", sizeof(thechicken->name));
 
     c = thechicken->hp_max / 5 +1;
     if (c < 2)	    c = 2;
@@ -650,12 +650,12 @@ revive_chicken(chicken_t *thechicken, int admin)
     if (admin)
 	thechicken->hp = thechicken->hp_max;
 
-    thechicken->weight = thechicken->hp; // weight = 1 ®É sick ¦³¾÷¦A¦¸¦º¤`
-    if (thechicken->weight < 2)	// Á×§K¯f¦º©Î¾j¦º
+    thechicken->weight = thechicken->hp; // weight = 1 æ™‚ sick æœ‰æ©Ÿå†æ¬¡æ­»äº¡
+    if (thechicken->weight < 2)	// é¿å…ç—…æ­»æˆ–é¤“æ­»
 	thechicken->weight = 2;
 
-    thechicken->satis = 2; // º¡·N­°§C
-    thechicken->tired = thechicken->hp; // ­YÂk¹s«h¹L¤Ó²n
+    thechicken->satis = 2; // æ»¿æ„é™ä½
+    thechicken->tired = thechicken->hp; // è‹¥æ­¸é›¶å‰‡éå¤ªçˆ½
 
     if (admin)
     {
@@ -685,25 +685,25 @@ deadtype(const chicken_t * thechicken, chicken_t *mychicken)
 {
     int             i;
 
-    if (thechicken->hp <= 0) // hp¥ÎºÉ
+    if (thechicken->hp <= 0) // hpç”¨ç›¡
 	i = DEADTYPE_NOHP;
-    else if (thechicken->tired > thechicken->hp * 3) // ¾Ş³Ò¹L«×
+    else if (thechicken->tired > thechicken->hp * 3) // æ“å‹éåº¦
 	i = DEADTYPE_TOOTIRED;
-    else if (thechicken->weight > thechicken->hp_max * 5) // ªÎ­D¹L«×
+    else if (thechicken->weight > thechicken->hp_max * 5) // è‚¥èƒ–éåº¦
 	i = DEADTYPE_TOOFAT;
     else if (thechicken->weight == 1 &&
-	     thechicken->sick > thechicken->hp_max / 4) // ¾j¦º¤F
+	     thechicken->sick > thechicken->hp_max / 4) // é¤“æ­»äº†
 	i = DEADTYPE_NOFOOD;
-    else if (thechicken->satis <= 0) // «Ü¤£º¡·N
+    else if (thechicken->satis <= 0) // å¾ˆä¸æ»¿æ„
 	i = DEADTYPE_NOSATIS;
     else
 	return DEADTYPE_NOTYET;
 
     if (thechicken == mychicken) {
 	log_filef(CHICKENLOG, LOG_CREAT,
-                 ANSI_COLOR(31) "%s" ANSI_RESET " ©Ò¯k·Rªº"
+                 ANSI_COLOR(31) "%s" ANSI_RESET " æ‰€ç–¼æ„›çš„"
                  ANSI_COLOR(33) " %s" ANSI_COLOR(32) " %s "
-                 ANSI_RESET "±¾¤F ©ó %s\n", cuser.userid, thechicken->name,
+                 ANSI_RESET "æ›äº† æ–¼ %s\n", cuser.userid, thechicken->name,
                  chicken_type[(int)thechicken->type], Cdate(&now));
 	mychicken->name[0] = 0;
     }
@@ -747,15 +747,15 @@ ch_changename(chicken_t *mychicken)
 {
     char      newname[20] = "";
 
-    getdata_str(b_lines - 1, 0, "§ï­Ó¦n¦W¦r§a: ", newname, sizeof(newname)-1,
+    getdata_str(b_lines - 1, 0, "æ”¹å€‹å¥½åå­—å§: ", newname, sizeof(newname)-1,
                 DOECHO, mychicken->name);
 
     if (strlen(newname) >= 3 && strcmp(newname, mychicken->name)) {
 	strlcpy(mychicken->name, newname, sizeof(mychicken->name));
 	log_filef(CHICKENLOG, LOG_CREAT,
-                ANSI_COLOR(31) "%s" ANSI_RESET " §â¯k·Rªº" ANSI_COLOR(33)
+                ANSI_COLOR(31) "%s" ANSI_RESET " æŠŠç–¼æ„›çš„" ANSI_COLOR(33)
                 " %s" ANSI_COLOR(32) " %s "
-                ANSI_RESET "§ï¦W¬°" ANSI_COLOR(33) " %s" ANSI_RESET " ©ó %s\n",
+                ANSI_RESET "æ”¹åç‚º" ANSI_COLOR(33) " %s" ANSI_RESET " æ–¼ %s\n",
                  cuser.userid, mychicken->name,
                  chicken_type[(int)mychicken->type], newname, Cdate(&now));
     }
@@ -771,7 +771,7 @@ select_menu(int age GCC_UNUSED, chicken_t *mychicken)
 
     vbarf(ANSI_COLOR(44;37) " " MONEYNAME ":" ANSI_COLOR(33) " %-10d"
 #ifdef HAVE_CHICKEN_CS
-          ANSI_COLOR(37) "  ±`ÃÑÂI¼Æ :" ANSI_COLOR(33) " %-10d"
+          ANSI_COLOR(37) "  å¸¸è­˜é»æ•¸ :" ANSI_COLOR(33) " %-10d"
 #endif
           , cuser.money
 #ifdef HAVE_CHICKEN_CS
@@ -779,23 +779,23 @@ select_menu(int age GCC_UNUSED, chicken_t *mychicken)
 #endif
           );
 
-    prints("\n" ANSI_COLOR(33) "(" ANSI_COLOR(37) "1" ANSI_COLOR(33) ")²M²z "
-           "(" ANSI_COLOR(37) "2" ANSI_COLOR(33) ")¦Y¶º "
-	   "(" ANSI_COLOR(37) "3" ANSI_COLOR(33) ")²q®±   "
-           "(" ANSI_COLOR(37) "4" ANSI_COLOR(33) ")°á®Ñ "
-	   "(" ANSI_COLOR(37) "5" ANSI_COLOR(33) ")¿Ë¥L "
-           "(" ANSI_COLOR(37) "6" ANSI_COLOR(33) ")¥´¥L "
-	   "(" ANSI_COLOR(37) "7" ANSI_COLOR(33) ")¶R%s "
-           "(" ANSI_COLOR(37) "8" ANSI_COLOR(33) ")¦Y¸É«~\n"
-	   "(" ANSI_COLOR(37) "9" ANSI_COLOR(33) ")¦YÃÄ "
-	   "(" ANSI_COLOR(37) "m" ANSI_COLOR(33) ")¶RÃÄ "
-           "(" ANSI_COLOR(37) "o" ANSI_COLOR(33) ")¶R¸É«~ "
-           "(" ANSI_COLOR(37) "k" ANSI_COLOR(33) ")±ó¾i "
-	   "(" ANSI_COLOR(37) "n" ANSI_COLOR(33) ")§ï¦W "
+    prints("\n" ANSI_COLOR(33) "(" ANSI_COLOR(37) "1" ANSI_COLOR(33) ")æ¸…ç† "
+           "(" ANSI_COLOR(37) "2" ANSI_COLOR(33) ")åƒé£¯ "
+	   "(" ANSI_COLOR(37) "3" ANSI_COLOR(33) ")çŒœæ‹³   "
+           "(" ANSI_COLOR(37) "4" ANSI_COLOR(33) ")å”¸æ›¸ "
+	   "(" ANSI_COLOR(37) "5" ANSI_COLOR(33) ")è¦ªä»– "
+           "(" ANSI_COLOR(37) "6" ANSI_COLOR(33) ")æ‰“ä»– "
+	   "(" ANSI_COLOR(37) "7" ANSI_COLOR(33) ")è²·%s "
+           "(" ANSI_COLOR(37) "8" ANSI_COLOR(33) ")åƒè£œå“\n"
+	   "(" ANSI_COLOR(37) "9" ANSI_COLOR(33) ")åƒè—¥ "
+	   "(" ANSI_COLOR(37) "m" ANSI_COLOR(33) ")è²·è—¥ "
+           "(" ANSI_COLOR(37) "o" ANSI_COLOR(33) ")è²·è£œå“ "
+           "(" ANSI_COLOR(37) "k" ANSI_COLOR(33) ")æ£„é¤Š "
+	   "(" ANSI_COLOR(37) "n" ANSI_COLOR(33) ")æ”¹å "
 #ifdef HAVE_CHICKEN_CS
-	   "(" ANSI_COLOR(37) "s" ANSI_COLOR(33) ")±`ÃÑ°İµª "
+	   "(" ANSI_COLOR(37) "s" ANSI_COLOR(33) ")å¸¸è­˜å•ç­” "
 #endif
-	   "(" ANSI_COLOR(37) "q" ANSI_COLOR(33) ")Â÷¶}:" ANSI_RESET,
+	   "(" ANSI_COLOR(37) "q" ANSI_COLOR(33) ")é›¢é–‹:" ANSI_RESET,
 	   chicken_food[(int)mychicken->type]);
     do {
 	switch (ch = vkey()) {
@@ -882,11 +882,11 @@ recover_chicken(chicken_t * thechicken)
     if (now - thechicken->lastvisit > (60 * 60 * 24 * 7))
 	return 0;
 
-    vs_hdr2(" ¾iÂû³õ ", " ´_¬¡Ãdª«");
-    prints("\n§A¦³¤@­Ó­è¦º¤`¤£¤[ªº %s ­n©Û³ê¦^¨Ó¶Ü? ¥u­n %d ¤¸­ò...\n",
+    vs_hdr2(" é¤Šé›å ´ ", " å¾©æ´»å¯µç‰©");
+    prints("\nä½ æœ‰ä¸€å€‹å‰›æ­»äº¡ä¸ä¹…çš„ %s è¦æ‹›å–šå›ä¾†å—? åªè¦ %d å…ƒå”·...\n",
            chicken_type[(int)thechicken->type], price);
     do {
-	getdata(10, 0, " ­nªá¿ú´_¬¡Ãdª«¶Ü¡H [y/n]: ",
+	getdata(10, 0, " è¦èŠ±éŒ¢å¾©æ´»å¯µç‰©å—ï¼Ÿ [y/n]: ",
 		buf, 2, LCECHO);
     }
     while (buf[0] != 'y' && buf[0] != 'n');
@@ -898,15 +898,15 @@ recover_chicken(chicken_t * thechicken)
 
     reload_money();
     if (cuser.money < price) {
-        vmsg("¿ú¤£°÷³á¡A½ĞÄw¿ú«á¦A¨Ó");
+        vmsg("éŒ¢ä¸å¤ å–”ï¼Œè«‹ç±ŒéŒ¢å¾Œå†ä¾†");
         return 0;
     }
 
-    pay(money, "ÆF¬É¦u½Ã");
+    pay(money, "éˆç•Œå®ˆè¡›");
     revive_chicken(thechicken, 0);
     move(12, 0);
-    prints("Ãdª«¤w´_¬¡¡C ½Ğ°O±o¥[¥HÁı­¹Á×§K¦A«×¦º¤`¡C\n"
-           "·PÁÂ±z¹ïÃdª«ªº·R¤ß¡A´_¬¡¶O¥´§é¡A¶È¦¬ $%d¡C\n", money);
+    prints("å¯µç‰©å·²å¾©æ´»ã€‚ è«‹è¨˜å¾—åŠ ä»¥é¤µé£Ÿé¿å…å†åº¦æ­»äº¡ã€‚\n"
+           "æ„Ÿè¬æ‚¨å°å¯µç‰©çš„æ„›å¿ƒï¼Œå¾©æ´»è²»æ‰“æŠ˜ï¼Œåƒ…æ”¶ $%dã€‚\n", money);
     pressanykey();
     return 1;
 }
@@ -919,18 +919,18 @@ chicken_toggle_death(const char *uid)
     assert(uid);
     if (!mychicken)
     {
-	vmsgf("%s ¨S¾iÃdª«¡C", uid);
+	vmsgf("%s æ²’é¤Šå¯µç‰©ã€‚", uid);
     }
     else if (mychicken->name[0])
     {
 	mychicken->name[0] = 0;
-	vmsgf("%s ªºÃdª«³Q±ş¦º¤F", uid);
+	vmsgf("%s çš„å¯µç‰©è¢«æ®ºæ­»äº†", uid);
     }
     else
     {
 	revive_chicken(mychicken, 1);
-	strlcpy(mychicken->name, "[¦º]", sizeof(mychicken->name));
-	vmsgf("%s ªºÃdª«´_¬¡¤F", uid);
+	strlcpy(mychicken->name, "[æ­»]", sizeof(mychicken->name));
+	vmsgf("%s çš„å¯µç‰©å¾©æ´»äº†", uid);
     }
     free_live_chicken(mychicken);
 }
@@ -944,7 +944,7 @@ chicken_query(const char *userid)
     {
 	move(1, 0);
 	clrtobot();
-	prints("\n\n%s ¨Ã¨S¦³¾iÃdª«..", userid);
+	prints("\n\n%s ä¸¦æ²’æœ‰é¤Šå¯µç‰©..", userid);
     } else {
         debug_timediff(&xchicken);
 	time_diff(&xchicken);
@@ -952,13 +952,13 @@ chicken_query(const char *userid)
 	{
 	    show_chicken_data(&xchicken);
 #ifdef HAVE_CHICKEN_CS
-            prints("±`ÃÑÂI¼Æ: %d", xchicken.commonsense);
+            prints("å¸¸è­˜é»æ•¸: %d", xchicken.commonsense);
 #endif
-	    prints("\n\n¥H¤W¬O %s ªºÃdª«¸ê®Æ..", userid);
+	    prints("\n\nä»¥ä¸Šæ˜¯ %s çš„å¯µç‰©è³‡æ–™..", userid);
 	} else {
 	    move(1, 0);
 	    clrtobot();
-	    prints("\n\n%s ªºÃdª«¦º±¼¤F...", userid);
+	    prints("\n\n%s çš„å¯µç‰©æ­»æ‰äº†...", userid);
 	}
     }
 

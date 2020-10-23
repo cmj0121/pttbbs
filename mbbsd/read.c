@@ -2,12 +2,12 @@
 
 static int headers_size = 0;
 static fileheader_t *headers = NULL;
-static int      last_line; // PTT: last_line ´å¼Ğ¥i«üªº³Ì«á¤@­Ó
+static int      last_line; // PTT: last_line æ¸¸æ¨™å¯æŒ‡çš„æœ€å¾Œä¸€å€‹
 
 #include <sys/mman.h>
 
 /* ----------------------------------------------------- */
-/* Tag List ¼ĞÅÒ                                         */
+/* Tag List æ¨™ç±¤                                         */
 /* ----------------------------------------------------- */
 static TagItem         *TagList = NULL;	/* ascending list */
 
@@ -116,17 +116,17 @@ TagPruner(int bid)
     } else if(currstat == RMAIL) {
         sethomedir(direct, cuser.userid);
     } else {
-        vmsg("©êºp¡Aµ{¦¡²§±` - ½Ğ¦Ü " BN_BUGREPORT " ³ø§i±z­èªº¸Ô²Ó¨BÆJ¡C");
+        vmsg("æŠ±æ­‰ï¼Œç¨‹å¼ç•°å¸¸ - è«‹è‡³ " BN_BUGREPORT " å ±å‘Šæ‚¨å‰›çš„è©³ç´°æ­¥é©Ÿã€‚");
         return FULLUPDATE;
     }
 
     if (IsEmptyTagList() || (currstat == READING && !(currmode & MODE_BOARD)))
         return DONOTHING;
-    if (vans("§R°£©Ò¦³¼Ğ°O[N]?") != 'y')
+    if (vans("åˆªé™¤æ‰€æœ‰æ¨™è¨˜[N]?") != 'y')
         return READ_REDRAW;
 
     // ready to start.
-    outmsg("³B²z¤¤,½Ğµy«á...");
+    outmsg("è™•ç†ä¸­,è«‹ç¨å¾Œ...");
     refresh();
 
     // first, delete and backup all files
@@ -157,14 +157,14 @@ TagPruner(int bid)
 keeploc_t      *
 getkeep(const char *s, int def_topline, int def_cursline)
 {
-    /* ¬°¬Ù°O¾ĞÅé, ¥BÁ×§K malloc/free ¤£¦¨¹ï, getkeep ³Ì¦n¤£­n malloc,
-     * ¥u°O s ªº hash ­È,
-     * fvn1a-32bit collision ¾÷²v¬ù¤p©ó¤Q¸U¤À¤§¤@ */
-    /* ­ì¥»¨Ï¥Î link list, ¥i¬O¤@¤è­±·|³y¦¨ malloc/free ¤£¦¨¹ï,
-     * ¤@¤è­± size ¤p, malloc space overhead ´N°ª, ¦]¦¹§ï¦¨ link block,
-     * ¥H KEEPSLOT ¬°¤@­Ó block ªº link list.
-     * ¥u¦³²Ä¤@­Ó block ¥i¯à¨Sº¡. */
-    /* TODO LRU recycle? ³Â·Ğ¦b©ó§O³B¥i¯à§â keeploc_t pointer °OµÛ... */
+    /* ç‚ºçœè¨˜æ†¶é«”, ä¸”é¿å… malloc/free ä¸æˆå°, getkeep æœ€å¥½ä¸è¦ malloc,
+     * åªè¨˜ s çš„ hash å€¼,
+     * fvn1a-32bit collision æ©Ÿç‡ç´„å°æ–¼åè¬åˆ†ä¹‹ä¸€ */
+    /* åŸæœ¬ä½¿ç”¨ link list, å¯æ˜¯ä¸€æ–¹é¢æœƒé€ æˆ malloc/free ä¸æˆå°,
+     * ä¸€æ–¹é¢ size å°, malloc space overhead å°±é«˜, å› æ­¤æ”¹æˆ link block,
+     * ä»¥ KEEPSLOT ç‚ºä¸€å€‹ block çš„ link list.
+     * åªæœ‰ç¬¬ä¸€å€‹ block å¯èƒ½æ²’æ»¿. */
+    /* TODO LRU recycle? éº»ç…©åœ¨æ–¼åˆ¥è™•å¯èƒ½æŠŠ keeploc_t pointer è¨˜è‘—... */
 #define KEEPSLOT 10
     struct keepsome {
 	unsigned char used;
@@ -249,20 +249,20 @@ cursor_pos(keeploc_t * locmem, int val, int from_top, int isshow)
 }
 
 /**
- * ®Ú¾Ú stypen ¿ï¾Ü¤W/¤U¤@½g¤å³¹
+ * æ ¹æ“š stypen é¸æ“‡ä¸Š/ä¸‹ä¸€ç¯‡æ–‡ç« 
  *
- * @param locmem  ¥Î¨Ó¦s¦b¬Y¬İªO´å¼Ğ¦ì¸mªº structure¡C
- * @param stypen  ´å¼Ğ²¾°Êªº¤èªk
+ * @param locmem  ç”¨ä¾†å­˜åœ¨æŸçœ‹æ¿æ¸¸æ¨™ä½ç½®çš„ structureã€‚
+ * @param stypen  æ¸¸æ¨™ç§»å‹•çš„æ–¹æ³•
  *           CURSOR_FIRST, CURSOR_NEXT, CURSOR_PREV:
- *             »P´å¼Ğ¥Ø«e¦ì¸mªº¤å³¹¦P¼ĞÃD ªº ²Ä¤@½g/¤U¤@½g/«e¤@½g ¤å³¹¡C
+ *             èˆ‡æ¸¸æ¨™ç›®å‰ä½ç½®çš„æ–‡ç« åŒæ¨™é¡Œ çš„ ç¬¬ä¸€ç¯‡/ä¸‹ä¸€ç¯‡/å‰ä¸€ç¯‡ æ–‡ç« ã€‚
  *           RELATE_FIRST, RELATE_NEXT, RELATE_PREV:
- *             »P¥Ø«e¥¿¾\Åªªº¤å³¹¦P¼ĞÃD ªº ²Ä¤@½g/¤U¤@½g/«e¤@½g ¤å³¹¡C
+ *             èˆ‡ç›®å‰æ­£é–±è®€çš„æ–‡ç« åŒæ¨™é¡Œ çš„ ç¬¬ä¸€ç¯‡/ä¸‹ä¸€ç¯‡/å‰ä¸€ç¯‡ æ–‡ç« ã€‚
  *           NEWPOST_NEXT, NEWPOST_PREV:
- *             ¤U¤@­Ó/«e¤@­Ó thread ªº²Ä¤@½g¡C
+ *             ä¸‹ä¸€å€‹/å‰ä¸€å€‹ thread çš„ç¬¬ä¸€ç¯‡ã€‚
  *           AUTHOR_NEXT, AUTHOR_PREV:
- *             XXX ³o¥\¯à¥Ø«e¦n¹³¨S¥Î¨ì?
+ *             XXX é€™åŠŸèƒ½ç›®å‰å¥½åƒæ²’ç”¨åˆ°?
  *
- * @return ·sªº´å¼Ğ¦ì¸m
+ * @return æ–°çš„æ¸¸æ¨™ä½ç½®
  */
 static int
 thread(const keeploc_t * locmem, int stypen)
@@ -301,7 +301,7 @@ thread(const keeploc_t * locmem, int stypen)
 		else if( !strncmp(&fh.title[4], key, PROPER_TITLE_LEN) ) {
 		    amatch = new_ln;
 		    jump = THREAD_SEARCH_RANGE;
-		    /* ·í·j´M¦P¥DÃD²Ä¤@½g, ³sÄò§ä¤£¨ì¦h¤Ö½g¤~°± */
+		    /* ç•¶æœå°‹åŒä¸»é¡Œç¬¬ä¸€ç¯‡, é€£çºŒæ‰¾ä¸åˆ°å¤šå°‘ç¯‡æ‰åœ */
 		}
 	    }
             else if( !strncmp(subject(fh.title), key, PROPER_TITLE_LEN) )
@@ -327,14 +327,14 @@ thread(const keeploc_t * locmem, int stypen)
 }
 
 /*
- * ®Ú¾Ú stypen ¿ï¾Ü¤W/¤U¤@½g¤wÅª¹Lªº¤å³¹
+ * æ ¹æ“š stypen é¸æ“‡ä¸Š/ä¸‹ä¸€ç¯‡å·²è®€éçš„æ–‡ç« 
  *
- * @param locmem  ¥Î¨Ó¦s¦b¬Y¬İªO´å¼Ğ¦ì¸mªº structure¡C
- * @param stypen  ´å¼Ğ²¾°Êªº¤èªk
+ * @param locmem  ç”¨ä¾†å­˜åœ¨æŸçœ‹æ¿æ¸¸æ¨™ä½ç½®çš„ structureã€‚
+ * @param stypen  æ¸¸æ¨™ç§»å‹•çš„æ–¹æ³•
  *           CURSOR_NEXT, CURSOR_PREV:
- *             »P´å¼Ğ¥Ø«e¦ì¸mªº¤å³¹¦P¼ĞÃD ªº ¤U¤@½g/«e¤@½g ¤å³¹¡C
+ *             èˆ‡æ¸¸æ¨™ç›®å‰ä½ç½®çš„æ–‡ç« åŒæ¨™é¡Œ çš„ ä¸‹ä¸€ç¯‡/å‰ä¸€ç¯‡ æ–‡ç« ã€‚
  *
- * @return ·sªº´å¼Ğ¦ì¸m
+ * @return æ–°çš„æ¸¸æ¨™ä½ç½®
  */
 static int
 search_read(const int bid, const keeploc_t * locmem, int stypen)
@@ -355,12 +355,12 @@ reload_fh:
     rk = get_records_keep(currdirect, &fh, sizeof(fileheader_t), pos, 1, &fd);
     if( rk < 0 ) goto out;
     if( rk == 0 /* EOF */ ) {
-        /* ¦pªG¬O¸m©³¤å³¹, «h­n±N ftime ³]©w¦¨³Ì¤j (¥Nªí¤ñ³Ì«á¤@½gÁÙ­n·s)  */
+        /* å¦‚æœæ˜¯ç½®åº•æ–‡ç« , å‰‡è¦å°‡ ftime è¨­å®šæˆæœ€å¤§ (ä»£è¡¨æ¯”æœ€å¾Œä¸€ç¯‡é‚„è¦æ–°)  */
         ftime = 2147483647;
     } else {
 #ifdef SAFE_ARTICLE_DELETE
         if (fh.filename[0] == '.' || fh.owner[0] == '-') {
-            /* ´å¼Ğ©Ò¦b¤å³¹¤w³Q§R°£, ¸õ¹L, ©¹¤U§ä¤U¤@½g¤å³¹ */
+            /* æ¸¸æ¨™æ‰€åœ¨æ–‡ç« å·²è¢«åˆªé™¤, è·³é, å¾€ä¸‹æ‰¾ä¸‹ä¸€ç¯‡æ–‡ç«  */
             close(fd);
             pos += step;
             goto reload_fh;
@@ -399,7 +399,7 @@ reload_fh:
             if (rk == 0) continue;
 #ifdef SAFE_ARTICLE_DELETE
             if (fh.filename[0] == '.' || fh.owner[0] == '-') {
-                /* ³o½g¤å³¹¤w³Q§R°£, ¸õ¹L, ¸Õ¸Õ¤U¤@½g */
+                /* é€™ç¯‡æ–‡ç« å·²è¢«åˆªé™¤, è·³é, è©¦è©¦ä¸‹ä¸€ç¯‡ */
                 continue;
             }
 #endif
@@ -425,7 +425,7 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
     char *sp;
     int n = -1;
 
-    if(!getdata(b_lines, 0, "·j´M" AID_DISPLAYNAME ": #", aidc, 20, DOECHO))
+    if(!getdata(b_lines, 0, "æœå°‹" AID_DISPLAYNAME ": #", aidc, 20, DOECHO))
     {
 	move(b_lines, 0);
 	clrtoeol();
@@ -438,7 +438,7 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
 	move(21, 0);
 	clrtobot();
 	move(22, 0);
-	prints("¦¹ª¬ºA¤UµLªk¨Ï¥Î·j´M" AID_DISPLAYNAME "¥\\¯à");
+	prints("æ­¤ç‹€æ…‹ä¸‹ç„¡æ³•ä½¿ç”¨æœå°‹" AID_DISPLAYNAME "åŠŸ\èƒ½");
 	pressanykey();
 	return FULLUPDATE;
     }
@@ -453,8 +453,8 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
     if((aidu = aidc2aidu(sp)) > 0)
     {
 	/* search bottom */
-	/* FIXME: ¸m©³¤å¦ı¨S¦C¦b .DIR.bottom ªº¦b³o¬q·|·j¤£¨ì¡A
-	   ¦b¤U¤@¬q search board ®É¤~·|·j¨ì¥»Åé¡CÃø¸Ñ¡C */
+	/* FIXME: ç½®åº•æ–‡ä½†æ²’åˆ—åœ¨ .DIR.bottom çš„åœ¨é€™æ®µæœƒæœä¸åˆ°ï¼Œ
+	   åœ¨ä¸‹ä¸€æ®µ search board æ™‚æ‰æœƒæœåˆ°æœ¬é«”ã€‚é›£è§£ã€‚ */
 	{
 	    char buf[FNLEN];
 
@@ -463,8 +463,8 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
 	    if((n = search_aidu(dirfile, aidu)) >= 0)
 	    {
 		n += getbtotal(currbid);
-		/* ¤£¥i¥Î bottom_line¡A¦]¬°¦pªG¬O¦b digest mode¡A
-		   bottom_line ·|¬O¤åºKªº¼Æ¥Ø¡A¦Ó¤£¬O¯u¥¿ªº¤å³¹¼Æ */
+		/* ä¸å¯ç”¨ bottom_lineï¼Œå› ç‚ºå¦‚æœæ˜¯åœ¨ digest modeï¼Œ
+		   bottom_line æœƒæ˜¯æ–‡æ‘˜çš„æ•¸ç›®ï¼Œè€Œä¸æ˜¯çœŸæ­£çš„æ–‡ç« æ•¸ */
 		if(currmode & MODE_DIGEST)
 		{
 		    *pnewdirect_new_ln = n;
@@ -519,9 +519,9 @@ select_by_aid(const keeploc_t * locmem, int *pnew_ln, int *pnewdirect_new_ln,
 	clrtobot();
 	move(22, 0);
 	if(aidu <= 0)
-	    prints("¤£¦Xªkªº" AID_DISPLAYNAME "¡A½Ğ½T©w¿é¤J¬O¥¿½Tªº");
+	    prints("ä¸åˆæ³•çš„" AID_DISPLAYNAME "ï¼Œè«‹ç¢ºå®šè¼¸å…¥æ˜¯æ­£ç¢ºçš„");
 	else
-	    prints("§ä¤£¨ì³o­Ó" AID_DISPLAYNAME "¡A¥i¯à¬O¤å³¹¤w®ø¥¢¡A©Î¬O§A§ä¿ù¬İªO¤F");
+	    prints("æ‰¾ä¸åˆ°é€™å€‹" AID_DISPLAYNAME "ï¼Œå¯èƒ½æ˜¯æ–‡ç« å·²æ¶ˆå¤±ï¼Œæˆ–æ˜¯ä½ æ‰¾éŒ¯çœ‹æ¿äº†");
 	pressanykey();
 	return FULLUPDATE;
     }  /* if(n < 0) */
@@ -556,7 +556,7 @@ forward_file(const fileheader_t * fhdr, const char *direct)
 #endif
 	break;
     case -4:
-	vmsg("«H½c¤wº¡");
+	vmsg("ä¿¡ç®±å·²æ»¿");
 	break;
     default:
 	break;
@@ -580,12 +580,12 @@ ask_filter_predicate(fileheader_predicate_t *pred, int prev_modes, int sr_mode,
 
     if(sr_mode & RS_AUTHOR) {
 	if(!getdata(b_lines, 0,
-		    currmode & MODE_SELECT ? "¼W¥[±ø¥ó §@ªÌ: ":"·j´M§@ªÌ: ",
+		    currmode & MODE_SELECT ? "å¢åŠ æ¢ä»¶ ä½œè€…: ":"æœå°‹ä½œè€…: ",
 		    keyword, IDLEN+1, DOECHO) || trim_blank(keyword))
 	    return READ_REDRAW;
     } else if(sr_mode & RS_KEYWORD) {
 	if(!getdata(b_lines, 0,
-		    currmode & MODE_SELECT ? "¼W¥[±ø¥ó ¼ĞÃD: ":"·j´M¼ĞÃD: ",
+		    currmode & MODE_SELECT ? "å¢åŠ æ¢ä»¶ æ¨™é¡Œ: ":"æœå°‹æ¨™é¡Œ: ",
 		    keyword, TTLEN, DOECHO) || trim_blank(keyword))
 	    return READ_REDRAW;
 
@@ -595,30 +595,30 @@ ask_filter_predicate(fileheader_predicate_t *pred, int prev_modes, int sr_mode,
 	if (currmode & MODE_SELECT) {
 	    // TTLEN width exceed default screen
 	    // let's use TTLEN-4 here.
-	    if (!getdata(b_lines, 0, "¼W¥[±ø¥ó ±Æ°£¼ĞÃD: ",
+	    if (!getdata(b_lines, 0, "å¢åŠ æ¢ä»¶ æ’é™¤æ¨™é¡Œ: ",
 			 keyword, TTLEN-4, DOECHO) ||
 		trim_blank(keyword))
 		return READ_REDRAW;
 	} else {
-	    vmsg("¤Ï¦V·j´M(!)¥u¯à¦b¤w¶i¤J·j´M®É¨Ï¥Î(¨Ò: ¥ı¥Î / ·j´M)");
+	    vmsg("åå‘æœå°‹(!)åªèƒ½åœ¨å·²é€²å…¥æœå°‹æ™‚ä½¿ç”¨(ä¾‹: å…ˆç”¨ / æœå°‹)");
 	    return READ_REDRAW;
 	}
     } else if (sr_mode & RS_RECOMMEND) {
 	if (currstat == RMAIL ||
 	    !getdata(b_lines, 0, (currmode & MODE_SELECT) ?
-		     "¼W¥[±ø¥ó ±À¤å¼Æ: ": "·j´M±À¤å¼Æ°ª©ó¦h¤Ö"
+		     "å¢åŠ æ¢ä»¶ æ¨æ–‡æ•¸: ": "æœå°‹æ¨æ–‡æ•¸é«˜æ–¼å¤šå°‘"
 #ifndef OLDRECOMMEND
-		     " (<0«h·j¼N¤å¼Æ) "
+		     " (<0å‰‡æœå™“æ–‡æ•¸) "
 #endif // OLDRECOMMEND
-		     "ªº¤å³¹: ",
-		     // ¦]¬°¦³­t¼Æ©Ò¥H¼È®É¤£¯à¥Î NUMECHO
+		     "çš„æ–‡ç« : ",
+		     // å› ç‚ºæœ‰è² æ•¸æ‰€ä»¥æš«æ™‚ä¸èƒ½ç”¨ NUMECHO
 		     keyword, 7, LCECHO) ||
 	    (pred->recommend = atoi(keyword)) == 0)
 	    return READ_REDRAW;
     } else if (sr_mode & RS_MONEY) {
 	if (currstat == RMAIL ||
 	    !getdata(b_lines, 0, (currmode & MODE_SELECT) ?
-		      "¼W¥[±ø¥ó ¤å³¹»ù®æ: ":"·j´M»ù®æ°ª©ó¦h¤Öªº¤å³¹: ",
+		      "å¢åŠ æ¢ä»¶ æ–‡ç« åƒ¹æ ¼: ":"æœå°‹åƒ¹æ ¼é«˜æ–¼å¤šå°‘çš„æ–‡ç« : ",
 		      keyword, 7, NUMECHO) ||
 	    (pred->money = atoi(keyword)) <= 0)
 	    return READ_REDRAW;
@@ -688,7 +688,7 @@ select_read(const keeploc_t * locmem, int sr_mode)
    assert( sizeof(newdirect) >= sizeof(currdirect) );
    if( strlen(genbuf) + strlen(newdirect) >= sizeof(currdirect) )
    {
-       vmsg("©êºp¡A¤w¹F·j´M±ø¥ó¤W­­¡C");
+       vmsg("æŠ±æ­‰ï¼Œå·²é”æœå°‹æ¢ä»¶ä¸Šé™ã€‚");
        return  READ_REDRAW; // avoid overflow
    }
 
@@ -810,8 +810,8 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
         case 'G':
 	    // special types
 	    switch(vans( currmode & MODE_SELECT ?
-			"¼W¥[±ø¥ó ¼Ğ°O(m/s)(¥¼¿é¤J«h¨ú®ø): ":
-			"·j´M¼Ğ°O(m/s)(¥¼¿é¤J«h¨ú®ø): "))
+			"å¢åŠ æ¢ä»¶ æ¨™è¨˜(m/s)(æœªè¼¸å…¥å‰‡å–æ¶ˆ): ":
+			"æœå°‹æ¨™è¨˜(m/s)(æœªè¼¸å…¥å‰‡å–æ¶ˆ): "))
 	    {
 		case 's':
 		    mode = select_read(locmem, RS_SOLVED);
@@ -932,7 +932,7 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 		int             id;
 		userec_t        muser;
 
-		vs_hdr("¨Ï¥ÎªÌ³]©w");
+		vs_hdr("ä½¿ç”¨è€…è¨­å®š");
 		move(1, 0);
 		if ((id = getuser(headers[locmem->crs_ln - locmem->top_ln].owner, &muser))) {
 		    user_display(&muser, 1);
@@ -945,11 +945,11 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 	    }
 	    break;
 
-	    /* rocker.011018: ±Ä¥Î·sªºtag¼Ò¦¡ */
+	    /* rocker.011018: æ¡ç”¨æ–°çš„tagæ¨¡å¼ */
 	case 't':
 	    if(locmem->crs_ln == 0)
 		break;
-	    /* ±N­ì¥»¦b Read() ¸Ì­±ªº "TagNum = 0" ²¾¦Ü¦¹³B */
+	    /* å°‡åŸæœ¬åœ¨ Read() è£¡é¢çš„ "TagNum = 0" ç§»è‡³æ­¤è™• */
 	    if ((currstat & RMAIL && TagBoard != 0) ||
 		(!(currstat & RMAIL) && TagBoard != bid)) {
 		if (currstat & RMAIL)
@@ -958,7 +958,7 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 		    TagBoard = bid;
 		TagNum = 0;
 	    }
-	    /* rocker.011112: ¸Ñ¨M¦Aselect mode¼Ğ°O¤å³¹ªº°İÃD */
+	    /* rocker.011112: è§£æ±ºå†select modeæ¨™è¨˜æ–‡ç« çš„å•é¡Œ */
             if (ToggleTagItem(&headers[locmem->crs_ln - locmem->top_ln]))
 	    {
 		locmem->crs_ln ++;
@@ -988,7 +988,7 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 
     case Ctrl('D'):
         if (currmode & MODE_SELECT) {
-            vmsg("½Ğ¥ıÂ÷¶}·j´M¼Ò¦¡(T¼Ğ°O·|«O¯d)¦A§R°£ÀÉ®×¡C");
+            vmsg("è«‹å…ˆé›¢é–‹æœå°‹æ¨¡å¼(Tæ¨™è¨˜æœƒä¿ç•™)å†åˆªé™¤æª”æ¡ˆã€‚");
             mode = FULLUPDATE;
         } else {
             mode = TagPruner(bid);
@@ -1041,7 +1041,7 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 		    return FULLUPDATE;
 		}
 
-		// ¥H¤U³o´XºØ mode ­n¦A³B²z´å¼Ğ
+		// ä»¥ä¸‹é€™å¹¾ç¨® mode è¦å†è™•ç†æ¸¸æ¨™
                 if(mode == READ_PREV || mode == READ_NEXT ||
                    mode == RELATE_PREV || mode == RELATE_FIRST ||
                    mode == AUTHOR_NEXT || mode ==  AUTHOR_PREV ||
@@ -1060,7 +1060,7 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
 			break;
                     case RELATE_NEXT:
                         new_ln = thread(locmem, RELATE_NEXT);
-			/* XXX: Åª¨ì³Ì«á¤@½g­n¸õ¥X¨Ó */
+			/* XXX: è®€åˆ°æœ€å¾Œä¸€ç¯‡è¦è·³å‡ºä¾† */
 			if( new_ln == locmem->crs_ln ){
 			    default_ch = 0;
 			    return FULLUPDATE;
@@ -1095,10 +1095,10 @@ i_read_key(const onekey_t * rcmdlist, keeploc_t * locmem,
     return mode;
 }
 
-// recbase:	Åã¥Ü¦ì¸mªº¶}ÀY
-// headers_size:­nÅã¥Ü´X¦æ
-// last_line:	¥şªO .DIR + ¸m©³ ªº¦³®Ä¼Æ¥Ø
-// bottom_line:	¥şªO .DIR (µL¸m©³) ªº¦³®Ä¼Æ¥Ø
+// recbase:	é¡¯ç¤ºä½ç½®çš„é–‹é ­
+// headers_size:è¦é¡¯ç¤ºå¹¾è¡Œ
+// last_line:	å…¨æ¿ .DIR + ç½®åº• çš„æœ‰æ•ˆæ•¸ç›®
+// bottom_line:	å…¨æ¿ .DIR (ç„¡ç½®åº•) çš„æœ‰æ•ˆæ•¸ç›®
 
 // XXX never return -1!
 
@@ -1106,14 +1106,14 @@ static int
 get_records_and_bottom(const char *direct,  fileheader_t* headers,
                      int recbase, int headers_size, int last_line, int bottom_line)
 {
-    // n: ¸m©³°£¥~ªº¥iÅã¥Ü¼Æ¥Ø
+    // n: ç½®åº•é™¤å¤–çš„å¯é¡¯ç¤ºæ•¸ç›®
     int     n = bottom_line - recbase + 1, rv = 0;
 
-    if( last_line < 1)	// §¹¥ş¨SªF¦è
+    if( last_line < 1)	// å®Œå…¨æ²’æ±è¥¿
 	return 0;
 
     BEGINSTAT(STAT_BOARDREC);
-    // ¤£Åã¥Ü¸m©³ªº±¡§Î
+    // ä¸é¡¯ç¤ºç½®åº•çš„æƒ…å½¢
     if( n >= headers_size || (currmode & (MODE_SELECT | MODE_DIGEST)) )
     {
 	rv = get_records(direct, headers, sizeof(fileheader_t),
@@ -1122,14 +1122,14 @@ get_records_and_bottom(const char *direct,  fileheader_t* headers,
 	return rv > 0 ? rv : 0;
     }
 
-    //////// Åã¥Ü¥»¤å+¸m©³: ////////
+    //////// é¡¯ç¤ºæœ¬æ–‡+ç½®åº•: ////////
 
-    // Åª¨ú .DIR ¥»¤å
+    // è®€å– .DIR æœ¬æ–‡
     if (n > 0)
     {
 	n = get_records(direct, headers, sizeof(fileheader_t), recbase, n);
 	if (n < 0) n = 0;
-	rv += n; // rv ¬°¦³®Ä¥»¤å¼Æ
+	rv += n; // rv ç‚ºæœ‰æ•ˆæœ¬æ–‡æ•¸
 
 	recbase = 1;
     } else {
@@ -1137,7 +1137,7 @@ get_records_and_bottom(const char *direct,  fileheader_t* headers,
 	recbase = 1 + (-n);
     }
 
-    // Åª¨ú¸m©³ (ª`·N recbase ¥i¯à¶W¹L bottom_line, ¤]´N¬O¥H¸m©³²Ä n ­Ó¶}©l)
+    // è®€å–ç½®åº• (æ³¨æ„ recbase å¯èƒ½è¶…é bottom_line, ä¹Ÿå°±æ˜¯ä»¥ç½®åº•ç¬¬ n å€‹é–‹å§‹)
     n = last_line - bottom_line +1 - (recbase-1);
     if (rv + n > headers_size)
 	n = headers_size - rv;
@@ -1171,7 +1171,7 @@ i_read(int cmdmode, const char *direct, void (*dotitle) (),
     int             needs_fullupdate = 0;
 
     strlcpy(currdirect0, currdirect, sizeof(currdirect0));
-    /* Ptt: ³oÃä headers ¥i¥H°w¹ï¬İªOªº³Ì«á 60 ½g°µ cache */
+    /* Ptt: é€™é‚Š headers å¯ä»¥é‡å°çœ‹æ¿çš„æœ€å¾Œ 60 ç¯‡åš cache */
     headers_size = p_lines;
     headers = (fileheader_t *) calloc(headers_size, FHSZ);
     assert(headers != NULL);
@@ -1179,7 +1179,7 @@ i_read(int cmdmode, const char *direct, void (*dotitle) (),
     mode = NEWDIRECT;
 
     do {
-	/* ÀË¬dÅv­­¬O§_¤w§ï */
+	/* æª¢æŸ¥æ¬Šé™æ˜¯å¦å·²æ”¹ */
 	if (currbid > 0 && getbcache(currbid)->perm_reload > enter_time)
 	{
 	    boardheader_t *bp = getbcache(currbid);
@@ -1188,13 +1188,13 @@ i_read(int cmdmode, const char *direct, void (*dotitle) (),
 	    enter_time = bp->perm_reload;
 	}
 
-	/* ¨Ì¾Ú mode Åã¥Ü fileheader */
+	/* ä¾æ“š mode é¡¯ç¤º fileheader */
 	setutmpmode(cmdmode);
 	switch (mode) {
 	case DONOTHING:
 	    break;
 
-	case NEWDIRECT:	/* ²Ä¤@¦¸¸ü¤J¦¹¥Ø¿ı */
+	case NEWDIRECT:	/* ç¬¬ä¸€æ¬¡è¼‰å…¥æ­¤ç›®éŒ„ */
 	case DIRCHANGED:
 	    if (bidcache > 0 && !(currmode & (MODE_SELECT | MODE_DIGEST))){
 		if( (last_line = getbtotal(currbid)) == 0 ){
@@ -1268,7 +1268,7 @@ i_read(int cmdmode, const char *direct, void (*dotitle) (),
 	case PART_REDRAW:
 	    move(3, 0);
             if( last_line == 0 )
-                  outs("    ¨S¦³¤å³¹...");
+                  outs("    æ²’æœ‰æ–‡ç« ...");
             else {
 		int i;
 		for( i = 0; i < entries ; i++ )
@@ -1277,11 +1277,11 @@ i_read(int cmdmode, const char *direct, void (*dotitle) (),
 	    /* no break */
 	case READ_REDRAW:
 	    if (currstat == RMAIL)
-		vs_footer(" ÂE¶­©¹ªğ ",
-		    " (R/y)¦^«H (x)¯¸¤ºÂà±H (d/D)§R«H (^P)±Hµo·s«H \t(¡ö/q)Â÷¶}");
+		vs_footer(" é´»é›å¾€è¿” ",
+		    " (R/y)å›ä¿¡ (x)ç«™å…§è½‰å¯„ (d/D)åˆªä¿¡ (^P)å¯„ç™¼æ–°ä¿¡ \t(â†/q)é›¢é–‹");
 	    else
-		vs_footer(" ¤å³¹¿ïÅª ",
-		    " (y)¦^À³(X)±À¤å(^X)Âà¿ı (=[]<>)¬ÛÃö¥DÃD(/?a)§ä¼ĞÃD/§@ªÌ (b)¶iªOµe­±");
+		vs_footer(" æ–‡ç« é¸è®€ ",
+		    " (y)å›æ‡‰(X)æ¨æ–‡(^X)è½‰éŒ„ (=[]<>)ç›¸é—œä¸»é¡Œ(/?a)æ‰¾æ¨™é¡Œ/ä½œè€… (b)é€²æ¿ç•«é¢");
 	    break;
 
 	case TITLE_REDRAW:

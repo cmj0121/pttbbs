@@ -1,4 +1,4 @@
-/* ¬İªO¤@Äıªí(sorted) */
+/* çœ‹æ¿ä¸€è¦½è¡¨(sorted) */
 #include "bbs.h"
 
 boardheader_t allbrd[MAX_BOARD];
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     if (detail_i < 0) {
 	printf(
-		"     ¬İªO¦WºÙ     ªO¥D                     Ãş§O   ¤¤¤å±Ô­z\n"
+		"     çœ‹æ¿åç¨±     æ¿ä¸»                     é¡åˆ¥   ä¸­æ–‡æ•˜è¿°\n"
 		"     -----------------------------------------------------------------\n");
 	for (i = 0; i < count; i++) {
 	    printf("%4d %-13s%-25.25s%s\n", i+1, allbrd[i].brdname, allbrd[i].BM, allbrd[i].title);

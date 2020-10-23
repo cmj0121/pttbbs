@@ -3,35 +3,35 @@
 /**
  * Structure
  * =========
- * fav ÀÉªº«e¨â­Ó byte ¬Oª©¸¹¡A±µ¤U¨Ó¤~¬O¯u¥¿ªº data¡C
+ * fav æª”çš„å‰å…©å€‹ byte æ˜¯ç‰ˆè™Ÿï¼Œæ¥ä¸‹ä¾†æ‰æ˜¯çœŸæ­£çš„ dataã€‚
  *
- * fav ªº¥D­n¬[ºc¦p¤U¡G
+ * fav çš„ä¸»è¦æ¶æ§‹å¦‚ä¸‹ï¼š
  *
- *   fav_t - ¥Î¨Ó¸Ë¦UºØ entry(fav_type_t) ªº directory
- *     ¶i¤J§Úªº³Ì·R®É¡A¬İ¨ìªºªF¦è´N¬O®Ú¾Ú fav_t ¥Í¥X¨Óªº¡C
- *     ¸Ì­±¬ö¿ıªÌ¡A³o¤@­Ó level ¤¤¦³¦h¤Ö­Ó¬İªO¡B¥Ø¿ı¡B¤À¹j½u¡C(favh)
- *     ¬O¤@­Ó array (with pre-allocated buffer)
+ *   fav_t - ç”¨ä¾†è£å„ç¨® entry(fav_type_t) çš„ directory
+ *     é€²å…¥æˆ‘çš„æœ€æ„›æ™‚ï¼Œçœ‹åˆ°çš„æ±è¥¿å°±æ˜¯æ ¹æ“š fav_t ç”Ÿå‡ºä¾†çš„ã€‚
+ *     è£¡é¢ç´€éŒ„è€…ï¼Œé€™ä¸€å€‹ level ä¸­æœ‰å¤šå°‘å€‹çœ‹æ¿ã€ç›®éŒ„ã€åˆ†éš”ç·šã€‚(favh)
+ *     æ˜¯ä¸€å€‹ array (with pre-allocated buffer)
  *
- *   fav_type_t - fav entry ªº base class
- *     ¦s¨ú®É³z¹L type ÅÜ¼Æ¨Ó±oª¾¥¿½Tªº«¬ºA¡C
+ *   fav_type_t - fav entry çš„ base class
+ *     å­˜å–æ™‚é€é type è®Šæ•¸ä¾†å¾—çŸ¥æ­£ç¢ºçš„å‹æ…‹ã€‚
  *
  *   fav_board_t / fav_line_t / fav_folder_t - derived class
- *     ¸Ô²Ó±¡§Î½Ğ°Ñ¦Ò fav.h ¤¤ªº©w¸q¡C
- *     ¥H cast_(board|line|folder)_t ¨Ó±N¤@­Ó fav_type_t §@°ÊºAÂà«¬¡C
+ *     è©³ç´°æƒ…å½¢è«‹åƒè€ƒ fav.h ä¸­çš„å®šç¾©ã€‚
+ *     ä»¥ cast_(board|line|folder)_t ä¾†å°‡ä¸€å€‹ fav_type_t ä½œå‹•æ…‹è½‰å‹ã€‚
  *
  * Policy
  * ======
- * ¬°¤FÁ×§K¹L«×ªº¸ê®Æ·h²¾¡A·í±N¤@­Ó item ±q§Úªº³Ì·R¤¤²¾°£®É¡A¥u±N¥Lªº
- * FAVH_FAV flag ²¾°£¡C¦Ó¨S¦³³o­Ó flag ªº item ¤]¤£³Qµø¬°§Úªº³Ì·R¡C
+ * ç‚ºäº†é¿å…éåº¦çš„è³‡æ–™æ¬ç§»ï¼Œç•¶å°‡ä¸€å€‹ item å¾æˆ‘çš„æœ€æ„›ä¸­ç§»é™¤æ™‚ï¼Œåªå°‡ä»–çš„
+ * FAVH_FAV flag ç§»é™¤ã€‚è€Œæ²’æœ‰é€™å€‹ flag çš„ item ä¹Ÿä¸è¢«è¦–ç‚ºæˆ‘çš„æœ€æ„›ã€‚
  *
- * §Úªº³Ì·R¤¤¡A¨S³] FAVH_FAV ªº¸ê®Æ¡A±N¦b¬Y¨Ç®É­Ô¡A¦p¼g¤JÀÉ®×®É¡A©I¥s
- * rebuild_fav ²M°£°®²b¡C
+ * æˆ‘çš„æœ€æ„›ä¸­ï¼Œæ²’è¨­ FAVH_FAV çš„è³‡æ–™ï¼Œå°‡åœ¨æŸäº›æ™‚å€™ï¼Œå¦‚å¯«å…¥æª”æ¡ˆæ™‚ï¼Œå‘¼å«
+ * rebuild_fav æ¸…é™¤ä¹¾æ·¨ã€‚
  *
  * Others
  * ======
- * ¯¸ªø·h²¾¬İªO©Ò¥Îªº t ¡A¦]¬°¤£¯à¥u¦s¦b nbrd ¸Ì­±¡A¤S¤£µM¦A§Ë¥XÃB¥~ªºªÅ¶¡¡A
- * ©Ò¥H·í¯¸ªø¤£¦b§Úªº³Ì·R«ö¤F t ¡A·|§â³o­Ó°O¿ı¼È¦s¦b fav ¤¤
- * (FAVH_ADM_TAG == 1, FAVH_FAV == 0)¡C
+ * ç«™é•·æ¬ç§»çœ‹æ¿æ‰€ç”¨çš„ t ï¼Œå› ç‚ºä¸èƒ½åªå­˜åœ¨ nbrd è£¡é¢ï¼Œåˆä¸ç„¶å†å¼„å‡ºé¡å¤–çš„ç©ºé–“ï¼Œ
+ * æ‰€ä»¥ç•¶ç«™é•·ä¸åœ¨æˆ‘çš„æœ€æ„›æŒ‰äº† t ï¼ŒæœƒæŠŠé€™å€‹è¨˜éŒ„æš«å­˜åœ¨ fav ä¸­
+ * (FAVH_ADM_TAG == 1, FAVH_FAV == 0)ã€‚
  */
 
 #ifdef DEBUG
@@ -58,8 +58,8 @@ static void fav4_read_favrec(FILE *frp, fav_t *fp);
 static void fav_free_branch(fav_t *fp);
 
 /**
- * cast_(board|line|folder) ¤@±Ú¥Î©ó±N base class §@Âà«¬
- * (¤£ÀË¬d¹ê»Ú data type)
+ * cast_(board|line|folder) ä¸€æ—ç”¨æ–¼å°‡ base class ä½œè½‰å‹
+ * (ä¸æª¢æŸ¥å¯¦éš› data type)
  */
 inline static fav_board_t *cast_board(fav_type_t *p){
     return (fav_board_t *)p->fp;
@@ -74,14 +74,14 @@ inline static fav_folder_t *cast_folder(fav_type_t *p){
 }
 
 /**
- * ¶Ç¦^«ü©w dir ¤¤©Ò¥Îªº entry ªºÁ`¼Æ (¥uºâ¯uªº¦b¸Ì­±¡A¦Ó¤£ºâ¤w³Q²¾°£ªº)
+ * å‚³å›æŒ‡å®š dir ä¸­æ‰€ç”¨çš„ entry çš„ç¸½æ•¸ (åªç®—çœŸçš„åœ¨è£¡é¢ï¼Œè€Œä¸ç®—å·²è¢«ç§»é™¤çš„)
  */
 inline int get_data_number(fav_t *fp){
     return fp->nBoards + fp->nLines + fp->nFolders;
 }
 
 /**
- * ¶Ç¦^¥Ø«e©Ò¦bªº dir pointer
+ * å‚³å›ç›®å‰æ‰€åœ¨çš„ dir pointer
  */
 inline fav_t *get_current_fav(void){
     if (fav_stack_num == 0)
@@ -90,7 +90,7 @@ inline fav_t *get_current_fav(void){
 }
 
 /**
- * ±N ft(entry) cast ¦¨¤@­Ó dir
+ * å°‡ ft(entry) cast æˆä¸€å€‹ dir
  */
 inline fav_t *get_fav_folder(fav_type_t *ft){
     return cast_folder(ft)->this_folder;
@@ -101,7 +101,7 @@ inline int get_item_type(fav_type_t *ft){
 }
 
 /**
- * ±N¤@­Ó«ü©wªº dir pointer ¦s¤U¨Ó¡A¤§«á¥i¥Î fav_get_tmp_fav ¨Ó¦s¥Î
+ * å°‡ä¸€å€‹æŒ‡å®šçš„ dir pointer å­˜ä¸‹ä¾†ï¼Œä¹‹å¾Œå¯ç”¨ fav_get_tmp_fav ä¾†å­˜ç”¨
  */
 inline static void fav_set_tmp_folder(fav_t *fp){
     fav_tmp = fp;
@@ -112,7 +112,7 @@ inline static fav_t *fav_get_tmp_fav(void){
 }
 
 /**
- * ±N fp(dir) °Oªº¼Æ¶q¤¤¡A¦©°£¤@³æ¦ì ft(entry)
+ * å°‡ fp(dir) è¨˜çš„æ•¸é‡ä¸­ï¼Œæ‰£é™¤ä¸€å–®ä½ ft(entry)
  */
 static void fav_decrease(fav_t *fp, fav_type_t *ft)
 {
@@ -133,7 +133,7 @@ static void fav_decrease(fav_t *fp, fav_type_t *ft)
 }
 
 /**
- * ±N fp(dir) °Oªº¼Æ¶q¤¤¡A¼W¥[¤@³æ¦ì ft(entry)
+ * å°‡ fp(dir) è¨˜çš„æ•¸é‡ä¸­ï¼Œå¢åŠ ä¸€å–®ä½ ft(entry)
  */
 static void fav_increase(fav_t *fp, fav_type_t *ft)
 {
@@ -165,8 +165,8 @@ inline static int get_line_num(fav_t *fp) {
 }
 
 /**
- * ³]©w¬Y­Ó flag¡C
- * @bit: ¥Ø«e©Ò¦³ flags ¦³: FAVH_FAV, FAVH_TAG, FAVH_UNREAD, FAVH_ADM_TAG
+ * è¨­å®šæŸå€‹ flagã€‚
+ * @bit: ç›®å‰æ‰€æœ‰ flags æœ‰: FAVH_FAV, FAVH_TAG, FAVH_UNREAD, FAVH_ADM_TAG
  * @param cmd: FALSE: unset, TRUE: set, EXCH: opposite
  */
 void set_attr(fav_type_t *ft, int bit, char cmd){
@@ -206,7 +206,7 @@ static char *get_item_class(fav_type_t *ft)
 	    assert(0<=cast_board(ft)->bid-1 && cast_board(ft)->bid-1<MAX_BOARD);
 	    return bcache[cast_board(ft)->bid - 1].title;
 	case FAVT_FOLDER:
-	    return "¥Ø¿ı";
+	    return "ç›®éŒ„";
 	case FAVT_LINE:
 	    return "----";
     }
@@ -238,7 +238,7 @@ inline static void* fav_malloc(int size){
 }
 
 /**
- * ¥u½Æ»s fav_type_t
+ * åªè¤‡è£½ fav_type_t
  */
 inline static void
 fav_item_copy(fav_type_t *target, const fav_type_t *source){
@@ -252,7 +252,7 @@ inline fav_t *get_fav_root(void){
 }
 
 /**
- * ¬O§_¬°¦³®Äªº entry
+ * æ˜¯å¦ç‚ºæœ‰æ•ˆçš„ entry
  */
 inline int valid_item(fav_type_t *ft){
     return ft->attr & FAVH_FAV;
@@ -285,8 +285,8 @@ static int is_need_rebuild_fav(fav_t *fp)
     return 0;
 }
 /**
- * ²M°£ fp(dir) ¤¤µL®Äªº entry/dir¡C¡uµL®Ä¡v«üªº¬O¨S¦³ FAVH_FAV flag¡A©Ò¥H
- * ¤£¥]§t¤£¦s¦bªº¬İªO¡C
+ * æ¸…é™¤ fp(dir) ä¸­ç„¡æ•ˆçš„ entry/dirã€‚ã€Œç„¡æ•ˆã€æŒ‡çš„æ˜¯æ²’æœ‰ FAVH_FAV flagï¼Œæ‰€ä»¥
+ * ä¸åŒ…å«ä¸å­˜åœ¨çš„çœ‹æ¿ã€‚
  */
 static void rebuild_fav(fav_t *fp)
 {
@@ -385,7 +385,7 @@ void fav_sort_by_class(void)
  */
 
 /**
- * ¥Ø¿ı¼h¼Æ¬O§_¹F¨ì³Ì¤j­È FAV_MAXDEPTH
+ * ç›®éŒ„å±¤æ•¸æ˜¯å¦é”åˆ°æœ€å¤§å€¼ FAV_MAXDEPTH
  */
 inline int fav_stack_full(void){
     return fav_stack_num >= FAV_MAXDEPTH;
@@ -494,7 +494,7 @@ static int read_favrec(FILE *frp, fav_t *fp)
 }
 
 /**
- * ±q°O¿ıÀÉ¤¤ load ¥X§Úªº³Ì·R¡C
+ * å¾è¨˜éŒ„æª”ä¸­ load å‡ºæˆ‘çš„æœ€æ„›ã€‚
  * TODO create default fav, and add SYSOP/PttNewHand (see reginit_fav)
  */
 int fav_load(void)
@@ -596,8 +596,8 @@ static void write_favrec(FILE *fwp, fav_t *fp)
 }
 
 /**
- * §â°O¿ıÀÉ save ¶i§Úªº³Ì·R¡C
- * @note fav_cleanup() ·|¥ı³Q©I¥s¡C
+ * æŠŠè¨˜éŒ„æª” save é€²æˆ‘çš„æœ€æ„›ã€‚
+ * @note fav_cleanup() æœƒå…ˆè¢«å‘¼å«ã€‚
  */
 int fav_save(void)
 {
@@ -627,7 +627,7 @@ int fav_save(void)
 }
 
 /**
- * remove ft (³]¬° invalid¡A¹ê»Ú¤W·|µ¥¨ì save ®É¤~²M°£)
+ * remove ft (è¨­ç‚º invalidï¼Œå¯¦éš›ä¸Šæœƒç­‰åˆ° save æ™‚æ‰æ¸…é™¤)
  */
 static inline void fav_free_item(fav_type_t *ft)
 {
@@ -685,8 +685,8 @@ void fav_free(void)
 }
 
 /**
- * ±q¥Ø«eªº dir ¤¤§ä¥X¯S©wÃş§O (type)¡Bid ¬° id ªº entry¡C
- * §ä¤£¨ì¶Ç¦^ NULL
+ * å¾ç›®å‰çš„ dir ä¸­æ‰¾å‡ºç‰¹å®šé¡åˆ¥ (type)ã€id ç‚º id çš„ entryã€‚
+ * æ‰¾ä¸åˆ°å‚³å› NULL
  */
 static fav_type_t *get_fav_item(int id, int type)
 {
@@ -708,7 +708,7 @@ static fav_type_t *get_fav_item(int id, int type)
 }
 
 /**
- * ±q¥Ø«eªº dir ¤¤ remove ¯S©wÃş§O (type)¡Bid ¬° id ªº entry¡C
+ * å¾ç›®å‰çš„ dir ä¸­ remove ç‰¹å®šé¡åˆ¥ (type)ã€id ç‚º id çš„ entryã€‚
  */
 void fav_remove_item(int id, char type)
 {
@@ -716,7 +716,7 @@ void fav_remove_item(int id, char type)
 }
 
 /**
- * get*(bid) ¶Ç¦^¥Ø«eªº dir ¤¤¸ÓÃş§O id == bid ªº entry¡C
+ * get*(bid) å‚³å›ç›®å‰çš„ dir ä¸­è©²é¡åˆ¥ id == bid çš„ entryã€‚
  */
 fav_type_t *getadmtag(int bid)
 {
@@ -775,8 +775,8 @@ inline static int is_maxsize(void){
 }
 
 /**
- * ¨C¦¸¤@­Ó dir º¡®É¡A³o­Ó function ·|±N buffer ¤j¤p½Õ¤j FAV_PRE_ALLOC ­Ó¡A
- * ª½¨ì¤W­­¬°¤î¡C
+ * æ¯æ¬¡ä¸€å€‹ dir æ»¿æ™‚ï¼Œé€™å€‹ function æœƒå°‡ buffer å¤§å°èª¿å¤§ FAV_PRE_ALLOC å€‹ï¼Œ
+ * ç›´åˆ°ä¸Šé™ç‚ºæ­¢ã€‚
  */
 static int enlarge_if_full(fav_t *fp)
 {
@@ -857,8 +857,8 @@ static void move_in_folder(fav_t *fav, int src, int dst)
 }
 
 /**
- * ±N¥Ø«e¥Ø¿ı¤¤²Ä src ­Ó entry ²¾¨ì dst¡C
- * @note src/dst ¬O user ¹ê»Ú¤W¬İ¨ìªº¦ì¸m¡A¤]´N¬O¤£¥]§t invalid entry¡C
+ * å°‡ç›®å‰ç›®éŒ„ä¸­ç¬¬ src å€‹ entry ç§»åˆ° dstã€‚
+ * @note src/dst æ˜¯ user å¯¦éš›ä¸Šçœ‹åˆ°çš„ä½ç½®ï¼Œä¹Ÿå°±æ˜¯ä¸åŒ…å« invalid entryã€‚
  */
 void move_in_current_folder(int from, int to)
 {
@@ -870,7 +870,7 @@ void move_in_current_folder(int from, int to)
  */
 
 /**
- * allocate ¤@­Ó folder entry
+ * allocate ä¸€å€‹ folder entry
  */
 inline static fav_t *alloc_folder_item(void){
     fav_t *fp = (fav_t *)fav_malloc(sizeof(fav_t));
@@ -880,8 +880,8 @@ inline static fav_t *alloc_folder_item(void){
 }
 
 /**
- * ·s¼W¤@¤À¹j½u
- * @return ¥[¤Jªº entry «ü¼Ğ
+ * æ–°å¢ä¸€åˆ†éš”ç·š
+ * @return åŠ å…¥çš„ entry æŒ‡æ¨™
  */
 fav_type_t *fav_add_line(void)
 {
@@ -894,8 +894,8 @@ fav_type_t *fav_add_line(void)
 }
 
 /**
- * ·s¼W¤@¥Ø¿ı
- * @return ¥[¤Jªº entry «ü¼Ğ
+ * æ–°å¢ä¸€ç›®éŒ„
+ * @return åŠ å…¥çš„ entry æŒ‡æ¨™
  */
 fav_type_t *fav_add_folder(void)
 {
@@ -913,9 +913,9 @@ fav_type_t *fav_add_folder(void)
 }
 
 /**
- * ±N«ü©w¬İªO¥[¤J¥Ø«eªº¥Ø¿ı¡C
- * @return ¥[¤Jªº entry «ü¼Ğ
- * @note ¤£¤¹³\¦P¤@­ÓªO³Q¥[¤J¨â¦¸
+ * å°‡æŒ‡å®šçœ‹æ¿åŠ å…¥ç›®å‰çš„ç›®éŒ„ã€‚
+ * @return åŠ å…¥çš„ entry æŒ‡æ¨™
+ * @note ä¸å…è¨±åŒä¸€å€‹æ¿è¢«åŠ å…¥å…©æ¬¡
  */
 fav_type_t *fav_add_board(int bid)
 {
@@ -958,9 +958,9 @@ fav_type_t *fav_add_admtag(int bid)
  * I think we don't have to implement the function 'cross-folder' tag.*/
 
 /**
- * ±N¥Ø«e¥Ø¿ı¤U¡A¥Ñ type & id «ü©wªº entry ¼Ğ¤W/¨ú®ø tag
- * @param bit ¦P set_attr
- * @note ­Y¦P¤@­Ó¥Ø¿ı¤£©¯¦³¦P¼ËªºªF¦è¡A¥u¦³²Ä¤@­Ó·|§@¥Î¡C
+ * å°‡ç›®å‰ç›®éŒ„ä¸‹ï¼Œç”± type & id æŒ‡å®šçš„ entry æ¨™ä¸Š/å–æ¶ˆ tag
+ * @param bit åŒ set_attr
+ * @note è‹¥åŒä¸€å€‹ç›®éŒ„ä¸å¹¸æœ‰åŒæ¨£çš„æ±è¥¿ï¼Œåªæœ‰ç¬¬ä¸€å€‹æœƒä½œç”¨ã€‚
  */
 void fav_tag(int id, char type, char bit) {
     fav_type_t *ft = get_fav_item(id, type);
@@ -1059,7 +1059,7 @@ static void fav_dosomething_all_tagged_item(int (*act)(fav_t *))
 }
 
 /**
- * fav_*_all_tagged_item ¦b¾ã­Ó§Úªº³Ì·R¤W¹ï¤w¼Ğ¤W tag ªº entry °µ¬Y¥ó¨Æ¡C
+ * fav_*_all_tagged_item åœ¨æ•´å€‹æˆ‘çš„æœ€æ„›ä¸Šå°å·²æ¨™ä¸Š tag çš„ entry åšæŸä»¶äº‹ã€‚
  */
 void fav_remove_all_tagged_item(void)
 {
@@ -1088,7 +1088,7 @@ inline static int remove_tags(fav_t *fp)
 }
 
 /**
- * ²¾°£§Úªº³Ì·R©Ò¦³ªº tags
+ * ç§»é™¤æˆ‘çš„æœ€æ„›æ‰€æœ‰çš„ tags
  */
 void fav_remove_all_tag(void)
 {
@@ -1096,7 +1096,7 @@ void fav_remove_all_tag(void)
 }
 
 /**
- * ³]©w folder ªº¤¤¤å¦WºÙ
+ * è¨­å®š folder çš„ä¸­æ–‡åç¨±
  */
 void fav_set_folder_title(fav_type_t *ft, char *title)
 {
@@ -1110,12 +1110,12 @@ void fav_set_folder_title(fav_type_t *ft, char *title)
 #define BRD_NEW 1
 #define BRD_END 2
 /**
- * ¦pªG user ¶}±Ò UF_FAV_ADDNEW ªº¥\¯à:
- *  mode == 1: update ¬İªO¡A¨Ã±N·s¬İªO¥[¤J§Úªº³Ì·R¡C
- *  mode == 0: update ¸ê°T¦ı¤£¥[¤J¡C
+ * å¦‚æœ user é–‹å•Ÿ UF_FAV_ADDNEW çš„åŠŸèƒ½:
+ *  mode == 1: update çœ‹æ¿ï¼Œä¸¦å°‡æ–°çœ‹æ¿åŠ å…¥æˆ‘çš„æœ€æ„›ã€‚
+ *  mode == 0: update è³‡è¨Šä½†ä¸åŠ å…¥ã€‚
  *
- *  @return ¥[¤Jªº¬İªO¼Æ
- *  PS. count ´NÅı¥¦¼Æ§¹¡A¤~¤£·|¦b¤U¤@¦¸ login ¤S±q¤@¥b¶}©l¼Æ¡C
+ *  @return åŠ å…¥çš„çœ‹æ¿æ•¸
+ *  PS. count å°±è®“å®ƒæ•¸å®Œï¼Œæ‰ä¸æœƒåœ¨ä¸‹ä¸€æ¬¡ login åˆå¾ä¸€åŠé–‹å§‹æ•¸ã€‚
  */
 int updatenewfav(int mode)
 {

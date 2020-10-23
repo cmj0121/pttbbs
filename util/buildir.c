@@ -66,8 +66,8 @@ int main(int argc, char **argv)
 		
 		/* set article owner */
 		fgets(buf, sizeof(buf), fp);
-		if(strncmp(buf, "§@ªÌ: ", 6) == 0 ||
-		   strncmp(buf, "µo«H¤H: ", 8) == 0) {
+		if(strncmp(buf, "ä½œè€…: ", 6) == 0 ||
+		   strncmp(buf, "ç™¼ä¿¡äºº: ", 8) == 0) {
 		    int i, j;
 		    
 		    for(i = 5; buf[i] != ' '; i++);
@@ -84,8 +84,8 @@ int main(int argc, char **argv)
 		    
 		    /* set article title */
 		    while(fgets(buf, sizeof(buf), fp))
-			if(strncmp(buf, "¼ÐÃD: ", 6) == 0 ||
-			   strncmp(buf, "¼Ð  ÃD: ", 8) == 0) {
+			if(strncmp(buf, "æ¨™é¡Œ: ", 6) == 0 ||
+			   strncmp(buf, "æ¨™  é¡Œ: ", 8) == 0) {
 			    for( i = 5 ; buf[i] != ' ' ; ++i )
 				;
 			    for( ; buf[i] == ' ' ; ++i )
@@ -100,11 +100,11 @@ int main(int argc, char **argv)
 			    printf("%s, owner: %s, title: %s\n", path, fhdr.owner, fhdr.title);
 			    break;
 			}
-		} else if(strncmp(buf, "¡ó Åwªï¥úÁ{", 11) == 0) {
-		    strcpy(fhdr.title, "·|Ä³°O¿ý");
-		} else if(strncmp(buf, "\33[1;33;46m¡¹", 12) == 0||
+		} else if(strncmp(buf, "â˜‰ æ­¡è¿Žå…‰è‡¨", 11) == 0) {
+		    strcpy(fhdr.title, "æœƒè­°è¨˜éŒ„");
+		} else if(strncmp(buf, "\33[1;33;46mâ˜…", 12) == 0||
 			  strncmp(buf, "To", 2) == 0) {
-		    strcpy(fhdr.title, "¼ö½u°O¿ý");
+		    strcpy(fhdr.title, "ç†±ç·šè¨˜éŒ„");
 		}
 //		if(!fhdr.title[0])
 //		    strcpy(fhdr.title, dirlist[count]->d_name);

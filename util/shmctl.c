@@ -196,7 +196,7 @@ int utmpfix(int argc, char **argv)
 	    addkilllist(which);
 	}
 	else if( kill(SHM->uinfo[which].pid, 0) < 0 ){
-	    /* ¦¹±ø¥óÀ³©ñ³Ì«á; ¨ä¥LÄæ¦ì¨S°ÝÃD¦ý process ¤£¦s¦b¤~ purge_utmp */
+	    /* æ­¤æ¢ä»¶æ‡‰æ”¾æœ€å¾Œ; å…¶ä»–æ¬„ä½æ²’å•é¡Œä½† process ä¸å­˜åœ¨æ‰ purge_utmp */
 	    clean = "process error";
 	    purge_utmp(&SHM->uinfo[which]);
 	}
@@ -232,7 +232,7 @@ int utmpfix(int argc, char **argv)
     }
     sleep(3);
     for( i = 0 ; i < killtop ; ++i )
-	// FIXME «e­±¤w¸g memset §â SHM->uinfo[which] ²M±¼¤F, ¦¹³BÀË¬d pid µL¥Î
+	// FIXME å‰é¢å·²ç¶“ memset æŠŠ SHM->uinfo[which] æ¸…æŽ‰äº†, æ­¤è™•æª¢æŸ¥ pid ç„¡ç”¨
 	if( SHM->uinfo[killlist[i].where].pid == killlist[i].pid &&
 	    kill(killlist[i].pid, 0) == 0 ){ // still alive
 	    printf("sending SIGKILL to %d\n", (int)killlist[i].pid);
@@ -312,12 +312,12 @@ cmputmpchc(const void * i, const void * j)
     int played_b=(total_b!=0);
     int             type;
 
-    // NOTE: ¥Ø«e "§O§ä§Ú¤U´Ñ" ¤£¼vÅT±Æ§Ç
-    /* 1. "§ä§Ú¤U´Ñ" ±Æ³Ì«e­± */
+    // NOTE: ç›®å‰ "åˆ¥æ‰¾æˆ‘ä¸‹æ£‹" ä¸å½±éŸ¿æŽ’åº
+    /* 1. "æ‰¾æˆ‘ä¸‹æ£‹" æŽ’æœ€å‰é¢ */
     if ((a->withme&WITHME_CHESS)!=(b->withme&WITHME_CHESS))
 	return (a->withme&WITHME_CHESS)?-1:1;
 #ifdef CHC_SORTBY_RATING
-    /* 2. ¤U¶W¹L¤Q½L´Ñ¥Îµ¥¯Å¤À±Æ§Ç */
+    /* 2. ä¸‹è¶…éŽåç›¤æ£‹ç”¨ç­‰ç´šåˆ†æŽ’åº */
     if ((total_a>=10)!=(total_b>=10))
 	return (total_a>=10)?-1:1;
     if (total_a>=10 && total_b>=10) {
@@ -325,12 +325,12 @@ cmputmpchc(const void * i, const void * j)
 	    return b->chess_elo_rating-a->chess_elo_rating;
     }
 #endif
-    /* 3. ¦³¤U¹L´Ñªº¦b¨S¤U¹Lªº«e­± */
+    /* 3. æœ‰ä¸‹éŽæ£‹çš„åœ¨æ²’ä¸‹éŽçš„å‰é¢ */
     if ((type = played_b - played_a))
 	return type;
     if (played_a == 0)
 	return 0;
-    /* 4. ³Ñ¤U(¤U¤£¶W¹L¤Q½L©Îµ¥¯Å¤À¬Û¦P, ©Î¤£¥Îµ¥¯Å¤À±Æ§Ç)ªº¤H¥H³Ó­t©M±Æ */
+    /* 4. å‰©ä¸‹(ä¸‹ä¸è¶…éŽåç›¤æˆ–ç­‰ç´šåˆ†ç›¸åŒ, æˆ–ä¸ç”¨ç­‰ç´šåˆ†æŽ’åº)çš„äººä»¥å‹è² å’ŒæŽ’ */
     if ((type = b->chc_win - a->chc_win))
         return type;
     if ((type = a->chc_lose - b->chc_lose))
@@ -374,7 +374,7 @@ void utmpsort(int sortall)
 {
     userinfo_t     *uentp;
     int             count, i, ns;
-    // 2008 Baseball event ¦¨¥\Åý short Ãz±¼
+    // 2008 Baseball event æˆåŠŸè®“ short çˆ†æŽ‰
     int             nusers[MAX_BOARD];
 
 
@@ -753,9 +753,9 @@ void buildclass(int bid, int level)
     }
     bptr = &bcache[bid];
     if (bptr->firstchild[0] == NULL || bptr->childcount <= 0)
-        load_uidofgid(bid + 1, 1); /* ¦]¬°³oÃä bid±q 0¶}©l, ©Ò¥H¦A +1 ¦^¨Ó */
+        load_uidofgid(bid + 1, 1); /* å› ç‚ºé€™é‚Š bidå¾ž 0é–‹å§‹, æ‰€ä»¥å† +1 å›žä¾† */
     if (bptr->firstchild[1] == NULL || bptr->childcount <= 0)
-        load_uidofgid(bid + 1, 1); /* ¦]¬°³oÃä bid±q 0¶}©l, ©Ò¥H¦A +1 ¦^¨Ó */
+        load_uidofgid(bid + 1, 1); /* å› ç‚ºé€™é‚Š bidå¾ž 0é–‹å§‹, æ‰€ä»¥å† +1 å›žä¾† */
 
     for (bptr = bptr->firstchild[0]; bptr != NULL ; bptr = bptr->next[0]) {
 	if( bptr->brdattr & BRD_GROUPBOARD )

@@ -45,9 +45,9 @@ bbsmail_pretty_subject(const char *subject)
 
     static const char *table[] = {
 	"Undelivered Mail Returned to Sender",
-	"<¹ï¤è°h«H³qª¾>",
+	"<å°æ–¹é€€ä¿¡é€šçŸ¥>",
         "Returned mail: see transcript for details",
-	"<¹ï¤è°h«H³qª¾>",
+	"<å°æ–¹é€€ä¿¡é€šçŸ¥>",
 	NULL,
 	NULL,
     };
@@ -90,7 +90,7 @@ int mail2bbs(char *userid)
     }
 
     if (REJECT_OUTTAMAIL(xuser))
-	return -1; //¤£±µ¨ü¯¸¥~«H
+	return -1; //ä¸æ¥å—ç«™å¤–ä¿¡
 
     sethomepath(filename, xuser.userid);
 
@@ -151,7 +151,7 @@ int mail2bbs(char *userid)
     if( (ptr = strchr(title, '\n')) )
 	*ptr = '\0';
 
-    if( strchr(sender, '@') == NULL )	/* ¥Ñ local host ±H«H */
+    if( strchr(sender, '@') == NULL )	/* ç”± local host å¯„ä¿¡ */
 	strlcat(sender, "@" MYHOSTNAME, sizeof(sender));
 
 /* allocate a file for the new mail */
@@ -183,10 +183,10 @@ int mail2bbs(char *userid)
     }
 
     if (!title[0])
-	snprintf(title, sizeof(title), "¨Ó¦Û %.64s", sender);
+	snprintf(title, sizeof(title), "ä¾†è‡ª %.64s", sender);
     title[TTLEN] = 0;
     time(&tmp_time);
-    fprintf(fout, "§@ªÌ: %s\n¼ĞÃD: %s\n®É¶¡: %s\n",
+    fprintf(fout, "ä½œè€…: %s\næ¨™é¡Œ: %s\næ™‚é–“: %s\n",
 	    sender, title, ctime(&tmp_time));
 
 /* copy the stdin to the specified file */

@@ -3,38 +3,38 @@
 #define INCLUDE_COMMON_H
 
 #define STR_GUEST	"guest"	    // guest account
-#define STR_REGNEW	"new"	    // •Œ®”´ÿ∑s±b∏π™∫¶W∫Ÿ
+#define STR_REGNEW	"new"	    // Áî®‰æÜÂª∫Êñ∞Â∏≥ËôüÁöÑÂêçÁ®±
 
 #define DEFAULT_BOARD   str_sysop
 
 // BBS Configuration Files
-#define FN_CONF_EDITABLE	"etc/editable"	    // Ø∏∞»•iΩsøË™∫®t≤Œ¿…Æ◊¶C™Ì
-#define FN_CONF_RESERVED_ID	"etc/reserved.id"   // ´OØd®t≤Œ•ŒµL™kµ˘•U™∫ ID
-#define FN_CONF_BINDPORTS	"etc/bindports.conf"   // πw≥]≠n¥£®—≥sΩu™A∞»™∫ port ¶C™Ì
-#define FN_CONF_BANIP           BBSHOME "/etc/banip.conf"    // ∏T§Ó≥sΩu™∫ IP ¶C™Ì
+#define FN_CONF_EDITABLE	"etc/editable"	    // Á´ôÂãôÂèØÁ∑®ËºØÁöÑÁ≥ªÁµ±Ê™îÊ°àÂàóË°®
+#define FN_CONF_RESERVED_ID	"etc/reserved.id"   // ‰øùÁïôÁ≥ªÁµ±Áî®ÁÑ°Ê≥ïË®ªÂÜäÁöÑ ID
+#define FN_CONF_BINDPORTS	"etc/bindports.conf"   // È†êË®≠Ë¶ÅÊèê‰æõÈÄ£Á∑öÊúçÂãôÁöÑ port ÂàóË°®
+#define FN_CONF_BANIP           BBSHOME "/etc/banip.conf"    // Á¶ÅÊ≠¢ÈÄ£Á∑öÁöÑ IP ÂàóË°®
 
 // BBS Data File Names
 #define FN_PASSWD       BBSHOME "/.PASSWDS"      /* User records */
 #define FN_CHICKEN	"chicken"
-#define FN_USSONG       "ussong"        /* ¬I∫q≤Œ≠p */
-#define FN_POST_NOTE    "post.note"     /* po§Â≥π≥∆ß—ø˝ */
+#define FN_USSONG       "ussong"        /* ÈªûÊ≠åÁµ±Ë®à */
+#define FN_POST_NOTE    "post.note"     /* poÊñáÁ´†ÂÇôÂøòÈåÑ */
 #define FN_POST_BID     "post.bid"
 #define FN_MONEY        "etc/money"
 #define FN_OVERRIDES    "overrides"
 #define FN_REJECT       "reject"
-#define FN_WATER        "water"         // ¬¬§Ù±Ì
-#define FN_BANNED       "banned"        // ∑s§Ù±Ì
-#define FN_BANNED_HISTORY "banned.history"  // ∑s§Ù±Ì§ßæ˙•v∞Oø˝
-#define FN_BADPOST_HISTORY "badpost.history"  // ¶H§Âæ˙•v∞Oø˝
+#define FN_WATER        "water"         // ËàäÊ∞¥Ê°∂
+#define FN_BANNED       "banned"        // Êñ∞Ê∞¥Ê°∂
+#define FN_BANNED_HISTORY "banned.history"  // Êñ∞Ê∞¥Ê°∂‰πãÊ≠∑Âè≤Ë®òÈåÑ
+#define FN_BADPOST_HISTORY "badpost.history"  // Âä£ÊñáÊ≠∑Âè≤Ë®òÈåÑ
 #define FN_CANVOTE      "can_vote"
-#define FN_VISABLE      "visable"	// §£™æπD¨OΩ÷´˜ø˘™∫°A±Nø˘¥Nø˘ßa...
-#define FN_ALOHAED      "alohaed"       // §WØ∏≠n≥q™æß⁄™∫¶W≥Ê (ΩsøË•Œ)
-#define FN_ALOHA        "aloha"         // ß⁄§WØ∏≠n≥q™æ™∫¶W≥Ê (¶€∞ ≤£•Õ)
+#define FN_VISABLE      "visable"	// ‰∏çÁü•ÈÅìÊòØË™∞ÊãºÈåØÁöÑÔºåÂ∞áÈåØÂ∞±ÈåØÂêß...
+#define FN_ALOHAED      "alohaed"       // ‰∏äÁ´ôË¶ÅÈÄöÁü•ÊàëÁöÑÂêçÂñÆ (Á∑®ËºØÁî®)
+#define FN_ALOHA        "aloha"         // Êàë‰∏äÁ´ôË¶ÅÈÄöÁü•ÁöÑÂêçÂñÆ (Ëá™ÂãïÁî¢Áîü)
 #define FN_USIES        "usies"         /* BBS log */
 #define FN_DIR		".DIR"
 #define FN_DIR_BOTTOM   ".DIR.bottom"
 #define FN_BOARD        ".BRD"          /* board list */
-#define FN_USEBOARD     "usboard"       /* ¨›™O≤Œ≠p */
+#define FN_USEBOARD     "usboard"       /* ÁúãÊùøÁµ±Ë®à */
 #define FN_TOPSONG      "etc/topsong"
 #define FN_OVERRIDES    "overrides"
 #define FN_TICKET       "ticket"
@@ -47,9 +47,9 @@
 #define FN_TICKET_BRDLIST "boardlist"
 #define FN_BRDLISTHELP	"etc/boardlist.help"
 #define FN_BOARDHELP	"etc/board.help"
-#define FN_MAIL_ACCOUNT_SYSOP "etc/mail_account_sysop"  // ±b∏πØ∏™¯´HΩc¶C™Ì
-#define FN_MAIL_ACCOUNT_SYSOP_DESC "etc/mail_account_sysop_desc"  // ±b∏πØ∏™¯´HΩcª°©˙
-#define FN_USERMEMO	"memo.txt"	// ®œ•Œ™Ã≠”§H∞O®∆•ª
+#define FN_MAIL_ACCOUNT_SYSOP "etc/mail_account_sysop"  // Â∏≥ËôüÁ´ôÈï∑‰ø°ÁÆ±ÂàóË°®
+#define FN_MAIL_ACCOUNT_SYSOP_DESC "etc/mail_account_sysop_desc"  // Â∏≥ËôüÁ´ôÈï∑‰ø°ÁÆ±Ë™™Êòé
+#define FN_USERMEMO	"memo.txt"	// ‰ΩøÁî®ËÄÖÂÄã‰∫∫Ë®ò‰∫ãÊú¨
 #define FN_BADLOGIN	"logins.bad"	// in BBSHOME & user directory
 #define FN_RECENTLOGIN	"logins.recent"	// in user directory
 #define FN_FORWARD      ".forward"      /* auto forward */
@@ -61,7 +61,7 @@
 #define SZ_RECENTPAY    (16000)
 #endif
 
-// ¶€≠qßR∞£§Â≥πÆ…•X≤{™∫º–√DªP¿…Æ◊
+// Ëá™Ë®ÇÂà™Èô§ÊñáÁ´†ÊôÇÂá∫ÁèæÁöÑÊ®ôÈ°åËàáÊ™îÊ°à
 #ifndef FN_SAFEDEL
 #ifdef USE_EDIT_HISTORY
 // For edit_history, the new file name must be as short as possible so that so we can restore it later.
@@ -72,7 +72,7 @@
 #endif // USE_EDIT_HISTORY
 #endif // FN_SAFEDEL
 #ifndef STR_SAFEDEL_TITLE
-#define STR_SAFEDEL_TITLE   "(•ª§Â§w≥QßR∞£)"
+#define STR_SAFEDEL_TITLE   "(Êú¨ÊñáÂ∑≤Ë¢´Âà™Èô§)"
 #endif 
 #define FN_EDITHISTORY  ".history"
 
@@ -80,83 +80,83 @@
 #define SAFE_ARTICLE_DELETE_NUSER (2)
 #endif
 
-#define MSG_DEL_CANCEL  "®˙Æ¯ßR∞£"
-#define MSG_BIG_BOY     "ß⁄¨O§j´”≠Ù! ^o^Y"
-#define MSG_BIG_GIRL    "•@¨ˆ§j¨¸§k *^-^*"
-#define MSG_LITTLE_BOY  "ß⁄¨O©≥≠}∞’... =)"
-#define MSG_LITTLE_GIRL "≥Ã•i∑R™∫¨¸¨‹! :>"
-#define MSG_MAN         "≥¡∑Ì≥“®˚®˚ (^O^)"
-#define MSG_WOMAN       "•sß⁄§p™¸´º!! /:>"
-#define MSG_PLANT       "¥”™´§]¶≥© ßO≥·.."
-#define MSG_MIME        "ƒq™´¡`®S© ßO§Fßa"
+#define MSG_DEL_CANCEL  "ÂèñÊ∂àÂà™Èô§"
+#define MSG_BIG_BOY     "ÊàëÊòØÂ§ßÂ∏•Âì•! ^o^Y"
+#define MSG_BIG_GIRL    "‰∏ñÁ¥ÄÂ§ßÁæéÂ•≥ *^-^*"
+#define MSG_LITTLE_BOY  "ÊàëÊòØÂ∫ïËø™Âï¶... =)"
+#define MSG_LITTLE_GIRL "ÊúÄÂèØÊÑõÁöÑÁæéÁúâ! :>"
+#define MSG_MAN         "È∫•Áï∂ÂãûÂèîÂèî (^O^)"
+#define MSG_WOMAN       "Âè´ÊàëÂ∞èÈòøÂß®!! /:>"
+#define MSG_PLANT       "Ê§çÁâ©‰πüÊúâÊÄßÂà•Âñî.."
+#define MSG_MIME        "Á§¶Áâ©Á∏ΩÊ≤íÊÄßÂà•‰∫ÜÂêß"
 
-#define MSG_CLOAKED     "§w∂i§J¡ÙßŒº“¶°(§£¶C©Û®œ•Œ™Ã¶W≥Ê§W)"
-#define MSG_UNCLOAK     "§w¬˜∂}¡ÙßŒº“¶°(§Ω∂}©Û®œ•Œ™Ã¶W≥Ê§W)"
+#define MSG_CLOAKED     "Â∑≤ÈÄ≤ÂÖ•Èö±ÂΩ¢Ê®°Âºè(‰∏çÂàóÊñº‰ΩøÁî®ËÄÖÂêçÂñÆ‰∏ä)"
+#define MSG_UNCLOAK     "Â∑≤Èõ¢ÈñãÈö±ÂΩ¢Ê®°Âºè(ÂÖ¨ÈñãÊñº‰ΩøÁî®ËÄÖÂêçÂñÆ‰∏ä)"
 
-#define MSG_WORKING     "≥B≤z§§°AΩ–µy≠‘..."
+#define MSG_WORKING     "ËôïÁêÜ‰∏≠ÔºåË´ãÁ®çÂÄô..."
 
-#define MSG_CANCEL      "®˙Æ¯°C"
-#define MSG_USR_LEFT    "®œ•Œ™Ã§w∏g¬˜∂}§F"
-#define MSG_NOBODY      "•ÿ´eµL§H§WΩu"
+#define MSG_CANCEL      "ÂèñÊ∂à„ÄÇ"
+#define MSG_USR_LEFT    "‰ΩøÁî®ËÄÖÂ∑≤Á∂ìÈõ¢Èñã‰∫Ü"
+#define MSG_NOBODY      "ÁõÆÂâçÁÑ°‰∫∫‰∏äÁ∑ö"
 
-#define MSG_DEL_OK      "ßR∞£ßπ≤¶"
-#define MSG_DEL_CANCEL  "®˙Æ¯ßR∞£"
-#define MSG_DEL_ERROR   "ßR∞£ø˘ª~"
-#define MSG_DEL_NY      "Ω–ΩT©wßR∞£(Y/N)?[N] "
+#define MSG_DEL_OK      "Âà™Èô§ÂÆåÁï¢"
+#define MSG_DEL_CANCEL  "ÂèñÊ∂àÂà™Èô§"
+#define MSG_DEL_ERROR   "Âà™Èô§ÈåØË™§"
+#define MSG_DEL_NY      "Ë´ãÁ¢∫ÂÆöÂà™Èô§(Y/N)?[N] "
 
-#define MSG_FWD_OK      "§Â≥π¬‡±Hßπ¶®!"
-#define MSG_FWD_ERR1    "¬‡±Hø˘ª~: ®t≤Œø˘ª~ system error"
-#define MSG_FWD_ERR2    "¬‡±Hø˘ª~: ¶Ïß}ø˘ª~ address error"
+#define MSG_FWD_OK      "ÊñáÁ´†ËΩâÂØÑÂÆåÊàê!"
+#define MSG_FWD_ERR1    "ËΩâÂØÑÈåØË™§: Á≥ªÁµ±ÈåØË™§ system error"
+#define MSG_FWD_ERR2    "ËΩâÂØÑÈåØË™§: ‰ΩçÂùÄÈåØË™§ address error"
 
-#define MSG_SURE_NY     "Ω–±zΩT©w(Y/N)°H[N] "
-#define MSG_SURE_YN     "Ω–±zΩT©w(Y/N)°H[Y] "
+#define MSG_SURE_NY     "Ë´ãÊÇ®Á¢∫ÂÆö(Y/N)Ôºü[N] "
+#define MSG_SURE_YN     "Ë´ãÊÇ®Á¢∫ÂÆö(Y/N)Ôºü[Y] "
 
-#define MSG_BID         "Ω–øÈ§J¨›™O¶W∫Ÿ: "
-#define MSG_UID         "Ω–øÈ§J®œ•Œ™Ã•N∏π: "
-#define MSG_PASSWD      "Ω–øÈ§J±z™∫±KΩX: "
+#define MSG_BID         "Ë´ãËº∏ÂÖ•ÁúãÊùøÂêçÁ®±: "
+#define MSG_UID         "Ë´ãËº∏ÂÖ•‰ΩøÁî®ËÄÖ‰ª£Ëôü: "
+#define MSG_PASSWD      "Ë´ãËº∏ÂÖ•ÊÇ®ÁöÑÂØÜÁ¢º: "
 
-#define MSG_BIG_BOY     "ß⁄¨O§j´”≠Ù! ^o^Y"
-#define MSG_BIG_GIRL    "•@¨ˆ§j¨¸§k *^-^*"
-#define MSG_LITTLE_BOY  "ß⁄¨O©≥≠}∞’... =)"
-#define MSG_LITTLE_GIRL "≥Ã•i∑R™∫¨¸¨‹! :>"
-#define MSG_MAN         "≥¡∑Ì≥“®˚®˚ (^O^)"
-#define MSG_WOMAN       "•sß⁄§p™¸´º!! /:>"
-#define MSG_PLANT       "¥”™´§]¶≥© ßO≥·.."
-#define MSG_MIME        "ƒq™´¡`®S© ßO§Fßa"
+#define MSG_BIG_BOY     "ÊàëÊòØÂ§ßÂ∏•Âì•! ^o^Y"
+#define MSG_BIG_GIRL    "‰∏ñÁ¥ÄÂ§ßÁæéÂ•≥ *^-^*"
+#define MSG_LITTLE_BOY  "ÊàëÊòØÂ∫ïËø™Âï¶... =)"
+#define MSG_LITTLE_GIRL "ÊúÄÂèØÊÑõÁöÑÁæéÁúâ! :>"
+#define MSG_MAN         "È∫•Áï∂ÂãûÂèîÂèî (^O^)"
+#define MSG_WOMAN       "Âè´ÊàëÂ∞èÈòøÂß®!! /:>"
+#define MSG_PLANT       "Ê§çÁâ©‰πüÊúâÊÄßÂà•Âñî.."
+#define MSG_MIME        "Á§¶Áâ©Á∏ΩÊ≤íÊÄßÂà•‰∫ÜÂêß"
 
-#define ERR_BOARD_OPEN  ".BOARD ∂}±“ø˘ª~"
-#define ERR_BOARD_UPDATE        ".BOARD ßÛ∑s¶≥ª~"
-#define ERR_PASSWD_OPEN ".PASSWDS ∂}±“ø˘ª~"
+#define ERR_BOARD_OPEN  ".BOARD ÈñãÂïüÈåØË™§"
+#define ERR_BOARD_UPDATE        ".BOARD Êõ¥Êñ∞ÊúâË™§"
+#define ERR_PASSWD_OPEN ".PASSWDS ÈñãÂïüÈåØË™§"
 
-#define ERR_BID         "ßA∑dø˘§F∞’°I®S¶≥≥o≠”™O≥·°I"
-#define ERR_UID         "≥o∏Ã®S¶≥≥o≠”§H∞’°I"
-#define ERR_PASSWD      "±KΩX§£πÔ≥·°IΩ–¿À¨d±b∏π§Œ±KΩX§j§pºg¶≥µLøÈ§Jø˘ª~°C"
-#define ERR_FILENAME    "¿…¶W§£•øΩT°I"
+#define ERR_BID         "‰Ω†ÊêûÈåØ‰∫ÜÂï¶ÔºÅÊ≤íÊúâÈÄôÂÄãÊùøÂñîÔºÅ"
+#define ERR_UID         "ÈÄôË£°Ê≤íÊúâÈÄôÂÄã‰∫∫Âï¶ÔºÅ"
+#define ERR_PASSWD      "ÂØÜÁ¢º‰∏çÂ∞çÂñîÔºÅË´ãÊ™¢Êü•Â∏≥ËôüÂèäÂØÜÁ¢ºÂ§ßÂ∞èÂØ´ÊúâÁÑ°Ëº∏ÂÖ•ÈåØË™§„ÄÇ"
+#define ERR_FILENAME    "Ê™îÂêç‰∏çÊ≠£Á¢∫ÔºÅ"
 
-#define TN_ANNOUNCE	"[§Ωßi]"
+#define TN_ANNOUNCE	"[ÂÖ¨Âëä]"
 
-#define STR_AUTHOR1     "ß@™Ã:"
-#define STR_AUTHOR2     "µo´H§H:"
-#define STR_POST1       "¨›™O:"
-#define STR_POST2       "Ø∏§∫:"
+#define STR_AUTHOR1     "‰ΩúËÄÖ:"
+#define STR_AUTHOR2     "Áôº‰ø°‰∫∫:"
+#define STR_POST1       "ÁúãÊùø:"
+#define STR_POST2       "Á´ôÂÖß:"
 
-#define STR_LOGINDAYS	"µn§J¶∏º∆"
-#define STR_LOGINDAYS_QTY "¶∏"
+#define STR_LOGINDAYS	"ÁôªÂÖ•Ê¨°Êï∏"
+#define STR_LOGINDAYS_QTY "Ê¨°"
 
 /* AIDS */
-#define AID_DISPLAYNAME	"§Â≥π•NΩX(AID)"
+#define AID_DISPLAYNAME	"ÊñáÁ´†‰ª£Á¢º(AID)"
 /* end of AIDS */
 
 /* QUERY_ARTICLE_URL */
-#define URL_DISPLAYNAME "§Â≥π∫Ùß}"
+#define URL_DISPLAYNAME "ÊñáÁ´†Á∂≤ÂùÄ"
 /* end of QUERY_ARTICLE_URL */
 
 /* LONG MESSAGES */
-#define MSG_SELECT_BOARD ANSI_COLOR(7) "°i øÔæ‹¨›™O °j" ANSI_RESET "\n" \
-			"Ω–øÈ§J¨›™O¶W∫Ÿ(´ˆ™≈•’¡‰¶€∞ ∑j¥M): "
+#define MSG_SELECT_BOARD ANSI_COLOR(7) "„Äê ÈÅ∏ÊìáÁúãÊùø „Äë" ANSI_RESET "\n" \
+			"Ë´ãËº∏ÂÖ•ÁúãÊùøÂêçÁ®±(ÊåâÁ©∫ÁôΩÈçµËá™ÂãïÊêúÂ∞ã): "
 
 #define MSG_SEPARATOR \
-"¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w"
+"‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ"
 
 /* Flags to getdata input function */
 #define NOECHO       0
@@ -171,7 +171,7 @@
 
 #define EQUSTR 0	/* for strcmp */
 
-/* ¶n§Õ√ˆ´Y */
+/* Â•ΩÂèãÈóú‰øÇ */
 #define IRH 1   /* I reject him.		*/
 #define HRM 2   /* He reject me.		*/
 #define IBH 4   /* I am board friend of him.	*/
@@ -191,7 +191,7 @@
 
 
 /* ----------------------------------------------------- */
-/* §Ù≤yº“¶° √‰¨…©w∏q                                     */
+/* Ê∞¥ÁêÉÊ®°Âºè ÈÇäÁïåÂÆöÁæ©                                     */
 /* ----------------------------------------------------- */
 #define WB_OFO_USER_TOP		7
 #define WB_OFO_USER_BOTTOM	11
@@ -202,7 +202,7 @@
 #define WB_OFO_MSG_LEFT		4
 
 /* ----------------------------------------------------- */
-/* º–√D√˛ßŒ                                              */
+/* Ê®ôÈ°åÈ°ûÂΩ¢                                              */
 /* ----------------------------------------------------- */
 #define SUBJECT_NORMAL      0
 #define SUBJECT_REPLY       1
@@ -210,7 +210,7 @@
 #define SUBJECT_LOCKED      3
 
 /* ----------------------------------------------------- */
-/* ∏s≤’¶W≥Êº“¶°   Ptt                                    */
+/* Áæ§ÁµÑÂêçÂñÆÊ®°Âºè   Ptt                                    */
 /* ----------------------------------------------------- */
 #define FRIEND_OVERRIDE 0
 #define FRIEND_REJECT   1
@@ -221,14 +221,14 @@
 #define BOARD_WATER     6
 #define BOARD_VISABLE   7 
 
-#define LOCK_THIS   1    // lock≥oΩu§£Ø‡≠´Ω∆™±
-#define LOCK_MULTI  2    // lock©“¶≥Ωu§£Ø‡≠´Ω∆™±   
+#define LOCK_THIS   1    // lockÈÄôÁ∑ö‰∏çËÉΩÈáçË§áÁé©
+#define LOCK_MULTI  2    // lockÊâÄÊúâÁ∑ö‰∏çËÉΩÈáçË§áÁé©   
 
 #define MAX_MODES	(127)
 #define MAX_RECOMMENDS  (100)
 
 #define STR_CURSOR      ">"
-#define STR_CURSOR2     "°¥"
+#define STR_CURSOR2     "‚óè"
 #define STR_UNCUR       " "
 #define STR_UNCUR2      "  "
 
@@ -237,7 +237,7 @@
 #define RECVINREPLYING  1
 
 /* ----------------------------------------------------- */
-/* ΩsøËæπøÔ∂µ                                            */
+/* Á∑®ËºØÂô®ÈÅ∏È†Ö                                            */
 /* ----------------------------------------------------- */
 #define EDITFLAG_TEXTONLY   (0x00000001)
 #define EDITFLAG_UPLOAD	    (0x00000002)
@@ -253,7 +253,7 @@
 #define EDIT_ABORTED	-1
 
 /* ----------------------------------------------------- */
-/* ≤·§—´«±`º∆ (xchatd)                                   */
+/* ËÅäÂ§©ÂÆ§Â∏∏Êï∏ (xchatd)                                   */
 /* ----------------------------------------------------- */
 #define EXIT_LOGOUT     0
 #define EXIT_LOSTCONN   -1

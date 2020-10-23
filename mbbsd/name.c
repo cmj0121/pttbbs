@@ -1,7 +1,7 @@
 #include "bbs.h"
 
-#define COMPLETE_MORE_MSG   "«öªÅ¥ÕÁä¥i¦C¥X§ó¦h¶µ¥Ø"
-#define COMPLETE_LIST_TITLE "¬ÛÃö¸ê°T¤@Äýªí"
+#define COMPLETE_MORE_MSG   "æŒ‰ç©ºç™½éµå¯åˆ—å‡ºæ›´å¤šé …ç›®"
+#define COMPLETE_LIST_TITLE "ç›¸é—œè³‡è¨Šä¸€è¦½è¡¨"
 
 void
 ToggleVector(struct Vector *list, int *recipient, const char *listfile, const char *msg)
@@ -195,8 +195,8 @@ usercomplete2(const char *prompt, char *data, const char *defval)
 	.allow_nonexistent_prefix = 1,
     };
 
-    // TODO namecomplete3 ·|§â namelist ªF¦è¥þ³¡ dupe ¤@¥÷¡A¦b¤j¯¸¤W§@­Ó´X¦Ê¦¸
-    // ´N over cpu computation limit ¤F¡F we need a better implementation.
+    // TODO namecomplete3 æœƒæŠŠ namelist æ±è¥¿å…¨éƒ¨ dupe ä¸€ä»½ï¼Œåœ¨å¤§ç«™ä¸Šä½œå€‹å¹¾ç™¾æ¬¡
+    // å°± over cpu computation limit äº†ï¼› we need a better implementation.
     Vector_init_const(&namelist, SHM->userid[0], MAX_USERS, IDLEN+1);
     namecomplete_internal(&nc_int, prompt, data, defval);
 }

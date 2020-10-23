@@ -2,42 +2,42 @@
 #ifndef INCLUDE_PERM_H
 #define INCLUDE_PERM_H
 
-#define MENU_UNREGONLY (-1)	    // ¯S®í­È: ¦b menu ¸Ìªí¥Ü¥¼µù¥U§¹¦¨
-				    // ¦ı¤S«Dguestªº±b¸¹¤~¬İ±o¨ì
+#define MENU_UNREGONLY (-1)	    // ç‰¹æ®Šå€¼: åœ¨ menu è£¡è¡¨ç¤ºæœªè¨»å†Šå®Œæˆ
+				    // ä½†åˆéguestçš„å¸³è™Ÿæ‰çœ‹å¾—åˆ°
 
-#define PERM_BASIC        000000000001 /* °ò¥»Åv¤O       */
-#define PERM_CHAT         000000000002 /* ¶i¤J²á¤Ñ«Ç     */
-#define PERM_PAGE         000000000004 /* §ä¤H²á¤Ñ       */
-#define PERM_POST         000000000010 /* µoªí¤å³¹       */
-#define PERM_LOGINOK      000000000020 /* µù¥Uµ{§Ç»{ÃÒ   */
-#define PERM_MAILLIMIT    000000000040 /* «H¥óµL¤W­­     */
-#define PERM_CLOAK        000000000100 /* ¥Ø«eÁô§Î¤¤     */
-#define PERM_SEECLOAK     000000000200 /* ¬İ¨£§ÔªÌ       */
-#define PERM_XEMPT        000000000400 /* ¥Ã¤[«O¯d±b¸¹   */
-#define PERM_SYSOPHIDE    000000001000 /* ¯¸ªøÁô¨­³N     */
-#define PERM_BM           000000002000 /* ªO¥D           */
-#define PERM_ACCOUNTS     000000004000 /* ±b¸¹Á`ºŞ       */
-#define PERM_CHATROOM     000000010000 /* ²á¤Ñ«ÇÁ`ºŞ     */
-#define PERM_BOARD        000000020000 /* ¬İªOÁ`ºŞ       */
-#define PERM_SYSOP        000000040000 /* ¯¸ªø           */
+#define PERM_BASIC        000000000001 /* åŸºæœ¬æ¬ŠåŠ›       */
+#define PERM_CHAT         000000000002 /* é€²å…¥èŠå¤©å®¤     */
+#define PERM_PAGE         000000000004 /* æ‰¾äººèŠå¤©       */
+#define PERM_POST         000000000010 /* ç™¼è¡¨æ–‡ç«        */
+#define PERM_LOGINOK      000000000020 /* è¨»å†Šç¨‹åºèªè­‰   */
+#define PERM_MAILLIMIT    000000000040 /* ä¿¡ä»¶ç„¡ä¸Šé™     */
+#define PERM_CLOAK        000000000100 /* ç›®å‰éš±å½¢ä¸­     */
+#define PERM_SEECLOAK     000000000200 /* çœ‹è¦‹å¿è€…       */
+#define PERM_XEMPT        000000000400 /* æ°¸ä¹…ä¿ç•™å¸³è™Ÿ   */
+#define PERM_SYSOPHIDE    000000001000 /* ç«™é•·éš±èº«è¡“     */
+#define PERM_BM           000000002000 /* æ¿ä¸»           */
+#define PERM_ACCOUNTS     000000004000 /* å¸³è™Ÿç¸½ç®¡       */
+#define PERM_CHATROOM     000000010000 /* èŠå¤©å®¤ç¸½ç®¡     */
+#define PERM_BOARD        000000020000 /* çœ‹æ¿ç¸½ç®¡       */
+#define PERM_SYSOP        000000040000 /* ç«™é•·           */
 #define PERM_BBSADM       000000100000 /* BBSADM         */
-#define PERM_NOTOP        000000200000 /* ¤£¦C¤J±Æ¦æº]   */
-#define PERM_VIOLATELAW   000000400000 /* ¹Hªk³q½r¤¤     */
-#define PERM_ANGEL        000001000000 /* ¦³¸ê®æ¾á¥ô¤p¤Ñ¨Ï */
-#define PERM_NOREGCODE    000002000000 /* ¤£¤¹³\»{ÃÒ½Xµù¥U */
-#define PERM_VIEWSYSOP    000004000000 /* µøÄ±¯¸ªø       */
-#define PERM_LOGUSER      000010000000 /* Æ[¹î¨Ï¥ÎªÌ¦æÂÜ */
-#define PERM_NOCITIZEN    000020000000 /* İ¶¹Ü¤½Åv       */
-#define PERM_SYSSUPERSUBOP 000040000000 /* ¸s²Õªø         */
-#define PERM_ACCTREG      000100000000 /* ±b¸¹¼f®Ö²Õ     */
-#define PERM_PRG          000200000000 /* µ{¦¡²Õ         */
-#define PERM_ACTION       000400000000 /* ¬¡°Ê²Õ         */
-#define PERM_PAINT        001000000000 /* ¬ü¤u²Õ         */
-#define PERM_POLICE_MAN   002000000000 /* Äµ¹îÁ`ºŞ       */
-#define PERM_SYSSUBOP     004000000000 /* ¤p²Õªø         */
-#define PERM_OLDSYSOP     010000000000 /* °h¥ğ¯¸ªø       */
-#define PERM_POLICE       020000000000 /* Äµ¹î */
-// 32 ­Ó¤w¸g¥ş³¡¥Î¥ú¤F¡C «á­±¨S¦³¤F¡C
+#define PERM_NOTOP        000000200000 /* ä¸åˆ—å…¥æ’è¡Œæ¦œ   */
+#define PERM_VIOLATELAW   000000400000 /* é•æ³•é€šç·ä¸­     */
+#define PERM_ANGEL        000001000000 /* æœ‰è³‡æ ¼æ“”ä»»å°å¤©ä½¿ */
+#define PERM_NOREGCODE    000002000000 /* ä¸å…è¨±èªè­‰ç¢¼è¨»å†Š */
+#define PERM_VIEWSYSOP    000004000000 /* è¦–è¦ºç«™é•·       */
+#define PERM_LOGUSER      000010000000 /* è§€å¯Ÿä½¿ç”¨è€…è¡Œè¹¤ */
+#define PERM_NOCITIZEN    000020000000 /* æ‹å¥ªå…¬æ¬Š       */
+#define PERM_SYSSUPERSUBOP 000040000000 /* ç¾¤çµ„é•·         */
+#define PERM_ACCTREG      000100000000 /* å¸³è™Ÿå¯©æ ¸çµ„     */
+#define PERM_PRG          000200000000 /* ç¨‹å¼çµ„         */
+#define PERM_ACTION       000400000000 /* æ´»å‹•çµ„         */
+#define PERM_PAINT        001000000000 /* ç¾å·¥çµ„         */
+#define PERM_POLICE_MAN   002000000000 /* è­¦å¯Ÿç¸½ç®¡       */
+#define PERM_SYSSUBOP     004000000000 /* å°çµ„é•·         */
+#define PERM_OLDSYSOP     010000000000 /* é€€ä¼‘ç«™é•·       */
+#define PERM_POLICE       020000000000 /* è­¦å¯Ÿ */
+// 32 å€‹å·²ç¶“å…¨éƒ¨ç”¨å…‰äº†ã€‚ å¾Œé¢æ²’æœ‰äº†ã€‚
 
 #define NUMPERMS        32
 
@@ -52,7 +52,7 @@
 #define PERM_NOTIMEOUT  (PERM_SYSOP)
 #define PERM_READMAIL   (PERM_BASIC)
 #define PERM_FORWARD    (PERM_LOGINOK)    /* to do the forwarding */
-#define PERM_INTERNET   (PERM_LOGINOK)  /* ¨­¥÷»{ÃÒ¹LÃöªº¤~¯à±H«H¨ì Internet */
+#define PERM_INTERNET   (PERM_LOGINOK)  /* èº«ä»½èªè­‰éé—œçš„æ‰èƒ½å¯„ä¿¡åˆ° Internet */
 
 #define HasUserPerm(x)  ((cuser.userlevel & (x)) != 0)
 #define HasBasicUserPerm(x)  (HasUserPerm(PERM_BASIC) && HasUserPerm(x))

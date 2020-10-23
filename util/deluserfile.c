@@ -1,4 +1,4 @@
-/* ¦Û°Ê¬åuser¥Ø¿ıÀÉ®×µ{¦¡ */
+/* è‡ªå‹•ç userç›®éŒ„æª”æ¡ˆç¨‹å¼ */
 
 #include "bbs.h"
 
@@ -34,8 +34,8 @@ void del_file(char *userid)
 		strcpy(new_filename, user_home);
 		stampfile(new_filename, &mymail);
 		mymail.filemode = FILE_READ;
-		strcpy(mymail.owner, "[³Æ.§Ñ.¿ı]");
-		strcpy(mymail.title, "¼ö½u°O¿ı");
+		strcpy(mymail.owner, "[å‚™.å¿˜.éŒ„]");
+		strcpy(mymail.title, "ç†±ç·šè¨˜éŒ„");
 
 		sethomefile(log_filename, userid, "writelog");
 		rename(log_filename, new_filename);
@@ -105,7 +105,7 @@ int main(void)
 	{
 	    userid = de->d_name;
 
-	    /* ¹w¨¾¿ù»~ */
+	    /* é é˜²éŒ¯èª¤ */
 	    if (is_validuserid(userid))
 	    {
 		if (!(count++ % 300))

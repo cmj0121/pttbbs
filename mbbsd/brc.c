@@ -2,7 +2,7 @@
 #include "daemons.h"
 
 /**
- * Ãö©ó¥»ÀÉ®×ªº²Ó¸`¡A½Ğ¨£ docs/brc.txt¡C
+ * é—œæ–¼æœ¬æª”æ¡ˆçš„ç´°ç¯€ï¼Œè«‹è¦‹ docs/brc.txtã€‚
  * v3: add last modified time for comment system. double max size.
  *     original time_t as 'create'.
  */
@@ -299,8 +299,8 @@ load_remote_brc() {
                (fd = toconnectex(BRCSTORED_ADDR, 5)) < 0) {
             mvprints(b_lines, 0, (conn_retries == 0) ?
                      ANSI_COLOR(1;31)
-                     "µLªk¸ü¤J³Ì·sªº¬İªO¤wÅª¥¼Åª¸ê®Æ, ±N¨Ï¥Î¤W¦¸³Æ¥÷... (#%d)"
-                     ANSI_RESET: "¥¿¦b¦P¨B¬İªO¤wÅª¥¼Åª¸ê®Æ,½Ğµy­Ô... (#%d)",
+                     "ç„¡æ³•è¼‰å…¥æœ€æ–°çš„çœ‹æ¿å·²è®€æœªè®€è³‡æ–™, å°‡ä½¿ç”¨ä¸Šæ¬¡å‚™ä»½... (#%d)"
+                     ANSI_RESET: "æ­£åœ¨åŒæ­¥çœ‹æ¿å·²è®€æœªè®€è³‡æ–™,è«‹ç¨å€™... (#%d)",
                      conn_retries + 1);
             refresh();
             sleep(1);
@@ -647,15 +647,15 @@ brc_unread(int bid, const char *fname, time4_t modified)
 }
 
 /*
- *  ±q ftime ¸Ó½g¤å³¹¶}©l, ©¹¤W©Î©¹¤U´M§ä²Ä¤@½g¤wÅª¹Lªº¤å³¹
- *    forward == 1: ©¹§ó·sªº¤å³¹§ä (©¹¤U§ä)
+ *  å¾ ftime è©²ç¯‡æ–‡ç« é–‹å§‹, å¾€ä¸Šæˆ–å¾€ä¸‹å°‹æ‰¾ç¬¬ä¸€ç¯‡å·²è®€éçš„æ–‡ç« 
+ *    forward == 1: å¾€æ›´æ–°çš„æ–‡ç« æ‰¾ (å¾€ä¸‹æ‰¾)
  *
- *  °²³]: blist[] ¬O«ö·Ó .create ¥Ñ¤j¦Ó¤p©¹«á±Æ§Ç¦nªº.
- *        blist[] ³Ì«á¤@­Ó¬O .create = 1 (see brc_read_record())
+ *  å‡è¨­: blist[] æ˜¯æŒ‰ç…§ .create ç”±å¤§è€Œå°å¾€å¾Œæ’åºå¥½çš„.
+ *        blist[] æœ€å¾Œä¸€å€‹æ˜¯ .create = 1 (see brc_read_record())
  *
- *  Return: -1 -- ¨S¦³¥ô¦ó¤wÅª¤å³¹ªº¬ö¿ı
- *           0 -- §ä¤£¨ì¥ô¦ó¤wÅªªº¤å³¹
- *           1 -- §ä¨ì¤wÅª¤å³¹, ¨Ã±N¸Ó¤å³¹©ñ¦b result ¤¤¶Ç¦^.
+ *  Return: -1 -- æ²’æœ‰ä»»ä½•å·²è®€æ–‡ç« çš„ç´€éŒ„
+ *           0 -- æ‰¾ä¸åˆ°ä»»ä½•å·²è®€çš„æ–‡ç« 
+ *           1 -- æ‰¾åˆ°å·²è®€æ–‡ç« , ä¸¦å°‡è©²æ–‡ç« æ”¾åœ¨ result ä¸­å‚³å›.
  */
 int
 brc_search_read(int bid, time4_t ftime, int forward, time4_t *result)
@@ -675,13 +675,13 @@ brc_search_read(int bid, time4_t ftime, int forward, time4_t *result)
 
     if( bnum == 0 || !blist ||
         ( bnum == 1 && blist[0].create == 1 ) ) {
-        // ¥»ª©¨S¦³¤wÅª¤å³¹¬ö¿ı (¦³¥i¯à¬O¤Ó¤[¨S¬İ, ¤wÅª¤å³¹¦Cªí³Q¥á±ó, ©Î¬O
-        // ±q¨Ó´N¨S¦³¶i¨Ó¹L³o­Óª© ...).
+        // æœ¬ç‰ˆæ²’æœ‰å·²è®€æ–‡ç« ç´€éŒ„ (æœ‰å¯èƒ½æ˜¯å¤ªä¹…æ²’çœ‹, å·²è®€æ–‡ç« åˆ—è¡¨è¢«ä¸Ÿæ£„, æˆ–æ˜¯
+        // å¾ä¾†å°±æ²’æœ‰é€²ä¾†éé€™å€‹ç‰ˆ ...).
         return -1;
     }
 
     // [0].create is the biggest.
-    // ­º¥ı­n§ä¨ì ftime ©Ò¦bªº°Ï¶¡, µM«á¦Aµø forward ªº­È¨Ó¨ú«e«áªº¤wÅª¤å³¹.
+    // é¦–å…ˆè¦æ‰¾åˆ° ftime æ‰€åœ¨çš„å€é–“, ç„¶å¾Œå†è¦– forward çš„å€¼ä¾†å–å‰å¾Œçš„å·²è®€æ–‡ç« .
     for( i = 0; i < bnum; i++ ) { /* using linear search */
 	if( ftime > blist[i].create ) {
 	    if( forward ) {
@@ -691,12 +691,12 @@ brc_search_read(int bid, time4_t ftime, int forward, time4_t *result)
                     return 0;
                 }
             } else {
-                // ¦^¶Ç¦¹½g¬°¤wÅª¤å³¹
+                // å›å‚³æ­¤ç¯‡ç‚ºå·²è®€æ–‡ç« 
                 if( result ) *result = blist[i].create;
                 return 1;
             }
         }
-        // ´å¼Ğ©Ò¦bªºÀÉ®×¥»¨­´N¬O¤wÅª¹L
+        // æ¸¸æ¨™æ‰€åœ¨çš„æª”æ¡ˆæœ¬èº«å°±æ˜¯å·²è®€é
         else if( ftime == blist[i].create ) {
             if( forward && i ) {
                 goto return_newer;
@@ -706,19 +706,19 @@ brc_search_read(int bid, time4_t ftime, int forward, time4_t *result)
             return 0;
         }
     }
-    // °Ï¶¡¸¨¦b³Ì«á¤@­Óªº«á­± (§ó¦­¤§«eªº¤å³¹)
+    // å€é–“è½åœ¨æœ€å¾Œä¸€å€‹çš„å¾Œé¢ (æ›´æ—©ä¹‹å‰çš„æ–‡ç« )
     if ( forward && i ) {
         goto return_newer;
     }
     return 0;
 
 return_newer:
-    // ¦^¶Ç«á¤@½g¤wÅª¤å³¹
+    // å›å‚³å¾Œä¸€ç¯‡å·²è®€æ–‡ç« 
     if( result ) *result = blist[i - 1].create;
     return 1;
 
 return_older:
-    // ¦^¶Ç«e¤@½g¤wÅª¤å³¹
+    // å›å‚³å‰ä¸€ç¯‡å·²è®€æ–‡ç« 
     if( result ) *result = blist[i + 1].create;
     return 1;
 }

@@ -1,8 +1,8 @@
 #include "bbs.h"
 
-//kcwu: 80x24 ¤@¯ë¨Ï¥ÎªÌ¦W³æ 1.9k, §t header 2.4k
-// ¤@¯ë¤å³¹±À¤å­¶¬ù 2590 bytes
-// ª`·N¹ê»Ú¥i¥ÎªºªÅ¶¡¬° N-1¡C
+//kcwu: 80x24 ä¸€èˆ¬ä½¿ç”¨è€…åå–® 1.9k, å« header 2.4k
+// ä¸€èˆ¬æ–‡ç« æ¨æ–‡é ç´„ 2590 bytes
+// æ³¨æ„å¯¦éš›å¯ç”¨çš„ç©ºé–“ç‚º N-1ã€‚
 #define OBUFSIZE  3072
 #define IBUFSIZE  128
 
@@ -181,7 +181,7 @@ process_pager_keys(int ch)
 	    }
 	    return KEY_INCOMPLETE;
 
-	    // TODO Áà¦º¤Fªº code ¡Aµ¥¦n¤ß¤H refine
+	    // TODO é†œæ­»äº†çš„ code ï¼Œç­‰å¥½å¿ƒäºº refine
 	case Ctrl('R'):
 
 	    if (PAGER_UI_IS(PAGER_UI_OFO))
@@ -218,7 +218,7 @@ process_pager_keys(int ch)
 		    (currutmp->chatid[0] == 2 || currutmp->chatid[0] == 3) &&
 		    water_which->count != 0)
 	    {
-		/* ²Ä¤G¦¸«ö Ctrl-R */
+		/* ç¬¬äºŒæ¬¡æŒ‰ Ctrl-R */
 		watermode = 1;
 		t_display_new();
 		return KEY_INCOMPLETE;
@@ -226,39 +226,39 @@ process_pager_keys(int ch)
 	    else if (watermode == -1 &&
 		    currutmp->msgs[0].pid)
 	    {
-		/* ²Ä¤@¦¸«ö Ctrl-R (¥²¶·¥ı³Q¥á¹L¤ô²y) */
+		/* ç¬¬ä¸€æ¬¡æŒ‰ Ctrl-R (å¿…é ˆå…ˆè¢«ä¸Ÿéæ°´çƒ) */
 		screen_backup_t old_screen;
 		int             my_newfd;
 		scr_dump(&old_screen);
 
-		/* ¦pªG¥¿¦btalkªº¸Ü¥ı¤£³B²z¹ï¤è°e¹L¨Óªº«Ê¥] (¤£¥hselect) */
+		/* å¦‚æœæ­£åœ¨talkçš„è©±å…ˆä¸è™•ç†å°æ–¹é€éä¾†çš„å°åŒ… (ä¸å»select) */
 		my_newfd = vkey_detach();
 		show_call_in(0, 0);
 		watermode = 0;
 #ifndef PLAY_ANGEL
-		my_write(currutmp->msgs[0].pid, "¤ô²y¥á¹L¥h¡G ",
+		my_write(currutmp->msgs[0].pid, "æ°´çƒä¸Ÿéå»ï¼š ",
 			currutmp->msgs[0].userid, WATERBALL_GENERAL, NULL);
 #else
 		switch (currutmp->msgs[0].msgmode) {
 		    case MSGMODE_TALK:
 		    case MSGMODE_WRITE:
 		    case MSGMODE_ALOHA:
-			my_write(currutmp->msgs[0].pid, "¤ô²y¥á¹L¥h¡G ",
+			my_write(currutmp->msgs[0].pid, "æ°´çƒä¸Ÿéå»ï¼š ",
 				 currutmp->msgs[0].userid, WATERBALL_GENERAL, NULL);
 			break;
 		    case MSGMODE_FROMANGEL:
-			my_write(currutmp->msgs[0].pid, "¦A°İ¤@¦¸¡G ",
+			my_write(currutmp->msgs[0].pid, "å†å•ä¸€æ¬¡ï¼š ",
 				 currutmp->msgs[0].userid, WATERBALL_ANGEL, NULL);
 			break;
 		    case MSGMODE_TOANGEL:
-			my_write(currutmp->msgs[0].pid, "¦^µª¤p¥D¤H¡G ",
+			my_write(currutmp->msgs[0].pid, "å›ç­”å°ä¸»äººï¼š ",
 				 currutmp->msgs[0].userid, WATERBALL_ANSWER, NULL);
 			break;
 		}
 #endif
 		vkey_attach(my_newfd);
 
-		/* ÁÙ­ì¿Ã¹õ */
+		/* é‚„åŸè¢å¹• */
 		scr_restore(&old_screen);
 		return KEY_INCOMPLETE;
 	    }
@@ -339,8 +339,8 @@ add_io(int fd, int timeout)
     i_newfd = fd;
     if (timeout) {
 	i_to.tv_sec = timeout;
-	i_to.tv_usec = 16384;	/* Ptt: §ï¦¨16384 Á×§K¤£«ö®Éfor loop¦Ycpu
-				 * time 16384 ¬ù¨C¬í64¦¸ */
+	i_to.tv_usec = 16384;	/* Ptt: æ”¹æˆ16384 é¿å…ä¸æŒ‰æ™‚for loopåƒcpu
+				 * time 16384 ç´„æ¯ç§’64æ¬¡ */
 	i_top = &i_to;
     } else
 	i_top = NULL;
@@ -471,8 +471,8 @@ dogetch(void)
 
     if (currutmp) {
 	syncnow();
-	/* 3 ¬í¤º¶W¹L¨â byte ¤~ºâ active, anti-antiidle.
-	 * ¤£¹L¤è¦VÁäµ¥²Õ¦XÁä¤£¤î 1 byte */
+	/* 3 ç§’å…§è¶…éå…© byte æ‰ç®— active, anti-antiidle.
+	 * ä¸éæ–¹å‘éµç­‰çµ„åˆéµä¸æ­¢ 1 byte */
 	if (now - lastact < 3)
 	    currutmp->lastact = now;
 	lastact = now;

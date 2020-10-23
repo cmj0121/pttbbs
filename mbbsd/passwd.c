@@ -640,14 +640,14 @@ void pwcuInitGuestInfo	()
 {
     int i;
     char *nick[] = {
-	"·¦¤l", "¨©´ß", "¤º¦ç", "Ä_¯S²~", "Â½¨®³½",
-	"¾ð¸­", "¯BµÓ", "¾c¤l", "¼ç¤ô¸¥", "Å]¤ý",
-	"ÅKÅø", "¦Ò¨÷", "¤j¬ü¤k"
+	"æ¤°å­", "è²æ®¼", "å…§è¡£", "å¯¶ç‰¹ç“¶", "ç¿»è»Šé­š",
+	"æ¨¹è‘‰", "æµ®è", "éž‹å­", "æ½›æ°´è‰‡", "é­”çŽ‹",
+	"éµç½", "è€ƒå·", "å¤§ç¾Žå¥³"
     };
 
     i = random() % DIM(nick);
     snprintf(cuser.nickname, sizeof(cuser.nickname),
-	    "®üÃäº}¨Óªº%s", nick[i]);
+	    "æµ·é‚Šæ¼‚ä¾†çš„%s", nick[i]);
     strlcpy(currutmp->nickname, cuser.nickname,
 	    sizeof(currutmp->nickname));
     strlcpy(cuser.realname, "guest", sizeof(cuser.realname));

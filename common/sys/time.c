@@ -5,7 +5,7 @@
 static char cdate_buffer[32];
 
 /**
- * ¶|¦~
+ * é–å¹´
  */
 int is_leap_year(int year)
 {
@@ -13,7 +13,7 @@ int is_leap_year(int year)
 }
 
 /**
- * µ¹¤é´Á¨D¬P®y
+ * çµ¦æ—¥æœŸæ±‚æ˜Ÿåº§
  *
  * @return	1..12
  */
@@ -22,7 +22,7 @@ int getHoroscope(int m, int d)
     if (m > 12 || m < 1)
 	return 1;
 
-    // ¼¯½~ ¤ô²~ Âù³½ ¨d¦Ï ª÷¤û Âù¤l ¥¨ÃÉ ·à¤l ³B¤k ¤Ñ¯¯ ¤ÑÃÈ ®g¤â
+    // æ‘©ç¾¯ æ°´ç“¶ é›™é­š ç‰¡ç¾Š é‡‘ç‰› é›™å­ å·¨èŸ¹ ç…å­ è™•å¥³ å¤©ç§¤ å¤©è  å°„æ‰‹
     const int firstday[12] = {
 	// Reference: http://zh.wikipedia.org/wiki/%E6%98%9F%E5%BA%A7
 	/* Jan. */ 20, 19, 21, 20, 21, 22, 23, 23, 24, 24, 22, 22

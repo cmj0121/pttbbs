@@ -9,7 +9,7 @@ int post_msg2(const char* bname, const char* title, const char *msg,
     fileheader_t    fhdr;
     char	    dirfn[PATHLEN];
 
-    /* ¦b bname ªOµoªí·s¤å³¹ */
+    /* åœ¨ bname æ¿ç™¼è¡¨æ–°æ–‡ç«  */
     setbpath(fname, bname);
     stampfile(fname, &fhdr);
     fp = fopen(fname, "w");
@@ -20,13 +20,13 @@ int post_msg2(const char* bname, const char* title, const char *msg,
     if (!fp)
 	return -1;
 
-    fprintf(fp, "§@ªÌ: %s ¬İªO: %s\n¼ĞÃD: %s \n", author, bname, title);
-    fprintf(fp, "®É¶¡: %s\n", ctime4(&now));
+    fprintf(fp, "ä½œè€…: %s çœ‹æ¿: %s\næ¨™é¡Œ: %s \n", author, bname, title);
+    fprintf(fp, "æ™‚é–“: %s\n", ctime4(&now));
 
     fputs(msg, fp);
     fclose(fp);
 
-    /* ±NÀÉ®×¥[¤J¦Cªí */
+    /* å°‡æª”æ¡ˆåŠ å…¥åˆ—è¡¨ */
     strlcpy(fhdr.title, title, sizeof(fhdr.title));
     strlcpy(fhdr.owner, author, sizeof(fhdr.owner));
     setbdir(dirfn, bname);
@@ -72,9 +72,9 @@ post_change_perm(int oldperm, int newperm, const char *sysopid, const char *user
     // generate log (warning: each line should <= STRLEN*2)
     for (i = 0; i < NUMPERMS; i++) {
 	if (((oldperm >> i) & 1) != ((newperm >> i) & 1)) {
-	    sprintf(s, "   ¯¸ªø" ANSI_COLOR(1;32) "%s%s%s%s" ANSI_RESET "ªºÅv­­\n",
+	    sprintf(s, "   ç«™é•·" ANSI_COLOR(1;32) "%s%s%s%s" ANSI_RESET "çš„æ¬Šé™\n",
 		    sysopid,
-	       (((oldperm >> i) & 1) ? ANSI_COLOR(1;33) "Ãö³¬" : ANSI_COLOR(1;33) "¶}±Ò"),
+	       (((oldperm >> i) & 1) ? ANSI_COLOR(1;33) "é—œé–‰" : ANSI_COLOR(1;33) "é–‹å•Ÿ"),
 		    userid, str_permid[i]);
 	    s += strlen(s);
 	    flag++;
@@ -86,15 +86,15 @@ post_change_perm(int oldperm, int newperm, const char *sysopid, const char *user
 
     clrtobot();
     clear();
-    while (!getdata(5, 0, "½Ğ¿é¤J²z¥Ñ¥H¥Ü­t³d¡G",
+    while (!getdata(5, 0, "è«‹è¼¸å…¥ç†ç”±ä»¥ç¤ºè² è²¬ï¼š",
 		reason, sizeof(reason), DOECHO));
-    sprintf(s, "\n   " ANSI_COLOR(1;37) "¯¸ªø%s­×§ïÅv­­²z¥Ñ¬O¡G%s\n" ANSI_RESET,
+    sprintf(s, "\n   " ANSI_COLOR(1;37) "ç«™é•·%sä¿®æ”¹æ¬Šé™ç†ç”±æ˜¯ï¼š%s\n" ANSI_RESET,
 	    cuser.userid, reason);
 
-    snprintf(title, sizeof(title), "[¦w¥ş³ø§i] ¯¸ªø%s­×§ï%sÅv­­³ø§i",
+    snprintf(title, sizeof(title), "[å®‰å…¨å ±å‘Š] ç«™é•·%sä¿®æ”¹%sæ¬Šé™å ±å‘Š",
 	    cuser.userid, userid);
 
-    post_msg(BN_SECURITY, title, genbuf, "[¨t²Î¦w¥ş§½]");
+    post_msg(BN_SECURITY, title, genbuf, "[ç³»çµ±å®‰å…¨å±€]");
 }
 
 void
@@ -110,30 +110,30 @@ post_violatelaw2(const char *crime, const char *police, const char *reason, cons
     char title[TTLEN+1];
     char msg[ANSILINELEN * 10];
 
-    snprintf(title, sizeof(title), "[³ø§i] %s:%-*s §P¨M", crime,
+    snprintf(title, sizeof(title), "[å ±å‘Š] %s:%-*s åˆ¤æ±º", crime,
 	    (int)(30 - strlen(crime)), reason);
 
     snprintf(msg, sizeof(msg),
-	    ANSI_COLOR(1;32) "%s" ANSI_RESET "§P¨M¡G\n"
-	    "     " ANSI_COLOR(1;32) "%s" ANSI_RESET "¦]"
-            ANSI_COLOR(1;35) "%s" ANSI_RESET "¦æ¬°¡A\n"
-	    "¹H¤Ï¥»¯¸¯¸³W¡A³B¥H" ANSI_COLOR(1;35) "%s" ANSI_RESET
-            "¡A¯S¦¹¤½§i\n\n\n%s\n",
+	    ANSI_COLOR(1;32) "%s" ANSI_RESET "åˆ¤æ±ºï¼š\n"
+	    "     " ANSI_COLOR(1;32) "%s" ANSI_RESET "å› "
+            ANSI_COLOR(1;35) "%s" ANSI_RESET "è¡Œç‚ºï¼Œ\n"
+	    "é•åæœ¬ç«™ç«™è¦ï¼Œè™•ä»¥" ANSI_COLOR(1;35) "%s" ANSI_RESET
+            "ï¼Œç‰¹æ­¤å…¬å‘Š\n\n\n%s\n",
 	    police, crime, reason, result, memo ? memo : "");
 
-    if (!strstr(police, "Äµ¹î")) {
-	post_msg(BN_POLICELOG, title, msg, "[" BBSMNAME "ªk°|]");
+    if (!strstr(police, "è­¦å¯Ÿ")) {
+	post_msg(BN_POLICELOG, title, msg, "[" BBSMNAME "æ³•é™¢]");
 
 	snprintf(msg, sizeof(msg),
-		ANSI_COLOR(1;32) "%s" ANSI_RESET "§P¨M¡G\n"
-		"     " ANSI_COLOR(1;32) "%s" ANSI_RESET "¦]"
-                ANSI_COLOR(1;35) "%s" ANSI_RESET "¦æ¬°¡A\n"
-		"¹H¤Ï¥»¯¸¯¸³W¡A³B¥H" ANSI_COLOR(1;35) "%s" ANSI_RESET
-                "¡A¯S¦¹¤½§i\n\n\n%s\n",
-		"¯¸°ÈÄµ¹î", crime, reason, result, memo ? memo : "");
+		ANSI_COLOR(1;32) "%s" ANSI_RESET "åˆ¤æ±ºï¼š\n"
+		"     " ANSI_COLOR(1;32) "%s" ANSI_RESET "å› "
+                ANSI_COLOR(1;35) "%s" ANSI_RESET "è¡Œç‚ºï¼Œ\n"
+		"é•åæœ¬ç«™ç«™è¦ï¼Œè™•ä»¥" ANSI_COLOR(1;35) "%s" ANSI_RESET
+                "ï¼Œç‰¹æ­¤å…¬å‘Š\n\n\n%s\n",
+		"ç«™å‹™è­¦å¯Ÿ", crime, reason, result, memo ? memo : "");
     }
 
-    post_msg("ViolateLaw", title, msg, "[" BBSMNAME "ªk°|]");
+    post_msg("ViolateLaw", title, msg, "[" BBSMNAME "æ³•é™¢]");
 }
 
 void
@@ -141,12 +141,12 @@ post_newboard(const char *bgroup, const char *bname, const char *bms)
 {
     char            genbuf[ANSILINELEN], title[TTLEN+1];
 
-    snprintf(title, sizeof(title), "[·sªO¦¨¥ß] %s", bname);
+    snprintf(title, sizeof(title), "[æ–°æ¿æˆç«‹] %s", bname);
     snprintf(genbuf, sizeof(genbuf),
-	     "%s ¶}¤F¤@­Ó·sªO %s : %s\n\n·s¥ôªO¥D¬° %s\n\n®¥³ß*^_^*\n",
+	     "%s é–‹äº†ä¸€å€‹æ–°æ¿ %s : %s\n\næ–°ä»»æ¿ä¸»ç‚º %s\n\næ­å–œ*^_^*\n",
 	     cuser.userid, bname, bgroup, bms);
 
-    post_msg("Record", title, genbuf, "[¨t²Î]");
+    post_msg("Record", title, genbuf, "[ç³»çµ±]");
 }
 
 void
@@ -157,13 +157,13 @@ post_policelog2(const char *bname, const char *atitle, const char *action,
     char genbuf[ANSILINELEN], title[TTLEN+1];
 
     snprintf(title, sizeof(title), "[%s][%s] %s by %s", action,
-             toggle ? "¶}±Ò" : "Ãö³¬", bname, cuser.userid);
+             toggle ? "é–‹å•Ÿ" : "é—œé–‰", bname, cuser.userid);
     snprintf(genbuf, sizeof(genbuf),
-	     "%s (%s) %s %s ¬İªO %s ¥\\¯à\n­ì¦] : %s\n%s%s\n\n",
-	     cuser.userid, fromhost, toggle ? "¶}±Ò" : "Ãö³¬", bname, action,
-	     reason, atitle ? "¤å³¹¼ĞÃD : " : "", atitle ? atitle : "");
+	     "%s (%s) %s %s çœ‹æ¿ %s åŠŸ\èƒ½\nåŸå›  : %s\n%s%s\n\n",
+	     cuser.userid, fromhost, toggle ? "é–‹å•Ÿ" : "é—œé–‰", bname, action,
+	     reason, atitle ? "æ–‡ç« æ¨™é¡Œ : " : "", atitle ? atitle : "");
 
-    if (post_msg2(BN_POLICELOG, title, genbuf, "[¨t²Î]", msg_file) == 0) {
+    if (post_msg2(BN_POLICELOG, title, genbuf, "[ç³»çµ±]", msg_file) == 0) {
         if (attach_file)
             AppendTail(attach_file, msg_file, 0);
     }

@@ -2448,14 +2448,14 @@ int main(int argc, char* argv[])
     {
 #if 0
         // DBCS test
-        char *a1 = ANSI_COLOR(1;33) "´ú¸Õ" ANSI_COLOR(34) "¤¤¤å"
-            ANSI_REVERSE "´ú¸Õ" ANSI_RESET "´ú¸Õ"
-            "´ú¸Õa" ANSI_RESET "\n";
+        char *a1 = ANSI_COLOR(1;33) "æ¸¬è©¦" ANSI_COLOR(34) "ä¸­æ–‡"
+            ANSI_REVERSE "æ¸¬è©¦" ANSI_RESET "æ¸¬è©¦"
+            "æ¸¬è©¦a" ANSI_RESET "\n";
         outstr(a1);
         move(0, 2);
-        outstr("¤¤¤å1");
-        outstr(ANSI_COLOR(1;33)"¤¤¤å2");
-        outstr(" ¤¤\x85");
+        outstr("ä¸­æ–‡1");
+        outstr(ANSI_COLOR(1;33)"ä¸­æ–‡2");
+        outstr(" ä¸­\x85");
         outstr("okok herer\x8a");
 
         move(0, 8);
@@ -2475,7 +2475,7 @@ int main(int argc, char* argv[])
         getchar();
 
         clear();
-        outs("¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å¤¤¤å");
+        outs("ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡ä¸­æ–‡");
         move(0, 0);
         outs(" this\xFF (ff)is te.(80 tail)->\x80 (80)");
         refresh();

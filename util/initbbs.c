@@ -106,63 +106,63 @@ static void initBoards() {
 	memset(&b, 0, sizeof(b));
 	
 	strcpy(b.brdname, "SYSOP");
-	strcpy(b.title, "¼T­ù ¡·¯¸ªø¦n!");
+	strcpy(b.title, "å˜°å“© â—ç«™é•·å¥½!");
 	b.brdattr = BRD_POSTMASK;
 	b.level = 0;
 	b.gid = 2;
 	newboard(fp, &b);
 
 	strcpy(b.brdname, "1...........");
-	strcpy(b.title, ".... £U¤¤¥¡¬F©²  ¡m°ªÀ£¦MÀI,«D¤H¥i¼Ä¡n");
+	strcpy(b.title, ".... Î£ä¸­å¤®æ”¿åºœ  ã€Šé«˜å£“å±éšª,éäººå¯æ•µã€‹");
 	b.brdattr = BRD_GROUPBOARD;
 	b.level = PERM_SYSOP;
 	b.gid = 1;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "junk");
-	strcpy(b.title, "µo¹q ¡·Âø¤CÂø¤Kªº©U§£");
+	strcpy(b.title, "ç™¼é›» â—é›œä¸ƒé›œå…«çš„åƒåœ¾");
 	b.brdattr = 0;
 	b.level = PERM_SYSOP;
 	b.gid = 2;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "Security");
-	strcpy(b.title, "µo¹q ¡·¯¸¤º¨t²Î¦w¥ş");
+	strcpy(b.title, "ç™¼é›» â—ç«™å…§ç³»çµ±å®‰å…¨");
 	b.brdattr = 0;
 	b.level = PERM_SYSOP;
 	b.gid = 2;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "2...........");
-	strcpy(b.title, ".... £U¥«¥Á¼s³õ     ³ø§i  ¯¸ªø  £­¡I");
+	strcpy(b.title, ".... Î£å¸‚æ°‘å»£å ´     å ±å‘Š  ç«™é•·  ã„œï¼");
 	b.brdattr = BRD_GROUPBOARD;
 	b.level = 0;
 	b.gid = 1;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, BN_ALLPOST);
-	strcpy(b.title, "¼T­ù ¡·¸óªO¦¡LOCAL·s¤å³¹");
+	strcpy(b.title, "å˜°å“© â—è·¨æ¿å¼LOCALæ–°æ–‡ç« ");
 	b.brdattr = BRD_POSTMASK;
 	b.level = PERM_SYSOP;
 	b.gid = 5;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "deleted");
-	strcpy(b.title, "¼T­ù ¡·¸ê·½¦^¦¬µ©");
+	strcpy(b.title, "å˜°å“© â—è³‡æºå›æ”¶ç­’");
 	b.brdattr = 0;
 	b.level = PERM_BM;
 	b.gid = 5;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "Note");
-	strcpy(b.title, "¼T­ù ¡·°ÊºA¬İªO¤Îºq¦±§ë½Z");
+	strcpy(b.title, "å˜°å“© â—å‹•æ…‹çœ‹æ¿åŠæ­Œæ›²æŠ•ç¨¿");
 	b.brdattr = 0;
 	b.level = 0;
 	b.gid = 5;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "Record");
-	strcpy(b.title, "¼T­ù ¡·§Ú­Ìªº¦¨ªG");
+	strcpy(b.title, "å˜°å“© â—æˆ‘å€‘çš„æˆæœ");
 	b.brdattr = 0 | BRD_POSTMASK;
 	b.level = 0;
 	b.gid = 5;
@@ -170,21 +170,21 @@ static void initBoards() {
 	
 	
 	strcpy(b.brdname, "WhoAmI");
-	strcpy(b.title, "¼T­ù ¡·¨ş¨ş¡A²q²q§Ú¬O½Ö¡I");
+	strcpy(b.title, "å˜°å“© â—å‘µå‘µï¼ŒçŒœçŒœæˆ‘æ˜¯èª°ï¼");
 	b.brdattr = 0;
 	b.level = 0;
 	b.gid = 5;
 	newboard(fp, &b);
 	
 	strcpy(b.brdname, "EditExp");
-	strcpy(b.title, "¼T­ù ¡·½d¥»ºëÆF§ë½Z°Ï");
+	strcpy(b.title, "å˜°å“© â—ç¯„æœ¬ç²¾éˆæŠ•ç¨¿å€");
 	b.brdattr = 0;
 	b.level = 0;
 	b.gid = 5;
 	newboard(fp, &b);
 
 	strcpy(b.brdname, "ALLHIDPOST");
-	strcpy(b.title, "¼T­ù ¡·¸óªO¦¡LOCAL·s¤å³¹(ÁôªO)");
+	strcpy(b.title, "å˜°å“© â—è·¨æ¿å¼LOCALæ–°æ–‡ç« (éš±æ¿)");
 	b.brdattr = BRD_POSTMASK | BRD_HIDE;
 	b.level = PERM_SYSOP;
 	b.gid = 5;
@@ -192,7 +192,7 @@ static void initBoards() {
 	
 #ifdef BN_FIVECHESS_LOG
 	strcpy(b.brdname, BN_FIVECHESS_LOG);
-	strcpy(b.title, "´ÑÃÀ ¡·" BBSNAME "¤­¤l´ÑÃĞ ¯¸¤W¹ï§½¥ş¬ö¿ı");
+	strcpy(b.title, "æ£‹è— â—" BBSNAME "äº”å­æ£‹è­œ ç«™ä¸Šå°å±€å…¨ç´€éŒ„");
 	b.brdattr = BRD_POSTMASK;
 	b.level = PERM_SYSOP;
 	b.gid = 5;
@@ -217,27 +217,27 @@ static void initMan() {
     
     if((fp = fopen("man/boards/N/Note/.DIR", "w"))) {
 	strcpy(f.filename, "SONGBOOK");
-	strcpy(f.title, "¡» ¡iÂI ºq ºq ¥»¡j");
+	strcpy(f.title, "â—† ã€é» æ­Œ æ­Œ æœ¬ã€‘");
 	fwrite(&f, sizeof(f), 1, fp);
 	Mkdir("man/boards/N/Note/SONGBOOK");
 	
 	strcpy(f.filename, "SYS");
-	strcpy(f.title, "¡» <¨t²Î> °ÊºA¬İªO");
+	strcpy(f.title, "â—† <ç³»çµ±> å‹•æ…‹çœ‹æ¿");
 	fwrite(&f, sizeof(f), 1, fp);
 	Mkdir("man/boards/N/Note/SYS");
 		
 	strcpy(f.filename, "SONGO");
-	strcpy(f.title, "¡» <ÂIºq> °ÊºA¬İªO");
+	strcpy(f.title, "â—† <é»æ­Œ> å‹•æ…‹çœ‹æ¿");
 	fwrite(&f, sizeof(f), 1, fp);
 	Mkdir("man/boards/N/Note/SONGO");
 
 	strcpy(f.filename, "AD");
-	strcpy(f.title, "¡» <¼s§i> °ÊºA¬İªO");
+	strcpy(f.title, "â—† <å»£å‘Š> å‹•æ…‹çœ‹æ¿");
 	fwrite(&f, sizeof(f), 1, fp);
 	Mkdir("man/boards/N/Note/AD");
 	
 	strcpy(f.filename, "NEWS");
-	strcpy(f.title, "¡» <·s»D> °ÊºA¬İªO");
+	strcpy(f.title, "â—† <æ–°è> å‹•æ…‹çœ‹æ¿");
 	fwrite(&f, sizeof(f), 1, fp);
 	Mkdir("man/boards/N/Note/NEWS");
 	
@@ -265,10 +265,10 @@ int main(int argc, char **argv)
 {
     if( argc != 2 || strcmp(argv[1], "-DoIt") != 0 ){
 	fprintf(stderr,
-		"Äµ§i!  initbbs¥u¥Î¦b¡u²Ä¤@¦¸¦w¸Ë¡vªº®É­Ô.\n"
-		"­Y±zªº¯¸¥x¤w¸g¤W½u,  initbbs±N·|¯}Ãa±¼­ì¦³¸ê®Æ!\n\n"
-		"±N§â BBS ¦w¸Ë¦b " BBSHOME "\n\n"
-		"½T©w­n°õ¦æ, ½Ğ¨Ï¥Î initbbs -DoIt\n");
+		"è­¦å‘Š!  initbbsåªç”¨åœ¨ã€Œç¬¬ä¸€æ¬¡å®‰è£ã€çš„æ™‚å€™.\n"
+		"è‹¥æ‚¨çš„ç«™å°å·²ç¶“ä¸Šç·š,  initbbså°‡æœƒç ´å£æ‰åŸæœ‰è³‡æ–™!\n\n"
+		"å°‡æŠŠ BBS å®‰è£åœ¨ " BBSHOME "\n\n"
+		"ç¢ºå®šè¦åŸ·è¡Œ, è«‹ä½¿ç”¨ initbbs -DoIt\n");
 	return 1;
     }
 

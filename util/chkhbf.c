@@ -8,7 +8,7 @@ struct {
 
 void usage(void)
 {
-    fprintf(stderr, "³qª¾ÁôªOªO¥D¬O§_¦³ªO¤Í¹L´Á/¤w¸g¹L´Á\n"
+    fprintf(stderr, "é€šçŸ¥éš±æ¿æ¿ä¸»æ˜¯å¦æœ‰æ¿å‹éŽæœŸ/å·²ç¶“éŽæœŸ\n"
 	    "usage: chkhbf [-a] [board name [board name]]\n");
 }
 
@@ -42,36 +42,36 @@ void informBM(char *userid, boardheader_t *bptr, int nEXP)
 
     printf("brdname: %s, BM: %s\n", bptr->brdname, userid);
     fprintf(fp,
-	    "§@ªÌ: ¨t²Î³qª¾.\n"
-	    "¼ÐÃD: Äµ§i: ¶QªOªO¤Í§Y±N¹L´Á/¤w¸g¹L´Á\n"
-	    "®É¶¡: %s\n"
-	    " %s ªºªO¥D±z¦n: \n"
-	    "    ¤U¦C¶QªOªO¤Í§Y±N¹L´Á©Î¤w¸g¹L´Á:\n"
+	    "ä½œè€…: ç³»çµ±é€šçŸ¥.\n"
+	    "æ¨™é¡Œ: è­¦å‘Š: è²´æ¿æ¿å‹å³å°‡éŽæœŸ/å·²ç¶“éŽæœŸ\n"
+	    "æ™‚é–“: %s\n"
+	    " %s çš„æ¿ä¸»æ‚¨å¥½: \n"
+	    "    ä¸‹åˆ—è²´æ¿æ¿å‹å³å°‡éŽæœŸæˆ–å·²ç¶“éŽæœŸ:\n"
 	    "------------------------------------------------------------\n",
 	    CTIMEx(buf, now), bptr->brdname);
     for( i = 0 ; i < nEXP ; ++i )
 	if( explist[i].expire == -1 )
-	    fprintf(fp, "%-15s  ¤w¸g¹L´Á\n", explist[i].userid);
+	    fprintf(fp, "%-15s  å·²ç¶“éŽæœŸ\n", explist[i].userid);
 	else
-	    fprintf(fp, "%-15s  §Y±N¦b %s ¹L´Á\n",
+	    fprintf(fp, "%-15s  å³å°‡åœ¨ %s éŽæœŸ\n",
 		    explist[i].userid, CTIMEx(buf, explist[i].expire));
     fprintf(fp,
 	    "------------------------------------------------------------\n"
-	    "»¡©ú:\n"
-	    "    ¬°¤F¸`¬Ù¨t²Î¸ê·½, ¨t²Î±N¦Û°Ê²M°£±¼¶W¹L¥|­Ó¤ë¥¼¤W¯¸\n"
-	    "ªº¨Ï¥ÎªÌ. ¦¹®É­Y¦³¬Y¦ì±z¤£»{ÃÑªº¨Ï¥ÎªÌ«ê¦nµù¥U¤F¸Ó±b¸¹,\n"
-	    "±N·|µø¬°¶QªOªO¤Í¦Ó©ñ¦æ¶i¤J.\n"
-	    "    «ØÄ³±z¼È®É±N³o¨Ç¨Ï¥ÎªÌ¦Û¶QªOªºªO¤Í¦W³æ¤¤²¾°£.\n"
+	    "èªªæ˜Ž:\n"
+	    "    ç‚ºäº†ç¯€çœç³»çµ±è³‡æº, ç³»çµ±å°‡è‡ªå‹•æ¸…é™¤æŽ‰è¶…éŽå››å€‹æœˆæœªä¸Šç«™\n"
+	    "çš„ä½¿ç”¨è€…. æ­¤æ™‚è‹¥æœ‰æŸä½æ‚¨ä¸èªè­˜çš„ä½¿ç”¨è€…æ°å¥½è¨»å†Šäº†è©²å¸³è™Ÿ,\n"
+	    "å°‡æœƒè¦–ç‚ºè²´æ¿æ¿å‹è€Œæ”¾è¡Œé€²å…¥.\n"
+	    "    å»ºè­°æ‚¨æš«æ™‚å°‡é€™äº›ä½¿ç”¨è€…è‡ªè²´æ¿çš„æ¿å‹åå–®ä¸­ç§»é™¤.\n"
 	    "\n"
-	    "    ³o«Ê«H¥ó¬O¥Ñµ{¦¡¦Û°Êµo¥X, ½Ð¤£­nª½±µ¦^ÂÐ³o«Ê«H. ­Y\n"
-	    "±z¦³¬ÛÃö°ÝÃD½Ð³Â·Ð¦Ü¬ÝªO SYSOP, ©Î¬Oª½±µ»P¬ÝªOÁ`ºÞÁpÃ´. :)\n"
+	    "    é€™å°ä¿¡ä»¶æ˜¯ç”±ç¨‹å¼è‡ªå‹•ç™¼å‡º, è«‹ä¸è¦ç›´æŽ¥å›žè¦†é€™å°ä¿¡. è‹¥\n"
+	    "æ‚¨æœ‰ç›¸é—œå•é¡Œè«‹éº»ç…©è‡³çœ‹æ¿ SYSOP, æˆ–æ˜¯ç›´æŽ¥èˆ‡çœ‹æ¿ç¸½ç®¡è¯ç¹«. :)\n"
 	    "\n"
-	    BBSNAME "¯¸ªø¸s·q¤W"
+	    BBSNAME "ç«™é•·ç¾¤æ•¬ä¸Š"
 	    );
     fclose(fp);
 
-    strcpy(mymail.title, "Äµ§i: ¶QªOªO¤Í§Y±N¹L´Á/¤w¸g¹L´Á");
-    strcpy(mymail.owner, "¨t²Î³qª¾.");
+    strcpy(mymail.title, "è­¦å‘Š: è²´æ¿æ¿å‹å³å°‡éŽæœŸ/å·²ç¶“éŽæœŸ");
+    strcpy(mymail.owner, "ç³»çµ±é€šçŸ¥.");
     sethomedir(filename, userid);
     mailalertuid(uid);
     append_record(filename, &mymail, sizeof(mymail));

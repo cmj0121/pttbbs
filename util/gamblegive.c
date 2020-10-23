@@ -1,4 +1,4 @@
-/* ª§Ä³½ä½L ²£¥Í¬õ¥]¾÷®æ¦¡ */
+/* çˆ­è­°è³­ç›¤ ç”¢ç”Ÿç´…åŒ…æ©Ÿæ ¼å¼ */
 #define _UTIL_C_
 #include "bbs.h"
 
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
     while (fgets(buf,512,fp) )
 	{
-            if(strncmp(buf, "®¥³ß", 4)) continue; 
+            if(strncmp(buf, "æ­å–œ", 4)) continue; 
             userid = strtok(buf+5," ");
             p = strtok(NULL, " ");
             num = atoi(p+4);

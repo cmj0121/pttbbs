@@ -10,11 +10,11 @@ typedef struct {
 #endif
     int xmode;
     int xid;
-    char xname[32];               /* ÀÉ®×¦WºÙ */
-    char owner[80];               /* §@ªÌ (E-mail address) */
-    char nick[50];                /* ¼ÊºÙ */
+    char xname[32];               /* æª”æ¡ˆåç¨± */
+    char owner[80];               /* ä½œè€… (E-mail address) */
+    char nick[50];                /* æš±ç¨± */
     char date[9];                 /* [96/12/01] */
-    char title[72];               /* ¥DÃD (TTLEN + 1) */
+    char title[72];               /* ä¸»é¡Œ (TTLEN + 1) */
     char score;
 #ifdef FOR_WRETCH
     char pad2[4];
@@ -22,12 +22,12 @@ typedef struct {
 } itoc_HDR;
 
 #define ITOC_POST_MARKED     0x00000002      /* marked */
-#define ITOC_POST_BOTTOM1    0x00002000      /* ¸m©³¤å³¹ªº¥¿¥» */
+#define ITOC_POST_BOTTOM1    0x00002000      /* ç½®åº•æ–‡ç« çš„æ­£æœ¬ */
 
-#define ITOC_GEM_RESTRICT    0x0800          /* ­­¨î¯ÅºëµØ°Ï¡A¶· manager ¤~¯à¬İ */
-#define ITOC_GEM_RESERVED    0x1000          /* ­­¨î¯ÅºëµØ°Ï¡A¶· sysop ¤~¯à§ó§ï */
+#define ITOC_GEM_RESTRICT    0x0800          /* é™åˆ¶ç´šç²¾è¯å€ï¼Œé ˆ manager æ‰èƒ½çœ‹ */
+#define ITOC_GEM_RESERVED    0x1000          /* é™åˆ¶ç´šç²¾è¯å€ï¼Œé ˆ sysop æ‰èƒ½æ›´æ”¹ */
 #define ITOC_GEM_FOLDER      0x00010000      /* folder / article */
-#define ITOC_GEM_BOARD       0x00020000      /* ¬İªOºëµØ°Ï */
+#define ITOC_GEM_BOARD       0x00020000      /* çœ‹æ¿ç²¾è¯å€ */
 
 static const char radix32[32] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -64,7 +64,7 @@ int convert(char *fname, char *newpath)
 	    stampfile(newpath, &fhdr);
 
 	    if (trans_man)
-		strlcpy(fhdr.title, "¡º ", sizeof(fhdr.title));
+		strlcpy(fhdr.title, "â—‡ ", sizeof(fhdr.title));
 
 	    if (ihdr.xname[0] == '@')
 		snprintf(buf, sizeof(buf), "%s/@/%s", path, ihdr.xname);
@@ -85,7 +85,7 @@ int convert(char *fname, char *newpath)
 	    stampdir(newpath, &fhdr);
 
 	    if (trans_man)
-		strlcpy(fhdr.title, "¡» ", sizeof(fhdr.title));
+		strlcpy(fhdr.title, "â—† ", sizeof(fhdr.title));
 
 	    convert(ihdr.xname, newpath);
 	}

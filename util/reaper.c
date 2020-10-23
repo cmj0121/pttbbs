@@ -140,9 +140,9 @@ int check_last_login(void *data, int n, userec_t *u) {
     if (u->lastlogin > now + 86400 || u->lastlogin < 0) // should not be newer than now plus one day.
     {
         // invalid record
-        printf("¨Ï¥ÎªÌ %-*s (µn¤J%3d ¦¸, %s%s, %s [%04X])\n ³Ì«áµn¤J¤é´Á²§±` [%04X]: %s",
+        printf("ä½¿ç”¨è€… %-*s (ç™»å…¥%3d æ¬¡, %s%s, %s [%04X])\n æœ€å¾Œç™»å…¥æ—¥æœŸç•°å¸¸ [%04X]: %s",
                 IDLEN, u->userid, u->numlogindays,
-                (u->userlevel & PERM_LOGINOK) ? "¤w¹L»{ÃÒ" : "¥¼¹L»{ÃÒ",
+                (u->userlevel & PERM_LOGINOK) ? "å·²éŽèªè­‰" : "æœªéŽèªè­‰",
                 (u->userlevel & PERM_SYSOP) ? "[SYSOP]" : "",
                 buf,
                 (unsigned)u->firstlogin,
@@ -153,11 +153,11 @@ int check_last_login(void *data, int n, userec_t *u) {
 
         if (u->lastlogin > now)
         {
-            printf(" (­º¦¸µn¤J¤é´Á¤]²§±`)");
+            printf(" (é¦–æ¬¡ç™»å…¥æ—¥æœŸä¹Ÿç•°å¸¸)");
             u->lastlogin = u->firstlogin = 0x362CFC7E;
         }
 
-        printf(" ¤w­×¥¿µn¤J¤é´Á¬°: %s\n", ctime4(&u->lastlogin));
+        printf(" å·²ä¿®æ­£ç™»å…¥æ—¥æœŸç‚º: %s\n", ctime4(&u->lastlogin));
 
         // flush
         passwd_update(n+1, u);

@@ -32,7 +32,7 @@ inc_badpost(const char *userid, int num) {
 }
 
 static char * const badpost_reason[] = {
-    "¼s§i", "¤£·í¥ÎÃã", "¤H¨­§ğÀ»"
+    "å»£å‘Š", "ä¸ç•¶ç”¨è¾­", "äººèº«æ”»æ“Š"
 };
 
 #define DIM(x)	(sizeof(x)/sizeof(x[0]))
@@ -51,13 +51,13 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
     clrtobot();
     for (i = 0; i < (int)DIM(badpost_reason); i++)
 	prints("%d.%s ", i + 1, badpost_reason[i]);
-    prints("%d.%s ", i + 1, "¨ä¥L");
-    prints("0.¨ú®ø°h¤å ");
+    prints("%d.%s ", i + 1, "å…¶ä»–");
+    prints("0.å–æ¶ˆé€€æ–‡ ");
     do {
-        getdata(b_lines - 1, 0, "½Ğ¿ï¾Ü: ", genbuf, 2, NUMECHO);
+        getdata(b_lines - 1, 0, "è«‹é¸æ“‡: ", genbuf, 2, NUMECHO);
         i = genbuf[0] - '1';
         if (i == -1) {
-            vmsg("¨ú®ø³]©w°h¤å¡C");
+            vmsg("å–æ¶ˆè¨­å®šé€€æ–‡ã€‚");
             return -1;
         }
         if (i < 0 || i > (int)DIM(badpost_reason))
@@ -69,10 +69,10 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
     if (i < (int)DIM(badpost_reason)) {
         snprintf(reason, sizeof(reason), "%s", badpost_reason[i]);
     } else if (i == DIM(badpost_reason)) {
-        while (!getdata(b_lines, 0, "½Ğ¿é¤J­ì¦]", reason, 50, DOECHO)) {
-            // ¹ï©ó comment ¥Ø«e¥i¥H­«¨Ó¡A¦ı«Dcomment ¤åª½±µ§R±¼©Ò¥H¨Sªk cancel
+        while (!getdata(b_lines, 0, "è«‹è¼¸å…¥åŸå› ", reason, 50, DOECHO)) {
+            // å°æ–¼ comment ç›®å‰å¯ä»¥é‡ä¾†ï¼Œä½†écomment æ–‡ç›´æ¥åˆªæ‰æ‰€ä»¥æ²’æ³• cancel
             if (comment) {
-                vmsg("¨ú®ø³]©w°h¤å¡C");
+                vmsg("å–æ¶ˆè¨­å®šé€€æ–‡ã€‚");
                 return -1;
             }
             bell();
@@ -81,21 +81,21 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
     }
     assert(i >= 0 && i <= (int)DIM(badpost_reason));
 
-    sprintf(genbuf,"°h¦^%s(%s)", comment ? "±À¤å" : "¤å³¹", reason);
+    sprintf(genbuf,"é€€å›%s(%s)", comment ? "æ¨æ–‡" : "æ–‡ç« ", reason);
 
     if (fhdr) strncat(genbuf, fhdr->title, 64-strlen(genbuf));
 
 #ifdef USE_COOLDOWN
     add_cooldowntime(tusernum, 60);
-    add_posttimes(tusernum, 15); //Ptt: ­áµ² post for 1 hour
+    add_posttimes(tusernum, 15); //Ptt: å‡çµ post for 1 hour
 #endif
 
     if (!(inc_badpost(userid, 1) % 5)){
 	userec_t xuser;
-	post_violatelaw(userid, BBSMNAME "¨t²ÎÄµ¹î",
-		"°h¤å²Ö­p 5 ½g", "»@³æ¤@±i");
-	mail_violatelaw(userid, BBSMNAME "¨t²ÎÄµ¹î",
-		"°h¤å²Ö­p 5 ½g", "»@³æ¤@±i");
+	post_violatelaw(userid, BBSMNAME "ç³»çµ±è­¦å¯Ÿ",
+		"é€€æ–‡ç´¯è¨ˆ 5 ç¯‡", "ç½°å–®ä¸€å¼µ");
+	mail_violatelaw(userid, BBSMNAME "ç³»çµ±è­¦å¯Ÿ",
+		"é€€æ–‡ç´¯è¨ˆ 5 ç¯‡", "ç½°å–®ä¸€å¼µ");
 	kick_all(userid);
 	passwd_sync_query(tusernum, &xuser);
 	xuser.money = moneyof(tusernum);
@@ -106,7 +106,7 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
     }
 
     if (!comment) {
-        log_filef(newpath, LOG_CREAT, "¡° BadPost Reason: %s\n", reason);
+        log_filef(newpath, LOG_CREAT, "â€» BadPost Reason: %s\n", reason);
     }
 
 #ifdef BAD_POST_RECORD
@@ -121,18 +121,18 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
 	    setbpath(rptpath, BAD_POST_RECORD);
 	    stampfile(rptpath, &report_fh);
 
-	    strcpy(report_fh.owner, "[" BBSMNAME "Äµ¹î§½]");
+	    strcpy(report_fh.owner, "[" BBSMNAME "è­¦å¯Ÿå±€]");
 	    snprintf(report_fh.title, sizeof(report_fh.title),
-		    "%s ªO %s ªO¥D°h¦^ %s %s",
-		    currboard, cuser.userid, userid, comment ? "±À¤å" : "¤å³¹");
+		    "%s æ¿ %s æ¿ä¸»é€€å› %s %s",
+		    currboard, cuser.userid, userid, comment ? "æ¨æ–‡" : "æ–‡ç« ");
 	    Copy(newpath, rptpath);
 	    fp = fopen(rptpath, "at");
 
 	    if (fp)
 	    {
-		fprintf(fp, "\n°h¤å­ì¦]: %s\n", genbuf);
+		fprintf(fp, "\né€€æ–‡åŸå› : %s\n", genbuf);
 		if (comment)
-		    fprintf(fp, "\n°h¦^±À¤å¶µ¥Ø:\n%s", comment);
+		    fprintf(fp, "\né€€å›æ¨æ–‡é …ç›®:\n%s", comment);
 		fprintf(fp, "\n");
 		fclose(fp);
 	    }
@@ -153,10 +153,10 @@ int assign_badpost(const char *userid, fileheader_t *fhdr,
 
 int
 reassign_badpost(const char *userid) {
-    // ¦H°h´_Ã@«Í¡A¸É¦H¦ó¨ä¦h¡C¸É¦HµL³qª¾¡A¥Î¤á·d¤£À´¡C
-    // ¥Î¤á­Y³Q¸É¦H²Ö¡AªF²o¦è§è½|¨t²Î¡C
+    // åŠ£é€€å¾©é­å±ï¼Œè£œåŠ£ä½•å…¶å¤šã€‚è£œåŠ£ç„¡é€šçŸ¥ï¼Œç”¨æˆ¶æä¸æ‡‚ã€‚
+    // ç”¨æˆ¶è‹¥è¢«è£œåŠ£ç´¯ï¼Œæ±ç‰½è¥¿æ‰¯ç½µç³»çµ±ã€‚
     //
-    // ©Ò¥H¡A¦pªG¯uªº­n¸É¦H¡A¤@©w­n§iª¾¨Ï¥ÎªÌ¡C
+    // æ‰€ä»¥ï¼Œå¦‚æœçœŸçš„è¦è£œåŠ£ï¼Œä¸€å®šè¦å‘ŠçŸ¥ä½¿ç”¨è€…ã€‚
     userec_t u;
     char title[TTLEN+1];
     char msg[512];
@@ -165,17 +165,17 @@ reassign_badpost(const char *userid) {
     int orig_badpost = 0;
     int uid;
 
-    vs_hdr2(" °h¤å­×¥¿ ", userid);
+    vs_hdr2(" é€€æ–‡ä¿®æ­£ ", userid);
     if ((uid = getuser(userid, &u)) == 0) {
-        vmsgf("§ä¤£¨ì¨Ï¥ÎªÌ %s¡C", userid);
+        vmsgf("æ‰¾ä¸åˆ°ä½¿ç”¨è€… %sã€‚", userid);
         return -1;
     }
     orig_badpost = u.badpost;
-    prints("\n¨Ï¥ÎªÌ %s ªº°h¤å¼Æ¥Ø«e¬°: %d\n", userid, u.badpost);
+    prints("\nä½¿ç”¨è€… %s çš„é€€æ–‡æ•¸ç›®å‰ç‚º: %d\n", userid, u.badpost);
     snprintf(buf, sizeof(buf), "%d", u.badpost);
-    if (!getdata_str(5, 0, "½Õ¾ã°h¤å¼Æ¥Ø¬°: ", buf, sizeof(buf), DOECHO, buf) ||
+    if (!getdata_str(5, 0, "èª¿æ•´é€€æ–‡æ•¸ç›®ç‚º: ", buf, sizeof(buf), DOECHO, buf) ||
         atoi(buf) == u.badpost) {
-        vmsg("°h¤å¼Æ¥Ø¤£ÅÜ¡A¥¼ÅÜ°Ê¡C");
+        vmsg("é€€æ–‡æ•¸ç›®ä¸è®Šï¼Œæœªè®Šå‹•ã€‚");
         return 0;
     }
 
@@ -184,33 +184,33 @@ reassign_badpost(const char *userid) {
     if (u.badpost > orig_badpost) {
         u.timeremovebadpost = adjust_badpost_time(u.timeremovebadpost);
     }
-    prints("\n¨Ï¥ÎªÌ %s ªº°h¤å§Y±N¥Ñ %d §ï¬° %d¡C½Ğ¿é¤J²z¥Ñ(·|±Hµ¹¨Ï¥ÎªÌ)\n",
+    prints("\nä½¿ç”¨è€… %s çš„é€€æ–‡å³å°‡ç”± %d æ”¹ç‚º %dã€‚è«‹è¼¸å…¥ç†ç”±(æœƒå¯„çµ¦ä½¿ç”¨è€…)\n",
            userid, orig_badpost, u.badpost);
-    if (!getdata(7, 0, "²z¥Ñ: ", reason, sizeof(reason), DOECHO)) {
-        vmsg("¿ù»~: ¤£¯àµL²z¥Ñ¡C");
+    if (!getdata(7, 0, "ç†ç”±: ", reason, sizeof(reason), DOECHO)) {
+        vmsg("éŒ¯èª¤: ä¸èƒ½ç„¡ç†ç”±ã€‚");
         return -1;
     }
 
     move(6, 0); clrtobot();
-    prints("¨Ï¥ÎªÌ %s ªº°h¤å¥Ñ %d §ï¬° %d¡C\n²z¥Ñ: %s\n",
+    prints("ä½¿ç”¨è€… %s çš„é€€æ–‡ç”± %d æ”¹ç‚º %dã€‚\nç†ç”±: %s\n",
            userid, orig_badpost, u.badpost, reason);
-    if (!getdata(9, 0, "½T©w¡H [y/N]", buf, 3, LCECHO) || buf[0] != 'y') {
-        vmsg("¿ù»~: ¥¼½T©w¡A©ñ±ó¡C");
+    if (!getdata(9, 0, "ç¢ºå®šï¼Ÿ [y/N]", buf, 3, LCECHO) || buf[0] != 'y') {
+        vmsg("éŒ¯èª¤: æœªç¢ºå®šï¼Œæ”¾æ£„ã€‚");
         return -1;
     }
 
     // GOGOGO
     snprintf(msg, sizeof(msg),
-             "   ¯¸ªø" ANSI_COLOR(1;32) "%s" ANSI_RESET "§â" ANSI_COLOR(1;32)
-             "%s" ANSI_RESET "ªº°h¤å±q" ANSI_COLOR(1;35) "%d" ANSI_RESET
-             "§ï¦¨" ANSI_COLOR(1;35) "%d" ANSI_RESET "\n"
-             "   " ANSI_COLOR(1;37) "­×§ï²z¥Ñ¬O¡G%s" ANSI_RESET,
+             "   ç«™é•·" ANSI_COLOR(1;32) "%s" ANSI_RESET "æŠŠ" ANSI_COLOR(1;32)
+             "%s" ANSI_RESET "çš„é€€æ–‡å¾" ANSI_COLOR(1;35) "%d" ANSI_RESET
+             "æ”¹æˆ" ANSI_COLOR(1;35) "%d" ANSI_RESET "\n"
+             "   " ANSI_COLOR(1;37) "ä¿®æ”¹ç†ç”±æ˜¯ï¼š%s" ANSI_RESET,
              cuser.userid, u.userid, orig_badpost, u.badpost, reason);
     snprintf(title, sizeof(title),
-             "[¦w¥ş³ø§i] ¯¸ªø%s­×§ï%s°h¤å³ø§i", cuser.userid, u.userid);
-    post_msg(BN_SECURITY, title, msg, "[¨t²Î¦w¥ş§½]");
-    mail_log2id_text(u.userid, "[¨t²Î³qª¾] °h¤åÅÜ§ó", msg,
-                     "[¨t²Î¦w¥ş§½]", NA);
+             "[å®‰å…¨å ±å‘Š] ç«™é•·%sä¿®æ”¹%sé€€æ–‡å ±å‘Š", cuser.userid, u.userid);
+    post_msg(BN_SECURITY, title, msg, "[ç³»çµ±å®‰å…¨å±€]");
+    mail_log2id_text(u.userid, "[ç³»çµ±é€šçŸ¥] é€€æ–‡è®Šæ›´", msg,
+                     "[ç³»çµ±å®‰å…¨å±€]", NA);
     passwd_sync_update(uid, &u);
     kick_all(u.userid);
 
