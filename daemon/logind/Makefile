@@ -1,39 +1,20 @@
-# $Id: Makefile 4384 2008-06-28 15:50:14Z wens $
-SRCROOT=	../..
-.include "$(SRCROOT)/pttbbs.mk"
+include Makefile.in
 
-PROGS=          logind
-PROGRAMS=	logind loginc
-UTILDIR=	$(SRCROOT)/util
-UTILOBJ=	$(UTILDIR)/util_var.o
+SRC := $(wildcard *.c)
+OBJ := $(subst .c,.o,$(SRC))
+BIN := loginc logind
 
-LDLIBS+=$(SRCROOT)/common/bbs/libcmbbs.a \
-	$(SRCROOT)/common/sys/libcmsys.a \
-	$(SRCROOT)/common/osdep/libosdep.a \
-	-levent
+LIB     := $(SRCROOT)/common/bbs/llibbbs.a $(SRCROOT)/common/osdep/libosdep.a $(SRCROOT)/common/sys/libsys.a
+CFLAGS  := $(CFLAGS) -DFIONWRITE
+LDFLAGS := $(LDFLAGS) \
+				-L $(SRCROOT)/common/bbs   -lbbs \
+				-L $(SRCROOT)/common/osdep -losdep \
+				-L $(SRCROOT)/common/sys   -lsys
 
-DATETIME!=	date '+%Y%m%d%H%M'
 
-all:	${PROGRAMS}
+.PHONY: all clean
 
-.SUFFIXES: .c .cpp .o
-.c.o:
-	$(CC) $(CFLAGS) -c $*.c
-.cpp.o:
-	$(CXX) $(CXXFLAGS) -c $*.cpp
-
-logind: logind.o 
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $> $(UTILOBJ) $(LDLIBS)
-
-loginc: loginc.o 
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $> $(LDLIBS)
-
-install: $(PROGS)
-	install -d $(BBSHOME)/bin/
-	install -s -p $(PROGS) $(BBSHOME)/bin/logind.$(DATETIME)
-	objcopy --only-keep-debug --compress-debug-sections $(PROGS) $(BBSHOME)/bin/logind.$(DATETIME).debug
-	cd $(BBSHOME)/bin && objcopy --add-gnu-debuglink=logind.$(DATETIME).debug logind.$(DATETIME)
-	@ln -sfv logind.$(DATETIME) $(BBSHOME)/bin/logind
+all: $(BIN)
 
 clean:
-	rm -f *~ ${PROGRAMS} logind.o loginc.o
+	rm -f $(BIN) $(OBJ)

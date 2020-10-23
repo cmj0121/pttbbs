@@ -1,14 +1,24 @@
-# $Id$
+include Makefile.in
 
-SRCROOT:=	../..
-.include "$(SRCROOT)/pttbbs.mk"
+SRC := $(wildcard *.c)
+OBJ := $(subst .c,.o,$(SRC))
+LIB := libbbs.a
 
-SRCS:=	log.c money.c names.c path.c time.c string.c fhdr_stamp.c cache.c \
-    	passwd.c filehdr.c banip.c search.c
-LIB:=	cmbbs
+CFLAGS := $(CFLAGS) -DNEED_SETPROCTITLE
+LDFLAGS := $(LDFLAGS) -L../osdep/libosdep.a
 
-install:
+.PHONY: all clean
 
-all:	$(SRCROOT)/include/var.h .depend
+all: $(LIB)		# build all necessary
 
-.include <bsd.lib.mk>
+clean:			# clean-up temporary file
+	rm -f $(LIB) $(OBJ)
+
+help:  			# show this message
+	@printf "Usage: make [OPTION]\n"
+	@printf "\n"
+	@perl -nle 'print $$& if m{^[\w-]+:.*?#.*$$}' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?#"} {printf "    %-18s %s\n", $$1, $$2}'
+
+$(LIB): $(OBJ)
+	$(AR) -csr $@ $^
