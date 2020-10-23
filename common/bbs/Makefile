@@ -4,7 +4,7 @@ SRC := $(wildcard *.c)
 OBJ := $(subst .c,.o,$(SRC))
 LIB := libbbs.a
 
-CFLAGS := $(CFLAGS) -DNEED_SETPROCTITLE
+CFLAGS := $(CFLAGS)
 LDFLAGS := $(LDFLAGS) -L../osdep/libosdep.a
 
 .PHONY: all clean
