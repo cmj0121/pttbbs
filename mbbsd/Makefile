@@ -40,7 +40,7 @@ vers.c:
 	sh $(SRCROOT)/util/newvers.sh
 
 $(BIN): $(LIB)
-	$(CC) -o $@ $^ $(LDFLAGS) $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
 $(LIB): $(OBJ)
 	$(AR) -csr $@ $^

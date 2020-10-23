@@ -1,6 +1,6 @@
 include Makefile.in
 
-SUBDIR := common mbbsd
+SUBDIR := common mbbsd util
 
 .PHONY: all clean help $(SUBDIR)
 
@@ -21,4 +21,4 @@ $(SUBDIR): $(VAR_H)
 $(VAR_H):	# generate the basic variable header
 	perl $(SRCROOT)/util/parsevar.pl < $(SRCROOT)/mbbsd/var.c > $(SRCROOT)/include/var.h
 
-mbbsd: common
+mbbsd util: common
