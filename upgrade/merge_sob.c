@@ -24,7 +24,7 @@ m_sob(void)
  "    -----------------------------------------------------------------\n"
  "    特別叮嚀:\n"
  "      為了帳號安全,您只有連續十次密碼錯誤的機會,請小心輸入.\n"
- "      連續次錯誤您的變身功\能就會被開罰單並直接通知站長.\n"
+ "      連續次錯誤您的變身功能就會被開罰單並直接通知站長.\n"
  "      請不要在變身過程中不正常斷線, 刻意斷線變半獸人站長不救唷.\n"
 	);
 
@@ -157,7 +157,7 @@ m_sob(void)
 	merge_dir(buf, genbuf, 1);
         strcat(msg, "匯入個人信箱\n");
    }
-   if(getans("是否匯入個人信箱精華區(個人作品集)? (會覆蓋\現有設定) (y/N)")=='y')
+   if(getans("是否匯入個人信箱精華區(個人作品集)? (會覆蓋現有設定) (y/N)")=='y')
    {
         fileheader_t fh;
         sprintf(buf,
@@ -181,7 +181,7 @@ m_sob(void)
           append_record(buf, &fh, sizeof(fh));
          }
    }
-   if(getans("是否匯入好友名單? (會覆蓋\現有設定, ID可能是不同人)? (y/N)")=='y')
+   if(getans("是否匯入好友名單? (會覆蓋現有設定, ID可能是不同人)? (y/N)")=='y')
    {
        sethomefile(genbuf, cuser.userid, "overrides");
        sprintf(buf, "sob/home/%c/%s/overrides",userid[0],userid);

@@ -389,7 +389,7 @@ main_dark(int fd, userinfo_t * uin)
     move(12, 3);
     prints("%s[0勝0敗]" ANSI_COLOR(5;31) "ｖｓ" ANSI_COLOR(1;37) "." ANSI_RESET "%s[0勝0敗]", currutmp->userid, currutmp->mateid);
     outs("\n"
-	 "                                                " ANSI_COLOR(1;36) "╳╱" ANSI_COLOR(1;31) "功\能表" ANSI_COLOR(1;36) "╲╳╲╱╳╲" ANSI_RESET "\n"
+	 "                                                " ANSI_COLOR(1;36) "╳╱" ANSI_COLOR(1;31) "功能表" ANSI_COLOR(1;36) "╲╳╲╱╳╲" ANSI_RESET "\n"
 	 "                                                " ANSI_COLOR(1;36) "╱" ANSI_COLOR(1;33) " ↑←↓→" ANSI_COLOR(1;37) ": " ANSI_COLOR(1;35) "移動" ANSI_RESET "\n"
 	 "                                                " ANSI_COLOR(1;36) "╳" ANSI_COLOR(1;33) " ｓ" ANSI_COLOR(1;37) ": " ANSI_COLOR(1;35) "      選子,翻子" ANSI_RESET "\n"
 	 "                                                " ANSI_COLOR(1;36) "╱" ANSI_COLOR(1;33) " enter" ANSI_COLOR(1;37) ": " ANSI_COLOR(1;35) "   吃棋,放棋" ANSI_RESET "\n"

@@ -467,7 +467,7 @@ query_adbanner_usong_pref_changed(const userec_t *u, char force_yn)
 	"\n\n\n\n"
 	"\n\n\t" ANSI_COLOR(1)
 	"此類由使用者自行發表的文字與圖像並不代表站方立場。" ANSI_RESET
-	"\n\n\t由於心情點播部份較難定義出完整的審核標準，為了避免造成閱\讀者的不快或"
+	"\n\n\t由於心情點播部份較難定義出完整的審核標準，為了避免造成閱讀者的不快或"
 	"\n\n\t誤會，在此要確認您是否希望顯示心情點播內容。"
 	"\n\n\t(若之後想改變此類設定，可至 (U)個人設定區->(U)個人化設定 調整)\n");
     vs_rectangle_simple(1, 1, 78, MAX_ADBANNER_HEIGHT);
@@ -931,7 +931,7 @@ new_register(void)
 
     // Over 18.
     y++;
-    mvouts(y, 0, "本站部份看板可能有限制級內容只適合成年人士閱\讀。");
+    mvouts(y, 0, "本站部份看板可能有限制級內容只適合成年人士閱讀。");
     if (query_yn(y + 1,
 		"您是否年滿十八歲並同意觀看此類看板(若否請輸入n)? [y/n]:"))
 	newuser.over_18 = 1;
@@ -1512,14 +1512,14 @@ u_register(void)
 		u_exit("getuser error");
 		exit(0);
 	    }
-	    mail_muser(cuser, "[註冊成功\囉]", "etc/registeredmail");
+	    mail_muser(cuser, "[註冊成功囉]", "etc/registeredmail");
 #if FOREIGN_REG_DAY > 0
 	    if(HasUserFlag(UF_FOREIGN))
 		mail_muser(cuser, "[出入境管理局]", "etc/foreign_welcome");
 #endif
 	    snprintf(justify, sizeof(justify), "<E-Mail>: %s", Cdate(&now));
 	    pwcuRegCompleteJustify(justify);
-	    outs("\n註冊成功\, 重新上站後將取得完整權限\n"
+	    outs("\n註冊成功, 重新上站後將取得完整權限\n"
 		   "請按下任一鍵跳離後重新上站~ :)");
 	    pressanykey();
 	    u_exit("registed");
@@ -1870,7 +1870,7 @@ regform_accept(const char *userid, const char *justify)
     else
 #endif
     // last: send notification mail
-    mail_log2id(muser.userid, "[系統通知] 註冊成功\ ", "etc/registered",
+    mail_log2id(muser.userid, "[系統通知] 註冊成功 ", "etc/registered",
 	    "[系統通知]", 1, 0);
 }
 

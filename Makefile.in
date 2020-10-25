@@ -1,5 +1,9 @@
 SRCROOT := $(shell git rev-parse --show-toplevel)
-VAR_H   := $(SRCROOT)/include/var.h
+
+VAR_C  := $(SRCROOT)/mbbsd/var.c
+VAR_H  := $(SRCROOT)/include/var.h
+
+MBBSD_UTIL_OBJ := $(SRCROOT)/mbbsd/var.o
 
 CC     := gcc
 CFLAGS := -I $(SRCROOT)/include -DBBSHOME='"$(HOME)"'

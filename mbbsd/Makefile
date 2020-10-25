@@ -26,7 +26,7 @@ LDFLAGS := $(LDFLAGS) $(COMMON_LIB)
 
 .PHONY: all clean
 
-all: $(BIN)
+all: $(BIN) $(MBBSD_UTIL_OBJ)
 
 clean:
 	rm -f $(BIN) $(OBJ) $(LIB) vers.c

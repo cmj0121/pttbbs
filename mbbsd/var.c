@@ -25,7 +25,7 @@ const char * const str_permid[] = {
 #else
     "小天使(本站無效)",
 #endif
-    "不允許\認證碼註冊",	/* PERM_NOREGCODE */
+    "不允許認證碼註冊",	/* PERM_NOREGCODE */
     "視覺站長",			/* PERM_VIEWSYSOP */
     "觀察使用者行蹤",		/* PERM_LOGUSER */
     "禠奪公權",		        /* PERM_NOCITIZEN */
@@ -233,7 +233,7 @@ char           * const ModeTypeTable[] = {
     BBSMNAME2 "量販店",		/* PSALE */
     "發表文章",			/* POSTING */
     "看板列表",			/* READBRD */
-    "閱\讀文章",		/* READING */
+    "閱讀文章",			/* READING */
     "新文章列表",		/* READNEW */
     "選擇看板",			/* SELECT */
     "讀信",			/* RMAIL */

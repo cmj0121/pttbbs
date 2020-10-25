@@ -155,7 +155,7 @@ int u_cancelbadpost(void)
 	   "%s %s 刪除一篇退文 (%d -> %d 篇)\n",
 	   Cdate(&now), cuser.userid, prev, cuser.badpost);
 
-   vmsgf("恭喜您已成功\刪除一篇退文 (由 %d 變為 %d 篇)",
+   vmsgf("恭喜您已成功刪除一篇退文 (由 %d 變為 %d 篇)",
 	   prev, cuser.badpost);
    return 0;
 }
@@ -454,7 +454,7 @@ void Customize(void)
 	"ADBANNER   顯示使用者心情點播(需開啟動態看板)",
 	"MAIL       拒收站外信",
 	"BACKUP     預設備份信件與其它記錄", //"與聊天記錄",
-        "LOGIN      只允許\使用安全連線(ex, ssh)登入",
+	"LOGIN      只允許使用安全連線(ex, ssh)登入",
 	"MYFAV      新板自動進我的最愛",
 	"MYFAV      單色顯示我的最愛",
 	"MODMARK    隱藏文章修改符號(推文/修文) (~)",
@@ -768,7 +768,7 @@ uinfo_query(const char *orig_uid, int adminmode, int unum)
 
         do {
             snprintf(buf, sizeof(buf), x.over_18 ? "y" : "n");
-            mvouts(y, 0, "本站部份看板可能有限制級內容只適合成年人士閱\讀。");
+            mvouts(y, 0, "本站部份看板可能有限制級內容只適合成年人士閱讀。");
             getdata_buf(y+1, 0,"您是否年滿十八歲並同意觀看此類看板"
                         "(若否請輸入n)[y/n]: ", buf, 3, LCECHO);
         } while (buf[0] != 'y' && buf[0] != 'n');
@@ -1115,7 +1115,7 @@ uinfo_query(const char *orig_uid, int adminmode, int unum)
            "且有不少管理/維護的問題，"
            ANSI_COLOR(1;31)
            "所以請停止讓使用者自行申請改大小寫的服務。\n" ANSI_RESET
-           "除非是站務需求(如解決近似ID) 不然請勿使用此功\能改大小寫\n");
+           "除非是站務需求(如解決近似ID) 不然請勿使用此功能改大小寫\n");
         clrtobot();
 
 	if (getdata_str(b_lines - 3, 0, "新的使用者代號：", genbuf, IDLEN + 1,

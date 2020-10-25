@@ -2,9 +2,19 @@ include Makefile.in
 
 SRC := $(wildcard *.c)
 OBJ := $(subst .c,.o,$(SRC))
-BIN := bbsctl
+BIN := $(subst .c,,$(SRC))
 
-LDFLAGS := $(COMMON_LIB) $(LDFLAGS) 
+CFLAGS  := $(CFLAGS) -DPTTBBS_UTIL
+LDFLAGS := $(COMMON_LIB) $(LDFLAGS)
+
+# the binary that could NOT build success
+SKIP_BIN := cleanpasswd reaper uhash_loader writemoney
+
+BIN := $(filter-out $(SKIP_BIN),$(BIN))
+
+BIN_WITHOUT_UTIL := userlist
+
+$(filter-out $(BIN_WITHOUT_UTIL),$(BIN)): LDFLAGS := $(LDFLAGS) $(MBBSD_UTIL_OBJ)
 
 .PHONY: all clean
 

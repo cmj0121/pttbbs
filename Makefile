@@ -7,6 +7,7 @@ SUBDIR := common mbbsd util
 all: $(SUBDIR)		# build all necessary
 
 clean: $(SUBDIR)	# clean-up temporary file
+	rm -f $(VAR_H)
 
 help:  				# show this message
 	@printf "Usage: make [OPTION]\n"
@@ -18,7 +19,9 @@ $(SUBDIR): $(VAR_H)
 	@ln -sf ../Makefile.in $@/Makefile.in
 	$(MAKE) -C $@ $(MAKECMDGOALS)
 
-$(VAR_H):	# generate the basic variable header
-	perl $(SRCROOT)/util/parsevar.pl < $(SRCROOT)/mbbsd/var.c > $(SRCROOT)/include/var.h
+$(VAR_H): $(VAR_C)	# generate the basic variable header
+	perl $(SRCROOT)/util/parsevar.pl < $< > $@
 
 mbbsd util: common
+util: $(MBBSD_UTIL_OBJ)
+$(MBBSD_UTIL_OBJ): $(VAR_C)
