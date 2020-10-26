@@ -1,124 +1,124 @@
-³o½g¤å¥ó»¡©ú§Ö³t¦w¸Ëªº¤èªk,
-¨ä¥L³Ì·s¦w¸Ë¬ÛÃö»¡©ú¥ç¥i°Ñ¦Ò: https://github.com/ptt/pttbbs/wiki ¤º®e
+é€™ç¯‡æ–‡ä»¶èªªæ˜å¿«é€Ÿå®‰è£çš„æ–¹æ³•,
+å…¶ä»–æœ€æ–°å®‰è£ç›¸é—œèªªæ˜äº¦å¯åƒè€ƒ: https://github.com/ptt/pttbbs/wiki å…§å®¹
 
 ==============
-¥H root ªºÅv­­
+ä»¥ root çš„æ¬Šé™
 ==============
 
- ¦b¥D¾÷¤W¥[¤J¨â­Ó UID ¬° 9999 ªº±b¸¹¡A¤À§O¨ú¦W¬° bbs »P bbsadm¡C
- ®a¥Ø¿ı³]¬° /home/bbs¡AGroup «h¨ú¦W¥s bbs¡AGID=99¡C
- bbs ªº shell ³]¦¨ /home/bbs/bin/bbsrf¡A¤£³]±K½X¡C
- bbsadm ªº shell ³]¦¨ /bin/sh (©Î csh, bash, ¿ï³ßÅwªº§Y¥i)¨Ã³]©w±K½X¡C
+ åœ¨ä¸»æ©Ÿä¸ŠåŠ å…¥å…©å€‹ UID ç‚º 9999 çš„å¸³è™Ÿï¼Œåˆ†åˆ¥å–åç‚º bbs èˆ‡ bbsadmã€‚
+ å®¶ç›®éŒ„è¨­ç‚º /home/bbsï¼ŒGroup å‰‡å–åå« bbsï¼ŒGID=99ã€‚
+ bbs çš„ shell è¨­æˆ /home/bbs/bin/bbsrfï¼Œä¸è¨­å¯†ç¢¼ã€‚
+ bbsadm çš„ shell è¨­æˆ /bin/sh (æˆ– csh, bash, é¸å–œæ­¡çš„å³å¯)ä¸¦è¨­å®šå¯†ç¢¼ã€‚
 
- ¥H Debian µ¥ Linux ¬°¨Ò:
+ ä»¥ Debian ç­‰ Linux ç‚ºä¾‹:
 
- 1. ¥´ vipw, ¥[¤J©³¤U¨â¦æ
+ 1. æ‰“ vipw, åŠ å…¥åº•ä¸‹å…©è¡Œ
 
     bbs::9999:99:PttBBS,,,:/home/bbs:/home/bbs/bin/bbsrf
     bbsadm::9999:99:PttBBS,,,:/home/bbs:/bin/bash
 
- 2. °õ¦æ passwd bbsadm ³] bbsadmªº±K½X
+ 2. åŸ·è¡Œ passwd bbsadm è¨­ bbsadmçš„å¯†ç¢¼
 
- 3. ¦b /etc/group ¤¤¥[¤J¤@¦æ
+ 3. åœ¨ /etc/group ä¸­åŠ å…¥ä¸€è¡Œ
 
     bbs:x:99:
 
- 4. °õ¦æ mkdir /home/bbs
+ 4. åŸ·è¡Œ mkdir /home/bbs
 
- 5. °õ¦æ chown -R bbs:bbs /home/bbs
+ 5. åŸ·è¡Œ chown -R bbs:bbs /home/bbs
 
- 6. °õ¦æ chmod 700 /home/bbs
+ 6. åŸ·è¡Œ chmod 700 /home/bbs
 
- ·íµM¡A§A¤]¥i¥H¥Î adduesr ©Î useradd µ¥µ¥µ{¦¡À°¦£«Ø¥ß»P³]©w¡C
- ¨ä¥¦Àô¹Ò (¦p FreeBSD) ½Ğ¦Û¦æ°Ñ·Ó¬ÛÃö§@·~¨t²Î¨Ï¥Î»¡©ú¡C
+ ç•¶ç„¶ï¼Œä½ ä¹Ÿå¯ä»¥ç”¨ adduesr æˆ– useradd ç­‰ç­‰ç¨‹å¼å¹«å¿™å»ºç«‹èˆ‡è¨­å®šã€‚
+ å…¶å®ƒç’°å¢ƒ (å¦‚ FreeBSD) è«‹è‡ªè¡Œåƒç…§ç›¸é—œä½œæ¥­ç³»çµ±ä½¿ç”¨èªªæ˜ã€‚
 
 ====================
-¥H¤U¥Î bbsadm ªº¨­¥÷
+ä»¥ä¸‹ç”¨ bbsadm çš„èº«ä»½
 ====================
 
- 7. ±z¥i¥H³z¹L¤U¦C¤è¦¡¤U¸ü¨ì¥»¯¸ªº­ì©lµ{¦¡½X:
+ 7. æ‚¨å¯ä»¥é€éä¸‹åˆ—æ–¹å¼ä¸‹è¼‰åˆ°æœ¬ç«™çš„åŸå§‹ç¨‹å¼ç¢¼:
     https://github.com/ptt/pttbbs
-    ³o¬O¥Ø«e¥D­n¶}µoªºª©¥», ¤]¬O§å½ğ½ğ¹ê·~§{©M§å½ğ½ğ¨ß¨â­Ó¯¸¥x
-    ©Ò¨Ï¥Îªºª©¥». ¦b³o­Óª©¥»¤¤§t¦³³Ì·sªºµ{¦¡, ¦ı¬O¥i¯à·|¤£Ã­©w,
-    ¦³ bug, ¬Æ¦Ü©M¤§«eªºª©¥»¤£¬Û®e. «ØÄ³±z¦³°òÂ¦ªºµ{¦¡¯à¤O, ¨Ã
-    ÀH®Éª`·N PttCurrent ¬İªO (¦b telnet://ptt.cc ¤¤, ©Î¥i¥H¨Ï¥Î
-    ºô­¶ª©¥» http://www.ptt.cc/bbs/PttCurrent/index.html) , ¤×
-    ¨ä·í±z¦b§ó·sµ{¦¡ªº®É­Ô.
+    é€™æ˜¯ç›®å‰ä¸»è¦é–‹ç™¼çš„ç‰ˆæœ¬, ä¹Ÿæ˜¯æ‰¹è¸¢è¸¢å¯¦æ¥­åŠå’Œæ‰¹è¸¢è¸¢å…”å…©å€‹ç«™å°
+    æ‰€ä½¿ç”¨çš„ç‰ˆæœ¬. åœ¨é€™å€‹ç‰ˆæœ¬ä¸­å«æœ‰æœ€æ–°çš„ç¨‹å¼, ä½†æ˜¯å¯èƒ½æœƒä¸ç©©å®š,
+    æœ‰ bug, ç”šè‡³å’Œä¹‹å‰çš„ç‰ˆæœ¬ä¸ç›¸å®¹. å»ºè­°æ‚¨æœ‰åŸºç¤çš„ç¨‹å¼èƒ½åŠ›, ä¸¦
+    éš¨æ™‚æ³¨æ„ PttCurrent çœ‹æ¿ (åœ¨ telnet://ptt.cc ä¸­, æˆ–å¯ä»¥ä½¿ç”¨
+    ç¶²é ç‰ˆæœ¬ http://www.ptt.cc/bbs/PttCurrent/index.html) , å°¤
+    å…¶ç•¶æ‚¨åœ¨æ›´æ–°ç¨‹å¼çš„æ™‚å€™.
 
     git clone http://github.com/ptt/pttbbs
 
-    ±z¥i¥H¦b¸Ó¥Ø¿ı¤Uª½±µ³z¹L git pull §ó·s¦Ü pttbbs ³Ì·sªº·½½X. ¦p:
+    æ‚¨å¯ä»¥åœ¨è©²ç›®éŒ„ä¸‹ç›´æ¥é€é git pull æ›´æ–°è‡³ pttbbs æœ€æ–°çš„æºç¢¼. å¦‚:
     cd /home/bbs/pttbbs; git pull; git rebase
 
- 8. ¤Á´«¨ì pttbbs ªº¥Ø¿ı¤U ( cd /home/bbs/pttbbs )
+ 8. åˆ‡æ›åˆ° pttbbs çš„ç›®éŒ„ä¸‹ ( cd /home/bbs/pttbbs )
 
- 9. ¦pªG±zªº pttbbs.conf¨Ã¤£¦s¦b, ¥i¥H«ş¤@¥÷¹w³]ªº¨Ó¥Î:
+ 9. å¦‚æœæ‚¨çš„ pttbbs.confä¸¦ä¸å­˜åœ¨, å¯ä»¥æ‹·ä¸€ä»½é è¨­çš„ä¾†ç”¨:
      cp sample/pttbbs.conf pttbbs.conf
 
- 10.¨Ì¾Ú±zªº¶·¨D, ­×§ï pttbbs.conf
-    ½Ğª`·N, ¹w³]ªº pttbbs.conf¬Oµ¹¬Û·í¤j³W¼Òªº bbs¥Îªº.
-    ³q±`±z¶·­n¶i¦æ­×§ï¥H²Å¦X±zªº¶·¨D.
+ 10.ä¾æ“šæ‚¨çš„é ˆæ±‚, ä¿®æ”¹ pttbbs.conf
+    è«‹æ³¨æ„, é è¨­çš„ pttbbs.confæ˜¯çµ¦ç›¸ç•¶å¤§è¦æ¨¡çš„ bbsç”¨çš„.
+    é€šå¸¸æ‚¨é ˆè¦é€²è¡Œä¿®æ”¹ä»¥ç¬¦åˆæ‚¨çš„é ˆæ±‚.
 
-    ¦pªG¬O¦b 64bit ªº§@·~¨t²Î½sÄ¶¦w¸Ë PttBBS
-    ½Ğ°O±o¦b pttbbs.conf ¨ú®ø¥H¤U¨â­Ó©w¸qªºµù¸Ñ¡G
+    å¦‚æœæ˜¯åœ¨ 64bit çš„ä½œæ¥­ç³»çµ±ç·¨è­¯å®‰è£ PttBBS
+    è«‹è¨˜å¾—åœ¨ pttbbs.conf å–æ¶ˆä»¥ä¸‹å…©å€‹å®šç¾©çš„è¨»è§£ï¼š
 
     #define SHMALIGNEDSIZE (1048576*4)
     #define TIMET64
 
-    * ¦pªG±z¬O¥Î Linux ¨t²Î, ½Ğ¥ı¦w¸Ë pmake, µM«á±N make alias ¦¨ pmake *
-    * ¦pªG±z¬O¥Î MacOSX ¨t²Î, ½Ğ¥ı¥Ñ ports ¦w¸Ë bmake,
-      µM«á±N make alias ¦¨ pmake *
+    * å¦‚æœæ‚¨æ˜¯ç”¨ Linux ç³»çµ±, è«‹å…ˆå®‰è£ pmake, ç„¶å¾Œå°‡ make alias æˆ pmake *
+    * å¦‚æœæ‚¨æ˜¯ç”¨ MacOSX ç³»çµ±, è«‹å…ˆç”± ports å®‰è£ bmake,
+      ç„¶å¾Œå°‡ make alias æˆ pmake *
 
-    ¥H¤U¬O½sÄ¶«e«ØÄ³¥ı¦w¸Ëªº®M¥ó²M³æ¡A
-    ¥i¥H¥Î apt / yum µ¥®M¥óºŞ²z­û«ü¥OÀË¬d¦Û¤v¦³¨S¦³¦w¸Ë¨ì¡G
+    ä»¥ä¸‹æ˜¯ç·¨è­¯å‰å»ºè­°å…ˆå®‰è£çš„å¥—ä»¶æ¸…å–®ï¼Œ
+    å¯ä»¥ç”¨ apt / yum ç­‰å¥—ä»¶ç®¡ç†å“¡æŒ‡ä»¤æª¢æŸ¥è‡ªå·±æœ‰æ²’æœ‰å®‰è£åˆ°ï¼š
     bmake, ccache, clang, gcc, git, libevent-dev/libevent-devel,
     pkg-config/pkgconfig/pkgconf, python
 
- 11.(¦b /home/bbs/pttbbs ¤U)  °õ¦æ make clean; make all install
+ 11.(åœ¨ /home/bbs/pttbbs ä¸‹)  åŸ·è¡Œ make clean; make all install
 
- 12.¦pªG¬O·s¬[°_¨Óªº¯¸, ½Ğ°õ¦æ cd sample; make install
+ 12.å¦‚æœæ˜¯æ–°æ¶èµ·ä¾†çš„ç«™, è«‹åŸ·è¡Œ cd sample; make install
 
- 13.°õ¦æ cd /home/bbs; bin/initbbs -DoIt
+ 13.åŸ·è¡Œ cd /home/bbs; bin/initbbs -DoIt
 
-¨ä¤¤²Ä 13 ¥H¤Î 14 ¨B¬Oµ¹²Ä¤@¦¸¦w¸Ëªº®É­Ô¨Ï¥Îªº,
-¦pªG±zªº BBS¤¤¤w¸g¦³¸ê®Æ¤F, ½Ğ°È¥²¤£­n°õ¦æ³o¨â­Ó¨BÆJ.
+å…¶ä¸­ç¬¬ 13 ä»¥åŠ 14 æ­¥æ˜¯çµ¦ç¬¬ä¸€æ¬¡å®‰è£çš„æ™‚å€™ä½¿ç”¨çš„,
+å¦‚æœæ‚¨çš„ BBSä¸­å·²ç¶“æœ‰è³‡æ–™äº†, è«‹å‹™å¿…ä¸è¦åŸ·è¡Œé€™å…©å€‹æ­¥é©Ÿ.
 
-°²¦p¤@¤Á³£«Ü¶¶§Qªº¸Ü, ³o¼Ë¤l¤j·§´N¦w¸Ë§¹¤F, ±µ¤U¨Ó¬O±Ò°Ê bbs ªº³¡¥÷.
+å‡å¦‚ä¸€åˆ‡éƒ½å¾ˆé †åˆ©çš„è©±, é€™æ¨£å­å¤§æ¦‚å°±å®‰è£å®Œäº†, æ¥ä¸‹ä¾†æ˜¯å•Ÿå‹• bbs çš„éƒ¨ä»½.
 
- 15.°õ¦æ /home/bbs/bin/shmctl init (*µù1, *µù2)
+ 15.åŸ·è¡Œ /home/bbs/bin/shmctl init (*è¨»1, *è¨»2)
 
- 16.¥Î root °õ¦æ /home/bbs/bin/mbbsd -p 23 -d (*µù3)
-    ¨ä¤¤ -d ¬O«ü©w daemon mode. ­Y³s½u¦³°İÃD»İ­n¤è«K´ú¸Õ®É¥i¥H¥ı¤£¥[ -d¡A
-    ¥Î§Oµ¡ª½±µ¶i¦æ³s½u¥H¤è«K§ä¥X°İÃD¡C
+ 16.ç”¨ root åŸ·è¡Œ /home/bbs/bin/mbbsd -p 23 -d (*è¨»3)
+    å…¶ä¸­ -d æ˜¯æŒ‡å®š daemon mode. è‹¥é€£ç·šæœ‰å•é¡Œéœ€è¦æ–¹ä¾¿æ¸¬è©¦æ™‚å¯ä»¥å…ˆä¸åŠ  -dï¼Œ
+    ç”¨åˆ¥çª—ç›´æ¥é€²è¡Œé€£ç·šä»¥æ–¹ä¾¿æ‰¾å‡ºå•é¡Œã€‚
 
- 17.´ú¸Õ¾ã­Ó¨t²Î¬O§_§¹¦¨:
-    telnet localhost 23 ¬İ¬İ
+ 17.æ¸¬è©¦æ•´å€‹ç³»çµ±æ˜¯å¦å®Œæˆ:
+    telnet localhost 23 çœ‹çœ‹
 
-    new ¤@­Ó±b¸¹¥sSYSOP, µM«á logout¦A login, ³o¼Ë¤l´N·|¾Ö¦³¯¸ªøÅv­­Åo~
-    ¦A new¤@­Ó±b¸¹¥s guest , ³o¼Ë¤l§O¤H´N¥i¥H¥Î guest °ÑÆ[§Aªº¯¸¤F
+    new ä¸€å€‹å¸³è™Ÿå«SYSOP, ç„¶å¾Œ logoutå† login, é€™æ¨£å­å°±æœƒæ“æœ‰ç«™é•·æ¬Šé™å›‰~
+    å† newä¸€å€‹å¸³è™Ÿå« guest , é€™æ¨£å­åˆ¥äººå°±å¯ä»¥ç”¨ guest åƒè§€ä½ çš„ç«™äº†
 
-    (­Y¨t²Î¦^À³¡uµLªk±µ¨ü³o­Ó¥N¸¹¡v¡A½Ğ¥ıÀH«K«Ø¤@­Ó guest0 ªº±b¸¹¡A
-     ¦A´« SYSOP µn¤J¨Ã§â guest0 §ï¦W¬° guest, ¶¶«K§âÅv­­³]¤@©w)
+    (è‹¥ç³»çµ±å›æ‡‰ã€Œç„¡æ³•æ¥å—é€™å€‹ä»£è™Ÿã€ï¼Œè«‹å…ˆéš¨ä¾¿å»ºä¸€å€‹ guest0 çš„å¸³è™Ÿï¼Œ
+     å†æ› SYSOP ç™»å…¥ä¸¦æŠŠ guest0 æ”¹åç‚º guest, é †ä¾¿æŠŠæ¬Šé™è¨­ä¸€å®š)
 
-    ¶}ªO, ¶}¸s²Õ, ¥H¤Î·h°Ê¸s²Õªº¤èªk½Ğ¬İ ptt2.cc PttSrc ªOªº¤åºK
+    é–‹æ¿, é–‹ç¾¤çµ„, ä»¥åŠæ¬å‹•ç¾¤çµ„çš„æ–¹æ³•è«‹çœ‹ ptt2.cc PttSrc æ¿çš„æ–‡æ‘˜
 
- 18.¬ÛÃö¶i¶¥¥\¯à½Ğ°Ñ¦Ò ADVANCE
+ 18.ç›¸é—œé€²éšåŠŸèƒ½è«‹åƒè€ƒ ADVANCE
 
- 19.¬°¤FÅı¶}¾÷ªº®É­Ô·|¦Û¤v§â bbs (¥H¤Î©Ò¶·­nªºµ{¦¡) ¶]°_¨Ó,
-    ­Y±z¨Ï¥Î Linux, ±z¥i¥H°Ñ¦Ò /home/bbs/sample/rc.local ªº¤º®e
-    ¥H root Åv­­«Ø¥ß /etc/rc.local ÀÉ®×±N¸Ó¤º®e½Æ»s¶i¥h, ¨Ã±NÅv­­³]©w¥i°õ¦æ
+ 19.ç‚ºäº†è®“é–‹æ©Ÿçš„æ™‚å€™æœƒè‡ªå·±æŠŠ bbs (ä»¥åŠæ‰€é ˆè¦çš„ç¨‹å¼) è·‘èµ·ä¾†,
+    è‹¥æ‚¨ä½¿ç”¨ Linux, æ‚¨å¯ä»¥åƒè€ƒ /home/bbs/sample/rc.local çš„å…§å®¹
+    ä»¥ root æ¬Šé™å»ºç«‹ /etc/rc.local æª”æ¡ˆå°‡è©²å…§å®¹è¤‡è£½é€²å», ä¸¦å°‡æ¬Šé™è¨­å®šå¯åŸ·è¡Œ
 
-    ¤§«á±z¥i¥H­«·s¶}¾÷¸Õ¸Õ¬İ¬O¤£¬O¦b­«¶}«á¥i¥H¥¿±`¹B§@ :)
+    ä¹‹å¾Œæ‚¨å¯ä»¥é‡æ–°é–‹æ©Ÿè©¦è©¦çœ‹æ˜¯ä¸æ˜¯åœ¨é‡é–‹å¾Œå¯ä»¥æ­£å¸¸é‹ä½œ :)
 
- 20.pttbbs ¶·­n©w®É°õ¦æ¤@¨Ç¤p tool ¨Óºû«ù¨t²Î¥¿±`¹B§@,
-    reload cache, ³Æ¥÷, ¸`¤éÂIºqµ¥¨t²Î¸ê°T¡A©Î¨ä¥¦¯S®í¥~³¡µ{¦¡µ¥µ¥.
-    ½Ğ¥Î bbsªºÅv­­, °õ¦æ crontab -e , ¤º®e½Ğ°Ñ·Ó sample/crontab
-    (¦b¤j³¡¥÷ªº±¡ªp¤U, ª½±µ±N sample/crontab ¤º®e«ş³Æ¶i¥h
-    ©Î¬Oª½±µ crontab /home/bbs/pttbbs/sample/crontab §Y¥i
+ 20.pttbbs é ˆè¦å®šæ™‚åŸ·è¡Œä¸€äº›å° tool ä¾†ç¶­æŒç³»çµ±æ­£å¸¸é‹ä½œ,
+    reload cache, å‚™ä»½, ç¯€æ—¥é»æ­Œç­‰ç³»çµ±è³‡è¨Šï¼Œæˆ–å…¶å®ƒç‰¹æ®Šå¤–éƒ¨ç¨‹å¼ç­‰ç­‰.
+    è«‹ç”¨ bbsçš„æ¬Šé™, åŸ·è¡Œ crontab -e , å…§å®¹è«‹åƒç…§ sample/crontab
+    (åœ¨å¤§éƒ¨ä»½çš„æƒ…æ³ä¸‹, ç›´æ¥å°‡ sample/crontab å…§å®¹æ‹·å‚™é€²å»
+    æˆ–æ˜¯ç›´æ¥ crontab /home/bbs/pttbbs/sample/crontab å³å¯
 
- 21.¦b¬Y¨Ç±¡ªp¤U, pttbbs·|¶·­n¤@¨Ç¨ä¥Lªºµ{¦¡¨Ó»²§U.
+ 21.åœ¨æŸäº›æƒ…æ³ä¸‹, pttbbsæœƒé ˆè¦ä¸€äº›å…¶ä»–çš„ç¨‹å¼ä¾†è¼”åŠ©.
 
-    ¤U­±¦C¥X©Ò¶·­nªºµ{¦¡, µ{¦¡©ÒÄİªº¸ô®|¥i¥H¨Ï¥Î«ü¥O¬d¸ß: type <µ{¦¡¦WºÙ>
+    ä¸‹é¢åˆ—å‡ºæ‰€é ˆè¦çš„ç¨‹å¼, ç¨‹å¼æ‰€å±¬çš„è·¯å¾‘å¯ä»¥ä½¿ç”¨æŒ‡ä»¤æŸ¥è©¢: type <ç¨‹å¼åç¨±>
 
         tar
         gzip
@@ -127,32 +127,32 @@
         mutt
         lynx
 
-    §Ú­Ì¤j³¡¥÷ªº perl script·|¥Î¨ì LocalVars.pm , ¸ÓÀÉ®×¤º­t³d©w¸q
-    ¦U§O¾÷¾¹ªº³]©w (¦p¥~³¡µ{¦¡ªº¸ô®|) .
-    ½Ğ±N /home/bbs/pttbbs/sample/LocalVars.pm ½Æ»s¤@¥÷¦Ü /home/bbs/bin/
-    ¤U, ¨Ã­×¥¿¸ÓÀÉ¥H²Å¦X¶QÀô¹Òªº³]©w.
+    æˆ‘å€‘å¤§éƒ¨ä»½çš„ perl scriptæœƒç”¨åˆ° LocalVars.pm , è©²æª”æ¡ˆå…§è² è²¬å®šç¾©
+    å„åˆ¥æ©Ÿå™¨çš„è¨­å®š (å¦‚å¤–éƒ¨ç¨‹å¼çš„è·¯å¾‘) .
+    è«‹å°‡ /home/bbs/pttbbs/sample/LocalVars.pm è¤‡è£½ä¸€ä»½è‡³ /home/bbs/bin/
+    ä¸‹, ä¸¦ä¿®æ­£è©²æª”ä»¥ç¬¦åˆè²´ç’°å¢ƒçš„è¨­å®š.
 
-    ¥t¥~¦C¥X§Ú­Ì perl script·|¥Î¨ìªº perl module
+    å¦å¤–åˆ—å‡ºæˆ‘å€‘ perl scriptæœƒç”¨åˆ°çš„ perl module
         Mail::Sender
         IO::All
 
-µù:
-1. ³o­Óµ{¦¡¬O¦b initial shared memory ¥Îªº, ¥u¦³¶}¾÷«á²Ä¤@¦¸°õ¦æ, ©Î¬O
-   §A¤â°Ê²M°£ shm «á¤~»İ­n°õ¦æ
+è¨»:
+1. é€™å€‹ç¨‹å¼æ˜¯åœ¨ initial shared memory ç”¨çš„, åªæœ‰é–‹æ©Ÿå¾Œç¬¬ä¸€æ¬¡åŸ·è¡Œ, æˆ–æ˜¯
+   ä½ æ‰‹å‹•æ¸…é™¤ shm å¾Œæ‰éœ€è¦åŸ·è¡Œ
 
-2. ¦pªG±z¶]¤F shmctl init ©Î uhash_loader ¨Ã¨S¦³¬İ¨ì
+2. å¦‚æœæ‚¨è·‘äº† shmctl init æˆ– uhash_loader ä¸¦æ²’æœ‰çœ‹åˆ°
       total XXXXX names loaded.
-   ¦Ó¬O¬İ¨ì¨ä¥Lªº¿ù»~°T®§
-    (¨Ò¦p [shmget error] key = 4cc, errno = 22: Invalid argument)
-   ¥i¯à¬O±z§@·~¨t²Î shared-memory ¤W­­¤£¨¬,
-   ½Ğ°Ñ¦Ò docs/FAQ ¤¤¥[¤j shared-memory ³¡¥÷ªº»¡©ú.
+   è€Œæ˜¯çœ‹åˆ°å…¶ä»–çš„éŒ¯èª¤è¨Šæ¯
+    (ä¾‹å¦‚ [shmget error] key = 4cc, errno = 22: Invalid argument)
+   å¯èƒ½æ˜¯æ‚¨ä½œæ¥­ç³»çµ± shared-memory ä¸Šé™ä¸è¶³,
+   è«‹åƒè€ƒ docs/FAQ ä¸­åŠ å¤§ shared-memory éƒ¨ä»½çš„èªªæ˜.
 
-3. bin/mbbsd -p 23 ¬O«ü©w­n bind 23 port, ¨Ì·Ó UNIX ³W©w, 1024 ¥H¤Uªº port
-   ¶·­n¦³ root Åv­­, ©Ò¥H¦pªG­n bind 23 port ªº¸Ü´N­n¥Î root ¥h°õ¦æ,
-   3000 port «h¤£»İ­n.
-   ½Ğ°Ñ¦Ò docs/ADVANCE ¦w¸Ë¦n bbsctl ,
-   ¤§«á±z´N¥i¥H³z¹L bbsctl ª½±µ¦b¨ä¥LÅv­­¤U (¦p bbsadm )
-   ¨Ó±Ò°Ê¥i¥H bind port 23 ªº mbbsd.
-   ¹ï©ó ptt/ptt2 ³W¼Òªº¶W¯Å¤j¯¸¡AÁÙ¦³¥t¤@­Ó¿ï¾Ü¬O¨Ï¥Î daemon/logind ¡C
+3. bin/mbbsd -p 23 æ˜¯æŒ‡å®šè¦ bind 23 port, ä¾ç…§ UNIX è¦å®š, 1024 ä»¥ä¸‹çš„ port
+   é ˆè¦æœ‰ root æ¬Šé™, æ‰€ä»¥å¦‚æœè¦ bind 23 port çš„è©±å°±è¦ç”¨ root å»åŸ·è¡Œ,
+   3000 port å‰‡ä¸éœ€è¦.
+   è«‹åƒè€ƒ docs/ADVANCE å®‰è£å¥½ bbsctl ,
+   ä¹‹å¾Œæ‚¨å°±å¯ä»¥é€é bbsctl ç›´æ¥åœ¨å…¶ä»–æ¬Šé™ä¸‹ (å¦‚ bbsadm )
+   ä¾†å•Ÿå‹•å¯ä»¥ bind port 23 çš„ mbbsd.
+   å°æ–¼ ptt/ptt2 è¦æ¨¡çš„è¶…ç´šå¤§ç«™ï¼Œé‚„æœ‰å¦ä¸€å€‹é¸æ“‡æ˜¯ä½¿ç”¨ daemon/logind ã€‚
 
-4. ±z¥²¶·¥ı¦w¸Ë git (½Ğ°Ñ¦Ò©x¤èºô¯¸ http://git-scm.com/ )
+4. æ‚¨å¿…é ˆå…ˆå®‰è£ git (è«‹åƒè€ƒå®˜æ–¹ç¶²ç«™ http://git-scm.com/ )

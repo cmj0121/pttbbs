@@ -1,58 +1,58 @@
-³o½g¤å³¹´y­z PttBBS ¤¤±`³Q°İ¨ìªº°İÃD¤Î¸Ñ¨M¤è¦¡.
+é€™ç¯‡æ–‡ç« æè¿° PttBBS ä¸­å¸¸è¢«å•åˆ°çš„å•é¡ŒåŠè§£æ±ºæ–¹å¼.
 
- 1. PttBBSªº°Q½×°Ï¡A¥H¤Î¦p¦ó±H°e­×§ïµ¹©x¤è
- 2. ¦b Linux©³¤U¥X²{ Makefile ¿ù»~.
- 3. ¥[¤j shared-memory
- 4. ³]©w group
- 5. ¤­¤l´Ñ½L¨S¦³¥X²{
- 6. sendmail.cf­n§ïªº¦a¤è(°Ñ¦Ò¥Î) (by DavidYu)
- 7. ¦p¦óÅı¥Î ssh¤è¦¡¶i bbs¤£¥Î±K½X
-
-------------------------------------------------------------------------------
-
-1. PttBBSªº°Q½×°Ï¡A¥H¤Î¦p¦ó±H°e­×§ïµ¹©x¤è
-
-¥D­n°Q½×°Ï¦ì©ó§å½ğ½ğ¹ê·~§{ (telnet://ptt.cc) ªº PttCurrent ¬İªO.
-
-·í§A§@¤F¬Y¨Ç°¶¤jªº­×§ï·Q»P¤H¤À¨É®É (¤£ºŞ¬O¼g¤F­Ó·s¹CÀ¸¡A©Î¬O§ïµ½¤F¤°»ò¬É­±)¡A
-¥i¥H¥Î svn/git/... §@¥X diff ¨Ã¶K¦b PttCurrent ¤W¡A©Î¬Oª½±µ¨ì github ¤W pull request¡C
-
-pttbbs ªº maintainers ·|µø±¡ªp (³q±`¬O¦Ò¼{®Ä¯à¦]¯À»P¦w¥ş°İÃD) ¨M©w­n¤£­n§â
-³o¨Ç­×§ï¾ã¦X¶i©x¤èª©¥»¤¤¡C
-
-¦pªG§Aªº­×§ï¨S¶i¤J©x¤è source tree ¤]¨SÃö«Y¡A¦³¿³½ìªº¨ä¥¦¶}µoªÌ­Ì¥i¥H¦Û¦æ¨ì
-PttCurrent ©Î github ¤W¥h§ì¨ú¨Ã®M¥Î§Aªº­×§ï - ³o¤]¬O Open Source ªººë¯«¡C
+ 1. PttBBSçš„è¨è«–å€ï¼Œä»¥åŠå¦‚ä½•å¯„é€ä¿®æ”¹çµ¦å®˜æ–¹
+ 2. åœ¨ Linuxåº•ä¸‹å‡ºç¾ Makefile éŒ¯èª¤.
+ 3. åŠ å¤§ shared-memory
+ 4. è¨­å®š group
+ 5. äº”å­æ£‹ç›¤æ²’æœ‰å‡ºç¾
+ 6. sendmail.cfè¦æ”¹çš„åœ°æ–¹(åƒè€ƒç”¨) (by DavidYu)
+ 7. å¦‚ä½•è®“ç”¨ sshæ–¹å¼é€² bbsä¸ç”¨å¯†ç¢¼
 
 ------------------------------------------------------------------------------
 
-2. ¦b Linux©³¤U¥X²{ Makefile ¿ù»~.
+1. PttBBSçš„è¨è«–å€ï¼Œä»¥åŠå¦‚ä½•å¯„é€ä¿®æ”¹çµ¦å®˜æ–¹
 
-¨Ï¥Î Linux, ¦b compileªº®É­Ô¥X¦p Makefile:20: *** missing separator.  Stop.
-½Ğ¦w¸Ë pmake, ¨Ã±N make alias ¦¨ pmake
+ä¸»è¦è¨è«–å€ä½æ–¼æ‰¹è¸¢è¸¢å¯¦æ¥­åŠ (telnet://ptt.cc) çš„ PttCurrent çœ‹æ¿.
 
-¦p:     apt-get install pmake
+ç•¶ä½ ä½œäº†æŸäº›å‰å¤§çš„ä¿®æ”¹æƒ³èˆ‡äººåˆ†äº«æ™‚ (ä¸ç®¡æ˜¯å¯«äº†å€‹æ–°éŠæˆ²ï¼Œæˆ–æ˜¯æ”¹å–„äº†ä»€éº¼ç•Œé¢)ï¼Œ
+å¯ä»¥ç”¨ svn/git/... ä½œå‡º diff ä¸¦è²¼åœ¨ PttCurrent ä¸Šï¼Œæˆ–æ˜¯ç›´æ¥åˆ° github ä¸Š pull requestã€‚
+
+pttbbs çš„ maintainers æœƒè¦–æƒ…æ³ (é€šå¸¸æ˜¯è€ƒæ…®æ•ˆèƒ½å› ç´ èˆ‡å®‰å…¨å•é¡Œ) æ±ºå®šè¦ä¸è¦æŠŠ
+é€™äº›ä¿®æ”¹æ•´åˆé€²å®˜æ–¹ç‰ˆæœ¬ä¸­ã€‚
+
+å¦‚æœä½ çš„ä¿®æ”¹æ²’é€²å…¥å®˜æ–¹ source tree ä¹Ÿæ²’é—œä¿‚ï¼Œæœ‰èˆˆè¶£çš„å…¶å®ƒé–‹ç™¼è€…å€‘å¯ä»¥è‡ªè¡Œåˆ°
+PttCurrent æˆ– github ä¸Šå»æŠ“å–ä¸¦å¥—ç”¨ä½ çš„ä¿®æ”¹ - é€™ä¹Ÿæ˜¯ Open Source çš„ç²¾ç¥ã€‚
+
+------------------------------------------------------------------------------
+
+2. åœ¨ Linuxåº•ä¸‹å‡ºç¾ Makefile éŒ¯èª¤.
+
+ä½¿ç”¨ Linux, åœ¨ compileçš„æ™‚å€™å‡ºå¦‚ Makefile:20: *** missing separator.  Stop.
+è«‹å®‰è£ pmake, ä¸¦å°‡ make alias æˆ pmake
+
+å¦‚:     apt-get install pmake
         alias make=pmake
 
-ª`·N:
+æ³¨æ„:
 
-¦pªG§A pmake ¬İ¨ì "Makefile", line 9: Missing dependency operator
-¬O¦]¬°¸Ë¤F pmake 2.x (Debian ¥Ø«e¸Ëªº¬O 1.9x, ¦Ó Mandrake ´N¬O¥Î 2.x)¡C
-PMake 2.x §â .if §ï¦¨ #if ªº®æ¦¡¡A³o·|³y¦¨ÂÂªºÀÉ®×³£¥¢®Ä¡A
-¦Ó¥BÁöµM¦³´£¨Ñ -Z . ¥i¥Î . ¥N´À # ¡A¦ı system.mk µ¥¨t²ÎÀÉ¤´¬° # ©Ò¥H·|Äê¡C
+å¦‚æœä½  pmake çœ‹åˆ° "Makefile", line 9: Missing dependency operator
+æ˜¯å› ç‚ºè£äº† pmake 2.x (Debian ç›®å‰è£çš„æ˜¯ 1.9x, è€Œ Mandrake å°±æ˜¯ç”¨ 2.x)ã€‚
+PMake 2.x æŠŠ .if æ”¹æˆ #if çš„æ ¼å¼ï¼Œé€™æœƒé€ æˆèˆŠçš„æª”æ¡ˆéƒ½å¤±æ•ˆï¼Œ
+è€Œä¸”é›–ç„¶æœ‰æä¾› -Z . å¯ç”¨ . ä»£æ›¿ # ï¼Œä½† system.mk ç­‰ç³»çµ±æª”ä»ç‚º # æ‰€ä»¥æœƒçˆ›ã€‚
 
-PttBBS ·|¤£·|§ï¦¨ PMake v2 ªº®æ¦¡©O¡H ¦]¬° BSD ¨t²Î³£¨SÅÜ¡A©Ò¥H¥i¯à¤£·|§ï¡C
+PttBBS æœƒä¸æœƒæ”¹æˆ PMake v2 çš„æ ¼å¼å‘¢ï¼Ÿ å› ç‚º BSD ç³»çµ±éƒ½æ²’è®Šï¼Œæ‰€ä»¥å¯èƒ½ä¸æœƒæ”¹ã€‚
 
-¸Ñ¨M¤èªk¦³¨âºØ
-(1) ½Ğ¸Ë pmake 1.x ¡AÂ²³æª½±µªº§@ªk
-(2) ¤£¹L¦³®É­Ô§A´N¬O¤£©¯­n¥Î pmake 2.x¡A©Ò¥H¦³­Ó¤pµ{¦¡¥i¥HÀ°§A¦£¡C
-    ¦b pttbbs/ ¥Ø¿ı¤U°õ¦æ util/pmakev2.sh
-    ¥¦·|¦Û°ÊÂà´«¦¨ PMake v2 ªº®æ¦¡¡C
+è§£æ±ºæ–¹æ³•æœ‰å…©ç¨®
+(1) è«‹è£ pmake 1.x ï¼Œç°¡å–®ç›´æ¥çš„ä½œæ³•
+(2) ä¸éæœ‰æ™‚å€™ä½ å°±æ˜¯ä¸å¹¸è¦ç”¨ pmake 2.xï¼Œæ‰€ä»¥æœ‰å€‹å°ç¨‹å¼å¯ä»¥å¹«ä½ å¿™ã€‚
+    åœ¨ pttbbs/ ç›®éŒ„ä¸‹åŸ·è¡Œ util/pmakev2.sh
+    å®ƒæœƒè‡ªå‹•è½‰æ›æˆ PMake v2 çš„æ ¼å¼ã€‚
 
 ------------------------------------------------------------------------------
 
-3. ¥[¤j shared-memory
+3. åŠ å¤§ shared-memory
 
-½Ğ¦b /etc/sysctl.conf ¸Ì­±¥[¤J
+è«‹åœ¨ /etc/sysctl.conf è£¡é¢åŠ å…¥
 
 in FreeBSD:
 
@@ -64,45 +64,45 @@ in Linux:
     kernel.shmmax=104857600
     kernel.shmall=25600
 
-³o¨â­Ó¼Æ­È¥iµø¶·­n½Õ¾ã,
-¦b­«·s¶}¾÷«á·|¥Í®Ä.
+é€™å…©å€‹æ•¸å€¼å¯è¦–é ˆè¦èª¿æ•´,
+åœ¨é‡æ–°é–‹æ©Ÿå¾Œæœƒç”Ÿæ•ˆ.
 
 ------------------------------------------------------------------------------
 
-4. ³]©w group
+4. è¨­å®š group
 
-¥H FreeBSD¬°¨Ò, ±z¶·­n§ó°Ê /etc/group ³o­ÓÀÉ®×,
+ä»¥ FreeBSDç‚ºä¾‹, æ‚¨é ˆè¦æ›´å‹• /etc/group é€™å€‹æª”æ¡ˆ,
 
-/etc/group ªº»yªk¬O:
+/etc/group çš„èªæ³•æ˜¯:
 
 group:passwd:gid:member
 
-    group¬O¸Ó groupªº¦W¦r,
-    passwd¤@¯ë±¡ªp¤U¤£³], ¥H *¥N´À,
-    gid  ¬°¤@­Ó¤Q¶i¦ìªº¼Æ¦r, ³Ì¦n¤£­n©M¨ä¥Lªº­«½Æ,
-    member¬°­ş¨Ç¤H¦³¦b¸Ó¸s²Õ¤º, ¥H³r¸¹ (,)¹j¶}.
+    groupæ˜¯è©² groupçš„åå­—,
+    passwdä¸€èˆ¬æƒ…æ³ä¸‹ä¸è¨­, ä»¥ *ä»£æ›¿,
+    gid  ç‚ºä¸€å€‹åé€²ä½çš„æ•¸å­—, æœ€å¥½ä¸è¦å’Œå…¶ä»–çš„é‡è¤‡,
+    memberç‚ºå“ªäº›äººæœ‰åœ¨è©²ç¾¤çµ„å…§, ä»¥é€—è™Ÿ (,)éš”é–‹.
 
-¸Ô²Ó¥Îªk½Ğ¨£group(5)
+è©³ç´°ç”¨æ³•è«‹è¦‹group(5)
 
-¨Ò¦p±z­n±N aaa, bbb ¥[¤J bbsadm ³o­Ó group, ±z¥i¯à·|¥Î:
+ä¾‹å¦‚æ‚¨è¦å°‡ aaa, bbb åŠ å…¥ bbsadm é€™å€‹ group, æ‚¨å¯èƒ½æœƒç”¨:
 
     bbsadm:*:9876:aaa,bbb
 
-¦b³]©w§¹¦¨«á, ­ì¨Ó¤w¸gµn¤Jªº¨Ï¥ÎªÌ¶·­n­«·sµn¤J,
-¤~·|­«·s¸ü¤J¦Ü·s³]ªº group¤º.
-±z¥i¥H°Ñ¦Ò group(5)
+åœ¨è¨­å®šå®Œæˆå¾Œ, åŸä¾†å·²ç¶“ç™»å…¥çš„ä½¿ç”¨è€…é ˆè¦é‡æ–°ç™»å…¥,
+æ‰æœƒé‡æ–°è¼‰å…¥è‡³æ–°è¨­çš„ groupå…§.
+æ‚¨å¯ä»¥åƒè€ƒ group(5)
 
 ------------------------------------------------------------------------------
 
-5. ¤­¤l´Ñ½L¨S¦³¥X²{
+5. äº”å­æ£‹ç›¤æ²’æœ‰å‡ºç¾
 
-½Ğ±N sample/etc/@five «ş¨©¨ì ~bbs/etc/ §Y¥i.
+è«‹å°‡ sample/etc/@five æ‹·è²åˆ° ~bbs/etc/ å³å¯.
 
 ------------------------------------------------------------------------------
 
-6. sendmail.cf­n§ïªº¦a¤è(°Ñ¦Ò¥Î) (by DavidYu)
+6. sendmail.cfè¦æ”¹çš„åœ°æ–¹(åƒè€ƒç”¨) (by DavidYu)
 
-­nª`·N,tab©Mspace¤£¯à²V¥Î
+è¦æ³¨æ„,tabå’Œspaceä¸èƒ½æ··ç”¨
 
 ######################################
 ###   Ruleset 0 -- Parse Address   ###
@@ -150,25 +150,25 @@ Mbbsmail,       P=/home/bbs/bin/bbsmail, F=lsSDFMhPu, U=bbs, S=10,R=20/40,
 
 ------------------------------------------------------------------------------
 
-7. ¦p¦óÅı¥Î ssh¤è¦¡¶i bbs¤£¥Î±K½X
+7. å¦‚ä½•è®“ç”¨ sshæ–¹å¼é€² bbsä¸ç”¨å¯†ç¢¼
 
-¥ı¦b /etc/ssh/sshd_config ¤¤§â
+å…ˆåœ¨ /etc/ssh/sshd_config ä¸­æŠŠ
 
     #PermitEmptyPasswords no
 
-§ï¦¨
+æ”¹æˆ
 
     PermitEmptyPasswords yes
 
-­Y±z¨Ï¥Î FreeBSD 4.x, ½Ğ§ï /etc/pam.conf, ¦b
+è‹¥æ‚¨ä½¿ç”¨ FreeBSD 4.x, è«‹æ”¹ /etc/pam.conf, åœ¨
 sshd    auth    required        pam_unix.so                     try_first_pass
-³o¦æ³Ì«á­±¦A¥[¤W nullok
+é€™è¡Œæœ€å¾Œé¢å†åŠ ä¸Š nullok
 
-­Y±z¨Ï¥Î FreeBSD 5.x, ½Ğ§ï /etc/pam.d/sshd, ¦b
+è‹¥æ‚¨ä½¿ç”¨ FreeBSD 5.x, è«‹æ”¹ /etc/pam.d/sshd, åœ¨
 auth            required        pam_unix.so             no_warn try_first_pass
-³o¦æ³Ì«á­±¦A¥[¤W nullok
+é€™è¡Œæœ€å¾Œé¢å†åŠ ä¸Š nullok
 
-­Y±z¨Ï¥Î Debian 9, ½Ğ§ï /etc/pam.d/common-auth, ¦b
+è‹¥æ‚¨ä½¿ç”¨ Debian 9, è«‹æ”¹ /etc/pam.d/common-auth, åœ¨
 auth   [success=1 default=ignore]      pam_unix.so nullok_secure
-¥h±¼ nullok_secure «á­±¥[¤W try_first_pass nullok
+å»æ‰ nullok_secure å¾Œé¢åŠ ä¸Š try_first_pass nullok
 

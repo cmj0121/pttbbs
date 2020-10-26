@@ -4,171 +4,171 @@
     also as the "Perfect Term"
 
     API Manual
-    ¨ç¦¡»¡©ú¤â¥U
+    å‡½å¼èªªæ˜æ‰‹å†Š
 
     VERSION 1.1
-    ³Ì«á§ó·s: 2007/12/24 18:00   piaip
+    æœ€å¾Œæ›´æ–°: 2007/12/24 18:00   piaip
 
 =============================================================================
 
-    pfterm ¬O¬°¤F¸Ñ¨M non-ANSI based terminal ³B²z¤éº¥§xÃøªº°İÃD¦Ó½Ï¥Íªº¡C 
-    ÂÂ¦³ªº¨t²Î (screen.c) °²³]¿é¥Xªº¸ê®Æ¥ş¬O³æ¯Âªº ASCII ¤å¦r¡A
-    ©Ò¥H¦b³B²z DBCS¥H¤Î ANSI ½Xªº®É­Ô«D±`®e©ö»~§P©Î¿é¥X¤£¨¬ªº¸ê®Æ¡C
-    ¥t¥~½w½Ä°Ï¦r¦ê¤j¤p (ANSILINELEN) ³y¦¨ªº®ö¶O¤]¬O­Ó°İÃD¡C
+    pfterm æ˜¯ç‚ºäº†è§£æ±º non-ANSI based terminal è™•ç†æ—¥æ¼¸å›°é›£çš„å•é¡Œè€Œèª•ç”Ÿçš„ã€‚ 
+    èˆŠæœ‰çš„ç³»çµ± (screen.c) å‡è¨­è¼¸å‡ºçš„è³‡æ–™å…¨æ˜¯å–®ç´”çš„ ASCII æ–‡å­—ï¼Œ
+    æ‰€ä»¥åœ¨è™•ç† DBCSä»¥åŠ ANSI ç¢¼çš„æ™‚å€™éå¸¸å®¹æ˜“èª¤åˆ¤æˆ–è¼¸å‡ºä¸è¶³çš„è³‡æ–™ã€‚
+    å¦å¤–ç·©è¡å€å­—ä¸²å¤§å° (ANSILINELEN) é€ æˆçš„æµªè²»ä¹Ÿæ˜¯å€‹å•é¡Œã€‚
 
-    pfterm ªº¿Ã¹õ³B²z¤è¦¡¬O¦Û¬°¤@­ÓµêÀÀªº DBCS-aware ANSI Terminal¡A
-    ¦b§ó·s®É¤~§Y®É²£¥Í³Ì¨Î¤Æªº¿é¥X¡C
+    pfterm çš„è¢å¹•è™•ç†æ–¹å¼æ˜¯è‡ªç‚ºä¸€å€‹è™›æ“¬çš„ DBCS-aware ANSI Terminalï¼Œ
+    åœ¨æ›´æ–°æ™‚æ‰å³æ™‚ç”¢ç”Ÿæœ€ä½³åŒ–çš„è¼¸å‡ºã€‚
 
 =============================================================================
 
-    pfterm API ¬O¥H ncurses-like ¬°°òÂ¦¡C
-    ¥H fterm_* ¬°¶}ÀYªº API, ¦h¥b¬O pfterm ¤º³¡¨Ï¥Îªº¨ç¦¡¡F
-    ¦Ó¸ò ncurses ¦P¦W©Î¬Ûªñªº API «h¬O¤@¯ëµ{¦¡¨Ï¥Îªº³¡¥÷¡C
+    pfterm API æ˜¯ä»¥ ncurses-like ç‚ºåŸºç¤ã€‚
+    ä»¥ fterm_* ç‚ºé–‹é ­çš„ API, å¤šåŠæ˜¯ pfterm å…§éƒ¨ä½¿ç”¨çš„å‡½å¼ï¼›
+    è€Œè·Ÿ ncurses åŒåæˆ–ç›¸è¿‘çš„ API å‰‡æ˜¯ä¸€èˆ¬ç¨‹å¼ä½¿ç”¨çš„éƒ¨ä»½ã€‚
 
 =============================================================================
 
 //// common ncurse-like library interface   
-//// ncurse ¬Û®e³¡¥÷
+//// ncurse ç›¸å®¹éƒ¨ä»½
 
-// initialization   ªì©l¤Æ
-void    initscr     (void);                 ªì©l¨t²Î
-int     resizeterm  (int rows, int cols);   ½Õ¾ãµøµ¡¤j¤p¬°(rows,col)
-int     endwin      (void);                 µ²§ô¨t²Î
+// initialization   åˆå§‹åŒ–
+void    initscr     (void);                 åˆå§‹ç³»çµ±
+int     resizeterm  (int rows, int cols);   èª¿æ•´è¦–çª—å¤§å°ç‚º(rows,col)
+int     endwin      (void);                 çµæŸç³»çµ±
 
-// cursor           ´å¼Ğ
-void    getyx       (int *y, int *x);       ¨ú±o¥Ø«e´å¼Ğ¦ì¸m
-void    move        (int y, int x);         ²¾°Ê´å¼Ğ
+// cursor           æ¸¸æ¨™
+void    getyx       (int *y, int *x);       å–å¾—ç›®å‰æ¸¸æ¨™ä½ç½®
+void    move        (int y, int x);         ç§»å‹•æ¸¸æ¨™
 
-// clear            ²M°£µe­±
-void    clear       (void);                 ²M°£¿Ã¹õ¨Ã¦^¨ì­ìÂI(0,0)
-void    clrtoeol    (void);                 ²M¦Ü¦æ§À
-void    clrtobot    (void);                 ²M¦Ü¿Ã¹õ©³³¡
+// clear            æ¸…é™¤ç•«é¢
+void    clear       (void);                 æ¸…é™¤è¢å¹•ä¸¦å›åˆ°åŸé»(0,0)
+void    clrtoeol    (void);                 æ¸…è‡³è¡Œå°¾
+void    clrtobot    (void);                 æ¸…è‡³è¢å¹•åº•éƒ¨
 
-// clear (non-ncurses)  ²M°£(«D¼Ğ·Ç¡A¤£«ØÄ³¨Ï¥Î)
-void    clrtoln     (int ln);               ±q¥Ø«e¦æ©¹¤U²M¦Ü(¤£¥]§t)ln¦æ:[y,ln)
-void    clrcurln    (void);                 ²M°£¥Ø«e¦æ, ¬Û·í©ó clrtoln(y+1)
-void    clrtobeg    (void);                 ²M¦Ü¦æ­º
-void    clrtohome   (void);                 ²M¦Ü¿Ã¹õ­ìÂI(0,0)
-void    clrscr      (void);                 ²M°£¿Ã¹õ¦ı¤£¦^¨ì­ìÂI
-void    clrregion   (int r1, int r2);       ²M°£[r1,r2]©Î[r2,r1]ªº½d³ò (Âù¦V)
+// clear (non-ncurses)  æ¸…é™¤(éæ¨™æº–ï¼Œä¸å»ºè­°ä½¿ç”¨)
+void    clrtoln     (int ln);               å¾ç›®å‰è¡Œå¾€ä¸‹æ¸…è‡³(ä¸åŒ…å«)lnè¡Œ:[y,ln)
+void    clrcurln    (void);                 æ¸…é™¤ç›®å‰è¡Œ, ç›¸ç•¶æ–¼ clrtoln(y+1)
+void    clrtobeg    (void);                 æ¸…è‡³è¡Œé¦–
+void    clrtohome   (void);                 æ¸…è‡³è¢å¹•åŸé»(0,0)
+void    clrscr      (void);                 æ¸…é™¤è¢å¹•ä½†ä¸å›åˆ°åŸé»
+void    clrregion   (int r1, int r2);       æ¸…é™¤[r1,r2]æˆ–[r2,r1]çš„ç¯„åœ (é›™å‘)
 
-// flushing         §ó·sµe­±
-void    doupdate    (void);                 §ó·sµe­± (¥u°e¥X§ïÅÜªº³¡¥÷)
-void    refresh     (void);                 §ó·sµe­± (­Y¦³¿é¤J«öÁä«h¤£§ó·s)
-void    redrawwin   (void);                 ±j¨î¤U¦¸§ó·s¥ş³¡µe­±(¤´»İ refresh)
+// flushing         æ›´æ–°ç•«é¢
+void    doupdate    (void);                 æ›´æ–°ç•«é¢ (åªé€å‡ºæ”¹è®Šçš„éƒ¨ä»½)
+void    refresh     (void);                 æ›´æ–°ç•«é¢ (è‹¥æœ‰è¼¸å…¥æŒ‰éµå‰‡ä¸æ›´æ–°)
+void    redrawwin   (void);                 å¼·åˆ¶ä¸‹æ¬¡æ›´æ–°å…¨éƒ¨ç•«é¢(ä»éœ€ refresh)
 
-// scrolling        ±²°Ê
-void    scroll      (void);                 ¦V¤W±²°Ê¤@¦æ
-void    rscroll     (void);                 ¦V¤U±²°Ê¤@¦æ
-void    scrl        (int rows);             ±²°Ê rows ¦æ (¥¿­È©¹¤W­t­È©¹¤U)
+// scrolling        æ²å‹•
+void    scroll      (void);                 å‘ä¸Šæ²å‹•ä¸€è¡Œ
+void    rscroll     (void);                 å‘ä¸‹æ²å‹•ä¸€è¡Œ
+void    scrl        (int rows);             æ²å‹• rows è¡Œ (æ­£å€¼å¾€ä¸Šè² å€¼å¾€ä¸‹)
 
-// scrolling (non-ncurses) ±²°Ê(«D¼Ğ·Ç¡A¤£«ØÄ³¨Ï¥Î)
-void    region_scroll_up(int top, int bot); ¤W±²¤@¦æ [top,bot] ªº¤º®e
+// scrolling (non-ncurses) æ²å‹•(éæ¨™æº–ï¼Œä¸å»ºè­°ä½¿ç”¨)
+void    region_scroll_up(int top, int bot); ä¸Šæ²ä¸€è¡Œ [top,bot] çš„å…§å®¹
 
-// attributes       ÃC¦â»PÄİ©Ê
-ftattr  attrget     (void);                 Åª¨ú¥Ø«eÄİ©Ê
-void    attrset     (ftattr attr);          ³]©wÄİ©Ê
-void    attrsetfg   (ftattr attr);          ³]©w«e´º¦â (0-7)
-void    attrsetbg   (ftattr attr);          ³]©w­I´º¦â (0-7)
+// attributes       é¡è‰²èˆ‡å±¬æ€§
+ftattr  attrget     (void);                 è®€å–ç›®å‰å±¬æ€§
+void    attrset     (ftattr attr);          è¨­å®šå±¬æ€§
+void    attrsetfg   (ftattr attr);          è¨­å®šå‰æ™¯è‰² (0-7)
+void    attrsetbg   (ftattr attr);          è¨­å®šèƒŒæ™¯è‰² (0-7)
 
-// output (non-ncurses) ¿é¥X («D ncurses ­·®æ)
-void    outc        (unsigned char c);      ¿é¥X¦r¤¸ (¥i§t ANSI ±±¨î½X)
-void    outs        (const char *s);        ¿é¥X¦r¦ê (¥i§t ANSI ±±¨î½X)
-void    outstr      (const char *str);      ¿é¥X§¹¾ã¦r¦ê (¥i§tANSI±±¨î½X)
+// output (non-ncurses) è¼¸å‡º (é ncurses é¢¨æ ¼)
+void    outc        (unsigned char c);      è¼¸å‡ºå­—å…ƒ (å¯å« ANSI æ§åˆ¶ç¢¼)
+void    outs        (const char *s);        è¼¸å‡ºå­—ä¸² (å¯å« ANSI æ§åˆ¶ç¢¼)
+void    outstr      (const char *str);      è¼¸å‡ºå®Œæ•´å­—ä¸² (å¯å«ANSIæ§åˆ¶ç¢¼)
 
-            P.S: ®t²§¦b©ó¡A outstr() ·|¥ı­pºâ©Ò»İªºªÅ¶¡¡A¨Ã§â¸Ó³B¥¿½T²M°£±¼¡A
-            outstr() ¤º«Ø DBCS ªº¿ëÃÑ¯à¤O¡A©Ò¥H¤£·|»\¦r¥u»\¨ì¤@¥bÅÜ¶Ã½X¡C
-            outc/outs «h¬OµLµøÂÂ¤º®eª½±µÂĞ»\¡C
-            ¦ıª`·N outstr ¥Ø«e¨Ã¤£·|¥h¦Ò¼{ str ¥»¨­¬O§_¯u¬°§¹¾ã DBCS ¦r¦ê¡C
+            P.S: å·®ç•°åœ¨æ–¼ï¼Œ outstr() æœƒå…ˆè¨ˆç®—æ‰€éœ€çš„ç©ºé–“ï¼Œä¸¦æŠŠè©²è™•æ­£ç¢ºæ¸…é™¤æ‰ï¼Œ
+            outstr() å…§å»º DBCS çš„è¾¨è­˜èƒ½åŠ›ï¼Œæ‰€ä»¥ä¸æœƒè“‹å­—åªè“‹åˆ°ä¸€åŠè®Šäº‚ç¢¼ã€‚
+            outc/outs å‰‡æ˜¯ç„¡è¦–èˆŠå…§å®¹ç›´æ¥è¦†è“‹ã€‚
+            ä½†æ³¨æ„ outstr ç›®å‰ä¸¦ä¸æœƒå»è€ƒæ…® str æœ¬èº«æ˜¯å¦çœŸç‚ºå®Œæ•´ DBCS å­—ä¸²ã€‚
 
-// readback         Åª¨ú¿Ã¹õ¤Wªº¤å¦r
-int     instr       (char *str);            §â´å¼Ğ³Bªº¦r¦êÅª¦^¨ì str ³B
-int     innstr      (char *str, int n);     §â´å¼Ğ³B³Ì¦h n ­Ó¦r¤¸Åª¦^ str 
-int     inansistr   (char *str, int n);     Åª¦^¦³ ANSI ±±¨î½X®æ¦¡ªº¦r¦ê¡C
+// readback         è®€å–è¢å¹•ä¸Šçš„æ–‡å­—
+int     instr       (char *str);            æŠŠæ¸¸æ¨™è™•çš„å­—ä¸²è®€å›åˆ° str è™•
+int     innstr      (char *str, int n);     æŠŠæ¸¸æ¨™è™•æœ€å¤š n å€‹å­—å…ƒè®€å› str 
+int     inansistr   (char *str, int n);     è®€å›æœ‰ ANSI æ§åˆ¶ç¢¼æ ¼å¼çš„å­—ä¸²ã€‚
 
-            P.S: ª`·N inansistr ³q±`»İ­n¤ñ¸ûªøªºªÅ¶¡ («ØÄ³¨Ï¥Î ANSILINELEN)
-            µ²§À·|³]¦^¼Ğ·ÇªºÄİ©Ê (ESC[m)¡A­YªÅ¶¡¤£¨¬«h¤¤¶¡·|±¼¦r¡C
-            in*str ¶Ç¦^ªº¬O©ÒÅª¨ìªº¦r¤¸¼Æ¡C
+            P.S: æ³¨æ„ inansistr é€šå¸¸éœ€è¦æ¯”è¼ƒé•·çš„ç©ºé–“ (å»ºè­°ä½¿ç”¨ ANSILINELEN)
+            çµå°¾æœƒè¨­å›æ¨™æº–çš„å±¬æ€§ (ESC[m)ï¼Œè‹¥ç©ºé–“ä¸è¶³å‰‡ä¸­é–“æœƒæ‰å­—ã€‚
+            in*str å‚³å›çš„æ˜¯æ‰€è®€åˆ°çš„å­—å…ƒæ•¸ã€‚
 
-// restore          ¦^¦s
-void    scr_dump    (void *psb);            ±N¥Ø«eµe­±¦s¤J psb
-void    scr_restore (void *psb);            ¥Ñ psb Åª¥Xµe­±¨ÃÄÀ©ñ¸ê·½
+// restore          å›å­˜
+void    scr_dump    (void *psb);            å°‡ç›®å‰ç•«é¢å­˜å…¥ psb
+void    scr_restore (void *psb);            ç”± psb è®€å‡ºç•«é¢ä¸¦é‡‹æ”¾è³‡æº
 
-            ¥Ø«eªº psb ±µ¨üªº¬O screen_backup_t*, dump «e¤£»İªì©l
-            dump ·|¬°¥¦°t¸m°O¾ĞÅé¡Arestore «h·|ÄÀ©ñ¡A
-            ©Ò¥H¤@©w­n¦¨¹ï¡C
+            ç›®å‰çš„ psb æ¥å—çš„æ˜¯ screen_backup_t*, dump å‰ä¸éœ€åˆå§‹
+            dump æœƒç‚ºå®ƒé…ç½®è¨˜æ†¶é«”ï¼Œrestore å‰‡æœƒé‡‹æ”¾ï¼Œ
+            æ‰€ä»¥ä¸€å®šè¦æˆå°ã€‚
 
-// grayout          Grayout ²H¤J²H¥X¨t²Î
+// grayout          Grayout æ·¡å…¥æ·¡å‡ºç³»çµ±
 void    grayout     (int y, int end, int level);
 
-            ±N°Ï¶¡ [y, end] ªº¤º®e§@²H¥X©Î²H¤Jªº³B²z¡C level ±±¨î¦â±m:
-            GRAYOUT_DARK:   Âà¬°·t¦â¦r
-            GRAYOUT_BOLD:   Âà¬°«G¦â¦r
-            GRAYOUT_NORM:   Âà¬°µL¦â±mªº´¶³q¦r
+            å°‡å€é–“ [y, end] çš„å…§å®¹ä½œæ·¡å‡ºæˆ–æ·¡å…¥çš„è™•ç†ã€‚ level æ§åˆ¶è‰²å½©:
+            GRAYOUT_DARK:   è½‰ç‚ºæš—è‰²å­—
+            GRAYOUT_BOLD:   è½‰ç‚ºäº®è‰²å­—
+            GRAYOUT_NORM:   è½‰ç‚ºç„¡è‰²å½©çš„æ™®é€šå­—
 
-// deprecated       «ØÄ³°±¥Î³¡¥÷
-void    standout    (void);                 Äİ©Ê³]¬°¤Ï¥Õ
-void    standend    (void);                 ­«³]Äİ©Ê
+// deprecated       å»ºè­°åœç”¨éƒ¨ä»½
+void    standout    (void);                 å±¬æ€§è¨­ç‚ºåç™½
+void    standend    (void);                 é‡è¨­å±¬æ€§
 
-            µù: pfterm ¥Ø«e¨Ã¥¼¯uªº¤ä´© stand Äİ©Ê¡A©Ò¥H¥u¬O°²ªº¤Ï¥Õ®ÄªG¡C
-            move() ¦Ü¸Ó¦ì¸m¦Aµe¦r«hÄİ©Ê·|§ïÅÜ¡C
+            è¨»: pfterm ç›®å‰ä¸¦æœªçœŸçš„æ”¯æ´ stand å±¬æ€§ï¼Œæ‰€ä»¥åªæ˜¯å‡çš„åç™½æ•ˆæœã€‚
+            move() è‡³è©²ä½ç½®å†ç•«å­—å‰‡å±¬æ€§æœƒæ”¹è®Šã€‚
 
 =============================================================================
 
 //// flat-term internal processor
-//// pfterm ¤º³¡¨ç¦¡
+//// pfterm å…§éƒ¨å‡½å¼
 
-        ­n±N pfterm ±µ¤W¬Y­Ó©³¼h (ºô¸ô/BBS/ÀÉ®×/...) ¥u­n©w¸q¦n´X­Ó
-        Âà±µ¨ç¦¡§Y¥i§Ö³t²¾´Ó:
+        è¦å°‡ pfterm æ¥ä¸ŠæŸå€‹åº•å±¤ (ç¶²è·¯/BBS/æª”æ¡ˆ/...) åªè¦å®šç¾©å¥½å¹¾å€‹
+        è½‰æ¥å‡½å¼å³å¯å¿«é€Ÿç§»æ¤:
 
 int     fterm_inbuf     (void);         // raw input  adapter
-            Áä½L¿é¤JªºÂà±µ¨ç¦¡¡A¶Ç¦^¬O§_¤´¦³¥¼Åª¨úªº¿é¤J¡C (³Ì¨Î¤Æ refresh ¥Î)
+            éµç›¤è¼¸å…¥çš„è½‰æ¥å‡½å¼ï¼Œå‚³å›æ˜¯å¦ä»æœ‰æœªè®€å–çš„è¼¸å…¥ã€‚ (æœ€ä½³åŒ– refresh ç”¨)
 
 void    fterm_rawc      (int c);        // raw output adapter
-            ¿é¥Xªº°ò¥»Âà±µ¨ç¦¡¡A¿é¥X¤@­Ó¦r¤¸¨ì©³¼h¨t²Î¡C
+            è¼¸å‡ºçš„åŸºæœ¬è½‰æ¥å‡½å¼ï¼Œè¼¸å‡ºä¸€å€‹å­—å…ƒåˆ°åº•å±¤ç³»çµ±ã€‚
 
 void    fterm_rawnewline(void);         // raw output adapter
-            ¿é¥Xªº°ò¥»Âà±µ¨ç¦¡¡A¿é¥X¤@­Ó´«¦æ²Å¸¹¨ì©³¼h¨t²Î¡C
+            è¼¸å‡ºçš„åŸºæœ¬è½‰æ¥å‡½å¼ï¼Œè¼¸å‡ºä¸€å€‹æ›è¡Œç¬¦è™Ÿåˆ°åº•å±¤ç³»çµ±ã€‚
 
 void    fterm_rawflush  (void);         // raw output adapter
-            ¿é¥Xªº°ò¥»Âà±µ¨ç¦¡¡A°e¥X©Ò¦³¤w¿é¥Xªº¤º®e¨ì©³¼h¨t²Î¡C
+            è¼¸å‡ºçš„åŸºæœ¬è½‰æ¥å‡½å¼ï¼Œé€å‡ºæ‰€æœ‰å·²è¼¸å‡ºçš„å…§å®¹åˆ°åº•å±¤ç³»çµ±ã€‚
 
 ------------------------------------------------------------------------------
 
-        ¤U­±¬O©I¥sÂà±µ¨ç¦¡ªº°ò¥»©R¥O:
+        ä¸‹é¢æ˜¯å‘¼å«è½‰æ¥å‡½å¼çš„åŸºæœ¬å‘½ä»¤:
 
-void    fterm_raws      (const char *s);                ¿é¥X¦r¦ê
-void    fterm_rawnc     (int c, int n);                 ¿é¥X n ­Ó­«½Æªº¦r¤¸ c
-void    fterm_rawnum    (int arg);                      ¿é¥X¼Æ¦r
+void    fterm_raws      (const char *s);                è¼¸å‡ºå­—ä¸²
+void    fterm_rawnc     (int c, int n);                 è¼¸å‡º n å€‹é‡è¤‡çš„å­—å…ƒ c
+void    fterm_rawnum    (int arg);                      è¼¸å‡ºæ•¸å­—
 
-void    fterm_rawcmd    (int arg, int defval, char c);  ¿é¥X ANSI ©R¥O
+void    fterm_rawcmd    (int arg, int defval, char c);  è¼¸å‡º ANSI å‘½ä»¤
 void    fterm_rawcmd2   (int arg1, int arg2, int defval, char c);
 
-            rawcmd/rawcmd2 ·|¿é¥X ESC_CHR '[' arg ';' arg2 c ªº©R¥O
-            ­Y arg/arg2 »P defval ¬Ûµ¥«h¸Ó°Ñ¼Æ·|©¿²¤¤£¦L
+            rawcmd/rawcmd2 æœƒè¼¸å‡º ESC_CHR '[' arg ';' arg2 c çš„å‘½ä»¤
+            è‹¥ arg/arg2 èˆ‡ defval ç›¸ç­‰å‰‡è©²åƒæ•¸æœƒå¿½ç•¥ä¸å°
 
-void    fterm_rawattr   (ftattr attr);      §ïÅÜ©³¼h¿é¥XÄİ©Ê»P¦â±m
-void    fterm_rawclear  (void);             ¿é¥X²M°£¥ş³¡µe­±(¤£²¾°Ê)ªº©R¥O
-void    fterm_rawclreol (void);             ¿é¥X²M¦Ü¦æ§Àªº©R¥O
-void    fterm_rawhome   (void);             ¿é¥X²¾¦Ü­ìÂI(0,0)ªº©R¥O
-void    fterm_rawscroll (int dy);           ±²°Ê¿Ã¹õ dy ¦æ¡A¥¿©¹¤W­t©¹¤U
-void    fterm_rawcursor (void);             §ó·s©³¼h´å¼Ğªº¦ì¸m»PÄİ©Ê
-void    fterm_rawmove   (int y, int x);     ²¾°Ê©³¼h´å¼Ğ¨ì«ü©wªº¦ì¸m
-void    fterm_rawmove_opt(int y, int x);    ³Ì¨Î¤Æ²¾°Ê´å¼Ğ
-void    fterm_rawmove_rel(int dy, int dx);  ²¾°Ê©³¼h´å¼Ğ¨ì«ü©wªº¬Û¹ï¦ì¸m
+void    fterm_rawattr   (ftattr attr);      æ”¹è®Šåº•å±¤è¼¸å‡ºå±¬æ€§èˆ‡è‰²å½©
+void    fterm_rawclear  (void);             è¼¸å‡ºæ¸…é™¤å…¨éƒ¨ç•«é¢(ä¸ç§»å‹•)çš„å‘½ä»¤
+void    fterm_rawclreol (void);             è¼¸å‡ºæ¸…è‡³è¡Œå°¾çš„å‘½ä»¤
+void    fterm_rawhome   (void);             è¼¸å‡ºç§»è‡³åŸé»(0,0)çš„å‘½ä»¤
+void    fterm_rawscroll (int dy);           æ²å‹•è¢å¹• dy è¡Œï¼Œæ­£å¾€ä¸Šè² å¾€ä¸‹
+void    fterm_rawcursor (void);             æ›´æ–°åº•å±¤æ¸¸æ¨™çš„ä½ç½®èˆ‡å±¬æ€§
+void    fterm_rawmove   (int y, int x);     ç§»å‹•åº•å±¤æ¸¸æ¨™åˆ°æŒ‡å®šçš„ä½ç½®
+void    fterm_rawmove_opt(int y, int x);    æœ€ä½³åŒ–ç§»å‹•æ¸¸æ¨™
+void    fterm_rawmove_rel(int dy, int dx);  ç§»å‹•åº•å±¤æ¸¸æ¨™åˆ°æŒ‡å®šçš„ç›¸å°ä½ç½®
 
-int     fterm_chattr    (char *s,           ±NÄİ©Ê±q oattr Âà¬° nattr ©Ò»İªº 
-            ftattr oattr, ftattr nattr);    ANSI ±±¨î½X¿é¥X¦Ü s ³B¡C
-                                            ª`·Ns­n°÷ªø(°_½X­n FTATTR_MINCMD=16 
-                                            ¦r¤¸), ¦Ò¼{¬Û®e©Ê«ØÄ³ 32 ¥H¤W¡C
+int     fterm_chattr    (char *s,           å°‡å±¬æ€§å¾ oattr è½‰ç‚º nattr æ‰€éœ€çš„ 
+            ftattr oattr, ftattr nattr);    ANSI æ§åˆ¶ç¢¼è¼¸å‡ºè‡³ s è™•ã€‚
+                                            æ³¨æ„sè¦å¤ é•·(èµ·ç¢¼è¦ FTATTR_MINCMD=16 
+                                            å­—å…ƒ), è€ƒæ…®ç›¸å®¹æ€§å»ºè­° 32 ä»¥ä¸Šã€‚
 
-        ¤U­±¬O¤º³¡¨ç¦¡¡A¤£«ØÄ³ª½±µ¨Ï¥Î:
+        ä¸‹é¢æ˜¯å…§éƒ¨å‡½å¼ï¼Œä¸å»ºè­°ç›´æ¥ä½¿ç”¨:
 
-void    fterm_markdirty (void);             ¼Ğ°O¥Ø«eµe­±»İ­n§ó·s
-void    fterm_exec      (void);             (¤º³¡¥Î)°õ¦æ¤w¦¬¶°¨ìªº ANSI ©R¥O
-void    fterm_flippage  (void);             (¤º³¡¥Î)¤Á­¶ (pfterm ¬° dual buffer)
-void    fterm_dupe2bk   (void);             (¤º³¡¥Î)¦P¨B­I´º­¶
-int     fterm_prepare_str(int len);         (¤º³¡¥Î)¦w¥ş²M°£ªø«×¬° len ªºªÅ¶¡
+void    fterm_markdirty (void);             æ¨™è¨˜ç›®å‰ç•«é¢éœ€è¦æ›´æ–°
+void    fterm_exec      (void);             (å…§éƒ¨ç”¨)åŸ·è¡Œå·²æ”¶é›†åˆ°çš„ ANSI å‘½ä»¤
+void    fterm_flippage  (void);             (å…§éƒ¨ç”¨)åˆ‡é  (pfterm ç‚º dual buffer)
+void    fterm_dupe2bk   (void);             (å…§éƒ¨ç”¨)åŒæ­¥èƒŒæ™¯é 
+int     fterm_prepare_str(int len);         (å…§éƒ¨ç”¨)å®‰å…¨æ¸…é™¤é•·åº¦ç‚º len çš„ç©ºé–“
 
 =============================================================================
 // vim:expandtab:sw=4:ts=4

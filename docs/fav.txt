@@ -2,40 +2,40 @@ Favorite ver.4
 
 Feature
 =======
-�E���g�B��Ӭ[�c����
-�Efolding
+‧重寫、整個架構改變
+‧folding
 
 Structure
 =========
-  fav4 ���D�n�[�c�p�U�G
+  fav4 的主要架構如下：
 
-�Efav_t
-  �i�J�ڪ��̷R�ɡA�ݨ쪺�F��N�O�ھ� fav_t �ͥX�Ӫ��C
-  �̭������̡A�o�@�� level �����h�֭ӬݪO�B�ؿ��B���j�u�C(favh)
+‧fav_t
+  進入我的最愛時，看到的東西就是根據 fav_t 生出來的。
+  裡面紀錄者，這一個 level 中有多少個看板、目錄、分隔線。(favh)
 
-�Efav_type_t
-  �o��O�[�b�H�U�T�ӪF�褧�W�������A����O�N�L�̵����P�@�تF��A��K���᪺�s���C
-  �Τ@�� void * ���Ы��V�Y���O����A�s���ɥi�z�L type �ܼƨӱo�����T�����A�C
+‧fav_type_t
+  這算是架在以下三個東西之上的介面，等於是將他們視為同一種東西，方便之後的存取。
+  用一個 void * 指標指向某塊記憶體，存取時可透過 type 變數來得知正確的型態。
 
-�Efav_board_t
-  �����F bid �ΤW�����X�ɶ��C
+‧fav_board_t
+  紀錄了 bid 及上次拜訪時間。
 
-�Efav_line_t
-  �����F lid
+‧fav_line_t
+  紀錄了 lid
 
-�Efav_folder_t
-  �����F fid �Υi�ۭq���W�١C
+‧fav_folder_t
+  紀錄了 fid 及可自訂的名稱。
 
-�Efav.c ���H cast_(board|line|folder)_t() �ӱN�@�� fav_type_t �ର���T�����A�C
+‧fav.c 中以 cast_(board|line|folder)_t() 來將一個 fav_type_t 轉為正確的型態。
 
 Policy
 ======
-�E���F�קK�L�ת���Ʒh���A���N�@�� item �q�ڪ��̷R�������ɡA�u�N�L�� FAVH_FAV
-  flag �����C�ӨS���o�� flag �� item �]���Q�����ڪ��̷R�C
+‧為了避免過度的資料搬移，當將一個 item 從我的最愛中移除時，只將他的 FAVH_FAV
+  flag 移除。而沒有這個 flag 的 item 也不被視為我的最愛。
 
-�E�ڪ��̷R���A�S�] FAVH_FAV ����ơA�N�b�Y�ǮɭԡA�p�g�J�ɮ׮ɡA�I�s
-  rebuild_fav �M�����b�C
+‧我的最愛中，沒設 FAVH_FAV 的資料，將在某些時候，如寫入檔案時，呼叫
+  rebuild_fav 清除乾淨。
 
-�E�����h���ݪO�ҥΪ� t �A�]������u�s�b nbrd �̭��A�S���M�A�˥X�B�~���Ŷ��A
-  �ҥH���������b�ڪ��̷R���F t �A�|��o�ӰO���Ȧs�b fav ���]FAVH_ADM_TAG == 1,
-  FAVH_FAV == 0�^�C
+‧站長搬移看板所用的 t ，因為不能只存在 nbrd 裡面，又不然再弄出額外的空間，
+  所以當站長不在我的最愛按了 t ，會把這個記錄暫存在 fav 中（FAVH_ADM_TAG == 1,
+  FAVH_FAV == 0）。
