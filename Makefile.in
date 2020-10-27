@@ -5,7 +5,14 @@ VAR_H  := $(SRCROOT)/include/var.h
 
 MBBSD_UTIL_OBJ := $(SRCROOT)/mbbsd/var.o
 
-CC     := gcc
-CFLAGS := -I $(SRCROOT)/include -DBBSHOME='"$(HOME)"'
+CC      := gcc
+CFLAGS  := -I $(SRCROOT)/include -DBBSHOME='"$(HOME)"'
+LDFLAGS :=
 
 COMMON_LIB := -L $(SRCROOT)/common/bbs -L $(SRCROOT)/common/sys -L $(SRCROOT)/common/osdep -lbbs -lsys -losdep
+
+ifeq ($(shell uname),Darwin)
+CFLAGS := $(CFLAGS) -DNEED_SETPROCTITLE
+LDFLAGS := -liconv
+endif
+

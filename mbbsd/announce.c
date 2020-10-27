@@ -1,12 +1,12 @@
 #include "bbs.h"
 
 // XXX piaip 2007/12/29
-// ³Ìªñµo²{«Ü¦h code ³£¦º¦b announce
-// ¦]¬°¶i¨Ó­n¬İ lastlevel ¦Ó«D currbid
-// user ¥i¯à¤@¶i BBS ª½±ş¶l¥ó->mail_cite->¶iºëµØ°Ï
-// ©ó¬O´NÃz¬µ
-// ¦P²z currboard ¤]¤£¸Ó¥Î
-// ½Ğ§ï¥Î me.bid (ª`·N me.bid ¥i¯à¬° 0, ªí¥Ü¶i¨Óªº«D¬İªO¡C)
+// æœ€è¿‘ç™¼ç¾å¾ˆå¤š code éƒ½æ­»åœ¨ announce
+// å› ç‚ºé€²ä¾†è¦çœ‹ lastlevel è€Œé currbid
+// user å¯èƒ½ä¸€é€² BBS ç›´æ®ºéƒµä»¶->mail_cite->é€²ç²¾è¯å€
+// æ–¼æ˜¯å°±çˆ†ç‚¸
+// åŒç† currboard ä¹Ÿä¸è©²ç”¨
+// è«‹æ”¹ç”¨ me.bid (æ³¨æ„ me.bid å¯èƒ½ç‚º 0, è¡¨ç¤ºé€²ä¾†çš„éçœ‹æ¿ã€‚)
 
 // for max file size limitation here, see edit.c
 #define MAX_FILE_SIZE (32768*1024)
@@ -101,7 +101,7 @@ int copyqueue_append(CopyQueue *pcq)
 		sizeof(CopyQueue) * allocated_copyqueue);
 	if(!copyqueue)
 	{
-	    vmsg("°O¾ĞÅé¤£¨¬¡A«ş¨©¥¢±Ñ");
+	    vmsg("è¨˜æ†¶é«”ä¸è¶³ï¼Œæ‹·è²å¤±æ•—");
 	    // try to reset
 	    copyqueue_reset();
 	    free(copyqueue);
@@ -167,7 +167,7 @@ a_copyitem(const char *fpath, const char *title, const char *owner, int mode)
     //copyqueue_append(&cq);
     copyqueue_toggle(&cq);
     if (mode && flFirstAlert) {
-	vmsg("[ª`·N] ´£¿ô±z½Æ»s/¼Ğ°O«á­n¶K¤W(p)©Îªş¥[(a)«á¤~¯à§R°£­ì¤å!");
+	vmsg("[æ³¨æ„] æé†’æ‚¨è¤‡è£½/æ¨™è¨˜å¾Œè¦è²¼ä¸Š(p)æˆ–é™„åŠ (a)å¾Œæ‰èƒ½åˆªé™¤åŸæ–‡!");
 	flFirstAlert = 0;
     }
 }
@@ -215,13 +215,13 @@ a_showmenu(menu_t * pm)
     fileheader_t   *item;
     time4_t         dtime;
 
-    showtitle("ºëµØ¤å³¹", pm->mtitle);
-    prints("   " ANSI_COLOR(1;36) "½s¸¹    ¼Ğ      ÃD%56s" ANSI_RESET,
-	   "½s    ¿ï      ¤é    ´Á");
+    showtitle("ç²¾è¯æ–‡ç« ", pm->mtitle);
+    prints("   " ANSI_COLOR(1;36) "ç·¨è™Ÿ    æ¨™      é¡Œ%56s" ANSI_RESET,
+	   "ç·¨    é¸      æ—¥    æœŸ");
 
     if (!pm->num)
     {
-	outs("\n  ¡mºëµØ°Ï¡n©|¦b§l¨ú¤Ñ¦a¶¡ªº¤é¤ëºëµØ¤¤... :)");
+	outs("\n  ã€Šç²¾è¯å€ã€‹å°šåœ¨å¸å–å¤©åœ°é–“çš„æ—¥æœˆç²¾è¯ä¸­... :)");
     }
     else
     {
@@ -237,7 +237,7 @@ a_showmenu(menu_t * pm)
 	    title = item->title;
 	    editor = item->owner;
 	    /*
-	     * Ptt §â®É¶¡§ï¬°¨úÀÉ®×®É¶¡ dtime = atoi(&item->filename[2]);
+	     * Ptt æŠŠæ™‚é–“æ”¹ç‚ºå–æª”æ¡ˆæ™‚é–“ dtime = atoi(&item->filename[2]);
 	     */
 	    snprintf(buf, sizeof(buf), "%s/%s", pm->path, item->filename);
 	    if(copyqueue_querysize() > 0 && copyqueue_fileinqueue(buf))
@@ -259,20 +259,20 @@ a_showmenu(menu_t * pm)
     if(copyqueue_querysize() > 0)
     {		// something in queue
 	char buf[STRLEN];
-	snprintf(buf, sizeof(buf),  "¡i¤w¼Ğ°O(½Æ»s) %d ¶µ¡j", copyqueue_querysize());
+	snprintf(buf, sizeof(buf),  "ã€å·²æ¨™è¨˜(è¤‡è£½) %d é …ã€‘", copyqueue_querysize());
 	vs_footer(buf, pm->level == 0 ?
-		" (c)¼Ğ°O/½Æ»s - µLºŞ²zÅv­­¡AµLªk¶K¤W " :
-		" (c)¼Ğ°O/½Æ»s (p)¶K¤W/¨ú®ø/­«³]¼Ğ°O (a)ªş¥[¦Ü¤å³¹«á\t(q/¡ö)Â÷¶} (h)»¡©ú");
+		" (c)æ¨™è¨˜/è¤‡è£½ - ç„¡ç®¡ç†æ¬Šé™ï¼Œç„¡æ³•è²¼ä¸Š " :
+		" (c)æ¨™è¨˜/è¤‡è£½ (p)è²¼ä¸Š/å–æ¶ˆ/é‡è¨­æ¨™è¨˜ (a)é™„åŠ è‡³æ–‡ç« å¾Œ\t(q/â†)é›¢é–‹ (h)èªªæ˜");
     }
     else if(pm->level)
     {		// BM
-	vs_footer(" ¡iªO  ¥D¡j ",
-		" (n)·s¼W¤å³¹ (g)·s¼W¥Ø¿ı (e)½s¿èÀÉ®×\t(q/¡ö)Â÷¶} (h)»¡©ú");
+	vs_footer(" ã€æ¿  ä¸»ã€‘ ",
+		" (n)æ–°å¢æ–‡ç«  (g)æ–°å¢ç›®éŒ„ (e)ç·¨è¼¯æª”æ¡ˆ\t(q/â†)é›¢é–‹ (h)èªªæ˜");
     }
     else
     {		// normal user
-	vs_footer(" ¡i¥\\¯àÁä¡j ",
-		" (k¡ôj¡õ)²¾°Ê´å¼Ğ (enter/¡÷)Åª¨ú¸ê®Æ\t(q/¡ö)Â÷¶} (h)»¡©ú");
+	vs_footer(" ã€åŠŸ\èƒ½éµã€‘ ",
+		" (kâ†‘jâ†“)ç§»å‹•æ¸¸æ¨™ (enter/â†’)è®€å–è³‡æ–™\t(q/â†)é›¢é–‹ (h)èªªæ˜");
     }
     return 1;
 }
@@ -283,7 +283,7 @@ a_searchtitle(menu_t * pm, int rev)
     static char     search_str[40] = "";
     int             pos;
 
-    getdata(b_lines - 1, 1, "[·j´M]ÃöÁä¦r:", search_str, sizeof(search_str), DOECHO);
+    getdata(b_lines - 1, 1, "[æœå°‹]é—œéµå­—:", search_str, sizeof(search_str), DOECHO);
 
     if (!*search_str)
 	return pm->now;
@@ -316,30 +316,30 @@ static void
 a_showhelp(int level)
 {
     clear();
-    outs(ANSI_COLOR(36) "¡i " BBSNAME "¤½§GÄæ¨Ï¥Î»¡©ú ¡j" ANSI_RESET "\n\n"
-	 "[¡ö][q]         Â÷¶}¨ì¤W¤@¼h¥Ø¿ı\n"
-	 "[¡ô][k]         ¤W¤@­Ó¿ï¶µ\n"
-	 "[¡õ][j]         ¤U¤@­Ó¿ï¶µ\n"
-	 "[¡÷][r][enter]  ¶i¤J¥Ø¿ı¡şÅª¨ú¤å³¹\n"
-	 "[^B][PgUp]      ¤W­¶¿ï³æ\n"
-	 "[^F][PgDn][Spc] ¤U­¶¿ï³æ\n"
-	 "[##]            ²¾¨ì¸Ó¿ï¶µ\n"
-	 "[^W]            §Ú¦b­ş¸Ì\n"
-	 "[F][U]          ±N¤å³¹±H¦^ Internet ¶l½c/"
-	 "±N¤å³¹ uuencode «á±H¦^¶l½c\n");
+    outs(ANSI_COLOR(36) "ã€ " BBSNAME "å…¬ä½ˆæ¬„ä½¿ç”¨èªªæ˜ ã€‘" ANSI_RESET "\n\n"
+	 "[â†][q]         é›¢é–‹åˆ°ä¸Šä¸€å±¤ç›®éŒ„\n"
+	 "[â†‘][k]         ä¸Šä¸€å€‹é¸é …\n"
+	 "[â†“][j]         ä¸‹ä¸€å€‹é¸é …\n"
+	 "[â†’][r][enter]  é€²å…¥ç›®éŒ„ï¼è®€å–æ–‡ç« \n"
+	 "[^B][PgUp]      ä¸Šé é¸å–®\n"
+	 "[^F][PgDn][Spc] ä¸‹é é¸å–®\n"
+	 "[##]            ç§»åˆ°è©²é¸é …\n"
+	 "[^W]            æˆ‘åœ¨å“ªè£¡\n"
+	 "[F][U]          å°‡æ–‡ç« å¯„å› Internet éƒµç®±/"
+	 "å°‡æ–‡ç«  uuencode å¾Œå¯„å›éƒµç®±\n");
     if (level >= MANAGER) {
-	outs("\n" ANSI_COLOR(36) "¡i ªO¥D±M¥ÎÁä ¡j" ANSI_RESET "\n"
-	     "[H]             ¤Á´«¬° ¤½¶}/¥i¨£·|­û¦W³æ/ªO¥D ¤~¯à¾\\Åª\n"
-	     "[n/g]           ¦¬¿ıºëµØ¤å³¹/¶}ÅP¥Ø¿ı\n"
-	     "[m/d/D]         ²¾°Ê/§R°£¤å³¹/§R°£¤@­Ó½d³òªº¤å³¹\n"
-	     "[f/T/e]         ½s¿è¼ĞÃD²Å¸¹/­×§ï¤å³¹¼ĞÃD/¤º®e\n"
-	     "[c/p/a]         ºëµØ°Ï¤º ¼Ğ°O(½Æ»s)/¶K¤W(¥i¦h½g)/ªş¥[³æ½g¤å³¹\n"
-	     "[^P/^A]         ¶K¤W/ªş¥[ºëµØ°Ï¥~¤w¥Î't'¼Ğ°O¤å³¹\n");
+	outs("\n" ANSI_COLOR(36) "ã€ æ¿ä¸»å°ˆç”¨éµ ã€‘" ANSI_RESET "\n"
+	     "[H]             åˆ‡æ›ç‚º å…¬é–‹/å¯è¦‹æœƒå“¡åå–®/æ¿ä¸» æ‰èƒ½é–±è®€\n"
+	     "[n/g]           æ”¶éŒ„ç²¾è¯æ–‡ç« /é–‹é—¢ç›®éŒ„\n"
+	     "[m/d/D]         ç§»å‹•/åˆªé™¤æ–‡ç« /åˆªé™¤ä¸€å€‹ç¯„åœçš„æ–‡ç« \n"
+	     "[f/T/e]         ç·¨è¼¯æ¨™é¡Œç¬¦è™Ÿ/ä¿®æ”¹æ–‡ç« æ¨™é¡Œ/å…§å®¹\n"
+	     "[c/p/a]         ç²¾è¯å€å…§ æ¨™è¨˜(è¤‡è£½)/è²¼ä¸Š(å¯å¤šç¯‡)/é™„åŠ å–®ç¯‡æ–‡ç« \n"
+	     "[^P/^A]         è²¼ä¸Š/é™„åŠ ç²¾è¯å€å¤–å·²ç”¨'t'æ¨™è¨˜æ–‡ç« \n");
     }
     if (level >= SYSOP) {
-	outs("\n" ANSI_COLOR(36) "¡i ¯¸ªø±M¥ÎÁä ¡j" ANSI_RESET "\n"
-	     "[l]             «Ø symbolic link\n"
-	     "[N]             ¬d¸ßÀÉ¦W\n");
+	outs("\n" ANSI_COLOR(36) "ã€ ç«™é•·å°ˆç”¨éµ ã€‘" ANSI_RESET "\n"
+	     "[l]             å»º symbolic link\n"
+	     "[N]             æŸ¥è©¢æª”å\n");
     }
     pressanykey();
 }
@@ -391,8 +391,8 @@ static void
 a_newitem(menu_t * pm, int mode)
 {
     char    *mesg[3] = {
-	"[·s¼W¤å³¹] ½Ğ¿é¤J¼ĞÃD¡G",	/* ADDITEM */
-	"[·s¼W¥Ø¿ı] ½Ğ¿é¤J¼ĞÃD¡G",	/* ADDGROUP */
+	"[æ–°å¢æ–‡ç« ] è«‹è¼¸å…¥æ¨™é¡Œï¼š",	/* ADDITEM */
+	"[æ–°å¢ç›®éŒ„] è«‹è¼¸å…¥æ¨™é¡Œï¼š",	/* ADDGROUP */
     };
 
     char            fpath[PATHLEN];
@@ -405,16 +405,16 @@ a_newitem(menu_t * pm, int mode)
     switch (mode) {
     case ADDITEM:
 	stampfile(fpath, &item);
-	strlcpy(item.title, "¡º ", sizeof(item.title));	/* A1BA */
+	strlcpy(item.title, "â—‡ ", sizeof(item.title));	/* A1BA */
 	break;
 
     case ADDGROUP:
 	if (stampadir(fpath, &item, 0) == -1)
 	{
-	    vmsg("©êºp¡AµLªk¦b¥»¼h«Ø¥ß·s¥Ø¿ı¡C");
+	    vmsg("æŠ±æ­‰ï¼Œç„¡æ³•åœ¨æœ¬å±¤å»ºç«‹æ–°ç›®éŒ„ã€‚");
 	    return;
 	}
-	strlcpy(item.title, "¡» ", sizeof(item.title));	/* A1BB */
+	strlcpy(item.title, "â—† ", sizeof(item.title));	/* A1BB */
 	break;
     }
 
@@ -468,16 +468,16 @@ a_pasteitem(menu_t * pm, int mode)
     move(b_lines - 1, 0);
     if(copyqueue_querysize() <= 0)
     {
-	vmsg("½Ğ¥ı°õ¦æ½Æ»s(copy)©R¥O«á¦A¶K¤W(paste)");
+	vmsg("è«‹å…ˆåŸ·è¡Œè¤‡è£½(copy)å‘½ä»¤å¾Œå†è²¼ä¸Š(paste)");
 	return;
     }
     if(mode && copyqueue_querysize() > 1)
     {
 	multiple = 1;
 	move(b_lines-2, 0); clrtobot();
-	outs("c: ¹ï¦U¶µ¥Ø­Ó§O½T»{¬O§_­n¶K¤W, z: ¥ş³¡¤£¶K¡A¦P®É­«³]¨Ã¨ú®ø¥ş³¡¼Ğ°O\n");
+	outs("c: å°å„é …ç›®å€‹åˆ¥ç¢ºèªæ˜¯å¦è¦è²¼ä¸Š, z: å…¨éƒ¨ä¸è²¼ï¼ŒåŒæ™‚é‡è¨­ä¸¦å–æ¶ˆå…¨éƒ¨æ¨™è¨˜\n");
 	snprintf(buf, sizeof(buf),
-		"½T©w­n¶K¤W¥ş³¡¦@ %d ­Ó¶µ¥Ø¶Ü (c/z/y/N)¡H ",
+		"ç¢ºå®šè¦è²¼ä¸Šå…¨éƒ¨å…± %d å€‹é …ç›®å— (c/z/y/N)ï¼Ÿ ",
 		copyqueue_querysize());
 	getdata(b_lines - 1, 0, buf, ans, sizeof(ans), LCECHO);
 	if(ans[0] == 'y')
@@ -485,7 +485,7 @@ a_pasteitem(menu_t * pm, int mode)
 	else if(ans[0] == 'z')
 	{
 	    copyqueue_reset();
-	    vmsg("¤w­«³]½Æ»s°O¿ı¡C");
+	    vmsg("å·²é‡è¨­è¤‡è£½è¨˜éŒ„ã€‚");
 	    return;
 	}
 	else if (ans[0] != 'c')
@@ -508,13 +508,13 @@ a_pasteitem(menu_t * pm, int mode)
 	if (dashd(cq->copyfile)) {
 	    for (i = 0; cq->copyfile[i] && cq->copyfile[i] == pm->path[i]; i++);
 	    if (!cq->copyfile[i]) {
-		vmsg("±N¥Ø¿ı«ş¶i¦Û¤vªº¤l¥Ø¿ı¤¤¡A·|³y¦¨µL½a°j°é¡I");
+		vmsg("å°‡ç›®éŒ„æ‹·é€²è‡ªå·±çš„å­ç›®éŒ„ä¸­ï¼Œæœƒé€ æˆç„¡çª®è¿´åœˆï¼");
 		continue;
 	    }
 	}
 	if (mode && !skipAll) {
 	    snprintf(buf, sizeof(buf),
-		     "½T©w­n«ş¨©[%s]¶Ü(Y/N)¡H[N] ", cq->copytitle);
+		     "ç¢ºå®šè¦æ‹·è²[%s]å—(Y/N)ï¼Ÿ[N] ", cq->copytitle);
 	    getdata(b_lines - 1, 0, buf, ans, sizeof(ans), LCECHO);
 	} else
 	    ans[0] = 'y';
@@ -532,19 +532,19 @@ a_pasteitem(menu_t * pm, int mode)
 		    Mkdir(pm->path);
 		memset(&item, 0, sizeof(fileheader_t));
 		strlcpy(item.filename, fname + 1, sizeof(item.filename));
-		memcpy(cq->copytitle, "¡·", 2);
+		memcpy(cq->copytitle, "â—", 2);
 		Copy(cq->copyfile, newpath);
 	    } else if (dashf(cq->copyfile)) {
 		stampfile(newpath, &item);
-		memcpy(cq->copytitle, "¡º", 2);
+		memcpy(cq->copytitle, "â—‡", 2);
                 Copy(cq->copyfile, newpath);
 	    } else if (dashd(cq->copyfile) &&
 		       stampadir(newpath, &item, 0) != -1) {
-		memcpy(cq->copytitle, "¡»", 2);
+		memcpy(cq->copytitle, "â—†", 2);
 		copy_file(cq->copyfile, newpath);
 	    } else {
 		copyqueue_reset();
-		vmsg("µLªk«ş¨©¡I");
+		vmsg("ç„¡æ³•æ‹·è²ï¼");
 		return;
 	    }
 	    strlcpy(item.owner, *cq->copyowner ? cq->copyowner : cuser.userid,
@@ -567,7 +567,7 @@ a_appenditem(const menu_t * pm, int isask)
     move(b_lines - 1, 0);
     if(copyqueue_querysize() <= 0)
     {
-	vmsg("½Ğ¥ı°õ¦æ copy ©R¥O«á¦A append");
+	vmsg("è«‹å…ˆåŸ·è¡Œ copy å‘½ä»¤å¾Œå† append");
 	copyqueue_reset();
 	return;
     }
@@ -577,7 +577,7 @@ a_appenditem(const menu_t * pm, int isask)
 	off_t sz;
 
 	if (!dashf(cq->copyfile)) {
-	    vmsg("¥Ø¿ı¤£±oªş¥[©óÀÉ®×«á¡I");
+	    vmsg("ç›®éŒ„ä¸å¾—é™„åŠ æ–¼æª”æ¡ˆå¾Œï¼");
 	    return;
 	}
 
@@ -586,7 +586,7 @@ a_appenditem(const menu_t * pm, int isask)
 
 	// if same file, abort.
 	if (!dashf(fname) || strcmp(fname, cq->copyfile) == 0) {
-	    vmsg("ÀÉ®×¤£±oªş¥[©ó¦¹¡I");
+	    vmsg("æª”æ¡ˆä¸å¾—é™„åŠ æ–¼æ­¤ï¼");
 	    return;
 	}
 
@@ -594,13 +594,13 @@ a_appenditem(const menu_t * pm, int isask)
 	sz = dashs(fname);
 	if (sz >= MAX_FILE_SIZE)
 	{
-	    vmsg("ÀÉ®×¤w¶W¹L³Ì¤j­­¨î¡AµLªk¦Aªş¥[");
+	    vmsg("æª”æ¡ˆå·²è¶…éæœ€å¤§é™åˆ¶ï¼Œç„¡æ³•å†é™„åŠ ");
 	    return;
 	}
 
 	if (isask) {
 	    snprintf(buf, sizeof(buf),
-		    "½T©w­n±N[%s]ªş¥[©ó¦¹¶Ü(Y/N)¡H[N] ", cq->copytitle);
+		    "ç¢ºå®šè¦å°‡[%s]é™„åŠ æ–¼æ­¤å—(Y/N)ï¼Ÿ[N] ", cq->copytitle);
 	    getdata(b_lines - 2, 1, buf, ans, sizeof(ans), LCECHO);
 	}
 
@@ -619,7 +619,7 @@ a_appenditem(const menu_t * pm, int isask)
 	fprintf(fp, "\n> %s <\n\n", buf);
 	if (isask)
 	    getdata(b_lines - 1, 1,
-		    "¬O§_¦¬¿ıÃ±¦WÀÉ³¡¥÷(Y/N)¡H[Y] ",
+		    "æ˜¯å¦æ”¶éŒ„ç°½åæª”éƒ¨ä»½(Y/N)ï¼Ÿ[Y] ",
 		    ans, sizeof(ans), LCECHO);
 
 	// XXX reported by Kinra, appending same file may cause endless loop here.
@@ -648,7 +648,7 @@ typedef struct _iter_paste_tag_param {
 static int
 _iter_paste_tag(void *item, void *optarg) {
     char buf[PATHLEN];
-    char title[TTLEN + 1] = "¡º  ";
+    char title[TTLEN + 1] = "â—‡  ";
     fileheader_t *fhdr = (fileheader_t*) item;
     _iter_paste_tag_param *param = (_iter_paste_tag_param*) optarg;
 
@@ -659,9 +659,9 @@ _iter_paste_tag(void *item, void *optarg) {
     {
         grayout(0, b_lines-2, GRAYOUT_DARK);
         move(b_lines-1, 0); clrtobot();
-        prints("³B²z #%d ¶µµo¥Í¿ù»~¡C ½Ğ§â§A­è­è¶i¦æªº§¹¾ã¨BÆJ¶K¨ì "
-                BN_BUGREPORT " ªO¡C\n", param->item);
-        vmsg("©¿²¤¿ù»~¨ÃÄ~Äò¶i¦æ¡C");
+        prints("è™•ç† #%d é …ç™¼ç”ŸéŒ¯èª¤ã€‚ è«‹æŠŠä½ å‰›å‰›é€²è¡Œçš„å®Œæ•´æ­¥é©Ÿè²¼åˆ° "
+                BN_BUGREPORT " æ¿ã€‚\n", param->item);
+        vmsg("å¿½ç•¥éŒ¯èª¤ä¸¦ç¹¼çºŒé€²è¡Œã€‚");
         return 0;
     }
 
@@ -711,8 +711,8 @@ a_pastetagpost(menu_t * pm, int mode)
     // prevent if anything wrong
     if (TagNum > MAXTAGS || TagNum < 0)
     {
-	vmsg("¤º³¡¿ù»~¡C½Ğ§â§A­è­è¶i¦æªº§¹¾ã¨BÆJ¶K¨ì "
-		BN_BUGREPORT " ªO¡C");
+	vmsg("å…§éƒ¨éŒ¯èª¤ã€‚è«‹æŠŠä½ å‰›å‰›é€²è¡Œçš„å®Œæ•´æ­¥é©Ÿè²¼åˆ° "
+		BN_BUGREPORT " æ¿ã€‚");
 	return 0;
     }
 
@@ -737,7 +737,7 @@ a_moveitem(menu_t * pm)
     char            buf[PATHLEN];
     int             fail;
 
-    snprintf(buf, sizeof(buf), "½Ğ¿é¤J²Ä %d ¿ï¶µªº·s¦¸§Ç¡G", pm->now + 1);
+    snprintf(buf, sizeof(buf), "è«‹è¼¸å…¥ç¬¬ %d é¸é …çš„æ–°æ¬¡åºï¼š", pm->now + 1);
     if (!getdata(b_lines - 1, 1, buf, newnum, sizeof(newnum), DOECHO))
 	return;
     num = (newnum[0] == '$') ? A_INVALID_PAGE : atoi(newnum) - 1;
@@ -786,17 +786,17 @@ a_delete(menu_t * pm, const char *backup_dir)
     char            fpath[PATHLEN], buf[PATHLEN], cmd[PATHLEN];
     char            ans[4];
     fileheader_t    backup, *fhdr = &(pm->header[pm->now - pm->page]);
-    const char *msg_errsync = "§R°£ÀÉ®×¥¢±Ñ¡A½Ğ°h¦^¤W¼h¥Ø¿ı«á¦A­«¸Õ¤@¦¸",
-               *msg_errsync2 = "ÀÉ®×¥i¯à¤w³Q¥¦¤H§R°£¡A½Ğ°h¦^¤W¼h¥Ø¿ı¦A­«¶i½T»{",
-               *msg_errbackup = "ÀÉ®×¤w§R°£¦ıµLªk³Æ¥÷¡C½Ğ¦Ü " BN_BUGREPORT
-                                "³ø§i±z¸Õ¹Ï§R°£ÀÉ®×ªº¦ì¸m¡C";
+    const char *msg_errsync = "åˆªé™¤æª”æ¡ˆå¤±æ•—ï¼Œè«‹é€€å›ä¸Šå±¤ç›®éŒ„å¾Œå†é‡è©¦ä¸€æ¬¡",
+               *msg_errsync2 = "æª”æ¡ˆå¯èƒ½å·²è¢«å®ƒäººåˆªé™¤ï¼Œè«‹é€€å›ä¸Šå±¤ç›®éŒ„å†é‡é€²ç¢ºèª",
+               *msg_errbackup = "æª”æ¡ˆå·²åˆªé™¤ä½†ç„¡æ³•å‚™ä»½ã€‚è«‹è‡³ " BN_BUGREPORT
+                                "å ±å‘Šæ‚¨è©¦åœ–åˆªé™¤æª”æ¡ˆçš„ä½ç½®ã€‚";
 
     snprintf(fpath, sizeof(fpath),
 	     "%s/%s", pm->path, fhdr->filename);
     setadir(buf, pm->path);
 
     if (fhdr->filename[0] == 'H' && fhdr->filename[1] == '.') {
-	getdata(b_lines - 1, 1, "±z½T©w­n§R°£¦¹ºëµØ°Ï³s½u¶Ü(Y/N)¡H[N] ",
+	getdata(b_lines - 1, 1, "æ‚¨ç¢ºå®šè¦åˆªé™¤æ­¤ç²¾è¯å€é€£ç·šå—(Y/N)ï¼Ÿ[N] ",
 		ans, sizeof(ans), LCECHO);
 	if (ans[0] != 'y')
 	    return;
@@ -805,7 +805,7 @@ a_delete(menu_t * pm, const char *backup_dir)
 	    return;
         }
     } else if (dashl(fpath)) {
-	getdata(b_lines - 1, 1, "±z½T©w­n§R°£¦¹ symbolic link ¶Ü(Y/N)¡H[N] ",
+	getdata(b_lines - 1, 1, "æ‚¨ç¢ºå®šè¦åˆªé™¤æ­¤ symbolic link å—(Y/N)ï¼Ÿ[N] ",
 		ans, sizeof(ans), LCECHO);
 	if (ans[0] != 'y')
 	    return;
@@ -816,7 +816,7 @@ a_delete(menu_t * pm, const char *backup_dir)
 	unlink(fpath);
     } else if (dashf(fpath)) {
 
-	getdata(b_lines - 1, 1, "±z½T©w­n§R°£¦¹ÀÉ®×¶Ü(Y/N)¡H[N] ", ans,
+	getdata(b_lines - 1, 1, "æ‚¨ç¢ºå®šè¦åˆªé™¤æ­¤æª”æ¡ˆå—(Y/N)ï¼Ÿ[N] ", ans,
 		sizeof(ans), LCECHO);
 	if (ans[0] != 'y')
 	    return;
@@ -862,7 +862,7 @@ a_delete(menu_t * pm, const char *backup_dir)
 	const char *save_bn = ( HasUserPerm(PERM_MAILLIMIT) && (currstat & RMAIL) ) ?
 		BN_JUNK : BN_DELETED;
 
-	getdata(b_lines - 1, 1, "±z½T©w­n§R°£¾ã­Ó¥Ø¿ı¶Ü(Y/N)¡H[N] ", ans,
+	getdata(b_lines - 1, 1, "æ‚¨ç¢ºå®šè¦åˆªé™¤æ•´å€‹ç›®éŒ„å—(Y/N)ï¼Ÿ[N] ", ans,
 		sizeof(ans), LCECHO);
 	if (ans[0] != 'y')
 	    return;
@@ -876,7 +876,7 @@ a_delete(menu_t * pm, const char *backup_dir)
 	// let's allow it to use a large set of file names.
 	if (stampadir(buf, &backup, 1) != 0)
 	{
-	    vmsg("©êºp¡A¨t²Î¥Ø«eµLªk§R°£¸ê®Æ¡A½Ğ³qª¾¯¸°È¤H­û");
+	    vmsg("æŠ±æ­‰ï¼Œç³»çµ±ç›®å‰ç„¡æ³•åˆªé™¤è³‡æ–™ï¼Œè«‹é€šçŸ¥ç«™å‹™äººå“¡");
 	    return;
 	}
 
@@ -885,7 +885,7 @@ a_delete(menu_t * pm, const char *backup_dir)
 	system(cmd);
 
 	strlcpy(backup.owner, cuser.userid, sizeof(backup.owner));
-	strcpy(backup.title, "¡»");
+	strcpy(backup.title, "â—†");
 	strlcpy(backup.title + 2, fhdr->title + 2, sizeof(backup.title) - 3);
 
         // restrict access if source is hidden
@@ -897,8 +897,8 @@ a_delete(menu_t * pm, const char *backup_dir)
 		*save_bn, save_bn);
 	append_record(buf, &backup, sizeof(backup));
 
-    } else {			/* Ptt ·l·´ªº¶µ¥Ø */
-	getdata(b_lines - 1, 1, "±z½T©w­n§R°£¦¹·l·´ªº¶µ¥Ø¶Ü(Y/N)¡H[N] ",
+    } else {			/* Ptt ææ¯€çš„é …ç›® */
+	getdata(b_lines - 1, 1, "æ‚¨ç¢ºå®šè¦åˆªé™¤æ­¤ææ¯€çš„é …ç›®å—(Y/N)ï¼Ÿ[N] ",
 		ans, sizeof(ans), LCECHO);
 	if (ans[0] != 'y')
 	    return;
@@ -917,11 +917,11 @@ a_newtitle(const menu_t * pm)
     fhdr = &pm->header[pm->now - pm->page];
     memcpy(&item, fhdr, FHSZ);
     strlcpy(buf, item.title + 3, sizeof(buf));
-    if (getdata_buf(b_lines - 1, 0, "   ·s¼ĞÃD: ", buf, 60, DOECHO)) {
+    if (getdata_buf(b_lines - 1, 0, "   æ–°æ¨™é¡Œ: ", buf, 60, DOECHO)) {
 	strlcpy(item.title + 3, buf, sizeof(item.title) - 3);
 	setadir(buf, pm->path);
         if (substitute_fileheader(buf, fhdr, &item, pm->now + 1) != 0)
-            vmsg("µLªkÅÜ§ó¦WºÙ¡A¥i¯à¥Ø¿ı¦³¨ä¥¦ªO¥D¥¿¦b­×§ï¡C½Ğ°h¥X¥»¼h¥Ø¿ı«á¦A­«¸Õ¡C");
+            vmsg("ç„¡æ³•è®Šæ›´åç¨±ï¼Œå¯èƒ½ç›®éŒ„æœ‰å…¶å®ƒæ¿ä¸»æ­£åœ¨ä¿®æ”¹ã€‚è«‹é€€å‡ºæœ¬å±¤ç›®éŒ„å¾Œå†é‡è©¦ã€‚");
     }
 }
 static void
@@ -938,7 +938,7 @@ a_hideitem(const menu_t * pm)
 	item->filemode |= FILE_HIDE;
     setadir(buf, pm->path);
     if (substitute_fileheader(buf, item, item, pm->now + 1) != 0) {
-        vmsg("µLªkÅÜ§ó¡A¥i¯à¥Ø¿ı¦³¨ä¥¦ªO¥D¥¿¦b­×§ï¡C½Ğ°h¥X¥»¼h¥Ø¿ı«á¦A­«¸Õ¡C");
+        vmsg("ç„¡æ³•è®Šæ›´ï¼Œå¯èƒ½ç›®éŒ„æœ‰å…¶å®ƒæ¿ä¸»æ­£åœ¨ä¿®æ”¹ã€‚è«‹é€€å‡ºæœ¬å±¤ç›®éŒ„å¾Œå†é‡è©¦ã€‚");
     }
 }
 static void
@@ -949,13 +949,13 @@ a_editsign(const menu_t * pm)
 
     memcpy(&item, &pm->header[pm->now - pm->page], FHSZ);
     snprintf(buf, sizeof(buf), "%c%c", item.title[0], item.title[1]);
-    if (getdata_buf(b_lines - 1, 1, "²Å¸¹", buf, 3, DOECHO)) {
+    if (getdata_buf(b_lines - 1, 1, "ç¬¦è™Ÿ", buf, 3, DOECHO)) {
 	item.title[0] = buf[0] ? buf[0] : ' ';
 	item.title[1] = buf[1] ? buf[1] : ' ';
 	item.title[2] = ' ';
 	setadir(buf, pm->path);
         if (substitute_fileheader(buf, &item, &item, pm->now + 1) != 0) {
-            vmsg("µLªkÅÜ§ó¡A¥i¯à¥Ø¿ı¦³¨ä¥¦ªO¥D¥¿¦b­×§ï¡C½Ğ°h¥X¥»¼h¥Ø¿ı«á¦A­«¸Õ¡C");
+            vmsg("ç„¡æ³•è®Šæ›´ï¼Œå¯èƒ½ç›®éŒ„æœ‰å…¶å®ƒæ¿ä¸»æ­£åœ¨ä¿®æ”¹ã€‚è«‹é€€å‡ºæœ¬å±¤ç›®éŒ„å¾Œå†é‡è©¦ã€‚");
         }
     }
 }
@@ -972,7 +972,7 @@ a_showname(const menu_t * pm)
     snprintf(buf, sizeof(buf),
 	     "%s/%s", pm->path, pm->header[pm->now - pm->page].filename);
     if (dashl(buf)) {
-	prints("¦¹ symbolic link ¦WºÙ¬° %s\n",
+	prints("æ­¤ symbolic link åç¨±ç‚º %s\n",
 	       pm->header[pm->now - pm->page].filename);
 	if ((len = readlink(buf, buf, PATHLEN - 1)) >= 0) {
 	    buf[len] = '\0';
@@ -988,16 +988,16 @@ a_showname(const menu_t * pm)
 			sym = 1;
 		}
 		if (sym) {
-		    vmsgf("¦¹ symbolic link «ü¦V %s", &buf[i + 1]);
+		    vmsgf("æ­¤ symbolic link æŒ‡å‘ %s", &buf[i + 1]);
 		}
 	    }
 	}
     } else if (dashf(buf))
-	prints("¦¹¤å³¹¦WºÙ¬° %s", pm->header[pm->now - pm->page].filename);
+	prints("æ­¤æ–‡ç« åç¨±ç‚º %s", pm->header[pm->now - pm->page].filename);
     else if (dashd(buf))
-	prints("¦¹¥Ø¿ı¦WºÙ¬° %s", pm->header[pm->now - pm->page].filename);
+	prints("æ­¤ç›®éŒ„åç¨±ç‚º %s", pm->header[pm->now - pm->page].filename);
     else
-	outs("¦¹¶µ¥Ø¤w·l·´, «ØÄ³±N¨ä§R°£¡I");
+	outs("æ­¤é …ç›®å·²ææ¯€, å»ºè­°å°‡å…¶åˆªé™¤ï¼");
     pressanykey();
 }
 #ifdef CHESSCOUNTRY
@@ -1022,7 +1022,7 @@ a_setchesslist(const menu_t * me)
 
     if (strcmp(buf_real, "chess_list") == 0
 	    || strcmp(buf_real, "chess_photo") == 0) {
-	vmsg("¤£»İ­«³]¡I");
+	vmsg("ä¸éœ€é‡è¨­ï¼");
 	return;
     }
 
@@ -1033,15 +1033,15 @@ a_setchesslist(const menu_t * me)
     photo_exist = dashd(buf_photo);
 
     if (!list_exist && !photo_exist) {
-	vmsg("¦¹¬İªO«D´Ñ°ê¡I");
+	vmsg("æ­¤çœ‹æ¿éæ£‹åœ‹ï¼");
 	return;
     }
 
-    getdata(b_lines, 0, "±N¦¹¶µ¥Ø³]©w¬° (1) ´Ñ°ê¦W³æ (2) ´Ñ°ê·Ó¤ùÀÉ¥Ø¿ı¡G",
+    getdata(b_lines, 0, "å°‡æ­¤é …ç›®è¨­å®šç‚º (1) æ£‹åœ‹åå–® (2) æ£‹åœ‹ç…§ç‰‡æª”ç›®éŒ„ï¼š",
 	    buf, sizeof(buf), 1);
     if (buf[0] == '1') {
 	if (list_exist)
-	    getdata(b_lines, 0, "­ì¦³¤§´Ñ°ê¦W³æ±N³Q¨ú¥N¡A½Ğ½T»{ (y/N)",
+	    getdata(b_lines, 0, "åŸæœ‰ä¹‹æ£‹åœ‹åå–®å°‡è¢«å–ä»£ï¼Œè«‹ç¢ºèª (y/N)",
 		    buf, sizeof(buf), 1);
 	else
 	    buf[0] = 'y';
@@ -1052,7 +1052,7 @@ a_setchesslist(const menu_t * me)
 	}
     } else if (buf[0] == '2') {
 	if (photo_exist)
-	    getdata(b_lines, 0, "­ì¦³¤§´Ñ°ê·Ó¤ù±N³Q¨ú¥N¡A½Ğ½T»{ (y/N)",
+	    getdata(b_lines, 0, "åŸæœ‰ä¹‹æ£‹åœ‹ç…§ç‰‡å°‡è¢«å–ä»£ï¼Œè«‹ç¢ºèª (y/N)",
 		    buf, sizeof(buf), 1);
 	else
 	    buf[0] = 'y';
@@ -1089,13 +1089,13 @@ isvisible_man(const menu_t * me)
 }
 
 typedef struct {
-    char bReturnToRoot;		// ¥Î¨Ó¸õ¥X recursion
+    char bReturnToRoot;		// ç”¨ä¾†è·³å‡º recursion
     int  z_indexes [STRLEN/2];	// each index code takes minimal 2 characters
-    const char *backup_dir;    // ¬å¤å³¹®É­n¦s¨ì­ş
+    const char *backup_dir;    // ç æ–‡ç« æ™‚è¦å­˜åˆ°å“ª
 }   a_menu_session_t;
 
 // look up current location
-#define A_WHEREAMI_PREFIX_STR	"§Ú¦b­ş¡H "
+#define A_WHEREAMI_PREFIX_STR	"æˆ‘åœ¨å“ªï¼Ÿ "
 static int
 a_where_am_i(const menu_t *root, int current_idx, const char *current_title)
 {
@@ -1169,7 +1169,7 @@ a_where_am_i(const menu_t *root, int current_idx, const char *current_title)
 	//  decide if we need to skip.
 	if (++lvl == max_lvl-1 && p && p->next)
 	{
-	    prints("... (¤¤¶¡¤w¬Ù²¤) ...");
+	    prints("... (ä¸­é–“å·²çœç•¥) ...");
 	    bskipping = 1;
 	    continue;
 	}
@@ -1223,7 +1223,7 @@ int a_parse_zindexes(const char *s, a_menu_session_t *sess)
     return 1;
 }
 
-#define MULTI_SEARCH_PROMPT "·s¦ì¸m (¥i¿é¤J¦h¼h¼Æ¦r): "
+#define MULTI_SEARCH_PROMPT "æ–°ä½ç½® (å¯è¼¸å…¥å¤šå±¤æ•¸å­—): "
 static int
 a_multi_search_num(char init, a_menu_session_t *sess)
 {
@@ -1285,7 +1285,7 @@ a_menu_rec(const char *maintitle, const char *path,
     me.num = get_num_records(fname, FHSZ);
     me.bid = lastbid;
 
-    /* ºëµØ°Ï-tree ¤¤³¡¥÷µ²ºcÄİ©ó cuser ==> BM */
+    /* ç²¾è¯å€-tree ä¸­éƒ¨ä»½çµæ§‹å±¬æ–¼ cuser ==> BM */
 
     if (!(me.level = lastlevel)) {
 	char           *ptr;
@@ -1485,14 +1485,14 @@ a_menu_rec(const char *maintitle, const char *path,
 			 me.header[me.now - me.page].filename);
 
 		/* XXX: dirty fix
-		   À³¸Ó­n§ï¦¨¦pªGµo²{¸Ó¥Ø¿ı¸Ì­±¦³Áô§Î¥Ø¿ıªº¸Ü¤~©Úµ´.
-		   ¤£¹L³o¼Ëªº¸Ü¶·­n¾ã­Ó·j¤@¹M, ¦Ó¥B¥Ø«e§PÂ_¸Ó¸ê®Æ¬O¥Ø¿ı
-		   ÁÙ¬OÀÉ®×³ºµM¬O¥Î fstat(2) ¦Ó¤£¬Oª½±µ¦s¦b .DIR ¤º |||b
-		   ¶·µ¥¸Ó¸ê®Æ¼g¤J .DIR ¤º¦A implement¤~¦³®Ä²v.
+		   æ‡‰è©²è¦æ”¹æˆå¦‚æœç™¼ç¾è©²ç›®éŒ„è£¡é¢æœ‰éš±å½¢ç›®éŒ„çš„è©±æ‰æ‹’çµ•.
+		   ä¸éé€™æ¨£çš„è©±é ˆè¦æ•´å€‹æœä¸€é, è€Œä¸”ç›®å‰åˆ¤æ–·è©²è³‡æ–™æ˜¯ç›®éŒ„
+		   é‚„æ˜¯æª”æ¡ˆç«Ÿç„¶æ˜¯ç”¨ fstat(2) è€Œä¸æ˜¯ç›´æ¥å­˜åœ¨ .DIR å…§ |||b
+		   é ˆç­‰è©²è³‡æ–™å¯«å…¥ .DIR å…§å† implementæ‰æœ‰æ•ˆç‡.
 		 */
 		if( !me.level && !HasUserPerm(PERM_SYSOP) &&
 		    (me.bid==0 || !is_BM_cache(me.bid)) && dashd(fname) )
-		    vmsg("¥u¦³ªO¥D¤~¥i¥H«ş¨©¥Ø¿ı­ò!");
+		    vmsg("åªæœ‰æ¿ä¸»æ‰å¯ä»¥æ‹·è²ç›®éŒ„å”·!");
 		else
 		    a_copyitem(fname, me.header[me.now - me.page].title, 0, 1);
 		me.page = A_INVALID_PAGE;
@@ -1525,7 +1525,7 @@ a_menu_rec(const char *maintitle, const char *path,
 		    int             more_result;
 
 		    while ((more_result = more(fname, YEA))) {
-			/* Ptt ½d¥»ºëÆF plugin */
+			/* Ptt ç¯„æœ¬ç²¾éˆ plugin */
 			if (trans_buffer &&
 				(currstat == EDITEXP || currstat == OSONG)) {
 			    char            ans[4];
@@ -1534,8 +1534,8 @@ a_menu_rec(const char *maintitle, const char *path,
 			    clrtoeol();
 			    getdata(22, 1,
 				    currstat == EDITEXP ?
-				    "­n§â½d¨Ò¥[¤J¨ì¤å³¹¤º¶Ü?[y/N]" :
-				    "½T©w­n¿ï³o½g¶Ü?[y/N]",
+				    "è¦æŠŠç¯„ä¾‹åŠ å…¥åˆ°æ–‡ç« å…§å—?[y/N]" :
+				    "ç¢ºå®šè¦é¸é€™ç¯‡å—?[y/N]",
 				    ans, sizeof(ans), LCECHO);
 			    if (ans[0] == 'y') {
 				strlcpy(trans_buffer, fname, PATHLEN);
@@ -1594,7 +1594,7 @@ a_menu_rec(const char *maintitle, const char *path,
 		    }
 
 		    me.next = NULL;
-		    /* Ptt  ±j¤O¸õ¥Xrecursive */
+		    /* Ptt  å¼·åŠ›è·³å‡ºrecursive */
 		    if (sess->bReturnToRoot) {
 			free(me.header);
 			return returnvalue;
@@ -1616,7 +1616,7 @@ a_menu_rec(const char *maintitle, const char *path,
 		    a_forward(path, fhdr, ch /* == 'U' */ );
 		    /* By CharlieL */
 		} else
-		    vmsg("µLªkÂà±H¦¹¶µ¥Ø");
+		    vmsg("ç„¡æ³•è½‰å¯„æ­¤é …ç›®");
 		me.page = A_INVALID_PAGE;
 	    }
 
@@ -1718,7 +1718,7 @@ int
 Announce(void)
 {
     setutmpmode(ANNOUNCE);
-    a_menu(BBSNAME "§G§iÄæ", "man",
+    a_menu(BBSNAME "ä½ˆå‘Šæ¬„", "man",
 	   ((HasUserPerm(PERM_SYSOP) ) ? SYSOP : NOBODY),
 	   0,
 	   NULL, NULL);

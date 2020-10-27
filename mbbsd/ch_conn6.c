@@ -1,13 +1,13 @@
 #include "bbs.h"
 
 enum {
-    BWHITE = 0,  /* ¥Õ¤l («á¤â) */
-    BBLACK = 1,  /* ¶Â¤l (¥ı¤â) */
-    BEMPTY = 2,  /* ªÅ¥Õ */
-    MAX_TIME = 300,  /* idle ¬í¼Æ */
+    BWHITE = 0,  /* ç™½å­ (å¾Œæ‰‹) */
+    BBLACK = 1,  /* é»‘å­ (å…ˆæ‰‹) */
+    BEMPTY = 2,  /* ç©ºç™½ */
+    MAX_TIME = 300,  /* idle ç§’æ•¸ */
 };
 
-#define BRDSIZ (19)  /* ´Ñ½L³æÃä¤j¤p */
+#define BRDSIZ (19)  /* æ£‹ç›¤å–®é‚Šå¤§å° */
 #define BOARD_LINE_ON_SCREEN(X) ((X) + 2)
 #define INVALID_ROW(R) ((R) < 0 || (R) >= BRDSIZ)
 #define INVALID_COL(C) ((C) < 0 || (C) >= BRDSIZ)
@@ -65,7 +65,7 @@ static const ChessConstants conn6_constants = {
     BRDSIZ,
     BRDSIZ,
     0,
-    "¤»¤l´Ñ",
+    "å…­å­æ£‹",
     "photo_connect6",
 #ifdef BN_CONNECT6_LOG
     BN_CONNECT6_LOG,
@@ -73,7 +73,7 @@ static const ChessConstants conn6_constants = {
     NULL,
 #endif
     { ANSI_COLOR(37;43), ANSI_COLOR(30;43) },
-    { "¥Õ´Ñ", "¶Â´Ñ" },
+    { "ç™½æ£‹", "é»‘æ£‹" },
 };
 
 static int
@@ -132,8 +132,8 @@ conn6_check_win(board_t b, int color)
 static char*
 conn6_getstep(const conn6_step_t* step, char buf[])
 {
-    static const char* const ColName = "¢Ï¢Ğ¢Ñ¢Ò¢Ó¢Ô¢Õ¢Ö¢×¢Ø¢Ù¢Ú¢Û¢Ü O P Q R S";
-    static const char* const RowName = "19181716151413121110¢¸¢·¢¶¢µ¢´¢³¢²¢±¢°";
+    static const char* const ColName = "ï¼¡ï¼¢ï¼£ï¼¤ï¼¥ï¼¦ï¼§ï¼¨ï¼©ï¼ªï¼«ï¼¬ï¼­ï¼® O P Q R S";
+    static const char* const RowName = "19181716151413121110ï¼™ï¼˜ï¼—ï¼–ï¼•ï¼”ï¼“ï¼’ï¼‘";
 
     sprintf(buf, "%s%2.2s%2.2s,%2.2s%2.2s" ANSI_RESET,
 	    turn_color[step->color],
@@ -171,11 +171,11 @@ conn6_init_board(board_t board)
 static void
 conn6_drawline(const ChessInfo* info, int line)
 {
-    static const char* const BoardPic[] = {
-	"ùİ", "ùç", "ùç", "ùß",
-	"ùò", "¢q", "¢q", "ùô",
-	"ùò", "¢q", "¡Ï", "ùô",
-	"ùã", "ùí", "ùí", "ùå",
+   static const char* const BoardPic[] = {
+	"â•”", "â•¤", "â•¤", "â•—",
+	"â•Ÿ", "â”¼", "â”¼", "â•¢",
+	"â•Ÿ", "â”¼", "ï¼‹", "â•¢",
+	"â•š", "â•§", "â•§", "â•",
     };
     static const int BoardPicIndex[] =
     { 0, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 3 };
@@ -183,10 +183,10 @@ conn6_drawline(const ChessInfo* info, int line)
     board_p board = (board_p)info->board;
 
     if (line == 0) {
-	prints(ANSI_COLOR(1;46) "  ¤»¤l´Ñ¹ï¾Ô  " ANSI_COLOR(45)
+	prints(ANSI_COLOR(1;46) "  å…­å­æ£‹å°æˆ°  " ANSI_COLOR(45)
 		"%30s VS %-20s%10s" ANSI_RESET,
 	       info->user1.userid, info->user2.userid,
-	       info->mode == CHESS_MODE_WATCH ? "[Æ[´Ñ¼Ò¦¡]" : "");
+	       info->mode == CHESS_MODE_WATCH ? "[è§€æ£‹æ¨¡å¼]" : "");
     } else if (line == 1) {
 	outs("   A B C D E F G H I J K L M N O P Q R S");
     } else if (line >= 2 && line <= BRDSIZ + 1) {
@@ -214,12 +214,12 @@ conn6_drawline(const ChessInfo* info, int line)
     if (line > 13 &&
 	line < 17) {
 	switch (line - 13) {
-	    case 1: outs("­º¦^¥~¨C¦^¦X¤U¨â¤l¡C");
+	    case 1: outs("é¦–å›å¤–æ¯å›åˆä¸‹å…©å­ã€‚");
 		    break;
-	    case 2: outs("¸Ô²Ó³W«h¨£ http://connect6.org");
+	    case 2: outs("è©³ç´°è¦å‰‡è¦‹ http://connect6.org");
 		    break;
 #ifdef CONN6_BETA
-	    case 3: outs("¨t²Î´ú¸Õ¤¤¡A¾ÔÁZ¤£¦C¤J°O¿ı");
+	    case 3: outs("ç³»çµ±æ¸¬è©¦ä¸­ï¼Œæˆ°ç¸¾ä¸åˆ—å…¥è¨˜éŒ„");
 		    break;
 #endif
 	}
@@ -354,7 +354,7 @@ conn6_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
     vcur_restore(cur);
 
     fprintf(fp, "\n");
-    fprintf(fp, "«ö z ¥i¶i¤J¥´ÃĞ¼Ò¦¡\n");
+    fprintf(fp, "æŒ‰ z å¯é€²å…¥æ‰“è­œæ¨¡å¼\n");
     fprintf(fp, "\n");
 
     fprintf(fp, "<connect6log>\nblack:%s\nwhite:%s\n",
@@ -398,7 +398,7 @@ conn6_loadlog(FILE *fp, ChessInfo *info)
 	    if (getuser(buf + 6, &rec))
 		conn6_init_user_userec(&rec, user);
 	} else if (buf[0] == '[') {
-	    /* "[ 1]¡´ ==> H8 H8    [ 2]¡³ ==> J9 K9    "  */
+	    /* "[ 1]â— ==> H8 H8    [ 2]â—‹ ==> J9 K9    "  */
 	    conn6_step_t step = { .type = CHESS_STEP_NORMAL };
 	    int         c, r;
 	    const char *p = buf;
@@ -484,7 +484,7 @@ connect6(int s, ChessGameMode mode)
 int
 conn6_main(void)
 {
-    return ChessStartGame('f', SIG_CONN6, "¤»¤l´Ñ");
+    return ChessStartGame('f', SIG_CONN6, "å…­å­æ£‹");
 }
 
 int
@@ -497,7 +497,7 @@ conn6_personal(void)
 int
 conn6_watch(void)
 {
-    return ChessWatchGame(&connect6, M_CONN6, "¤»¤l´Ñ");
+    return ChessWatchGame(&connect6, M_CONN6, "å…­å­æ£‹");
 }
 
 ChessInfo*

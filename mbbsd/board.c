@@ -1,8 +1,8 @@
 #include "bbs.h"
 
 /* personal board state
- * ¬Û¹ï©ó¬İªOªº attr (BRD_* in ../include/pttstruct.h),
- * ³o¨Ç¬O¥Î¦b user interface ªº flag */
+ * ç›¸å°æ–¼çœ‹æ¿çš„ attr (BRD_* in ../include/pttstruct.h),
+ * é€™äº›æ˜¯ç”¨åœ¨ user interface çš„ flag */
 #define NBRD_FAV    	 1
 #define NBRD_BOARD	 2
 #define NBRD_LINE   	 4
@@ -25,11 +25,11 @@ typedef struct {
 } __attribute__ ((packed)) boardstat_t;
 
 /**
- * class_bid ªº·N¸q
- *   class_bid < 0   ¼öªù¬İªO
- *   class_bid = 0   §Úªº³Ì·R
- *   class_bid = 1   ¤ÀÃş¬İªO
- *   class_bid > 1   ¨ä¥L¥Ø¿ı
+ * class_bid çš„æ„ç¾©
+ *   class_bid < 0   ç†±é–€çœ‹æ¿
+ *   class_bid = 0   æˆ‘çš„æœ€æ„›
+ *   class_bid = 1   åˆ†é¡çœ‹æ¿
+ *   class_bid > 1   å…¶ä»–ç›®éŒ„
  */
 #define IN_HOTBOARD()	(class_bid < 0)
 #define IN_FAVORITE()	(class_bid == 0)
@@ -66,7 +66,7 @@ inline boardheader_t *getparent(const boardheader_t *fh)
 	return NULL;
 }
 
-// µ{¦¡¤¤¦³¯S§O¥Î³~©Ò¥H¤£±o¦Û¦æ post / ­×§ïªº¬İªO
+// ç¨‹å¼ä¸­æœ‰ç‰¹åˆ¥ç”¨é€”æ‰€ä»¥ä¸å¾—è‡ªè¡Œ post / ä¿®æ”¹çš„çœ‹æ¿
 int
 is_readonly_board(const char *bname)
 {
@@ -130,10 +130,10 @@ static void imovefav(int old)
     char buf[5];
     int new;
 
-    getdata(b_lines - 1, 0, "½Ğ¿é¤J·s¦¸§Ç:", buf, sizeof(buf), DOECHO);
+    getdata(b_lines - 1, 0, "è«‹è¼¸å…¥æ–°æ¬¡åº:", buf, sizeof(buf), DOECHO);
     new = atoi(buf) - 1;
     if (new < 0 || brdnum <= new){
-	vmsg("¿é¤J½d³ò¦³»~!");
+	vmsg("è¼¸å…¥ç¯„åœæœ‰èª¤!");
 	return;
     }
     move_in_current_folder(old, new);
@@ -166,12 +166,12 @@ HasBoardPermNormally(boardheader_t *bptr)
 	(HasUserPerm(PERM_POLICE) || HasUserPerm(PERM_POLICE_MAN)))
 	return 1;
 
-    /* ªO¥D */
+    /* æ¿ä¸» */
     if( is_BM_cache(bptr - bcache + 1) ) /* XXXbid */
 	return 1;
 
-    /* ¯¦±K¬İªO¡G®Ö¹ï­º®uªO¥Dªº¦n¤Í¦W³æ */
-    if (brdattr & BRD_HIDE) {	/* ÁôÂÃ */
+    /* ç¥•å¯†çœ‹æ¿ï¼šæ ¸å°é¦–å¸­æ¿ä¸»çš„å¥½å‹åå–® */
+    if (brdattr & BRD_HIDE) {	/* éš±è— */
 	if (!is_hidden_board_friend((int)(bptr - bcache) + 1, currutmp->uid)) {
 	    if (brdattr & BRD_POSTMASK)
 		return 0;
@@ -182,11 +182,11 @@ HasBoardPermNormally(boardheader_t *bptr)
     }
 
     // TODO Change this to a query on demand.
-    /* ¤Q¤K¸T¬İªO */
+    /* åå…«ç¦çœ‹æ¿ */
     if( (brdattr & BRD_OVER18) && !cuser.over_18 )
 	return 0;
 
-    /* ­­¨î¾\ÅªÅv­­ */
+    /* é™åˆ¶é–±è®€æ¬Šé™ */
     if (level && !(brdattr & BRD_POSTMASK) && !HasUserPerm(level))
 	return 0;
 
@@ -216,7 +216,7 @@ b_post_note(void)
     char            buf[PATHLEN], yn[3];
 
     // if(!(currmode & MODE_BOARD)) return DONOTHING;
-    vs_hdr("¦Û­qª`·N¨Æ¶µ");
+    vs_hdr("è‡ªè¨‚æ³¨æ„äº‹é …");
 
     setbfile(buf, currboard, FN_POST_NOTE);
     move(b_lines-2, 0); clrtobot();
@@ -224,7 +224,7 @@ b_post_note(void)
     if (more(buf, NA) == -1)
 	more("etc/" FN_POST_NOTE, NA);
 
-    getdata(b_lines - 2, 0, "¦Û­qµo¤åª`·N¨Æ¶µ: (y)½s¿è/(d)§R°£/(n)¤£ÅÜ? [y/d/N]:",
+    getdata(b_lines - 2, 0, "è‡ªè¨‚ç™¼æ–‡æ³¨æ„äº‹é …: (y)ç·¨è¼¯/(d)åˆªé™¤/(n)ä¸è®Š? [y/d/N]:",
 	    yn, sizeof(yn), LCECHO);
     if (yn[0] == 'y')
 	veditfile(buf);
@@ -247,7 +247,7 @@ b_posttype()
    posttype_f = bp->posttype_f;
    memcpy(posttype, bp->posttype, sizeof(bp->posttype));
 
-   vs_hdr("³]©w¤å³¹Ãş§O");
+   vs_hdr("è¨­å®šæ–‡ç« é¡åˆ¥");
 
    do {
        move(2, 0);
@@ -255,7 +255,7 @@ b_posttype()
        for (i = 0, p = posttype; *p && i < 8; i++, p += 4) {
            strlcpy(genbuf, p, 5);
            prints(" %d. %s %s\n", i + 1, genbuf,
-                  posttype_f & (1 << i) ? "(¦³½d¥»)": "");
+                  posttype_f & (1 << i) ? "(æœ‰ç¯„æœ¬)": "");
            // Workaround broken items
            if (strlen(p) < 4) {
                memset(p + strlen(p), ' ', 4 - strlen(p));
@@ -263,12 +263,12 @@ b_posttype()
        }
        types = i;
        if (!getdata(15, 0,
-                    "½Ğ¿é¤J­n³]©wªº¶µ¥Ø½s¸¹¡A©Î c ³]©wÁ`¼Æ,©Î ENTER Â÷¶}:",
+                    "è«‹è¼¸å…¥è¦è¨­å®šçš„é …ç›®ç·¨è™Ÿï¼Œæˆ– c è¨­å®šç¸½æ•¸,æˆ– ENTER é›¢é–‹:",
                     genbuf, 3, LCECHO))
            break;
 
        if (genbuf[0] == 'c') {
-           getdata(15, 0, "­n«O¯d´X¶µÃş§O©O¡H [0-8©Î ENTER Â÷¶}]: ", genbuf, 3,
+           getdata(15, 0, "è¦ä¿ç•™å¹¾é …é¡åˆ¥å‘¢ï¼Ÿ [0-8æˆ– ENTER é›¢é–‹]: ", genbuf, 3,
                    NUMECHO);
            if (!isdigit(genbuf[0]))
                continue;
@@ -285,19 +285,19 @@ b_posttype()
        if (i < 0 || i >= 8)
            continue;
        strlcpy(genbuf, posttype + i * 4, 5);
-       if(getdata_str(16, 0, "Ãş§O¦WºÙ: ", genbuf, 5, DOECHO, genbuf)) {
+       if(getdata_str(16, 0, "é¡åˆ¥åç¨±: ", genbuf, 5, DOECHO, genbuf)) {
            char tmp[5];
            snprintf(tmp, sizeof(tmp), "%-4.4s", genbuf);
            memcpy(posttype + (i * 4), tmp, 4);
        }
-       getdata(17, 0, "­n¨Ï¥Î½d¥»¶Ü? [y/n/K(¤£§ïÅÜ)]: ", genbuf, 2, LCECHO);
+       getdata(17, 0, "è¦ä½¿ç”¨ç¯„æœ¬å—? [y/n/K(ä¸æ”¹è®Š)]: ", genbuf, 2, LCECHO);
        if (genbuf[0] == 'y')
            posttype_f |= 1 << i;
        else if (genbuf[0] == 'n') {
            posttype_f &= ~(1 << i);
            continue;
        }
-       getdata(18, 0, "­n½s¿è½d¥»ÀÉ®×¶Ü? [y/N]: ", genbuf, 2, LCECHO);
+       getdata(18, 0, "è¦ç·¨è¼¯ç¯„æœ¬æª”æ¡ˆå—? [y/N]: ", genbuf, 2, LCECHO);
        if (genbuf[0] == 'y') {
            setbnfile(filepath, bp->brdname, "postsample", i);
            veditfile(filepath);
@@ -311,13 +311,13 @@ b_posttype()
        modified = 1;
    }
    if (strcmp(bp->posttype, posttype) != 0) {
-       /* ³oÃäÀ³¸Ó­n¨¾race condition */
+       /* é€™é‚Šæ‡‰è©²è¦é˜²race condition */
        strlcpy(bp->posttype, posttype, sizeof(bp->posttype));
        modified = 1;
    }
    if (modified) {
        substitute_record(fn_board, bp, sizeof(boardheader_t), currbid);
-       vmsg("¸ê®Æ¤w§ó·s¡C");
+       vmsg("è³‡æ–™å·²æ›´æ–°ã€‚");
    }
    return FULLUPDATE;
 }
@@ -374,7 +374,7 @@ b_config(void)
     // 2 3 4 5 6 7 9
     // better not: 0
 
-#define CANTPOSTMSG ANSI_COLOR(1;31) "(±z¥¼¹F­­¨î)" ANSI_RESET
+#define CANTPOSTMSG ANSI_COLOR(1;31) "(æ‚¨æœªé”é™åˆ¶)" ANSI_RESET
 
     while (!finished) {
 	// limits
@@ -387,53 +387,53 @@ b_config(void)
 
 	// outs(MSG_SEPARATOR); // deprecated by grayout
 	outs("\n" ANSI_REVERSE); // now (ytitle, 0);
-	vbarf(" ¡m%s¡n¬İªO³]©w", bp->brdname);
+	vbarf(" ã€Š%sã€‹çœ‹æ¿è¨­å®š", bp->brdname);
 
 	move(ytitle + 2, 0);
 
-	prints(" "ANSI_COLOR(1;36) "b" ANSI_RESET " - ¤¤¤å±Ô­z: %s\n", bp->title);
-	prints("     ªO¥D¦W³æ: %s\n", does_board_have_public_bm(bp) ? bp->BM : "(µL)");
+	prints(" "ANSI_COLOR(1;36) "b" ANSI_RESET " - ä¸­æ–‡æ•˜è¿°: %s\n", bp->title);
+	prints("     æ¿ä¸»åå–®: %s\n", does_board_have_public_bm(bp) ? bp->BM : "(ç„¡)");
 	prints( " " ANSI_COLOR(1;36) "h" ANSI_RESET
-		" - ¤½¶}ª¬ºA(¬O§_Áô§Î): %s " ANSI_RESET "\n",
+		" - å…¬é–‹ç‹€æ…‹(æ˜¯å¦éš±å½¢): %s " ANSI_RESET "\n",
 		(bp->brdattr & BRD_HIDE) ?
-		ANSI_COLOR(1;31)"Áô§Î":"¤½¶}");
+		ANSI_COLOR(1;31)"éš±å½¢":"å…¬é–‹");
 
 	prints( " " ANSI_COLOR(1;36) "g" ANSI_RESET
-		" - ÁôªO®É %s ¶i¤J¤Q¤j±Æ¦æº]" ANSI_RESET "\n",
+		" - éš±æ¿æ™‚ %s é€²å…¥åå¤§æ’è¡Œæ¦œ" ANSI_RESET "\n",
 		(bp->brdattr & BRD_BMCOUNT) ?
-		ANSI_COLOR(1)"¥i¥H" ANSI_RESET: "¤£¥i");
+		ANSI_COLOR(1)"å¯ä»¥" ANSI_RESET: "ä¸å¯");
 
 	prints( " " ANSI_COLOR(1;36) "e" ANSI_RESET
-		" - %s "ANSI_RESET "«D¬İªO·|­ûµo¤å\n",
+		" - %s "ANSI_RESET "éçœ‹æ¿æœƒå“¡ç™¼æ–‡\n",
 		(bp->brdattr & BRD_RESTRICTEDPOST) ?
-		ANSI_COLOR(1)"¤£¶}©ñ" : "¶}©ñ"
+		ANSI_COLOR(1)"ä¸é–‹æ”¾" : "é–‹æ”¾"
 		);
 
 	prints( " " ANSI_COLOR(1;36) "y" ANSI_RESET
 		" - %s" ANSI_RESET
-		" ¦^À³¤å³¹\n",
+		" å›æ‡‰æ–‡ç« \n",
 		(bp->brdattr & BRD_NOREPLY) ?
-		ANSI_COLOR(1)"¤£¶}©ñ" : "¶}©ñ"
+		ANSI_COLOR(1)"ä¸é–‹æ”¾" : "é–‹æ”¾"
 		);
 
 	prints( " " ANSI_COLOR(1;36) "d" ANSI_RESET
 		" - %s" ANSI_RESET
-		" ¦Û§R¤å³¹\n",
+		" è‡ªåˆªæ–‡ç« \n",
 		(bp->brdattr & BRD_NOSELFDELPOST) ?
-		ANSI_COLOR(1)"¤£¶}©ñ" : "¶}©ñ"
+		ANSI_COLOR(1)"ä¸é–‹æ”¾" : "é–‹æ”¾"
 		);
 
 	prints( " " ANSI_COLOR(1;36) "r" ANSI_RESET
-		" - %s " ANSI_RESET "±ÀÂË¤å³¹\n",
+		" - %s " ANSI_RESET "æ¨è–¦æ–‡ç« \n",
 		(bp->brdattr & BRD_NORECOMMEND) ?
-		ANSI_COLOR(1)"¤£¶}©ñ":"¶}©ñ"
+		ANSI_COLOR(1)"ä¸é–‹æ”¾":"é–‹æ”¾"
 		);
 
 #ifndef OLDRECOMMEND
 	prints( " " ANSI_COLOR(1;36) "s" ANSI_RESET
-	        " - %s " ANSI_RESET "¼N¤å\n",
+	        " - %s " ANSI_RESET "å™“æ–‡\n",
 		((bp->brdattr & BRD_NORECOMMEND) || (bp->brdattr & BRD_NOBOO))
-		? ANSI_COLOR(1)"¤£¶}©ñ":"¶}©ñ");
+		? ANSI_COLOR(1)"ä¸é–‹æ”¾":"é–‹æ”¾");
 #endif
 	{
 	    int d = 0;
@@ -448,57 +448,57 @@ b_config(void)
 	    }
 
 	    prints( " " ANSI_COLOR(1;36) "f" ANSI_RESET
-		    " - %s " ANSI_RESET "§Ö³t³s±À¤å³¹",
+		    " - %s " ANSI_RESET "å¿«é€Ÿé€£æ¨æ–‡ç« ",
 		    d != 0 ?
-		     ANSI_COLOR(1)"­­¨î": "¶}©ñ");
+		     ANSI_COLOR(1)"é™åˆ¶": "é–‹æ”¾");
 	    if(d > 0)
-		prints(", ³Ì§C¶¡¹j®É¶¡: %d ¬í", d);
+		prints(", æœ€ä½é–“éš”æ™‚é–“: %d ç§’", d);
 	    outs("\n");
 	}
 
 	prints( " " ANSI_COLOR(1;36) "i" ANSI_RESET
-		" - ±À¤å®É %s" ANSI_RESET " °O¿ı¨Ó·½ IP\n",
+		" - æ¨æ–‡æ™‚ %s" ANSI_RESET " è¨˜éŒ„ä¾†æº IP\n",
 		(bp->brdattr & BRD_IPLOGRECMD) ?
-		ANSI_COLOR(1)"¦Û°Ê":"¤£·|");
+		ANSI_COLOR(1)"è‡ªå‹•":"ä¸æœƒ");
 
 	prints( " " ANSI_COLOR(1;36) "a" ANSI_RESET
-		" - ±À¤å®É %s" ANSI_RESET " ¶}ÀY\n",
+		" - æ¨æ–‡æ™‚ %s" ANSI_RESET " é–‹é ­\n",
 		(bp->brdattr & BRD_ALIGNEDCMT) ?
-		ANSI_COLOR(1)"¹ï»ô":"¤£¥Î¹ï»ô");
+		ANSI_COLOR(1)"å°é½Š":"ä¸ç”¨å°é½Š");
 
 	prints( " " ANSI_COLOR(1;36) "k" ANSI_RESET
-		" - ªO¥D %s" ANSI_RESET
-		" §R°£³¡¥÷¹H³W¤å¦r\n",
+		" - æ¿ä¸» %s" ANSI_RESET
+		" åˆªé™¤éƒ¨ä»½é•è¦æ–‡å­—\n",
 		(bp->brdattr & BRD_BM_MASK_CONTENT) ?
-		ANSI_COLOR(1)"¥i" : "µLªk"
+		ANSI_COLOR(1)"å¯" : "ç„¡æ³•"
 		);
 
 #ifdef USE_AUTOCPLOG
 	prints( " " ANSI_COLOR(1;36) "x" ANSI_RESET
-		" - Âà¿ı¤å³¹ %s " ANSI_RESET "¦Û°Ê°O¿ı¡A¥B %s "
-		ANSI_RESET "µo¤åÅv­­\n",
+		" - è½‰éŒ„æ–‡ç«  %s " ANSI_RESET "è‡ªå‹•è¨˜éŒ„ï¼Œä¸” %s "
+		ANSI_RESET "ç™¼æ–‡æ¬Šé™\n",
 		(bp->brdattr & BRD_CPLOG) ?
-		ANSI_COLOR(1)"·|" : "¤£·|" ,
+		ANSI_COLOR(1)"æœƒ" : "ä¸æœƒ" ,
 		(bp->brdattr & BRD_CPLOG) ?
-		ANSI_COLOR(1)"»İ­n" : "¤£»İ"
+		ANSI_COLOR(1)"éœ€è¦" : "ä¸éœ€"
 		);
 #endif
 #ifdef USE_COOLDOWN
 	prints( " " ANSI_COLOR(1;36) "j" ANSI_RESET
-		" - %s ³]¬°§NÀR¼Ò¦¡\n",
+		" - %s è¨­ç‚ºå†·éœæ¨¡å¼\n",
 		(bp->brdattr & BRD_COOLDOWN) ?
-		ANSI_COLOR(1)"¤w"ANSI_RESET : "¥¼");
+		ANSI_COLOR(1)"å·²"ANSI_RESET : "æœª");
 #endif
 
 	// use '8' instead of '1', to prevent 'l'/'1' confusion
 	prints( " " ANSI_COLOR(1;36) "8" ANSI_RESET
-		" - %s" ANSI_RESET "¥¼º¡¤Q¤K·³¶i¤J\n",
+		" - %s" ANSI_RESET "æœªæ»¿åå…«æ­²é€²å…¥\n",
 		(bp->brdattr & BRD_OVER18) ?
-		ANSI_COLOR(1) "¸T¤î " : "¤¹³\\ " );
+		ANSI_COLOR(1) "ç¦æ­¢ " : "å…è¨± " );
 
 	if (!canpost)
-	    outs(ANSI_COLOR(1;31)"  ¡¹ ±z¦b¦¹¬İªOµLµo¤å©Î±À¤åÅv­­¡A"
-		"¸Ô²Ó­ì¦]½Ğ°Ñ¦Ò¤W­±Åã¥Ü¬°¬õ¦â©Î¦³ * ªº¶µ¥Ø¡C"ANSI_RESET"\n");
+	    outs(ANSI_COLOR(1;31)"  â˜… æ‚¨åœ¨æ­¤çœ‹æ¿ç„¡ç™¼æ–‡æˆ–æ¨æ–‡æ¬Šé™ï¼Œ"
+		"è©³ç´°åŸå› è«‹åƒè€ƒä¸Šé¢é¡¯ç¤ºç‚ºç´…è‰²æˆ–æœ‰ * çš„é …ç›®ã€‚"ANSI_RESET"\n");
 
 	ipostres = b_lines - LNPOSTRES;
 	move_ansi(ipostres++, COLPOSTRES-2);
@@ -509,9 +509,9 @@ b_config(void)
 	    outs(ANSI_COLOR(31));
 
 	if (bp->brdattr & BRD_VOTEBOARD)
-	    outs("´£¥X³s¸p­­¨î:" ANSI_RESET);
+	    outs("æå‡ºé€£ç½²é™åˆ¶:" ANSI_RESET);
 	else
-	    outs("µo¤å»P±À¤å­­¨î:" ANSI_RESET);
+	    outs("ç™¼æ–‡èˆ‡æ¨æ–‡é™åˆ¶:" ANSI_RESET);
 
 #define POSTRESTRICTION(msg,utag) \
 	prints(msg, attr ? ANSI_COLOR(1) : "", i, attr ? ANSI_RESET : "")
@@ -528,7 +528,7 @@ b_config(void)
 	    i = (int)llogin * 10;
 	    attr = ((int)cuser.numlogindays < i) ? 1 : 0;
 	    if (attr) outs(ANSI_COLOR(1;31) "*");
-	    prints(STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "¥H¤W", i);
+	    prints(STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "ä»¥ä¸Š", i);
 	    if (attr) outs(ANSI_RESET);
 	    hasres = 1;
 	}
@@ -539,7 +539,7 @@ b_config(void)
 	    i = 255 - lbp;
 	    attr = (cuser.badpost > i) ? 1 : 0;
 	    if (attr) outs(ANSI_COLOR(1;31) "*");
-	    prints("°h¤å½g¼Æ %d ½g¥H¤U", i);
+	    prints("é€€æ–‡ç¯‡æ•¸ %d ç¯‡ä»¥ä¸‹", i);
 	    if (attr) outs(ANSI_RESET);
 	    hasres = 1;
 	}
@@ -559,7 +559,7 @@ b_config(void)
 	if (!hasres && cachePostPerm)
 	{
 	    move_ansi(ipostres++, COLPOSTRES);
-	    outs("µL¯S§O­­¨î");
+	    outs("ç„¡ç‰¹åˆ¥é™åˆ¶");
 	}
 
 	// show BM commands
@@ -578,27 +578,27 @@ b_config(void)
 	    ipostres ++;
 	    move_ansi(ipostres++, COLPOSTRES-2);
 	    outs(aCat);
-	    outs("¦W³æ½s¿è»P¨ä¥¦:");
-	    if (!isBM) outs(" (»İªO¥DÅv­­)");
+	    outs("åå–®ç·¨è¼¯èˆ‡å…¶å®ƒ:");
+	    if (!isBM) outs(" (éœ€æ¿ä¸»æ¬Šé™)");
 	    outs(aRst);
 	    move_ansi(ipostres++, COLPOSTRES);
-	    prints("%sw%s)³]©w¤ô±í %sv%s)¥i¨£·|­û¦W³æ ",
+	    prints("%sw%s)è¨­å®šæ°´æ¡¶ %sv%s)å¯è¦‹æœƒå“¡åå–® ",
 		    aHot, aRst, aHot, aRst);
 	    move_ansi(ipostres++, COLPOSTRES);
-	    prints("%sm%s)Á|¿ì§ë²¼ %so%s)§ë²¼¦W³æ ",
+	    prints("%sm%s)èˆ‰è¾¦æŠ•ç¥¨ %so%s)æŠ•ç¥¨åå–® ",
 		    aHot, aRst, aHot, aRst);
 	    move_ansi(ipostres++, COLPOSTRES);
-	    prints("%sc%s)¤å³¹Ãş§O %sn%s)µo¤åª`·N¨Æ¶µ ",
+	    prints("%sc%s)æ–‡ç« é¡åˆ¥ %sn%s)ç™¼æ–‡æ³¨æ„äº‹é … ",
 		    aHot, aRst, aHot, aRst);
 	    move_ansi(ipostres++, COLPOSTRES);
-	    prints("%sp%s)¶iªOµe­±",
+	    prints("%sp%s)é€²æ¿ç•«é¢",
 		    aHot, aRst);
 	    outs(ANSI_RESET);
 
             if (GROUPOP()) {
                 move_ansi(++ipostres, COLPOSTRES);
                 prints(ANSI_COLOR(1;32)
-                       "±z¥Ø«e¦³¦¹¬İªOªº¸s²ÕºŞ²zÅv"
+                       "æ‚¨ç›®å‰æœ‰æ­¤çœ‹æ¿çš„ç¾¤çµ„ç®¡ç†æ¬Š"
                        ANSI_RESET);
             }
 
@@ -612,12 +612,12 @@ b_config(void)
 	}
 
         if (check_mod) {
-            if (vmsg("­Y­n¶i¦æ­×§ï½Ğ«ö Ctrl-P¡A¨ä¥¦Áäª½±µÂ÷¶}¡C") != Ctrl('P'))
+            if (vmsg("è‹¥è¦é€²è¡Œä¿®æ”¹è«‹æŒ‰ Ctrl-Pï¼Œå…¶å®ƒéµç›´æ¥é›¢é–‹ã€‚") != Ctrl('P'))
                 return FULLUPDATE;
             check_mod = 0;
         }
 
-        ansk = vans("½Ğ¿é¤J­n§ïÅÜªº³]©w, ¨ä¥¦Áäµ²§ô: ");
+        ansk = vans("è«‹è¼¸å…¥è¦æ”¹è®Šçš„è¨­å®š, å…¶å®ƒéµçµæŸ: ");
         if (isascii(ansk))
             ansk = tolower(ansk);
 
@@ -649,7 +649,7 @@ b_config(void)
 		    char genbuf[BTLEN+1];
 		    move(b_lines, 0); clrtoeol();
 		    SOLVE_ANSI_CACHE();
-		    outs("½Ğ¿é¤J¬İªO·s¤¤¤å±Ô­z: ");
+		    outs("è«‹è¼¸å…¥çœ‹æ¿æ–°ä¸­æ–‡æ•˜è¿°: ");
 		    vgetstr(genbuf, BTLEN-16, 0, bp->title + 7);
 		    if (!genbuf[0] || strcmp(genbuf, bp->title+7) == 0)
 			break;
@@ -668,7 +668,7 @@ b_config(void)
 		    bp->brdattr ^= BRD_RESTRICTEDPOST;
 		    touched = 1;
 		} else {
-		    vmsg("¦¹¶µ³]©w»İ­n¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç«™é•·æ¬Šé™");
 		}
 		break;
 
@@ -676,7 +676,7 @@ b_config(void)
 #ifndef BMCHS
 		if (!HasUserPerm(PERM_SYSOP))
 		{
-		    vmsg("¦¹¶µ³]©w»İ­n¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç«™é•·æ¬Šé™");
 		    break;
 		}
 #endif
@@ -684,8 +684,8 @@ b_config(void)
 		    char ans[2];
 		    move(b_lines-2, 0); clrtobot();
 		    if (getdata(b_lines-1, 0, (bp->brdattr & BRD_HIDE) ?
-			    ANSI_COLOR(1;32) " +++ ½T©w­n¸Ñ°£¬İªOÁô§Î¶Ü?" ANSI_RESET " [y/N]: ":
-			    ANSI_COLOR(1;31) " --- ½T©w­nÁô§Î¬İªO¶Ü?" ANSI_RESET " [y/N]: ",
+			    ANSI_COLOR(1;32) " +++ ç¢ºå®šè¦è§£é™¤çœ‹æ¿éš±å½¢å—?" ANSI_RESET " [y/N]: ":
+			    ANSI_COLOR(1;31) " --- ç¢ºå®šè¦éš±å½¢çœ‹æ¿å—?" ANSI_RESET " [y/N]: ",
 			    ans, sizeof(ans), LCECHO) < 1 ||
 			    ans[0] != 'y')
 			break;
@@ -703,18 +703,18 @@ b_config(void)
 		bp->perm_reload = now;
 		touched = 1;
 		vmsg((bp->brdattr & BRD_HIDE) ?
-			" ª`·N: ¬İªO¤wÁô§Î" :
-			" ª`·N: ¬İªO¤w¸Ñ°£Áô§Î");
+			" æ³¨æ„: çœ‹æ¿å·²éš±å½¢" :
+			" æ³¨æ„: çœ‹æ¿å·²è§£é™¤éš±å½¢");
 		break;
 
-		// ii³s«ö´N·|»~Ä²¡A©Ò¥H¦A½T»{¤@¤U
+		// iié€£æŒ‰å°±æœƒèª¤è§¸ï¼Œæ‰€ä»¥å†ç¢ºèªä¸€ä¸‹
 	    case 'i':
 		{
 		    char ans[2];
 		    move(b_lines-2, 0); clrtobot();
 		    if (getdata(b_lines-1, 0, (bp->brdattr & BRD_IPLOGRECMD) ?
-			    ANSI_COLOR(1;32) " --- ½T©w­n°±¤î°O¿ı±À¤å IP ¶Ü?" ANSI_RESET " [y/N]: " :
-			    ANSI_COLOR(1;31) " +++ ½T©w­n°O¿ı±À¤å IP ¶Ü?" ANSI_RESET " [y/N]: ",
+			    ANSI_COLOR(1;32) " --- ç¢ºå®šè¦åœæ­¢è¨˜éŒ„æ¨æ–‡ IP å—?" ANSI_RESET " [y/N]: " :
+			    ANSI_COLOR(1;31) " +++ ç¢ºå®šè¦è¨˜éŒ„æ¨æ–‡ IP å—?" ANSI_RESET " [y/N]: ",
 			    ans, sizeof(ans), LCECHO) < 1 ||
 			    ans[0] != 'y')
 			break;
@@ -722,26 +722,26 @@ b_config(void)
 		bp->brdattr ^= BRD_IPLOGRECMD;
 		touched = 1;
 		vmsg((bp->brdattr & BRD_IPLOGRECMD) ?
-			" ª`·N: ¶}©l°O¿ı±À¤åIP" :
-			" ª`·N: ¤w°±¤î°O¿ı±À¤åIP");
+			" æ³¨æ„: é–‹å§‹è¨˜éŒ„æ¨æ–‡IP" :
+			" æ³¨æ„: å·²åœæ­¢è¨˜éŒ„æ¨æ–‡IP");
 		break;
 
 #ifdef USE_COOLDOWN
             case 'j':
                 if (!(HasUserPerm(PERM_SYSOP | PERM_POLICE) ||
                       (HasUserPerm(PERM_SYSSUPERSUBOP) && GROUPOP()))) {
-		    vmsg("¦¹¶µ³]©w»İ­n¯¸ªø©Î¬İªOÄµ¹î©Î¸s²ÕªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç«™é•·æˆ–çœ‹æ¿è­¦å¯Ÿæˆ–ç¾¤çµ„é•·æ¬Šé™");
                     break;
                 }
                 {
                     char ans[50];
-                    getdata(b_lines - 1, 0, "½Ğ¿é¤J²z¥Ñ(ªÅ¥Õ©ñ±ó³]©w):", ans, sizeof(ans), DOECHO);
+                    getdata(b_lines - 1, 0, "è«‹è¼¸å…¥ç†ç”±(ç©ºç™½æ”¾æ£„è¨­å®š):", ans, sizeof(ans), DOECHO);
                     if (!*ans) {
-                        vmsg("¥¼¿é¤J²z¥Ñ¡A©ñ±ó³]©w¡C");
+                        vmsg("æœªè¼¸å…¥ç†ç”±ï¼Œæ”¾æ£„è¨­å®šã€‚");
                         break;
                     }
                     bp->brdattr ^= BRD_COOLDOWN;
-                    post_policelog(bp->brdname, NULL, "§NÀR", ans, (bp->brdattr & BRD_COOLDOWN));
+                    post_policelog(bp->brdname, NULL, "å†·éœ", ans, (bp->brdattr & BRD_COOLDOWN));
                     touched = 1;
                 }
                 break;
@@ -751,7 +751,7 @@ b_config(void)
 #ifndef BMCHS
 		if (!HasUserPerm(PERM_SYSOP))
 		{
-		    vmsg("¦¹¶µ³]©w»İ­n¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç«™é•·æ¬Šé™");
 		    break;
 		}
 #endif
@@ -776,7 +776,7 @@ b_config(void)
 		    if(bp->fastrecommend_pause > 0)
 			sprintf(buf, "%d", bp->fastrecommend_pause);
 		    getdata_str(b_lines-1, 0,
-			    "½Ğ¿é¤J³s±À®É¶¡­­¨î(³æ¦ì: ¬í) [5~240]: ",
+			    "è«‹è¼¸å…¥é€£æ¨æ™‚é–“é™åˆ¶(å–®ä½: ç§’) [5~240]: ",
 			    buf, 4, NUMECHO, buf);
 		    if(buf[0] >= '0' && buf[0] <= '9')
 			bp->fastrecommend_pause = atoi(buf);
@@ -786,7 +786,7 @@ b_config(void)
 		    {
 			if(buf[0])
 			{
-			    vmsg("¿é¤J®É¶¡µL®Ä¡A½Ğ¨Ï¥Î 5~240 ¤§¶¡ªº¼Æ¦r¡C");
+			    vmsg("è¼¸å…¥æ™‚é–“ç„¡æ•ˆï¼Œè«‹ä½¿ç”¨ 5~240 ä¹‹é–“çš„æ•¸å­—ã€‚");
 			}
 			bp->fastrecommend_pause = 0;
 			bp->brdattr &= ~BRD_NOFASTRECMD;
@@ -806,7 +806,7 @@ b_config(void)
 	    case '8':
 		if (!cuser.over_18)
 		{
-		    vmsg("ªO¥D¥»¨­¥¼º¡ 18 ·³¡C");
+		    vmsg("æ¿ä¸»æœ¬èº«æœªæ»¿ 18 æ­²ã€‚");
 		} else {
 		    bp->brdattr ^= BRD_OVER18;
 		    touched = 1;
@@ -862,7 +862,7 @@ b_config(void)
 
 	    case 'y':
 		if (!(HasUserPerm(PERM_SYSOP) || (HasUserPerm(PERM_SYSSUPERSUBOP) && GROUPOP()) ) ) {
-		    vmsg("¦¹¶µ³]©w»İ­n¸s²Õªø©Î¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç¾¤çµ„é•·æˆ–ç«™é•·æ¬Šé™");
 		    break;
 		}
 		bp->brdattr ^= BRD_NOREPLY;
@@ -871,7 +871,7 @@ b_config(void)
 
 	    case 'k':
 		if (!(HasUserPerm(PERM_SYSOP) || (HasUserPerm(PERM_SYSSUPERSUBOP) && GROUPOP()) ) ) {
-		    vmsg("¦¹¶µ³]©w»İ­n¸s²Õªø©Î¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç¾¤çµ„é•·æˆ–ç«™é•·æ¬Šé™");
 		    break;
 		}
 		bp->brdattr ^= BRD_BM_MASK_CONTENT;
@@ -881,7 +881,7 @@ b_config(void)
 	    case 'd':
 #ifndef ALLOW_BM_SET_NOSELFDELPOST
 		if (!(HasUserPerm(PERM_SYSOP) || (HasUserPerm(PERM_SYSSUPERSUBOP) && GROUPOP()) ) ) {
-		    vmsg("¦¹¶µ³]©w»İ­n¸s²Õªø©Î¯¸ªøÅv­­");
+		    vmsg("æ­¤é …è¨­å®šéœ€è¦ç¾¤çµ„é•·æˆ–ç«™é•·æ¬Šé™");
 		    break;
 		}
 #endif
@@ -899,10 +899,10 @@ b_config(void)
 	assert(0<=currbid-1 && currbid-1<MAX_BOARD);
 	substitute_record(fn_board, bp, sizeof(boardheader_t), currbid);
 	log_usies("SetBoard", bp->brdname);
-	vmsg("¤wÀx¦s·s³]©w");
+	vmsg("å·²å„²å­˜æ–°è¨­å®š");
     }
     else
-	vmsg("¥¼§ïÅÜ¥ô¦ó³]©w");
+	vmsg("æœªæ”¹è®Šä»»ä½•è¨­å®š");
 
     return FULLUPDATE;
 }
@@ -937,7 +937,7 @@ b_quick_acl(int ent GCC_UNUSED, fileheader_t *fhdr,
     }
 #endif // STR_SAFEDEL_TITLE
     if (!uid[0] || !is_validuserid(uid) || !searchuser(uid, uid)) {
-        vmsg("¸Ó¨Ï¥ÎªÌ±b¸¹¤£¦s¦b");
+        vmsg("è©²ä½¿ç”¨è€…å¸³è™Ÿä¸å­˜åœ¨");
         return FULLUPDATE;
     }
 
@@ -951,7 +951,7 @@ b_quick_acl(int ent GCC_UNUSED, fileheader_t *fhdr,
 
 static int
 check_newpost(boardstat_t * ptr)
-{				/* Ptt §ï */
+{				/* Ptt æ”¹ */
     time4_t         ftime;
 
     ptr->myattr &= ~NBRD_UNREAD;
@@ -966,11 +966,11 @@ check_newpost(boardstat_t * ptr)
     if (B_TOTAL(ptr) == 0)
 	return 0;
 
-    // Note: ¥H«e³o¸Ì¦³ if(ftime > now [+10]) ´N­«³] ftime ªº code;
-    // ¦ı¹ê»Úªºª¬ªp¬O¨º¼Ë²£¥Íªº lastposttime ·|»P¬İªO¤ºªº¤å³¹¤£¦P¡A
-    // ³y¦¨¥¼Åª²Å¸¹¥Ã»·¤£·|®ø¥¢¡C ¤S¡A¦b³oÃäªº now ¨ä¹ê¬O«D¦P¨Bªº¡A
-    // ©Ò¥H­Y¦³¤H¦b¶i¤J³o¸Ì­±¥d«Ü¤[(ex, system overload)¨º´N·|«D±`®e©ö
-    // ÅÜ¦¨ ftime > now.
+    // Note: ä»¥å‰é€™è£¡æœ‰ if(ftime > now [+10]) å°±é‡è¨­ ftime çš„ code;
+    // ä½†å¯¦éš›çš„ç‹€æ³æ˜¯é‚£æ¨£ç”¢ç”Ÿçš„ lastposttime æœƒèˆ‡çœ‹æ¿å…§çš„æ–‡ç« ä¸åŒï¼Œ
+    // é€ æˆæœªè®€ç¬¦è™Ÿæ°¸é ä¸æœƒæ¶ˆå¤±ã€‚ åˆï¼Œåœ¨é€™é‚Šçš„ now å…¶å¯¦æ˜¯éåŒæ­¥çš„ï¼Œ
+    // æ‰€ä»¥è‹¥æœ‰äººåœ¨é€²å…¥é€™è£¡é¢å¡å¾ˆä¹…(ex, system overload)é‚£å°±æœƒéå¸¸å®¹æ˜“
+    // è®Šæˆ ftime > now.
     ftime = B_LASTPOSTTIME(ptr);
 
     if (brc_unread_time(ptr->bid, ftime, 0))
@@ -1054,10 +1054,10 @@ load_boards(char *key)
             fav_t   *fav = get_current_fav();
             int     nfav;
 
-	    // XXX TODO «Ü¦h¤H¦º¦b³o¸Ì¡A¦ı§Ú¤£½T©w¥L­Ì¬O fav Á{®ÉÃa±¼ÁÙ¬O¸Ó¥Ã¤[­×¥¿
-	    // workaround À³¸Ó¬O nfav = fav ? get_data_number(fav) : 0;
+	    // XXX TODO å¾ˆå¤šäººæ­»åœ¨é€™è£¡ï¼Œä½†æˆ‘ä¸ç¢ºå®šä»–å€‘æ˜¯ fav è‡¨æ™‚å£æ‰é‚„æ˜¯è©²æ°¸ä¹…ä¿®æ­£
+	    // workaround æ‡‰è©²æ˜¯ nfav = fav ? get_data_number(fav) : 0;
             if (!get_current_fav()) {
-                vmsgf("§Úªº³Ì·R¨t²Î¿ù»~¡A½Ğ¨ì" BN_BUGREPORT "³ø§i±z¤§«e¶i¦æ¤F­ş¨Ç°Ê§@¡AÁÂÁÂ");
+                vmsgf("æˆ‘çš„æœ€æ„›ç³»çµ±éŒ¯èª¤ï¼Œè«‹åˆ°" BN_BUGREPORT "å ±å‘Šæ‚¨ä¹‹å‰é€²è¡Œäº†å“ªäº›å‹•ä½œï¼Œè¬è¬");
                 refresh();
                 assert(get_current_fav());
                 exit(-1);
@@ -1114,7 +1114,7 @@ load_boards(char *key)
 		    state |= NBRD_TAG;
 		if (is_set_attr(&fav->favh[i], FAVH_ADM_TAG))
 		    state |= NBRD_TAG;
-		// ¦³¨Ç¤H ¬Y¨Ç bid < 0 Orzz // ptt2 local modification
+		// æœ‰äº›äºº æŸäº› bid < 0 Orzz // ptt2 local modification
 		if (fav_getid(&fav->favh[i]) < 1)
 		    continue;
 		addnewbrdstat(fav_getid(&fav->favh[i]) - 1, NBRD_FAV | state);
@@ -1179,7 +1179,7 @@ load_boards(char *key)
 
 	nbrdsize = childcount + 5;
 	nbrd = (boardstat_t *) malloc((childcount+5) * sizeof(boardstat_t));
-        // ¹w¯d¨â­Ó¥H§K¤j¶q¶}ªO®É±¾½Õ
+        // é ç•™å…©å€‹ä»¥å…å¤§é‡é–‹æ¿æ™‚æ›èª¿
 	for (bid = bptr->firstchild[type]; bid > 0 &&
 		brdnum < childcount+5; bid = bptr->next[type]) {
 	    assert(0<=bid-1 && bid-1<MAX_BOARD);
@@ -1195,7 +1195,7 @@ load_boards(char *key)
 		else {
 		    bid = BRD_LINK_TARGET(bptr);
 		    if (bcache[bid - 1].brdname[0] == 0) {
-			vmsg("³sµ²¤w·l·´¡A½Ğ¦Ü SYSOP ¦^³ø¦¹°İÃD¡C");
+			vmsg("é€£çµå·²ææ¯€ï¼Œè«‹è‡³ SYSOP å›å ±æ­¤å•é¡Œã€‚");
 			continue;
 		    }
 		}
@@ -1228,8 +1228,8 @@ search_local_board()
         if (!IS_LISTING_FAV() ||
             (nbrd[num].myattr & NBRD_BOARD && HasBoardPerm(B_BH(&nbrd[num]))) )
             Vector_add(&namelist, B_BH(&nbrd[num])->brdname);
-    namecomplete2(&namelist, ANSI_REVERSE "¡i ·j´M©Ò¦b¦ì¸m¬İªO ¡j"
-	    ANSI_RESET "\n½Ğ¿é¤J¬İªO¦WºÙ(«öªÅ¥ÕÁä¦Û°Ê·j´M): ", genbuf);
+    namecomplete2(&namelist, ANSI_REVERSE "ã€ æœå°‹æ‰€åœ¨ä½ç½®çœ‹æ¿ ã€‘"
+	    ANSI_RESET "\nè«‹è¼¸å…¥çœ‹æ¿åç¨±(æŒ‰ç©ºç™½éµè‡ªå‹•æœå°‹): ", genbuf);
     Vector_delete(&namelist);
 
 
@@ -1311,12 +1311,12 @@ get_fav_type(boardstat_t *ptr)
 static void
 brdlist_foot(void)
 {
-    vs_footer("  ¿ï¾Ü¬İªO  ",
+    vs_footer("  é¸æ“‡çœ‹æ¿  ",
 	    IS_LISTING_FAV() ?
-	    "  (a)¼W¥[¬İªO (s)¶i¤J¤wª¾ªO¦W (y)¦C¥X¥ş³¡ (v/V)¤wÅª/¥¼Åª" :
+	    "  (a)å¢åŠ çœ‹æ¿ (s)é€²å…¥å·²çŸ¥æ¿å (y)åˆ—å‡ºå…¨éƒ¨ (v/V)å·²è®€/æœªè®€" :
             IN_CLASS() ?
-	    "  (m)¥[¤J/²¾¥X³Ì·R (s)¶i¤J¤wª¾ªO¦W (v/V)¤wÅª/¥¼Åª " :
-	    "  (m)¥[¤J/²¾¥X³Ì·R (y)¥u¦C³Ì·R (v/V)¤wÅª/¥¼Åª ");
+	    "  (m)åŠ å…¥/ç§»å‡ºæœ€æ„› (s)é€²å…¥å·²çŸ¥æ¿å (v/V)å·²è®€/æœªè®€ " :
+	    "  (m)åŠ å…¥/ç§»å‡ºæœ€æ„› (y)åªåˆ—æœ€æ„› (v/V)å·²è®€/æœªè®€ ");
 }
 
 
@@ -1345,25 +1345,25 @@ show_brdlist(int head, int clsflag, int newflag)
     if (unlikely(IN_CLASSROOT())) {
 	currstat = CLASS;
 	myrow = 6;
-	showtitle("¤ÀÃş¬İªO", BBSName);
+	showtitle("åˆ†é¡çœ‹æ¿", BBSName);
 	move(1, 0);
 	// TODO move ascii art to adbanner?
 	outs(
 	    "                                                              "
-	    "¢©  ¢~¡X" ANSI_COLOR(33) "¡´\n"
-	    "                                                    ùá¡X  " ANSI_RESET " "
-	    "¢¨¢i" ANSI_COLOR(47) "¡ó" ANSI_COLOR(40) "¢i¢i¢©ùç\n"
-	    "  " ANSI_COLOR(44) "   ¡s¡s¡s¡s¡s¡s¡s¡s                               "
-	    ANSI_COLOR(33) "ùø" ANSI_RESET ANSI_COLOR(44) " ¢©¢¨¢i¢i¢i¡¿¡¿¡¿ùø " ANSI_RESET "\n"
+	    "â—£  â•­â€”" ANSI_COLOR(33) "â—\n"
+	    "                                                    â•¬â€”  " ANSI_RESET " "
+	    "â—¢â–ˆ" ANSI_COLOR(47) "âŠ™" ANSI_COLOR(40) "â–ˆâ–ˆâ—£â•¤\n"
+	    "  " ANSI_COLOR(44) "   ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿                               "
+	    ANSI_COLOR(33) "â•‘" ANSI_RESET ANSI_COLOR(44) " â—£â—¢â–ˆâ–ˆâ–ˆâ–¼â–¼â–¼â•‘ " ANSI_RESET "\n"
 	    "  " ANSI_COLOR(44) "                                                  "
-	    ANSI_COLOR(33) "  " ANSI_RESET ANSI_COLOR(44) " ¢«¢ª¢i¢i¢i¡¶¡¶¡¶ ùø" ANSI_RESET "\n"
-	    "                                  ¡s¡s¡s¡s¡s¡s¡s¡s    " ANSI_COLOR(33)
-	    "¢x" ANSI_RESET "   ¢ª¢i¢i¢i¢i¢« ùø\n"
-	    "                                                      " ANSI_COLOR(33) "ùó"
-	    "¡X¡X" ANSI_RESET "  ¢«      ¡X¡Ï" ANSI_RESET);
+	    ANSI_COLOR(33) "  " ANSI_RESET ANSI_COLOR(44) " â—¤â—¥â–ˆâ–ˆâ–ˆâ–²â–²â–² â•‘" ANSI_RESET "\n"
+	    "                                  ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿ï¸¿    " ANSI_COLOR(33)
+	    "â”‚" ANSI_RESET "   â—¥â–ˆâ–ˆâ–ˆâ–ˆâ—¤ â•‘\n"
+	    "                                                      " ANSI_COLOR(33) "â•«"
+	    "â€”â€”" ANSI_RESET "  â—¤      â€”ï¼‹" ANSI_RESET);
     } else if (clsflag) {
-	showtitle("¬İªO¦Cªí", BBSName);
-	outs("[¡ö][q]¦^¤W¼h [¡÷][r]¾\\Åª [¡ô¡õ]¿ï¾Ü [PgUp][PgDn]Â½­¶ [c]·s¤å³¹ [/]·j´M [h]¨D§U\n");
+	showtitle("çœ‹æ¿åˆ—è¡¨", BBSName);
+	outs("[â†][q]å›ä¸Šå±¤ [â†’][r]é–±è®€ [â†‘â†“]é¸æ“‡ [PgUp][PgDn]ç¿»é  [c]æ–°æ–‡ç«  [/]æœå°‹ [h]æ±‚åŠ©\n");
 
 	// boards in Ptt series are very, very large.
 	// let's create more space for board numbers,
@@ -1371,16 +1371,16 @@ show_brdlist(int head, int clsflag, int newflag)
 	//
 	// newflag is not so different now because we use all 5 digits.
 
-	vbarf(ANSI_REVERSE "   %s   ¬İ  ªO       Ãş§O   ¤¤   ¤å   ±Ô   ­z"    
-              "               ¤H®ğ ªO   ¥D", newflag ? "Á`¼Æ" : "½s¸¹");
+	vbarf(ANSI_REVERSE "   %s   çœ‹  æ¿       é¡åˆ¥   ä¸­   æ–‡   æ•˜   è¿°"    
+              "               äººæ°£ æ¿   ä¸»", newflag ? "ç¸½æ•¸" : "ç·¨è™Ÿ");
 	move(b_lines, 0);
 	brdlist_foot();
     }
     if (brdnum > 0) {
 	boardstat_t    *ptr;
- 	char *unread[2] = {ANSI_COLOR(37) "  " ANSI_RESET, ANSI_COLOR(1;31) "£¾" ANSI_RESET};
+ 	char *unread[2] = {ANSI_COLOR(37) "  " ANSI_RESET, ANSI_COLOR(1;31) "Ë‡" ANSI_RESET};
         if (HasUserFlag(UF_MENU_LIGHTBAR))
-            unread[1] = ANSI_COLOR(31) "£¾" ANSI_RESET;
+            unread[1] = ANSI_COLOR(31) "Ë‡" ANSI_RESET;
 
 	if (IS_LISTING_FAV() && brdnum == 1 && get_fav_type(&nbrd[0]) == 0) {
 
@@ -1390,11 +1390,11 @@ show_brdlist(int head, int clsflag, int newflag)
 	    {
 		// TODO actually we cannot use 's' (for PTT)...
 		mvouts(3, 10,
-		"--- µù¥Uªº¨Ï¥ÎªÌ¤~¯à·s¼W¬İªO³á (¥i«ö s ¤â°Ê¿ï¨ú) ---");
+		"--- è¨»å†Šçš„ä½¿ç”¨è€…æ‰èƒ½æ–°å¢çœ‹æ¿å–” (å¯æŒ‰ s æ‰‹å‹•é¸å–) ---");
 	    } else {
 		// normal user. tell him what to do.
 		mvouts(3, 10,
-		"--- ªÅ¥Ø¿ı¡A½Ğ«ö a ·s¼W©Î¥Î y ¦C¥X¥ş³¡¬İªO«á«ö z ¼W§R ---");
+		"--- ç©ºç›®éŒ„ï¼Œè«‹æŒ‰ a æ–°å¢æˆ–ç”¨ y åˆ—å‡ºå…¨éƒ¨çœ‹æ¿å¾ŒæŒ‰ z å¢åˆª ---");
 	    }
 	    return;
 	}
@@ -1434,7 +1434,7 @@ show_brdlist(int head, int clsflag, int newflag)
 		    // this style is too long and we don't want to
 		    // fight with users...
 		    // think about new way some otherday.
-		    prints("%sMyFavFolder" ANSI_RESET "  ¥Ø¿ı ¡¼%-34s",
+		    prints("%sMyFavFolder" ANSI_RESET "  ç›®éŒ„ â–¡%-34s",
 			    !(HasUserFlag(UF_FAV_NOHILIGHT))?
                              (HasUserFlag(UF_MENU_LIGHTBAR) ?
                               HILIGHT_COLOR2 : HILIGHT_COLOR) : "",
@@ -1444,11 +1444,11 @@ show_brdlist(int head, int clsflag, int newflag)
 			outs(HILIGHT_COLOR);
 		    prints("%-12s", "[Folder]");
 		    outs(ANSI_RESET);
-		    prints(" ¥Ø¿ı £U%-34s", title);
+		    prints(" ç›®éŒ„ Î£%-34s", title);
 		    */
 		    /*
 		    outs(ANSI_COLOR(0;36));
-		    prints("£U%-70.70s", title);
+		    prints("Î£%-70.70s", title);
 		    outs(ANSI_RESET);
 		    */
 		    continue;
@@ -1458,7 +1458,7 @@ show_brdlist(int head, int clsflag, int newflag)
 		    outs("          ");
 		else {
 		    if (!GROUPOP() && !HasBoardPerm(B_BH(ptr))) {
-                        const char *reason = "[¸T¤J]";
+                        const char *reason = "[ç¦å…¥]";
 
 			if (newflag)
                             prints("%7s", "");
@@ -1466,7 +1466,7 @@ show_brdlist(int head, int clsflag, int newflag)
                             prints("%7d", head);
 
                         if (B_BH(ptr)->brdattr & BRD_HIDE)
-                            reason = "[ÁôªO]";
+                            reason = "[éš±æ¿]";
 
                         // we don't print BM and popularity, so subject can be
                         // longer
@@ -1477,7 +1477,7 @@ show_brdlist(int head, int clsflag, int newflag)
 #ifdef USE_REAL_DESC_FOR_HIDDEN_BOARD_IN_MYFAV
                                 B_BH(ptr)->title + 7
 #else
-                                "<¥Ø«eµLªk¶i¤J¦¹¬İªO>"
+                                "<ç›®å‰ç„¡æ³•é€²å…¥æ­¤çœ‹æ¿>"
 #endif
                                 );
 			continue;
@@ -1535,7 +1535,7 @@ show_brdlist(int head, int clsflag, int newflag)
 #else
 		    else if (0)
 #endif
-                        outs("ÀR ");
+                        outs("éœ ");
                     // Note the nuser is not updated realtime, or have some bug.
 		    else if (B_BH(ptr)->nuser < 1)
 			prints(" %c ", B_BH(ptr)->bvote ? 'V' : ' ');
@@ -1546,20 +1546,20 @@ show_brdlist(int head, int clsflag, int newflag)
 #ifdef EXTRA_HOTBOARD_COLORS
 		    // piaip 2008/02/04: new colors
 		    else if (B_BH(ptr)->nuser >= 100000)
-			outs(ANSI_COLOR(1;35) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;35) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 60000)
-			outs(ANSI_COLOR(1;33) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;33) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 30000)
-			outs(ANSI_COLOR(1;32) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;32) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 10000)
-			outs(ANSI_COLOR(1;36) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;36) "çˆ†!" ANSI_RESET);
 #endif
 		    else if (B_BH(ptr)->nuser >= 5000)
-			outs(ANSI_COLOR(1;34) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;34) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 2000)
-			outs(ANSI_COLOR(1;31) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1;31) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 1000)
-			outs(ANSI_COLOR(1) "Ãz!" ANSI_RESET);
+			outs(ANSI_COLOR(1) "çˆ†!" ANSI_RESET);
 		    else if (B_BH(ptr)->nuser >= 100)
 			outs(ANSI_COLOR(1) "HOT" ANSI_RESET);
 		    else //if (B_BH(ptr)->nuser > 50)
@@ -1592,7 +1592,7 @@ set_menu_group_op(char *BM)
 
     currmode |= MODE_GROUPOP;
 
-    // XXX ¤£¬O«Ü½T©w¬O§_¸Ó¦b³oÃä save level?
+    // XXX ä¸æ˜¯å¾ˆç¢ºå®šæ˜¯å¦è©²åœ¨é€™é‚Š save level?
     if (!HasUserPerm(PERM_SYSSUBOP) || !HasUserPerm(PERM_BM))
         pwcuBitEnableLevel(PERM_SYSSUBOP | PERM_BM);
 
@@ -1612,7 +1612,7 @@ paste_taged_brds(int gid)
     int  bid, tmp;
 
     if (gid == 0  || ! (HasUserPerm(PERM_SYSOP) || GROUPOP()) ||
-        vans("¶K¤W¼Ğ°Oªº¬İªO?(y/N)")!='y') return 0;
+        vans("è²¼ä¸Šæ¨™è¨˜çš„çœ‹æ¿?(y/N)")!='y') return 0;
     fav = get_fav_root();
     for (tmp = 0; tmp < fav->DataTail; tmp++) {
 	    boardheader_t  *bh;
@@ -1647,7 +1647,7 @@ choose_board(int newflag)
     if( get_fav_root() == NULL ) {
 	fav_load();
         if (!get_current_fav()) {
-            vmsgf("§Úªº³Ì·R¸ü¤J¥¢±Ñ¡A½Ğ¨ì" BN_BUGREPORT "³ø§i±z¤§«e¶i¦æ¤F­ş¨Ç°Ê§@¡AÁÂÁÂ");
+            vmsgf("æˆ‘çš„æœ€æ„›è¼‰å…¥å¤±æ•—ï¼Œè«‹åˆ°" BN_BUGREPORT "å ±å‘Šæ‚¨ä¹‹å‰é€²è¡Œäº†å“ªäº›å‹•ä½œï¼Œè¬è¬");
             refresh();
             assert(get_current_fav());
             exit(-1);
@@ -1664,7 +1664,7 @@ choose_board(int newflag)
 	    load_boards(keyword);
 	    if (brdnum <= 0) {
 		if (keyword[0] != 0) {
-		    vmsg("¨S¦³¥ô¦ó¬İªO¼ĞÃD¦³¦¹ÃöÁä¦r");
+		    vmsg("æ²’æœ‰ä»»ä½•çœ‹æ¿æ¨™é¡Œæœ‰æ­¤é—œéµå­—");
 		    keyword[0] = 0;
 		    brdnum = -1;
 		    continue;
@@ -1807,7 +1807,7 @@ choose_board(int newflag)
 		     HasUserPerm(PERM_SYSSUPERSUBOP) ||
 		     HasUserPerm(PERM_SYSSUBOP) ||
 		     HasUserPerm(PERM_BOARD)) {
-		/* ¯¸ªøºŞ²z¥Îªº tag */
+		/* ç«™é•·ç®¡ç†ç”¨çš„ tag */
 		if (ptr->myattr & NBRD_TAG)
 		    set_attr(getadmtag(ptr->bid), FAVH_ADM_TAG, FALSE);
 		else
@@ -1840,9 +1840,9 @@ choose_board(int newflag)
 
 	case '/':
             if (IN_HOTBOARD()) {
-                vmsg("¼öªù¬İªO¼Ò¦¡¤U¤£¤ä´©¤¤¤åÃöÁä¦r·j´M");
+                vmsg("ç†±é–€çœ‹æ¿æ¨¡å¼ä¸‹ä¸æ”¯æ´ä¸­æ–‡é—œéµå­—æœå°‹");
             } else {
-                getdata_buf(b_lines - 1, 0, "½Ğ¿é¤J¬İªO¤¤¤åÃöÁä¦r:",
+                getdata_buf(b_lines - 1, 0, "è«‹è¼¸å…¥çœ‹æ¿ä¸­æ–‡é—œéµå­—:",
                         keyword, sizeof(keyword), DOECHO);
                 trim(keyword);
             }
@@ -1852,9 +1852,9 @@ choose_board(int newflag)
 	case 'S':
 	    if(IS_LISTING_FAV()){
 		move(b_lines - 2, 0); clrtobot();
-		outs("­«·s±Æ§Ç¬İªO "
-			ANSI_COLOR(1;33) "(ª`·N, ³o­Ó°Ê§@·|ÂĞ¼g­ì¨Ó³]©w)" ANSI_RESET " \n");
-		tmp = vans("±Æ§Ç¤è¦¡ (1)«ö·ÓªO¦W±Æ§Ç (2)«ö·ÓÃş§O±Æ§Ç ==> [0]¨ú®ø ");
+		outs("é‡æ–°æ’åºçœ‹æ¿ "
+			ANSI_COLOR(1;33) "(æ³¨æ„, é€™å€‹å‹•ä½œæœƒè¦†å¯«åŸä¾†è¨­å®š)" ANSI_RESET " \n");
+		tmp = vans("æ’åºæ–¹å¼ (1)æŒ‰ç…§æ¿åæ’åº (2)æŒ‰ç…§é¡åˆ¥æ’åº ==> [0]å–æ¶ˆ ");
 		if( tmp == '1' )
 		    fav_sort_by_name();
 		else if( tmp == '2' )
@@ -1896,9 +1896,9 @@ choose_board(int newflag)
 		// since now user can use Ctrl-S to get access
 		// to folders, let's fallback to boards only here.
 		CompleteBoard(ANSI_REVERSE
-			"¡i ·j´M¥ş¯¸¬İªO ¡j" ANSI_RESET
-			"  (­Y­n­­©w·j´M½d³ò¬°¥Ø«e¦Cªí½Ğ§ï¥Î Ctrl-S)\n"
-			"½Ğ¿é¤J¬İªO¦WºÙ(«öªÅ¥ÕÁä¦Û°Ê·j´M): ",
+			"ã€ æœå°‹å…¨ç«™çœ‹æ¿ ã€‘" ANSI_RESET
+			"  (è‹¥è¦é™å®šæœå°‹ç¯„åœç‚ºç›®å‰åˆ—è¡¨è«‹æ”¹ç”¨ Ctrl-S)\n"
+			"è«‹è¼¸å…¥çœ‹æ¿åç¨±(æŒ‰ç©ºç™½éµè‡ªå‹•æœå°‹): ",
 			bname);
 		// force refresh
 		head = -1;
@@ -1953,7 +1953,7 @@ choose_board(int newflag)
 		}
 
 		assert(0<=ptr->bid-1 && ptr->bid-1<MAX_BOARD);
-		if (!(B_BH(ptr)->brdattr & BRD_GROUPBOARD)) {	/* «Dsub class */
+		if (!(B_BH(ptr)->brdattr & BRD_GROUPBOARD)) {	/* ésub class */
 		    if (HasBoardPerm(B_BH(ptr))) {
 			brc_initial_board(B_BH(ptr)->brdname);
 
@@ -1977,9 +1977,9 @@ choose_board(int newflag)
 		    if (!(B_BH(ptr)->brdattr & BRD_TOP))
 			class_bid = ptr->bid;
 		    else
-			class_bid = -1;	/* ¼öªù¸s²Õ¥Î */
+			class_bid = -1;	/* ç†±é–€ç¾¤çµ„ç”¨ */
 
-		    if (!GROUPOP())	/* ¦pªGÁÙ¨S¦³¤p²ÕªøÅv­­ */
+		    if (!GROUPOP())	/* å¦‚æœé‚„æ²’æœ‰å°çµ„é•·æ¬Šé™ */
 			set_menu_group_op(B_BH(ptr)->BM);
 
 		    if (now < B_BH(ptr)->bupdate) {
@@ -2002,7 +2002,7 @@ choose_board(int newflag)
     		    }
 		    else
 			choose_board(0);
-		    currmode = currmodetmp;	/* Â÷¶}ªOªO«á´N§âÅv­­®³±¼³á */
+		    currmode = currmodetmp;	/* é›¢é–‹æ¿æ¿å¾Œå°±æŠŠæ¬Šé™æ‹¿æ‰å–” */
 		    num = tmp1;
 		    class_bid = bidtmp;
 		    setutmpbid(tmp);
@@ -2023,7 +2023,7 @@ choose_board(int newflag)
 	    break;
 	case Ctrl('D'):
 	    if (HasFavEditPerm()) {
-		if (vans("§R°£©Ò¦³¼Ğ°O[N]?") == 'y'){
+		if (vans("åˆªé™¤æ‰€æœ‰æ¨™è¨˜[N]?") == 'y'){
 		    fav_remove_all_tagged_item();
 		    brdnum = -1;
 		}
@@ -2057,7 +2057,7 @@ choose_board(int newflag)
 	    }
 	    else if (HasFavEditPerm() && IS_LISTING_FAV()) {
 		if (fav_add_line() == NULL) {
-		    vmsg("·s¼W¥¢±Ñ¡A¤À¹j½u/Á`³Ì·R ¼Æ¶q¹F³Ì¤j­È¡C");
+		    vmsg("æ–°å¢å¤±æ•—ï¼Œåˆ†éš”ç·š/ç¸½æœ€æ„› æ•¸é‡é”æœ€å¤§å€¼ã€‚");
 		    break;
 		}
 		/* done move if it's the first item. */
@@ -2079,7 +2079,7 @@ choose_board(int newflag)
 		head = 9999;
 		if (IS_LISTING_FAV()) {
 		    if (ptr->myattr & NBRD_FAV) {
-			if (vans("§A½T©w§R°£¶Ü? [N/y]") != 'y')
+			if (vans("ä½ ç¢ºå®šåˆªé™¤å—? [N/y]") != 'y')
 			    break;
 			fav_remove_item(ptr->bid, get_fav_type(ptr));
 			ptr->myattr &= ~NBRD_FAV;
@@ -2094,7 +2094,7 @@ choose_board(int newflag)
 		    else if (ch != 'd') // 'd' only deletes something.
 		    {
 			if (fav_add_board(ptr->bid) == NULL)
-			    vmsg("§Aªº³Ì·R¤Ó¦h¤F°Õ ¯uªá¤ß");
+			    vmsg("ä½ çš„æœ€æ„›å¤ªå¤šäº†å•¦ çœŸèŠ±å¿ƒ");
 			else
 			    ptr->myattr |= NBRD_FAV;
 		    }
@@ -2114,14 +2114,14 @@ choose_board(int newflag)
 	    if (HasFavEditPerm() && IS_LISTING_FAV()) {
 		fav_type_t  *ft;
 		if (fav_stack_full()){
-		    vmsg("¥Ø¿ı¤w¹F³Ì¤j¼h¼Æ!!");
+		    vmsg("ç›®éŒ„å·²é”æœ€å¤§å±¤æ•¸!!");
 		    break;
 		}
 		if ((ft = fav_add_folder()) == NULL) {
-		    vmsg("·s¼W¥¢±Ñ¡A¥Ø¿ı/Á`³Ì·R ¼Æ¶q¹F³Ì¤j­È¡C");
+		    vmsg("æ–°å¢å¤±æ•—ï¼Œç›®éŒ„/ç¸½æœ€æ„› æ•¸é‡é”æœ€å¤§å€¼ã€‚");
 		    break;
 		}
-		fav_set_folder_title(ft, "·sªº¥Ø¿ı");
+		fav_set_folder_title(ft, "æ–°çš„ç›®éŒ„");
 		/* don't move if it's the first item */
 		assert(nbrdsize>0);
 		if (get_fav_type(&nbrd[0]) != 0)
@@ -2135,7 +2135,7 @@ choose_board(int newflag)
 	    if (HasFavEditPerm() && nbrd[num].myattr & NBRD_FOLDER) {
 		fav_type_t *ft = getfolder(nbrd[num].bid);
 		strlcpy(buf, get_item_title(ft), sizeof(buf));
-		getdata_buf(b_lines-1, 0, "½Ğ­×§ï¦WºÙ: ", buf, BTLEN+1, DOECHO);
+		getdata_buf(b_lines-1, 0, "è«‹ä¿®æ”¹åç¨±: ", buf, BTLEN+1, DOECHO);
 		fav_set_folder_title(ft, buf);
 		brdnum = -1;
 	    }
@@ -2145,14 +2145,14 @@ choose_board(int newflag)
 		char c, fname[80];
 		brdnum = -1;
 		if (get_current_fav() != get_fav_root()) {
-		    vmsg("½Ğ¨ì§Úªº³Ì·R³Ì¤W¼h°õ¦æ¥»¥\\¯à");
+		    vmsg("è«‹åˆ°æˆ‘çš„æœ€æ„›æœ€ä¸Šå±¤åŸ·è¡Œæœ¬åŠŸèƒ½");
 		    break;
 		}
 
-		c = vans("½Ğ¿ï¾Ü 2)³Æ¥÷§Úªº³Ì·R 3)¨ú¦^³Ì·R³Æ¥÷ [Q]");
+		c = vans("è«‹é¸æ“‡ 2)å‚™ä»½æˆ‘çš„æœ€æ„› 3)å–å›æœ€æ„›å‚™ä»½ [Q]");
 		if(!c)
 		    break;
-		if(vans("½T©w¶Ü [y/N] ") != 'y')
+		if(vans("ç¢ºå®šå— [y/N] ") != 'y')
 		    break;
 		switch(c){
 		    case '2':
@@ -2165,7 +2165,7 @@ choose_board(int newflag)
 			setuserfile(fname, FAV);
 			sprintf(buf, "%s.bak", fname);
 			if (!dashf(buf)){
-			    vmsg("§A¨S¦³³Æ¥÷§Aªº³Ì·R³á");
+			    vmsg("ä½ æ²’æœ‰å‚™ä»½ä½ çš„æœ€æ„›å–”");
 			    break;
 			}
                         Copy(buf, fname);
@@ -2184,8 +2184,8 @@ choose_board(int newflag)
 		move(0, 0);
 		clrtoeol();
 		/* use CompleteBoard or CompleteBoardAndGroup ? */
-		CompleteBoard(ANSI_REVERSE "¡i ¼W¥[§Úªº³Ì·R ¡j" ANSI_RESET "\n"
-			"½Ğ¿é¤J±ı¥[¤Jªº¬İªO¦WºÙ(«öªÅ¥ÕÁä¦Û°Ê·j´M)¡G",
+		CompleteBoard(ANSI_REVERSE "ã€ å¢åŠ æˆ‘çš„æœ€æ„› ã€‘" ANSI_RESET "\n"
+			"è«‹è¼¸å…¥æ¬²åŠ å…¥çš„çœ‹æ¿åç¨±(æŒ‰ç©ºç™½éµè‡ªå‹•æœå°‹)ï¼š",
 			bname);
 
 		if (bname[0] && (bid = getbnum(bname)) &&
@@ -2202,7 +2202,7 @@ choose_board(int newflag)
 			}
 			if (i == nbrdsize) {
 			    assert(keyword[0]);
-			    vmsg("¤w¸g¦b§Úªº³Ì·R¸Ì¤F, ¨ú®øÃöÁä¦r´N¯à¬İ¨ìÅo");
+			    vmsg("å·²ç¶“åœ¨æˆ‘çš„æœ€æ„›è£¡äº†, å–æ¶ˆé—œéµå­—å°±èƒ½çœ‹åˆ°å›‰");
 			    keyword[0] = '\0';
 			    brdnum = -1;
 			}
@@ -2210,7 +2210,7 @@ choose_board(int newflag)
 			ptr = fav_add_board(bid);
 
 			if (ptr == NULL)
-			    vmsg("§Aªº³Ì·R¤Ó¦h¤F°Õ ¯uªá¤ß");
+			    vmsg("ä½ çš„æœ€æ„›å¤ªå¤šäº†å•¦ çœŸèŠ±å¿ƒ");
 			else {
 			    ptr->attr |= NBRD_FAV;
 
@@ -2233,9 +2233,9 @@ choose_board(int newflag)
 		brc_finalize();
 
 		last_save_fav_and_brc = now;
-		vmsg("¤wÀx¦s¬İªO¾\\Åª°O¿ı");
+		vmsg("å·²å„²å­˜çœ‹æ¿é–±è®€è¨˜éŒ„");
 	    } else
-		vmsgf("¶¡¹j®É¶¡¤Óªñ¡A¥¼Àx¦s¬İªO¾\\Åª°O¿ı [½Ğµ¥ %d ¬í«á¦A¸Õ]",
+		vmsgf("é–“éš”æ™‚é–“å¤ªè¿‘ï¼Œæœªå„²å­˜çœ‹æ¿é–±è®€è¨˜éŒ„ [è«‹ç­‰ %d ç§’å¾Œå†è©¦]",
 			(int)(600 - (now-last_save_fav_and_brc)));
 	    break;
 
@@ -2257,7 +2257,7 @@ choose_board(int newflag)
 		assert(0<=num && num<nbrdsize);
 		ptr = &nbrd[num];
 		if (ptr->myattr & NBRD_SYMBOLIC) {
-		    if (vans("½T©w§R°£³sµ²¡H[N/y]") == 'y')
+		    if (vans("ç¢ºå®šåˆªé™¤é€£çµï¼Ÿ[N/y]") == 'y')
 			delete_board_link(getbcache(ptr->bid), ptr->bid);
 		}
 		brdnum = -1;
@@ -2289,7 +2289,7 @@ choose_board(int newflag)
 	    if (IN_SUBCLASS() &&
 		(HasUserPerm(PERM_SYSOP | PERM_BOARD) || GROUPOP())) {
 		setbpath(buf, getbcache(class_bid)->brdname);
-		Mkdir(buf);	/* Ptt:¶}¸s²Õ¥Ø¿ı */
+		Mkdir(buf);	/* Ptt:é–‹ç¾¤çµ„ç›®éŒ„ */
 		b_note_edit_bname(class_bid);
 		brdnum = -1;
 	    }

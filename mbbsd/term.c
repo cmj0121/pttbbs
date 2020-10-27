@@ -1,4 +1,5 @@
 #include "bbs.h"
+#include <sys/ioctl.h>
 #include <termios.h>
 
 /* ----------------------------------------------------- */
