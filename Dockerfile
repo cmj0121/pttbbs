@@ -1,11 +1,9 @@
-FROM archlinux:20200407 AS builder
+FROM alpine:3.12.1
 
-RUN useradd -s /bin/bash -d /home/bbs bbsadm
-RUN useradd -s /home/bbs/bin/bbsrf -d /home/bbs bbs
-RUN mkdir /home/bbs
-RUN chown bbs:bbs -R /home/bbs
-RUN chmod 700 /home/bbs
-
-
-WORKDIR /home/bbs/bbsptt
+WORKDIR /src
 COPY . .
+
+RUN apk add --virtual build-dependencies build-base git perl
+# for linux/limits.h
+RUN apk add --no-cache linux-headers musl-dev
+RUN make clean && make -j

@@ -25,3 +25,9 @@ $(VAR_H): $(VAR_C)	# generate the basic variable header
 mbbsd util: common
 util: $(MBBSD_UTIL_OBJ)
 $(MBBSD_UTIL_OBJ): $(VAR_C)
+
+build:	# build the docker image
+	docker build -t pttbbs .
+
+run:	# run the pttbbs in docker
+	docker run -it pttbbs sh
