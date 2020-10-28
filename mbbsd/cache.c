@@ -23,7 +23,7 @@ getuser(const char *userid, userec_t *xuser)
 void
 getnewutmpent(const userinfo_t * up)
 {
-/* Ptt:³o¸Ì¥[¤W hash Æ[©À§äªÅªº utmp */
+/* Ptt:é€™è£¡åŠ ä¸Š hash è§€å¿µæ‰¾ç©ºçš„ utmp */
     register int    i;
     register userinfo_t *uentp;
     unsigned int p = StringHash(up->userid) % USHM_SIZE;
@@ -69,12 +69,12 @@ count_logins(int uid, int show)
 	j = uid - u->uid;
 	if (!j) {
 	    for (; i > 0 && uid == SHM->uinfo[ulist[i - 1]].uid; i--);
-							/* «ü¨ì²Ä¤@µ§ */
+							/* æŒ‡åˆ°ç¬¬ä¸€ç­† */
 	    for (count = 0; (ulist[i + count] &&
 		    (u = &SHM->uinfo[ulist[i + count]]) &&
 		    uid == u->uid); count++) {
 		if (show)
-		    prints("(%d) ¥Ø«eª¬ºA¬°: %-17.16s(¨Ó¦Û %s)\n",
+		    prints("(%d) ç›®å‰ç‹€æ…‹ç‚º: %-17.16s(ä¾†è‡ª %s)\n",
 			   count + 1, modestring(u, 0),
 			   u->from);
 	    }
@@ -106,7 +106,7 @@ setutmpmode(unsigned int mode)
 {
     if (currstat != mode)
 	currutmp->mode = currstat = mode;
-    /* °lÂÜ¨Ï¥ÎªÌ */
+    /* è¿½è¹¤ä½¿ç”¨è€… */
     if (HasUserPerm(PERM_LOGUSER)) {
 	log_user("setutmpmode to %s(%d)\n", modestring(currutmp, 0), mode);
     }
@@ -191,7 +191,7 @@ banned_msg(const char *bname)
     static char ban_msg[STRLEN];
     time4_t expire = is_banned_by_board(bname);
     if (expire > now) {
-        sprintf(ban_msg, "¨Ï¥ÎªÌ¤£¥iµo¨¥(©|¦³%d¤Ñ)",
+        sprintf(ban_msg, "ä½¿ç”¨è€…ä¸å¯ç™¼è¨€(å°šæœ‰%då¤©)",
                 ((expire - now) / DAY_SECONDS) +1);
         return ban_msg;
     }
@@ -199,7 +199,7 @@ banned_msg(const char *bname)
     char buf[PATHLEN];
     setbfile(buf, bname, fn_water);
     if (file_exist_record(buf, cuser.userid))
-        return "¨Ï¥ÎªÌ¤£¥iµo¨¥";
+        return "ä½¿ç”¨è€…ä¸å¯ç™¼è¨€";
 #endif
     return NULL;
 }
@@ -212,11 +212,11 @@ postperm_msg(const char *bname)
     boardheader_t   *bp = NULL;
 
     if (!(i = getbnum(bname)))
-	return "¬İªO¤£¦s¦b";
+	return "çœ‹æ¿ä¸å­˜åœ¨";
 
     // system internal read only boards (no matter what attribute/flag set)
     if (is_readonly_board(bname))
-	return "¬İªO°ßÅª";
+	return "çœ‹æ¿å”¯è®€";
 
     if (HasUserPerm(PERM_SYSOP))
 	return NULL;
@@ -244,29 +244,29 @@ postperm_msg(const char *bname)
 #endif
 
     if (!HasUserPerm(PERM_POST))
-	return (PERM_POST == PERM_LOGINOK) ? "¥¼§¹¦¨»{ÃÒ" :
-            "µLµo¤åÅv­­";
+	return (PERM_POST == PERM_LOGINOK) ? "æœªå®Œæˆèªè­‰" :
+            "ç„¡ç™¼æ–‡æ¬Šé™";
 
-    /* ¯µ±K¬İªO¯S§O³B²z */
+    /* ç§˜å¯†çœ‹æ¿ç‰¹åˆ¥è™•ç† */
     if (bp->brdattr & BRD_HIDE)
 	return NULL;
     else if (bp->brdattr & BRD_RESTRICTEDPOST &&
 	    !is_hidden_board_friend(i, usernum))
-	return "¬İªO­­¨îµo¤å";
+	return "çœ‹æ¿é™åˆ¶ç™¼æ–‡";
 
     if (HasUserPerm(PERM_VIOLATELAW))
     {
-	// ¦b»@³æªº°Q½×¬ÛÃöªO¥i¥Hµo¤å
+	// åœ¨ç½°å–®çš„è¨è«–ç›¸é—œæ¿å¯ä»¥ç™¼æ–‡
 	if (bp->level & PERM_VIOLATELAW)
 	    return NULL;
 	else
-	    return "»@³æ¥¼Ãº";
+	    return "ç½°å–®æœªç¹³";
     }
 
     if (!(bp->level & ~PERM_POST))
 	return NULL;
     if (!HasUserPerm(bp->level & ~PERM_POST))
-	return "¥¼¹F¬İªO­n¨DÅv­­";
+	return "æœªé”çœ‹æ¿è¦æ±‚æ¬Šé™";
     return NULL;
 }
 

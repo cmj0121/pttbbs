@@ -1,4 +1,4 @@
-/* �إߩҦ��ݪO��ذϪ��s�� */
+/* 建立所有看板精華區的連結 */
 
 #include "bbs.h"
 #define GROUPROOT BBSHOME"/man/group"

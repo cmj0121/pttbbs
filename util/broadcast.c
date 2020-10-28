@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
     int sleep_time = 5;
     int num_per_loop = 500;
-    char * owner = "¨t²Î¼s¼½";
+    char * owner = "ç³»çµ±å»£æ’­";
 
     int i, j;
     userinfo_t *uentp;
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     msg.pid = getpid();
     strlcpy(msg.userid, owner, sizeof(msg.userid));
-    snprintf(msg.last_call_in, sizeof(msg.last_call_in), "[¼s¼½]%s", argv[optind]);
+    snprintf(msg.last_call_in, sizeof(msg.last_call_in), "[å»£æ’­]%s", argv[optind]);
 
     now = time(NULL);
 

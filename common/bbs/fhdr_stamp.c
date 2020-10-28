@@ -27,7 +27,7 @@ int stamplink(char *fpath, fileheader_t * fh) GCC_WEAK;
 #define STAMP_DIR   1
 #define STAMP_LINK  2
 
-/* mail / post �ɡA�̾ڮɶ��إ��ɮשΥؿ��A�[�W�l�W */
+/* mail / post 時，依據時間建立檔案或目錄，加上郵戳 */
 /* @param[in,out] fpath input as dirname, output as filename */
 static inline int
 fhdr_stamp(char *fpath, fileheader_t *fh, int type)

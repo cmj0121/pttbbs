@@ -2,23 +2,23 @@
 #include "bbs.h"
 #include <sys/socket.h>
 
-#define BBLANK 	(-1)  	/* ™≈•’ */
-#define BWHITE 	(0)  	/* •’§l, ´·§‚ */
-#define BBLACK 	(1)  	/* ∂¬§l, •˝§‚ */
-#define LWHITE  (2)     /* •’™≈ */
-#define LBLACK  (3)     /* ∂¬™≈ */
+#define BBLANK 	(-1)  	/* Á©∫ÁôΩ */
+#define BWHITE 	(0)  	/* ÁôΩÂ≠ê, ÂæåÊâã */
+#define BBLACK 	(1)  	/* ÈªëÂ≠ê, ÂÖàÊâã */
+#define LWHITE  (2)     /* ÁôΩÁ©∫ */
+#define LBLACK  (3)     /* ÈªëÁ©∫ */
 
 /* only used for communicating */
-#define SETHAND (5)    /* ≈˝§l */
-#define CLEAN   (6)    /* ≤M∞£¶∫§l */
-#define UNCLEAN (7)    /* ≤M∞£ø˘§l°A≠´∑s®”πL*/
-#define CLEANDONE (8)  /* ∂}©l≠p¶a */
+#define SETHAND (5)    /* ËÆìÂ≠ê */
+#define CLEAN   (6)    /* Ê∏ÖÈô§Ê≠ªÂ≠ê */
+#define UNCLEAN (7)    /* Ê∏ÖÈô§ÈåØÂ≠êÔºåÈáçÊñ∞‰æÜÈÅé*/
+#define CLEANDONE (8)  /* ÈñãÂßãË®àÂú∞ */
 
 #define MAX_TIME (300)
 
 #define BOARD_LINE_ON_SCREEN(X) ((X) + 2)
 
-#define BRDSIZ 	(19) 	/* ¥—ΩL≥Ê√‰§j§p */
+#define BRDSIZ 	(19) 	/* Ê£ãÁõ§ÂñÆÈÇäÂ§ßÂ∞è */
 
 static const char* turn_color[] = { ANSI_COLOR(37;43), ANSI_COLOR(30;43) };
 
@@ -53,10 +53,10 @@ typedef struct {
     char    game_end;
     char    clean_end;    /* bit 1 => I, bit 2 => he */
     char    need_redraw;
-    float   feed_back;    /* ∂K¡Ÿ */
+    float   feed_back;    /* Ë≤ºÈÇÑ */
     int     eaten[2];
     int     backup_eaten[2];
-    rc_t    forbidden[2]; /* •¥ßT§ß∏T§‚ */
+    rc_t    forbidden[2]; /* ÊâìÂä´‰πãÁ¶ÅÊâã */
 } go_tag_t;
 #define GET_TAG(INFO) ((go_tag_t*)(INFO)->tag)
 
@@ -99,7 +99,7 @@ static const ChessConstants go_constants = {
     BRDSIZ,
     BRDSIZ,
     1,
-    "≥Ú¥—",
+    "ÂúçÊ£ã",
     "photo_go",
 #ifdef BN_GOCHESS_LOG
     BN_GOCHESS_LOG,
@@ -107,7 +107,7 @@ static const ChessConstants go_constants = {
     NULL,
 #endif
     { ANSI_COLOR(37;43), ANSI_COLOR(30;43) },
-    { "•’¥—", "∂¬¥—" },
+    { "ÁôΩÊ£ã", "ÈªëÊ£ã" },
 };
 
 static void
@@ -122,7 +122,7 @@ go_sethand(board_t board, int n)
     }
 }
 
-/* ≠p∫‚¨Y§l™∫Æº∆, recursion part of go_countlib() */
+/* Ë®àÁÆóÊüêÂ≠êÁöÑÊ∞£Êï∏, recursion part of go_countlib() */
 static int
 go_count(board_t board, board_t mark, int x, int y, int color)
 {
@@ -150,7 +150,7 @@ go_count(board_t board, board_t mark, int x, int y, int color)
     return total;
 }
 
-/* ≠p∫‚¨Y§l™∫Æº∆ */
+/* Ë®àÁÆóÊüêÂ≠êÁöÑÊ∞£Êï∏ */
 static int
 go_countlib(board_t board, int x, int y, char color)
 {
@@ -164,7 +164,7 @@ go_countlib(board_t board, int x, int y, char color)
     return go_count(board, mark, x, y, color);
 }
 
-/* ≠p∫‚ΩL≠±§W®C≠”§l™∫Æº∆ */
+/* Ë®àÁÆóÁõ§Èù¢‰∏äÊØèÂÄãÂ≠êÁöÑÊ∞£Êï∏ */
 static void
 go_eval(board_t board, int lib[][BRDSIZ], char color)
 {
@@ -176,7 +176,7 @@ go_eval(board_t board, int lib[][BRDSIZ], char color)
 		lib[i][j] = go_countlib(board, i, j, color);
 }
 
-/* ¿À¨d§@®B¨Oß_¶X™k */
+/* Ê™¢Êü•‰∏ÄÊ≠•ÊòØÂê¶ÂêàÊ≥ï */
 static int
 go_check(ChessInfo* info, const go_step_t* step)
 {
@@ -399,7 +399,7 @@ go_result(ChessInfo* info)
 
     memcpy(board, result_board, sizeof(result_board));
 
-    /* ¶∫§l¶^∂Ò */
+    /* Ê≠ªÂ≠êÂõûÂ°´ */
     count[0] -= tag->eaten[1];
     count[1] -= tag->eaten[0];
 
@@ -416,8 +416,8 @@ go_result(ChessInfo* info)
 static char*
 go_getstep(const go_step_t* step, char buf[])
 {
-    static const char* const ColName = "¢œ¢–¢—¢“¢”¢‘¢’¢÷¢ÿ¢Ÿ¢⁄¢€¢‹¢›¢ﬁ¢ﬂ¢‡¢·¢‚";
-    static const char* const RawName = "19181716151413121110¢∏¢∑¢∂¢µ¢¥¢≥¢≤¢±¢∞";
+    static const char* const ColName = "Ôº°Ôº¢Ôº£Ôº§Ôº•Ôº¶ÔºßÔº®Ôº™Ôº´Ôº¨Ôº≠ÔºÆÔºØÔº∞Ôº±Ôº≤Ôº≥Ôº¥";
+    static const char* const RawName = "19181716151413121110ÔºôÔºòÔºóÔºñÔºïÔºîÔºìÔºíÔºë";
     static const int ansi_length     = sizeof(ANSI_COLOR(30;43)) - 1;
 
     strcpy(buf, turn_color[step->color]);
@@ -472,10 +472,10 @@ static void
 go_drawline(const ChessInfo* info, int line)
 {
     static const char* const BoardPic[] = {
-	"˘›", "˘Á", "˘Á", "˘ﬂ",
-	"˘Ú", "¢q", "¢q", "˘Ù",
-	"˘Ú", "¢q", "°œ", "˘Ù",
-	"˘„", "˘Ì", "˘Ì", "˘Â",
+	"‚ïî", "‚ï§", "‚ï§", "‚ïó",
+	"‚ïü", "‚îº", "‚îº", "‚ï¢",
+	"‚ïü", "‚îº", "Ôºã", "‚ï¢",
+	"‚ïö", "‚ïß", "‚ïß", "‚ïù",
     };
     static const int BoardPicIndex[] =
     { 0, 1, 1, 2, 1,
@@ -487,10 +487,10 @@ go_drawline(const ChessInfo* info, int line)
     go_tag_t* tag = (go_tag_t*) info->tag;
 
     if (line == 0) {
-	prints(ANSI_COLOR(1;46) "   ≥Ú¥—πÔæ‘   " ANSI_COLOR(45)
+	prints(ANSI_COLOR(1;46) "   ÂúçÊ£ãÂ∞çÊà∞   " ANSI_COLOR(45)
 		"%30s VS %-20s%10s" ANSI_RESET,
 	       info->user1.userid, info->user2.userid,
-	       info->mode == CHESS_MODE_WATCH ? "[∆[¥—º“¶°]" : "");
+	       info->mode == CHESS_MODE_WATCH ? "[ËßÄÊ£ãÊ®°Âºè]" : "");
     } else if (line == 1) {
 	outs("   A B C D E F G H J K L M N O P Q R S T");
     } else if (line >= 2 && line <= 20) {
@@ -514,10 +514,10 @@ go_drawline(const ChessInfo* info, int line)
 	if (info->mode == CHESS_MODE_VERSUS ||
 		info->mode == CHESS_MODE_PERSONAL) {
 	    if (tag->game_end)
-		outs(ANSI_COLOR(31;47) "(w)" ANSI_COLOR(30) "≠p¶a" ANSI_RESET);
+		outs(ANSI_COLOR(31;47) "(w)" ANSI_COLOR(30) "Ë®àÂú∞" ANSI_RESET);
 	    else if (info->history.used == 0 && (info->myturn == BWHITE
 			|| info->mode == CHESS_MODE_PERSONAL))
-		outs(ANSI_COLOR(31;47) "(x)" ANSI_COLOR(30) "±¬§l" ANSI_RESET);
+		outs(ANSI_COLOR(31;47) "(x)" ANSI_COLOR(30) "ÊéàÂ≠ê" ANSI_RESET);
 	}
     }
 
@@ -526,12 +526,12 @@ go_drawline(const ChessInfo* info, int line)
 
 	if (tag->game_end && tag->clean_end == 3)
 	    prints("   " ANSI_COLOR(30;43) "%s" ANSI_RESET
-		    " §Ë§l™≈°G%3.1f", bw_chess[color],
+		    " ÊñπÂ≠êÁ©∫Ôºö%3.1f", bw_chess[color],
 		    tag->eaten[color] +
 		    (color == BWHITE ? tag->feed_back : 0.0));
 	else
 	    prints("   " ANSI_COLOR(30;43) "%s" ANSI_RESET
-		    " §Ë¥£§lº∆°G%3d", bw_chess[color], tag->eaten[color]);
+		    " ÊñπÊèêÂ≠êÊï∏Ôºö%3d", bw_chess[color], tag->eaten[color]);
     } else
 	ChessDrawExtraInfo(info, line, 3);
 }
@@ -546,7 +546,7 @@ static int
 go_prepare_play(ChessInfo* info)
 {
     if (((go_tag_t*) info->tag)->game_end) {
-	strlcpy(info->warnmsg, "Ω–≤M∞£¶∫§l°A•H´K≠p∫‚≥”≠t",
+	strlcpy(info->warnmsg, "Ë´ãÊ∏ÖÈô§Ê≠ªÂ≠êÔºå‰ª•‰æøË®àÁÆóÂãùË≤†",
 		sizeof(info->warnmsg));
 	if (info->last_movestr[0] != ' ')
 	    strcpy(info->last_movestr, "        ");
@@ -587,7 +587,7 @@ go_process_key(ChessInfo* info, int key, ChessGameResult* result)
 	    }
 	} else if (key == 'u') {
 	    char buf[4];
-	    getdata(b_lines, 0, "¨Oß_Øu™∫≠n≠´∑s¬I¶∫§l? (y/N)",
+	    getdata(b_lines, 0, "ÊòØÂê¶ÁúüÁöÑË¶ÅÈáçÊñ∞ÈªûÊ≠ªÂ≠ê? (y/N)",
 		    buf, sizeof(buf), DOECHO);
 	    ChessDrawLine(info, b_lines);
 
@@ -606,7 +606,7 @@ go_process_key(ChessInfo* info, int key, ChessGameResult* result)
 	char buf[4];
 	int  n;
 
-	getdata(22, 43, "≠n±¬¶h§÷§l©O(2 - 9)°H ", buf, sizeof(buf), DOECHO);
+	getdata(22, 43, "Ë¶ÅÊéàÂ§öÂ∞ëÂ≠êÂë¢(2 - 9)Ôºü ", buf, sizeof(buf), DOECHO);
 	n = atoi(buf);
 
 	if (n >= 2 && n <= 9) {
@@ -619,7 +619,7 @@ go_process_key(ChessInfo* info, int key, ChessGameResult* result)
 	    ((go_tag_t*)info->tag)->feed_back = 0.0;
 
 	    snprintf(info->last_movestr, sizeof(info->last_movestr),
-		    ANSI_COLOR(1) "±¬ %d §l" ANSI_RESET, n);
+		    ANSI_COLOR(1) "Êéà %d Â≠ê" ANSI_RESET, n);
 	    ChessRedraw(info);
 	    return 1;
 	} else
@@ -712,12 +712,12 @@ go_prepare_step(ChessInfo* info, const go_step_t* step)
 		go_examboard(tag->backup_board, !step->color, info);
 	} else {
 	    snprintf(info->last_movestr, sizeof(info->last_movestr),
-		    ANSI_COLOR(1) "±¬ %d §l" ANSI_RESET, step->loc.r);
+		    ANSI_COLOR(1) "Êéà %d Â≠ê" ANSI_RESET, step->loc.r);
 	    tag->need_redraw = 1;
 	    ((go_tag_t*)info->tag)->feed_back = 0.0;
 	}
     } else if (step->type == CHESS_STEP_PASS)
-	strcpy(info->last_movestr, "µÍ§‚");
+	strcpy(info->last_movestr, "ËôõÊâã");
 }
 
 static ChessGameResult
@@ -769,7 +769,7 @@ go_post_game(ChessInfo* info)
 
     info->timelimit = NULL;
     info->turn      = info->myturn;
-    strcpy(info->warnmsg, "Ω–¬I∞£¶∫§l");
+    strcpy(info->warnmsg, "Ë´ãÈªûÈô§Ê≠ªÂ≠ê");
     ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
 
     memcpy(tag->backup_board, info->board, sizeof(tag->backup_board));
@@ -830,11 +830,11 @@ go_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
     vcur_restore(cur);
 
     fprintf(fp, "\n");
-    fprintf(fp, "´ˆ z •i∂i§J•¥√–º“¶°\n");
+    fprintf(fp, "Êåâ z ÂèØÈÄ≤ÂÖ•ÊâìË≠úÊ®°Âºè\n");
     fprintf(fp, "\n");
 
     if (sethand) {
-	fprintf(fp, "[   1] ±¬ %d §l\n                ", sethand);
+	fprintf(fp, "[   1] Êéà %d Â≠ê\n                ", sethand);
 	i = 1;
     } else
 	i = 0;
@@ -846,7 +846,7 @@ go_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
 	    fprintf(fp, "[%3d]%s => %c%-4d", i + 1, bw_chess[step->color],
 		    ColName[step->loc.c], 19 - step->loc.r);
 	else if (step->type == CHESS_STEP_PASS)
-	    fprintf(fp, "[%3d]%s => µÍ§‚ ", i + 1, bw_chess[(i + 1) % 2]);
+	    fprintf(fp, "[%3d]%s => ËôõÊâã ", i + 1, bw_chess[(i + 1) % 2]);
 	else
 	    break;
 	if (i % 5 == 4)
@@ -854,7 +854,7 @@ go_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
     }
 
     fprintf(fp,
-	    "\n\n°m•H§U¨∞ sgf ÆÊ¶°¥—√–°n\n<golog>\n(;GM[1]"
+	    "\n\n„Ää‰ª•‰∏ãÁÇ∫ sgf Ê†ºÂºèÊ£ãË≠ú„Äã\n<golog>\n(;GM[1]"
 	    "GN[%s-%s(W) Ptt]\n"
 	    "SZ[19]HA[%d]PB[%s]PW[%s]\n"
 	    "PC[FPG BBS/Ptt BBS: ptt.cc]\n",
@@ -929,7 +929,7 @@ gochess(int s, ChessGameMode mode)
 int
 gochess_main(void)
 {
-    return ChessStartGame('g', SIG_GO, "≥Ú¥—");
+    return ChessStartGame('g', SIG_GO, "ÂúçÊ£ã");
 }
 
 int
@@ -942,7 +942,7 @@ gochess_personal(void)
 int
 gochess_watch(void)
 {
-    return ChessWatchGame(&gochess, UMODE_GO, "≥Ú¥—");
+    return ChessWatchGame(&gochess, UMODE_GO, "ÂúçÊ£ã");
 }
 
 static int

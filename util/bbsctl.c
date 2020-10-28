@@ -1,6 +1,6 @@
 #include "bbs.h"
 
-#ifdef __FreeBSD__
+#if defined(__FreeBSD__)
    #include <sys/syslimits.h>
    #include <sys/types.h>
    #include <signal.h>
@@ -11,8 +11,7 @@
    #define  IPCS    "/usr/bin/ipcs"
    #define  IPCRM   "/usr/bin/ipcrm"
    #define  AWK     "/usr/bin/awk"
-#endif
-#ifdef __linux__
+#elif defined(__linux__)
    #include <linux/limits.h>
    #include <sys/types.h>
    #include <signal.h>
@@ -23,6 +22,18 @@
    #define  IPCS    "/usr/bin/ipcs"
    #define  IPCRM   "/usr/bin/ipcrm"
    #define  AWK     "/usr/bin/awk"
+#elif defined(__APPLE__)
+   #include <sys/types.h>
+   #include <signal.h>
+   #include <grp.h>
+   #define  SU      "/usr/bin/su"
+   #define  CP      "/bin/cp"
+   #define  KILLALL "/usr/bin/killall"
+   #define  IPCS    "/usr/bin/ipcs"
+   #define  IPCRM   "/usr/bin/ipcrm"
+   #define  AWK     "/usr/bin/awk"
+#else
+#  error	"cannot detect platform"
 #endif
 
 int HaveBBSADM(void)

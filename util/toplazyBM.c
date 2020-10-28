@@ -100,18 +100,18 @@ int main(void)
 	exit(1);
     }
 
-    fprintf(inf, "Äµ§i: ªO¥D­Y¶W¹L(¤£¥]§t) %d¤Ñ¥¼¤W¯¸,±N¤©©ó§KÂ¾\n",
+    fprintf(inf, "è­¦å‘Š: æ¿ä¸»è‹¥è¶…éŽ(ä¸åŒ…å«) %då¤©æœªä¸Šç«™,å°‡äºˆæ–¼å…è·\n",
             LAZY_BM_LIMIT_DAYS);
     fprintf(inf,
-	    "¬ÝªO¦WºÙ                                           "
-	    "    ªO¥D        ´X¤Ñ¨S¨Ó°Õ\n"
+	    "çœ‹æ¿åç¨±                                           "
+	    "    æ¿ä¸»        å¹¾å¤©æ²’ä¾†å•¦\n"
 	    "---------------------------------------------------"
 	    "--------------------------\n");
 
-    fprintf(firef, "§KÂ¾ªO¥D\n");
+    fprintf(firef, "å…è·æ¿ä¸»\n");
     fprintf(firef,
-	    "¬ÝªO¦WºÙ                                           "
-	    "    ªO¥D        ´X¤Ñ¨S¨Ó°Õ\n"
+	    "çœ‹æ¿åç¨±                                           "
+	    "    æ¿ä¸»        å¹¾å¤©æ²’ä¾†å•¦\n"
 	    "---------------------------------------------------"
 	    "--------------------------\n"); 
 
@@ -153,12 +153,12 @@ int main(void)
 		lostbms[j].ctitle = allbrd[i].title;
 		lostbms[j].lostdays = diff / 86400;
 
-		//¶W¹L LAZY_BM_LIMIT_DAYS ¤Ñ §KÂ¾
+		//è¶…éŽ LAZY_BM_LIMIT_DAYS å¤© å…è·
 		if (lostbms[j].lostdays > LAZY_BM_LIMIT_DAYS) {
 		    xuser.userlevel &= ~PERM_BM;
 		    bms[index].flag = 1;
 		    flag = 1;
-                    // NOTE: ¦n¹³¤£§ï¤]µL©Ò¿×¡A¥Ø«e©Þ BM ¬O¦Û°Êªº¡C
+                    // NOTE: å¥½åƒä¸æ”¹ä¹Ÿç„¡æ‰€è¬‚ï¼Œç›®å‰æ‹” BM æ˜¯è‡ªå‹•çš„ã€‚
 		    passwd_update(bmid, &xuser);
 		}
 		j++;
@@ -169,7 +169,7 @@ int main(void)
 	if (flag == 1) {
             boardheader_t *bp = getbcache(i+1);
 
-            // ½T»{§Ú­Ì¨S·d¿ù cache. ¦pªG cache ¬µ¤F´N§O¥Î¤F
+            // ç¢ºèªæˆ‘å€‘æ²’æžéŒ¯ cache. å¦‚æžœ cache ç‚¸äº†å°±åˆ¥ç”¨äº†
             if (strcmp(bp->brdname, allbrd[i].brdname) != 0) {
                 printf("ERROR: unmatched cache!!! (%s - %s)\n",
                         bp->brdname, allbrd[i].brdname);
@@ -202,12 +202,12 @@ int main(void)
     //write to the etc/toplazyBM
     for (i = 0; i < j; i++) {
 	if (lostbms[i].lostdays > LAZY_BM_LIMIT_DAYS) {
-	    fprintf(firef, "%-*.*s%-*.*s%-*.*s%3d¤Ñ¨S¤W¯¸\n",
+	    fprintf(firef, "%-*.*s%-*.*s%-*.*s%3då¤©æ²’ä¸Šç«™\n",
 		    IDLEN, IDLEN, lostbms[i].title, BTLEN-10,
 		    BTLEN-10, lostbms[i].ctitle, IDLEN,IDLEN,
 		    lostbms[i].bmname,lostbms[i].lostdays);
 	} else {
-	    fprintf(inf, "%-*.*s%-*.*s%-*.*s%3d¤Ñ¨S¤W¯¸\n",
+	    fprintf(inf, "%-*.*s%-*.*s%-*.*s%3då¤©æ²’ä¸Šç«™\n",
 		    IDLEN, IDLEN, lostbms[i].title, BTLEN-10,
 		    BTLEN-10, lostbms[i].ctitle, IDLEN,IDLEN,
 		    lostbms[i].bmname,lostbms[i].lostdays);
@@ -233,14 +233,14 @@ int main(void)
 		lostbms[i].bmname[0], lostbms[i].bmname);
 	stampfile(genbuf, &mymail);
 
-	strcpy(mymail.owner, "[" BBSMNAME "Äµ¹î§½]");
+	strcpy(mymail.owner, "[" BBSMNAME "è­¦å¯Ÿå±€]");
 	if (lostdays <= LAZY_BM_LIMIT_DAYS)
 	    sprintf(mymail.title,
-		    ANSI_COLOR(32) "ª©¥D³qª¾" ANSI_RESET " %sª©ª©¥D%s",
+		    ANSI_COLOR(32) "ç‰ˆä¸»é€šçŸ¥" ANSI_RESET " %sç‰ˆç‰ˆä¸»%s",
 		    lostbms[i].title, lostbms[i].bmname);
 	else
 	    sprintf(mymail.title,
-		    ANSI_COLOR(32) "ª©¥D¦Û°Ê§KÂ¾³qª¾" ANSI_RESET " %s ª©¥D %s",
+		    ANSI_COLOR(32) "ç‰ˆä¸»è‡ªå‹•å…è·é€šçŸ¥" ANSI_RESET " %s ç‰ˆä¸» %s",
 		    lostbms[i].title, lostbms[i].bmname);
 
 	unlink(genbuf);

@@ -15,14 +15,14 @@ char *get_restriction_reason(
     syncnow();
     if (numlogindays / 10 < limits_logins) {
         snprintf(msg, sz_msg,
-                 STR_LOGINDAYS "¥¼º¡ %d " STR_LOGINDAYS
-                 "(¥Ø«e%d" STR_LOGINDAYS_QTY ") ",
+                 STR_LOGINDAYS "æœªæ»¿ %d " STR_LOGINDAYS
+                 "(ç›®å‰%d" STR_LOGINDAYS_QTY ") ",
                  limits_logins * 10, numlogindays);
         return msg;
     }
 #ifdef ASSESS
     if  (badpost > (255 - limits_badpost)) {
-        snprintf(msg, sz_msg, "°h¤å¶W¹L %d ½g(¥Ø«e%d½g)",
+        snprintf(msg, sz_msg, "é€€æ–‡è¶…é %d ç¯‡(ç›®å‰%dç¯‡)",
                  255 - limits_badpost, badpost);
         return msg;
     }
@@ -30,7 +30,7 @@ char *get_restriction_reason(
     return NULL;
 }
 
-/* ¨¾°ô Multi play */
+/* é˜²å µ Multi play */
 static int
 is_playing(int unmode)
 {
@@ -65,11 +65,11 @@ lockutmpmode(int unmode, int state)
 	clear();
 	move(10, 20);
 	if (errorno == LOCK_THIS)
-	    prints("½Ğ¥ıÂ÷¶} %s ¤~¯à¦A %s ",
+	    prints("è«‹å…ˆé›¢é–‹ %s æ‰èƒ½å† %s ",
 		   ModeTypeTable[currutmp->lockmode],
 		   ModeTypeTable[unmode]);
 	else
-	    prints("©êºp! ¦]¬°±z¥Ø«e¦h­«µn¤J©Ò¥HµLªk¨Ï¥Î %s",
+	    prints("æŠ±æ­‰! å› ç‚ºæ‚¨ç›®å‰å¤šé‡ç™»å…¥æ‰€ä»¥ç„¡æ³•ä½¿ç”¨ %s",
                    ModeTypeTable[unmode]);
 	pressanykey();
 	return errorno;
@@ -158,11 +158,11 @@ p_from(void)
 {
     char tmp_from[sizeof(currutmp->from)];
 
-    if (vans("½T©w­n§ï¬G¶m?[y/N]") != 'y')
+    if (vans("ç¢ºå®šè¦æ”¹æ•…é„‰?[y/N]") != 'y')
 	return 0;
 
     strlcpy(tmp_from, currutmp->from, sizeof(tmp_from));
-    if (getdata(b_lines - 1, 0, "½Ğ¿é¤J·s¬G¶m:",
+    if (getdata(b_lines - 1, 0, "è«‹è¼¸å…¥æ–°æ•…é„‰:",
 		tmp_from, sizeof(tmp_from), DOECHO) &&
 	strcmp(tmp_from, currutmp->from) != 0)
     {
@@ -186,31 +186,31 @@ mail_redenvelop(const char *from, const char *to, int money, char *fpath)
     if (!(fp = fopen(fpath, "w")))
 	return -1;
 
-    fprintf(fp, "§@ªÌ: %s\n"
-	    "¼ĞÃD: ©Û°]¶iÄ_\n"
-	    "®É¶¡: %s\n"
-	    ANSI_COLOR(1;33) "¿Ë·Rªº %s ¡G\n\n" ANSI_RESET
-	    ANSI_COLOR(1;31) "    §Ú¥]µ¹§A¤@­Ó %d " MONEYNAME
-                                 "ªº¤j¬õ¥]³á ^_^\n\n"
-	    "    Â§»´±¡·N­«¡A½Ğ¯º¯Ç...... ^_^" ANSI_RESET "\n"
+    fprintf(fp, "ä½œè€…: %s\n"
+	    "æ¨™é¡Œ: æ‹›è²¡é€²å¯¶\n"
+	    "æ™‚é–“: %s\n"
+	    ANSI_COLOR(1;33) "è¦ªæ„›çš„ %s ï¼š\n\n" ANSI_RESET
+	    ANSI_COLOR(1;31) "    æˆ‘åŒ…çµ¦ä½ ä¸€å€‹ %d " MONEYNAME
+                                 "çš„å¤§ç´…åŒ…å–” ^_^\n\n"
+	    "    ç¦®è¼•æƒ…æ„é‡ï¼Œè«‹ç¬‘ç´...... ^_^" ANSI_RESET "\n"
 #if defined(USE_RECENTPAY) || defined(LOG_RECENTPAY)
-            "\n  ±z¥i©ó¤U¦C¦ì¸m§ä¨ì³Ìªñªº¥æ©ö°O¿ı:\n"
-            "  ¥D¿ï³æ => (U)ser­Ó¤H³]©w => (L)MyLogs­Ó¤H°O¿ı =>"
-            " (P)RecentPay³Ìªñ¥æ©ö°O¿ı\n"
+            "\n  æ‚¨å¯æ–¼ä¸‹åˆ—ä½ç½®æ‰¾åˆ°æœ€è¿‘çš„äº¤æ˜“è¨˜éŒ„:\n"
+            "  ä¸»é¸å–® => (U)serå€‹äººè¨­å®š => (L)MyLogså€‹äººè¨˜éŒ„ =>"
+            " (P)RecentPayæœ€è¿‘äº¤æ˜“è¨˜éŒ„\n"
 #endif
             , from, ctime4(&now), to, money);
     fclose(fp);
 
     // colorize topic to make sure this is issued by system.
     snprintf(fhdr.title, sizeof(fhdr.title),
-	    ANSI_COLOR(1;37;41) "[¬õ¥]]" ANSI_RESET " $%d", money);
+	    ANSI_COLOR(1;37;41) "[ç´…åŒ…]" ANSI_RESET " $%d", money);
     strlcpy(fhdr.owner, from, sizeof(fhdr.owner));
     sethomedir(dirent, to);
     append_record(dirent, &fhdr, sizeof(fhdr));
     return 0;
 }
 
-/* µ¹¿ú»PÃØ»Pµ| */
+/* çµ¦éŒ¢èˆ‡è´ˆèˆ‡ç¨… */
 
 int
 give_tax(int money)
@@ -253,8 +253,8 @@ give_money_vget_changecb(int key GCC_UNUSED, VGET_RUNTIME *prt, void *instance)
 	m1 = m2 = 0;
 
     move(4, 0);
-    prints(" %c §A­n¥I¥X (µ|«e): %d\n", c1, m1);
-    prints(" %c ¹ï¤è¦¬¨ì (µ|«á): %d\n", c2, m2);
+    prints(" %c ä½ è¦ä»˜å‡º (ç¨…å‰): %d\n", c1, m1);
+    prints(" %c å°æ–¹æ”¶åˆ° (ç¨…å¾Œ): %d\n", c2, m2);
     return VGETCB_NONE;
 }
 
@@ -288,22 +288,22 @@ do_give_money(char *id, int uid, int money, const char *myid)
 
     tax = give_tax(money);
     if (money - tax <= 0)
-	return -1;		/* Ãº§¹µ|´N¨S¿úµ¹¤F */
+	return -1;		/* ç¹³å®Œç¨…å°±æ²’éŒ¢çµ¦äº† */
 
     if (strcasecmp(myid, cuser.userid) != 0)  {
         snprintf(prompt, sizeof(prompt)-1,
-                "¥H %s ªº¦W¸qÂà±bµ¹ %s (µ|«á $%d)",
+                "ä»¥ %s çš„åç¾©è½‰å¸³çµ¦ %s (ç¨…å¾Œ $%d)",
                 myid, id, money - tax);
     } else {
         snprintf(prompt, sizeof(prompt)-1,
-                "Âà±bµ¹ %s (µ|«á $%d)", id, money - tax);
+                "è½‰å¸³çµ¦ %s (ç¨…å¾Œ $%d)", id, money - tax);
     }
 
-    // ¹ê»Úµ¹¤©ª÷¿ú¡C ¬°Á×§Kµ{¦¡¬G»Ù/´c·NÂ_½u¡A¤@«ß¥ı¦©¦Aµo¡C
+    // å¯¦éš›çµ¦äºˆé‡‘éŒ¢ã€‚ ç‚ºé¿å…ç¨‹å¼æ•…éšœ/æƒ¡æ„æ–·ç·šï¼Œä¸€å¾‹å…ˆæ‰£å†ç™¼ã€‚
     pay(money, "%s", prompt);
-    pay_as_uid(uid, -(money - tax), "¨Ó¦Û %s ªºÂà±b (µ|«e $%d)",
+    pay_as_uid(uid, -(money - tax), "ä¾†è‡ª %s çš„è½‰å¸³ (ç¨…å‰ $%d)",
                myid, money);
-    log_filef(FN_MONEY, LOG_CREAT, "%-12s µ¹ %-12s %d\t(µ|«á %d)\t%s\n",
+    log_filef(FN_MONEY, LOG_CREAT, "%-12s çµ¦ %-12s %d\t(ç¨…å¾Œ %d)\t%s\n",
               cuser.userid, id, money, money - tax, Cdate(&now));
 
     // penalty
@@ -333,18 +333,18 @@ give_money_ui(const char *userid)
     int		    m = 0, mtax = 0, tries = 3, skipauth = 0;
     static time4_t  lastauth = 0;
     const char	    *myid = cuser.userid;
-    const char	    *uid_prompt = "³o¦ì©¯¹B¨àªºid: ";
+    const char	    *uid_prompt = "é€™ä½å¹¸é‹å…’çš„id: ";
 
     const char *alert_trade = "\n" ANSI_COLOR(0;1;31)
-        "´£¿ô±z¥»¯¸ªºµêÀÀ " MONEYNAME " ¤£À³»P¨ä¥¦µêÀÀ©Î²{¹ê¥Í¬¡"
-        "³q¥Î¤§³f¹ô¶i¦æ¥æ©ö\n"
-        "­Y¬dÀò¦³¨Ï¥ÎªÌ¸g¥Ñ¤£ªk³~®|¨ú±o¦A»P¨ä¥¦¨Ï¥ÎªÌ¶i¦æ³f¹ô¶¡¤§¥æ©ö®É\n"
-        "¯¸¤è±Nª½±µ¦©¦^¡C¬°Á×§K³y¦¨±z­Ó¤H·l¥¢¡A½Ğ¤T«ä¦Ó«á¦æ¡C"
+        "æé†’æ‚¨æœ¬ç«™çš„è™›æ“¬ " MONEYNAME " ä¸æ‡‰èˆ‡å…¶å®ƒè™›æ“¬æˆ–ç¾å¯¦ç”Ÿæ´»"
+        "é€šç”¨ä¹‹è²¨å¹£é€²è¡Œäº¤æ˜“\n"
+        "è‹¥æŸ¥ç²æœ‰ä½¿ç”¨è€…ç¶“ç”±ä¸æ³•é€”å¾‘å–å¾—å†èˆ‡å…¶å®ƒä½¿ç”¨è€…é€²è¡Œè²¨å¹£é–“ä¹‹äº¤æ˜“æ™‚\n"
+        "ç«™æ–¹å°‡ç›´æ¥æ‰£å›ã€‚ç‚ºé¿å…é€ æˆæ‚¨å€‹äººæå¤±ï¼Œè«‹ä¸‰æ€è€Œå¾Œè¡Œã€‚"
          ANSI_RESET "\n";
 
     // TODO prevent macros, we should check something here,
     // like user pw/id/...
-    vs_hdr("µ¹¤©" MONEYNAME);
+    vs_hdr("çµ¦äºˆ" MONEYNAME);
 
     if (!HasBasicUserPerm(PERM_LOGINOK))
         return -1;
@@ -360,12 +360,12 @@ give_money_ui(const char *userid)
 
     if (!id[0] || strcasecmp(cuser.userid, id) == 0)
     {
-	vmsg("¥æ©ö¨ú®ø!");
+	vmsg("äº¤æ˜“å–æ¶ˆ!");
 	return -1;
     }
 
     if ((uid = searchuser(id, id)) == 0) {
-	vmsg("¬dµL¦¹¤H!");
+	vmsg("æŸ¥ç„¡æ­¤äºº!");
 	return -1;
     }
 
@@ -373,9 +373,9 @@ give_money_ui(const char *userid)
 
     m = 0;
     money_buf[0] = 0;
-    mvouts(2, 0, "­nµ¹¥L¦h¤Ö" MONEYNAME "©O? "
-           "(¥i«ö TAB ¤Á´«¿é¤Jµ|«e/µ|«áª÷ÃB, µ|²v©T©w 10%)\n");
-    outs(" ½Ğ¿é¤Jª÷ÃB: ");  // (3, 0)
+    mvouts(2, 0, "è¦çµ¦ä»–å¤šå°‘" MONEYNAME "å‘¢? "
+           "(å¯æŒ‰ TAB åˆ‡æ›è¼¸å…¥ç¨…å‰/ç¨…å¾Œé‡‘é¡, ç¨…ç‡å›ºå®š 10%)\n");
+    outs(" è«‹è¼¸å…¥é‡‘é¡: ");  // (3, 0)
     {
 	int is_before_tax = 1;
 	const VGET_CALLBACKS cb = {
@@ -389,20 +389,20 @@ give_money_ui(const char *userid)
 	    m = cal_before_givetax(m);
     }
     if (m < 2) {
-	vmsg("ª÷ÃB¹L¤Ö¡A¥æ©ö¨ú®ø!");
+	vmsg("é‡‘é¡éå°‘ï¼Œäº¤æ˜“å–æ¶ˆ!");
 	return -1;
     }
 
     reload_money();
     if (cuser.money < m) {
-	vmsg("§A¨S¦³¨º»ò¦h" MONEYNAME "³á!");
+	vmsg("ä½ æ²’æœ‰é‚£éº¼å¤š" MONEYNAME "å–”!");
 	return -1;
     }
 
     mtax = give_tax(m);
     move(4, 0);
-    prints( "¥æ©ö¤º®e: %s ±Nµ¹¤© %s : [¥¼µ|] $%d (µ|ª÷ $%d )\n"
-	    "¹ï¤è¹ê±o: $%d\n",
+    prints( "äº¤æ˜“å…§å®¹: %s å°‡çµ¦äºˆ %s : [æœªç¨…] $%d (ç¨…é‡‘ $%d )\n"
+	    "å°æ–¹å¯¦å¾—: $%d\n",
 	    cuser.userid, id, m, mtax, m-mtax);
 
     // safe context starts at (6, 0).
@@ -415,12 +415,12 @@ give_money_ui(const char *userid)
 	while (strcmp(xuser.myangel, cuser.userid) == 0)
 	{
 	    char yn[3];
-	    mvouts(6, 0, "¥L¬O§Aªº¤p¥D¤H¡A¬O§_°Î¦W¡H[y/n]: ");
+	    mvouts(6, 0, "ä»–æ˜¯ä½ çš„å°ä¸»äººï¼Œæ˜¯å¦åŒ¿åï¼Ÿ[y/n]: ");
 	    vgets(yn, sizeof(yn), VGET_LOWERCASE);
             switch(yn[0]) {
                 case 'y':
                     // TODO replace with angel_load_my_fullnick.
-                    myid = "¤p¤Ñ¨Ï";
+                    myid = "å°å¤©ä½¿";
                     break;
                 case 'n':
                     break;
@@ -435,7 +435,7 @@ give_money_ui(const char *userid)
     if (is_rejected(id)) {
         move(13, 0);
         outs(ANSI_COLOR(1;35)
-             "¹ï¤è©Úµ´¦¬«H¡A§¹¦¨¥æ©ö«á±N¤£±H°e¬õ¥]³U¡C" ANSI_RESET);
+             "å°æ–¹æ‹’çµ•æ”¶ä¿¡ï¼Œå®Œæˆäº¤æ˜“å¾Œå°‡ä¸å¯„é€ç´…åŒ…è¢‹ã€‚" ANSI_RESET);
         can_send_mail = 0;
     }
 
@@ -443,12 +443,12 @@ give_money_ui(const char *userid)
     move(7, 0);
     if (now - lastauth >= 15*60) // valid through 15 minutes
     {
-	outs(ANSI_COLOR(1;31) "¬°¤FÁ×§K»~«ö©Î¬O´c·N¶BÄF¡A"
-		"¦b§¹¦¨¥æ©ö«e­n­«·s½T»{±zªº¨­¥÷¡C" ANSI_RESET);
+	outs(ANSI_COLOR(1;31) "ç‚ºäº†é¿å…èª¤æŒ‰æˆ–æ˜¯æƒ¡æ„è©é¨™ï¼Œ"
+		"åœ¨å®Œæˆäº¤æ˜“å‰è¦é‡æ–°ç¢ºèªæ‚¨çš„èº«ä»½ã€‚" ANSI_RESET);
     } else {
-	outs("§Aªº»{ÃÒ©|¥¼¹L´Á¡A¥i¼È®É¸õ¹L±K½X»{ÃÒµ{§Ç¡C\n");
+	outs("ä½ çš„èªè­‰å°šæœªéæœŸï¼Œå¯æš«æ™‚è·³éå¯†ç¢¼èªè­‰ç¨‹åºã€‚\n");
 	// auth is valid.
-	if (vans("½T©w¶i¦æ¥æ©ö¶Ü¡H (y/N): ") == 'y')
+	if (vans("ç¢ºå®šé€²è¡Œäº¤æ˜“å—ï¼Ÿ (y/N): ") == 'y')
 	    skipauth = 1;
 	else
 	    tries = -1;
@@ -469,27 +469,27 @@ give_money_ui(const char *userid)
 	// if we show '%d chances left', some user may think
 	// they will be locked out...
 	if (tries > 0 &&
-	    vmsg("±K½X¿ù»~¡A½Ğ­«¸Õ©Î«ö n ¨ú®ø¥æ©ö¡C") == 'n')
+	    vmsg("å¯†ç¢¼éŒ¯èª¤ï¼Œè«‹é‡è©¦æˆ–æŒ‰ n å–æ¶ˆäº¤æ˜“ã€‚") == 'n')
 	    return -1;
     }
 
     if (tries < 0)
     {
-	vmsg("¥æ©ö¨ú®ø!");
+	vmsg("äº¤æ˜“å–æ¶ˆ!");
 	return -1;
     }
 
-    outs("\n¥æ©ö¥¿¦b¶i¦æ¤¤¡A½Ğµy­Ô...\n");
+    outs("\näº¤æ˜“æ­£åœ¨é€²è¡Œä¸­ï¼Œè«‹ç¨å€™...\n");
     refresh();
 
     if(do_give_money(id, uid, m, myid) < 0)
     {
-	outs(ANSI_COLOR(1;31) "¥æ©ö¥¢±Ñ¡I" ANSI_RESET "\n");
-	vmsg("¥æ©ö¥¢±Ñ¡C");
+	outs(ANSI_COLOR(1;31) "äº¤æ˜“å¤±æ•—ï¼" ANSI_RESET "\n");
+	vmsg("äº¤æ˜“å¤±æ•—ã€‚");
 	return -1;
     }
 
-    outs(ANSI_COLOR(1;33) "¥æ©ö§¹¦¨¡I" ANSI_RESET "\n");
+    outs(ANSI_COLOR(1;33) "äº¤æ˜“å®Œæˆï¼" ANSI_RESET "\n");
 
     // transaction complete.
     if (can_send_mail) {
@@ -497,10 +497,10 @@ give_money_ui(const char *userid)
 
         if (mail_redenvelop( myid, id, m - mtax, fpath) < 0)
 	{
-            outs(ANSI_COLOR(1;31) "¤wÂà¤J¹ï¤è±b¤á¦ı¬õ¥]³U±H°e¥¢±Ñ()¡C"
+            outs(ANSI_COLOR(1;31) "å·²è½‰å…¥å°æ–¹å¸³æˆ¶ä½†ç´…åŒ…è¢‹å¯„é€å¤±æ•—()ã€‚"
                  ANSI_RESET);
 	} else {
-            if (vans("¥æ©ö¤w§¹¦¨¡A­n­×§ï¬õ¥]³U¶Ü¡H[y/N] ") == 'y')
+            if (vans("äº¤æ˜“å·²å®Œæˆï¼Œè¦ä¿®æ”¹ç´…åŒ…è¢‹å—ï¼Ÿ[y/N] ") == 'y')
                 veditfile(fpath);
             log_file(fpath, 0,  alert_trade);
             sendalert(id, ALERT_NEW_MAIL);
@@ -508,11 +508,11 @@ give_money_ui(const char *userid)
     }
 #ifdef USE_RECENTPAY
     move(b_lines-5, 0); clrtobot();
-    outs("\n±z¥i©ó¤U¦C¦ì¸m§ä¨ì³Ìªñªº¥æ©ö°O¿ı:\n"
-            "¥D¿ï³æ => (U)ser­Ó¤H³]©w => (L)MyLogs­Ó¤H°O¿ı => "
-            "(P)RecentPay³Ìªñ¥æ©ö°O¿ı\n");
+    outs("\næ‚¨å¯æ–¼ä¸‹åˆ—ä½ç½®æ‰¾åˆ°æœ€è¿‘çš„äº¤æ˜“è¨˜éŒ„:\n"
+            "ä¸»é¸å–® => (U)serå€‹äººè¨­å®š => (L)MyLogså€‹äººè¨˜éŒ„ => "
+            "(P)RecentPayæœ€è¿‘äº¤æ˜“è¨˜éŒ„\n");
 #endif
-    vmsg("¥æ©ö§¹¦¨¡C");
+    vmsg("äº¤æ˜“å®Œæˆã€‚");
     return 0;
 }
 
@@ -536,20 +536,20 @@ p_sysinfo(void)
     // You have to define your own fancy_load function.
     cpuloadstr = fancy_load(load);
 #else
-    cpuloadstr = (load < 5 ? "¨}¦n" : (load < 20 ? "©|¥i" : "¹L­«"));
+    cpuloadstr = (load < 5 ? "è‰¯å¥½" : (load < 20 ? "å°šå¯" : "éé‡"));
 #endif
 
     clear();
-    showtitle("¨t²Î¸ê°T", BBSNAME);
+    showtitle("ç³»çµ±è³‡è¨Š", BBSNAME);
     move(2, 0);
-    prints("±z²{¦b¦ì©ó " TITLE_COLOR BBSNAME ANSI_RESET " (" MYIP ")\n"
-	   "¨t²Î­t¸ü: %s\n"
-	   "½u¤W¤H¼Æ: %d/%d\n"
+    prints("æ‚¨ç¾åœ¨ä½æ–¼ " TITLE_COLOR BBSNAME ANSI_RESET " (" MYIP ")\n"
+	   "ç³»çµ±è² è¼‰: %s\n"
+	   "ç·šä¸Šäººæ•¸: %d/%d\n"
 #ifdef DETECT_CLIENT
 	   "ClientCode: %8.8X\n"
 #endif
-	   "°_©l®É¶¡: %s\n"
-	   "½sÄ¶®É¶¡: %s\n",
+	   "èµ·å§‹æ™‚é–“: %s\n"
+	   "ç·¨è­¯æ™‚é–“: %s\n",
 	   cpuloadstr, SHM->UTMPnumber,
 #ifdef DYMAX_ACTIVE
 	   // XXX check the related logic in mbbsd.c
@@ -564,7 +564,7 @@ p_sysinfo(void)
            Cdatelite(&start_time),
 	   build_time);
     if (*build_remote) {
-      prints("½sÄ¶ª©¥»: %s %s %s\n", build_remote, build_origin, build_hash);
+      prints("ç·¨è­¯ç‰ˆæœ¬: %s %s %s\n", build_remote, build_origin, build_hash);
     }
 
 #ifdef REPORT_PIAIP_MODULES
@@ -576,7 +576,7 @@ p_sysinfo(void)
 	    "\tpmore (piaip's more) 2007 w/Movie\n"
 #endif
 #ifdef EDITPOST_SMARTMERGE
-	    "\tSmart Merge ­×¤å¦Û°Ê¦X¨Ö\n"
+	    "\tSmart Merge ä¿®æ–‡è‡ªå‹•åˆä½µ\n"
 #endif
 #if defined(USE_PFTERM)
 	    "\t(EXP) pfterm (piaip's flat terminal, Perfect Term)\n"
@@ -593,8 +593,8 @@ p_sysinfo(void)
 	char usage[80];
 	get_memusage(sizeof(usage), usage);
 	getrusage(RUSAGE_SELF, &ru);
-	prints("°O¾ĞÅé¥Î¶q: %s\n", usage);
-	prints("CPU ¥Î¶q:   %ld.%06ldu %ld.%06lds",
+	prints("è¨˜æ†¶é«”ç”¨é‡: %s\n", usage);
+	prints("CPU ç”¨é‡:   %ld.%06ldu %ld.%06lds",
 	       (long int)ru.ru_utime.tv_sec,
 	       (long int)ru.ru_utime.tv_usec,
 	       (long int)ru.ru_stime.tv_sec,
@@ -602,7 +602,7 @@ p_sysinfo(void)
 #ifdef CPULIMIT_PER_DAY
 	prints(" (limit %d secs per day)", CPULIMIT_PER_DAY);
 #endif
-	outs("\n¯S§O°Ñ¼Æ:"
+	outs("\nç‰¹åˆ¥åƒæ•¸:"
 #ifdef CRITICAL_MEMORY
 		" CRITICAL_MEMORY"
 #endif

@@ -26,7 +26,7 @@ typedef struct {
     int     lose;
     int     tie;
     unsigned short rating;
-    unsigned short orig_rating; // ­ì©l rating, ¦]¬°¹CÀ¸¶}©l¥ıºâ¿é¤@³õ, rating ­È´N¶]±¼¤F
+    unsigned short orig_rating; // åŸå§‹ rating, å› ç‚ºéŠæˆ²é–‹å§‹å…ˆç®—è¼¸ä¸€å ´, rating å€¼å°±è·‘æ‰äº†
 } ChessUser;
 
 private typedef struct {
@@ -35,13 +35,13 @@ private typedef struct {
     void *body;
 } ChessHistory;
 
-/*   ´ÑÃşÆ[¾Ô
+/*   æ£‹é¡è§€æˆ°
  *
- * Âù¤H¹ï¾Ô®É¡AÂù¤è³£·|¦³¤@­Ó broadcast_list ªº linked-list¡A¬ö¿ıµÛ¨C¤U¤@
- * ¨B´Ñ¡A¥²¶·±N³o­Ó°T®§¥áµ¹¨º¨Ç¤H¡]sock¡^¡C
- * ¨C·í¤@­ÓÆ[´ÑªÌ¥[¤J¡]Æ[´Ñ¥i¥H±q¬õ¤è©Î¶Â¤èªºÆ[ÂI¶i¦æ¡^¡A¨ä¤¤¤@¤èªº¤U´ÑªÌ
- * ªº broadcast_list ´N·|¦h¤@µ§°O¿ı¡A¤§«á´N·|±N¤Uªº©Î¦¬¨ì¹ï¤è¤Uªº¨C¤@¨B´Ñ
- * ¶Çµ¹ broadcast_list ¤¤©Ò¦³»İ­nªº¤H¡A¹F¨ìÆ[´Ñªº®ÄªG¡C
+ * é›™äººå°æˆ°æ™‚ï¼Œé›™æ–¹éƒ½æœƒæœ‰ä¸€å€‹ broadcast_list çš„ linked-listï¼Œç´€éŒ„è‘—æ¯ä¸‹ä¸€
+ * æ­¥æ£‹ï¼Œå¿…é ˆå°‡é€™å€‹è¨Šæ¯ä¸Ÿçµ¦é‚£äº›äººï¼ˆsockï¼‰ã€‚
+ * æ¯ç•¶ä¸€å€‹è§€æ£‹è€…åŠ å…¥ï¼ˆè§€æ£‹å¯ä»¥å¾ç´…æ–¹æˆ–é»‘æ–¹çš„è§€é»é€²è¡Œï¼‰ï¼Œå…¶ä¸­ä¸€æ–¹çš„ä¸‹æ£‹è€…
+ * çš„ broadcast_list å°±æœƒå¤šä¸€ç­†è¨˜éŒ„ï¼Œä¹‹å¾Œå°±æœƒå°‡ä¸‹çš„æˆ–æ”¶åˆ°å°æ–¹ä¸‹çš„æ¯ä¸€æ­¥æ£‹
+ * å‚³çµ¦ broadcast_list ä¸­æ‰€æœ‰éœ€è¦çš„äººï¼Œé”åˆ°è§€æ£‹çš„æ•ˆæœã€‚
  */
 private typedef struct ChessBroadcastListNode {
     int    sock;
@@ -58,16 +58,16 @@ typedef struct {
     int     limit_time;
     int     free_time;
     enum {
-	CHESS_TIMEMODE_MULTIHAND, /* ­­®É­­¨B */
-	CHESS_TIMEMODE_COUNTING   /* Åª¬í */
+	CHESS_TIMEMODE_MULTIHAND, /* é™æ™‚é™æ­¥ */
+	CHESS_TIMEMODE_COUNTING   /* è®€ç§’ */
     } time_mode;
 } ChessTimeLimit;
 
 typedef enum {
-    CHESS_MODE_VERSUS,   /* ¹ï«³ */
-    CHESS_MODE_WATCH,    /* Æ[´Ñ */
-    CHESS_MODE_PERSONAL, /* ¥´ÃĞ */
-    CHESS_MODE_REPLAY    /* ¬İÃĞ */
+    CHESS_MODE_VERSUS,   /* å°å¥• */
+    CHESS_MODE_WATCH,    /* è§€æ£‹ */
+    CHESS_MODE_PERSONAL, /* æ‰“è­œ */
+    CHESS_MODE_REPLAY    /* çœ‹è­œ */
 } ChessGameMode;
 
 typedef enum {
@@ -86,15 +86,15 @@ typedef struct ChessInfo {
 
     rc_t cursor;
 
-    /* ­p®É¥Î, [0] = mine, [1] = his */
+    /* è¨ˆæ™‚ç”¨, [0] = mine, [1] = his */
     int	    lefttime[2];
-    int     lefthand[2]; /* ­­®É­­¨B®É¥Î, = 0 ªí¬°¦Û¥Ñ®É¶¡©Î«D­­®É­­¨B¼Ò¦¡ */
+    int     lefthand[2]; /* é™æ™‚é™æ­¥æ™‚ç”¨, = 0 è¡¨ç‚ºè‡ªç”±æ™‚é–“æˆ–éé™æ™‚é™æ­¥æ¨¡å¼ */
     const ChessTimeLimit* timelimit;
 
     const ChessGameMode mode;
     const ChessUser user1;
     const ChessUser user2;
-    const char myturn;   /* §Ú¤èÃC¦â */
+    const char myturn;   /* æˆ‘æ–¹é¡è‰² */
 
     char       turn;
     char       pass[2];

@@ -10,10 +10,10 @@
 
 #define CHAR_LOWER(c)  ((c >= 'A' && c <= 'Z') ? c|32 : c)
 /* ----------------------------------------------------- */
-/* ¦r¦êÂà´«ÀË¬d¨ç¼Æ                                      */
+/* å­—ä¸²è½‰æ›æª¢æŸ¥å‡½æ•¸                                      */
 /* ----------------------------------------------------- */
 /**
- * ±N¦r¦ê s Âà¬°¤p¼g¦s¦^ t
+ * å°‡å­—ä¸² s è½‰ç‚ºå°å¯«å­˜å› t
  * @param t allocated char array
  * @param s
  */
@@ -47,7 +47,7 @@ str_case_starts_with(const char *str, const char *prefix) {
 }
 
 /**
- * ²¾°£¦r¦ê buf «áºİ¦h¾lªºªÅ¥Õ¡C
+ * ç§»é™¤å­—ä¸² buf å¾Œç«¯å¤šé¤˜çš„ç©ºç™½ã€‚
  * @param buf
  */
 void
@@ -66,7 +66,7 @@ trim(char *buf)
 }
 
 /**
- * ²¾°£ src ªº '\n' ¨Ã§ï¦¨ '\0'
+ * ç§»é™¤ src çš„ '\n' ä¸¦æ”¹æˆ '\0'
  * @param src
  */
 void chomp(char *src)
@@ -80,7 +80,7 @@ void chomp(char *src)
 }
 
 /* ----------------------------------------------------- */
-/* ANSI ³B²z¨ç¼Æ                                         */
+/* ANSI è™•ç†å‡½æ•¸                                         */
 /* ----------------------------------------------------- */
 int
 strip_blank(char *cbuf, const char *buf)
@@ -132,14 +132,14 @@ static const char EscapeFlag[] = {
     /* F0 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 /**
- * ®Ú¾Ú mode ¨Ó strip ¦r¦ê src¡A¨Ã§âµ²ªG¦s¨ì dst
+ * æ ¹æ“š mode ä¾† strip å­—ä¸² srcï¼Œä¸¦æŠŠçµæœå­˜åˆ° dst
  * @param dst
  * @param src (if NULL then only return length)
  * @param mode enum {STRIP_ALL = 0, ONLY_COLOR, NO_RELOAD};
- *             STRIP_ALL:  ¥ş³¡¦Y±¼
- *             ONLY_COLOR: ¥u¯d¸òÃC¦â¦³Ãöªº (ESC[*m)
- *             NO_RELOAD:  ¥u¯d¤W­±»{ÃÑªº(²¾¦ì+¦â±m)
- * @return strip «áªºªø«×
+ *             STRIP_ALL:  å…¨éƒ¨åƒæ‰
+ *             ONLY_COLOR: åªç•™è·Ÿé¡è‰²æœ‰é—œçš„ (ESC[*m)
+ *             NO_RELOAD:  åªç•™ä¸Šé¢èªè­˜çš„(ç§»ä½+è‰²å½©)
+ * @return strip å¾Œçš„é•·åº¦
  */
 int
 strip_ansi(char *dst, const char *src, enum STRIP_FLAG mode)
@@ -265,7 +265,7 @@ strlen_noansi(const char *s)
 }
 
 /* ----------------------------------------------------- */
-/* DBCS ³B²z¨ç¼Æ                                         */
+/* DBCS è™•ç†å‡½æ•¸                                         */
 /* ----------------------------------------------------- */
 
 void
@@ -299,7 +299,7 @@ strip_nonebig5(unsigned char *str, int maxlen)
 }
 
 /**
- * DBCS_RemoveIntrEscape(buf, len): ¥h°£ DBCS ¤@¦rÂù¦â¦r¡C
+ * DBCS_RemoveIntrEscape(buf, len): å»é™¤ DBCS ä¸€å­—é›™è‰²å­—ã€‚
  * (deprecated)
  */
 int DBCS_RemoveIntrEscape(unsigned char *buf, int *len)
@@ -364,7 +364,7 @@ int DBCS_RemoveIntrEscape(unsigned char *buf, int *len)
 }
 
 /**
- * DBCS_NextStatus(c, prev_status): ¨ú±o c ªº DBCS ª¬ºA
+ * DBCS_NextStatus(c, prev_status): å–å¾— c çš„ DBCS ç‹€æ…‹
  */
 int
 DBCS_NextStatus(char c, int prev_status) {
@@ -376,8 +376,8 @@ DBCS_NextStatus(char c, int prev_status) {
 }
 
 /**
- * DBCS_Status(dbcstr, pos): ¨ú±o¦r¦ê¤¤«ü©w¦ì¸mªº DBCS ª¬ºA¡C
- * ­Y pos ¶W¹Lµ²§À«h¶Ç¦^³Ì«á¤@­Ó¦r¤¸ªº DBCS status
+ * DBCS_Status(dbcstr, pos): å–å¾—å­—ä¸²ä¸­æŒ‡å®šä½ç½®çš„ DBCS ç‹€æ…‹ã€‚
+ * è‹¥ pos è¶…éçµå°¾å‰‡å‚³å›æœ€å¾Œä¸€å€‹å­—å…ƒçš„ DBCS status
  */
 int DBCS_Status(const char *dbcstr, int pos)
 {
@@ -402,7 +402,7 @@ void DBCS_safe_trim(char *dbcstr)
 }
 
 /**
- * DBCS_strcasestr(pool, ptr): ¦b¦r¦ê pool ¤¤´M§ä ptr (¥u©¿²¤­^¤å¤j¤p¼g)
+ * DBCS_strcasestr(pool, ptr): åœ¨å­—ä¸² pool ä¸­å°‹æ‰¾ ptr (åªå¿½ç•¥è‹±æ–‡å¤§å°å¯«)
  */
 char *
 DBCS_strcasestr(const char* pool, const char *ptr)
@@ -453,7 +453,7 @@ DBCS_strcasestr(const char* pool, const char *ptr)
 }
 
 /*
- * DBCS_strncasecmp(s1, s2, len): ¤ñ¸û s1/s2 (¥u©¿²¤­^¤å¤j¤p¼g)
+ * DBCS_strncasecmp(s1, s2, len): æ¯”è¼ƒ s1/s2 (åªå¿½ç•¥è‹±æ–‡å¤§å°å¯«)
  */
 int
 DBCS_strncasecmp(const char *s1, const char *s2, size_t len) {
@@ -480,7 +480,7 @@ DBCS_StringHash(const char *s)
 }
 
 /* ----------------------------------------------------- */
-/* ¦r¦êÀË¬d¨ç¼Æ¡G­^¤å¡B¼Æ¦r¡BÀÉ¦W¡BE-mail address        */
+/* å­—ä¸²æª¢æŸ¥å‡½æ•¸ï¼šè‹±æ–‡ã€æ•¸å­—ã€æª”åã€E-mail address        */
 /* ----------------------------------------------------- */
 
 int
@@ -492,10 +492,10 @@ invalid_pname(const char *str)
     while (*p1) {
 	if (!(p2 = strchr(p1, '/')))
 	    p2 = str + strlen(str);
-	if (p1 + 1 > p2 || p1 + strspn(p1, ".") == p2) /* ¤£¤¹³\¥Î / ¶}ÀY, ©Î¬O // ¤§¶¡¥u¦³ . */
+	if (p1 + 1 > p2 || p1 + strspn(p1, ".") == p2) /* ä¸å…è¨±ç”¨ / é–‹é ­, æˆ–æ˜¯ // ä¹‹é–“åªæœ‰ . */
 	    return 1;
 	for (p3 = p1; p3 < p2; p3++)
-	    if (!isalnum(*p3) && !strchr("@[]-._", *p3)) /* ¥u¤¹³\ alnum ©Î³o¨Ç²Å¸¹ */
+	    if (!isalnum(*p3) && !strchr("@[]-._", *p3)) /* åªå…è¨± alnum æˆ–é€™äº›ç¬¦è™Ÿ */
 		return 1;
 	p1 = p2 + (*p2 ? 1 : 0);
     }
@@ -504,7 +504,7 @@ invalid_pname(const char *str)
 
 /*
  * return	1	if /^[0-9]+$/
- * 		0	else, §tªÅ¦r¦ê
+ * 		0	else, å«ç©ºå­—ä¸²
  */
 int is_number(const char *p)
 {
@@ -620,15 +620,15 @@ static inline
 int
 mmdecode(unsigned char *src, unsigned char encode, unsigned char *dst)
 {
-    /* Thor.980901: src©Mdst¥i¬Û¦P, ¦ısrc ¤@©w¦³?©Î\0µ²§ô */
-    /* Thor.980901: ª`·N, decode¥Xªºµ²ªG¤£·|¦Û¤v¥[¤W \0 */
+    /* Thor.980901: srcå’Œdstå¯ç›¸åŒ, ä½†src ä¸€å®šæœ‰?æˆ–\0çµæŸ */
+    /* Thor.980901: æ³¨æ„, decodeå‡ºçš„çµæœä¸æœƒè‡ªå·±åŠ ä¸Š \0 */
     unsigned char  *t = dst;
     int             pattern = 0, bits = 0;
     encode |= 0x20;		/* Thor: to lower */
     switch (encode) {
     case 'q':			/* Thor: quoted-printable */
 	while (*src && *src != '?') {	/* Thor: delimiter *//* Thor.980901:
-					 * 0 ºâ¬O delimiter */
+					 * 0 ç®—æ˜¯ delimiter */
 	    if (*src == '=') {
 		int             x = *++src, y = x ? *++src : 0;
 		if (isreturn(x))
@@ -649,7 +649,7 @@ mmdecode(unsigned char *src, unsigned char encode, unsigned char *dst)
     case 'b':			/* Thor: base 64 */
 	while (*src && *src != '?') {	/* Thor: delimiter */
 	    /*
-	     * Thor.980901: 0¤]ºâ *//* Thor: pattern & bits are cleared
+	     * Thor.980901: 0ä¹Ÿç®— *//* Thor: pattern & bits are cleared
 	     * outside
 	     */
 	    int             x;
@@ -683,10 +683,10 @@ str_iconv(
 	  size_t dstlen)
 {				/* destination string length */
     /*
-     * ³o­Ó¨ç¦¡·|±N¤@­Ó¦r¦ê (src) ±q charset=fromcode Âà¦¨ charset=tocode,
-     * srclen ¬O src ªºªø«×, dst ¬O¿é¥Xªºbuffer, dstlen «h«ü©w¤F dst ªº¤j¤p,
-     * ³Ì«á·|¸É '\0', ©Ò¥H­n¯d¤@­Óbyteµ¹'\0'. ¦pªG¹J¨ì src ¤¤¦³«D¦r¶°ªº¦r,
-     * ©Î¬O src ¤¤¦³¥¼§¹¾ãªº byte, ³£·|¬å±¼.
+     * é€™å€‹å‡½å¼æœƒå°‡ä¸€å€‹å­—ä¸² (src) å¾ charset=fromcode è½‰æˆ charset=tocode,
+     * srclen æ˜¯ src çš„é•·åº¦, dst æ˜¯è¼¸å‡ºçš„buffer, dstlen å‰‡æŒ‡å®šäº† dst çš„å¤§å°,
+     * æœ€å¾Œæœƒè£œ '\0', æ‰€ä»¥è¦ç•™ä¸€å€‹byteçµ¦'\0'. å¦‚æœé‡åˆ° src ä¸­æœ‰éå­—é›†çš„å­—,
+     * æˆ–æ˜¯ src ä¸­æœ‰æœªå®Œæ•´çš„ byte, éƒ½æœƒç æ‰.
      */
     iconv_t         iconv_descriptor;
     size_t          iconv_ret, dstlen_old;
@@ -704,7 +704,7 @@ str_iconv(
     }
     /* Start translation */
     while (srclen > 0 && dstlen > 0) {
-	iconv_ret = iconv(iconv_descriptor, &src, &srclen,
+	iconv_ret = iconv(iconv_descriptor, (char **)&src, &srclen,
 			  &dst, &dstlen);
 	if (iconv_ret != 0) {
 	    switch (errno) {
@@ -800,7 +800,7 @@ str_decode_M3(char *str)
 #endif
 			while (*tmp && *tmp++ != '?');	/* Thor: no ? end,
 							 * mmdecode -1 */
-			/* Thor.980901: 0 ¤]ºâ decode µ²§ô */
+			/* Thor.980901: 0 ä¹Ÿç®— decode çµæŸ */
 			if (*tmp == '=')
 			    tmp++;
 			src = tmp;	/* Thor: decode over */

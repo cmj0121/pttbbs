@@ -59,7 +59,7 @@ static const ChessConstants gomo_constants = {
     BRDSIZ,
     BRDSIZ,
     0,
-    "§≠§l¥—",
+    "‰∫îÂ≠êÊ£ã",
     "photo_fivechess",
 #ifdef BN_FIVECHESS_LOG
     BN_FIVECHESS_LOG,
@@ -67,7 +67,7 @@ static const ChessConstants gomo_constants = {
     NULL,
 #endif
     { ANSI_COLOR(37;43), ANSI_COLOR(30;43) },
-    { "•’¥—", "∂¬¥—, ¶≥∏T§‚" },
+    { "ÁôΩÊ£ã", "ÈªëÊ£ã, ÊúâÁ¶ÅÊâã" },
 };
 
 /* pattern and advance map */
@@ -78,9 +78,9 @@ intrevcmp(const void *a, const void *b)
     return (*(int *)b - *(int *)a);
 }
 
-// •H (x,y) ¨∞∞_¬I, §Ë¶V (dx,dy), ∂«¶^•H bit ™Ì•‹¨€æF≠˛¥XÆÊ¶≥§l
-// ¶p 10111 ™Ì•‹∏”§Ë¶V¨€æF 1,2,3 ¶≥§l, 4 ™≈¶a
-// ≥Ã∞™¶Ï 1 ™Ì•‹πÔ§Ë™∫§l, ©Œ¨O¿
+// ‰ª• (x,y) ÁÇ∫Ëµ∑Èªû, ÊñπÂêë (dx,dy), ÂÇ≥Âõû‰ª• bit Ë°®Á§∫Áõ∏ÈÑ∞Âì™ÂπæÊ†ºÊúâÂ≠ê
+// Â¶Ç 10111 Ë°®Á§∫Ë©≤ÊñπÂêëÁõ∏ÈÑ∞ 1,2,3 ÊúâÂ≠ê, 4 Á©∫Âú∞
+// ÊúÄÈ´ò‰Ωç 1 Ë°®Á§∫Â∞çÊñπÁöÑÂ≠ê, ÊàñÊòØÁâÜ
 /* x,y: 0..BRDSIZ-1 ; color: CBLACK,CWHITE ; dx,dy: -1,0,+1 */
 static int
 gomo_getindex(board_t ku, int x, int y, int color, int dx, int dy)
@@ -172,8 +172,8 @@ dirchk(board_t ku, int x, int y, int color, int limit, int dx, int dy)
     return style;
 }
 
-/* ®“•~=F ø˘ª~=E ¶≥§l=D ≥s§≠=C ≥s§ª=B ¬˘•|=A •|•|=9 §T§T=8 */
-/* •|§T=7 ¨°•|=6 ¬_•|=5 ¶∫•|=4 ¨°§T=3 ¬_§T=2 ´OØd=1 µLÆƒ=0 */
+/* ‰æãÂ§ñ=F ÈåØË™§=E ÊúâÂ≠ê=D ÈÄ£‰∫î=C ÈÄ£ÂÖ≠=B ÈõôÂõõ=A ÂõõÂõõ=9 ‰∏â‰∏â=8 */
+/* Âõõ‰∏â=7 Ê¥ªÂõõ=6 Êñ∑Âõõ=5 Ê≠ªÂõõ=4 Ê¥ª‰∏â=3 Êñ∑‰∏â=2 ‰øùÁïô=1 ÁÑ°Êïà=0 */
 
 /* x,y: 0..BRDSIZ-1 ; color: CBLACK,CWHITE ; limit: 1,0 */
 static int
@@ -211,17 +211,17 @@ static char*
 gomo_move_warn(int style, char buf[])
 {
     char *xtype[] = {
-	ANSI_COLOR(1;31) "∏ı§T" ANSI_RESET,
-	ANSI_COLOR(1;31) "¨°§T" ANSI_RESET,
-	ANSI_COLOR(1;31) "¶∫•|" ANSI_RESET,
-	ANSI_COLOR(1;31) "∏ı•|" ANSI_RESET,
-	ANSI_COLOR(1;31) "¨°•|" ANSI_RESET,
-	ANSI_COLOR(1;31) "•|§T" ANSI_RESET,
-	ANSI_COLOR(1;31) "¬˘§T" ANSI_RESET,
-	ANSI_COLOR(1;31) "¬˘•|" ANSI_RESET,
-	ANSI_COLOR(1;31) "¬˘•|" ANSI_RESET,
-	ANSI_COLOR(1;31) "≥s§ª" ANSI_RESET,
-	ANSI_COLOR(1;31) "≥s§≠" ANSI_RESET
+	ANSI_COLOR(1;31) "Ë∑≥‰∏â" ANSI_RESET,
+	ANSI_COLOR(1;31) "Ê¥ª‰∏â" ANSI_RESET,
+	ANSI_COLOR(1;31) "Ê≠ªÂõõ" ANSI_RESET,
+	ANSI_COLOR(1;31) "Ë∑≥Âõõ" ANSI_RESET,
+	ANSI_COLOR(1;31) "Ê¥ªÂõõ" ANSI_RESET,
+	ANSI_COLOR(1;31) "Âõõ‰∏â" ANSI_RESET,
+	ANSI_COLOR(1;31) "Èõô‰∏â" ANSI_RESET,
+	ANSI_COLOR(1;31) "ÈõôÂõõ" ANSI_RESET,
+	ANSI_COLOR(1;31) "ÈõôÂõõ" ANSI_RESET,
+	ANSI_COLOR(1;31) "ÈÄ£ÂÖ≠" ANSI_RESET,
+	ANSI_COLOR(1;31) "ÈÄ£‰∫î" ANSI_RESET
     };
     if (style > 1 && style < 13)
 	return strcpy(buf, xtype[style - 2]);
@@ -232,8 +232,8 @@ gomo_move_warn(int style, char buf[])
 static char*
 gomo_getstep(const gomo_step_t* step, char buf[])
 {
-    static const char* const ColName = "¢œ¢–¢—¢“¢”¢‘¢’¢÷¢◊¢ÿ¢Ÿ¢⁄¢€¢‹";
-    static const char* const RawName = "151413121110¢∏¢∑¢∂¢µ¢¥¢≥¢≤¢±¢∞";
+    static const char* const ColName = "Ôº°Ôº¢Ôº£Ôº§Ôº•Ôº¶ÔºßÔº®Ôº©Ôº™Ôº´Ôº¨Ôº≠ÔºÆ";
+    static const char* const RawName = "151413121110ÔºôÔºòÔºóÔºñÔºïÔºîÔºìÔºíÔºë";
     static const int ansi_length     = sizeof(ANSI_COLOR(30;43)) - 1;
 
     strcpy(buf, turn_color[step->color]);
@@ -274,10 +274,10 @@ static void
 gomo_drawline(const ChessInfo* info, int line)
 {
     static const char* const BoardPic[] = {
-	"˘›", "˘Á", "˘Á", "˘ﬂ",
-	"˘Ú", "¢q", "¢q", "˘Ù",
-	"˘Ú", "¢q", "°œ", "˘Ù",
-	"˘„", "˘Ì", "˘Ì", "˘Â",
+	"‚ïî", "‚ï§", "‚ï§", "‚ïó",
+	"‚ïü", "‚îº", "‚îº", "‚ï¢",
+	"‚ïü", "‚îº", "Ôºã", "‚ï¢",
+	"‚ïö", "‚ïß", "‚ïß", "‚ïù",
     };
     static const int BoardPicIndex[] =
     { 0, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 3 };
@@ -285,10 +285,10 @@ gomo_drawline(const ChessInfo* info, int line)
     board_p board = (board_p) info->board;
 
     if (line == 0) {
-	prints(ANSI_COLOR(1;46) "  §≠§l¥—πÔæ‘  " ANSI_COLOR(45)
+	prints(ANSI_COLOR(1;46) "  ‰∫îÂ≠êÊ£ãÂ∞çÊà∞  " ANSI_COLOR(45)
 		"%30s VS %-20s%10s" ANSI_RESET,
 	       info->user1.userid, info->user2.userid,
-	       info->mode == CHESS_MODE_WATCH ? "[∆[¥—º“¶°]" : "");
+	       info->mode == CHESS_MODE_WATCH ? "[ËßÄÊ£ãÊ®°Âºè]" : "");
     } else if (line == 1) {
 	outs("    A B C D E F G H I J K L M N");
     } else if (line >= 2 && line <= 16) {
@@ -415,7 +415,7 @@ gomo_genlog(ChessInfo* info, FILE* fp, ChessGameResult result GCC_UNUSED)
     vcur_restore(cur);
 
     fprintf(fp, "\n");
-    fprintf(fp, "´ˆ z •i∂i§J•¥√–º“¶°\n");
+    fprintf(fp, "Êåâ z ÂèØÈÄ≤ÂÖ•ÊâìË≠úÊ®°Âºè\n");
     fprintf(fp, "\n");
 
     fprintf(fp, "<gomokulog>\nblack:%s\nwhite:%s\n",
@@ -458,7 +458,7 @@ static int gomo_loadlog(FILE *fp, ChessInfo *info)
 	    if (getuser(buf + 6, &rec))
 		gomo_init_user_userec(&rec, user);
 	} else if (buf[0] == '[') {
-	    /* "[ 1]°¥ ==> H8    [ 2]°≥ ==> H9"  */
+	    /* "[ 1]‚óè ==> H8    [ 2]‚óã ==> H9"  */
 	    gomo_step_t step = { .type = CHESS_STEP_NORMAL };
 	    int         c, r;
 	    const char *p = buf;
@@ -530,7 +530,7 @@ gomoku(int s, ChessGameMode mode)
 int
 gomoku_main(void)
 {
-    return ChessStartGame('f', SIG_GOMO, "§≠§l¥—");
+    return ChessStartGame('f', SIG_GOMO, "‰∫îÂ≠êÊ£ã");
 }
 
 int
@@ -543,7 +543,7 @@ gomoku_personal(void)
 int
 gomoku_watch(void)
 {
-    return ChessWatchGame(&gomoku, M_FIVE, "§≠§l¥—");
+    return ChessWatchGame(&gomoku, M_FIVE, "‰∫îÂ≠êÊ£ã");
 }
 
 ChessInfo*

@@ -29,7 +29,7 @@
 // --------------------------------------------------------------------------
 
 // TODO
-// 1. [done] unify talk/chat caption (eg, ²á¤Ñ/½Í¤Ñ«Ç¡A or ¥æ½Í/²á¤Ñ«Ç)
+// 1. [done] unify talk/chat caption (eg, èŠå¤©/è«‡å¤©å®¤ï¼Œ or äº¤è«‡/èŠå¤©å®¤)
 // 2. [done] move anti-flood and other static variables into context...
 // 3. [talk done] merge all cmd processor into peek_cmd(CCW_REMOTE)
 // 4. log recovery on crash?
@@ -137,7 +137,7 @@ ccw_footer(CCW_CTX *ctx)
         return;
     }
 
-    vs_footer(" CCW ", " (PgUp/PgDn)¦^ÅU°T®§°O¿ı\t(Ctrl-C)Â÷¶} ");
+    vs_footer(" CCW ", " (PgUp/PgDn)å›é¡§è¨Šæ¯è¨˜éŒ„\t(Ctrl-C)é›¢é–‹ ");
 }
 
 CCW_PROTO void
@@ -152,13 +152,13 @@ ccw_separators(CCW_CTX *ctx)
     }
 
     move(CCW_INIT_LINE-1, 0);
-    vpad(t_columns-2, "¢w");
+    vpad(t_columns-2, "â”€");
     outc('\n');
 
     i = ctx->sep_msg_width ? ctx->sep_msg_width :
         ctx->sep_msg ? strlen(ctx->sep_msg) : 0;
     move(CCW_STOP_LINE, 0);
-    vpad(t_columns - 2 - i, "¢w");
+    vpad(t_columns - 2 - i, "â”€");
     if (i) outs(ctx->sep_msg);
     outc('\n');
 }
@@ -242,7 +242,7 @@ ccw_print_line(CCW_CTX *ctx, const char *buf, int local)
     }
 
     outs(buf);
-    outs(ANSI_RESET "\n¡÷");
+    outs(ANSI_RESET "\nâ†’");
 }
 
 CCW_PROTO void
@@ -371,7 +371,7 @@ ccw_vgetcb_peek(int key, VGET_RUNTIME *prt GCC_UNUSED, void *instance)
                 VREFSCR scr = vscr_save();
                 vkey_detach();
 
-                if (vans("½T©w­nÂ÷¶}¶Ü? [y/N]: ") == 'y')
+                if (vans("ç¢ºå®šè¦é›¢é–‹å—? [y/N]: ") == 'y')
                     ctx->abort = YEA;
 
                 vkey_attach(ctx->fd);
@@ -403,7 +403,7 @@ ccw_process(CCW_CTX *ctx)
 
 #ifdef DEBUG
     ccw_print_line(ctx, ANSI_COLOR(1;30)
-            "¡» Powered by piaip's Common Chat Window" ANSI_RESET,
+            "â—† Powered by piaip's Common Chat Window" ANSI_RESET,
             CCW_LOCAL_MSG);
 #endif
 #ifdef EXP_CCW_MOTD
@@ -456,9 +456,9 @@ ccw_process(CCW_CTX *ctx)
 // Talk / Chat Adaptors
 
 #ifndef CCW_CAP_TALK
-#define CCW_CAP_TALK        "¥æ½Í"
-#define CCW_CAP_CHAT        "²á¤Ñ«Ç"
-#define CCW_CAP_CHATROOM    "²á¤Ñ«Ç"
+#define CCW_CAP_TALK        "äº¤è«‡"
+#define CCW_CAP_CHAT        "èŠå¤©å®¤"
+#define CCW_CAP_CHATROOM    "èŠå¤©å®¤"
 #endif
 
 CCW_PROTO int
@@ -481,8 +481,8 @@ ccw_talkchat_close_log(CCW_CTX *ctx, int force_decide, int is_chat)
     while (1) {
         char c;
         getdata(b_lines - 1, 0,
-                force_decide ? "²M°£(C) ²¾¦Ü³Æ§Ñ¿ı(M)? [c/m]: " :
-                               "²M°£(C) ²¾¦Ü³Æ§Ñ¿ı(M)? [C/m]",
+                force_decide ? "æ¸…é™¤(C) ç§»è‡³å‚™å¿˜éŒ„(M)? [c/m]: " :
+                               "æ¸…é™¤(C) ç§»è‡³å‚™å¿˜éŒ„(M)? [C/m]",
                 ans, sizeof(ans), LCECHO);
 
         // decide default answer
@@ -499,20 +499,20 @@ ccw_talkchat_close_log(CCW_CTX *ctx, int force_decide, int is_chat)
         {
             char subj[STRLEN];
             if (is_chat)
-                snprintf(subj, sizeof(subj), "·|Ä³°O¿ı");
+                snprintf(subj, sizeof(subj), "æœƒè­°è¨˜éŒ„");
             else
-                snprintf(subj, sizeof(subj), "¹ï¸Ü°O¿ı (%s)", ctx->remote_id);
+                snprintf(subj, sizeof(subj), "å°è©±è¨˜éŒ„ (%s)", ctx->remote_id);
 
-            if (mail_log2id(cuser.userid, subj, fpath, "[³Æ.§Ñ.¿ı]", 0, 1) < 0)
-                vmsg("¿ù»~: ³Æ§Ñ¿ıÀx¦s¥¢±Ñ¡C");
+            if (mail_log2id(cuser.userid, subj, fpath, "[å‚™.å¿˜.éŒ„]", 0, 1) < 0)
+                vmsg("éŒ¯èª¤: å‚™å¿˜éŒ„å„²å­˜å¤±æ•—ã€‚");
             break;
         }
 
         // force user to input correct answer...
         move(b_lines-2, 0); clrtobot();
-        prints(ANSI_COLOR(0;1;3%d) "½Ğ¥¿½T¿é¤J c ©Î m ªº«ü¥O¡C" ANSI_RESET,
+        prints(ANSI_COLOR(0;1;3%d) "è«‹æ­£ç¢ºè¼¸å…¥ c æˆ– m çš„æŒ‡ä»¤ã€‚" ANSI_RESET,
                 (int)((now % 7)+1));
-        if (c == 0) outs("¬°Á×§K»~«ö©Ò¥H¥u«ö ENTER ¬O¤£¦æªº¡C");
+        if (c == 0) outs("ç‚ºé¿å…èª¤æŒ‰æ‰€ä»¥åªæŒ‰ ENTER æ˜¯ä¸è¡Œçš„ã€‚");
     }
     unlink(fpath);
     return 1;
@@ -575,15 +575,15 @@ ccw_talk_end_session(CCW_CTX *ctx)
 CCW_PROTO void
 ccw_talk_header(CCW_CTX *ctx)
 {
-    vs_hdr2barf(" ¡i" CCW_CAP_TALK "¡j \t %s",
+    vs_hdr2barf(" ã€" CCW_CAP_TALK "ã€‘ \t %s",
             ctx->remote_id);
 }
 
 CCW_PROTO void
 ccw_talk_footer(CCW_CTX *ctx GCC_UNUSED)
 {
-    vs_footer(" ¡i" CCW_CAP_TALK "¡j ",
-            " (PgUp/PgDn)¦^ÅU°T®§°O¿ı\t(Ctrl-C)Â÷¶} ");
+    vs_footer(" ã€" CCW_CAP_TALK "ã€‘ ",
+            " (PgUp/PgDn)å›é¡§è¨Šæ¯è¨˜éŒ„\t(Ctrl-C)é›¢é–‹ ");
 }
 
 CCW_PROTO int
@@ -604,9 +604,9 @@ ccw_talk_peek_cmd(CCW_CTX *ctx, const char *buf, int local)
         return 0;
     if (ccw_partial_match(buf, CCW_TALK_CMD_HELP))
     {
-        ccw_print_line(ctx, "[»¡©ú] ¥i¿é¤J "
-                CCW_TALK_CMD_PREFIX_STR CCW_TALK_CMD_CLEAR " ²M°£µe­±©Î "
-                CCW_TALK_CMD_PREFIX_STR CCW_TALK_CMD_BYE " Â÷¶}¡C",
+        ccw_print_line(ctx, "[èªªæ˜] å¯è¼¸å…¥ "
+                CCW_TALK_CMD_PREFIX_STR CCW_TALK_CMD_CLEAR " æ¸…é™¤ç•«é¢æˆ– "
+                CCW_TALK_CMD_PREFIX_STR CCW_TALK_CMD_BYE " é›¢é–‹ã€‚",
                 CCW_LOCAL_MSG);
         return 1;
     }
@@ -670,7 +670,7 @@ ccw_talk(int fd, int destuid)
         .MAX_INPUT_LEN  = STRLEN - IDLEN - 5,    // 5 for ": " and more
         .remote_id      = remote_id,
         .local_id       = local_id,
-        .sep_msg        = " /c ²M°£µe­± /b Â÷¶} ",
+        .sep_msg        = " /c æ¸…é™¤ç•«é¢ /b é›¢é–‹ ",
 
         .header     = ccw_talk_header,
         .footer     = ccw_talk_footer,
@@ -695,7 +695,7 @@ ccw_talk(int fd, int destuid)
     setuserfile(fpath, "talk_XXXXXX");
     ctx.log = fdopen(mkstemp(fpath), "w");
     assert(ctx.log);
-    fprintf(ctx.log, "[%s] »P %s " CCW_CAP_TALK ":\n", Cdatelite(&now), ctx.remote_id);
+    fprintf(ctx.log, "[%s] èˆ‡ %s " CCW_CAP_TALK ":\n", Cdatelite(&now), ctx.remote_id);
 
     // main processor
     vkey_attach(fd);
@@ -749,7 +749,7 @@ ccw_chat_check_newmail(CCW_CTX *ctx)
         if (!ext->newmail)
         {
             // no need to log this...?
-            ccw_print_line(ctx, "¡» ±z¦³¥¼Åªªº·s«H¥ó¡C", CCW_LOCAL_MSG);
+            ccw_print_line(ctx, "â—† æ‚¨æœ‰æœªè®€çš„æ–°ä¿¡ä»¶ã€‚", CCW_LOCAL_MSG);
             ext->newmail = 1;
         }
     }
@@ -797,7 +797,7 @@ ccw_chat_end_session(CCW_CTX *ctx)
 CCW_PROTO void
 ccw_chat_header(CCW_CTX *ctx)
 {
-    vs_hdr2barf(" " CCW_CAP_CHATROOM " [%s] \t ¸ÜÃD: %s",
+    vs_hdr2barf(" " CCW_CAP_CHATROOM " [%s] \t è©±é¡Œ: %s",
             ctx->remote_id, ccw_chat_get_ext(ctx)->topic);
 }
 
@@ -820,14 +820,14 @@ ccw_chat_footer(CCW_CTX *ctx)
     }
 
     // draw real footer
-    vs_footer("¡i" CCW_CAP_CHAT "¡j", " (PgUp/PgDn)¦^ÅU" CCW_CAP_CHAT "°O¿ı "
-            "(Ctrl-Z)§Ö³t¤Á´«\t(Ctrl-C)Â÷¶}" CCW_CAP_CHAT);
+    vs_footer("ã€" CCW_CAP_CHAT "ã€‘", " (PgUp/PgDn)å›é¡§" CCW_CAP_CHAT "è¨˜éŒ„ "
+            "(Ctrl-Z)å¿«é€Ÿåˆ‡æ›\t(Ctrl-C)é›¢é–‹" CCW_CAP_CHAT);
 }
 
 CCW_PROTO void
 ccw_chat_prompt(CCW_CTX *ctx)
 {
-    prints("%-*s¡n", CHAT_ID_LEN, ctx->local_id);
+    prints("%-*sã€‹", CHAT_ID_LEN, ctx->local_id);
 }
 
 #ifdef EXP_CHAT_HIGHLIGHTS
@@ -915,7 +915,7 @@ ccw_chat_print_line(CCW_CTX *ctx, const char *buf, int local)
     outs(buf);
 #endif // !EXP_CHAT_HIGHLIGHTS
     assert(local != CCW_LOCAL);
-    outs(ANSI_RESET "\n¡÷");
+    outs(ANSI_RESET "\nâ†’");
 }
 
 CCW_PROTO void
@@ -1008,10 +1008,10 @@ ccw_chat_anti_flood(CCW_CTX *ctx)
     syncnow();
     if (now - ext->lasttime < 3 )
     {
-        // 3 ¬í¤º¬~¥b­±¬O¤£¦æªº ((25-5)/2)
+        // 3 ç§’å…§æ´—åŠé¢æ˜¯ä¸è¡Œçš„ ((25-5)/2)
         if( ++ext->flood > 10 )
         {
-            const char *alert_msg = "½Ğ¤Å¤j¶q°Å¶K©Î³y¦¨¬~ªO­±ªº®ÄªG¡C";
+            const char *alert_msg = "è«‹å‹¿å¤§é‡å‰ªè²¼æˆ–é€ æˆæ´—æ¿é¢çš„æ•ˆæœã€‚";
             move(b_lines, 0); clrtoeol(); bell();
             outs(alert_msg);
             doupdate();
@@ -1049,32 +1049,32 @@ ccw_chat_peek_cmd(CCW_CTX *ctx, const char *buf, int local GCC_UNUSED)
     if (ccw_partial_match(buf, "help"))
     {
         static const char * const hlp_op[] = {
-            "[/f]lag [+-][ls]", "³]©wÂê©w¡B¯µ±Kª¬ºA",
-            "[/i]nvite <id>", "ÁÜ½Ğ <id> ¥[¤J" CCW_CAP_CHATROOM,
-            "[/o]perator <id>", "´£ª@©Î¸Ñ°£ <id> ªººŞ²z­û(op)Åv­­",
-            "[/t]opic <text>", "´«­Ó¸ÜÃD",
-            " /kick <id>", "±N <id> ½ğ¥X" CCW_CAP_CHATROOM,
-            " /wall", "¼s¼½ (¯¸ªø±M¥Î)",
-            " /ban <userid>", "©Úµ´ <userid> ¦A¦¸¶i¤J¦¹" CCW_CAP_CHATROOM " (¥[¤J¶Â¦W³æ)",
-            " /unban <userid>", "§â <userid> ²¾¥X¶Â¦W³æ",
+            "[/f]lag [+-][ls]", "è¨­å®šé–å®šã€ç§˜å¯†ç‹€æ…‹",
+            "[/i]nvite <id>", "é‚€è«‹ <id> åŠ å…¥" CCW_CAP_CHATROOM,
+            "[/o]perator <id>", "ææ˜‡æˆ–è§£é™¤ <id> çš„ç®¡ç†å“¡(op)æ¬Šé™",
+            "[/t]opic <text>", "æ›å€‹è©±é¡Œ",
+            " /kick <id>", "å°‡ <id> è¸¢å‡º" CCW_CAP_CHATROOM,
+            " /wall", "å»£æ’­ (ç«™é•·å°ˆç”¨)",
+            " /ban <userid>", "æ‹’çµ• <userid> å†æ¬¡é€²å…¥æ­¤" CCW_CAP_CHATROOM " (åŠ å…¥é»‘åå–®)",
+            " /unban <userid>", "æŠŠ <userid> ç§»å‡ºé»‘åå–®",
             NULL,
         }, * const hlp[] = {
-            " /help op", CCW_CAP_CHAT "ºŞ²z­û±M¥Î«ü¥O",
-            "[//]help", "MUD-like ªÀ¥æ°Êµü",
-            "[/a]ct <msg>", "°µ¤@­Ó°Ê§@",
-            "[/b]ye [msg]", "¹D§O",
-            "[/c]lear", "²M°£¿Ã¹õ",
-            "[/j]oin <room>", "«Ø¥ß©Î¥[¤J" CCW_CAP_CHATROOM,
-            "[/l]ist [room]", "¦C¥X" CCW_CAP_CHATROOM "¨Ï¥ÎªÌ",
-            "[/m]sg <id> <msg>", "¸ò <id> »¡®¨®¨¸Ü",
-            "[/n]ick <id>", "±N¼ÊºÙ´«¦¨ <id>",
-            "[/p]ager", "¤Á´«©I¥s¾¹",
-            "[/q]uery <id>", "¬d¸ß¨Ï¥ÎªÌ <id>",
-            "[/r]oom ", "¦C¥X¤@¯ë" CCW_CAP_CHATROOM,
-            "[/w]ho", "¦C¥X¥»" CCW_CAP_CHATROOM "¨Ï¥ÎªÌ",
-            " /whoin <room>", "¦C¥X" CCW_CAP_CHAT " <room> ªº¨Ï¥ÎªÌ",
-            " /ignore <userid>", "©¿²¤«ü©w¨Ï¥ÎªÌªº°T®§",
-            " /unignore <userid>", "°±¤î©¿²¤«ü©w¨Ï¥ÎªÌªº°T®§",
+            " /help op", CCW_CAP_CHAT "ç®¡ç†å“¡å°ˆç”¨æŒ‡ä»¤",
+            "[//]help", "MUD-like ç¤¾äº¤å‹•è©",
+            "[/a]ct <msg>", "åšä¸€å€‹å‹•ä½œ",
+            "[/b]ye [msg]", "é“åˆ¥",
+            "[/c]lear", "æ¸…é™¤è¢å¹•",
+            "[/j]oin <room>", "å»ºç«‹æˆ–åŠ å…¥" CCW_CAP_CHATROOM,
+            "[/l]ist [room]", "åˆ—å‡º" CCW_CAP_CHATROOM "ä½¿ç”¨è€…",
+            "[/m]sg <id> <msg>", "è·Ÿ <id> èªªæ‚„æ‚„è©±",
+            "[/n]ick <id>", "å°‡æš±ç¨±æ›æˆ <id>",
+            "[/p]ager", "åˆ‡æ›å‘¼å«å™¨",
+            "[/q]uery <id>", "æŸ¥è©¢ä½¿ç”¨è€… <id>",
+            "[/r]oom ", "åˆ—å‡ºä¸€èˆ¬" CCW_CAP_CHATROOM,
+            "[/w]ho", "åˆ—å‡ºæœ¬" CCW_CAP_CHATROOM "ä½¿ç”¨è€…",
+            " /whoin <room>", "åˆ—å‡º" CCW_CAP_CHAT " <room> çš„ä½¿ç”¨è€…",
+            " /ignore <userid>", "å¿½ç•¥æŒ‡å®šä½¿ç”¨è€…çš„è¨Šæ¯",
+            " /unignore <userid>", "åœæ­¢å¿½ç•¥æŒ‡å®šä½¿ç”¨è€…çš„è¨Šæ¯",
             NULL,
         };
 
@@ -1084,7 +1084,7 @@ ccw_chat_peek_cmd(CCW_CTX *ctx, const char *buf, int local GCC_UNUSED)
         if (strcasestr(buf, " op"))
         {
             p = hlp_op;
-            ccw_print_line(ctx, CCW_CAP_CHAT "ºŞ²z­û±M¥Î«ü¥O", CCW_LOCAL_MSG);
+            ccw_print_line(ctx, CCW_CAP_CHAT "ç®¡ç†å“¡å°ˆç”¨æŒ‡ä»¤", CCW_LOCAL_MSG);
         }
         while (*p)
         {
@@ -1105,7 +1105,7 @@ ccw_chat_peek_cmd(CCW_CTX *ctx, const char *buf, int local GCC_UNUSED)
         char genbuf[STRLEN];
         syncnow();
         snprintf(genbuf, sizeof(genbuf),
-                "¡» " BBSNAME "¼Ğ·Ç®É¶¡: %s", Cdate(&now));
+                "â—† " BBSNAME "æ¨™æº–æ™‚é–“: %s", Cdate(&now));
         ccw_add_line(ctx, genbuf, CCW_LOCAL_MSG);
         return 1;
     }
@@ -1114,7 +1114,7 @@ ccw_chat_peek_cmd(CCW_CTX *ctx, const char *buf, int local GCC_UNUSED)
         char genbuf[STRLEN];
         currutmp->pager ++;
         currutmp->pager %= PAGER_MODES;
-        snprintf(genbuf, sizeof(genbuf), "¡» ±zªº©I¥s¾¹¤w³]¬°: [%s]",
+        snprintf(genbuf, sizeof(genbuf), "â—† æ‚¨çš„å‘¼å«å™¨å·²è¨­ç‚º: [%s]",
                 str_pager_modes[currutmp->pager]);
         ccw_add_line(ctx, genbuf, CCW_LOCAL_MSG);
         return 1;
@@ -1187,8 +1187,8 @@ ccw_chat(int fd)
         .local_id       = chatid,
         .arg            = &ext,
         .sep_msg        = " " ANSI_COLOR(1;33) "/h" ANSI_RESET
-                          " ¬d¸ß«ü¥O " ANSI_COLOR(1;33) "/b"
-                          ANSI_RESET " Â÷¶} ",
+                          " æŸ¥è©¢æŒ‡ä»¤ " ANSI_COLOR(1;33) "/b"
+                          ANSI_RESET " é›¢é–‹ ",
         .sep_msg_width  = 21,
 
         .header     = ccw_chat_header,
@@ -1205,11 +1205,11 @@ ccw_chat(int fd)
 
     // initialize nick
     while (1) {
-        const char *err = "µLªk¨Ï¥Î¦¹¥N¸¹";
+        const char *err = "ç„¡æ³•ä½¿ç”¨æ­¤ä»£è™Ÿ";
         char cmd[200];
 
-        getdata(b_lines - 1, 0, "½Ğ¿é¤J·Q¦b" CCW_CAP_CHAT
-                "¨Ï¥Îªº¼ÊºÙ (¿é¤J /b ¥iÂ÷¶}): ",
+        getdata(b_lines - 1, 0, "è«‹è¼¸å…¥æƒ³åœ¨" CCW_CAP_CHAT
+                "ä½¿ç”¨çš„æš±ç¨± (è¼¸å…¥ /b å¯é›¢é–‹): ",
                 chatid, sizeof(chatid), DOECHO);
 
         if (strcmp(chatid, "*") == 0 || strcasecmp(chatid, "/b") == 0)
@@ -1227,18 +1227,18 @@ ccw_chat(int fd)
         ccw_chat_send(&ctx, cmd);
         if (recv(ctx.fd, cmd, 3, 0) != 3) {
             close(ctx.fd);
-            vmsg("¨t²Î¿ù»~¡C");
+            vmsg("ç³»çµ±éŒ¯èª¤ã€‚");
             return 0;
         }
 
         if (strcmp(cmd, CHAT_LOGIN_OK) == 0)
             break;
         else if (!strcmp(cmd, CHAT_LOGIN_EXISTS))
-            err = "³o­Ó¥N¸¹¤w¸g¦³¤H¥Î¤F";
+            err = "é€™å€‹ä»£è™Ÿå·²ç¶“æœ‰äººç”¨äº†";
         else if (!strcmp(cmd, CHAT_LOGIN_INVALID))
-            err = "³o­Ó¥N¸¹¬O¿ù»~ªº";
+            err = "é€™å€‹ä»£è™Ÿæ˜¯éŒ¯èª¤çš„";
         else if (!strcmp(cmd, CHAT_LOGIN_BOGUS))
-            err = "½Ğ¤Å¬£»º¤À¨­¶i¤J!!";
+            err = "è«‹å‹¿æ´¾é£åˆ†èº«é€²å…¥!!";
 
         move(b_lines - 2, 0);
         outs(err);
@@ -1254,7 +1254,7 @@ ccw_chat(int fd)
     setuserfile(fpath, "chat_XXXXXX");
     ctx.log = fdopen(mkstemp(fpath), "w");
     assert(ctx.log);
-    fprintf(ctx.log, "[%s] ¶i¤J" CCW_CAP_CHAT ":\n", Cdatelite(&now));
+    fprintf(ctx.log, "[%s] é€²å…¥" CCW_CAP_CHAT ":\n", Cdatelite(&now));
 
     // main processor
     vkey_attach(fd);

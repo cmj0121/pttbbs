@@ -770,54 +770,54 @@ DEBUG_IO(int fd, const char *msg) {
 // Draw Screen
 
 #ifndef  INSCREEN
-# define INSCREEN ANSI_RESET "\r\n�i" BBSNAME "�j��(" MYHOSTNAME ", " MYIP ") \r\n"
+# define INSCREEN ANSI_RESET "\r\n【" BBSNAME "】◎(" MYHOSTNAME ", " MYIP ") \r\n"
 #endif
 
 #ifdef   STR_GUEST
-# define MSG_GUEST "�A�ΥH " STR_GUEST " ���["
+# define MSG_GUEST "，或以 " STR_GUEST " 參觀"
 #else
 # define MSG_GUEST ""
 #endif
 
 #ifdef   STR_REGNEW
-# define MSG_REGNEW "�A�ΥH new ���U"
+# define MSG_REGNEW "，或以 new 註冊"
 #else
 # define MSG_REGNEW
 #endif
 
 #define BOTTOM_YX           "24;1"
-#define LOGIN_PROMPT_MSG    ANSI_RESET "�п�J�N��" MSG_GUEST MSG_REGNEW ": " ANSI_REVERSE
+#define LOGIN_PROMPT_MSG    ANSI_RESET "請輸入代號" MSG_GUEST MSG_REGNEW ": " ANSI_REVERSE
 #define LOGIN_PROMPT_YX     "21;1"
 #define LOGIN_PROMPT_END    ANSI_RESET
 #define PASSWD_PROMPT_MSG   ANSI_RESET MSG_PASSWD
 #define PASSWD_PROMPT_YX    "22;1"
-#define PASSWD_CHECK_MSG    ANSI_RESET "���b�ˬd�b���P�K�X..."
+#define PASSWD_CHECK_MSG    ANSI_RESET "正在檢查帳號與密碼..."
 #define PASSWD_CHECK_YX     PASSWD_PROMPT_YX
-#define AUTH_SUCCESS_MSG    ANSI_RESET "�K�X���T�I �}�l�n�J�t��...\r\n"
+#define AUTH_SUCCESS_MSG    ANSI_RESET "密碼正確！ 開始登入系統...\r\n"
 #define AUTH_SUCCESS_YX     PASSWD_PROMPT_YX
-#define FREEAUTH_SUCCESS_MSG    ANSI_RESET "�}�l�n�J�t��...\r\n"
+#define FREEAUTH_SUCCESS_MSG    ANSI_RESET "開始登入系統...\r\n"
 #define FREEAUTH_SUCCESS_YX AUTH_SUCCESS_YX
 #define AUTH_FAIL_MSG       ANSI_RESET ERR_PASSWD
 #define AUTH_FAIL_YX        PASSWD_PROMPT_YX
-#define REJECT_INSECURE_MSG ANSI_RESET "��p�A���b���w�]�w���u��ϥΦw���s�u(�pssh)�n�J�C"
+#define REJECT_INSECURE_MSG ANSI_RESET "抱歉，此帳號已設定為只能使用安全連線(如ssh)登入。"
 #define REJECT_INSECURE_YX  PASSWD_PROMPT_YX
-#define USERID_EMPTY_MSG    ANSI_RESET "�Э��s��J�C"
+#define USERID_EMPTY_MSG    ANSI_RESET "請重新輸入。"
 #define USERID_EMPTY_YX     PASSWD_PROMPT_YX
-#define SERVICE_FAIL_MSG    ANSI_COLOR(0;1;31) "��p�A�����t�Υ��b���@���A�еy�ԦA�աC " ANSI_RESET
+#define SERVICE_FAIL_MSG    ANSI_COLOR(0;1;31) "抱歉，部份系統正在維護中，請稍候再試。 " ANSI_RESET
 #define SERVICE_FAIL_YX     BOTTOM_YX
-#define OVERLOAD_CPU_MSG    ANSI_RESET " �t�ιL��, �еy��A��... "
+#define OVERLOAD_CPU_MSG    ANSI_RESET " 系統過載, 請稍後再來... "
 #define OVERLOAD_CPU_YX     BOTTOM_YX
-#define OVERLOAD_USER_MSG   ANSI_RESET " �ѩ�H�ƹL�h�A�бz�y��A��... "
+#define OVERLOAD_USER_MSG   ANSI_RESET " 由於人數過多，請您稍後再來... "
 #define OVERLOAD_USER_YX    BOTTOM_YX
 
 #define NO_SUCH_ENCODING_MSG ANSI_RESET " Sorry, GB encoding is NOT supported anymore. Please use UTF-8."
 #define NO_SUCH_ENCODING_YX PASSWD_PROMPT_YX
 
-#define REJECT_FREE_UID_MSG ANSI_RESET " ��p�A���b���ΪA�Ȥw�F�W���C "
+#define REJECT_FREE_UID_MSG ANSI_RESET " 抱歉，此帳號或服務已達上限。 "
 #define REJECT_FREE_UID_YX  BOTTOM_YX
 
 #ifdef  STR_GUEST
-#define TOO_MANY_GUEST_MSG  ANSI_RESET " ��p�A�ثe�w���Ӧh " STR_GUEST " �b���W�C "
+#define TOO_MANY_GUEST_MSG  ANSI_RESET " 抱歉，目前已有太多 " STR_GUEST " 在站上。 "
 #define TOO_MANY_GUEST_YX   BOTTOM_YX
 #endif
 

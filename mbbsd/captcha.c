@@ -102,10 +102,10 @@ int verify_captcha(const char *reason)
 		return 1;
 
 	    // prompt user about captcha
-	    vs_hdr("CAPTCHA ÅçÃÒµ{§Ç");
+	    vs_hdr("CAPTCHA é©—è­‰ç¨‹åº");
 	    outs(reason);
-	    outs("½Ğ¿é¤J¤U­±¹Ï¼ËÅã¥Üªº¤å¦r¡C\n"
-		    "¹Ï¼Ë¥u·|¥Ñ¤j¼gªº A-Z ­^¤å¦r¥À²Õ¦¨¡C\n\n");
+	    outs("è«‹è¼¸å…¥ä¸‹é¢åœ–æ¨£é¡¯ç¤ºçš„æ–‡å­—ã€‚\n"
+		    "åœ–æ¨£åªæœƒç”±å¤§å¯«çš„ A-Z è‹±æ–‡å­—æ¯çµ„æˆã€‚\n\n");
 	    show_file(fpath, 4, b_lines-5, SHOWFILE_ALLOW_ALL);
 	    unlink(fpath);
 	}
@@ -114,7 +114,7 @@ int verify_captcha(const char *reason)
 	for (i = 10; i > 0; i--)
 	{
 	    move(b_lines-1, 0); clrtobot();
-	    prints("½Ğ¥J²ÓÀË¬d¤W­±ªº¹Ï§Î¡A %d ¬í«á§Y¥i¿é¤J...", i);
+	    prints("è«‹ä»”ç´°æª¢æŸ¥ä¸Šé¢çš„åœ–å½¢ï¼Œ %d ç§’å¾Œå³å¯è¼¸å…¥...", i);
 	    // flush out current input
 	    doupdate();
 	    sleep(1);
@@ -123,7 +123,7 @@ int verify_captcha(const char *reason)
 
 	// input captcha
 	move(b_lines-1, 0); clrtobot();
-	prints("½Ğ¿é¤J¹Ï¼ËÅã¥Üªº %d ­Ó­^¤å¦r¥À: ", (int)strlen(captcha));
+	prints("è«‹è¼¸å…¥åœ–æ¨£é¡¯ç¤ºçš„ %d å€‹è‹±æ–‡å­—æ¯: ", (int)strlen(captcha));
 	vgetstring(code, strlen(captcha)+1, 0, "", &vge, NULL);
 
 	if (code[0] && strcasecmp(code, captcha) == 0)
@@ -134,7 +134,7 @@ int verify_captcha(const char *reason)
 	    return 0;
 
 	// error
-	vmsg("¿é¤J¿ù»~¡A½Ğ­«¸Õ¡Cª`·N²Õ¦¨¤å¦r¥ş¬O¤j¼g­^¤å¦r¥À¡C");
+	vmsg("è¼¸å…¥éŒ¯èª¤ï¼Œè«‹é‡è©¦ã€‚æ³¨æ„çµ„æˆæ–‡å­—å…¨æ˜¯å¤§å¯«è‹±æ–‡å­—æ¯ã€‚");
 
     } while (1);
 
@@ -171,9 +171,9 @@ captcha_insert_remote(const char *handle, const char *verify)
     thttp_cleanup(&t);
 
     if (ret)
-	return "¦øªA¾¹³s½u¥¢±Ñ, ½Ğµy«á¦A¸Õ.";
+	return "ä¼ºæœå™¨é€£ç·šå¤±æ•—, è«‹ç¨å¾Œå†è©¦.";
     if (code != 200)
-	return "¤º³¡¦øªA¾¹¿ù»~, ½Ğµy«á¦A¸Õ.";
+	return "å…§éƒ¨ä¼ºæœå™¨éŒ¯èª¤, è«‹ç¨å¾Œå†è©¦.";
     return NULL;
 }
 
@@ -185,7 +185,7 @@ remote_captcha()
     char verify[CAPTCHA_CODE_LENGTH + 1];
     char verify_input[CAPTCHA_CODE_LENGTH + 1];
 
-    vs_hdr("¨ú±oÅçÃÒ½X");
+    vs_hdr("å–å¾—é©—è­‰ç¢¼");
 
     random_text_code(handle, CAPTCHA_CODE_LENGTH);
     random_text_code(verify, CAPTCHA_CODE_LENGTH);
@@ -195,7 +195,7 @@ remote_captcha()
 	return msg;
 
     move(2, 0);
-    outs("½Ğ¥ı¦Ü¥H¤U³sµ²¨ú±o»{ÃÒ½X:\n");
+    outs("è«‹å…ˆè‡³ä»¥ä¸‹é€£çµå–å¾—èªè­‰ç¢¼:\n");
     outs(CAPTCHA_URL_PREFIX "?handle=");
     outs(handle);
     outs("\n");
@@ -204,17 +204,17 @@ remote_captcha()
 	if (i < 3) {
 	    char buf[80];
 	    snprintf(buf, sizeof(buf), ANSI_COLOR(1;31)
-		     "ÅçÃÒ½X¿ù»~, ±zÁÙ¦³ %d ¦¸¾÷·|." ANSI_RESET, i);
+		     "é©—è­‰ç¢¼éŒ¯èª¤, æ‚¨é‚„æœ‰ %d æ¬¡æ©Ÿæœƒ." ANSI_RESET, i);
 	    move(6, 0);
 	    outs(buf);
 	}
 	verify_input[0] = '\0';
-	getdata(5, 0, "½Ğ¿é¤JÅçÃÒ½X: ", verify_input,
+	getdata(5, 0, "è«‹è¼¸å…¥é©—è­‰ç¢¼: ", verify_input,
 		sizeof(verify_input), DOECHO);
 	if (!strcmp(verify, verify_input))
 	    return NULL;
     }
-    return "ÅçÃÒ½X¿é¤J¿ù»~¦¸¼Æ¤Ó¦h, ½Ğ­«·s¾Ş§@!";
+    return "é©—è­‰ç¢¼è¼¸å…¥éŒ¯èª¤æ¬¡æ•¸å¤ªå¤š, è«‹é‡æ–°æ“ä½œ!";
 }
 
 #else

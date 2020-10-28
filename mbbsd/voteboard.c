@@ -30,7 +30,7 @@ char *CheckVoteRestrictionFile(
 
 static char *
 find_vote_entry_userid(char *s) {
-    // format: [SPACE*]NUM.USERID REASON ¨Ó·½:IP
+    // format: [SPACE*]NUM.USERID REASON ä¾†æº:IP
     while (*s == ' ')
         s++;
     while (isascii(*s) && isdigit(*s))
@@ -59,18 +59,18 @@ do_voteboardreply(const fileheader_t * fhdr)
 
     clear();
     if (!CheckPostPerm()||HasUserPerm(PERM_NOCITIZEN)) {
-	vmsg("¹ï¤£°_¡A±z¥Ø«eµLªk¦b¦¹µoªí¤å³¹¡I");
+	vmsg("å°ä¸èµ·ï¼Œæ‚¨ç›®å‰ç„¡æ³•åœ¨æ­¤ç™¼è¡¨æ–‡ç« ï¼");
 	return;
     }
 
     if (currmode & MODE_SELECT) {
-	vmsg("½Ğ¥ı°h¥X·j´M¼Ò¦¡«á¦A¶i¦æ³s¸p¡C");
+	vmsg("è«‹å…ˆé€€å‡ºæœå°‹æ¨¡å¼å¾Œå†é€²è¡Œé€£ç½²ã€‚");
 	return;
     }
 
     if (CheckVoteRestrictionFile(fhdr, sizeof(genbuf), genbuf))
     {
-	vmsgf("¥¼¹F§ë²¼¸ê®æ­­¨î: %s", genbuf);
+	vmsgf("æœªé”æŠ•ç¥¨è³‡æ ¼é™åˆ¶: %s", genbuf);
 	return;
     }
     setbpath(fpath, currboard);
@@ -96,12 +96,12 @@ do_voteboardreply(const fileheader_t * fhdr)
            }
         if (yes>3) outs(genbuf);
 
-	if (!strncmp(genbuf, "³s¸pµ²§ô®É¶¡", 12)) {
+	if (!strncmp(genbuf, "é€£ç½²çµæŸæ™‚é–“", 12)) {
 	    ptr = strchr(genbuf, '(');
 	    assert(ptr);
 	    sscanf(ptr + 1, "%lu", &endtime);
 	    if (endtime < (unsigned long)now) {
-		vmsg("³s¸p®É¶¡¤w¹L");
+		vmsg("é€£ç½²æ™‚é–“å·²é");
 		fclose(fi);
 		return;
 	    }
@@ -116,8 +116,8 @@ do_voteboardreply(const fileheader_t * fhdr)
 	if(space) *space='\0';
 	if (!strncasecmp(uid, cuser.userid, IDLEN)) {
 	    move(5, 10);
-	    outs("±z¤w¸g³s¸p¹L¥»½g¤F");
-	    getdata(17, 0, "­n­×§ï±z¤§«eªº³s¸p¶Ü¡H(Y/N) [N]", opnion, 3, LCECHO);
+	    outs("æ‚¨å·²ç¶“é€£ç½²éæœ¬ç¯‡äº†");
+	    getdata(17, 0, "è¦ä¿®æ”¹æ‚¨ä¹‹å‰çš„é€£ç½²å—ï¼Ÿ(Y/N) [N]", opnion, 3, LCECHO);
             if (*opnion == 'y')
                 break;
             fclose(fi);
@@ -126,12 +126,12 @@ do_voteboardreply(const fileheader_t * fhdr)
     }
     fclose(fi);
     do {
-	if (!getdata(19, 0, "½Ğ°İ±z (Y)¤ä«ù (N)¤Ï¹ï ³o­ÓÄ³ÃD¡G", opnion, 3, LCECHO)) {
+	if (!getdata(19, 0, "è«‹å•æ‚¨ (Y)æ”¯æŒ (N)åå° é€™å€‹è­°é¡Œï¼š", opnion, 3, LCECHO)) {
 	    return;
 	}
     } while (opnion[0] != 'y' && opnion[0] != 'n');
-    sprintf(genbuf, "½Ğ°İ±z»P³o­ÓÄ³ÃDªºÃö«Y©Î%s²z¥Ñ¬°¦ó¡G",
-	    opnion[0] == 'y' ? "¤ä«ù" : "¤Ï¹ï");
+    sprintf(genbuf, "è«‹å•æ‚¨èˆ‡é€™å€‹è­°é¡Œçš„é—œä¿‚æˆ–%sç†ç”±ç‚ºä½•ï¼š",
+	    opnion[0] == 'y' ? "æ”¯æŒ" : "åå°");
     if (!getdata(20, 0, genbuf, reason, 35, DOECHO)) {
 	return;
     }
@@ -157,7 +157,7 @@ do_voteboardreply(const fileheader_t * fhdr)
     }
     if (!endtime) {
 	now += 14 * 24 * 60 * 60;
-	fprintf(fo, "³s¸pµ²§ô®É¶¡: (%d)%s\n\n", now, Cdate(&now));
+	fprintf(fo, "é€£ç½²çµæŸæ™‚é–“: (%d)%s\n\n", now, Cdate(&now));
 	now -= 14 * 24 * 60 * 60;
     }
     fputs(genbuf, fo);
@@ -173,7 +173,7 @@ do_voteboardreply(const fileheader_t * fhdr)
 	fprintf(fo, "%3d.%s", ++yes, uid);
       }
     if (opnion[0] == 'y')
-	fprintf(fo, "%3d.%-15s%-34s ¨Ó·½:%s\n", ++yes, cuser.userid, reason, cuser.lasthost);
+	fprintf(fo, "%3d.%-15s%-34s ä¾†æº:%s\n", ++yes, cuser.userid, reason, cuser.lasthost);
     fputs(genbuf, fo);
 
     for(no=0; fgets(genbuf, sizeof(genbuf), fi);) {
@@ -187,11 +187,11 @@ do_voteboardreply(const fileheader_t * fhdr)
 	fprintf(fo, "%3d.%s", ++no, uid);
     }
     if (opnion[0] == 'n')
-	fprintf(fo, "%3d.%-15s%-34s ¨Ó·½:%s\n", ++no, cuser.userid, reason, cuser.lasthost);
-    fprintf(fo, "----------Á`­p----------\n");
-    fprintf(fo, "¤ä«ù¤H¼Æ:%-9d¤Ï¹ï¤H¼Æ:%-9d\n", yes, no);
-    fprintf(fo, "\n--\n¡° µo«H¯¸: " BBSNAME "(" MYHOSTNAME
-                ") \n¡» From: ³s¸p¤å³¹\n");
+	fprintf(fo, "%3d.%-15s%-34s ä¾†æº:%s\n", ++no, cuser.userid, reason, cuser.lasthost);
+    fprintf(fo, "----------ç¸½è¨ˆ----------\n");
+    fprintf(fo, "æ”¯æŒäººæ•¸:%-9dåå°äººæ•¸:%-9d\n", yes, no);
+    fprintf(fo, "\n--\nâ€» ç™¼ä¿¡ç«™: " BBSNAME "(" MYHOSTNAME
+                ") \nâ—† From: é€£ç½²æ–‡ç« \n");
 
     flock(fd, LOCK_UN);
     close(fd);
@@ -213,74 +213,74 @@ do_voteboard(int type)
     int             temp;
 
     if (!CheckPostPerm()) {
-	vmsg("¹ï¤£°_¡A±z¥Ø«eµLªk¦b¦¹µoªí¤å³¹¡I");
+	vmsg("å°ä¸èµ·ï¼Œæ‚¨ç›®å‰ç„¡æ³•åœ¨æ­¤ç™¼è¡¨æ–‡ç« ï¼");
 	return FULLUPDATE;
     }
     if (CheckVoteRestrictionBoard(currbid, sizeof(genbuf), genbuf))
     {
-	vmsgf("¥¼¹F§ë²¼¸ê®æ­­¨î: %s", genbuf);
+	vmsgf("æœªé”æŠ•ç¥¨è³‡æ ¼é™åˆ¶: %s", genbuf);
 	return FULLUPDATE;
     }
-    vs_hdr(BBSNAME "³s¸p¨t²Î");
-    outs("±z¥¿¦b¨Ï¥Î" BBSNAME "ªº³s¸p¨t²Î¡A½Ğ¤p¤ß¦^µª¤U¦C°İÃD¤~¯à¶}©l³s¸p\n");
-    outs("¥ô·N´£¥X³s¸p®×ªÌ¡A±N³Q¦C¤J¤£¨üÅwªï¨Ï¥ÎªÌ³á\n\n");
-    outs("(1)¬¡°Ê³s¸p (2)°O¦W¤½§ë ");
+    vs_hdr(BBSNAME "é€£ç½²ç³»çµ±");
+    outs("æ‚¨æ­£åœ¨ä½¿ç”¨" BBSNAME "çš„é€£ç½²ç³»çµ±ï¼Œè«‹å°å¿ƒå›ç­”ä¸‹åˆ—å•é¡Œæ‰èƒ½é–‹å§‹é€£ç½²\n");
+    outs("ä»»æ„æå‡ºé€£ç½²æ¡ˆè€…ï¼Œå°‡è¢«åˆ—å…¥ä¸å—æ­¡è¿ä½¿ç”¨è€…å–”\n\n");
+    outs("(1)æ´»å‹•é€£ç½² (2)è¨˜åå…¬æŠ• ");
     if(type==0)
-      outs("(3)¥Ó½Ğ·sªO (4)¼o°£ÂÂªO (5)³s¸pªO¥D \n(6)½}§KªO¥D (7)³s¸p¤p²Õªø (8)½}§K¤p²Õªø (9)¥Ó½Ğ·s¸s²Õ\n");
+      outs("(3)ç”³è«‹æ–°æ¿ (4)å»¢é™¤èˆŠæ¿ (5)é€£ç½²æ¿ä¸» \n(6)ç½·å…æ¿ä¸» (7)é€£ç½²å°çµ„é•· (8)ç½·å…å°çµ„é•· (9)ç”³è«‹æ–°ç¾¤çµ„\n");
 
     do {
-	getdata(6, 0, "½Ğ¿é¤J³s¸pÃş§O [0:¨ú®ø]¡G", topic, 3, DOECHO);
+	getdata(6, 0, "è«‹è¼¸å…¥é€£ç½²é¡åˆ¥ [0:å–æ¶ˆ]ï¼š", topic, 3, DOECHO);
 	temp = atoi(topic);
     } while (temp < 0 || temp > 9 || (type && temp>2));
     switch (temp) {
     case 0:
          return FULLUPDATE;
     case 1:
-	if (!getdata(7, 0, "½Ğ¿é¤J¬¡°Ê¥DÃD¡G", topic, 30, DOECHO))
+	if (!getdata(7, 0, "è«‹è¼¸å…¥æ´»å‹•ä¸»é¡Œï¼š", topic, 30, DOECHO))
 	    return FULLUPDATE;
-	snprintf(title, sizeof(title), "%s %s", "[¬¡°Ê³s¸p]", topic);
+	snprintf(title, sizeof(title), "%s %s", "[æ´»å‹•é€£ç½²]", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n", "¬¡°Ê³s¸p", "¬¡°Ê¥DÃD: ", topic);
-	strcat(genbuf, "\n¬¡°Ê¤º®e: \n");
+		 "%s\n\n%s%s\n", "æ´»å‹•é€£ç½²", "æ´»å‹•ä¸»é¡Œ: ", topic);
+	strcat(genbuf, "\næ´»å‹•å…§å®¹: \n");
 	break;
     case 2:
-	if (!getdata(7, 0, "½Ğ¿é¤J¤½§ë¥DÃD¡G", topic, 30, DOECHO))
+	if (!getdata(7, 0, "è«‹è¼¸å…¥å…¬æŠ•ä¸»é¡Œï¼š", topic, 30, DOECHO))
 	    return FULLUPDATE;
-	snprintf(title, sizeof(title), "%s %s", "[°O¦W¤½§ë]", topic);
+	snprintf(title, sizeof(title), "%s %s", "[è¨˜åå…¬æŠ•]", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n", "°O¦W¤½§ë", "¤½§ë¥DÃD: ", topic);
-	strcat(genbuf, "\n¤½§ë­ì¦]: \n");
+		 "%s\n\n%s%s\n", "è¨˜åå…¬æŠ•", "å…¬æŠ•ä¸»é¡Œ: ", topic);
+	strcat(genbuf, "\nå…¬æŠ•åŸå› : \n");
 	break;
     case 3:
 	do {
-	    if (!getdata(7, 0, "½Ğ¿é¤J¬İªO­^¤å¦WºÙ¡G", topic, IDLEN + 1, DOECHO))
+	    if (!getdata(7, 0, "è«‹è¼¸å…¥çœ‹æ¿è‹±æ–‡åç¨±ï¼š", topic, IDLEN + 1, DOECHO))
 		return FULLUPDATE;
 	    else if (!is_valid_brdname(topic))
-		outs("¤£¬O¥¿½Tªº¬İªO¦WºÙ");
+		outs("ä¸æ˜¯æ­£ç¢ºçš„çœ‹æ¿åç¨±");
 	    else if (getbnum(topic) > 0)
-		outs("¥»¦WºÙ¤w¸g¦s¦b");
+		outs("æœ¬åç¨±å·²ç¶“å­˜åœ¨");
 	    else
 		break;
 	} while (temp > 0);
-	snprintf(title, sizeof(title), "[¥Ó½Ğ·sªO] %s", topic);
+	snprintf(title, sizeof(title), "[ç”³è«‹æ–°æ¿] %s", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n%s", "¥Ó½Ğ·sªO", "­^¤å¦WºÙ: ", topic, "¤¤¤å¦WºÙ: ");
+		 "%s\n\n%s%s\n%s", "ç”³è«‹æ–°æ¿", "è‹±æ–‡åç¨±: ", topic, "ä¸­æ–‡åç¨±: ");
 
-	if (!getdata(8, 0, "½Ğ¿é¤J¬İªO¤¤¤å¦WºÙ¡G", topic, BTLEN + 1, DOECHO))
+	if (!getdata(8, 0, "è«‹è¼¸å…¥çœ‹æ¿ä¸­æ–‡åç¨±ï¼š", topic, BTLEN + 1, DOECHO))
 	    return FULLUPDATE;
 	strcat(genbuf, topic);
-	strcat(genbuf, "\n¬İªOÃş§O: ");
-	if (!getdata(9, 0, "½Ğ¿é¤J¬İªOÃş§O¡G", topic, 20, DOECHO))
+	strcat(genbuf, "\nçœ‹æ¿é¡åˆ¥: ");
+	if (!getdata(9, 0, "è«‹è¼¸å…¥çœ‹æ¿é¡åˆ¥ï¼š", topic, 20, DOECHO))
 	    return FULLUPDATE;
 	strcat(genbuf, topic);
-	strcat(genbuf, "\nªO¥D¦W³æ: ");
-	getdata(10, 0, "½Ğ¿é¤JªO¥D¦W³æ¡G", topic, IDLEN * 3 + 3, DOECHO);
+	strcat(genbuf, "\næ¿ä¸»åå–®: ");
+	getdata(10, 0, "è«‹è¼¸å…¥æ¿ä¸»åå–®ï¼š", topic, IDLEN * 3 + 3, DOECHO);
 	strcat(genbuf, topic);
-	strcat(genbuf, "\n¥Ó½Ğ­ì¦]: \n");
+	strcat(genbuf, "\nç”³è«‹åŸå› : \n");
 	break;
     case 4:
         move(1,0); clrtobot();
-        generalnamecomplete("½Ğ¿é¤J¬İªO­^¤å¦WºÙ¡G",
+        generalnamecomplete("è«‹è¼¸å…¥çœ‹æ¿è‹±æ–‡åç¨±ï¼š",
                             topic, IDLEN+1,
                             SHM->Bnumber,
                             &completeboard_compar,
@@ -288,17 +288,17 @@ do_voteboard(int type)
                             &completeboard_getname);
 	if (!getbnum(topic))
 	{
-	    vmsg("µL¦¹¬İª©¡C");
+	    vmsg("ç„¡æ­¤çœ‹ç‰ˆã€‚");
 	    return FULLUPDATE;
 	}
-	snprintf(title, sizeof(title), "[¼o°£ÂÂªO] %s", topic);
+	snprintf(title, sizeof(title), "[å»¢é™¤èˆŠæ¿] %s", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n", "¼o°£ÂÂªO", "­^¤å¦WºÙ: ", topic);
-	strcat(genbuf, "\n¼o°£­ì¦]: \n");
+		 "%s\n\n%s%s\n", "å»¢é™¤èˆŠæ¿", "è‹±æ–‡åç¨±: ", topic);
+	strcat(genbuf, "\nå»¢é™¤åŸå› : \n");
 	break;
     case 5:
         move(1,0); clrtobot();
-        generalnamecomplete("½Ğ¿é¤J¬İªO­^¤å¦WºÙ¡G",
+        generalnamecomplete("è«‹è¼¸å…¥çœ‹æ¿è‹±æ–‡åç¨±ï¼š",
                             topic, IDLEN+1,
                             SHM->Bnumber,
                             &completeboard_compar,
@@ -306,16 +306,16 @@ do_voteboard(int type)
                             &completeboard_getname);
 	if (!getbnum(topic))
 	{
-	    vmsg("µL¦¹¬İª©¡C");
+	    vmsg("ç„¡æ­¤çœ‹ç‰ˆã€‚");
 	    return FULLUPDATE;
 	}
-	snprintf(title, sizeof(title), "[³s¸pªO¥D] %s", topic);
-	snprintf(genbuf, sizeof(genbuf), "%s\n\n%s%s\n%s%s", "³s¸pªO¥D", "­^¤å¦WºÙ: ", topic, "¥Ó½Ğ ID : ", cuser.userid);
-	strcat(genbuf, "\n¥Ó½Ğ¬F¨£: \n");
+	snprintf(title, sizeof(title), "[é€£ç½²æ¿ä¸»] %s", topic);
+	snprintf(genbuf, sizeof(genbuf), "%s\n\n%s%s\n%s%s", "é€£ç½²æ¿ä¸»", "è‹±æ–‡åç¨±: ", topic, "ç”³è«‹ ID : ", cuser.userid);
+	strcat(genbuf, "\nç”³è«‹æ”¿è¦‹: \n");
 	break;
     case 6:
         move(1,0); clrtobot();
-        generalnamecomplete("½Ğ¿é¤J¬İªO­^¤å¦WºÙ¡G",
+        generalnamecomplete("è«‹è¼¸å…¥çœ‹æ¿è‹±æ–‡åç¨±ï¼š",
                             topic, IDLEN+1,
                             SHM->Bnumber,
                             &completeboard_compar,
@@ -323,84 +323,84 @@ do_voteboard(int type)
                             &completeboard_getname);
 	if (!getbnum(topic))
 	{
-	    vmsg("µL¦¹¬İª©¡C");
+	    vmsg("ç„¡æ­¤çœ‹ç‰ˆã€‚");
 	    return FULLUPDATE;
 	}
-	snprintf(title, sizeof(title), "[½}§KªO¥D] %s", topic);
+	snprintf(title, sizeof(title), "[ç½·å…æ¿ä¸»] %s", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n%s", "½}§KªO¥D", "­^¤å¦WºÙ: ",
-		 topic, "ªO¥D ID : ");
+		 "%s\n\n%s%s\n%s", "ç½·å…æ¿ä¸»", "è‹±æ–‡åç¨±: ",
+		 topic, "æ¿ä¸» ID : ");
         temp=getbnum(topic);
 	assert(0<=temp-1 && temp-1<MAX_BOARD);
 	do {
-	    if (!getdata(7, 0, "½Ğ¿é¤JªO¥DID¡G", topic, IDLEN + 1, DOECHO))
+	    if (!getdata(7, 0, "è«‹è¼¸å…¥æ¿ä¸»IDï¼š", topic, IDLEN + 1, DOECHO))
 		return FULLUPDATE;
         }while (!is_uBM(bcache[temp - 1].BM, topic));
 	strcat(genbuf, topic);
-	strcat(genbuf, "\n½}§K­ì¦]: \n");
+	strcat(genbuf, "\nç½·å…åŸå› : \n");
 	break;
     case 7:
-	if (!getdata(7, 0, "½Ğ¿é¤J¤p²Õ¤¤­^¤å¦WºÙ¡G", topic, 30, DOECHO))
+	if (!getdata(7, 0, "è«‹è¼¸å…¥å°çµ„ä¸­è‹±æ–‡åç¨±ï¼š", topic, 30, DOECHO))
 	    return FULLUPDATE;
-	snprintf(title, sizeof(title), "[³s¸p¤p²Õªø] %s", topic);
+	snprintf(title, sizeof(title), "[é€£ç½²å°çµ„é•·] %s", topic);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s\n\n%s%s\n%s%s", "³s¸p¤p²Õªø", "¤p²Õ¦WºÙ: ",
-		 topic, "¥Ó½Ğ ID : ", cuser.userid);
-	strcat(genbuf, "\n¥Ó½Ğ¬F¨£: \n");
+		 "%s\n\n%s%s\n%s%s", "é€£ç½²å°çµ„é•·", "å°çµ„åç¨±: ",
+		 topic, "ç”³è«‹ ID : ", cuser.userid);
+	strcat(genbuf, "\nç”³è«‹æ”¿è¦‹: \n");
 	break;
     case 8:
-	if (!getdata(7, 0, "½Ğ¿é¤J¤p²Õ¤¤­^¤å¦WºÙ¡G", topic, 30, DOECHO))
+	if (!getdata(7, 0, "è«‹è¼¸å…¥å°çµ„ä¸­è‹±æ–‡åç¨±ï¼š", topic, 30, DOECHO))
 	    return FULLUPDATE;
-	snprintf(title, sizeof(title), "[½}§K¤p²Õªø] %s", topic);
+	snprintf(title, sizeof(title), "[ç½·å…å°çµ„é•·] %s", topic);
 	snprintf(genbuf, sizeof(genbuf), "%s\n\n%s%s\n%s",
-		 "½}§K¤p²Õªø", "¤p²Õ¦WºÙ: ", topic, "¤p²Õªø ID : ");
-	if (!getdata(8, 0, "½Ğ¿é¤J¤p²ÕªøID¡G", topic, IDLEN + 1, DOECHO))
+		 "ç½·å…å°çµ„é•·", "å°çµ„åç¨±: ", topic, "å°çµ„é•· ID : ");
+	if (!getdata(8, 0, "è«‹è¼¸å…¥å°çµ„é•·IDï¼š", topic, IDLEN + 1, DOECHO))
 	    return FULLUPDATE;
 	strcat(genbuf, topic);
-	strcat(genbuf, "\n½}§K­ì¦]: \n");
+	strcat(genbuf, "\nç½·å…åŸå› : \n");
 	break;
     case 9:
-	if (!getdata(7, 0, "½Ğ¿é¤J¸s²Õ¤¤­^¤å¦WºÙ¡G", topic, 30, DOECHO))
+	if (!getdata(7, 0, "è«‹è¼¸å…¥ç¾¤çµ„ä¸­è‹±æ–‡åç¨±ï¼š", topic, 30, DOECHO))
 	    return FULLUPDATE;
-	snprintf(title, sizeof(title), "[¥Ó½Ğ·s¸s²Õ] %s", topic);
+	snprintf(title, sizeof(title), "[ç”³è«‹æ–°ç¾¤çµ„] %s", topic);
 	snprintf(genbuf, sizeof(genbuf), "%s\n\n%s%s\n%s%s",
-		 "¥Ó½Ğ¸s²Õ", "¸s²Õ¦WºÙ: ", topic, "¥Ó½Ğ ID : ", cuser.userid);
-	strcat(genbuf, "\n¥Ó½Ğ¬F¨£: \n");
+		 "ç”³è«‹ç¾¤çµ„", "ç¾¤çµ„åç¨±: ", topic, "ç”³è«‹ ID : ", cuser.userid);
+	strcat(genbuf, "\nç”³è«‹æ”¿è¦‹: \n");
 	break;
     default:
 	return FULLUPDATE;
     }
-    outs("½Ğ¿é¤JÂ²¤¶©Î¬F¨£(¦Ü¦h¤­¦æ)¡A­n²M·¡¶ñ¼g");
+    outs("è«‹è¼¸å…¥ç°¡ä»‹æˆ–æ”¿è¦‹(è‡³å¤šäº”è¡Œ)ï¼Œè¦æ¸…æ¥šå¡«å¯«");
     for (temp = 12; temp < 17; temp++) {
-	    if (!getdata(temp, 0, "¡G", topic, 60, DOECHO))
+	    if (!getdata(temp, 0, "ï¼š", topic, 60, DOECHO))
 		break;
 	    strcat(genbuf, topic);
 	    strcat(genbuf, "\n");
 	}
     if (temp == 11)
 	    return FULLUPDATE;
-    strcat(genbuf, "³s¸pµ²§ô®É¶¡: ");
+    strcat(genbuf, "é€£ç½²çµæŸæ™‚é–“: ");
     now += 14 * 24 * 60 * 60;
     snprintf(topic, sizeof(topic), "(%d)", now);
     strcat(genbuf, topic);
     strcat(genbuf, Cdate(&now));
     strcat(genbuf, "\n\n");
     now -= 14 * 24 * 60 * 60;
-    strcat(genbuf, "----------¤ä«ù----------\n");
-    strcat(genbuf, "----------¤Ï¹ï----------\n");
-    outs("¶}©l³s¸p¹Æ");
+    strcat(genbuf, "----------æ”¯æŒ----------\n");
+    strcat(genbuf, "----------åå°----------\n");
+    outs("é–‹å§‹é€£ç½²å˜");
     setbpath(fpath, currboard);
     stampfile(fpath, &votefile);
 
     if (!(fp = fopen(fpath, "w"))) {
-	outs("¶}ÀÉ¥¢±Ñ¡A½Ğµy­Ô­«¨Ó¤@¦¸");
+	outs("é–‹æª”å¤±æ•—ï¼Œè«‹ç¨å€™é‡ä¾†ä¸€æ¬¡");
 	return FULLUPDATE;
     }
-    fprintf(fp, "%s%s %s%s\n%s%s\n%s%s\n", "§@ªÌ: ", cuser.userid,
-	    "¬İªO: ", currboard,
-	    "¼ĞÃD: ", title,
-	    "®É¶¡: ", ctime4(&now));
-    fprintf(fp, ANSI_COLOR(1;33) "­Y·Q¥[¤J³s¸p½Ğ«ö y ¦^À³" ANSI_RESET "\n\n");
+    fprintf(fp, "%s%s %s%s\n%s%s\n%s%s\n", "ä½œè€…: ", cuser.userid,
+	    "çœ‹æ¿: ", currboard,
+	    "æ¨™é¡Œ: ", title,
+	    "æ™‚é–“: ", ctime4(&now));
+    fprintf(fp, ANSI_COLOR(1;33) "è‹¥æƒ³åŠ å…¥é€£ç½²è«‹æŒ‰ y å›æ‡‰" ANSI_RESET "\n\n");
     fprintf(fp, "%s\n", genbuf);
     fclose(fp);
     strlcpy(votefile.owner, cuser.userid, sizeof(votefile.owner));

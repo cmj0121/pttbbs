@@ -20,7 +20,7 @@ static int do_add_recommend(const char *direct, fileheader_t *fhdr,
 static int view_postinfo(int ent, const fileheader_t * fhdr,
                          const char *direct, int crs_ln);
 
-static int bnote_lastbid = -1; // ¨M©w¬O§_­nÅã¥Ü¶iªOµe­±ªº cache
+static int bnote_lastbid = -1; // æ±ºå®šæ˜¯å¦è¦é¡¯ç¤ºé€²æ¿ç•«é¢çš„ cache
 
 // recommend/comment types
 //  most people use recommendation just for one-line reply.
@@ -182,18 +182,18 @@ check_locked(fileheader_t *fhdr)
             return;
 
         scr = vscr_save();
-        vs_hdr("µ²®×¨Ã°±¤î¦^À³");
+        vs_hdr("çµæ¡ˆä¸¦åœæ­¢å›æ‡‰");
         move(5, 0);
-        outs("  ½Ğª`·N¡A¥»¥\\¯à (m+L) ¬O¡uµ²®×¨Ã²×¤î¦^À³¡v(¸T¦^¤å±À¤å)¡A\n"
-             "  ¤@ª½³£¤£¬O¡uÂê©w¤å³¹(ÅÜ°ßÅª)¡v¡C"
-             "¥¿µP¡uÂê©w¤å³¹¡v¬O¥u¦³¯¸ªø¥i¥Îªº ^E¡C\n\n"
-             "  ©Ò¥H²×¤î¦^À³«á¨Ï¥ÎªÌ¤´¥i­×§ï¦¹ÀÉ¡C\n\n"
-             "  ¥¼¨Ó§Ú­Ì·|¦Ò¼{¬O§_¸Ó­×§ïÅı m+L ¦³Âê©wªº¯à¤O¡A"
-             "¦ıµu´Á¤º¦¹¦æ¬°¤£·|§ïÅÜ¡C\n\n"
-             "  ½Ğ¤Å¦A´£³ø¦¹¶µ¬°¡uÂê©w¦³ bug¡v, ÁÂÁÂ\n\n"
+        outs("  è«‹æ³¨æ„ï¼Œæœ¬åŠŸèƒ½ (m+L) æ˜¯ã€Œçµæ¡ˆä¸¦çµ‚æ­¢å›æ‡‰ã€(ç¦å›æ–‡æ¨æ–‡)ï¼Œ\n"
+             "  ä¸€ç›´éƒ½ä¸æ˜¯ã€Œé–å®šæ–‡ç« (è®Šå”¯è®€)ã€ã€‚"
+             "æ­£ç‰Œã€Œé–å®šæ–‡ç« ã€æ˜¯åªæœ‰ç«™é•·å¯ç”¨çš„ ^Eã€‚\n\n"
+             "  æ‰€ä»¥çµ‚æ­¢å›æ‡‰å¾Œä½¿ç”¨è€…ä»å¯ä¿®æ”¹æ­¤æª”ã€‚\n\n"
+             "  æœªä¾†æˆ‘å€‘æœƒè€ƒæ…®æ˜¯å¦è©²ä¿®æ”¹è®“ m+L æœ‰é–å®šçš„èƒ½åŠ›ï¼Œ"
+             "ä½†çŸ­æœŸå…§æ­¤è¡Œç‚ºä¸æœƒæ”¹è®Šã€‚\n\n"
+             "  è«‹å‹¿å†æå ±æ­¤é …ç‚ºã€Œé–å®šæœ‰ bugã€, è¬è¬\n\n"
              ANSI_COLOR(1;31)
-             "  ¥t¥~¡A¦¹¥\\¯à¥Ø«e¦³¦P¨B°İÃD¡A"
-             "¤w¦b½u¤WªºªO¤Í¦bÂ÷¶}¬İªO«e³£¦³¾÷·|¦^À³/±À¤å¡C\n"
+             "  å¦å¤–ï¼Œæ­¤åŠŸèƒ½ç›®å‰æœ‰åŒæ­¥å•é¡Œï¼Œ"
+             "å·²åœ¨ç·šä¸Šçš„æ¿å‹åœ¨é›¢é–‹çœ‹æ¿å‰éƒ½æœ‰æ©Ÿæœƒå›æ‡‰/æ¨æ–‡ã€‚\n"
              ANSI_RESET
              );
         did_prompt = 1;
@@ -209,8 +209,8 @@ enum LISTMODES {
     LISTMODE_MONEY,
 };
 static char *listmode_desc[] = {
-    "¤é ´Á",
-    "»ù ®æ",
+    "æ—¥ æœŸ",
+    "åƒ¹ æ ¼",
 };
 static int currlistmode = LISTMODE_DATE;
 
@@ -223,21 +223,21 @@ anticrosspost(void)
 {
     // probably failure here.
     if (HasUserPerm(PERM_ADMIN | PERM_MANAGER)) {
-        vmsg("¨t²Î¥i¯à»~§P±z CP, ¬°Á×§K¥X¿ù¥ı¦æÂ_½u");
+        vmsg("ç³»çµ±å¯èƒ½èª¤åˆ¤æ‚¨ CP, ç‚ºé¿å…å‡ºéŒ¯å…ˆè¡Œæ–·ç·š");
         exit(0);
     }
 
     log_filef("etc/illegal_money",  LOG_CREAT,
              ANSI_COLOR(1;33;46) "%s "
-             ANSI_COLOR(37;45) "cross post ¤å³¹ "
+             ANSI_COLOR(37;45) "cross post æ–‡ç«  "
              ANSI_COLOR(37) " %s" ANSI_RESET "\n",
              cuser.userid, Cdatelite(&now));
 
-    post_violatelaw(cuser.userid, BBSMNAME "¨t²ÎÄµ¹î",
-                    "Cross-post", "»@³æ³B¥÷");
+    post_violatelaw(cuser.userid, BBSMNAME "ç³»çµ±è­¦å¯Ÿ",
+                    "Cross-post", "ç½°å–®è™•ä»½");
     pwcuViolateLaw();
-    mail_id(cuser.userid, "Cross-Post»@³æ",
-	    "etc/crosspost.txt", BBSMNAME "Äµ¹î³¡¶¤");
+    mail_id(cuser.userid, "Cross-Postç½°å–®",
+	    "etc/crosspost.txt", BBSMNAME "è­¦å¯Ÿéƒ¨éšŠ");
     // Delete all references from BN_ALLPOST, if available.
     delete_allpost(cuser.userid);
     kick_all(cuser.userid); // XXX: in2: wait for testing
@@ -254,26 +254,26 @@ save_violatelaw(void)
 
     setutmpmode(VIOLATELAW);
     clear();
-    vs_hdr("Ãº»@³æ¤¤¤ß");
+    vs_hdr("ç¹³ç½°å–®ä¸­å¿ƒ");
 
     // XXX reload lots of stuff here?
     pwcuReload();
     if (!(cuser.userlevel & PERM_VIOLATELAW)) {
-	vmsg("§A¨S¦³³Q¶}»@³æ~~");
+	vmsg("ä½ æ²’æœ‰è¢«é–‹ç½°å–®~~");
 	return 0;
     }
 
     day =  cuser.vl_count*3 - (now - cuser.timeviolatelaw)/DAY_SECONDS;
     if (day > 0) {
-        vmsgf("¨Ì·Ó¹H³W¦¸¼Æ(%d), §AÁÙ»İ­n¤Ï¬Ù %d ¤Ñ¤~¯àÃº»@³æ",
+        vmsgf("ä¾ç…§é•è¦æ¬¡æ•¸(%d), ä½ é‚„éœ€è¦åçœ %d å¤©æ‰èƒ½ç¹³ç½°å–®",
               cuser.vl_count, day);
 	return 0;
     }
     reload_money();
     if (cuser.money < (int)cuser.vl_count * 1000) {
 	snprintf(buf, sizeof(buf),
-                 ANSI_COLOR(1;31) "³o¬O§A²Ä %d ¦¸¹H¤Ï¥»¯¸ªk³W"
-                 "¥²¶·Ãº¥X %d " MONEYNAME "¡F¦ı§A¥Ø«e¥u¦³ %d ¡A¼Æ¶q¤£¨¬!!"
+                 ANSI_COLOR(1;31) "é€™æ˜¯ä½ ç¬¬ %d æ¬¡é•åæœ¬ç«™æ³•è¦"
+                 "å¿…é ˆç¹³å‡º %d " MONEYNAME "ï¼›ä½†ä½ ç›®å‰åªæœ‰ %d ï¼Œæ•¸é‡ä¸è¶³!!"
                  ANSI_RESET, (int)cuser.vl_count, (int)cuser.vl_count * 1000,
                  cuser.money);
 	mvouts(22, 0, buf);
@@ -281,16 +281,16 @@ save_violatelaw(void)
 	return 0;
     }
     move(5, 0);
-    prints("³o¬O§A²Ä %d ¦¸¹Hªk ¥²¶·Ãº¥X %d " MONEYNAME "\n\n",
+    prints("é€™æ˜¯ä½ ç¬¬ %d æ¬¡é•æ³• å¿…é ˆç¹³å‡º %d " MONEYNAME "\n\n",
 	    cuser.vl_count, cuser.vl_count * 1000);
-    outs(ANSI_COLOR(1;37) "§A¬O§_½T©w¥H«á¤£·|¦A¥Ç¤F¡H" ANSI_RESET "\n");
+    outs(ANSI_COLOR(1;37) "ä½ æ˜¯å¦ç¢ºå®šä»¥å¾Œä¸æœƒå†çŠ¯äº†ï¼Ÿ" ANSI_RESET "\n");
 
-    if (!getdata(10, 0, "½T©w¶Ü¡H[y/N]:", ok, sizeof(ok), LCECHO) ||
+    if (!getdata(10, 0, "ç¢ºå®šå—ï¼Ÿ[y/N]:", ok, sizeof(ok), LCECHO) ||
 	ok[0] != 'y')
     {
 	move(15, 0);
-	outs(ANSI_COLOR(1;31) "¤£·Q¥I¶Ü¡H ÁÙ¬O¤£ª¾¹D­n«ö y ¡H\n"
-	     "½Ğ¾i¦¨¬İ²M·¡¨t²Î°T®§ªº¦n²ßºD¡C\n" ANSI_RESET);
+	outs(ANSI_COLOR(1;31) "ä¸æƒ³ä»˜å—ï¼Ÿ é‚„æ˜¯ä¸çŸ¥é“è¦æŒ‰ y ï¼Ÿ\n"
+	     "è«‹é¤Šæˆçœ‹æ¸…æ¥šç³»çµ±è¨Šæ¯çš„å¥½ç¿’æ…£ã€‚\n" ANSI_RESET);
 	pressanykey();
 	return 0;
     }
@@ -302,17 +302,17 @@ save_violatelaw(void)
 	log_filef("log/violation", LOG_CREAT,
 		"%s %s pay-violation error: race-conditionn hack?\n",
 		Cdate(&now), cuser.userid);
-	vmsg(MONEYNAME "«ç»ò©¿µM¤£°÷¤F¡H ¸Õ¹Ï´ÛÄF¨t²Î³Q¬d¨ì±N¬å±b¸¹¡I");
+	vmsg(MONEYNAME "æ€éº¼å¿½ç„¶ä¸å¤ äº†ï¼Ÿ è©¦åœ–æ¬ºé¨™ç³»çµ±è¢«æŸ¥åˆ°å°‡ç å¸³è™Ÿï¼");
 	return 0;
     }
 
-    pay(1000 * (int)cuser.vl_count, "Ãº¥I»@³æ (#%d)", cuser.vl_count);
+    pay(1000 * (int)cuser.vl_count, "ç¹³ä»˜ç½°å–® (#%d)", cuser.vl_count);
     pwcuSaveViolateLaw();
     log_filef("log/violation", LOG_CREAT,
 	    "%s %s pay-violation: $%d complete.\n",
 	    Cdate(&now), cuser.userid, (int)cuser.vl_count*1000);
 
-    vmsg("»@³æ¤w¥I¡A½Ğ­«·sµn¤J¡C");
+    vmsg("ç½°å–®å·²ä»˜ï¼Œè«‹é‡æ–°ç™»å…¥ã€‚");
     u_exit("save_violate");
     exit(0);
     return 0;
@@ -333,17 +333,17 @@ set_board(void)
     }
 
     if (BoardPermNeedsSysopOverride(bp))
- 	vmsg("¶i¤J¥¼¸g±ÂÅv¬İªO");
+ 	vmsg("é€²å…¥æœªç¶“æˆæ¬Šçœ‹æ¿");
 
     board_note_time = &bp->bupdate;
 
     if (!does_board_have_public_bm(bp)) {
-	strcpy(currBM, "¼x¨D¤¤");
+	strcpy(currBM, "å¾µæ±‚ä¸­");
     } else {
 	/* calculate with other title information */
 	int l = 0;
 
-	snprintf(currBM, sizeof(currBM), "ªO¥D:%s", bp->BM);
+	snprintf(currBM, sizeof(currBM), "æ¿ä¸»:%s", bp->BM);
 	/* title has +7 leading symbols */
 	l += strlen(bp->title);
 	if(l >= 7)
@@ -419,7 +419,7 @@ GetWebUrl(const boardheader_t *bp, const fileheader_t *fhdr, char *buf,
 
 #endif // QUERY_ARTICLE_URL
 
-// post ¤å³¹¤£ºâ¿úªºªO
+// post æ–‡ç« ä¸ç®—éŒ¢çš„æ¿
 int IsFreeBoardName(const char *brdname)
 {
     if (strcmp(brdname, BN_TEST) == 0)
@@ -521,7 +521,7 @@ int CheckPostPerm2(const char **preason) {
         preason = &garbage;
 
     if (currmode & MODE_DIGEST) {
-        *preason = "¤åºKµLªkµo¤å";
+        *preason = "æ–‡æ‘˜ç„¡æ³•ç™¼æ–‡";
 	return 0;
     }
     return CheckModifyPerm(preason);
@@ -541,7 +541,7 @@ char* get_board_restriction_reason(int bid, size_t sz_msg, char *msg)
 	return NULL;
     assert(0<=bid-1 && bid-1<MAX_BOARD);
 
-    // XXX currmode ¬O¥Ø«e¬İªO¤£¬O bid...
+    // XXX currmode æ˜¯ç›®å‰çœ‹æ¿ä¸æ˜¯ bid...
     if (is_BM_cache(bid))
 	return NULL;
     bp = getbcache(bid);
@@ -569,17 +569,17 @@ readtitle(void)
     bp = getbcache(currbid);
 
     if(bp->bvote != 2 && bp->bvote)
-	brd_title = "¥»¬İªO¶i¦æ§ë²¼¤¤";
+	brd_title = "æœ¬çœ‹æ¿é€²è¡ŒæŠ•ç¥¨ä¸­";
     else
 	brd_title = bp->title + 7;
 
     showtitle(currBM, brd_title);
-    outs("[¡ö]Â÷¶} [¡÷]¾\\Åª [Ctrl-P]µoªí¤å³¹ [d]§R°£ [z]ºëµØ°Ï [i]¬İªO¸ê°T/³]©w [h]»¡©ú\n");
+    outs("[â†]é›¢é–‹ [â†’]é–±è®€ [Ctrl-P]ç™¼è¡¨æ–‡ç«  [d]åˆªé™¤ [z]ç²¾è¯å€ [i]çœ‹æ¿è³‡è¨Š/è¨­å®š [h]èªªæ˜\n");
     buf[0] = 0;
 
 #ifdef USE_COOLDOWN
     if (bp->brdattr & BRD_COOLDOWN)
-        snprintf(buf, sizeof(buf), "[ÀR]");
+        snprintf(buf, sizeof(buf), "[éœ]");
     else
 #endif
     {
@@ -588,10 +588,10 @@ readtitle(void)
         // user IS reading it.
         int nuser = SHM->bcache[currbid - 1].nuser;
         if (nuser < 1) nuser = 1;
-        snprintf(buf, sizeof(buf), "¤H®ğ:%d ", nuser);
+        snprintf(buf, sizeof(buf), "äººæ°£:%d ", nuser);
     }
 
-    vbarf(ANSI_REVERSE "   ½s¸¹    %s §@  ªÌ       ¤å  ³¹  ¼Ğ  ÃD\t%s ",
+    vbarf(ANSI_REVERSE "   ç·¨è™Ÿ    %s ä½œ  è€…       æ–‡  ç«   æ¨™  é¡Œ\t%s ",
 	    IS_LISTING_MONEY ? listmode_desc[LISTMODE_MONEY] : listmode_desc[currlistmode],
 	    buf);
 }
@@ -614,9 +614,9 @@ is_tn_allowed(const char *title)
 		    PERM_VIEWSYSOP| PERM_POLICE_MAN))
 	return 1;
 
-    // Note: Ãö©ó subgroup op ªº§P©w¥Ø«e¤]¬O¤@¹ÎÁV - ¤p²Õªø­n±q¦Û¤vªº¤ÀÃş
-    // ¶i¥h¤~·|¦³ GROUPOP(). ¤£¹L¤Ï¥¿¤p²Õªø¸ò¸s²Õªøªº¤H¨S¨º»ò¦h¡A´N¶}©ñ¥L­Ì
-    // always ¥i¥H¨Ï¥Î TN_ANNOUNCE §a¡C
+    // Note: é—œæ–¼ subgroup op çš„åˆ¤å®šç›®å‰ä¹Ÿæ˜¯ä¸€åœ˜ç³Ÿ - å°çµ„é•·è¦å¾è‡ªå·±çš„åˆ†é¡
+    // é€²å»æ‰æœƒæœ‰ GROUPOP(). ä¸éåæ­£å°çµ„é•·è·Ÿç¾¤çµ„é•·çš„äººæ²’é‚£éº¼å¤šï¼Œå°±é–‹æ”¾ä»–å€‘
+    // always å¯ä»¥ä½¿ç”¨ TN_ANNOUNCE å§ã€‚
     if (HasUserPerm(PERM_SYSSUPERSUBOP) ||
 	HasUserPerm(PERM_SYSSUBOP))
 	return 1;
@@ -659,7 +659,7 @@ readdoent(int num, fileheader_t * ent)
 	outs(ANSI_COLOR(1;30));
 	prints("%-6.5s", ent->date);
 	prints("%-13.12s", ent->owner);
-	prints("¢® %-.*s" ANSI_RESET "\n",
+	prints("â•³ %-.*s" ANSI_RESET "\n",
 		t_columns-34, ent->title);
 	return;
 #else // COLORIZED_SAFEDEL
@@ -732,29 +732,29 @@ readdoent(int num, fileheader_t * ent)
 
 #ifdef SAFE_ARTICLE_DELETE
     if (iscorpse)
-	color = '0', mark = "¡¼";
-        // color = '0', mark = "¢®";
+	color = '0', mark = "â–¡";
+        // color = '0', mark = "â•³";
     else
 #endif
     if (ent->filemode & FILE_VOTE)
-	color = '2', mark = "£¾";
+	color = '2', mark = "Ë‡";
     else switch(title_type) {
         case SUBJECT_REPLY:
             color = '3', mark = "R:";
             break;
         case SUBJECT_FORWARD:
-            color = '6', mark = "Âà";
+            color = '6', mark = "è½‰";
             break;
         case SUBJECT_LOCKED:
-            color = '5', mark = "Âê";
+            color = '5', mark = "é–";
             break;
         case SUBJECT_NORMAL:
         default:
-            color = '1', mark = "¡¼";
+            color = '1', mark = "â–¡";
             break;
     }
 
-    // TN_ANNOUNCE: [¤½§i]
+    // TN_ANNOUNCE: [å…¬å‘Š]
     if (title[0] == '[' && is_tn_announce(title))
 	special = 1;
 
@@ -763,7 +763,7 @@ readdoent(int num, fileheader_t * ent)
     if (title_type == SUBJECT_LOCKED)
         strcpy(recom,"0m--");
     else if(ent->recommend >= MAX_RECOMMENDS)
-	  strcpy(recom,"1mÃz");
+	  strcpy(recom,"1mçˆ†");
     else if(ent->recommend>9)
 	  sprintf(recom,"3m%2d",ent->recommend);
     else if(ent->recommend>0)
@@ -777,9 +777,9 @@ readdoent(int num, fileheader_t * ent)
     /* start printing */
     if (ent->filemode & FILE_BOTTOM) {
         if (HasUserFlag(UF_MENU_LIGHTBAR))
-            outs("  " ANSI_COLOR(33) "  ¡¹ " ANSI_RESET);
+            outs("  " ANSI_COLOR(33) "  â˜… " ANSI_RESET);
         else
-            outs("  " ANSI_COLOR(1;33) "  ¡¹ " ANSI_RESET);
+            outs("  " ANSI_COLOR(1;33) "  â˜… " ANSI_RESET);
     }
     else
 	/* recently we found that many boards have >10k articles,
@@ -823,7 +823,7 @@ readdoent(int num, fileheader_t * ent)
     prints("%-13.12s", ent->owner);
     if(isonline) outs(ANSI_RESET);
 
-    // TODO calculate correct width. «e­±¬ù¦³ 33 ­Ó¦r¤¸¡C */
+    // TODO calculate correct width. å‰é¢ç´„æœ‰ 33 å€‹å­—å…ƒã€‚ */
     w = t_columns - 34; /* 33+1, for trailing one more space */
 
     // print subject prefix
@@ -860,7 +860,7 @@ readdoent(int num, fileheader_t * ent)
         if (DBCS_Status(title, w-2) == DBCS_TRAILING)
             w--;
         outns(title, w-2);
-        outs("¡K");
+        outs("â€¦");
     } else {
         outs(title);
     }
@@ -893,7 +893,7 @@ whereami(void)
          i++)
 	p[i + 1] = getbcache(p[i]->parent);
     j = i;
-    prints("§Ú¦b­ş?\n%-40.40s %.13s\n", p[j]->title + 7, p[j]->BM);
+    prints("æˆ‘åœ¨å“ª?\n%-40.40s %.13s\n", p[j]->title + 7, p[j]->BM);
     for (j--; j >= 0; j--)
 	prints("%*s %-13.13s %-37.37s %.13s\n", (i - j) * 2, "",
 	       p[j]->brdname, p[j]->title,
@@ -903,7 +903,7 @@ whereami(void)
     strlcpy(category, p[i]->title + 7, sizeof(category));
     if ((pcat = strchr(category, ' ')) != NULL)
         *pcat = 0;
-    prints("¦ì¸m: ");
+    prints("ä½ç½®: ");
     for (j = i; j >= 0; j--)
         prints("%s%s ",
                (j == i) ? category: p[j]->brdname,
@@ -1002,7 +1002,7 @@ do_deleteCrossPost(const fileheader_t *fh, char bname[])
 
     // the getindex is not stable. in order to prevent leaving files,
     // no matter what, delete the file.
-    delete_file_content2(bdir, fh, bdir, NULL, 0, "Cross-Post(¨t²ÎÄµ¹î§R°£)");
+    delete_file_content2(bdir, fh, bdir, NULL, 0, "Cross-Post(ç³»çµ±è­¦å¯Ÿåˆªé™¤)");
     unlink(file);
 }
 
@@ -1015,7 +1015,7 @@ deleteCrossPost(const fileheader_t *fhdr, char *bname)
        strcmp(bname, BN_ALLHIDPOST) == 0 ||
        strcmp(bname, BN_NEWIDPOST) == 0 ||
        strcmp(bname, BN_UNANONYMOUS) == 0 ) {
-        // These files (in BN_ALLPOST etc) have '.BOARDªO' or '(BOARD)' refrence
+        // These files (in BN_ALLPOST etc) have '.BOARDæ¿' or '(BOARD)' refrence
         // in title
         int bnlen;
 	char bnbuf[IDLEN + 1] = "", *bn;
@@ -1028,7 +1028,7 @@ deleteCrossPost(const fileheader_t *fhdr, char *bname)
             bnlen = strlen(++bn) - 1;
             snprintf(bnbuf, sizeof(bnbuf), "%*.*s", bnlen, bnlen, bn);
         } else {
-            // old format:  .BOARDª©, which may conflict with board names.
+            // old format:  .BOARDç‰ˆ, which may conflict with board names.
             bn = strrchr(fhdr->title, '.');
             if (!bn)
                 return;
@@ -1074,7 +1074,7 @@ delete_allpost(const char *userid)
 }
 
 /* ----------------------------------------------------- */
-/* µoªí¡B¦^À³¡B½s¿è¡BÂà¿ı¤å³¹                            */
+/* ç™¼è¡¨ã€å›æ‡‰ã€ç·¨è¼¯ã€è½‰éŒ„æ–‡ç«                             */
 /* ----------------------------------------------------- */
 static int
 solveEdFlagByBoard(const char *bn, int flags)
@@ -1104,10 +1104,10 @@ do_reply_title(int row, const char *title, const char *prefix,
         len = TTLEN;
     result[TTLEN - 1] = '\0';
     DBCS_safe_trim(result);
-    mvouts(row++, 0, "­ì¼ĞÃD: "); outs(result);
-    getdata(row, 0, "±Ä¥Î­ì¼ĞÃD[Y/n]? ", ans, 3, LCECHO);
+    mvouts(row++, 0, "åŸæ¨™é¡Œ: "); outs(result);
+    getdata(row, 0, "æ¡ç”¨åŸæ¨™é¡Œ[Y/n]? ", ans, 3, LCECHO);
     if (ans[0] == 'n')
-	getdata_str(row, 0, "·s¼ĞÃD¡G", result, len, DOECHO, result);
+	getdata_str(row, 0, "æ–°æ¨™é¡Œï¼š", result, len, DOECHO, result);
 
 }
 
@@ -1115,7 +1115,7 @@ void
 log_crosspost_in_allpost(const char *brd, const fileheader_t *postfile) {
     char genbuf[PATHLEN];
     fileheader_t fh;
-    // '¡K' appears for t_columns-33.
+    // 'â€¦' appears for t_columns-33.
     int  len = 42-strlen(brd);
     const char *title = subject(postfile->title);
     int bid = getbnum(BN_ALLPOST), brd_id = getbnum(brd);
@@ -1136,7 +1136,7 @@ log_crosspost_in_allpost(const char *brd, const fileheader_t *postfile) {
     if ((int)strlen(title) > len) {
         genbuf[len-2] = 0;
         DBCS_safe_trim(genbuf);
-        strcat(genbuf, "¡K");
+        strcat(genbuf, "â€¦");
     }
     snprintf(fh.title, sizeof(fh.title),
              "%s %-*.*s(%s)", str_forward, len, len, genbuf, brd);
@@ -1153,7 +1153,7 @@ dbcs_safe_trim_title(char *output, const char *title, int len) {
     if ((int)strlen(title) > len) {
         snprintf(output, len + 1, "%-*.*s", len - 2, len - 2, title);
         DBCS_safe_trim(output);
-        strlcat(output, "¡K", len + 1);
+        strlcat(output, "â€¦", len + 1);
         while ((int)strlen(output) < len)
             strlcat(output, " ", len + 1);
     } else {
@@ -1219,9 +1219,9 @@ int
 does_board_have_public_bm(const boardheader_t *bp) {
     // Usually we can assume SHM->BMcache contains complete BM list; however
     // sometimes boards may contains only private BMs (ex: [ <-space  some_uid])
-    // ¥t¥~ÁÙ¦³¤H¤£ª¾¬°¤F¦Û¤v¥[¤F [] ¤W¥h
-    // ·d¤F¥b¤ÑÁÙ¬Orevert¦^­ì©lªº BM[0] < ' ' ¦n¤F¡A
-    // «ÜÁV¦ı¬OÁÙ¨S·Q¨ì§ó¦nªº§@ªk¡C
+    // å¦å¤–é‚„æœ‰äººä¸çŸ¥ç‚ºäº†è‡ªå·±åŠ äº† [] ä¸Šå»
+    // æäº†åŠå¤©é‚„æ˜¯revertå›åŸå§‹çš„ BM[0] < ' ' å¥½äº†ï¼Œ
+    // å¾ˆç³Ÿä½†æ˜¯é‚„æ²’æƒ³åˆ°æ›´å¥½çš„ä½œæ³•ã€‚
     return bp->BM[0] > ' ';
 }
 
@@ -1264,14 +1264,14 @@ do_post_article(int edflags)
     int             money = 0;
     char            genbuf[PATHLEN];
     const char	    *owner;
-    char            ctype[8][5] = {"°İÃD", "«ØÄ³", "°Q½×", "¤ß±o",
-				   "¶¢²á", "½Ğ¯q", "±¡³ø",
-				   "¤½§i" // TN_ANNOUNCE
+    char            ctype[8][6] = {"å•é¡Œ", "å»ºè­°", "è¨è«–", "å¿ƒå¾—",
+				   "é–’èŠ", "è«‹ç›Š", "æƒ…å ±",
+				   "å…¬å‘Š" // TN_ANNOUNCE
 				  };
     boardheader_t  *bp;
     int             posttype=-1;
     char save_title[STRLEN];
-    const char *reason = "µLªkµo¤å";
+    const char *reason = "ç„¡æ³•ç™¼æ–‡";
 
     save_title[0] = '\0';
 
@@ -1281,18 +1281,18 @@ do_post_article(int edflags)
 
     if( !CheckPostPerm2(&reason)
 #ifdef FOREIGN_REG
-	// ¤£¬O¥~Äy¨Ï¥ÎªÌ¦b PttForeign ªO
+	// ä¸æ˜¯å¤–ç±ä½¿ç”¨è€…åœ¨ PttForeign æ¿
 	&& !(HasUserFlag(UF_FOREIGN) &&
 	    strcmp(bp->brdname, BN_FOREIGN) == 0)
 #endif
 	) {
-	vmsgf("µLªkµo¤å: %s", reason);
+	vmsgf("ç„¡æ³•ç™¼æ–‡: %s", reason);
 	return READ_REDRAW;
     }
 
     if (get_board_restriction_reason(currbid, sizeof(genbuf), genbuf))
     {
-	vmsgf("¥¼¹F¬İªOµo¤å­­¨î: %s", genbuf);
+	vmsgf("æœªé”çœ‹æ¿ç™¼æ–‡é™åˆ¶: %s", genbuf);
 	return FULLUPDATE;
     }
 #ifdef USE_COOLDOWN
@@ -1321,9 +1321,9 @@ do_post_article(int edflags)
 	more("etc/" FN_POST_NOTE, NA);
     }
     move(19, 0);
-    prints("%s©ó¡i" ANSI_COLOR(33) " %s" ANSI_RESET " ¡j "
-	   ANSI_COLOR(32) "%s" ANSI_RESET " ¬İªO\n",
-	   "µoªí¤å³¹",
+    prints("%sæ–¼ã€" ANSI_COLOR(33) " %s" ANSI_RESET " ã€‘ "
+	   ANSI_COLOR(32) "%s" ANSI_RESET " çœ‹æ¿\n",
+	   "ç™¼è¡¨æ–‡ç« ",
 	   currboard, bp->title + 7);
 
     if (quote_file[0])
@@ -1332,13 +1332,13 @@ do_post_article(int edflags)
     else {
 	char tmp_title[STRLEN]="";
 	move(21,0);
-	outs("ºØÃş¡G");
+	outs("ç¨®é¡ï¼š");
 	for(i=0; i<8 && bp->posttype[i*4]; i++)
 	    strlcpy(ctype[i],bp->posttype+4*i,5);
 	if(i==0) i=8;
 	for(j=0; j<i; j++)
 	    prints("%d.%4.4s ", j+1, ctype[j]);
-	sprintf(buf,"(1-%d©Î¤£¿ï)",i);
+	sprintf(buf,"(1-%dæˆ–ä¸é¸)",i);
 
 	do {
 	    getdata(21, 6+7*i, buf, tmp_title, 3, LCECHO);
@@ -1355,7 +1355,7 @@ do_post_article(int edflags)
 	    if (!is_tn_allowed(tmp_title))
 	    {
 		// XXX the only case now is TN_ANNOUNCE.
-		mvouts(22, 0, "©êºp¡A" TN_ANNOUNCE " «O¯dµ¹ªO¥D¨Ï¥Î¡C\n");
+		mvouts(22, 0, "æŠ±æ­‰ï¼Œ" TN_ANNOUNCE " ä¿ç•™çµ¦æ¿ä¸»ä½¿ç”¨ã€‚\n");
 		continue;
 	    }
 	    break;
@@ -1366,13 +1366,13 @@ do_post_article(int edflags)
             // -4: for prefixes
             if (w >= TTLEN - 4)
                 w = TTLEN - 4;
-	    getdata_buf(22, 0, "¼ĞÃD¡G", tmp_title, w, DOECHO);
+	    getdata_buf(22, 0, "æ¨™é¡Œï¼š", tmp_title, w, DOECHO);
 	    strip_ansi(tmp_title, tmp_title, STRIP_ALL);
 
 	    if (!is_tn_allowed(tmp_title))
 	    {
 		// XXX the only case now is TN_ANNOUNCE.
-		mvouts(21, 0, "©êºp¡A" TN_ANNOUNCE " «O¯dµ¹ªO¥D¨Ï¥Î¡C\n");
+		mvouts(21, 0, "æŠ±æ­‰ï¼Œ" TN_ANNOUNCE " ä¿ç•™çµ¦æ¿ä¸»ä½¿ç”¨ã€‚\n");
 		tn_safe_strip(tmp_title);
 		continue;
 	    }
@@ -1389,7 +1389,7 @@ do_post_article(int edflags)
     /* build filename */
     setbpath(fpath, currboard);
     if (stampfile(fpath, &postfile) < 0) {
-        vmsg("¨t²Î¿ù»~: µLªk¼g¤JÀÉ®×¡C");
+        vmsg("ç³»çµ±éŒ¯èª¤: ç„¡æ³•å¯«å…¥æª”æ¡ˆã€‚");
         return FULLUPDATE;
     }
     if(posttype!=-1 && ((1<<posttype) & bp->posttype_f)) {
@@ -1403,7 +1403,7 @@ do_post_article(int edflags)
         edflags |= EDITFLAG_WARN_NOSELFDEL;
 
 #if defined(PLAY_ANGEL)
-    // XXX ´c·dªº code¡C
+    // XXX æƒ¡æçš„ codeã€‚
     if (HasUserPerm(PERM_ANGEL) && (currbrdattr & BRD_ANGELANONYMOUS))
     {
 	currbrdattr |= BRD_ANONYMOUS;
@@ -1488,7 +1488,7 @@ do_post_article(int edflags)
         char url[STRLEN];
         if (GetWebUrl(bp, &postfile, url, sizeof(url))) {
             log_filef(genbuf, LOG_CREAT,
-                      "¡° " URL_DISPLAYNAME ": %s\n", url);
+                      "â€» " URL_DISPLAYNAME ": %s\n", url);
         }
     }
 #endif
@@ -1522,36 +1522,36 @@ do_post_article(int edflags)
                     do_crosspost(BN_ALLPOST, &postfile, fpath);
                 }
 	}
-	outs("¶¶§Q¶K¥X§G§i¡A");
+	outs("é †åˆ©è²¼å‡ºä½ˆå‘Šï¼Œ");
 
 	// Freeboard/BRD_NOCREDIT check was already done.
 	if (!ifuseanony)
 	{
             if (money > 0)
 	    {
-                pay(-money, "%s ¬İªOµo¤å½Z¹S: %s", currboard, postfile.title);
+                pay(-money, "%s çœ‹æ¿ç™¼æ–‡ç¨¿é…¬: %s", currboard, postfile.title);
 		pwcuIncNumPost();
-		prints("³o¬O±zªº²Ä %d ½g¦³®Ä¤å³¹¡AÀò±o½Z¹S %d "
+		prints("é€™æ˜¯æ‚¨çš„ç¬¬ %d ç¯‡æœ‰æ•ˆæ–‡ç« ï¼Œç²å¾—ç¨¿é…¬ %d "
                         MONEYNAME "\n", cuser.numposts, money);
-		prints("\n (­Y¤§«á¦Û¦æ©Î³QªO¥D§R¤å"
-                       "«h¦¹¦¸Àò±oªº¦³®Ä¤å³¹¼Æ¤Î½Z¹S¥i¯à·|³Q¦^¦¬)\n\n");
+		prints("\n (è‹¥ä¹‹å¾Œè‡ªè¡Œæˆ–è¢«æ¿ä¸»åˆªæ–‡"
+                       "å‰‡æ­¤æ¬¡ç²å¾—çš„æœ‰æ•ˆæ–‡ç« æ•¸åŠç¨¿é…¬å¯èƒ½æœƒè¢«å›æ”¶)\n\n");
 	    } else {
 #ifdef USE_HIDDEN_BOARD_NOCREDIT
                 if (currbrdattr & BRD_HIDE)
-                    outs("¥Ñ©ó¥»¬İªO¬°ÁôªO¡A¬°Á×§K¾DÀİ¥Î¡Aµo¤åµL¥ô¦ó¼úÀy¡C");
+                    outs("ç”±æ–¼æœ¬çœ‹æ¿ç‚ºéš±æ¿ï¼Œç‚ºé¿å…é­æ¿«ç”¨ï¼Œç™¼æ–‡ç„¡ä»»ä½•çå‹µã€‚");
                 else
 #endif
 		// no money, no record.
-		outs("¥»½g¤å³¹¤£¦C¤J°O¿ı¡A·q½Ğ¥]²[¡C");
+		outs("æœ¬ç¯‡æ–‡ç« ä¸åˆ—å…¥è¨˜éŒ„ï¼Œæ•¬è«‹åŒ…æ¶µã€‚");
 	    }
 	}
 	else
 	{
-	    outs("¤£¦C¤J°O¿ı¡A·q½Ğ¥]²[¡C");
+	    outs("ä¸åˆ—å…¥è¨˜éŒ„ï¼Œæ•¬è«‹åŒ…æ¶µã€‚");
 	}
 	clrtobot();
 
-	/* ¦^À³¨ì­ì§@ªÌ«H½c */
+	/* å›æ‡‰åˆ°åŸä½œè€…ä¿¡ç®± */
         if (edflags & EDITFLAG_KIND_SENDMAIL) {
 	    char *str, *msg = NULL;
 
@@ -1566,7 +1566,7 @@ do_post_article(int edflags)
 		    msg = err_uid;
 		} else if(is_rejected(quote_user)) {
                     genbuf[0] = 0;
-                    msg = "§@ªÌ©Ú¦¬";
+                    msg = "ä½œè€…æ‹’æ”¶";
                 }
 	    }
 
@@ -1581,7 +1581,7 @@ do_post_article(int edflags)
 		strlcpy(mailfile.owner, cuser.userid, sizeof(mailfile.owner));
 		strlcpy(mailfile.title, save_title, sizeof(mailfile.title));
 		sethomedir(genbuf, quote_user);
-                msg = "¦^À³¦Ü§@ªÌ«H½c";
+                msg = "å›æ‡‰è‡³ä½œè€…ä¿¡ç®±";
 		if (append_record(genbuf, &mailfile, sizeof(mailfile)) == -1)
 		    msg = err_uid;
 		else
@@ -1592,13 +1592,13 @@ do_post_article(int edflags)
                                  "%s [%s (%s)] %s -> %s: %s\n",
                                  Cdatelite(&now), __FUNCTION__,
                                  currboard, cuser.userid, str + 1, save_title));
-                msg = "¦^À³¦Ü§@ªÌ¥~³¡«H½c";
+                msg = "å›æ‡‰è‡³ä½œè€…å¤–éƒ¨ä¿¡ç®±";
 		if ( bsmtp(fpath, save_title, str + 1, NULL) < 0)
-		    msg = "§@ªÌµLªk¦¬«H";
+		    msg = "ä½œè€…ç„¡æ³•æ”¶ä¿¡";
 	    } else {
 		// unknown user id
                 if (!msg)
-                    msg = "§@ªÌµLªk¦¬«H";
+                    msg = "ä½œè€…ç„¡æ³•æ”¶ä¿¡";
 	    }
 	    outs(msg);
 	}
@@ -1656,8 +1656,8 @@ do_generalboardreply(/*const*/ fileheader_t * fhdr)
     if (!CheckPostRestriction(currbid))
     {
 	getdata(b_lines - 1, 0,
-		ANSI_COLOR(1;31) "¡¶ µLªk¦^À³¦Ü¬İªO¡C " ANSI_RESET
-		"§ï¦^À³¦Ü (M)§@ªÌ«H½c (Q)¨ú®ø¡H[Q] ",
+		ANSI_COLOR(1;31) "â–² ç„¡æ³•å›æ‡‰è‡³çœ‹æ¿ã€‚ " ANSI_RESET
+		"æ”¹å›æ‡‰è‡³ (M)ä½œè€…ä¿¡ç®± (Q)å–æ¶ˆï¼Ÿ[Q] ",
 		genbuf, sizeof(genbuf), LCECHO);
 	switch (genbuf[0]) {
 	    case 'm':
@@ -1669,7 +1669,7 @@ do_generalboardreply(/*const*/ fileheader_t * fhdr)
     }
     else {
 	getdata(b_lines - 1, 0,
-		"¡¶ ¦^À³¦Ü (F)¬İªO (M)§@ªÌ«H½c (B)¤GªÌ¬Ò¬O (Q)¨ú®ø¡H[F] ",
+		"â–² å›æ‡‰è‡³ (F)çœ‹æ¿ (M)ä½œè€…ä¿¡ç®± (B)äºŒè€…çš†æ˜¯ (Q)å–æ¶ˆï¼Ÿ[F] ",
 		genbuf, sizeof(genbuf), LCECHO);
 	switch (genbuf[0]) {
 	    case 'm':
@@ -1720,10 +1720,10 @@ do_reply(/*const*/ fileheader_t * fhdr)
      {
        if(fhdr->filemode & FILE_MARKED)
          {
-          vmsg("«Ü©êºp, ¦¹¤å³¹¤wµ²®×¨Ã¼Ğ°O, ¤£±o¦^À³.");
+          vmsg("å¾ˆæŠ±æ­‰, æ­¤æ–‡ç« å·²çµæ¡ˆä¸¦æ¨™è¨˜, ä¸å¾—å›æ‡‰.");
           return FULLUPDATE;
          }
-       if(vmsg("¦¹½g¤å³¹¤wµ²®×, ¬O§_¯uªº­n¦^À³?(y/N)")!='y')
+       if(vmsg("æ­¤ç¯‡æ–‡ç« å·²çµæ¡ˆ, æ˜¯å¦çœŸçš„è¦å›æ‡‰?(y/N)")!='y')
           return FULLUPDATE;
      }
 
@@ -1731,7 +1731,7 @@ do_reply(/*const*/ fileheader_t * fhdr)
     bp = getbcache(currbid);
     if (bp->brdattr & BRD_NOREPLY) {
 	// try to reply by mail.
-	if (vans("«Ü©êºp, ¥»ªO¤£¶}©ñ¦^ÂĞ¤å³¹¡A­n§ï¦^«Hµ¹§@ªÌ¶Ü¡H [y/N]: ") == 'y')
+	if (vans("å¾ˆæŠ±æ­‰, æœ¬æ¿ä¸é–‹æ”¾å›è¦†æ–‡ç« ï¼Œè¦æ”¹å›ä¿¡çµ¦ä½œè€…å—ï¼Ÿ [y/N]: ") == 'y')
 	    return mail_reply(0, fhdr, 0);
 	else
 	    return FULLUPDATE;
@@ -1909,7 +1909,7 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
     }
 
     if (!dashf(genbuf)) {
-        vmsg("¦¹ÀÉ¤w·l·´¡AµLªk½s¿è¡C±z¥i¥H¸ÕµÛ§R°£¥¦¡C");
+        vmsg("æ­¤æª”å·²ææ¯€ï¼Œç„¡æ³•ç·¨è¼¯ã€‚æ‚¨å¯ä»¥è©¦è‘—åˆªé™¤å®ƒã€‚");
         return FULLUPDATE;
     }
 
@@ -1918,21 +1918,21 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
 
     setutmpmode(REEDIT);
 
-    // TODO ¥Ñ©ó²{¦bÀÉ®×³£¬Oª½±µ»\¦^­ìÀÉ¡A
-    // ¦b­ì¬İªO¥Ø¿ı¶}¤w¨S¦³«Ü¤j·N¸q¡C (®Ä²vµy°ª¤@ÂI)
-    // ¥i¥H¦Ò¼{§ï¶}¦b user home dir
-    // ¦n³B¬O¬İªOªºÀÉ®×¼Æ¤£·|¨g¦¨ªø¡C (when someone crashed)
+    // TODO ç”±æ–¼ç¾åœ¨æª”æ¡ˆéƒ½æ˜¯ç›´æ¥è“‹å›åŸæª”ï¼Œ
+    // åœ¨åŸçœ‹æ¿ç›®éŒ„é–‹å·²æ²’æœ‰å¾ˆå¤§æ„ç¾©ã€‚ (æ•ˆç‡ç¨é«˜ä¸€é»)
+    // å¯ä»¥è€ƒæ…®æ”¹é–‹åœ¨ user home dir
+    // å¥½è™•æ˜¯çœ‹æ¿çš„æª”æ¡ˆæ•¸ä¸æœƒç‹‚æˆé•·ã€‚ (when someone crashed)
     // sethomedir(fpath, cuser.userid);
-    // XXX ¦pªG§Aªº¨t²Î¦³©w´Á¬İªO²M©t¨àÀÉ¡A¨º´N¤£¥Î©ñ user home¡C
+    // XXX å¦‚æœä½ çš„ç³»çµ±æœ‰å®šæœŸçœ‹æ¿æ¸…å­¤å…’æª”ï¼Œé‚£å°±ä¸ç”¨æ”¾ user homeã€‚
     setbpath(fpath, currboard);
 
-    // XXX ¥H²{¦bªº¼Ò¦¡¡A³o¬O­Ó temp file
+    // XXX ä»¥ç¾åœ¨çš„æ¨¡å¼ï¼Œé€™æ˜¯å€‹ temp file
     stampfile(fpath, &postfile);
 
     // copying takes long time, add some visual effect
     grayout(0, b_lines-2, GRAYOUT_DARK);
     move(b_lines-1, 0); clrtoeol();
-    outs("¥¿¦b¸ü¤JÀÉ®×...");
+    outs("æ­£åœ¨è¼‰å…¥æª”æ¡ˆ...");
     refresh();
 
     strlcpy(save_title, fhdr->title, sizeof(save_title));
@@ -1943,7 +1943,7 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
 
 #ifdef EDITPOST_SMARTMERGE
     if (hash_partial_file(fpath, oldsz, oldsum) != HASHPF_RET_OK) {
-        vmsg("¨t²Î¿ù»~¡AµLªk·Ç³Æ½s¿èÀÉ®×¡C½Ğ¦Ü" BN_BUGREPORT "³ø§i");
+        vmsg("ç³»çµ±éŒ¯èª¤ï¼Œç„¡æ³•æº–å‚™ç·¨è¼¯æª”æ¡ˆã€‚è«‹è‡³" BN_BUGREPORT "å ±å‘Š");
         unlink(fpath);
         return FULLUPDATE;
     }
@@ -1955,7 +1955,7 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
     }
 
 #ifdef EDITPOST_SMARTMERGE
-    outs("\n\n" ANSI_COLOR(1;30) "¥¿¦bÀË¬dÀÉ®×¬O§_³Q­×§ï¹L..." ANSI_RESET);
+    outs("\n\n" ANSI_COLOR(1;30) "æ­£åœ¨æª¢æŸ¥æª”æ¡ˆæ˜¯å¦è¢«ä¿®æ”¹é..." ANSI_RESET);
     refresh();
 
     if (hash_partial_file(genbuf, oldsz, newsum) != HASHPF_RET_OK ||
@@ -1972,8 +1972,8 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
         setuserfile(genbuf, "buf.0");
         Rename(fpath, genbuf);
         // alert uesr
-        outs("\n\n" ANSI_COLOR(1;31) "ÀÉ®×¤w³Q¨ä¥¦¤H­×§ï¹L¡AµLªk¼g¤J¡C\n"
-             "­è¤~ªº¤º®e¤w¦s¤J±zªº¼È¦sÀÉ[0]¡C ½Ğ­«·s½s¿è¡C");
+        outs("\n\n" ANSI_COLOR(1;31) "æª”æ¡ˆå·²è¢«å…¶å®ƒäººä¿®æ”¹éï¼Œç„¡æ³•å¯«å…¥ã€‚\n"
+             "å‰›æ‰çš„å…§å®¹å·²å­˜å…¥æ‚¨çš„æš«å­˜æª”[0]ã€‚ è«‹é‡æ–°ç·¨è¼¯ã€‚");
         pressanykey();
         return FULLUPDATE;
     }
@@ -2020,7 +2020,7 @@ edit_post(int ent, fileheader_t * fhdr, const char *direct)
     if (rev > 0) {
         char revfn[PATHLEN];
         timecapsule_get_by_revision(genbuf, rev, revfn, sizeof(revfn));
-        log_filef(revfn, 0, "\n¡° Last modified: %s", Cdatelite(&oldmt));
+        log_filef(revfn, 0, "\nâ€» Last modified: %s", Cdatelite(&oldmt));
     }
 #endif
 
@@ -2074,11 +2074,11 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
     setbfile(fname, currboard, fhdr->filename);
     if (!dashf(fname))
     {
-	vmsg("ÀÉ®×¤w¤£¦s¦b¡C");
+	vmsg("æª”æ¡ˆå·²ä¸å­˜åœ¨ã€‚");
 	return FULLUPDATE;
     }
 
-    // XXX TODO ¬°Á×§K¹Hªk¨Ï¥ÎªÌ¤j¶q¹ï¥Ó¶DªOÂà¤å¡A­­©w¨C¦¸µo¤å¶q¡C
+    // XXX TODO ç‚ºé¿å…é•æ³•ä½¿ç”¨è€…å¤§é‡å°ç”³è¨´æ¿è½‰æ–‡ï¼Œé™å®šæ¯æ¬¡ç™¼æ–‡é‡ã€‚
     if (HasUserPerm(PERM_VIOLATELAW))
     {
 	static int violatecp = 0;
@@ -2087,7 +2087,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
     }
 
     if (!HasUserPerm(PERM_LOGINOK)) {
-	vmsg("±zµLÂà¿ıÅv­­¡C");
+	vmsg("æ‚¨ç„¡è½‰éŒ„æ¬Šé™ã€‚");
 	return FULLUPDATE;
     }
 
@@ -2096,9 +2096,9 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
     if (is_BM_cache(currbid)) {
         SOLVE_ANSI_CACHE();
         clrtoeol();
-        outs("·Ç³Æ¶i¦æ¤å³¹Âà¿ı¡CªO¥D­n¸m©³¤å³¹½Ğ§ï«ö "
-                ANSI_COLOR(1;31) "_" ANSI_RESET " (À£¦í "
-                ANSI_COLOR(1;36) "Shift" ANSI_RESET " ¦A«ö "
+        outs("æº–å‚™é€²è¡Œæ–‡ç« è½‰éŒ„ã€‚æ¿ä¸»è¦ç½®åº•æ–‡ç« è«‹æ”¹æŒ‰ "
+                ANSI_COLOR(1;31) "_" ANSI_RESET " (å£“ä½ "
+                ANSI_COLOR(1;36) "Shift" ANSI_RESET " å†æŒ‰ "
                 ANSI_COLOR(1;36) "-" ANSI_RESET
                 " )\n");
     }
@@ -2115,7 +2115,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
     if( (bp->brdattr & BRD_CPLOG) &&
 	(!CheckPostPerm() || !CheckPostRestriction(currbid)))
     {
-	vmsg("¥Ñ¥»ªOÂà¿ı¤å³¹»İ¦³µo¤åÅv­­(¥i«ö i ¬d¬İ­­¨î)");
+	vmsg("ç”±æœ¬æ¿è½‰éŒ„æ–‡ç« éœ€æœ‰ç™¼æ–‡æ¬Šé™(å¯æŒ‰ i æŸ¥çœ‹é™åˆ¶)");
 	return FULLUPDATE;
     }
 #endif // USE_AUTOCPLOG
@@ -2126,54 +2126,54 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 
     move(1, 0);
 
-    CompleteBoard("Âà¿ı¥»¤å³¹©ó¬İªO¡G", xboard);
+    CompleteBoard("è½‰éŒ„æœ¬æ–‡ç« æ–¼çœ‹æ¿ï¼š", xboard);
     if (*xboard == '\0')
 	return FULLUPDATE;
 
     if (!haspostperm(xboard))
     {
-	vmsg("¬İªO¤£¦s¦b©Î¸Ó¬İªO¸T¤î±zµoªí¤å³¹¡I");
+	vmsg("çœ‹æ¿ä¸å­˜åœ¨æˆ–è©²çœ‹æ¿ç¦æ­¢æ‚¨ç™¼è¡¨æ–‡ç« ï¼");
 	return FULLUPDATE;
     }
 
-    /* ¤£­n­É¥ÎÅÜ¼Æ¡A°O¾ĞÅé¨S¨º»ò¯Ê¡A¤H¸£²V¶Ãªº¥N»ù¤ñ¸û°ª */
+    /* ä¸è¦å€Ÿç”¨è®Šæ•¸ï¼Œè¨˜æ†¶é«”æ²’é‚£éº¼ç¼ºï¼Œäººè…¦æ··äº‚çš„ä»£åƒ¹æ¯”è¼ƒé«˜ */
     xbid = getbnum(xboard);
     assert(0<=xbid-1 && xbid-1<MAX_BOARD);
 
     if (xbid == currbid)
     {
-	vmsg("¦PªO¤£»İÂà¿ı¡C");
+	vmsg("åŒæ¿ä¸éœ€è½‰éŒ„ã€‚");
 	return FULLUPDATE;
     }
 
     // check target postperm
     if (get_board_restriction_reason(xbid, sizeof(genbuf), genbuf))
     {
-	vmsgf("¥¼¹F¬İªOµo¤å­­¨î: %s", genbuf);
+	vmsgf("æœªé”çœ‹æ¿ç™¼æ–‡é™åˆ¶: %s", genbuf);
 	return FULLUPDATE;
     }
 
 #ifdef USE_COOLDOWN
     if(check_cooldown(getbcache(xbid))) {
-	vmsg("¸Ó¬İªO²{¦bµLªkÂà¿ı¡C");
+	vmsg("è©²çœ‹æ¿ç¾åœ¨ç„¡æ³•è½‰éŒ„ã€‚");
 	return FULLUPDATE;
     }
 #endif
 
     do_reply_title(2, fhdr->title, str_forward, xtitle, sizeof(xtitle));
-    // FIXME ³o¸Ì¥i¯à·|¦³¤H°½°½¥Í¥X«O¯d¼ĞÃD(¦p[¤½§i])
-    // ¤£¹Lºâ¤F¡Aª½±µ¦H°h³oºØ¤H¤ñ¸û¤è«K
-    // ¤Ï¥¿¥»¨Ó´N¥u¬O·Q¸Ñ¨M¡u¤£¤p¤ß¡v©Î¬O¡u°²¸Ë¤£¤p¤ß¡v¥Î¨ìªº±¡§Î¡C
+    // FIXME é€™è£¡å¯èƒ½æœƒæœ‰äººå·å·ç”Ÿå‡ºä¿ç•™æ¨™é¡Œ(å¦‚[å…¬å‘Š])
+    // ä¸éç®—äº†ï¼Œç›´æ¥åŠ£é€€é€™ç¨®äººæ¯”è¼ƒæ–¹ä¾¿
+    // åæ­£æœ¬ä¾†å°±åªæ˜¯æƒ³è§£æ±ºã€Œä¸å°å¿ƒã€æˆ–æ˜¯ã€Œå‡è£ä¸å°å¿ƒã€ç”¨åˆ°çš„æƒ…å½¢ã€‚
     // tn_safe_strip_board(xtitle, xboard);
 
-    getdata(2, 0, "(S/L)µo¤å (Q)¨ú®ø¡H[Q] ", genbuf, 3, LCECHO);
+    getdata(2, 0, "(S/L)ç™¼æ–‡ (Q)å–æ¶ˆï¼Ÿ[Q] ", genbuf, 3, LCECHO);
 
     if (genbuf[0] != 'l' && genbuf[0] != 's')
         return FULLUPDATE;
 
 #ifdef CROSSPOST_VERIFY_CAPTCHA
-    if (!verify_captcha("¬°¤FÁ×§K¤£·í¤j¶qÂà¿ı\n")) {
-        vmsg("¤å³¹¥¼Âà¿ı¡A½Ğ­«¸Õ¡C");
+    if (!verify_captcha("ç‚ºäº†é¿å…ä¸ç•¶å¤§é‡è½‰éŒ„\n")) {
+        vmsg("æ–‡ç« æœªè½‰éŒ„ï¼Œè«‹é‡è©¦ã€‚");
         return FULLUPDATE;
     }
 #endif
@@ -2186,7 +2186,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 	currmode = 0;
 	setbpath(xfpath, xboard);
         if (stampfile(xfpath, &xfile) < 0) {
-            vmsg("¨t²Î¿ù»~: µLªk¼g¤JÀÉ®×");
+            vmsg("ç³»çµ±éŒ¯èª¤: ç„¡æ³•å¯«å…¥æª”æ¡ˆ");
             return FULLUPDATE;
         }
         strlcpy(xfile.owner, cuser.userid, sizeof(xfile.owner));
@@ -2207,7 +2207,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 	if (!IS_OPENBRD(bp))
 	{
 	    /* invisible board */
-	    fprintf(xptr, "¡° [¥»¤åÂà¿ı¦Û¬YÁô§Î¬İªO]\n\n");
+	    fprintf(xptr, "â€» [æœ¬æ–‡è½‰éŒ„è‡ªæŸéš±å½¢çœ‹æ¿]\n\n");
 	    b_suckinfile_invis(xptr, fname, currboard);
 	} else {
 	    /* public board */
@@ -2224,7 +2224,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 		// add trailing space
 		strcat(aidc, " ");
 	    }
-	    fprintf(xptr, "¡° [¥»¤åÂà¿ı¦Û %s ¬İªO%s]\n\n", currboard, aidc);
+	    fprintf(xptr, "â€» [æœ¬æ–‡è½‰éŒ„è‡ª %s çœ‹æ¿%s]\n\n", currboard, aidc);
 	    b_suckinfile(xptr, fname);
 	}
 
@@ -2247,9 +2247,9 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 	    bp = getbcache(bid);
 	    if (IS_OPENBRD(bp))
 	    {
-		sprintf(bname, "¬İªO %s", xboard);
+		sprintf(bname, "çœ‹æ¿ %s", xboard);
 	    } else {
-		strcpy(bname, "¬YÁô§Î¬İªO");
+		strcpy(bname, "æŸéš±å½¢çœ‹æ¿");
 	    }
 
 	    maxlength -= (strlen(cuser.userid) + strlen(bname));
@@ -2266,8 +2266,8 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 #endif
 	    snprintf(buf, sizeof(buf),
 		    // ANSI_COLOR(32) <- system will add green
-		    "¡° " ANSI_COLOR(1;32) "%s"
-		    ANSI_COLOR(0;32) ":Âà¿ı¦Ü"
+		    "â€» " ANSI_COLOR(1;32) "%s"
+		    ANSI_COLOR(0;32) ":è½‰éŒ„è‡³"
 		    "%s" ANSI_RESET "%*s%s\n" ,
 		    cuser.userid, bname, maxlength, "",
 		    tail);
@@ -2286,7 +2286,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 	}
 
 	/*
-	 * Cross fs¦³°İÃD else { unlink(xfpath); link(fname, xfpath); }
+	 * Cross fsæœ‰å•é¡Œ else { unlink(xfpath); link(fname, xfpath); }
 	 */
 	setbdir(fname, xboard);
 	append_record(fname, &xfile, sizeof(xfile));
@@ -2299,7 +2299,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 	add_posttimes(usernum, 1);
 #endif
 	setbtotal(getbnum(xboard));
-	outs("¤å³¹Âà¿ı§¹¦¨¡C(Âà¿ı¤£¼W¥[¤å³¹¼Æ¡A·q½Ğ¥]²[)\n\n");
+	outs("æ–‡ç« è½‰éŒ„å®Œæˆã€‚(è½‰éŒ„ä¸å¢åŠ æ–‡ç« æ•¸ï¼Œæ•¬è«‹åŒ…æ¶µ)\n\n");
 
         LOG_IF(LOG_CONF_CROSSPOST,
                log_filef("log/cross_post.log", LOG_CREAT,
@@ -2313,7 +2313,7 @@ cross_post(int ent, fileheader_t * fhdr, const char *direct)
 #ifdef NOTIFY_BM_CP_IGNORE
 	    // ignore BM for cross-posting.
 	    outs(ANSI_COLOR(1;32)
-                 "¦¹½g¬°ªO¥DÂà¿ı¡A¤£¦Û°ÊÀË¬dCP(¦ı½Ğ¤p¤ß»~Ä²¤H¤uÀËÁ|)\n"
+                 "æ­¤ç¯‡ç‚ºæ¿ä¸»è½‰éŒ„ï¼Œä¸è‡ªå‹•æª¢æŸ¥CP(ä½†è«‹å°å¿ƒèª¤è§¸äººå·¥æª¢èˆ‰)\n"
 		 ANSI_RESET);
 #endif
 	}
@@ -2365,7 +2365,7 @@ read_post(int ent, fileheader_t * fhdr, const char *direct)
             bnlen = strlen(++bn) - 1;
             snprintf(bnbuf, sizeof(bnbuf), "%*.*s", bnlen, bnlen, bn);
         } else {
-            // old format:  .BOARDª©, which may conflict with board names.
+            // old format:  .BOARDç‰ˆ, which may conflict with board names.
             bn = strrchr(fhdr->title, '.');
             if (!bn)
                 break;
@@ -2414,7 +2414,7 @@ read_post(int ent, fileheader_t * fhdr, const char *direct)
     {
 	case -1:
 	    clear();
-	    vmsg("¦¹¤å³¹µL¤º®e");
+	    vmsg("æ­¤æ–‡ç« ç„¡å…§å®¹");
 	    return FULLUPDATE;
 	case RET_DOREPLY:
 	case RET_DOREPLYALL:
@@ -2457,16 +2457,16 @@ editLimits(unsigned char *plogins,
     y++;
     move(y+2, 0); clrtobot();
     outs(ANSI_COLOR(1;32)
-         "½Ğª`·N¡uµù¥U®É¶¡¡v¤w³Q¨ú®ø(¥Ñ" STR_LOGINDAYS "¨ú¥N)¡A­Y±z¦¬¨ìªº­×§ï½Ğ¨D\n"
-         "¤´¦³¸Ó¼Æ­È¡A½Ğ­«·s¦V´£¥X¥Ó½ĞªÌ½T»{¡C ¥t¥~½Ğª`·N³o¬O¤@¤Ñ¤@¦¸­pºâ¡A¤£¬O\n"
-         "ÂÂªº¤W¯¸¦¸¼Æ¡C  ¦³ªºªO¥D¥i¯à®³ÂÂªº¤W¯¸¦¸¼Æ¨Ó¥Ó½Ğ¡A³y¦¨¨Ï¥ÎªÌ©¿µMµLªkµo¤å\n"
-         "¦ıªO¥D¤S¥H¬°¨S§ï¹L¡C ³]©w«e½Ğ¸òªO¥D½T»{¹L³o¤£¬OÂÂªº³]©w¼Æ­È¡C\n"
+         "è«‹æ³¨æ„ã€Œè¨»å†Šæ™‚é–“ã€å·²è¢«å–æ¶ˆ(ç”±" STR_LOGINDAYS "å–ä»£)ï¼Œè‹¥æ‚¨æ”¶åˆ°çš„ä¿®æ”¹è«‹æ±‚\n"
+         "ä»æœ‰è©²æ•¸å€¼ï¼Œè«‹é‡æ–°å‘æå‡ºç”³è«‹è€…ç¢ºèªã€‚ å¦å¤–è«‹æ³¨æ„é€™æ˜¯ä¸€å¤©ä¸€æ¬¡è¨ˆç®—ï¼Œä¸æ˜¯\n"
+         "èˆŠçš„ä¸Šç«™æ¬¡æ•¸ã€‚  æœ‰çš„æ¿ä¸»å¯èƒ½æ‹¿èˆŠçš„ä¸Šç«™æ¬¡æ•¸ä¾†ç”³è«‹ï¼Œé€ æˆä½¿ç”¨è€…å¿½ç„¶ç„¡æ³•ç™¼æ–‡\n"
+         "ä½†æ¿ä¸»åˆä»¥ç‚ºæ²’æ”¹éã€‚ è¨­å®šå‰è«‹è·Ÿæ¿ä¸»ç¢ºèªéé€™ä¸æ˜¯èˆŠçš„è¨­å®šæ•¸å€¼ã€‚\n"
         ANSI_RESET);
 
     sprintf(genbuf, "%u", logins*10);
     do {
 	getdata_buf(y, 0,
-                STR_LOGINDAYS "¤U­­ (0~2550,¥H10¬°³æ¦ì,­Ó¦ì¼Æ¦r±N¦Û°Ê±Ë¥h)¡G",
+                STR_LOGINDAYS "ä¸‹é™ (0~2550,ä»¥10ç‚ºå–®ä½,å€‹ä½æ•¸å­—å°‡è‡ªå‹•æ¨å»)ï¼š",
                 genbuf, 5, NUMECHO);
 	temp = atoi(genbuf);
     } while (temp < 0 || temp > 2550);
@@ -2478,7 +2478,7 @@ editLimits(unsigned char *plogins,
     sprintf(genbuf, "%u", temp);
     do {
 	getdata_buf(y, 0,
-		"°h¤å½g¼Æ¤W­­ (0~255)¡G", genbuf, 5, NUMECHO);
+		"é€€æ–‡ç¯‡æ•¸ä¸Šé™ (0~255)ï¼š", genbuf, 5, NUMECHO);
 	temp = atoi(genbuf);
     } while (temp < 0 || temp > 255);
     badpost = (unsigned char)(255 - temp);
@@ -2507,8 +2507,8 @@ do_limitedit(int ent, fileheader_t * fhdr, const char *direct)
 	strcat(buf, "(A)¥»ªOµoªí­­¨î ");
     strcat(buf, "(B)¥»ªO¹w³]");
     if (fhdr->filemode & FILE_VOTE)
-	strcat(buf, " (C)¥»½g");
-    strcat(buf, "³s¸p­­¨î (Q)¨ú®ø¡H[Q]");
+	strcat(buf, " (C)æœ¬ç¯‡");
+    strcat(buf, "é€£ç½²é™åˆ¶ (Q)å–æ¶ˆï¼Ÿ[Q]");
     buf[0] = vans(buf);
 
     if ((HasUserPerm(PERM_BOARD) || (HasUserPerm(PERM_SYSSUPERSUBOP) && GROUPOP())) && buf[0] == 'a') {
@@ -2520,7 +2520,7 @@ do_limitedit(int ent, fileheader_t * fhdr, const char *direct)
 	assert(0<=currbid-1 && currbid-1<MAX_BOARD);
 	substitute_record(fn_board, bp, sizeof(boardheader_t), currbid);
 	log_usies("SetBoard", bp->brdname);
-	vmsg("­×§ï§¹¦¨¡I");
+	vmsg("ä¿®æ”¹å®Œæˆï¼");
 	return FULLUPDATE;
 
     } else if (buf[0] == 'b') {
@@ -2532,12 +2532,12 @@ do_limitedit(int ent, fileheader_t * fhdr, const char *direct)
 	assert(0<=currbid-1 && currbid-1<MAX_BOARD);
 	substitute_record(fn_board, bp, sizeof(boardheader_t), currbid);
 	log_usies("SetBoard", bp->brdname);
-	vmsg("­×§ï§¹¦¨¡I");
+	vmsg("ä¿®æ”¹å®Œæˆï¼");
 	return FULLUPDATE;
 
     } else if ((fhdr->filemode & FILE_VOTE) && buf[0] == 'c') {
         if (currmode & MODE_SELECT) {
-            vmsg("½Ğ°h¥X·j´M¼Ò¦¡«á¦A³]©w¡C");
+            vmsg("è«‹é€€å‡ºæœå°‹æ¨¡å¼å¾Œå†è¨­å®šã€‚");
             return FULLUPDATE;
         }
 
@@ -2546,20 +2546,20 @@ do_limitedit(int ent, fileheader_t * fhdr, const char *direct)
 		&fhdr->multi.vote_limits.badpost);
         if (modify_dir_lite(direct, ent, fhdr->filename, 0, NULL, NULL, NULL, 0,
                             &fhdr->multi, 0, 0) != 0) {
-            vmsg("­×§ï¥¢±Ñ¡A½Ğ­«·s¶i¤J¬İªO¦A¸Õ¸Õ¡C");
+            vmsg("ä¿®æ”¹å¤±æ•—ï¼Œè«‹é‡æ–°é€²å…¥çœ‹æ¿å†è©¦è©¦ã€‚");
             return FULLUPDATE;
         }
 
-	vmsg("­×§ï§¹¦¨¡I");
+	vmsg("ä¿®æ”¹å®Œæˆï¼");
 	return FULLUPDATE;
     }
 
-    vmsg("¨ú®ø­×§ï");
+    vmsg("å–æ¶ˆä¿®æ”¹");
     return FULLUPDATE;
 }
 
 /* ----------------------------------------------------- */
-/* ±Ä¶°ºëµØ°Ï                                            */
+/* æ¡é›†ç²¾è¯å€                                            */
 /* ----------------------------------------------------- */
 static int
 b_man(void)
@@ -2597,7 +2597,7 @@ cite_post(int ent GCC_UNUSED, const fileheader_t * fhdr,
     char            title[TTLEN + 1];
 
     setbfile(fpath, currboard, fhdr->filename);
-    strlcpy(title, "¡º ", sizeof(title));
+    strlcpy(title, "â—‡ ", sizeof(title));
     strlcpy(title + 3, fhdr->title, TTLEN - 3);
     title[TTLEN] = '\0';
     a_copyitem(fpath, title, 0, 1);
@@ -2626,7 +2626,7 @@ edit_title(int ent, fileheader_t * fhdr, const char *direct)
 	return DONOTHING;
 
     if (currmode & MODE_SELECT) {
-        vmsg("½Ğ°h¥X·j´M¼Ò¦¡«á¦A³]©w¡C");
+        vmsg("è«‹é€€å‡ºæœå°‹æ¨¡å¼å¾Œå†è¨­å®šã€‚");
         return READ_REDRAW;
     }
     memcpy(&tmpfhdr, fhdr, sizeof(tmpfhdr));
@@ -2634,15 +2634,15 @@ edit_title(int ent, fileheader_t * fhdr, const char *direct)
     if (fhdr && fhdr->title[0])
 	strlcpy(genbuf, fhdr->title, TTLEN+1);
 
-    if (getdata_buf(b_lines - 1, 0, "¼ĞÃD¡G", tmpfhdr.title, TTLEN, DOECHO)) {
+    if (getdata_buf(b_lines - 1, 0, "æ¨™é¡Œï¼š", tmpfhdr.title, TTLEN, DOECHO)) {
 	// check TN_ANNOUNCE again for non-BMs...
 	tn_safe_strip(tmpfhdr.title);
     }
 
     if (allow >= 2) {
         char datebuf[6];
-        getdata_buf(b_lines - 1, 0, "§@ªÌ¡G", tmpfhdr.owner, IDLEN + 2, DOECHO);
-        getdata_str(b_lines - 1, 0, "¤é´Á¡G", datebuf, 6, DOECHO, tmpfhdr.date);
+        getdata_buf(b_lines - 1, 0, "ä½œè€…ï¼š", tmpfhdr.owner, IDLEN + 2, DOECHO);
+        getdata_str(b_lines - 1, 0, "æ—¥æœŸï¼š", datebuf, 6, DOECHO, tmpfhdr.date);
         // Normalize date to %.5s
         snprintf(tmpfhdr.date, sizeof(tmpfhdr.date), "%5.5s", datebuf);
     }
@@ -2656,13 +2656,13 @@ edit_title(int ent, fileheader_t * fhdr, const char *direct)
                tmpfhdr.title);
     }
 
-    getdata(b_lines - 1, 0, "½T©w(Y/N)?[n] ", genbuf, 3, LCECHO);
+    getdata(b_lines - 1, 0, "ç¢ºå®š(Y/N)?[n] ", genbuf, 3, LCECHO);
     if (genbuf[0] != 'y')
         return FULLUPDATE;
 
     if (modify_dir_lite(direct, ent, fhdr->filename, 0, tmpfhdr.title,
                         tmpfhdr.owner, tmpfhdr.date, 0, NULL, 0, 0) != 0) {
-        vmsg("©êºp¡A¨t²Î¦£¸L¤¤¡A½Ğµy«á¦A¸Õ¡C");
+        vmsg("æŠ±æ­‰ï¼Œç³»çµ±å¿™ç¢Œä¸­ï¼Œè«‹ç¨å¾Œå†è©¦ã€‚");
         return FULLUPDATE;
     }
     LOG_IF(LOG_CONF_EDIT_TITLE,
@@ -2686,11 +2686,11 @@ do_add_recommend(const char *direct, fileheader_t *fhdr,
 
     /*
       race here:
-      ¬°¤F´î¤Ö system calls , ²{¦bª½±µ¥Î·í«eªº±À¤å¼Æ +1 ¼g¤J .DIR ¤¤.
-      ³y¦¨
-      1.­Y¸Ó¤åÀÉ¦W³Q´«±¼ªº¸Ü, ±À¤å±N¼g¦ÜÂÂÀÉ¦W¤¤ (³y¦¨«ÕÆFÀÉ)
-      2.¨S¦³­«·sÅª¤@¦¸, ©Ò¥H±À¤å¼Æ¥i¯à³Q¤Öºâ
-      3.­Y±Àªº®É­Ô«e¤å³Q§R, ±N¥[¨ì«á¤åªº±À¤å¼Æ
+      ç‚ºäº†æ¸›å°‘ system calls , ç¾åœ¨ç›´æ¥ç”¨ç•¶å‰çš„æ¨æ–‡æ•¸ +1 å¯«å…¥ .DIR ä¸­.
+      é€ æˆ
+      1.è‹¥è©²æ–‡æª”åè¢«æ›æ‰çš„è©±, æ¨æ–‡å°‡å¯«è‡³èˆŠæª”åä¸­ (é€ æˆå¹½éˆæª”)
+      2.æ²’æœ‰é‡æ–°è®€ä¸€æ¬¡, æ‰€ä»¥æ¨æ–‡æ•¸å¯èƒ½è¢«å°‘ç®—
+      3.è‹¥æ¨çš„æ™‚å€™å‰æ–‡è¢«åˆª, å°‡åŠ åˆ°å¾Œæ–‡çš„æ¨æ–‡æ•¸
 
      */
 
@@ -2705,7 +2705,7 @@ do_add_recommend(const char *direct, fileheader_t *fhdr,
             if (flock(fd, LOCK_EX | LOCK_NB) < 0) {
                 move(b_lines, 0);
                 SOLVE_ANSI_CACHE();
-                prints("==> ÀÉ®×¥¿³Q¥¦¤H½s¿è¤¤¡Aµ¥«İ§¹¦¨: %d\n", lock_retry+1);
+                prints("==> æª”æ¡ˆæ­£è¢«å®ƒäººç·¨è¼¯ä¸­ï¼Œç­‰å¾…å®Œæˆ: %d\n", lock_retry+1);
                 doupdate();
                 sleep(lock_wait);
                 // reopen the file because edit_post creates a new file.
@@ -2720,7 +2720,7 @@ do_add_recommend(const char *direct, fileheader_t *fhdr,
         }
         close(fd);
         if (!lock_success) {
-            vmsg("¿ù»~: ÀÉ®×¥¿³Q¥¦¤H½s¿è¤¤¡AµLªk¼g¤J¡C");
+            vmsg("éŒ¯èª¤: æª”æ¡ˆæ­£è¢«å®ƒäººç·¨è¼¯ä¸­ï¼Œç„¡æ³•å¯«å…¥ã€‚");
             goto error;
         }
 #else
@@ -2728,8 +2728,8 @@ do_add_recommend(const char *direct, fileheader_t *fhdr,
         close(fd);
 #endif
     } else {
-	vmsg((errno == EROFS) ? "¿ù»~: ¨t²Î¥Ø«e°ßÅª¤¤¡AµLªk­×§ï¡C" :
-             "¿ù»~: ­ìÀÉ®×¤w³Q§R°£¡C µLªk¼g¤J¡C");
+	vmsg((errno == EROFS) ? "éŒ¯èª¤: ç³»çµ±ç›®å‰å”¯è®€ä¸­ï¼Œç„¡æ³•ä¿®æ”¹ã€‚" :
+             "éŒ¯èª¤: åŸæª”æ¡ˆå·²è¢«åˆªé™¤ã€‚ ç„¡æ³•å¯«å…¥ã€‚");
 	goto error;
     }
 
@@ -2773,16 +2773,16 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
     char	    mynick[IDLEN+1];
 #ifndef OLDRECOMMEND
     static const char *ctype[RECTYPE_SIZE] = {
-		       "±À", "¼N", "¡÷",
+		       "æ¨", "å™“", "â†’",
 		   };
     static const char *ctype_attr[RECTYPE_SIZE] = {
 		       ANSI_COLOR(1;33),
 		       ANSI_COLOR(1;31),
 		       ANSI_COLOR(1;37),
 		   }, *ctype_long[RECTYPE_SIZE] = {
-		       "­È±o±ÀÂË",
-		       "µ¹¥¦¼NÁn",
-		       "¥u¥[¡÷µù¸Ñ",
+		       "å€¼å¾—æ¨è–¦",
+		       "çµ¦å®ƒå™“è²",
+		       "åªåŠ â†’è¨»è§£",
 		   };
 #endif
     int             type, maxlength;
@@ -2792,7 +2792,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
     int isGuest = (strcmp(cuser.userid, STR_GUEST) == EQUSTR);
     int logIP = 0;
     int ymsg = b_lines -1;
-    const char *reason = "Åv­­¤£¨¬";
+    const char *reason = "æ¬Šé™ä¸è¶³";
 
     if (!fhdr || !fhdr->filename[0])
 	return DONOTHING;
@@ -2802,28 +2802,28 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 
     if (bp->brdattr & BRD_NORECOMMEND || fhdr->filename[0] == 'L' ||
         ((fhdr->filemode & FILE_MARKED) && (fhdr->filemode & FILE_SOLVED))) {
-	vmsg("©êºp, ¸T¤î±ÀÂË");
+	vmsg("æŠ±æ­‰, ç¦æ­¢æ¨è–¦");
 	return FULLUPDATE;
     }
     if (!CheckPostPerm2(&reason) || isGuest)
     {
-	vmsgf("µLªk±À¤å: %s", reason); //  "(¥i«ö¤j¼g I ¬d¬İ­­¨î)"
+	vmsgf("ç„¡æ³•æ¨æ–‡: %s", reason); //  "(å¯æŒ‰å¤§å¯« I æŸ¥çœ‹é™åˆ¶)"
 	return FULLUPDATE;
     }
 
-    // TODO ¥¼¨Ó¥i¥H¦Ò¼{§@¦¨¦³¿ï¶µ¥i³]©w¡C
+    // TODO æœªä¾†å¯ä»¥è€ƒæ…®ä½œæˆæœ‰é¸é …å¯è¨­å®šã€‚
 #ifdef BN_ONLY_OP_CAN_ADD_COMMENT
     if (  strcmp(bp->brdname, BN_ONLY_OP_CAN_ADD_COMMENT) == 0 &&
 	!((currmode & MODE_BOARD) || HasUserPerm(PERM_SYSOP|PERM_SYSSUPERSUBOP|PERM_SYSSUBOP)) )
     {
-	vmsg("¥»ªO±À¤å­­©wºŞ²z¤H­û¨Ï¥Î¡C");
+	vmsg("æœ¬æ¿æ¨æ–‡é™å®šç®¡ç†äººå“¡ä½¿ç”¨ã€‚");
 	return FULLUPDATE;
     }
 #endif
 
 #ifdef SAFE_ARTICLE_DELETE
     if (fhdr->filename[0] == '.' || fhdr->owner[0] == '-') {
-	vmsg("¥»¤å¤w§R°£");
+	vmsg("æœ¬æ–‡å·²åˆªé™¤");
 	return FULLUPDATE;
     }
 #endif
@@ -2837,7 +2837,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 #ifndef DEBUG
     if (get_board_restriction_reason(currbid, sizeof(msg), msg))
     {
-	vmsgf("¥¼¹F¬İªOµo¤å­­¨î: %s", msg);
+	vmsgf("æœªé”çœ‹æ¿ç™¼æ–‡é™åˆ¶: %s", msg);
 	return FULLUPDATE;
     }
 #endif
@@ -2852,7 +2852,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	int d = (int)bp->fastrecommend_pause - (now - lastrecommend);
 	if (d > 0)
 	{
-	    vmsgf("¥»ªO¸T¤î§Ö³t³sÄò±À¤å¡A½Ğ¦Aµ¥ %d ¬í", d);
+	    vmsgf("æœ¬æ¿ç¦æ­¢å¿«é€Ÿé€£çºŒæ¨æ–‡ï¼Œè«‹å†ç­‰ %d ç§’", d);
 	    return FULLUPDATE;
 	}
     }
@@ -2867,7 +2867,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	}
 	recommend_in_minute++;
 	if(recommend_in_minute>60) {
-	    vmsg("¨t²Î¸T¤îµu®É¶¡¤º¤j¶q±À¤å");
+	    vmsg("ç³»çµ±ç¦æ­¢çŸ­æ™‚é–“å…§å¤§é‡æ¨æ–‡");
 	    return FULLUPDATE;
 	}
     }
@@ -2878,14 +2878,14 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	setdirpath(path, direct, fhdr->filename);
 	size = dashs(path);
 	if (size > 5*1024*1024) {
-	    vmsg("ÀÉ®×¤Ó¤j, µLªkÄ~Äò±À¤å, ½Ğ¥t¼¶¤åµoªí");
+	    vmsg("æª”æ¡ˆå¤ªå¤§, ç„¡æ³•ç¹¼çºŒæ¨æ–‡, è«‹å¦æ’°æ–‡ç™¼è¡¨");
 	    return FULLUPDATE;
 	}
 
 	if (size > 100*1024) {
 	    int d = 10 - (now - lastrecommend);
 	    if (d > 0) {
-		vmsgf("¥»¤å¤w¹Lªø, ¸T¤î§Ö³t³sÄò±À¤å, ½Ğ¦Aµ¥ %d ¬í", d);
+		vmsgf("æœ¬æ–‡å·²éé•·, ç¦æ­¢å¿«é€Ÿé€£çºŒæ¨æ–‡, è«‹å†ç­‰ %d ç§’", d);
 		return FULLUPDATE;
 	    }
 	}
@@ -2918,9 +2918,9 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	type = RECTYPE_ARROW;
 	move(ymsg--, 0); clrtoeol();
 #ifndef OLDRECOMMEND
-	outs("§@ªÌ¥»¤H, ¨Ï¥Î ¡÷ ¥[µù¤è¦¡\n");
+	outs("ä½œè€…æœ¬äºº, ä½¿ç”¨ â†’ åŠ è¨»æ–¹å¼\n");
 #else
-	outs("§@ªÌ¥»¤H­º±À, ¨Ï¥Î ¡÷ ¥[µù¤è¦¡\n");
+	outs("ä½œè€…æœ¬äººé¦–æ¨, ä½¿ç”¨ â†’ åŠ è¨»æ–¹å¼\n");
 #endif
 
     }
@@ -2937,7 +2937,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	// too close
 	type = RECTYPE_ARROW;
 	move(ymsg--, 0); clrtoeol();
-	outs("®É¶¡¤Óªñ, ¨Ï¥Î ¡÷ ¥[µù¤è¦¡\n");
+	outs("æ™‚é–“å¤ªè¿‘, ä½¿ç”¨ â†’ åŠ è¨»æ–¹å¼\n");
     }
 #endif
 
@@ -2947,7 +2947,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	int i;
 
 	move(b_lines, 0); clrtoeol();
-	outs(ANSI_COLOR(1)  "±zÄ±±o³o½g¤å³¹ ");
+	outs(ANSI_COLOR(1)  "æ‚¨è¦ºå¾—é€™ç¯‡æ–‡ç«  ");
 
 	for (i = 0; i < RECTYPE_SIZE; i++)
 	{
@@ -2985,7 +2985,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
     {
 	move(ymsg--, 0); clrtoeol();
 	outs(ANSI_COLOR(1;31)
-	    "¡»³o½g¤å³¹¨Ó¦Û°Î¦WªO©Î¥~¯¸Âà«HªO¡A­ì§@ªÌ¥i¯àµLªk¬İ¨ì±À¤å¡C"
+	    "â—†é€™ç¯‡æ–‡ç« ä¾†è‡ªåŒ¿åæ¿æˆ–å¤–ç«™è½‰ä¿¡æ¿ï¼ŒåŸä½œè€…å¯èƒ½ç„¡æ³•çœ‹åˆ°æ¨æ–‡ã€‚"
 	    ANSI_RESET "\n");
     }
 
@@ -2998,10 +2998,10 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 	    ymsg --;
 	    move(ymsg--, 0); clrtoeol();
 	    outs(ANSI_COLOR(1;33)
-	    "¡»±z¥¿¦b·j´M(¼ĞÃD¡B§@ªÌ...)©Î¨ä¥¦¯S®í¦Cªí¼Ò¦¡¡A"
-	    "±À¤å­p¼Æ»P­×§ï°O¿ı±N·|¤À¶}­pºâ¡C"
+	    "â—†æ‚¨æ­£åœ¨æœå°‹(æ¨™é¡Œã€ä½œè€…...)æˆ–å…¶å®ƒç‰¹æ®Šåˆ—è¡¨æ¨¡å¼ï¼Œ"
+	    "æ¨æ–‡è¨ˆæ•¸èˆ‡ä¿®æ”¹è¨˜éŒ„å°‡æœƒåˆ†é–‹è¨ˆç®—ã€‚"
 	    ANSI_RESET "\n"
-	    "  ­Y·Q¥¿±`­p¼Æ½Ğ¥ı¥ªÁä°h¦^¥¿±`¦Cªí¼Ò¦¡¡C\n");
+	    "  è‹¥æƒ³æ­£å¸¸è¨ˆæ•¸è«‹å…ˆå·¦éµé€€å›æ­£å¸¸åˆ—è¡¨æ¨¡å¼ã€‚\n");
 	}
     }
 
@@ -3022,7 +3022,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
 
 #if defined(PLAY_ANGEL)
     if (HasUserPerm(PERM_ANGEL) && (bp->brdattr & BRD_ANGELANONYMOUS) &&
-	vans("­n¨Ï¥Î¤p¤Ñ¨Ï°Î¦W±À¤å¶Ü¡H [Y/n]: ") != 'n')
+	vans("è¦ä½¿ç”¨å°å¤©ä½¿åŒ¿åæ¨æ–‡å—ï¼Ÿ [Y/n]: ") != 'n')
     {
 	// angel push
 	mynick[0] = 0;
@@ -3040,9 +3040,9 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
     }
 
 #ifdef OLDRECOMMEND
-    maxlength -= 2; /* '±À' */
+    maxlength -= 2; /* 'æ¨' */
     maxlength -= strlen(myid);
-    sprintf(buf, "%s %s:", "¡÷" , myid);
+    sprintf(buf, "%s %s:", "â†’" , myid);
 
 #else // !OLDRECOMMEND
     maxlength -= strlen(myid);
@@ -3061,7 +3061,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
         // to hold ':wq', ':q!' 'ZZ'
 	char ans[2];
 	sprintf(buf+strlen(buf),
-		ANSI_REVERSE "%-*s" ANSI_RESET " ½T©w[y/N]:",
+		ANSI_REVERSE "%-*s" ANSI_RESET " ç¢ºå®š[y/N]:",
 		maxlength, msg);
 	move(b_lines, 0);
 	clrtoeol();
@@ -3080,7 +3080,7 @@ recommend(int ent, fileheader_t * fhdr, const char *direct)
                                     (int)now, currboard, fhdr->filename, msg));
 #ifdef USE_COMMENTD
     if (CommentsAddRecord(bp->brdname, fhdr->filename, type, msg)) {
-        vmsg("¿ù»~: ¸ê®Æ®w³s½u²§±`¡AµLªk¼g¤J¡C½Ğµy­Ô¦A¸Õ¡C");
+        vmsg("éŒ¯èª¤: è³‡æ–™åº«é€£ç·šç•°å¸¸ï¼Œç„¡æ³•å¯«å…¥ã€‚è«‹ç¨å€™å†è©¦ã€‚");
         return FULLUPDATE;
     }
 #endif
@@ -3123,11 +3123,11 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
     int ret = 0;
     int check_mark = 1, check_digest = 0;
 
-    /* ¦³¤TºØ±¡ªp·|¶i³o¸Ì, «H¥ó, ¬İªO, ºëµØ°Ï */
-    // ÀË¬dªº¤èªk¬O¬İ *direct:
-    //  'b' = ¬İªO boards/%c/%s/*
-    //  'm' = ºëµØ°Ï man/.../* or man/boards/%c/%s/.../*
-    //  'h' = «H½c home/%c/%s/* ©Î«H½cºëµØ°Ï home/%c/%s/man/.../*
+    /* æœ‰ä¸‰ç¨®æƒ…æ³æœƒé€²é€™è£¡, ä¿¡ä»¶, çœ‹æ¿, ç²¾è¯å€ */
+    // æª¢æŸ¥çš„æ–¹æ³•æ˜¯çœ‹ *direct:
+    //  'b' = çœ‹æ¿ boards/%c/%s/*
+    //  'm' = ç²¾è¯å€ man/.../* or man/boards/%c/%s/.../*
+    //  'h' = ä¿¡ç®± home/%c/%s/* æˆ–ä¿¡ç®±ç²¾è¯å€ home/%c/%s/man/.../*
     int is_board = (*direct == 'b'),
         // is_home = (*direct == 'h'),
         is_man = (*direct == 'm');
@@ -3143,31 +3143,31 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
     }
 #endif
 
-    /* rocker.011018: ¦ê±µ¼Ò¦¡¤UÁÙ¬O¤£¤¹³\§R°£¤ñ¸û¦n */
+    /* rocker.011018: ä¸²æ¥æ¨¡å¼ä¸‹é‚„æ˜¯ä¸å…è¨±åˆªé™¤æ¯”è¼ƒå¥½ */
     if (currmode & MODE_SELECT) {
-	vmsg("½Ğ¥ı¦^¨ì¥¿±`¼Ò¦¡«á¦A¶i¦æ§R°£...");
+	vmsg("è«‹å…ˆå›åˆ°æ­£å¸¸æ¨¡å¼å¾Œå†é€²è¡Œåˆªé™¤...");
 	return FULLUPDATE;
     }
 
     // let's do a full screen delete.
     clear();
-    vs_hdr("§R°£½d³ò");
+    vs_hdr("åˆªé™¤ç¯„åœ");
 
-    getdata(2, 0, "°_ÂI: ", numstr, 7, DOECHO);
+    getdata(2, 0, "èµ·é»: ", numstr, 7, DOECHO);
     num1 = atoi(numstr);
     if (num1 <= 0) {
-        vmsg("°_ÂI¦³»~");
+        vmsg("èµ·é»æœ‰èª¤");
         return FULLUPDATE;
     }
-    getdata(3, 0, "²×ÂI: ",numstr, 7, DOECHO);
+    getdata(3, 0, "çµ‚é»: ",numstr, 7, DOECHO);
     num2 = atoi(numstr);
     if (num2 < num1) {
-        vmsg("²×ÂI¦³»~");
+        vmsg("çµ‚é»æœ‰èª¤");
         return FULLUPDATE;
     }
     num = num2 - num1 + 1;
     if (num > 1000) {
-        vmsg("½Ğ¤Å¤@¦¸§R°£¶W¹L 1000 ½g¡C");
+        vmsg("è«‹å‹¿ä¸€æ¬¡åˆªé™¤è¶…é 1000 ç¯‡ã€‚");
         return FULLUPDATE;
     }
 
@@ -3178,7 +3178,7 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
     if (!recs ||
         get_records(direct, recs, sizeof(fileheader_t), num1, num) != num) {
         free(recs);
-        vmsg("µLªk¨ú±o«ü©w½d³òªº¸ê°T¡A½Ğ°h¥X«áµy­Ô¦A¸Õ");
+        vmsg("ç„¡æ³•å–å¾—æŒ‡å®šç¯„åœçš„è³‡è¨Šï¼Œè«‹é€€å‡ºå¾Œç¨å€™å†è©¦");
         return FULLUPDATE;
     }
     mvprints(5, 0, "#%06d %-*s %s\n"
@@ -3189,7 +3189,7 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
 
     // HACK: warn if target is man.
     if (is_man) {
-        outs("(½d³ò¤ºªº¤l¥Ø¿ı·|³Q¦Û°Ê¸õ¹L¡A½Ğ¥t¦æ¥Î¤p d §R°£)\n");
+        outs("(ç¯„åœå…§çš„å­ç›®éŒ„æœƒè¢«è‡ªå‹•è·³éï¼Œè«‹å¦è¡Œç”¨å° d åˆªé™¤)\n");
         // do not check mark in man
         check_mark = 0;
     } else if (is_board) {
@@ -3203,7 +3203,7 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
     }
 
     // ready to start.
-    outmsg("³B²z¤¤,½Ğµy«á...");
+    outmsg("è™•ç†ä¸­,è«‹ç¨å¾Œ...");
     refresh();
     ret = 0;
     LOG_IF((LOG_CONF_MASS_DELETE && (num >= 50)),
@@ -3219,21 +3219,21 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
             const char *bypass = NULL;
 
             if (check_mark && fh->filemode & FILE_MARKED) {
-                bypass = "¼Ğ°O¬° m ªº¶µ¥Ø";
+                bypass = "æ¨™è¨˜ç‚º m çš„é …ç›®";
             } else if (check_digest && fh->filemode & FILE_DIGEST) {
-                /* ¤åºK , FILE_DIGEST is used as REPLIED in mail menu.*/
-                bypass = "¤åºK";
+                /* æ–‡æ‘˜ , FILE_DIGEST is used as REPLIED in mail menu.*/
+                bypass = "æ–‡æ‘˜";
             } else {
                 char xfpath[PATHLEN];
                 setdirpath(xfpath, direct, fh->filename);
                 if (dashd(xfpath)) {
-                    bypass = "¤l¥Ø¿ı";
+                    bypass = "å­ç›®éŒ„";
                 }
             }
 
             if (bypass) {
                 id++;
-                mvprints(b_lines-1, 0, "¸õ¹L%s: %s\n", bypass, fh->title);
+                mvprints(b_lines-1, 0, "è·³é%s: %s\n", bypass, fh->title);
                 doupdate();
                 continue;
             }
@@ -3267,12 +3267,12 @@ del_range(int ent GCC_UNUSED, const fileheader_t *fhdr GCC_UNUSED,
 
     if (ret < 0) {
         clear();
-        vs_hdr("³¡¥÷§R°£¥¢±Ñ");
-        prints("\n\n¤w§R°£¤F %d ­ÓÀÉ®×¡A¦ıµLªk§R°£¨ä¥¦ÀÉ®×¡C\n", cdeleted);
-        outs( "¥i¯à¬O¦P®É¦³¨ä¥¦¤H¤]¦b¶i¦æ§R°£¡C½Ğ°h¥X¦¹¥Ø¿ı«á¦A­«¸Õ¡C\n\n"
-              "­Y¦¹¿ù»~«ùÄòµo¥Í¡A½Ğµ¥¬ù¤@¤p®É«á¦A­«¸Õ¡C\n\n"
-              "­Y¨ì®É¤´µLªk§R°£¡A½Ğ¨ì " BN_BUGREPORT " ¬İªO³ø§i¡C\n");
-        vmsg("µLªk§R°£¡C¥i¯à¦³¨ä¥¦¤H¥¿¦b¦P®É§R°£¡C");
+        vs_hdr("éƒ¨ä»½åˆªé™¤å¤±æ•—");
+        prints("\n\nå·²åˆªé™¤äº† %d å€‹æª”æ¡ˆï¼Œä½†ç„¡æ³•åˆªé™¤å…¶å®ƒæª”æ¡ˆã€‚\n", cdeleted);
+        outs( "å¯èƒ½æ˜¯åŒæ™‚æœ‰å…¶å®ƒäººä¹Ÿåœ¨é€²è¡Œåˆªé™¤ã€‚è«‹é€€å‡ºæ­¤ç›®éŒ„å¾Œå†é‡è©¦ã€‚\n\n"
+              "è‹¥æ­¤éŒ¯èª¤æŒçºŒç™¼ç”Ÿï¼Œè«‹ç­‰ç´„ä¸€å°æ™‚å¾Œå†é‡è©¦ã€‚\n\n"
+              "è‹¥åˆ°æ™‚ä»ç„¡æ³•åˆªé™¤ï¼Œè«‹åˆ° " BN_BUGREPORT " çœ‹æ¿å ±å‘Šã€‚\n");
+        vmsg("ç„¡æ³•åˆªé™¤ã€‚å¯èƒ½æœ‰å…¶å®ƒäººæ­£åœ¨åŒæ™‚åˆªé™¤ã€‚");
     }
 
     return (ret < 0 || cdeleted > 0) ? DIRCHANGED : FULLUPDATE;
@@ -3315,14 +3315,14 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
 
     /* TODO recursive lookup */
     if (currmode & MODE_SELECT) {
-        vmsg("½Ğ¦^¨ì¤@¯ë¼Ò¦¡¦A§R°£¤å³¹");
+        vmsg("è«‹å›åˆ°ä¸€èˆ¬æ¨¡å¼å†åˆªé™¤æ–‡ç« ");
         return DONOTHING;
     }
 
     /* DIGEST is not visible to users... */
     if ((fhdr->filemode & FILE_BOTTOM) ||
         (fhdr->filemode & FILE_MARKED) || (fhdr->filemode & FILE_DIGEST)) {
-        vmsg("¤å³¹³Q¼Ğ°O©Î¸m©³©Î¦¬¤J¤åºK¡AµLªk§R°£¡A½Ğ¬¢ªO¥D");
+        vmsg("æ–‡ç« è¢«æ¨™è¨˜æˆ–ç½®åº•æˆ–æ”¶å…¥æ–‡æ‘˜ï¼Œç„¡æ³•åˆªé™¤ï¼Œè«‹æ´½æ¿ä¸»");
         return DONOTHING;
     }
 
@@ -3356,7 +3356,7 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
 	return DONOTHING;
 
     if ((bp->brdattr & BRD_NOSELFDELPOST) && !(currmode & MODE_BOARD)) {
-        vmsg("©êºp¡A¥»¬İªO¥Ø«e¸T¤î¦Û§R¤å³¹¡C");
+        vmsg("æŠ±æ­‰ï¼Œæœ¬çœ‹æ¿ç›®å‰ç¦æ­¢è‡ªåˆªæ–‡ç« ã€‚");
 	return DONOTHING;
     }
 
@@ -3368,29 +3368,29 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
     {
 	// manager (bm, sysop, police)
 	do {
-	    getdata(1, 0, "½Ğ½T©w§R°£(Y/N/R¥[µù²z¥Ñ)?[N]", genbuf, 3, LCECHO);
+	    getdata(1, 0, "è«‹ç¢ºå®šåˆªé™¤(Y/N/RåŠ è¨»ç†ç”±)?[N]", genbuf, 3, LCECHO);
 
 	    // for y/n, skip.
 	    if (genbuf[0] != 'r')
 		break;
 
 	    // build reason string (based on STR_SAFEDEL_TITLE)
-	    snprintf(reason, sizeof(reason), "(¤w³Q%s§R°£) <%s>",
+	    snprintf(reason, sizeof(reason), "(å·²è¢«%såˆªé™¤) <%s>",
 		    cuser.userid, fhdr->owner);
 	    move(3, 0); clrtoeol();
-	    getdata_str(2, 0, " >> ½Ğ¿é¤J§R°£«á­nÅã¥Üªº¼ĞÃD: ¡¼ ",
+	    getdata_str(2, 0, " >> è«‹è¼¸å…¥åˆªé™¤å¾Œè¦é¡¯ç¤ºçš„æ¨™é¡Œ: â–¡ ",
 		    reason, sizeof(reason), DOECHO, reason);
 
 	    if (!reason[0])
 	    {
-		vmsg("¥¼¿é¤J²z¥Ñ¡A©ñ±ó§R°£¡C");
+		vmsg("æœªè¼¸å…¥ç†ç”±ï¼Œæ”¾æ£„åˆªé™¤ã€‚");
 		genbuf[0] = 'n';
 		break;
 	    }
 
 	    // confirm again!
 	    move(4, 0); clrtoeol();
-	    getdata(3, 0, "½Ğ¦A¦¸½T©w¬O§_­n¥Î¤W­z²z¥Ñ§R°£(Y/N)?[N]",
+	    getdata(3, 0, "è«‹å†æ¬¡ç¢ºå®šæ˜¯å¦è¦ç”¨ä¸Šè¿°ç†ç”±åˆªé™¤(Y/N)?[N]",
 		    genbuf, 3, LCECHO);
 
 	    // since the default y/n is same to msg_del_ny, we reuse the genbuf[0] here.
@@ -3404,13 +3404,13 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
     if (genbuf[0] == 'y') {
 
         // Must have enough money.
-        // ºâ¿ú«e¥ı§â¤å³¹ºØÃş·d²M·¡
+        // ç®—éŒ¢å‰å…ˆæŠŠæ–‡ç« ç¨®é¡ææ¸…æ¥š
         int del_fee = fhdr->multi.money;
         // freebn/brd_bad: should be done before, but let's make it safer.
         // new rule: only articles with money need updating
         // numpost (to solve deleting cross-posts).
-        // DIGEST mode ¤£¥ÎºŞ
-        // INVALIDMONEY_MODES (FILE_BID, FILE_ANONYMOUS, ...) ¤]³£¤£¥Î¦©
+        // DIGEST mode ä¸ç”¨ç®¡
+        // INVALIDMONEY_MODES (FILE_BID, FILE_ANONYMOUS, ...) ä¹Ÿéƒ½ä¸ç”¨æ‰£
         // also check MAX_POST_MONEY in case any error made bad money...
         if (del_fee < 0 ||
             IsFreeBoardName(currboard) ||
@@ -3424,7 +3424,7 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
         if (!not_owned) {
             reload_money();
             if (cuser.money < del_fee) {
-                vmsgf("±z¨­¤Wªº" MONEYNAME "¤£°÷¡A§R°£¦¹¤å­n %d "
+                vmsgf("æ‚¨èº«ä¸Šçš„" MONEYNAME "ä¸å¤ ï¼Œåˆªé™¤æ­¤æ–‡è¦ %d "
                       MONEYNAME, del_fee);
                 return FULLUPDATE;
             }
@@ -3451,16 +3451,16 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
             deleteCrossPost(fhdr, bp->brdname);
 
             move(b_lines - 10, 0); clrtobot();
-            prints("\n¥¿¦b§R°£¤å³¹: %s\n", fhdr->title);
+            prints("\næ­£åœ¨åˆªé™¤æ–‡ç« : %s\n", fhdr->title);
 
             // check delete_file_content for del_ret
             if (!IS_DELETE_FILE_CONTENT_OK(del_ret)) {
-                outs("ÀÉ®×¥i¯à¤w³Q¥¦¤H§R°£©Îµo¥Í¿ù»~¡A"
-                     "­Y«ùÄòµo¥Í½Ğ¦V" BN_BUGREPORT "³ø§i\n");
+                outs("æª”æ¡ˆå¯èƒ½å·²è¢«å®ƒäººåˆªé™¤æˆ–ç™¼ç”ŸéŒ¯èª¤ï¼Œ"
+                     "è‹¥æŒçºŒç™¼ç”Ÿè«‹å‘" BN_BUGREPORT "å ±å‘Š\n");
             }
             if (del_ret == DELETE_FILE_CONTENT_BACKUP_FAILED) {
-                outs(" " ANSI_COLOR(1;31) "* ÀÉ®×³Æ¥÷¥¢±Ñ¡A½Ğ¦Ü "
-                     BN_BUGREPORT "³ø§i" ANSI_RESET "\n");
+                outs(" " ANSI_COLOR(1;31) "* æª”æ¡ˆå‚™ä»½å¤±æ•—ï¼Œè«‹è‡³ "
+                     BN_BUGREPORT "å ±å‘Š" ANSI_RESET "\n");
             }
 #ifdef ASSESS
 	    // badpost assignment
@@ -3469,17 +3469,17 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
                 // case one, self-owned, invalid author, or digest mode - should not give bad posts
 	    } else if (!IS_DELETE_FILE_CONTENT_OK(del_ret) || !*newpath) {
                 // case 2, got error in file deletion (already deleted, also skip badpost)
-                outs("°h¤å³]©w: ¤w§R©Î§R°£¿ù»~ (¸õ¹L)\n");
+                outs("é€€æ–‡è¨­å®š: å·²åˆªæˆ–åˆªé™¤éŒ¯èª¤ (è·³é)\n");
 	    } else if (now - atoi(fhdr->filename + 2) > 7 * 24 * 60 * 60) {
                 // case 3, post older than one week (TODO use macro for the duration)
-		outs("°h¤å³]©w: ¤å³¹¶W¹L¤@¶g (¸õ¹L)\n");
+		outs("é€€æ–‡è¨­å®š: æ–‡ç« è¶…éä¸€é€± (è·³é)\n");
 	    } else {
                 // case 4, can assign badpost
 		move_ansi(1, 40); clrtoeol();
-		// TODO not_owned ®É¤]­n§ïÅÜ numpost?
-                outs("´c°h¤å³¹?(y/N) ");
-                // FIXME ¦³ªO¥D·|¦b³o¸Ì¤£¤p¤ßÂ_±¼³s½u©Ò¥H­n¤p¤ß...
-                // ­«­nªº¨Æ³Ì¦n¦b«e­±§@§¹¡C
+		// TODO not_owned æ™‚ä¹Ÿè¦æ”¹è®Š numpost?
+                outs("æƒ¡é€€æ–‡ç« ?(y/N) ");
+                // FIXME æœ‰æ¿ä¸»æœƒåœ¨é€™è£¡ä¸å°å¿ƒæ–·æ‰é€£ç·šæ‰€ä»¥è¦å°å¿ƒ...
+                // é‡è¦çš„äº‹æœ€å¥½åœ¨å‰é¢ä½œå®Œã€‚
                 vgets(genbuf, 3, VGET_LOWERCASE);
 
 		if (genbuf[0]=='y') {
@@ -3489,7 +3489,7 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
 	    }
 #endif // ASSESS
             if (*newpath && *reason) {
-                log_filef(newpath, LOG_CREAT, "¡° Delete Reason: %s\n", reason);
+                log_filef(newpath, LOG_CREAT, "â€» Delete Reason: %s\n", reason);
             }
 
             if (del_fee <= 0)
@@ -3511,10 +3511,10 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
 		    }
 
                     pay_as_uid(tusernum, del_fee,
-                            "%s ¬İªO ¤å³¹¡u%s¡v³Q%s¡A¦©°£½Z¹S%s %s",
+                            "%s çœ‹æ¿ æ–‡ç« ã€Œ%sã€è¢«%sï¼Œæ‰£é™¤ç¨¿é…¬%s %s",
                             currboard,  fhdr->title,
-                            as_badpost ? "°h¦^" : "§R°£",
-                            reason[0] ? "¡C­ì¦]:" : "", reason);
+                            as_badpost ? "é€€å›" : "åˆªé™¤",
+                            reason[0] ? "ã€‚åŸå› :" : "", reason);
                     sendalert_uid(tusernum, ALERT_PWD_PERM);
 #ifdef USE_COOLDOWN
 		    if (bp->brdattr & BRD_COOLDOWN)
@@ -3526,28 +3526,28 @@ del_post(int ent, fileheader_t * fhdr, char *direct)
 	    {
 		// owner case
 		pwcuDecNumPost();
-                pay(del_fee, "%s ¬İªO ¤å³¹¦Û§R²M¼ä¶O: %s",
+                pay(del_fee, "%s çœ‹æ¿ æ–‡ç« è‡ªåˆªæ¸…æ½”è²»: %s",
                         currboard, fhdr->title);
 		sendalert(cuser.userid, ALERT_PWD_PERM);
-		prints("±zªº¤å³¹´î¬° %d ½g¡A¤ä¥I²M¼ä¶O %d " MONEYNAME "\n",
+		prints("æ‚¨çš„æ–‡ç« æ¸›ç‚º %d ç¯‡ï¼Œæ”¯ä»˜æ¸…æ½”è²» %d " MONEYNAME "\n",
                         cuser.numposts, del_fee);
 	    }
             pressanykey();
 	    return DIRCHANGED;
 	} else { // delete_fileheader
-            vmsg("µLªk§R°£ÀÉ®×°O¿ı¡C½Ğµy­Ô¦A¸Õ¡C");
+            vmsg("ç„¡æ³•åˆªé™¤æª”æ¡ˆè¨˜éŒ„ã€‚è«‹ç¨å€™å†è©¦ã€‚");
             return DIRCHANGED;
         }
     } // genbuf[0] == 'y'
     return FULLUPDATE;
 }
 
-static int  // Ptt: ­×¥ÛÀY¤å
+static int  // Ptt: ä¿®çŸ³é ­æ–‡
 show_filename(int ent GCC_UNUSED, const fileheader_t * fhdr,
               const char *direct GCC_UNUSED)
 {
     if(!HasUserPerm(PERM_SYSOP)) return DONOTHING;
-    vmsgf("ÀÉ®×¦WºÙ: %s ", fhdr->filename);
+    vmsgf("æª”æ¡ˆåç¨±: %s ", fhdr->filename);
     return PART_REDRAW;
 }
 
@@ -3573,29 +3573,29 @@ lock_post(int ent, fileheader_t * fhdr, const char *direct)
 #ifdef USE_LIVE_ALLPOST
     // In case idiots do this in ALLPOST...
     if (strcmp(bp->brdname, BN_ALLPOST) == 0) {
-        vmsgf("½Ğ¦Ü­ì¬İªOÂê©w¡C%s ·|¦Û°Ê§ó·s¡C", BN_ALLPOST);
+        vmsgf("è«‹è‡³åŸçœ‹æ¿é–å®šã€‚%s æœƒè‡ªå‹•æ›´æ–°ã€‚", BN_ALLPOST);
         return FULLUPDATE;
     }
 #endif
 
     if (fhdr->filename[0]=='M') {
 	if (!HasUserPerm(PERM_SYSOP | PERM_POLICE)) {
-            vmsg("¯¸ªø©Î¯S®íºŞ²z¤H­û¤~¥i¶i¦æÂê©w¡CªO¥D¥u¯à¸Ñ°£Âê©w¡C");
+            vmsg("ç«™é•·æˆ–ç‰¹æ®Šç®¡ç†äººå“¡æ‰å¯é€²è¡Œé–å®šã€‚æ¿ä¸»åªèƒ½è§£é™¤é–å®šã€‚");
 	    return FULLUPDATE;
         }
 
-	getdata(b_lines - 1, 0, "½Ğ¿é¤JÂê©w²z¥Ñ¡G", genbuf, 50, DOECHO);
+	getdata(b_lines - 1, 0, "è«‹è¼¸å…¥é–å®šç†ç”±ï¼š", genbuf, 50, DOECHO);
 
-	if (vans("­n±N¤å³¹Âê©w¶Ü(y/N)?") != 'y')
+	if (vans("è¦å°‡æ–‡ç« é–å®šå—(y/N)?") != 'y')
 	    return FULLUPDATE;
 
         setbfile(fn1, currboard, fhdr->filename);
 
 	for (i = 0; i < MAX_BMs && SHM->BMcache[currbid-1][i] > 0; i++)
             mail_id(SHM->userid[SHM->BMcache[currbid-1][i] - 1], genbuf, fn1,
-                    "[Âê¤å³qª¾]");
+                    "[é–æ–‡é€šçŸ¥]");
 
-        post_policelog2(currboard, fhdr->title, "Âê¤å", genbuf, 1, fn1);
+        post_policelog2(currboard, fhdr->title, "é–æ–‡", genbuf, 1, fn1);
 
         // Rename the file to be secure, introducing new X-dot file here.
         // We can not use L-dot prefix since there may be some code that
@@ -3605,7 +3605,7 @@ lock_post(int ent, fileheader_t * fhdr, const char *direct)
         Rename(fn1, fnx);
         fhdr->filename[0] = 'L';
     } else if (fhdr->filename[0]=='L') {
-	if (vans("­n±N¤å³¹Âê©w¸Ñ°£¶Ü(y/N)?") != 'y')
+	if (vans("è¦å°‡æ–‡ç« é–å®šè§£é™¤å—(y/N)?") != 'y')
 	    return FULLUPDATE;
         fhdr->filename[0] = 'X';
         setbfile(fnx, currboard, fhdr->filename);
@@ -3615,9 +3615,9 @@ lock_post(int ent, fileheader_t * fhdr, const char *direct)
         // are not renamed.
         if (access(fnx, 0) == 0)
             Rename(fnx, fn1);
-        post_policelog(currboard, fhdr->title, "Âê¤å", genbuf, 0);
+        post_policelog(currboard, fhdr->title, "é–æ–‡", genbuf, 0);
     } else {
-        vmsg("µLªk¶i¦æÂê©w©Î¸Ñ°£¡C");
+        vmsg("ç„¡æ³•é€²è¡Œé–å®šæˆ–è§£é™¤ã€‚");
         return FULLUPDATE;
     }
     // TODO fix race condition here.
@@ -3639,7 +3639,7 @@ change_post_mode(int ent, fileheader_t *fhdr, const char *direct,
 
     if (currmode & MODE_SELECT) {
         if (!fhdr->multi.refer.flag) {
-            vmsg("½Ğ°h¥X·j´M¼Ò¦¡¦A¶i¦æ¦¹¶µ³]©w¡C");
+            vmsg("è«‹é€€å‡ºæœå°‹æ¨¡å¼å†é€²è¡Œæ­¤é …è¨­å®šã€‚");
             return READ_REDRAW;
         }
         // Try to solve entx and direct. Note fhdr does not need to be changed.
@@ -3666,7 +3666,7 @@ change_post_mode(int ent, fileheader_t *fhdr, const char *direct,
     } while (0);
 
     if (ret < 0) {
-        vmsg("³]©w¥¢±Ñ¡A½Ğ­«¶i¬İªO«á¦A¸Õ¤@¦¸¡C");
+        vmsg("è¨­å®šå¤±æ•—ï¼Œè«‹é‡é€²çœ‹æ¿å¾Œå†è©¦ä¸€æ¬¡ã€‚");
         return FULLUPDATE;
     } else {
         boardheader_t *bp = getbcache(currbid);
@@ -3699,7 +3699,7 @@ recommend_cancel(int ent, fileheader_t * fhdr, const char *direct)
     if (!(currmode & MODE_BOARD))
 	return DONOTHING;
 
-    getdata(b_lines - 1, 0, "½T©w­n±ÀÂËÂk¹s[y/N]? ", yn, 3, LCECHO);
+    getdata(b_lines - 1, 0, "ç¢ºå®šè¦æ¨è–¦æ­¸é›¶[y/N]? ", yn, 3, LCECHO);
     if (yn[0] != 'y')
 	return FULLUPDATE;
     fhdr->recommend = 0;
@@ -3707,7 +3707,7 @@ recommend_cancel(int ent, fileheader_t * fhdr, const char *direct)
     substitute_ref_record(direct, fhdr, ent);
     setdirpath(fn, direct, fhdr->filename);
     if (dashf(fn))
-        log_filef(fn, LOG_CREAT, "¡°%s ©ó %s ±N±ÀÂË­ÈÂk¹s\n", cuser.userid,
+        log_filef(fn, LOG_CREAT, "â€»%s æ–¼ %s å°‡æ¨è–¦å€¼æ­¸é›¶\n", cuser.userid,
                   Cdatelite(&now));
     return FULLUPDATE;
 }
@@ -3729,15 +3729,15 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
     if(!fhdr || fhdr->filename[0] == '.' || !fhdr->filename[0])
       return DONOTHING;
 
-    if((area_l + area_lines > b_lines) ||  /* ¤U­±©ñ¤£¤U */
-       (l >= (b_lines  * 2 / 3)))  /* ²¤¶W¹Lµe­± 2/3 */
+    if((area_l + area_lines > b_lines) ||  /* ä¸‹é¢æ”¾ä¸ä¸‹ */
+       (l >= (b_lines  * 2 / 3)))  /* ç•¥è¶…éç•«é¢ 2/3 */
       area_l -= (area_lines + 1);
 
     grayout(0, MIN(l - 1, area_l)-1, GRAYOUT_DARK);
     grayout(MAX(l + 1 + 1, area_l + area_lines), b_lines-1, GRAYOUT_DARK);
     grayout(l, l, GRAYOUT_BOLD);
 
-    /* ²M°£¤å³¹ªº«e¤@¦æ©Î«á¤@¦æ */
+    /* æ¸…é™¤æ–‡ç« çš„å‰ä¸€è¡Œæˆ–å¾Œä¸€è¡Œ */
     if(area_l > l)
       move(l - 1, 0);
     else
@@ -3753,7 +3753,7 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
 
     // TODO XXX support wide terminal someday.
 
-    prints("¢z¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢{\n");
+    prints("â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”\n");
 
     aidu = fn2aidu((char *)fhdr->filename);
     if(aidu > 0)
@@ -3762,9 +3762,9 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
       int y, x;
 
       aidu2aidc(aidc, aidu);
-      prints("¢x " AID_DISPLAYNAME ": "
+      prints("â”‚ " AID_DISPLAYNAME ": "
 	  ANSI_COLOR(1) "#%s" ANSI_RESET " (%s) [%s] ",
-	  aidc, currboard && currboard[0] ? currboard : "¥¼ª¾",
+	  aidc, currboard && currboard[0] ? currboard : "æœªçŸ¥",
 	  AID_HOSTNAME);
       getyx_ansi(&y, &x);
       x = 75 - x;
@@ -3774,7 +3774,7 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
     }
     else
     {
-      prints("¢x\n");
+      prints("â”‚\n");
     }
 
 #ifdef QUERY_ARTICLE_URL
@@ -3783,13 +3783,13 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
 	char url[STRLEN];
 
 	if (!bp) {
-	    prints("¢x\n");
+	    prints("â”‚\n");
 	} else if (!IsBoardForWeb(bp)) {
-	    prints("¢x ¥»¬İªO¥Ø«e¤£´£¨Ñ" URL_DISPLAYNAME " \n");
+	    prints("â”‚ æœ¬çœ‹æ¿ç›®å‰ä¸æä¾›" URL_DISPLAYNAME " \n");
 	} else if (!GetWebUrl(bp, fhdr, url, sizeof(url))) {
-	    prints("¢x ¥»¤å³¹¤£´£¨Ñ" URL_DISPLAYNAME " \n");
+	    prints("â”‚ æœ¬æ–‡ç« ä¸æä¾›" URL_DISPLAYNAME " \n");
         } else {
-	    prints("¢x " URL_DISPLAYNAME ": " ANSI_COLOR(1) "%s" ANSI_RESET
+	    prints("â”‚ " URL_DISPLAYNAME ": " ANSI_COLOR(1) "%s" ANSI_RESET
 		    "\n", url);
 	}
     }
@@ -3799,50 +3799,50 @@ view_postinfo(int ent GCC_UNUSED, const fileheader_t * fhdr,
         /* Note in MODE_SELECT, the multi may be fucked by ref number. */
 	/* When the file is anonymous posted, fhdr->multi.anon_uid is author.
 	 * see do_post_article() */
-	prints("¢x °Î¦WºŞ²z½s¸¹: %u (¦P¤@¤H¸¹½X·|¤@¼Ë)",
+	prints("â”‚ åŒ¿åç®¡ç†ç·¨è™Ÿ: %u (åŒä¸€äººè™Ÿç¢¼æœƒä¸€æ¨£)",
 	   (unsigned int)fhdr->multi.anon_uid + (unsigned int)currutmp->pid);
     } else if (fhdr->filemode & FILE_VOTE) {
         uint32_t bp = fhdr->multi.vote_limits.badpost,
                  lgn = fhdr->multi.vote_limits.logins;
-        prints("¢x §ë²¼­­¨î(»İ¥ıº¡¨¬µo¤å­­¨î): ");
+        prints("â”‚ æŠ•ç¥¨é™åˆ¶(éœ€å…ˆæ»¿è¶³ç™¼æ–‡é™åˆ¶): ");
         if (bp)
-            prints("°h¤å %d ½g¥H¤U ", 255 - bp);
+            prints("é€€æ–‡ %d ç¯‡ä»¥ä¸‹ ", 255 - bp);
         if (lgn)
-            prints(STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "¥H¤W ", lgn * 10);
+            prints(STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "ä»¥ä¸Š ", lgn * 10);
         if (!bp && !lgn)
-            prints("µL ");
+            prints("ç„¡ ");
     } else {
 	int m = query_file_money(fhdr);
 
 	if(m < 0)
-	    prints("¢x ¯S®í¤å³¹¡AµL»ù®æ°O¿ı");
+	    prints("â”‚ ç‰¹æ®Šæ–‡ç« ï¼Œç„¡åƒ¹æ ¼è¨˜éŒ„");
 	else
-	    prints("¢x ³o¤@½g¤å³¹­È %d " MONEYNAME, m);
+	    prints("â”‚ é€™ä¸€ç¯‡æ–‡ç« å€¼ %d " MONEYNAME, m);
 
     }
     prints("\n");
-    prints("¢|¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢}\n");
+    prints("â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜\n");
 
-    /* ¦L¹ï¸Ü®Øªº¥kÃä¬É */
+    /* å°å°è©±æ¡†çš„å³é‚Šç•Œ */
     {
       int i;
 
       for(i = 1; i < area_lines - 1; i ++)
       {
         move_ansi(area_l + i , 76);
-        prints("¢x");
+        prints("â”‚");
       }
     }
     {
         int r = pressanykey();
-        /* TODO: ¦h¥[¤@­Ó LISTMODE_AID¡H */
+        /* TODO: å¤šåŠ ä¸€å€‹ LISTMODE_AIDï¼Ÿ */
 	/* QQ: enable money listing mode */
 	if (r == 'Q')
 	{
 	    currlistmode = (currlistmode == LISTMODE_MONEY) ?
 		LISTMODE_DATE : LISTMODE_MONEY;
 	    vmsg((currlistmode == LISTMODE_MONEY) ?
-		    "¶}±Ò¤å³¹»ù®æ¦Cªí¼Ò¦¡" : "°±¤î¦C¥X¤å³¹»ù®æ");
+		    "é–‹å•Ÿæ–‡ç« åƒ¹æ ¼åˆ—è¡¨æ¨¡å¼" : "åœæ­¢åˆ—å‡ºæ–‡ç« åƒ¹æ ¼");
 	}
      }
 
@@ -3854,8 +3854,8 @@ static int
 view_posthistory(int ent GCC_UNUSED, const fileheader_t * fhdr, const char *direct)
 {
     char fpath[PATHLEN];
-    const char *err_no_history = "¦¹½g¤å³¹¼ÈµL½s¿è¾ú¥v°O¿ı¡C"
-                                 "­n¶i¸ê·½¦^¦¬µ©½Ğ¦A«ö¤@¦¸ ~";
+    const char *err_no_history = "æ­¤ç¯‡æ–‡ç« æš«ç„¡ç·¨è¼¯æ­·å²è¨˜éŒ„ã€‚"
+                                 "è¦é€²è³‡æºå›æ”¶ç­’è«‹å†æŒ‰ä¸€æ¬¡ ~";
     int maxrev = 0;
     int current_as_base = 1;
 
@@ -3916,7 +3916,7 @@ view_posthistory(int ent, const fileheader_t * fhdr, const char *direct) {
 
 #endif // USE_TIME_CAPSULE
 
-/* ¬İªO³Æ¥÷ */
+/* çœ‹æ¿å‚™ä»½ */
 static int
 tar_addqueue(void)
 {
@@ -3930,16 +3930,16 @@ tar_addqueue(void)
 
     snprintf(qfn, sizeof(qfn), BBSHOME "/jobspool/tarqueue.%s", currboard);
     if (access(qfn, 0) == 0) {
-        vmsg("¤w¸g±Æ©w¦æµ{, ·|©ó¨C¤é" TARQUEUE_TIME_STR "¨Ì§Ç¶i¦æ³Æ¥÷");
+        vmsg("å·²ç¶“æ’å®šè¡Œç¨‹, æœƒæ–¼æ¯æ—¥" TARQUEUE_TIME_STR "ä¾åºé€²è¡Œå‚™ä»½");
 	return FULLUPDATE;
     }
 
-    if (vansf("½T©w­n¹ï¬İªO %s ¶i¦æ³Æ¥÷¶Ü¡H[y/N] ", currboard) != 'y')
+    if (vansf("ç¢ºå®šè¦å°çœ‹æ¿ %s é€²è¡Œå‚™ä»½å—ï¼Ÿ[y/N] ", currboard) != 'y')
         return FULLUPDATE;
 
-    vs_hdr2(" ¬İªO³Æ¥÷ ", currboard);
+    vs_hdr2(" çœ‹æ¿å‚™ä»½ ", currboard);
 
-    if (!getdata_str(4, 0, "½Ğ¿é¤J³qª¾«H½c: ", email, sizeof(email), DOECHO,
+    if (!getdata_str(4, 0, "è«‹è¼¸å…¥é€šçŸ¥ä¿¡ç®±: ", email, sizeof(email), DOECHO,
                      cuser.userid))
 	return FULLUPDATE;
     if (strstr(email, "@") == NULL)
@@ -3952,17 +3952,17 @@ tar_addqueue(void)
 
     /* check email -.-"" */
     if (!is_valid_email(email)) {
-	vmsg("±z«ü©wªº«H½c¤£¥¿½T! ");
+	vmsg("æ‚¨æŒ‡å®šçš„ä¿¡ç®±ä¸æ­£ç¢º! ");
 	return FULLUPDATE;
     }
 
-    getdata(6, 0, "­n³Æ¥÷¬İªO¤º®e¶Ü(Y/N)?[Y]", ans, sizeof(ans), LCECHO);
+    getdata(6, 0, "è¦å‚™ä»½çœ‹æ¿å…§å®¹å—(Y/N)?[Y]", ans, sizeof(ans), LCECHO);
     bakboard = (ans[0] == 'n') ? 0 : 1;
-    getdata(7, 0, "­n³Æ¥÷ºëµØ°Ï¤º®e¶Ü(Y/N)?[N]", ans, sizeof(ans), LCECHO);
+    getdata(7, 0, "è¦å‚™ä»½ç²¾è¯å€å…§å®¹å—(Y/N)?[N]", ans, sizeof(ans), LCECHO);
     bakman = (ans[0] == 'y') ? 1 : 0;
     if (!bakboard && !bakman) {
 	move(8, 0);
-	outs("¥i¬O§Ú­Ì¥u¯à³Æ¥÷¬İªO©ÎºëµØ°Ïªº­C ^^\"\"\"");
+	outs("å¯æ˜¯æˆ‘å€‘åªèƒ½å‚™ä»½çœ‹æ¿æˆ–ç²¾è¯å€çš„è€¶ ^^\"\"\"");
 	pressanykey();
 	return FULLUPDATE;
     }
@@ -3973,8 +3973,8 @@ tar_addqueue(void)
     fclose(fp);
 
     move(10, 0);
-    outs("¨t²Î¤w¸g±N±zªº³Æ¥÷±Æ¤J¦æµ{, \n");
-    outs("µy«á±N·|¦b¨t²Î­t²ü¸û§Cªº®É­Ô±N¸ê®Æ±Hµ¹±z~ :) ");
+    outs("ç³»çµ±å·²ç¶“å°‡æ‚¨çš„å‚™ä»½æ’å…¥è¡Œç¨‹, \n");
+    outs("ç¨å¾Œå°‡æœƒåœ¨ç³»çµ±è² è·è¼ƒä½çš„æ™‚å€™å°‡è³‡æ–™å¯„çµ¦æ‚¨~ :) ");
     pressanykey();
     return FULLUPDATE;
 #else
@@ -3983,7 +3983,7 @@ tar_addqueue(void)
 }
 
 /* ----------------------------------------------------- */
-/* ¬İªO¶iªOµe­±¡B¤åºK¡BºëµØ°Ï                              */
+/* çœ‹æ¿é€²æ¿ç•«é¢ã€æ–‡æ‘˜ã€ç²¾è¯å€                              */
 /* ----------------------------------------------------- */
 int
 b_note_edit_bname(int bid)
@@ -4002,16 +4002,16 @@ b_note_edit_bname(int bid)
        // alert user our new b_note policy.
        char msg[STRLEN];
        clear();
-       vs_hdr("¶iªOµe­±Åã¥Ü³]©w");
+       vs_hdr("é€²æ¿ç•«é¢é¡¯ç¤ºè¨­å®š");
        outs("\n"
-       "\t½Ğ¨M©w¬O§_­n¦b¨Ï¥ÎªÌ­º¦¸¶i¤J¬İªO®ÉÅã¥Ü­èÀx¦sªº¶iªOµe­±¡C\n\n"
-       "\t½Ğª`·N­Y¨Ï¥ÎªÌ³sÄò­«½Æ¶i¥X¦P¤@­Ó¬İªO®É¡A¶iªOµe­±¥u·|Åã¥Ü¤@¦¸¡C\n"
-       "\t¦¹¬°¨t²Î³]©w¡A¨Ã«D³]©w¿ù»~¡C\n\n"
-       "\t(¨Ï¥ÎªÌÀH®É¥i«ö b ©Î¸g¥Ñ¶i¥X¤£¦P¬İªO¨Ó­«·sÅã¥Ü¶iªOµe­±)\n");
+       "\tè«‹æ±ºå®šæ˜¯å¦è¦åœ¨ä½¿ç”¨è€…é¦–æ¬¡é€²å…¥çœ‹æ¿æ™‚é¡¯ç¤ºå‰›å„²å­˜çš„é€²æ¿ç•«é¢ã€‚\n\n"
+       "\tè«‹æ³¨æ„è‹¥ä½¿ç”¨è€…é€£çºŒé‡è¤‡é€²å‡ºåŒä¸€å€‹çœ‹æ¿æ™‚ï¼Œé€²æ¿ç•«é¢åªæœƒé¡¯ç¤ºä¸€æ¬¡ã€‚\n"
+       "\tæ­¤ç‚ºç³»çµ±è¨­å®šï¼Œä¸¦éè¨­å®šéŒ¯èª¤ã€‚\n\n"
+       "\t(ä½¿ç”¨è€…éš¨æ™‚å¯æŒ‰ b æˆ–ç¶“ç”±é€²å‡ºä¸åŒçœ‹æ¿ä¾†é‡æ–°é¡¯ç¤ºé€²æ¿ç•«é¢)\n");
 
-       // ³]©w¤é´Áªº®ÄªG¨ä¹ê«Ü¦­´N¤£·|°Ê¤F,©Ò¥H©Ş±¼
+       // è¨­å®šæ—¥æœŸçš„æ•ˆæœå…¶å¯¦å¾ˆæ—©å°±ä¸æœƒå‹•äº†,æ‰€ä»¥æ‹”æ‰
        snprintf(msg, sizeof(msg),
-	       "­n¦b­º¦¸¶i¤J¬İªO®ÉÅã¥Ü¶iªOµe­±¶Ü¡H (y/n) [%c]: ",
+	       "è¦åœ¨é¦–æ¬¡é€²å…¥çœ‹æ¿æ™‚é¡¯ç¤ºé€²æ¿ç•«é¢å—ï¼Ÿ (y/n) [%c]: ",
 	       fh->bupdate ? 'Y' : 'N');
        getdata(10, 0, msg, buf, 3, LCECHO);
 
@@ -4050,7 +4050,7 @@ b_notes(void)
     {
 	clear();
 	move(4, 20);
-	outs("¥»¬İªO©|µL¶iªOµe­±¡C");
+	outs("æœ¬çœ‹æ¿å°šç„¡é€²æ¿ç•«é¢ã€‚");
     }
     if(mr != READ_NEXT)
 	    pressanykey();
@@ -4100,11 +4100,11 @@ pin_post(int ent, fileheader_t *old_fhdr, const char *direct)
     if (!(old_fhdr->filemode & FILE_BOTTOM))
     {
 	move(b_lines-1, 0); clrtoeol();
-	outs(ANSI_COLOR(1;33) "´£¿ô±z¸m©³»P­ì¤å¥Ø«e¤¬¬°³sµ²¡A§R±¼­ì¤å¤]·|¾É­P¸m©³®ø¥¢¡C" ANSI_RESET);
+	outs(ANSI_COLOR(1;33) "æé†’æ‚¨ç½®åº•èˆ‡åŸæ–‡ç›®å‰äº’ç‚ºé€£çµï¼Œåˆªæ‰åŸæ–‡ä¹Ÿæœƒå°è‡´ç½®åº•æ¶ˆå¤±ã€‚" ANSI_RESET);
     }
     if( vans(old_fhdr->filemode & FILE_BOTTOM ?
-	       "¨ú®ø¸m©³¤½§i?(y/N)":
-	       "¥[¤J¸m©³¤½§i?(y/N)") != 'y' )
+	       "å–æ¶ˆç½®åº•å…¬å‘Š?(y/N)":
+	       "åŠ å…¥ç½®åº•å…¬å‘Š?(y/N)") != 'y' )
 	return FULLUPDATE;
 
     // Don't change original fhdr.
@@ -4113,7 +4113,7 @@ pin_post(int ent, fileheader_t *old_fhdr, const char *direct)
     if(!(fhdr.filemode & FILE_BOTTOM) ){
           snprintf(buf, sizeof(buf), "%s.bottom", direct);
           if(num >= 5){
-              vmsg("¤£±o¶W¹L 5 ½g­«­n¤½§i ½ĞºëÂ²!");
+              vmsg("ä¸å¾—è¶…é 5 ç¯‡é‡è¦å…¬å‘Š è«‹ç²¾ç°¡!");
               return FULLUPDATE;
 	  }
 	  fhdr.filemode ^= FILE_BOTTOM;
@@ -4143,7 +4143,7 @@ good_post(int ent, fileheader_t * fhdr, const char *direct)
 	return DONOTHING;
 
     if(vans(fhdr->filemode & FILE_DIGEST ?
-              "¨ú®ø¬İªO¤åºK?(Y/n)" : "¦¬¤J¬İªO¤åºK?(Y/n)") == 'n')
+              "å–æ¶ˆçœ‹æ¿æ–‡æ‘˜?(Y/n)" : "æ”¶å…¥çœ‹æ¿æ–‡æ‘˜?(Y/n)") == 'n')
 	return READ_REDRAW;
 
     if (fhdr->filemode & FILE_DIGEST) {
@@ -4154,7 +4154,7 @@ good_post(int ent, fileheader_t * fhdr, const char *direct)
 	{
             int unum = searchuser(fhdr->owner, NULL);
             if (unum > 0) {
-                pay_as_uid(unum, 1000, "¨ú®ø %s ¬İªO¤åºK", currboard);
+                pay_as_uid(unum, 1000, "å–æ¶ˆ %s çœ‹æ¿æ–‡æ‘˜", currboard);
             }
 	    if (!(currmode & MODE_SELECT))
 		fhdr->multi.money -= 1000;
@@ -4188,7 +4188,7 @@ good_post(int ent, fileheader_t * fhdr, const char *direct)
 	{
             int unum = searchuser(fhdr->owner, NULL);
             if (unum > 0) {
-                pay_as_uid(unum, -1000, "³Q¿ï¤J %s ¬İªO¤åºK", currboard);
+                pay_as_uid(unum, -1000, "è¢«é¸å…¥ %s çœ‹æ¿æ–‡æ‘˜", currboard);
             }
 	    if (!(currmode & MODE_SELECT))
 		fhdr->multi.money += 1000;
@@ -4212,9 +4212,9 @@ b_mark_read_unread(int ent GCC_UNUSED, const fileheader_t * fhdr,
     char ans[3];
     time4_t curr;
     move(b_lines-4, 0); clrtobot();
-    outs("\n³]©w¤wÅª¥¼Åª°O¿ı (ª`·N: ¤å³¹³]¬°¤wÅª«á¤£·|¦A¥X²{­×§ï°O¸¹ '~')\n");
+    outs("\nè¨­å®šå·²è®€æœªè®€è¨˜éŒ„ (æ³¨æ„: æ–‡ç« è¨­ç‚ºå·²è®€å¾Œä¸æœƒå†å‡ºç¾ä¿®æ”¹è¨˜è™Ÿ '~')\n");
     getdata(b_lines-1, 0,
-            "³]©w©Ò¦³¤å³¹ (U)¥¼Åª (V)¤wÅª (W)«e¤wÅª«á¥¼Åª (Q)¨ú®ø¡H[Q] ",
+            "è¨­å®šæ‰€æœ‰æ–‡ç«  (U)æœªè®€ (V)å·²è®€ (W)å‰å·²è®€å¾Œæœªè®€ (Q)å–æ¶ˆï¼Ÿ[Q] ",
             ans, sizeof(ans), LCECHO);
 
     switch(*ans) {
@@ -4230,7 +4230,7 @@ b_mark_read_unread(int ent GCC_UNUSED, const fileheader_t * fhdr,
             if (curr > 1 && curr <= now) {
                 brc_toggle_read(currbid, curr);
             } else {
-                vmsg("½Ğ§ï¥Î¨ä¥¦¤å³¹³]©w·í°Ñ¦ÒÂI");
+                vmsg("è«‹æ”¹ç”¨å…¶å®ƒæ–‡ç« è¨­å®šç•¶åƒè€ƒé»");
             }
             break;
         default:
@@ -4252,12 +4252,12 @@ int check_cooldown(boardheader_t *bp)
     {
       if( bp->brdattr & BRD_COOLDOWN )
        {
-  	 vmsgf("§NÀR¤@¤U§a¡I (­­¨î %d ¤À %d ¬í)", diff/60, diff%60);
+  	 vmsgf("å†·éœä¸€ä¸‹å§ï¼ (é™åˆ¶ %d åˆ† %d ç§’)", diff/60, diff%60);
 	 return 1;
        }
       else if(posttimesof(usernum)==0xf)
       {
-	 vmsgf("¹ï¤£°_¡A±z³Q³]°h¤å¡I (­­¨î %d ¤À %d ¬í)", diff/60, diff%60);
+	 vmsgf("å°ä¸èµ·ï¼Œæ‚¨è¢«è¨­é€€æ–‡ï¼ (é™åˆ¶ %d åˆ† %d ç§’)", diff/60, diff%60);
 	 return 1;
       }
 #ifdef REJECT_FLOOD_POST
@@ -4266,7 +4266,7 @@ int check_cooldown(boardheader_t *bp)
         for(i=0; i<4; i++)
           if(bp->nuser>limit[i*2] && posttimesof(usernum)>=limit[i*2+1])
           {
-	    vmsgf("¹ï¤£°_¡A±zªº¤å³¹©Î±À¤å¶¡¹j¤ÓªñÅo¡I (­­¨î %d ¤À %d ¬í)",
+	    vmsgf("å°ä¸èµ·ï¼Œæ‚¨çš„æ–‡ç« æˆ–æ¨æ–‡é–“éš”å¤ªè¿‘å›‰ï¼ (é™åˆ¶ %d åˆ† %d ç§’)",
 		  diff/60, diff%60);
 	    return 1;
           }
@@ -4280,7 +4280,7 @@ int check_cooldown(boardheader_t *bp)
 static int
 mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
 #ifndef USE_TIME_CAPSULE
-    vmsg("¦¹¥\\¯à¥¼¶}±Ò¡A½Ğ¬¢¯¸ªø¡C");
+    vmsg("æ­¤åŠŸèƒ½æœªé–‹å•Ÿï¼Œè«‹æ´½ç«™é•·ã€‚");
     return FULLUPDATE;
 #else
     char pattern[STRLEN];
@@ -4299,25 +4299,25 @@ mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
     assert(bp);
 
     if (!(bp->brdattr & BRD_BM_MASK_CONTENT)) {
-        vmsg("­n¶}±Ò¦¹¶µ¥\\¯à½Ğ¬¢¸s²Õªø¡C");
+        vmsg("è¦é–‹å•Ÿæ­¤é …åŠŸèƒ½è«‹æ´½ç¾¤çµ„é•·ã€‚");
         return FULLUPDATE;
     }
 
-    vs_hdr2(" §R°£¯S©w¤å¦r ", fhdr->title);
-    if (!getdata(1, 0, "§R°£­ì¦]: ", reason, sizeof(reason), DOECHO))
+    vs_hdr2(" åˆªé™¤ç‰¹å®šæ–‡å­— ", fhdr->title);
+    if (!getdata(1, 0, "åˆªé™¤åŸå› : ", reason, sizeof(reason), DOECHO))
         return FULLUPDATE;
-    mvouts(3, 0, "½Ğ¿é¤J­n§R°£ªº¤å¦r (¥X²{®É·|¾ã¦æ³Q[¹H³W¤º®e]¨ú¥N, ³Ì¤Ö¨â­Ó¦r¤¸)\n");
-    if (!getdata(2, 0, "§R°£¤å¦r: ", pattern, TTLEN, DOECHO) || strlen(pattern) < 2)
+    mvouts(3, 0, "è«‹è¼¸å…¥è¦åˆªé™¤çš„æ–‡å­— (å‡ºç¾æ™‚æœƒæ•´è¡Œè¢«[é•è¦å…§å®¹]å–ä»£, æœ€å°‘å…©å€‹å­—å…ƒ)\n");
+    if (!getdata(2, 0, "åˆªé™¤æ–‡å­—: ", pattern, TTLEN, DOECHO) || strlen(pattern) < 2)
         return FULLUPDATE;
 
     // try to render and build.
     setdirpath(fpath, direct, fhdr->filename);
     fp = fopen(fpath, "rt");
     if (!fp) {
-        vmsg("¤å³¹¤w³Q§R°£©ÎÂê©w¡C");
+        vmsg("æ–‡ç« å·²è¢«åˆªé™¤æˆ–é–å®šã€‚");
         return FULLUPDATE;
     }
-    mvouts(3, 0, ANSI_COLOR(1;31) "±N§R°£¤U¦C¤å¦r:" ANSI_RESET "\n");
+    mvouts(3, 0, ANSI_COLOR(1;31) "å°‡åˆªé™¤ä¸‹åˆ—æ–‡å­—:" ANSI_RESET "\n");
     i = 4;
     while (fgets(buf, sizeof(buf), fp)) {
         strip_ansi(buf, buf, STRIP_ALL);
@@ -4327,7 +4327,7 @@ mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
             outs(buf);
             outs(ANSI_RESET);
             if (++i >= b_lines) {
-                if (tolower(vmsg("«ö q ©ñ±ó¡A©Î¬O¥ô·NÁäÄ~Äò: ")) == 'q') {
+                if (tolower(vmsg("æŒ‰ q æ”¾æ£„ï¼Œæˆ–æ˜¯ä»»æ„éµç¹¼çºŒ: ")) == 'q') {
                     found = 0;
                     break;
                 }
@@ -4340,20 +4340,20 @@ mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
     fclose(fp);
 
     if (!found) {
-        vmsg("¥¼­×§ïÀÉ®×¡C");
+        vmsg("æœªä¿®æ”¹æª”æ¡ˆã€‚");
         return FULLUPDATE;
     }
 
     /* XXX race condition here... */
-    getdata(b_lines, 0, "½T©w­n§R°£³o¨Ç¤º®e¶Ü? [y/N]: ", ans, sizeof(ans), LCECHO);
+    getdata(b_lines, 0, "ç¢ºå®šè¦åˆªé™¤é€™äº›å…§å®¹å—? [y/N]: ", ans, sizeof(ans), LCECHO);
     if (*ans != 'y') {
-        vmsg("¥¼­×§ïÀÉ®×¡C");
+        vmsg("æœªä¿®æ”¹æª”æ¡ˆã€‚");
         return FULLUPDATE;
     }
 
     rev = timecapsule_add_revision(fpath);
     if (!timecapsule_get_by_revision(fpath, rev, revpath, sizeof(revpath))) {
-        vmsg("¨t²Î¿ù»~¡AµLªk­×§ï¡C");
+        vmsg("ç³»çµ±éŒ¯èª¤ï¼Œç„¡æ³•ä¿®æ”¹ã€‚");
         return FULLUPDATE;
     }
     // Enforce building a new file.
@@ -4364,22 +4364,22 @@ mask_post_content(int ent GCC_UNUSED, fileheader_t * fhdr, const char *direct) {
     while (fgets(buf, sizeof(buf), fp)) {
         strip_ansi(buf2, buf, STRIP_ALL);
         if (strstr(buf2, pattern)) {
-            fputs("¡° [³¡¥÷¹H³W¤å¦r¤w§R°£]\n", fpw);
+            fputs("â€» [éƒ¨ä»½é•è¦æ–‡å­—å·²åˆªé™¤]\n", fpw);
             continue;
         }
         fputs(buf, fpw);
     }
     fclose(fp);
     fclose(fpw);
-    log_filef(fpath, LOG_CREAT, "¡° %s ©ó %s §R°£³¡¥÷¹H³W¤å¦r,­ì¦]: %s\n", cuser.userid,
+    log_filef(fpath, LOG_CREAT, "â€» %s æ–¼ %s åˆªé™¤éƒ¨ä»½é•è¦æ–‡å­—,åŸå› : %s\n", cuser.userid,
               Cdatelite(&now), reason);
     log_filef(revpath, LOG_CREAT,
-              "¡° %s ©ó %s §R°£³¡¥÷¹H³W¤å¦r,­ì¦]: %s\n"
-              "¡° ¹H³W¤å¦r¼Ë¦¡: %s\n",
+              "â€» %s æ–¼ %s åˆªé™¤éƒ¨ä»½é•è¦æ–‡å­—,åŸå› : %s\n"
+              "â€» é•è¦æ–‡å­—æ¨£å¼: %s\n",
               cuser.userid, Cdatelite(&now), reason, pattern);
 
-    // ²z½×¤W­n§ï fhdr->modified, ¤£¹L¦b¥Ø«e¤@¹Î¶Ãªº¦P¨B¾÷¨î¤U¡A¦h§@¦h¿ù¡C
-    vmsg("¹H³W¤å¦r¤w§R°£¡C");
+    // ç†è«–ä¸Šè¦æ”¹ fhdr->modified, ä¸éåœ¨ç›®å‰ä¸€åœ˜äº‚çš„åŒæ­¥æ©Ÿåˆ¶ä¸‹ï¼Œå¤šä½œå¤šéŒ¯ã€‚
+    vmsg("é•è¦æ–‡å­—å·²åˆªé™¤ã€‚");
     return FULLUPDATE;
 #endif
 }
@@ -4388,7 +4388,7 @@ static int
 b_moved_to_config()
 {
     if (currmode & MODE_BOARD) {
-	vmsg("³o­Ó¥\\¯à¤w²¾¤J¬İªO³]©w (i) ¥h¤F¡I");
+	vmsg("é€™å€‹åŠŸèƒ½å·²ç§»å…¥çœ‹æ¿è¨­å®š (i) å»äº†ï¼");
 	return FULLUPDATE;
     }
     return DONOTHING;
@@ -4398,7 +4398,7 @@ static int
 moved_to_ctrl_e()
 {
     if (currmode & MODE_BOARD) {
-	vmsg("³o­Ó¥\\¯à¤w²¾¤J¤å³¹ºŞ²z (Ctrl-E) ¥h¤F¡I");
+	vmsg("é€™å€‹åŠŸèƒ½å·²ç§»å…¥æ–‡ç« ç®¡ç† (Ctrl-E) å»äº†ï¼");
 	return FULLUPDATE;
     }
     return DONOTHING;
@@ -4407,9 +4407,9 @@ moved_to_ctrl_e()
 static int
 manage_post(int ent, fileheader_t * fhdr, const char *direct) {
     int ans;
-    const char *prompt = "[Y]±À¼ÆÂk¹s [E]Âê©w/¸Ñ°£ [M]§R¯S©w¤å¦r"
+    const char *prompt = "[Y]æ¨æ•¸æ­¸é›¶ [E]é–å®š/è§£é™¤ [M]åˆªç‰¹å®šæ–‡å­—"
 #ifdef USE_COMMENTD
-        " [V](¹êÅç)±À¤åºŞ²z"
+        " [V](å¯¦é©—)æ¨æ–‡ç®¡ç†"
 #endif
         ":";
 
@@ -4443,7 +4443,7 @@ manage_post(int ent, fileheader_t * fhdr, const char *direct) {
 #ifdef USE_COMMENTD
         case 'v':
             if (currbrdattr & (BRD_ANGELANONYMOUS | BRD_ANONYMOUS)) {
-                vmsg("©êºp¡A¼È®É¤£¤ä´©°Î¦WªO¡C");
+                vmsg("æŠ±æ­‰ï¼Œæš«æ™‚ä¸æ”¯æ´åŒ¿åæ¿ã€‚");
             } else  {
                 psb_comment_manager(currboard, fhdr->filename);
             }
@@ -4454,7 +4454,7 @@ manage_post(int ent, fileheader_t * fhdr, const char *direct) {
 }
 
 /* ----------------------------------------------------- */
-/* ¬İªO¥\¯àªí                                            */
+/* çœ‹æ¿åŠŸèƒ½è¡¨                                            */
 /* ----------------------------------------------------- */
 /* onekey_size was defined in ../include/pttstruct.h, as ((int)'z') */
 const onekey_t read_comms[] = {
@@ -4483,7 +4483,7 @@ const onekey_t read_comms[] = {
     { 0, whereami }, // Ctrl('W')
     { 1, cross_post }, // Ctrl('X')
     { 0, NULL }, // Ctrl('Y')
-    { 0, NULL }, // Ctrl('Z') 26 // ²{¦bµ¹ ZA ¥Î¡C
+    { 0, NULL }, // Ctrl('Z') 26 // ç¾åœ¨çµ¦ ZA ç”¨ã€‚
     { 0, NULL }, { 0, NULL }, { 0, NULL }, { 0, NULL }, { 0, NULL },
     { 0, NULL }, { 0, NULL }, { 0, NULL }, { 0, NULL }, { 0, NULL },
     { 1, recommend }, // '%' (m3itoc style)

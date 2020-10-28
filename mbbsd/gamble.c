@@ -1,13 +1,13 @@
 #include "bbs.h"
 
-#define MAX_ITEM	8	//³Ì¤j ±m¨é¶µ¥Ø(item) ­Ó¼Æ
-#define MAX_ITEM_LEN	30	//³Ì¤j ¨C¤@¶µ¥Ø¦W¦rªø«×
-#define MAX_ITEM_INPUT_LEN  9   //³Ì¤j ¨C¤@¶µ¥Ø(¤â°Ê¿é¤J®É)¦W¦rªø«×
-#define MAX_SUBJECT_LEN 650	//8*81 = 648 ³Ì¤j ¥DÃDªø«×
+#define MAX_ITEM	8	//æœ€å¤§ å½©åˆ¸é …ç›®(item) å€‹æ•¸
+#define MAX_ITEM_LEN	30	//æœ€å¤§ æ¯ä¸€é …ç›®åå­—é•·åº¦
+#define MAX_ITEM_INPUT_LEN  9   //æœ€å¤§ æ¯ä¸€é …ç›®(æ‰‹å‹•è¼¸å…¥æ™‚)åå­—é•·åº¦
+#define MAX_SUBJECT_LEN 650	//8*81 = 648 æœ€å¤§ ä¸»é¡Œé•·åº¦
 #define NARROW_ITEM_WIDTH   8   // old (narrow) item width
 
 #ifndef GAMBLE_ACTION_DELAY_US
-#define GAMBLE_ACTION_DELAY_US  (0) // ¨C­Ó°Ê§@¤§«eªº delay
+#define GAMBLE_ACTION_DELAY_US  (0) // æ¯å€‹å‹•ä½œä¹‹å‰çš„ delay
 #endif
 
 // Use "%lld" format string whenever you access variables in bignum_t.
@@ -43,20 +43,20 @@ show_ticket_data(char betname[MAX_ITEM][MAX_ITEM_LEN],
 
     clear();
     if (bh) {
-	snprintf(genbuf, sizeof(genbuf), "%s ¼Ö³z", bh->brdname);
+	snprintf(genbuf, sizeof(genbuf), "%s æ¨‚é€", bh->brdname);
 	if (bh->endgamble && now < bh->endgamble &&
 	    bh->endgamble - now < 3600) {
 	    snprintf(t, sizeof(t),
-		     "«Ê½L­Ë¼Æ %d ¬í", (int)(bh->endgamble - now));
+		     "å°ç›¤å€’æ•¸ %d ç§’", (int)(bh->endgamble - now));
 	    showtitle(genbuf, t);
 	} else
 	    showtitle(genbuf, BBSNAME);
     } else
-	showtitle(BBSMNAME "±m¨é", BBSNAME);
+	showtitle(BBSMNAME "å½©åˆ¸", BBSNAME);
     move(2, 0);
     snprintf(genbuf, sizeof(genbuf), "%s/" FN_TICKET_ITEMS, direct);
     if (!(fp = fopen(genbuf, "r"))) {
-	outs("\n¥Ø«e¨Ã¨S¦³Á|¿ì¼Ö³z\n");
+	outs("\nç›®å‰ä¸¦æ²’æœ‰èˆ‰è¾¦æ¨‚é€\n");
 	snprintf(genbuf, sizeof(genbuf), "%s/" FN_TICKET_OUTCOME, direct);
 	more(genbuf, NA);
 	return 0;
@@ -70,19 +70,19 @@ show_ticket_data(char betname[MAX_ITEM][MAX_ITEM_LEN],
     }
     fclose(fp);
 
-    prints(ANSI_COLOR(32) "¯¸³W:" ANSI_RESET
-     " 1.¥iÁÊ¶R¥H¤U¤£¦PÃş«¬ªº±m¨é¡C¨C±i­nªá " ANSI_COLOR(32) "%d"
-	 ANSI_RESET " " MONEYNAME "¡C\n"
+    prints(ANSI_COLOR(32) "ç«™è¦:" ANSI_RESET
+     " 1.å¯è³¼è²·ä»¥ä¸‹ä¸åŒé¡å‹çš„å½©åˆ¸ã€‚æ¯å¼µè¦èŠ± " ANSI_COLOR(32) "%d"
+	 ANSI_RESET " " MONEYNAME "ã€‚\n"
 "      2.%s\n"
-"      3.¶}¼ú®É¥u¦³¤@ºØ±m¨é¤¤¼ú, ¦³ÁÊ¶R¸Ó±m¨éªÌ, «h¥i¨ÌÁÊ¶Rªº±i¼Æ§¡¤ÀÁ`±mª÷¡C\n"
-"      4.¨Cµ§¼úª÷¥Ñ¨t²Î©â¨ú 5%% ¤§µ|ª÷%s¡C\n"
-"      5." ANSI_COLOR(1;31) "¦p¹J¨t²Î¬G»Ù³y¦¨±b¸¹¦^·¹µ¥¦UºØ°İÃD¡A"
-	 "­ì«h¤W¤£¤©¥H½ßÀv¡A­·ÀI¦Û¾á¡C" ANSI_RESET "\n"
+"      3.é–‹çæ™‚åªæœ‰ä¸€ç¨®å½©åˆ¸ä¸­ç, æœ‰è³¼è²·è©²å½©åˆ¸è€…, å‰‡å¯ä¾è³¼è²·çš„å¼µæ•¸å‡åˆ†ç¸½å½©é‡‘ã€‚\n"
+"      4.æ¯ç­†çé‡‘ç”±ç³»çµ±æŠ½å– 5%% ä¹‹ç¨…é‡‘%sã€‚\n"
+"      5." ANSI_COLOR(1;31) "å¦‚é‡ç³»çµ±æ•…éšœé€ æˆå¸³è™Ÿå›æº¯ç­‰å„ç¨®å•é¡Œï¼Œ"
+	 "åŸå‰‡ä¸Šä¸äºˆä»¥è³ å„Ÿï¼Œé¢¨éšªè‡ªæ“”ã€‚" ANSI_RESET "\n"
 	    ANSI_COLOR(32) "%s:" ANSI_RESET, *price,
-	   bh ? "¦¹¼Ö³z¥ÑªO¥D­t³dÁ|¿ì¨Ã¨M©w¶}¼ú®É¶¡µ²ªG, ¯¸¤è¤£ºŞ, Ä@½äªA¿é¡C" :
-	        "¨t²Î¨C¤Ñ 2:00 11:00 16:00 21:00 ¶}¼ú¡C",
-	   bh ? ", ¨ä¤¤ 0.05% ¤Àµ¹¶}¼úªO¥D, ³Ì¦h 500" : "",
-	   bh ? "ªO¥D¦Û­q³W«h¤Î»¡©ú" : "«e´X¦¸¶}¼úµ²ªG");
+	   bh ? "æ­¤æ¨‚é€ç”±æ¿ä¸»è² è²¬èˆ‰è¾¦ä¸¦æ±ºå®šé–‹çæ™‚é–“çµæœ, ç«™æ–¹ä¸ç®¡, é¡˜è³­æœè¼¸ã€‚" :
+	        "ç³»çµ±æ¯å¤© 2:00 11:00 16:00 21:00 é–‹çã€‚",
+	   bh ? ", å…¶ä¸­ 0.05% åˆ†çµ¦é–‹çæ¿ä¸», æœ€å¤š 500" : "",
+	   bh ? "æ¿ä¸»è‡ªè¨‚è¦å‰‡åŠèªªæ˜" : "å‰å¹¾æ¬¡é–‹ççµæœ");
 
     snprintf(genbuf, sizeof(genbuf), "%s/" FN_TICKET, direct);
     if (!dashf(genbuf)) {
@@ -91,7 +91,7 @@ show_ticket_data(char betname[MAX_ITEM][MAX_ITEM_LEN],
     }
     show_file(genbuf, 8, -1, SHOWFILE_ALLOW_ALL);
     move(15, 0); clrtobot();
-    outs(ANSI_COLOR(1;32) "¥Ø«e¤Uª`ª¬ªp:" ANSI_RESET "\n");
+    outs(ANSI_COLOR(1;32) "ç›®å‰ä¸‹æ³¨ç‹€æ³:" ANSI_RESET "\n");
 
     total = load_ticket_record(direct, ticket);
 
@@ -115,10 +115,10 @@ show_ticket_data(char betname[MAX_ITEM][MAX_ITEM_LEN],
                 outc('\n');
         }
     }
-    prints(ANSI_RESET "\n¤w¤Uª`Á`ÃB: "
+    prints(ANSI_RESET "\nå·²ä¸‹æ³¨ç¸½é¡: "
            ANSI_COLOR(1;33) "%lld" ANSI_RESET, total * (*price));
     if (end) {
-	outs("¡A¤w¸g°±¤î¤Uª`\n");
+	outs("ï¼Œå·²ç¶“åœæ­¢ä¸‹æ³¨\n");
 	return -count;
     }
     return count;
@@ -174,7 +174,7 @@ buy_ticket_ui(int money, const char *picture, int *item,
     char            buf[5];
 
     // XXX defaults to 1?
-    getdata_str(b_lines - 1, 0, "­n¶R¦h¤Ö¥÷©O:",
+    getdata_str(b_lines - 1, 0, "è¦è²·å¤šå°‘ä»½å‘¢:",
 		buf, sizeof(buf), NUMECHO, "1");
     num = atoi(buf);
     if (num < 1)
@@ -182,12 +182,12 @@ buy_ticket_ui(int money, const char *picture, int *item,
 
     reload_money();
     if (cuser.money/money < num) {
-	vmsg("²{ª÷¤£°÷ !!!");
+	vmsg("ç¾é‡‘ä¸å¤  !!!");
 	return;
     }
 
     *item += num;
-    pay(money * num, "%s±m¨é[ºØÃş%d,±i¼Æ%d]", title, type+1, num);
+    pay(money * num, "%så½©åˆ¸[ç¨®é¡%d,å¼µæ•¸%d]", title, type+1, num);
 
     // XXX magic numbers 5, 14...
     show_file(picture, 5, 14, SHOWFILE_ALLOW_ALL);
@@ -200,7 +200,7 @@ int
 ticket(int bid)
 {
     int             ch, end = 0;
-    int	            n, price, count; /* ÁÊ¶R±i¼Æ¡B³æ»ù¡B¿ï¶µ¼Æ */
+    int	            n, price, count; /* è³¼è²·å¼µæ•¸ã€å–®åƒ¹ã€é¸é …æ•¸ */
     char            path[128], fn_ticket[PATHLEN];
     char            betname[MAX_ITEM][MAX_ITEM_LEN];
     boardheader_t  *bh = NULL;
@@ -228,16 +228,16 @@ ticket(int bid)
 	move(20, 0);
         vkey_purge();
 	reload_money();
-	prints("²{¦³ " MONEYNAME ": " ANSI_COLOR(1;31) "%d" ANSI_RESET "\n"
-               "½Ğ¿ï¾Ü­nÁÊ¶RªººØÃş(1~%d)[Q:Â÷¶}]" ANSI_RESET ":",
+	prints("ç¾æœ‰ " MONEYNAME ": " ANSI_COLOR(1;31) "%d" ANSI_RESET "\n"
+               "è«‹é¸æ“‡è¦è³¼è²·çš„ç¨®é¡(1~%d)[Q:é›¢é–‹]" ANSI_RESET ":",
                cuser.money, count);
 	ch = vkey();
 	/*--
 	  Tim011127
-	  ¬°¤F±±¨îCS°İÃD ¦ı¬O³oÃäÁÙ¤£¯à§¹¥ş¸Ñ¨M³o°İÃD,
-	  ­Yuser³q¹LÀË¬d¤U¥h, ­è¦nªO¥D¶}¼ú, ÁÙ¬O·|³y¦¨userªº³o¦¸¬ö¿ı
-	  «Ü¦³¥i¯à¶]¨ì¤U¦¸¼Ö³zªº¬ö¿ı¥h, ¤]«Ü¦³¥i¯à³QªO¥D·s¶}¼Ö³z®É¬~±¼
-	  ¤£¹L³oÃä¦Ü¤Ö¥i¥H°µ¨ìªº¬O, ³»¦h¥u·|¦³¤@µ§¸ê®Æ¬O¿ùªº
+	  ç‚ºäº†æ§åˆ¶CSå•é¡Œ ä½†æ˜¯é€™é‚Šé‚„ä¸èƒ½å®Œå…¨è§£æ±ºé€™å•é¡Œ,
+	  è‹¥useré€šéæª¢æŸ¥ä¸‹å», å‰›å¥½æ¿ä¸»é–‹ç, é‚„æ˜¯æœƒé€ æˆuserçš„é€™æ¬¡ç´€éŒ„
+	  å¾ˆæœ‰å¯èƒ½è·‘åˆ°ä¸‹æ¬¡æ¨‚é€çš„ç´€éŒ„å», ä¹Ÿå¾ˆæœ‰å¯èƒ½è¢«æ¿ä¸»æ–°é–‹æ¨‚é€æ™‚æ´—æ‰
+	  ä¸éé€™é‚Šè‡³å°‘å¯ä»¥åšåˆ°çš„æ˜¯, é ‚å¤šåªæœƒæœ‰ä¸€ç­†è³‡æ–™æ˜¯éŒ¯çš„
 	--*/
 	if (ch == 'q' || ch == 'Q')
 	    break;
@@ -265,11 +265,11 @@ ticket(int bid)
 doesnt_catch_up:
 
     price = price * n;
-    // XXX ³o¬O¦]¬°°±¤î¤Uª`©Ò¥H°h¿ú¡H ·PÄ±¦n¦MÀI+race condition
+    // XXX é€™æ˜¯å› ç‚ºåœæ­¢ä¸‹æ³¨æ‰€ä»¥é€€éŒ¢ï¼Ÿ æ„Ÿè¦ºå¥½å±éšª+race condition
     if (price > 0) {
-        pay_as_uid(currutmp->uid, -price, "¤Uª`¥¢±Ñ°h¶O");
+        pay_as_uid(currutmp->uid, -price, "ä¸‹æ³¨å¤±æ•—é€€è²»");
     }
-    vmsg("ªO¥D¤w¸g°±¤î¤Uª`¤F");
+    vmsg("æ¿ä¸»å·²ç¶“åœæ­¢ä¸‹æ³¨äº†");
     unlockutmpmode();
     return -1;
 }
@@ -291,15 +291,15 @@ openticket(int bid)
     if (count == 0) {
 	setbfile(buf, bh->brdname, FN_TICKET_END);
 	unlink(buf);
-        //Ptt:	¦³bug
+        //Ptt:	æœ‰bug
         return 0;
     }
     lockreturn0(TICKET, LOCK_MULTI);
 
     do {
-        const char *betname_sel = "¨ú®ø°h¶O";
+        const char *betname_sel = "å–æ¶ˆé€€è²»";
 	do {
-	    getdata(20, 0, "¿ï¾Ü¤¤¼úªº¸¹½X(0:¤£¶}¼ú 99:¨ú®ø°h¶O):",
+	    getdata(20, 0, "é¸æ“‡ä¸­ççš„è™Ÿç¢¼(0:ä¸é–‹ç 99:å–æ¶ˆé€€è²»):",
                     buf, 3, LCECHO);
 	    bet = atoi(buf);
 	} while ((bet < 0 || bet > count) && bet != 99);
@@ -309,25 +309,25 @@ openticket(int bid)
 	}
         if (bet == 99) {
             move(22, 0); SOLVE_ANSI_CACHE(); clrtoeol();
-            prints(ANSI_COLOR(1;31) "½Ğª`·N: ¨ú®ø­n¦©¤âÄò¶O $%d" ANSI_RESET,
+            prints(ANSI_COLOR(1;31) "è«‹æ³¨æ„: å–æ¶ˆè¦æ‰£æ‰‹çºŒè²» $%d" ANSI_RESET,
                     price * 10);
         } else {
             betname_sel = betname[bet - 1];
         }
         move(20, 0); SOLVE_ANSI_CACHE(); clrtoeol();
-        prints("¹w­p¶}¼ú¶µ¥Ø: ½s¸¹:%d¡A¦WºÙ:%s\n", bet, betname_sel);
-        getdata(21, 0, "¿é¤J¶µ¥Ø¦WºÙ¥H½T»{§Aªº·NÃÑ²M¿ô(¶}¿ùµLªk¦^·¹): ",
+        prints("é è¨ˆé–‹çé …ç›®: ç·¨è™Ÿ:%dï¼Œåç¨±:%s\n", bet, betname_sel);
+        getdata(21, 0, "è¼¸å…¥é …ç›®åç¨±ä»¥ç¢ºèªä½ çš„æ„è­˜æ¸…é†’(é–‹éŒ¯ç„¡æ³•å›æº¯): ",
                 buf, MAX_ITEM_INPUT_LEN, DOECHO);
         if (strcasecmp(buf, betname_sel) == 0) {
             snprintf(buf, sizeof(buf), "%d", bet);
         } else {
-            getdata(21, 0, "¶µ¥Ø¦WºÙ¤£¦X¡C­n§ï¿é¤J¶µ¥Ø½s¸¹¶Ü[y/N]? ",
+            getdata(21, 0, "é …ç›®åç¨±ä¸åˆã€‚è¦æ”¹è¼¸å…¥é …ç›®ç·¨è™Ÿå—[y/N]? ",
                     buf, 3, LCECHO);
             if (buf[0] != 'y') {
                 move(20, 0); clrtobot();
                 continue;
             }
-            getdata(21, 0, "¿é¤J¸¹½X¥H½T»{(µL¦^·¹¾÷¨î¡A¶}¿ù³d¥ô¦Û­t):",
+            getdata(21, 0, "è¼¸å…¥è™Ÿç¢¼ä»¥ç¢ºèª(ç„¡å›æº¯æ©Ÿåˆ¶ï¼Œé–‹éŒ¯è²¬ä»»è‡ªè² ):",
                     buf, 3, LCECHO);
         }
         move(21, 0); SOLVE_ANSI_CACHE(); clrtoeol();
@@ -341,21 +341,21 @@ openticket(int bid)
     if(access(outcome, 0) == 0)
     {
 	unlockutmpmode();
-	vmsg("¤w¥t¦³¤H¶}¼ú¡A¨t²Îµy«á±N¦Û°Ê¤½§G¤¤¼úµ²ªG©ó¬İªO");
+	vmsg("å·²å¦æœ‰äººé–‹çï¼Œç³»çµ±ç¨å¾Œå°‡è‡ªå‹•å…¬ä½ˆä¸­ççµæœæ–¼çœ‹æ¿");
 	return 0;
     }
     if(rename(buf, outcome) != 0)
     {
 	unlockutmpmode();
-	vmsg("µLªk·Ç³Æ¶}¼ú... ½Ğ¦Ü " BN_BUGREPORT " ³ø§i¨Ãªş¤WªO¦W¡C");
+	vmsg("ç„¡æ³•æº–å‚™é–‹ç... è«‹è‡³ " BN_BUGREPORT " å ±å‘Šä¸¦é™„ä¸Šæ¿åã€‚");
 	return 0;
 
     }
 
     if (fork()) {
-	/* Ptt: ¥Î fork() ¨¾¤î¤£¥¿±`Â_½u¬~¿ú */
+	/* Ptt: ç”¨ fork() é˜²æ­¢ä¸æ­£å¸¸æ–·ç·šæ´—éŒ¢ */
 	unlockutmpmode();
-	vmsg("¨t²Îµy«á±N¦Û°Ê¤½§G©ó¤¤¼úµ²ªG¬İªO(°Ñ¥[ªÌ¦h®É­n¼Æ¤ÀÄÁ)..");
+	vmsg("ç³»çµ±ç¨å¾Œå°‡è‡ªå‹•å…¬ä½ˆæ–¼ä¸­ççµæœçœ‹æ¿(åƒåŠ è€…å¤šæ™‚è¦æ•¸åˆ†é˜)..");
 	return 0;
     }
     close(0);
@@ -371,39 +371,39 @@ openticket(int bid)
 #endif
 
 
-    bet--;			/* Âà¦¨¯x°}ªºindex */
-    /* ¨ú®ø¼Ö³z¥Ñ bet == 99 ÅÜ¦¨ bet == 98 */
+    bet--;			/* è½‰æˆçŸ©é™£çš„index */
+    /* å–æ¶ˆæ¨‚é€ç”± bet == 99 è®Šæˆ bet == 98 */
 
     total = load_ticket_record(path, ticket);
     setbfile(buf, bh->brdname, FN_TICKET_LOCK);
     if (!(fp1 = fopen(buf, "r")))
 	exit(1);
 
-    /* ÁÙ¨S¶}§¹¼ú¤£¯à¤Uª` ¥u­nmv¤@¶µ´N¦n */
+    /* é‚„æ²’é–‹å®Œçä¸èƒ½ä¸‹æ³¨ åªè¦mvä¸€é …å°±å¥½ */
     if (bet != 98) {
 	int forBM;
 	money = total * price;
 
 	forBM = money * 0.0005;
 	if(forBM > 500) forBM = 500;
-        pay(-forBM, "%s ±mª÷©â¦¨", bh->brdname);
+        pay(-forBM, "%s å½©é‡‘æŠ½æˆ", bh->brdname);
 
-	mail_redenvelop("[±mª÷©â¦¨]", cuser.userid, forBM, NULL);
+	mail_redenvelop("[å½©é‡‘æŠ½æˆ]", cuser.userid, forBM, NULL);
 	money = ticket[bet] ? money * 0.95 / ticket[bet] : 9999999;
     } else {
-	pay(price * 10, "¼Ö³z°h¶O¤âÄò¶O");
+	pay(price * 10, "æ¨‚é€é€€è²»æ‰‹çºŒè²»");
 	money = price;
     }
     setbfile(outcome, bh->brdname, FN_TICKET_OUTCOME);
     if ((fp = fopen(outcome, "w"))) {
         int wide = 0;
-	fprintf(fp, "¼Ö³z»¡©ú\n");
+	fprintf(fp, "æ¨‚é€èªªæ˜\n");
 	while (fgets(buf, sizeof(buf), fp1)) {
 	    buf[sizeof(buf)-1] = 0;
 	    fputs(buf, fp);
 	}
 
-	fprintf(fp, "\n¤Uª`±¡ªp\n");
+	fprintf(fp, "\nä¸‹æ³¨æƒ…æ³\n");
         for (i = 0; i < count && !wide; i++) {
             if (strlen(betname[i]) > NARROW_ITEM_WIDTH ||
                 ticket[i] > 999999)
@@ -421,27 +421,27 @@ openticket(int bid)
 
 	if (bet != 98) {
 	    fprintf(fp,
-                    "¶}¼ú®É¶¡: %s\n"
-		    "¶}¼úµ²ªG: %s\n"
-		    "¤Uª`Á`ÃB: %lld\n"
-		    "¤¤¼ú¤ñ¨Ò: %lld±i/%lld±i  (%f)\n"
-		    "¨C±i¤¤¼ú±m¨é¥i±o %lld " MONEYNAME "\n\n",
+                    "é–‹çæ™‚é–“: %s\n"
+		    "é–‹ççµæœ: %s\n"
+		    "ä¸‹æ³¨ç¸½é¡: %lld\n"
+		    "ä¸­çæ¯”ä¾‹: %lldå¼µ/%lldå¼µ  (%f)\n"
+		    "æ¯å¼µä¸­çå½©åˆ¸å¯å¾— %lld " MONEYNAME "\n\n",
                     Cdatelite(&now), betname[bet],
                     total * price,
                     ticket[bet], total,
                     total ? (double)ticket[bet] / total : (double)0,
                     money);
 
-	    fprintf(fp, "%s ¶}¥X:%s Á`ÃB:%lld ±mª÷/±i:%lld ¾÷²v:%1.2f\n\n",
+	    fprintf(fp, "%s é–‹å‡º:%s ç¸½é¡:%lld å½©é‡‘/å¼µ:%lld æ©Ÿç‡:%1.2f\n\n",
 		    Cdatelite(&now), betname[bet], total * price, money,
 		    total ? (double)ticket[bet] / total : (double)0);
 	} else
-	    fprintf(fp, "¼Ö³z¨ú®ø°h¦^: %s\n\n", Cdatelite(&now));
+	    fprintf(fp, "æ¨‚é€å–æ¶ˆé€€å›: %s\n\n", Cdatelite(&now));
 
     } // XXX somebody may use fp even fp==NULL
     fclose(fp1);
     /*
-     * ¥H¤U¬Oµ¹¿ú°Ê§@
+     * ä»¥ä¸‹æ˜¯çµ¦éŒ¢å‹•ä½œ
      */
     setbfile(buf, bh->brdname, FN_TICKET_USER);
     if ((bet == 98 || ticket[bet]) && (fp1 = fopen(buf, "r"))) {
@@ -451,51 +451,51 @@ openticket(int bid)
 	while (fscanf(fp1, "%s %d %d\n", userid, &mybet, &i) != EOF) {
 	    if (bet == 98 && mybet >= 0 && mybet < count) {
 		if (fp)
-		    fprintf(fp, "%-*s ¶R¤F %3d ±i %s, °h¦^ %5lld "
+		    fprintf(fp, "%-*s è²·äº† %3d å¼µ %s, é€€å› %5lld "
                             MONEYNAME "\n",
 			    IDLEN, userid, i, betname[mybet], money * i);
 		snprintf(buf, sizeof(buf),
-			 "%s ¼Ö³z°h¶O! $ %lld", bh->brdname, money * i);
+			 "%s æ¨‚é€é€€è²»! $ %lld", bh->brdname, money * i);
 	    } else if (mybet == bet) {
 		if (fp)
-		    fprintf(fp, "®¥³ß %-*s ¶R¤F %3d ±i %s, Àò±o %5lld "
+		    fprintf(fp, "æ­å–œ %-*s è²·äº† %3d å¼µ %s, ç²å¾— %5lld "
 			    MONEYNAME "\n",
 			    IDLEN, userid, i, betname[mybet], money * i);
-		snprintf(buf, sizeof(buf), "%s ¤¤¼ú«¨! $ %lld",
+		snprintf(buf, sizeof(buf), "%s ä¸­çå’§! $ %lld",
                          bh->brdname, money * i);
 	    } else {
 		if (fp)
-		    fprintf(fp, "     %-*s ¶R¤F %3d ±i %s\n" ,
+		    fprintf(fp, "     %-*s è²·äº† %3d å¼µ %s\n" ,
 			    IDLEN, userid, i, betname[mybet]);
 		continue;
             }
 	    if ((uid = searchuser(userid, userid)) == 0)
 		continue;
-            pay_as_uid(uid, -(money * i), BBSMNAME "±m¨é - [%s]",
+            pay_as_uid(uid, -(money * i), BBSMNAME "å½©åˆ¸ - [%s]",
                        betname[mybet]);
-	    mail_id(userid, buf, "etc/ticket.win", BBSMNAME "±m¨é");
+	    mail_id(userid, buf, "etc/ticket.win", BBSMNAME "å½©åˆ¸");
 	}
 	fclose(fp1);
     }
     if (fp) {
-	fprintf(fp, "\n--\n¡° ¶}¼ú¯¸ :" BBSNAME "(" MYHOSTNAME
-		") \n¡» From: %s\n", fromhost);
+	fprintf(fp, "\n--\nâ€» é–‹çç«™ :" BBSNAME "(" MYHOSTNAME
+		") \nâ—† From: %s\n", fromhost);
 	fclose(fp);
     }
 
     if (bet != 98)
-	snprintf(buf, sizeof(buf), TN_ANNOUNCE " %s ¼Ö³z¶}¼ú", bh->brdname);
+	snprintf(buf, sizeof(buf), TN_ANNOUNCE " %s æ¨‚é€é–‹ç", bh->brdname);
     else
-	snprintf(buf, sizeof(buf), TN_ANNOUNCE " %s ¼Ö³z¨ú®ø", bh->brdname);
-    post_file(bh->brdname, buf, outcome, "[±m¨é]");
-    post_file("Record", buf + 7, outcome, "[°¨¸ô±´¤l]");
-    post_file(BN_SECURITY, buf + 7, outcome, "[°¨¸ô±´¤l]");
+	snprintf(buf, sizeof(buf), TN_ANNOUNCE " %s æ¨‚é€å–æ¶ˆ", bh->brdname);
+    post_file(bh->brdname, buf, outcome, "[å½©åˆ¸]");
+    post_file("Record", buf + 7, outcome, "[é¦¬è·¯æ¢å­]");
+    post_file(BN_SECURITY, buf + 7, outcome, "[é¦¬è·¯æ¢å­]");
 
     setbfile(buf, bh->brdname, FN_TICKET_RECORD);
     unlink(buf);
 
     setbfile(buf, bh->brdname, FN_TICKET_USER);
-    post_file(BN_SECURITY, bh->brdname, buf, "[¤Uª`¬ö¿ı]");
+    post_file(BN_SECURITY, bh->brdname, buf, "[ä¸‹æ³¨ç´€éŒ„]");
     unlink(buf);
 
     setbfile(buf, bh->brdname, FN_TICKET_LOCK);
@@ -537,7 +537,7 @@ join_gamble(int eng GCC_UNUSED, const fileheader_t * fhdr GCC_UNUSED,
     if (!HasBasicUserPerm(PERM_LOGINOK))
 	return DONOTHING;
     if (stop_gamble()) {
-	vmsg("¥Ø«e¥¼Á|¿ì©Î¼Ö³z¤w¶}¼ú");
+	vmsg("ç›®å‰æœªèˆ‰è¾¦æˆ–æ¨‚é€å·²é–‹ç");
 	return DONOTHING;
     }
     assert(0<=currbid-1 && currbid-1<MAX_BOARD);
@@ -563,7 +563,7 @@ hold_gamble(void)
     if (!(currmode & MODE_BOARD))
 	return 0;
     if (bp->brdattr & BRD_NOCREDIT ) {
-        vmsg("¥»¬İªO¥Ø«e³Q³]©w¬°µo¤åµL¼úÀy¡AµLªk¨Ï¥Î¼Ö³z");
+        vmsg("æœ¬çœ‹æ¿ç›®å‰è¢«è¨­å®šç‚ºç™¼æ–‡ç„¡çå‹µï¼Œç„¡æ³•ä½¿ç”¨æ¨‚é€");
         return 0;
     }
 
@@ -572,8 +572,8 @@ hold_gamble(void)
     setbfile(genbuf, currboard, FN_TICKET_LOCK);
 
     if (dashf(fn_ticket)) {
-	getdata(b_lines - 1, 0, "¤w¸g¦³Á|¿ì¼Ö³z, "
-		"¬O§_­n [°±¤î¤Uª`]?(N/y)¡G", yn, 3, LCECHO);
+	getdata(b_lines - 1, 0, "å·²ç¶“æœ‰èˆ‰è¾¦æ¨‚é€, "
+		"æ˜¯å¦è¦ [åœæ­¢ä¸‹æ³¨]?(N/y)ï¼š", yn, 3, LCECHO);
 	if (yn[0] != 'y')
 	    return FULLUPDATE;
 	rename(fn_ticket, fn_ticket_end);
@@ -586,34 +586,34 @@ hold_gamble(void)
 	return FULLUPDATE;
     }
     if (dashf(fn_ticket_end)) {
-	getdata(b_lines - 1, 0, "¤w¸g¦³Á|¿ì¼Ö³z, "
-		"¬O§_­n¶}¼ú [§_/¬O]?(N/y)¡G", yn, 3, LCECHO);
+	getdata(b_lines - 1, 0, "å·²ç¶“æœ‰èˆ‰è¾¦æ¨‚é€, "
+		"æ˜¯å¦è¦é–‹ç [å¦/æ˜¯]?(N/y)ï¼š", yn, 3, LCECHO);
 	if (yn[0] != 'y')
 	    return FULLUPDATE;
         if(cpuload(NULL) > MAX_CPULOAD/4)
             {
-	        vmsg("­t²ü¹L°ª ½Ğ©ó¨t²Î­t²ü§C®É¶}¼ú..");
+	        vmsg("è² è·éé«˜ è«‹æ–¼ç³»çµ±è² è·ä½æ™‚é–‹ç..");
 		return FULLUPDATE;
 	    }
 	openticket(currbid);
 	return FULLUPDATE;
     } else if (dashf(genbuf)) {
-	vmsg(" ¥Ø«e¨t²Î¥¿¦b³B²z¶}¼ú¨Æ©y, ½Ğµ²ªG¥XÄl«á¦AÁ|¿ì.......");
+	vmsg(" ç›®å‰ç³»çµ±æ­£åœ¨è™•ç†é–‹çäº‹å®œ, è«‹çµæœå‡ºçˆå¾Œå†èˆ‰è¾¦.......");
 	return FULLUPDATE;
     }
-    getdata(b_lines - 2, 0, "­nÁ|¿ì¼Ö³z (N/y):", yn, 3, LCECHO);
+    getdata(b_lines - 2, 0, "è¦èˆ‰è¾¦æ¨‚é€ (N/y):", yn, 3, LCECHO);
     if (yn[0] != 'y')
 	return FULLUPDATE;
-    getdata(b_lines - 1, 0, "½Ğ¿é¤J¥DÃD (¿é¤J«á½s¿è¤º®e):",
+    getdata(b_lines - 1, 0, "è«‹è¼¸å…¥ä¸»é¡Œ (è¼¸å…¥å¾Œç·¨è¼¯å…§å®¹):",
 	    msg, 20, DOECHO);
     if (msg[0] == 0 || veditfile(fn_ticket_end) < 0) {
-        // ¦pªG¦³¤H race condition ´N... «Ü¸Ó¦º¡C
+        // å¦‚æœæœ‰äºº race condition å°±... å¾ˆè©²æ­»ã€‚
         unlink(fn_ticket_end);
 	return FULLUPDATE;
     }
 
     clear();
-    showtitle("Á|¿ì¼Ö³z", BBSNAME);
+    showtitle("èˆ‰è¾¦æ¨‚é€", BBSNAME);
     setbfile(tmp, currboard, FN_TICKET_ITEMS ".tmp");
 
     //sprintf(genbuf, "%s/" FN_TICKET_ITEMS, direct);
@@ -621,28 +621,28 @@ hold_gamble(void)
     if (!(fp = fopen(tmp, "w")))
 	return FULLUPDATE;
     do {
-	getdata(2, 0, "¿é¤J±m¨é»ù®æ (»ù®æ:10-10000):", yn, 6, NUMECHO);
+	getdata(2, 0, "è¼¸å…¥å½©åˆ¸åƒ¹æ ¼ (åƒ¹æ ¼:10-10000):", yn, 6, NUMECHO);
 	i = atoi(yn);
     } while (i < 10 || i > 10000);
     fprintf(fp, "%d\n", i);
-    if (!getdata(3, 0, "³]©w¦Û°Ê«Ê½L®É¶¡?(Y/n)", yn, 3, LCECHO) || yn[0] != 'n') {
-	bp->endgamble = gettime(4, now, "«Ê½L©ó");
+    if (!getdata(3, 0, "è¨­å®šè‡ªå‹•å°ç›¤æ™‚é–“?(Y/n)", yn, 3, LCECHO) || yn[0] != 'n') {
+	bp->endgamble = gettime(4, now, "å°ç›¤æ–¼");
 	assert(0<=currbid-1 && currbid-1<MAX_BOARD);
 	substitute_record(fn_board, bp, sizeof(boardheader_t), currbid);
     }
     move(6, 0);
     snprintf(genbuf, sizeof(genbuf),
-	     "\n½Ğ¨ì %s ªO «ö'f'°Ñ»P¼Ö³z!\n\n"
-	     "¤@±i %d " MONEYNAME " (%s)\n%s%s\n",
+	     "\nè«‹åˆ° %s æ¿ æŒ‰'f'åƒèˆ‡æ¨‚é€!\n\n"
+	     "ä¸€å¼µ %d " MONEYNAME " (%s)\n%s%s\n",
 	     currboard,
-	     i, i < 100 ? "°g§A¯Å" : i < 500 ? "¥­¥Á¯Å" :
-	     i < 1000 ? "¶Q±Ú¯Å" : i < 5000 ? "´I»¨¯Å" : "¶É®a¿º²£",
-	     bp->endgamble ? "¼Ö³zµ²§ô®É¶¡: " : "",
+	     i, i < 100 ? "è¿·ä½ ç´š" : i < 500 ? "å¹³æ°‘ç´š" :
+	     i < 1000 ? "è²´æ—ç´š" : i < 5000 ? "å¯Œè±ªç´š" : "å‚¾å®¶è•©ç”¢",
+	     bp->endgamble ? "æ¨‚é€çµæŸæ™‚é–“: " : "",
 	     bp->endgamble ? Cdate(&bp->endgamble) : ""
 	     );
     strcat(msg, genbuf);
-    outs("½Ğ¨Ì¦¸¿é¤J±m¨é¦WºÙ, »İ´£¨Ñ2~8¶µ. (¥¼º¡¤K¶µ, ¿é¤Jª½±µ«öEnter)\n");
-    //outs(ANSI_COLOR(1;33) "ª`·N¿é¤J«áµLªk­×§ï¡I\n");
+    outs("è«‹ä¾æ¬¡è¼¸å…¥å½©åˆ¸åç¨±, éœ€æä¾›2~8é …. (æœªæ»¿å…«é …, è¼¸å…¥ç›´æ¥æŒ‰Enter)\n");
+    //outs(ANSI_COLOR(1;33) "æ³¨æ„è¼¸å…¥å¾Œç„¡æ³•ä¿®æ”¹ï¼\n");
     for( i = 0 ; i < 8 ; ++i ){
 	snprintf(yn, sizeof(yn), " %d)", i + 1);
 	getdata(7 + i, 0, yn, genbuf, MAX_ITEM_INPUT_LEN, DOECHO);
@@ -653,23 +653,23 @@ hold_gamble(void)
     fclose(fp);
 
     setbfile(genbuf, currboard, FN_TICKET_RECORD);
-    unlink(genbuf); // Ptt: ¨¾°ô§Q¥Î¤£¦Pid¦P®ÉÁ|¿ì¼Ö³z
+    unlink(genbuf); // Ptt: é˜²å µåˆ©ç”¨ä¸åŒidåŒæ™‚èˆ‰è¾¦æ¨‚é€
     setbfile(genbuf, currboard, FN_TICKET_USER);
-    unlink(genbuf); // Ptt: ¨¾°ô§Q¥Î¤£¦Pid¦P®ÉÁ|¿ì¼Ö³z
+    unlink(genbuf); // Ptt: é˜²å µåˆ©ç”¨ä¸åŒidåŒæ™‚èˆ‰è¾¦æ¨‚é€
 
     setbfile(genbuf, currboard, FN_TICKET_ITEMS);
     setbfile(tmp, currboard, FN_TICKET_ITEMS ".tmp");
     if(!dashf(fn_ticket))
 	Rename(tmp, genbuf);
 
-    snprintf(genbuf, sizeof(genbuf), TN_ANNOUNCE " %s ªO ¶}©lÁ|¿ì¼Ö³z!", currboard);
+    snprintf(genbuf, sizeof(genbuf), TN_ANNOUNCE " %s æ¿ é–‹å§‹èˆ‰è¾¦æ¨‚é€!", currboard);
     post_msg(currboard, genbuf, msg, cuser.userid);
-    post_msg("Record", genbuf + 7, msg, "[°¨¸ô±´¤l]");
-    /* Tim ±±¨îCS, ¥H§K¥¿¦bª±ªºuser§â¸ê®Æ¤w¸g¼g¶i¨Ó */
+    post_msg("Record", genbuf + 7, msg, "[é¦¬è·¯æ¢å­]");
+    /* Tim æ§åˆ¶CS, ä»¥å…æ­£åœ¨ç©çš„useræŠŠè³‡æ–™å·²ç¶“å¯«é€²ä¾† */
     rename(fn_ticket_end, fn_ticket);
-    /* ³]©w§¹¤~§âÀÉ¦W§ï¹L¨Ó */
+    /* è¨­å®šå®Œæ‰æŠŠæª”åæ”¹éä¾† */
 
-    vmsg("¼Ö³z±m¨é³]©w§¹¦¨");
+    vmsg("æ¨‚é€å½©åˆ¸è¨­å®šå®Œæˆ");
     return FULLUPDATE;
 #endif
 }

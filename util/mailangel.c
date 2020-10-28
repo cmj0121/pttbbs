@@ -121,9 +121,9 @@ void mailUser(char *userid)
     }
 
     t = time(NULL);
-    fprintf(fp, "§@ªÌ: ¤p¤Ñ¨Ï¨t²Î\n"
-	    "¼ĞÃD: µ¹¤p¤Ñ¨Ïªº¤@«Ê«H\n"
-	    "®É¶¡: %s\n",
+    fprintf(fp, "ä½œè€…: å°å¤©ä½¿ç³»çµ±\n"
+	    "æ¨™é¡Œ: çµ¦å°å¤©ä½¿çš„ä¸€å°ä¿¡\n"
+	    "æ™‚é–“: %s\n",
 	    ctime4(&t));
 
     while ((count = fread(buf, 1, sizeof(buf), fp2))) {
@@ -132,8 +132,8 @@ void mailUser(char *userid)
     fclose(fp);
     fclose(fp2);
 
-    strcpy(header.title, "µ¹¤p¤Ñ¨Ïªº¤@«Ê«H");
-    strcpy(header.owner, "¤p¤Ñ¨Ï¨t²Î");
+    strcpy(header.title, "çµ¦å°å¤©ä½¿çš„ä¸€å°ä¿¡");
+    strcpy(header.owner, "å°å¤©ä½¿ç³»çµ±");
     sethomedir(filename, userid);
     append_record(filename, &header, sizeof(header));
     mailalertuser(userid);

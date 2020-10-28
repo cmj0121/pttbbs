@@ -127,48 +127,48 @@
 #define PMORE_MSG_PROGVER  "pmore 2007+"
 
 #define PMORE_MSG_PREF_TITLE \
-     " piaip's more: " PMORE_MSG_PROGVER " ³]©w¿ï¶µ "
+     " piaip's more: " PMORE_MSG_PROGVER " è¨­å®šé¸é … "
 #define PMORE_MSG_PREF_TITLE_QRAW \
-     " piaip's more: " PMORE_MSG_PROGVER " §Ö³t³]©w - ¦â±m(ANSI½X)Åã¥Ü¼Ò¦¡ "
+     " piaip's more: " PMORE_MSG_PROGVER " å¿«é€Ÿè¨­å®š - è‰²å½©(ANSIç¢¼)é¡¯ç¤ºæ¨¡å¼ "
 #define PMORE_MSG_HELP_TITLE \
-     " piaip's more: " PMORE_MSG_PROGVER " ÂsÄıµ{¦¡¨Ï¥Î»¡©ú"
+     " piaip's more: " PMORE_MSG_PROGVER " ç€è¦½ç¨‹å¼ä½¿ç”¨èªªæ˜"
 #define PMORE_MSG_HELP_PAUSE \
-     "½Ğ«ö¥ô·NÁäÂ÷¶}¦¹»¡©úµe­±"
+     "è«‹æŒ‰ä»»æ„éµé›¢é–‹æ­¤èªªæ˜ç•«é¢"
 #define PMORE_MSG_WARN_FAKEUSERINFO \
-     " ¡¶¦¹­¶¤º®e·|¨Ì¾\\ÅªªÌ¤£¦P,­ì¤å¥¼¥²¦³±zªº¸ê®Æ "
+     " â–²æ­¤é å…§å®¹æœƒä¾é–±è®€è€…ä¸åŒ,åŸæ–‡æœªå¿…æœ‰æ‚¨çš„è³‡æ–™ "
 #define PMORE_MSG_WARN_MOVECMD \
-     " ¡¶¦¹­¶¤º®e§t²¾¦ì½X,¥i¯à·|Åã¥Ü°°³yªº¨t²Î°T®§ "
+     " â–²æ­¤é å…§å®¹å«ç§»ä½ç¢¼,å¯èƒ½æœƒé¡¯ç¤ºå½é€ çš„ç³»çµ±è¨Šæ¯ "
 #define PMORE_MSG_SEARCH_KEYWORD \
-     "[·j´M]ÃöÁä¦r:"
+     "[æœå°‹]é—œéµå­—:"
 #define PMORE_MSG_SEARCH_LETTERCASE \
-     "°Ï¤À¤j¤p¼g(Y/N/Q)? "
+     "å€åˆ†å¤§å°å¯«(Y/N/Q)? "
 #define PMORE_MSG_GOTO_PAGE \
-     "¸õ¦Ü¦¹­¶(­Y­n§ï«ü©w¦æ¼Æ½Ğ¦bµ²§À¥[.): "
+     "è·³è‡³æ­¤é (è‹¥è¦æ”¹æŒ‡å®šè¡Œæ•¸è«‹åœ¨çµå°¾åŠ .): "
 #define PMORE_MSG_GOTO_LINE \
-     "¸õ¦Ü¦¹¦æ: "
+     "è·³è‡³æ­¤è¡Œ: "
 #define PMORE_MSG_QPREF_SUBJECT \
-     "¦â±mÅã¥Ü¤è¦¡:"
+     "è‰²å½©é¡¯ç¤ºæ–¹å¼:"
 #define PMORE_MSG_QPREF_OPTIONS \
-     "1.¹w³]®æ¦¡¤Æ¤º®e\t2.­ì©lANSI±±¨î½X\t3.¯Â¤å¦r"
+     "1.é è¨­æ ¼å¼åŒ–å…§å®¹\t2.åŸå§‹ANSIæ§åˆ¶ç¢¼\t3.ç´”æ–‡å­—"
 #define PMORE_MSG_QPREF_PROMPT \
-     "½Ğ½Õ¾ã³]©w (1-3 ¥iª½±µ¿ï©w¡A\\¥i¤Á´«) ©Î¨ä¥¦¥ô·NÁäµ²§ô¡C"
+     "è«‹èª¿æ•´è¨­å®š (1-3 å¯ç›´æ¥é¸å®šï¼Œ\\å¯åˆ‡æ›) æˆ–å…¶å®ƒä»»æ„éµçµæŸã€‚"
 
 #define PMORE_MSG_MOVIE_DETECTED \
-    " ¡¹ ³o¥÷¤å¥ó¬O¥i¼½©ñªº¤å¦r°Êµe¡A­n¶}©l¼½©ñ¶Ü¡H [Y/n]"
+    " â˜… é€™ä»½æ–‡ä»¶æ˜¯å¯æ’­æ”¾çš„æ–‡å­—å‹•ç•«ï¼Œè¦é–‹å§‹æ’­æ”¾å—ï¼Ÿ [Y/n]"
 #define PMORE_MSG_MOVIE_PLAYOLD_GETTIME \
-    "³o¥i¯à¬O¶Ç²Î°ÊµeÀÉ, ­Y­nª½±µ¼½©ñ½Ğ¿é¤J³t«×(¬í): "
+    "é€™å¯èƒ½æ˜¯å‚³çµ±å‹•ç•«æª”, è‹¥è¦ç›´æ¥æ’­æ”¾è«‹è¼¸å…¥é€Ÿåº¦(ç§’): "
 #define PMORE_MSG_MOVIE_PLAYOLD_AS24L \
-    "¶Ç²Î°Êµe¬O¥H 24 ¦æ¬°³æ¦ì³]­pªº, ­n¼ÒÀÀ 24 ¦æ¶Ü? (§_«h·|¥Î²{¦bªº¦æ¼Æ)[Yn] "
+    "å‚³çµ±å‹•ç•«æ˜¯ä»¥ 24 è¡Œç‚ºå–®ä½è¨­è¨ˆçš„, è¦æ¨¡æ“¬ 24 è¡Œå—? (å¦å‰‡æœƒç”¨ç¾åœ¨çš„è¡Œæ•¸)[Yn] "
 #define PMORE_MSG_MOVIE_PAUSE \
-    " >>> ¼È°±¼½©ñ°Êµe¡A½Ğ«ö¥ô·NÁäÄ~Äò©Î q ¤¤Â_¡C <<<"
+    " >>> æš«åœæ’­æ”¾å‹•ç•«ï¼Œè«‹æŒ‰ä»»æ„éµç¹¼çºŒæˆ– q ä¸­æ–·ã€‚ <<<"
 #define PMORE_MSG_MOVIE_PLAYING \
-    " >>> °Êµe¼½©ñ¤¤... ¥i«ö q, Ctrl-C ©Î¨ä¥¦¥ô·NÁä°±¤î";
+    " >>> å‹•ç•«æ’­æ”¾ä¸­... å¯æŒ‰ q, Ctrl-C æˆ–å…¶å®ƒä»»æ„éµåœæ­¢";
 #define PMORE_MSG_MOVIE_INTERACTION_PLAYING \
-    " >>> ¤¬°Ê¦¡°Êµe¼½©ñ¤¤... ¥i«ö q ©Î Ctrl-C °±¤î";
+    " >>> äº’å‹•å¼å‹•ç•«æ’­æ”¾ä¸­... å¯æŒ‰ q æˆ– Ctrl-C åœæ­¢";
 #define PMORE_MSG_MOVIE_INTERACTION_WAITSEL \
-    " >> ½Ğ¿é¤J¿ï¶µ:  (¤¬°Ê¦¡°Êµe¼½©ñ¤¤¡A¥i«ö q ©Î Ctrl-C ¤¤Â_)"
+    " >> è«‹è¼¸å…¥é¸é …:  (äº’å‹•å¼å‹•ç•«æ’­æ”¾ä¸­ï¼Œå¯æŒ‰ q æˆ– Ctrl-C ä¸­æ–·)"
 #define PMORE_MSG_MOVIE_INTERACTION_STOPPED \
-    "¤w±j¨î¤¤Â_¤¬°Ê¦¡¨t²Î"
+    "å·²å¼·åˆ¶ä¸­æ–·äº’å‹•å¼ç³»çµ±"
 
 // Colors
 #define PMORE_COLOR_HEADER1 \
@@ -568,7 +568,7 @@ struct SimpleBuffer {
 #define FH_HEADER_LEN (4)  // strlen of each heads
 #define FH_FLOATS     (2)  // right floating, name and val
 static const char *_fh_disp_heads[FH_HEADERS] =
-    {"§@ªÌ", "¼ĞÃD", "®É¶¡", "Âà«H"};
+    {"ä½œè€…", "æ¨™é¡Œ", "æ™‚é–“", "è½‰ä¿¡"};
 
 typedef struct
 {
@@ -1216,8 +1216,8 @@ mf_parseHeaders()
      * XXX: xxx                   <- headers[n]
      * [blank, fill with separator] <- lines
      *
-     * #define STR_AUTHOR1     "§@ªÌ:"
-     * #define STR_AUTHOR2     "µo«H¤H:"
+     * #define STR_AUTHOR1     "ä½œè€…:"
+     * #define STR_AUTHOR2     "ç™¼ä¿¡äºº:"
      */
     unsigned char *pmf = mf.start;
     int i = 0;
@@ -1554,7 +1554,7 @@ mf_display()
                 for(col = 0; col < headerw; col+=2)
                 {
                     // prints("%02d", col);
-                    outs("¢w");
+                    outs("â”€");
                 }
                 outs(ANSI_RESET);
             }
@@ -1648,7 +1648,7 @@ mf_display()
                     outs(ANSI_COLOR(0;36));
                     flResetColor = 1;
                 } else if (dist > 2 &&
-                        (!strncmp((char*)line_head, "¡°", 2) ||
+                        (!strncmp((char*)line_head, "â€»", 2) ||
                          !strncmp((char*)line_head, "==>", 3)))
                 {
                     outs(ANSI_COLOR(0;32));
@@ -2108,16 +2108,16 @@ mf_display_footer(
     // old status bar: quick draw
     if (bpref.oldstatusbar)
     {
-        prints("  ÂsÄı P.%d(%d%%)  ", nowpage, progress);
+        prints("  ç€è¦½ P.%d(%d%%)  ", nowpage, progress);
         outs(
                 PMORE_COLOR_FOOTER3      "  "
                 PMORE_COLOR_FOOTER3_KEY  "(h)"
-                PMORE_COLOR_FOOTER3_TEXT "¨D§U  "
+                PMORE_COLOR_FOOTER3_TEXT "æ±‚åŠ©  "
                 PMORE_COLOR_FOOTER3_KEY
-                "¡÷¡õ[PgUp][PgDn][Home][End]"
-                PMORE_COLOR_FOOTER3_TEXT "´å¼Ğ²¾°Ê  "
-                PMORE_COLOR_FOOTER3_KEY  "¡ö[q]"
-                PMORE_COLOR_FOOTER3_TEXT "µ²§ô   "
+                "â†’â†“[PgUp][PgDn][Home][End]"
+                PMORE_COLOR_FOOTER3_TEXT "æ¸¸æ¨™ç§»å‹•  "
+                PMORE_COLOR_FOOTER3_KEY  "â†[q]"
+                PMORE_COLOR_FOOTER3_TEXT "çµæŸ   "
             );
         return;
     }
@@ -2127,14 +2127,14 @@ mf_display_footer(
     // part 1, brief report (SUMMAR)
     if (allpages >= 0)
         snprintf(buf, sizeof(buf),
-                "  ÂsÄı ²Ä %1d/%1d ­¶ (%3d%%) ",
+                "  ç€è¦½ ç¬¬ %1d/%1d é  (%3d%%) ",
                 nowpage,
                 allpages,
                 progress
                );
     else
         snprintf(buf, sizeof(buf),
-                "  ÂsÄı ²Ä %1d ­¶ (%3d%%) ",
+                "  ç€è¦½ ç¬¬ %1d é  (%3d%%) ",
                 nowpage,
                 progress
                );
@@ -2155,7 +2155,7 @@ mf_display_footer(
         if (mf.xpos > 0)
         {
             snprintf(buf, sizeof(buf),
-                    " Åã¥Ü½d³ò: %d~%d Äæ¦ì, %02d~%02d ¦æ",
+                    " é¡¯ç¤ºç¯„åœ: %d~%d æ¬„ä½, %02d~%02d è¡Œ",
                     (int)mf.xpos+1,
                     (int)(mf.xpos + t_columns-(mf.trunclines ? 2 : 1)),
                     (int)(mf.lineno + 1),
@@ -2163,7 +2163,7 @@ mf_display_footer(
                     );
         } else {
             snprintf(buf, sizeof(buf),
-                    " ¥Ø«eÅã¥Ü: ²Ä %02d~%02d ¦æ",
+                    " ç›®å‰é¡¯ç¤º: ç¬¬ %02d~%02d è¡Œ",
                     (int)(mf.lineno + 1),
                     (int)(mf.lineno + mf.dispedlines)
                     );
@@ -2189,12 +2189,12 @@ mf_display_footer(
     // part 3, help: context help and quit hotkeys
 #define PMORE_MSG_FOOTER_FLOAT_SHORT \
     PMORE_COLOR_FOOTER3_KEY  "(h)"      \
-    PMORE_COLOR_FOOTER3_TEXT "«öÁä»¡©ú "
+    PMORE_COLOR_FOOTER3_TEXT "æŒ‰éµèªªæ˜ "
 
 #define PMORE_MSG_FOOTER_FLOAT_LONG \
     PMORE_MSG_FOOTER_FLOAT_SHORT \
-    PMORE_COLOR_FOOTER3_KEY  "¡ö[q]"    \
-    PMORE_COLOR_FOOTER3_TEXT "Â÷¶} "
+    PMORE_COLOR_FOOTER3_KEY  "â†[q]"    \
+    PMORE_COLOR_FOOTER3_TEXT "é›¢é–‹ "
 
     // first try: long (context + quit)
     w = PMORE_MACROSTRLEN(PMORE_MSG_FOOTER_FLOAT_LONG) -
@@ -2962,7 +2962,7 @@ pmore_PromptBar(const char *caption, int shadow)
     {
         outs(ANSI_COLOR(0;1;30));
         for(i = 0; i+2 < t_columns ; i+=2)
-            outs("¢b");
+            outs("â–");
         outs(ANSI_RESET "\n");
     }
     else
@@ -2978,7 +2978,7 @@ pmore_PromptBar(const char *caption, int shadow)
     {
         outs(ANSI_COLOR(0;1;30));
         for(i = 0; i+2 < t_columns ; i+=2)
-            outs("¢v");
+            outs("â–”");
         outs(ANSI_RESET "\n");
     }
 }
@@ -3062,26 +3062,26 @@ pmore_Preference()
         // TODO move these strings to localization section...
         // list options
         pmore_prefEntry(bpref.rawmode,
-                "\\", 1, "¦â±mÅã¥Ü¤è¦¡:", -1,
-                "¹w³]®æ¦¡¤Æ¤º®e\t­ì©lANSI±±¨î½X\t¯Â¤å¦r");
+                "\\", 1, "è‰²å½©é¡¯ç¤ºæ–¹å¼:", -1,
+                "é è¨­æ ¼å¼åŒ–å…§å®¹\tåŸå§‹ANSIæ§åˆ¶ç¢¼\tç´”æ–‡å­—");
 
         pmore_prefEntry(bpref.wrapmode,
-                "w", 1, "Â_¦æ¤è¦¡:", -1,
-                "ª½±µºI¦æ\t¦Û°ÊÂ_¦æ");
+                "w", 1, "æ–·è¡Œæ–¹å¼:", -1,
+                "ç›´æ¥æˆªè¡Œ\tè‡ªå‹•æ–·è¡Œ");
 
         pmore_prefEntry(bpref.wrapindicator,
-                "m", 1, "Â_¦æ²Å¸¹:", -1,
-                "¤£Åã¥Ü\tÅã¥Ü");
+                "m", 1, "æ–·è¡Œç¬¦è™Ÿ:", -1,
+                "ä¸é¡¯ç¤º\té¡¯ç¤º");
 
         pmore_prefEntry(bpref.separator,
-                "l", 1, "¤å³¹¼ĞÀY¤À¹j½u:", -1,
-                "µL\t³æ¦æ\t\t¶Ç²Î¤À¹j½u¥[ªÅ¦æ");
+                "l", 1, "æ–‡ç« æ¨™é ­åˆ†éš”ç·š:", -1,
+                "ç„¡\tå–®è¡Œ\t\tå‚³çµ±åˆ†éš”ç·šåŠ ç©ºè¡Œ");
 
         pmore_prefEntry(bpref.oldstatusbar,
-                "t", 1, "¶Ç²Îª¬ºA¦C»PÂ_¦æ¤è¦¡: ", -1,
-                "°±¥Î\t±Ò¥Î");
+                "t", 1, "å‚³çµ±ç‹€æ…‹åˆ—èˆ‡æ–·è¡Œæ–¹å¼: ", -1,
+                "åœç”¨\tå•Ÿç”¨");
 
-        switch (vmsg("½Ğ½Õ¾ã³]©w©Î¨ä¥¦¥ô·NÁäµ²§ô¡C"))
+        switch (vmsg("è«‹èª¿æ•´è¨­å®šæˆ–å…¶å®ƒä»»æ„éµçµæŸã€‚"))
         {
             case '\\':
             case '|':
@@ -3126,37 +3126,37 @@ pmore_Preference()
 
 static const char
 *hlp_basic[] = {
-    "¡i°ò¥»²¾°Ê¡j", NULL,
-    "  ¤UÂ½¤@­¶", "^F ¡÷ PgDn Space",
-    "  ¤WÂ½¤@­¶", "^B ^H PgUp BS",
-    "  ¤U±²¤@¦æ", " j ¡õ",
-    "  ¤W±²¤@¦æ", " k ¡ô",
-    "  ÀÉ®×µ²§À", " $ G  End",
-    "  ÀÉ®×¶}ÀY", " 0 g  Home",
-    "  Â÷¶}    ", " q ¡ö",
+    "ã€åŸºæœ¬ç§»å‹•ã€‘", NULL,
+    "  ä¸‹ç¿»ä¸€é ", "^F â†’ PgDn Space",
+    "  ä¸Šç¿»ä¸€é ", "^B ^H PgUp BS",
+    "  ä¸‹æ²ä¸€è¡Œ", " j â†“",
+    "  ä¸Šæ²ä¸€è¡Œ", " k â†‘",
+    "  æª”æ¡ˆçµå°¾", " $ G  End",
+    "  æª”æ¡ˆé–‹é ­", " 0 g  Home",
+    "  é›¢é–‹    ", " q â†",
     NULL,
 },
 *hlp_adv[] = {
-    "¡i¶i¶¥ÂsÄı¡j", NULL,
-    "  ·j´MÃöÁä¦r", "/",
-    "  ©¹«á·j´M  ", "n",
-    "  ©¹«e·j´M  ", "N",
-    "  «ü©w­¶¼Æ  ", ";  0-9¼Æ¦rÁä",
-    "  «ü©w¦æ¼Æ  ", ":",
-    "  ¦V¥k±²°Ê  ", ". > TAB",
-    "  ¦V¥ª±²°Ê  ", ", < Shift-TAB",
+    "ã€é€²éšç€è¦½ã€‘", NULL,
+    "  æœå°‹é—œéµå­—", "/",
+    "  å¾€å¾Œæœå°‹  ", "n",
+    "  å¾€å‰æœå°‹  ", "N",
+    "  æŒ‡å®šé æ•¸  ", ";  0-9æ•¸å­—éµ",
+    "  æŒ‡å®šè¡Œæ•¸  ", ":",
+    "  å‘å³æ²å‹•  ", ". > TAB",
+    "  å‘å·¦æ²å‹•  ", ", < Shift-TAB",
     NULL,
 },
 *hlp_sys[] = {
-    "¡i¨ä¥¦¡j", NULL,
+    "ã€å…¶å®ƒã€‘", NULL,
 #ifdef PMORE_USE_ASCII_MOVIE
-    "  ¼½©ñ°Êµe    ", "p",
+    "  æ’­æ”¾å‹•ç•«    ", "p",
 #endif
-    "  ¿ï¶µ³]©w    ", "o",
-    "  ¦â±mÅã¥Ü¼Ò¦¡", "\\",
-    "  »¡©ú        ", "h ? F1",
+    "  é¸é …è¨­å®š    ", "o",
+    "  è‰²å½©é¡¯ç¤ºæ¨¡å¼", "\\",
+    "  èªªæ˜        ", "h ? F1",
 #ifdef DEBUG
-    "  DBG °£¿ù¼Ò¦¡", "d",
+    "  DBG é™¤éŒ¯æ¨¡å¼", "d",
 #endif
     NULL,
 };
@@ -3393,17 +3393,17 @@ mf_moviePromptOptions(
         // named keys
         printlen += 2;
 
-        if (key == KEY_UP)          outs("¡ô");
-        else if (key == KEY_LEFT)   outs("¡ö");
-        else if (key == KEY_DOWN)   outs("¡õ");
-        else if (key == KEY_RIGHT)  outs("¡÷");
+        if (key == KEY_UP)          outs("â†‘");
+        else if (key == KEY_LEFT)   outs("â†");
+        else if (key == KEY_DOWN)   outs("â†“");
+        else if (key == KEY_RIGHT)  outs("â†’");
         else if (key == KEY_PGUP)   { outs("PgUp"); printlen += 2; }
         else if (key == KEY_PGDN)   { outs("PgDn"); printlen += 2; }
         else if (key == KEY_HOME)   { outs("Home"); printlen += 2; }
         else if (key == KEY_END)    { outs("End");  printlen ++; }
         else if (key == KEY_INS)    { outs("Ins");  printlen ++; }
         else if (key == KEY_DEL)    { outs("Del");  printlen ++; }
-        else if (key == '\b')       { outs("¡öBS"); printlen += 2; }
+        else if (key == '\b')       { outs("â†BS"); printlen += 2; }
         // else if (key == MOVIE_KEY_ANY)  // same as default
         else printlen -= 2;
     }
@@ -3420,7 +3420,7 @@ mf_moviePromptOptions(
     else
     {
         // default option text
-        text = (unsigned char*)"¡¸";
+        text = (unsigned char*)"â˜†";
         szText = ustrlen(text);
     }
 

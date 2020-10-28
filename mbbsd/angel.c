@@ -7,11 +7,11 @@
 #define FN_ANGELMSG     "angelmsg"
 #define FN_ANGELMSG2    "angelmsg2"
 
-// ©I¥s¤Ñ¨Ï®ÉÅã¥Üªº»¡©ú
+// å‘¼å«å¤©ä½¿æ™‚é¡¯ç¤ºçš„èªªæ˜
 #define FN_ANGEL_USAGE   "etc/angel_usage"
-// ©I¥s¤Ñ¨Ï®ÉÅã¥Üªº»¡©ú(ªş¦Û­q°T®§)
+// å‘¼å«å¤©ä½¿æ™‚é¡¯ç¤ºçš„èªªæ˜(é™„è‡ªè¨‚è¨Šæ¯)
 #define FN_ANGEL_USAGE2     "etc/angel_usage2"
-// ¤Ñ¨Ï¤£¦b½u¤W®Éªº»¡©ú(ªş¦Û­q°T®§)
+// å¤©ä½¿ä¸åœ¨ç·šä¸Šæ™‚çš„èªªæ˜(é™„è‡ªè¨‚è¨Šæ¯)
 #define FN_ANGEL_OFFLINE2   "etc/angel_offline2"
 
 #ifndef ANGEL_INACTIVE_DAYS
@@ -19,13 +19,13 @@
 #endif
 
 static const char
-*PROMPT_ANGELBEATS = " Angel Beats! ¤Ñ¨Ï¤½·| ",
-*ERR_CONNECTION = "©êºp¡AµLªk³s½u¦Ü¤Ñ¨Ï¤½·|¡A½Ğµy«á¦A¸Õ¡C\n"
-                  "­Y«ùÄòµo¥Í½Ğ¦Ü " BN_BUGREPORT " ¬İªO³qª¾¯¸¤èºŞ²z¤H­û¡C\n",
-*ERR_PROTOCOL = "©êºp¡A¤Ñ¨Ï¤½·|³s½u²§±`¡A½Ğµy«á¦A¸Õ¡C\n"
-                "­Y«ùÄòµo¥Í½Ğ¦Ü " BN_BUGREPORT " ¬İªO³qª¾¯¸¤èºŞ²z¤H­û¡C\n",
-*ERR_PROTOCOL2 = "©êºp¡A¤Ñ¨Ï¤½·|¦ü¥G¤w§ó·s¡A½Ğ­«·sµn¤J¡C\n"
-                 "­Yµn¤J«á¤´¿ù»~½Ğ¦Ü " BN_BUGREPORT " ¬İªO³qª¾¯¸¤èºŞ²z¤H­û¡C\n";
+*PROMPT_ANGELBEATS = " Angel Beats! å¤©ä½¿å…¬æœƒ ",
+*ERR_CONNECTION = "æŠ±æ­‰ï¼Œç„¡æ³•é€£ç·šè‡³å¤©ä½¿å…¬æœƒï¼Œè«‹ç¨å¾Œå†è©¦ã€‚\n"
+                  "è‹¥æŒçºŒç™¼ç”Ÿè«‹è‡³ " BN_BUGREPORT " çœ‹æ¿é€šçŸ¥ç«™æ–¹ç®¡ç†äººå“¡ã€‚\n",
+*ERR_PROTOCOL = "æŠ±æ­‰ï¼Œå¤©ä½¿å…¬æœƒé€£ç·šç•°å¸¸ï¼Œè«‹ç¨å¾Œå†è©¦ã€‚\n"
+                "è‹¥æŒçºŒç™¼ç”Ÿè«‹è‡³ " BN_BUGREPORT " çœ‹æ¿é€šçŸ¥ç«™æ–¹ç®¡ç†äººå“¡ã€‚\n",
+*ERR_PROTOCOL2 = "æŠ±æ­‰ï¼Œå¤©ä½¿å…¬æœƒä¼¼ä¹å·²æ›´æ–°ï¼Œè«‹é‡æ–°ç™»å…¥ã€‚\n"
+                 "è‹¥ç™»å…¥å¾Œä»éŒ¯èª¤è«‹è‡³ " BN_BUGREPORT " çœ‹æ¿é€šçŸ¥ç«™æ–¹ç®¡ç†äººå“¡ã€‚\n";
 
 /////////////////////////////////////////////////////////////////////////////
 // Angel Beats! Client
@@ -100,9 +100,9 @@ angel_toggle_pause()
         // pmore_QuickRawModePref-like conf
         currutmp->angelpause = vs_quick_pref(
             currutmp->angelpause % ANGELPAUSE_MODES,
-            "³]©w¤p¤Ñ¨Ï¯«¿Ù©I¥s¾¹(¥iª½±µ«ö¼Æ¦r¿ï¨ú,¤è«K³]©w¼öÁä¤]Á×§K»~«ö)",
-            "½Ğ¿ï¨ú¯«¿Ù©I¥s¾¹ªº·sª¬ºA: ",
-            "¶}©ñ\t°±¦¬\tÃö³¬",
+            "è¨­å®šå°å¤©ä½¿ç¥è«­å‘¼å«å™¨(å¯ç›´æ¥æŒ‰æ•¸å­—é¸å–,æ–¹ä¾¿è¨­å®šç†±éµä¹Ÿé¿å…èª¤æŒ‰)",
+            "è«‹é¸å–ç¥è«­å‘¼å«å™¨çš„æ–°ç‹€æ…‹: ",
+            "é–‹æ”¾\tåœæ”¶\té—œé–‰",
             NULL) % ANGELPAUSE_MODES;
     }
 }
@@ -148,7 +148,7 @@ angel_load_my_fullnick(char *buf, int szbuf)
         }
     }
     strlcpy(buf, mynick, szbuf);
-    strlcat(buf, "¤p¤Ñ¨Ï", szbuf);
+    strlcat(buf, "å°å¤©ä½¿", szbuf);
 }
 
 // cache my angel's nickname
@@ -229,7 +229,7 @@ select_angel() {
     int i;
     int fd;
 
-    vs_hdr2(PROMPT_ANGELBEATS, " ¿ï¨ú¤Ñ¨Ï ");
+    vs_hdr2(PROMPT_ANGELBEATS, " é¸å–å¤©ä½¿ ");
     outs("\n");
 
     if ((fd = toconnect(ANGELBEATS_ADDR)) < 0) {
@@ -253,7 +253,7 @@ select_angel() {
     close(fd);
 
     if (!list.angels) {
-        vmsg("©êºp¡A¥Ø«e¨S¦³¥i©I¥sªº¤Ñ¨Ï¦b½u¤W¡C");
+        vmsg("æŠ±æ­‰ï¼Œç›®å‰æ²’æœ‰å¯å‘¼å«çš„å¤©ä½¿åœ¨ç·šä¸Šã€‚");
         return 0;
     }
 
@@ -270,37 +270,37 @@ select_angel() {
         sethomefile(fn, userid, FN_ANGELMSG);
         if ((fp = fopen(fn, "rt")) != NULL) {
             angel_parse_nick_fp(fp, nick, sizeof(nick));
-            strlcat(nick, "¤p¤Ñ¨Ï", sizeof(nick));
+            strlcat(nick, "å°å¤©ä½¿", sizeof(nick));
             fclose(fp);
         } else {
-            strlcpy(nick, "(¥¼³]©w¼ÊºÙ)", sizeof(nick));
+            strlcpy(nick, "(æœªè¨­å®šæš±ç¨±)", sizeof(nick));
         }
         if (uinfo && uinfo->angelpause == 1)
-            pause_msg = ANSI_COLOR(1;32) "(°±¦¬·s°İÃD/·s¥D¤H) " ANSI_RESET;
+            pause_msg = ANSI_COLOR(1;32) "(åœæ”¶æ–°å•é¡Œ/æ–°ä¸»äºº) " ANSI_RESET;
         else if (uinfo && uinfo->angelpause == 2)
-            pause_msg = ANSI_COLOR(1;31) "(Ãö³¬©I¥s¾¹) " ANSI_RESET;
+            pause_msg = ANSI_COLOR(1;31) "(é—œé–‰å‘¼å«å™¨) " ANSI_RESET;
         prints(" %3i. %s %s [UID: %d]\n", i + 1, nick, pause_msg, uid);
     }
     while (list.angels) {
         char ans[5];
         int idx;
 
-        if (!getdata(b_lines - 1, 0, "½Ğ°İ­n¿ï¨ú­ş¦ì¤p¤Ñ¨Ï (¿é¤J¼Æ¦r): ",
+        if (!getdata(b_lines - 1, 0, "è«‹å•è¦é¸å–å“ªä½å°å¤©ä½¿ (è¼¸å…¥æ•¸å­—): ",
                      ans, sizeof(ans), NUMECHO)) {
-            vmsg("¥¼¿ï¨ú¤p¤Ñ¨Ï¡C");
+            vmsg("æœªé¸å–å°å¤©ä½¿ã€‚");
             return 0;
         }
         idx = atoi(ans);
         if (idx < 1 || idx > list.angels) {
-            vmsg("¼Æ¦r¤£¥¿½T¡C");
+            vmsg("æ•¸å­—ä¸æ­£ç¢ºã€‚");
             return 0;
         }
         // No need to tell AngelBeats since this is only for ANGEL_CIA_ACCOUNT.
         pwcuSetMyAngel(getuserid(list.uids[idx - 1]));
 	log_filef(BBSHOME "/log/changeangel.log",LOG_CREAT,
-                  "%s «~ºŞ %s ©â´ú %s ¤p¤Ñ¨Ï\n",
+                  "%s å“ç®¡ %s æŠ½æ¸¬ %s å°å¤©ä½¿\n",
                   Cdatelite(&now), cuser.userid, cuser.myangel);
-        vmsg("¤p¤Ñ¨Ï¤w§ó´«§¹¦¨¡C");
+        vmsg("å°å¤©ä½¿å·²æ›´æ›å®Œæˆã€‚");
         break;
     }
     return 0;
@@ -309,7 +309,7 @@ select_angel() {
 static int
 do_changeangel(int force) {
     char buf[4];
-    const char *prompt = "µn°O§¹¦¨¡A¤U¦¸©I¥s®É·|±q¤W½uªº¤Ñ¨Ï¤¤¿ï¥X·sªº¤p¤Ñ¨Ï";
+    const char *prompt = "ç™»è¨˜å®Œæˆï¼Œä¸‹æ¬¡å‘¼å«æ™‚æœƒå¾ä¸Šç·šçš„å¤©ä½¿ä¸­é¸å‡ºæ–°çš„å°å¤©ä½¿";
     static int is_bad_master = -1;
 
     /* cuser.myangel == "-" means banned for calling angel */
@@ -346,7 +346,7 @@ do_changeangel(int force) {
             duration *= 3;
         if (cuser.timesetangel &&
             (now - cuser.timesetangel < duration * 60)) {
-            vmsgf("¨C¦¸§ó´«¤p¤Ñ¨Ï³Ì¤Ö¶¡¹j %d ¤ÀÄÁ¡C", duration);
+            vmsgf("æ¯æ¬¡æ›´æ›å°å¤©ä½¿æœ€å°‘é–“éš” %d åˆ†é˜ã€‚", duration);
             return 0;
         }
 #endif
@@ -354,14 +354,14 @@ do_changeangel(int force) {
            log_filef("log/bad_master.log", LOG_CREAT,
                      "%s %s change angel.\n", Cdatelite(&now), cuser.userid);
         if (is_bad_master &&
-            !verify_captcha("¬°Á×§K¤j¶q«D¥¿±`§ó´«¤p¤Ñ¨Ï¡A\n"))
+            !verify_captcha("ç‚ºé¿å…å¤§é‡éæ­£å¸¸æ›´æ›å°å¤©ä½¿ï¼Œ\n"))
             return 0;
     }
 
-    getdata(b_lines - 1, 0, "½T©w­n§ó´«¤p¤Ñ¨Ï¡H [y/N]", buf, 3, LCECHO);
+    getdata(b_lines - 1, 0, "ç¢ºå®šè¦æ›´æ›å°å¤©ä½¿ï¼Ÿ [y/N]", buf, 3, LCECHO);
     if (buf[0] == 'y') {
 	log_filef(BBSHOME "/log/changeangel.log",LOG_CREAT,
-                  "%s ¤p¥D¤H %s ´«±¼ %s ¤p¤Ñ¨Ï\n",
+                  "%s å°ä¸»äºº %s æ›æ‰ %s å°å¤©ä½¿\n",
                   Cdatelite(&now), cuser.userid, cuser.myangel);
         angel_beats_do_request(ANGELBEATS_REQ_REMOVE_LINK,
                                usernum, searchuser(cuser.myangel, NULL));
@@ -400,10 +400,10 @@ angel_order_song(char *receiver, size_t sz_receiver) {
         return NULL;
 
     angel_nick = angel_get_nick();
-    snprintf(prompt, sizeof(prompt), "­n¯d¨¥µ¹§Aªº%s¤p¤Ñ¨Ï¶Ü? [y/N]: ",
+    snprintf(prompt, sizeof(prompt), "è¦ç•™è¨€çµ¦ä½ çš„%så°å¤©ä½¿å—? [y/N]: ",
              angel_nick);
     if (getdata(20, 0, prompt, ans, sizeof(ans), LCECHO) && *ans == 'y') {
-        snprintf(receiver, sz_receiver, "%s¤p¤Ñ¨Ï", angel_nick);
+        snprintf(receiver, sz_receiver, "%så°å¤©ä½¿", angel_nick);
         return angel_nick;
     }
     return NULL;
@@ -414,32 +414,32 @@ int angel_check_master(void) {
     userec_t xuser;
     int is_my_master;
 
-    vs_hdr2(PROMPT_ANGELBEATS, " ¬d¸ß¥D¤Hª¬ºA ");
-    usercomplete("·Q¬d¸ßªº¥D¤H ID: ", uid);
+    vs_hdr2(PROMPT_ANGELBEATS, " æŸ¥è©¢ä¸»äººç‹€æ…‹ ");
+    usercomplete("æƒ³æŸ¥è©¢çš„ä¸»äºº ID: ", uid);
     move(2, 0); clrtobot();
     if (!*uid)
         return 0;
     if (getuser(uid, &xuser) < 1) {
-        vmsg("¦¹ ID ¤£¦s¦b¡C");
+        vmsg("æ­¤ ID ä¸å­˜åœ¨ã€‚");
         return 0;
     }
     wait_penalty(1);
     is_my_master = (strcasecmp(xuser.myangel, cuser.userid) == 0);
     move(7, 0);
     if (is_my_master) {
-        prints(ANSI_COLOR(1;32) "%s ¬O§Aªº¥D¤H¡C" ANSI_RESET "\n",
+        prints(ANSI_COLOR(1;32) "%s æ˜¯ä½ çš„ä¸»äººã€‚" ANSI_RESET "\n",
                xuser.userid);
         if (xuser.timesetangel)
-            prints("¤p¤Ñ¨Ï»P¥D¤HªºÃö«Y¤wºû«ù¤F %d ¤Ñ¡C\n",
+            prints("å°å¤©ä½¿èˆ‡ä¸»äººçš„é—œä¿‚å·²ç¶­æŒäº† %d å¤©ã€‚\n",
                    (now - xuser.timesetangel) / DAY_SECONDS + 1);
         if (xuser.timeplayangel && xuser.timeplayangel > xuser.timesetangel)
-            prints("¤p¥D¤H³Ì«á»P¤Ñ¨Ï¤¬°Ê(hh¦¨¥\\©I¥s©ÎÂIºq)ªº®É¶¡: %s\n",
+            prints("å°ä¸»äººæœ€å¾Œèˆ‡å¤©ä½¿äº’å‹•(hhæˆåŠŸ\å‘¼å«æˆ–é»æ­Œ)çš„æ™‚é–“: %s\n",
                    Cdatelite(&xuser.timeplayangel));
         else if (xuser.timesetangel)
-            prints("¦ı¤p¥D¤H¦ü¥G±q¨Ó¨S»P§A¤¬°Ê(¦¨¥\\©I¥s©ÎÂIºq)¹L\n"
-                   " (±`¨£©ó¬~¤Ñ¨Ï©Î»~«öªº¥D¤H)¡C\n");
+            prints("ä½†å°ä¸»äººä¼¼ä¹å¾ä¾†æ²’èˆ‡ä½ äº’å‹•(æˆåŠŸ\å‘¼å«æˆ–é»æ­Œ)é\n"
+                   " (å¸¸è¦‹æ–¼æ´—å¤©ä½¿æˆ–èª¤æŒ‰çš„ä¸»äºº)ã€‚\n");
     } else {
-        prints(ANSI_COLOR(1;31) "%s ¤£¬O§Aªº¤p¥D¤H¡C" ANSI_RESET "\n",
+        prints(ANSI_COLOR(1;31) "%s ä¸æ˜¯ä½ çš„å°ä¸»äººã€‚" ANSI_RESET "\n",
                xuser.userid);
     }
     log_filef("log/angel_query_master.log", LOG_CREAT,
@@ -455,12 +455,12 @@ angel_log_order_song(const char *angel_nick) {
     syncnow();
     if (cuser.timesetangel && now >= cuser.timesetangel)
         snprintf(angel_exp, sizeof(angel_exp),
-                 "%d¤Ñ", (now - cuser.timesetangel) / DAY_SECONDS + 1);
+                 "%då¤©", (now - cuser.timesetangel) / DAY_SECONDS + 1);
     else
-        strlcpy(angel_exp, "«Ü¤[", sizeof(angel_exp));
+        strlcpy(angel_exp, "å¾ˆä¹…", sizeof(angel_exp));
 
     log_filef("log/osong_angel.log", LOG_CREAT,
-              "%s %*s ÂIºqµ¹ %*s¤p¤Ñ¨Ï (%s - %s)\n",
+              "%s %*s é»æ­Œçµ¦ %*så°å¤©ä½¿ (%s - %s)\n",
               Cdatelite(&now), IDLEN, cuser.userid,
               IDLEN - 6, angel_nick, fromhost, angel_exp);
     pwcuPlayAngel();
@@ -483,7 +483,7 @@ int a_angelreport() {
     angel_beats_data   req = {0};
     int fd;
 
-    vs_hdr2(PROMPT_ANGELBEATS, " ¤Ñ¨Ïª¬ºA³ø§i ");
+    vs_hdr2(PROMPT_ANGELBEATS, " å¤©ä½¿ç‹€æ…‹å ±å‘Š ");
     outs("\n");
 
     if ((fd = toconnect(ANGELBEATS_ADDR)) < 0) {
@@ -506,9 +506,9 @@ int a_angelreport() {
         outs(ERR_PROTOCOL2);
     } else {
         prints(
-            "\t ²{¦b®É¶¡: %s\n"
-            "\t ¨t²Î¤º¤wµn°Oªº¤Ñ¨Ï¬° %d ¦ì¡C\n"
-            "\t ¥Ø«e¦³ %d ¦ì¤Ñ¨Ï¦b½u¤W¡A¨ä¤¤ %d ¦ì¯«¿Ù©I¥s¾¹¬°³]©w¶}©ñ¡F\n",
+            "\t ç¾åœ¨æ™‚é–“: %s\n"
+            "\t ç³»çµ±å…§å·²ç™»è¨˜çš„å¤©ä½¿ç‚º %d ä½ã€‚\n"
+            "\t ç›®å‰æœ‰ %d ä½å¤©ä½¿åœ¨ç·šä¸Šï¼Œå…¶ä¸­ %d ä½ç¥è«­å‘¼å«å™¨ç‚ºè¨­å®šé–‹æ”¾ï¼›\n",
             Cdatelite(&now),
             rpt.total_angels,
             rpt.total_online_angels,
@@ -518,9 +518,9 @@ int a_angelreport() {
            rpt.inactive_days = ANGEL_INACTIVE_DAYS;
 
         prints(
-            "\t ¤W½u¤Ñ¨Ï¤¤¡A¾Ö¦³¬¡ÅD¤p¥D¤H¼Æ¥Ø³Ì¤Ö¬° %d ¦ì¡A³Ì¦h¬° %d ¦ì\n"
-            "\t ¤W½u¥B¶}©ñ¦¬¥D¤Hªº¤Ñ¨Ï¤¤¡A¬¡ÅD¥D¤H³Ì¤Ö %d ¦ì¡A³Ì¦h %d ¦ì\n"
-            "\t ¬¡ÅD¤p¥D¤H©w¸q¬° %d ¤Ñ¤º¦³¹ï¥ô¤@(¥]§t«e¥ô)¤p¤Ñ¨Ï¶Ç¹L°T®§\n",
+            "\t ä¸Šç·šå¤©ä½¿ä¸­ï¼Œæ“æœ‰æ´»èºå°ä¸»äººæ•¸ç›®æœ€å°‘ç‚º %d ä½ï¼Œæœ€å¤šç‚º %d ä½\n"
+            "\t ä¸Šç·šä¸”é–‹æ”¾æ”¶ä¸»äººçš„å¤©ä½¿ä¸­ï¼Œæ´»èºä¸»äººæœ€å°‘ %d ä½ï¼Œæœ€å¤š %d ä½\n"
+            "\t æ´»èºå°ä¸»äººå®šç¾©ç‚º %d å¤©å…§æœ‰å°ä»»ä¸€(åŒ…å«å‰ä»»)å°å¤©ä½¿å‚³éè¨Šæ¯\n",
             rpt.min_masters_of_online_angels,
             rpt.max_masters_of_online_angels,
             rpt.min_masters_of_active_angels,
@@ -530,39 +530,39 @@ int a_angelreport() {
        int days = (now - ANGELBEATS_ACTIVE_MASTER_RECORD_START) / DAY_SECONDS;
        days += 1;
        if (days < rpt.inactive_days)
-           prints("\t (¥Ñ©ó¬¡ÅD¤p¥D¤H¬O·s¼Wªº²Î­p¶µ¥Ø¡A"
-                   "¥Ø«e¹ê»Ú¥u¦³ %d ¤Ñ¤ºªº¼Æ¾Ú)\n", days);
+           prints("\t (ç”±æ–¼æ´»èºå°ä¸»äººæ˜¯æ–°å¢çš„çµ±è¨ˆé …ç›®ï¼Œ"
+                   "ç›®å‰å¯¦éš›åªæœ‰ %d å¤©å…§çš„æ•¸æ“š)\n", days);
 #endif
 
-       prints("\n\t " ANSI_COLOR(1;33) "´£¿ô±z¥H¤U¼Æ¾Ú¦³¥]§t±z¨p¤Hªº°O¿ı¡A"
-               "¥ô·N¤½§G¥i¯à·|¬ªÅS¨­¥÷¡C\n" ANSI_RESET);
+       prints("\n\t " ANSI_COLOR(1;33) "æé†’æ‚¨ä»¥ä¸‹æ•¸æ“šæœ‰åŒ…å«æ‚¨ç§äººçš„è¨˜éŒ„ï¼Œ"
+               "ä»»æ„å…¬ä½ˆå¯èƒ½æœƒæ´©éœ²èº«ä»½ã€‚\n" ANSI_RESET);
 
 #ifdef ANGEL_REPORT_INDEX
         if (HasUserPerm(PERM_ANGEL)) {
             if (currutmp->angelpause != ANGELPAUSE_NONE)
-                prints("\t ¥Ñ©ó±z¥Ø«e©Ú¦¬¤p¥D¤H©Ò¥HµL¶¶¦ì¸ê°T\n");
+                prints("\t ç”±æ–¼æ‚¨ç›®å‰æ‹’æ”¶å°ä¸»äººæ‰€ä»¥ç„¡é †ä½è³‡è¨Š\n");
             else if (rpt.my_active_index == 0)
-                prints("\t ±z¦ü¥G¦³¨ä¥¦µn¤J°±¦¬©Î©Ú¦¬©Ò¥H¥Ø«eµL¤Ñ¨Ï¶¶¦ì\n");
+                prints("\t æ‚¨ä¼¼ä¹æœ‰å…¶å®ƒç™»å…¥åœæ”¶æˆ–æ‹’æ”¶æ‰€ä»¥ç›®å‰ç„¡å¤©ä½¿é †ä½\n");
             else
-                prints("\t ±zªº½u¤W¤p¤Ñ¨Ï¶¶¦ì¬° %d¡C\n"
-                       "\t ¦¹¶¶¦ì¥i¯à·|¦]¨ä¥¦¤p¤Ñ¨Ï¤W½u©Î§ïÅÜ©I¥s¾¹¦ÓÅÜ¤j\n",
+                prints("\t æ‚¨çš„ç·šä¸Šå°å¤©ä½¿é †ä½ç‚º %dã€‚\n"
+                       "\t æ­¤é †ä½å¯èƒ½æœƒå› å…¶å®ƒå°å¤©ä½¿ä¸Šç·šæˆ–æ”¹è®Šå‘¼å«å™¨è€Œè®Šå¤§\n",
                        rpt.my_active_index);
         }
 #endif
-        prints("\t ±z¥Ø«e¤j¬ù¦³ %d ¦ì¬¡ÅD¤p¥D¤H¡C\n", rpt.my_active_masters);
+        prints("\t æ‚¨ç›®å‰å¤§ç´„æœ‰ %d ä½æ´»èºå°ä¸»äººã€‚\n", rpt.my_active_masters);
 
         if (rpt.last_assigned_master > 0) {
             // TODO check if last_assigned is already invalid.
-            prints("\t §A³Ì«á¦¬¨ìªº·s¤p¥D¤H¬O %s (%s)\n",
+            prints("\t ä½ æœ€å¾Œæ”¶åˆ°çš„æ–°å°ä¸»äººæ˜¯ %s (%s)\n",
                    getuserid(rpt.last_assigned_master),
                    Cdatelite(&rpt.last_assigned));
            prints("\n"
-                  "\t («Ü¦h·sªº¤p¥D¤H¥i¯à¬O»~«ö©Î¬~¤Ñ¨ÏÁ`¤§³£¤£·|°e°T®§¡A\n"
-                  "\t  ¦pªG§Aµ¥«Ü¤[³£¨S¬İ¨ì·s¥D¤Hªº°T®§¡A´N¥i¥H©ú¥Õ¬°¦ó¤§«e\n"
-                  "\t  ·|¥H¬°³£¨S¦³·s¥D¤H¡A¨ä¹ê¬O¦³¦¬¨ì¦ı¹ï¤è¤£Á¿¸Ü)\n");
+                  "\t (å¾ˆå¤šæ–°çš„å°ä¸»äººå¯èƒ½æ˜¯èª¤æŒ‰æˆ–æ´—å¤©ä½¿ç¸½ä¹‹éƒ½ä¸æœƒé€è¨Šæ¯ï¼Œ\n"
+                  "\t  å¦‚æœä½ ç­‰å¾ˆä¹…éƒ½æ²’çœ‹åˆ°æ–°ä¸»äººçš„è¨Šæ¯ï¼Œå°±å¯ä»¥æ˜ç™½ç‚ºä½•ä¹‹å‰\n"
+                  "\t  æœƒä»¥ç‚ºéƒ½æ²’æœ‰æ–°ä¸»äººï¼Œå…¶å¯¦æ˜¯æœ‰æ”¶åˆ°ä½†å°æ–¹ä¸è¬›è©±)\n");
         }
 #ifdef ANGEL_ASSIGN_DOCUMENT
-       prints("\n\t ­YÄ±±o«Ü¤[³£¨S¦¬¨ì·s¥D¤H¥i«ö [a] Áä¬d¬İ¤À°t¾÷¨î»¡©ú¡C\n");
+       prints("\n\t è‹¥è¦ºå¾—å¾ˆä¹…éƒ½æ²’æ”¶åˆ°æ–°ä¸»äººå¯æŒ‰ [a] éµæŸ¥çœ‹åˆ†é…æ©Ÿåˆ¶èªªæ˜ã€‚\n");
 #endif
     }
     close(fd);
@@ -583,7 +583,7 @@ angel_reject_me(userinfo_t * uin){
     int unum;
     while ((unum = *iter++)) {
 	if (unum == currutmp->uid) {
-            // ¶W¯Å¦n¤Í?
+            // è¶…ç´šå¥½å‹?
             if (intbsearch(unum, uin->myfriend, uin->nFriends))
                 return 0;
 	    return 1;
@@ -626,7 +626,7 @@ enum ANGEL_MSG_FORMAT {
 int
 angel_edit_msg(const char *prompt, const char *filename,
                enum ANGEL_MSG_FORMAT format) {
-    char nick[IDLEN - 6 + 1] = ""; // 6=strlen("¤p¤Ñ¨Ï")
+    char nick[IDLEN - 6 + 1] = ""; // 6=strlen("å°å¤©ä½¿")
     char old_nick[IDLEN] = "";
     char msg[3][STRLEN] = {"", "", ""};
     char fpath[PATHLEN];
@@ -637,7 +637,7 @@ angel_edit_msg(const char *prompt, const char *filename,
     vs_hdr2(PROMPT_ANGELBEATS, prompt);
     setuserfile(fpath, filename);
 
-    outs("­ì³]©w: \n");
+    outs("åŸè¨­å®š: \n");
     fp = fopen(fpath, "r");
     if (fp) {
         if (format == FORMAT_NICK_MSG) {
@@ -646,7 +646,7 @@ angel_edit_msg(const char *prompt, const char *filename,
                 chomp(buf);
                 strlcpy(nick, buf + 3, sizeof(nick));
                 strlcpy(old_nick, nick, sizeof(old_nick));
-                prints(" ¼ÊºÙ: %s¤p¤Ñ¨Ï\n", nick);
+                prints(" æš±ç¨±: %så°å¤©ä½¿\n", nick);
             }
         }
         for (i = 0; i < 3; i++) {
@@ -659,18 +659,18 @@ angel_edit_msg(const char *prompt, const char *filename,
 
         fclose(fp);
     } else {
-        outs("(¥Ø«eµL³]©w)\n");
+        outs("(ç›®å‰ç„¡è¨­å®š)\n");
     }
-    mvouts(10, 0, "·s³]©w:\n");
+    mvouts(10, 0, "æ–°è¨­å®š:\n");
     if (format == FORMAT_NICK_MSG) {
-        getdata_buf(11, 0, " ¤p¤Ñ¨Ï¼ÊºÙ¡G", nick, sizeof(nick), DOECHO);
+        getdata_buf(11, 0, " å°å¤©ä½¿æš±ç¨±ï¼š", nick, sizeof(nick), DOECHO);
         if (!*nick) {
-            mvouts(12, 0, "ªÅ¥Õ±N¾É­P§R°£¤p¤Ñ¨Ï¼ÊºÙ»P°T®§¡C\n");
+            mvouts(12, 0, "ç©ºç™½å°‡å°è‡´åˆªé™¤å°å¤©ä½¿æš±ç¨±èˆ‡è¨Šæ¯ã€‚\n");
             do_delete_file = 1;
         }
     }
     if (!do_delete_file) {
-        mvouts(12, 0, " ½s¿è°T®§ (³Ì¦h¤T¦æ¡A«ö[ENTER]µ²§ô):\n");
+        mvouts(12, 0, " ç·¨è¼¯è¨Šæ¯ (æœ€å¤šä¸‰è¡Œï¼ŒæŒ‰[ENTER]çµæŸ):\n");
         for (i = 0; i < 3; i++) {
             if (!getdata_buf(13 + i, 0, " : ", msg[i], 73, DOECHO)) {
                 for (i++; i < 3; i++)
@@ -679,32 +679,32 @@ angel_edit_msg(const char *prompt, const char *filename,
             }
         }
         if (format == FORMAT_PLAIN_MSG && !*msg[0]) {
-            mvouts(15, 0, "ªÅ¥Õ±N¾É­P§R°£¤p¤Ñ¨Ï°T®§¡C\n");
+            mvouts(15, 0, "ç©ºç™½å°‡å°è‡´åˆªé™¤å°å¤©ä½¿è¨Šæ¯ã€‚\n");
             do_delete_file = 1;
         }
     }
 
-    if (!getdata(20, 0, "½T©wÀx¦s¡H [y/N]: ", buf, 3, LCECHO) ||
+    if (!getdata(20, 0, "ç¢ºå®šå„²å­˜ï¼Ÿ [y/N]: ", buf, 3, LCECHO) ||
         buf[0] != 'y') {
         return 0;
     }
 
     if (strcmp(nick, old_nick) != 0) {
         log_filef("log/change_angel_nick.log", LOG_CREAT,
-                  "%s %s (%s¤p¤Ñ¨Ï)§ó´«¼ÊºÙ¬°¡u%s¤p¤Ñ¨Ï¡v\n",
+                  "%s %s (%så°å¤©ä½¿)æ›´æ›æš±ç¨±ç‚ºã€Œ%så°å¤©ä½¿ã€\n",
                   Cdatelite(&now), cuser.userid, old_nick, nick);
     }
 
     if (do_delete_file) {
         if (dashf(fpath) && remove(fpath) != 0)
-            vmsg("¨t²Î¿ù»~ - µLªk§R°£¡C");
+            vmsg("ç³»çµ±éŒ¯èª¤ - ç„¡æ³•åˆªé™¤ã€‚");
         return 1;
     }
 
     // write file
     fp = fopen(fpath, "w");
     if (!fp) {
-        vmsg("¨t²Î¿ù»~ - µLªk¼g¤J¡C");
+        vmsg("ç³»çµ±éŒ¯èª¤ - ç„¡æ³•å¯«å…¥ã€‚");
         return 0;
     }
     if (format == FORMAT_NICK_MSG) {
@@ -723,13 +723,13 @@ angel_edit_msg(const char *prompt, const char *filename,
 
 int
 a_angelmsg(){
-    return angel_edit_msg("½s¿è¤p¤Ñ¨Ï¼ÊºÙ»PÂ÷½u°T®§", FN_ANGELMSG,
+    return angel_edit_msg("ç·¨è¼¯å°å¤©ä½¿æš±ç¨±èˆ‡é›¢ç·šè¨Šæ¯", FN_ANGELMSG,
                           FORMAT_NICK_MSG);
 }
 
 int
 a_angelmsg2(){
-    return angel_edit_msg("½s¿è¤p¤Ñ¨Ï©I¥sµe­±­Ó©Ê¯d¨¥", FN_ANGELMSG2,
+    return angel_edit_msg("ç·¨è¼¯å°å¤©ä½¿å‘¼å«ç•«é¢å€‹æ€§ç•™è¨€", FN_ANGELMSG2,
                           FORMAT_PLAIN_MSG);
 }
 
@@ -795,12 +795,12 @@ NoAngelFound(const char* msg){
     outs(msg_separator);
     move(b_lines-2, 0);
     if (!msg)
-	msg = "§Aªº¤p¤Ñ¨Ï²{¦b¤£¦b½u¤W";
+	msg = "ä½ çš„å°å¤©ä½¿ç¾åœ¨ä¸åœ¨ç·šä¸Š";
     outs(msg);
 #ifdef BN_NEWBIE
     if (currutmp == NULL || currutmp->mode != EDITING)
-	outs("¡A½Ğ¥ı¦b·s¤âªO¤W´M§äµª®×©Î«ö Ctrl-P µo°İ");
-    if (vmsg("½Ğ«ö¥ô·NÁäÄ~Äò¡A­Y·Qª½±µ¶i¤J·s¤âªOµo¤å½Ğ«ö p") == 'p')
+	outs("ï¼Œè«‹å…ˆåœ¨æ–°æ‰‹æ¿ä¸Šå°‹æ‰¾ç­”æ¡ˆæˆ–æŒ‰ Ctrl-P ç™¼å•");
+    if (vmsg("è«‹æŒ‰ä»»æ„éµç¹¼çºŒï¼Œè‹¥æƒ³ç›´æ¥é€²å…¥æ–°æ‰‹æ¿ç™¼æ–‡è«‹æŒ‰ p") == 'p')
 	GotoNewHand();
 #else
     pressanykey();
@@ -826,17 +826,17 @@ AngelNotOnline(){
 	return;
     }
 
-    showtitle("¤p¤Ñ¨Ï¯d¨¥", BBSNAME);
+    showtitle("å°å¤©ä½¿ç•™è¨€", BBSNAME);
     move(2, 0);
-    prints("±zªº%s¤p¤Ñ¨Ï²{¦b¤£¦b½u¤W¡AÍ¢¯d¨¥µ¹§A¡G\n", _myangel_nick);
+    prints("æ‚¨çš„%så°å¤©ä½¿ç¾åœ¨ä¸åœ¨ç·šä¸Šï¼Œç¥‚ç•™è¨€çµ¦ä½ ï¼š\n", _myangel_nick);
     angel_display_message(FN_ANGEL_OFFLINE2, msg_fn, 1, 5, 4, 9, 53);
 
     // Query if user wants to go to newbie board
-    switch(tolower(vmsg("·Q´«¦¨¥Ø«e¦b½u¤Wªº¤p¤Ñ¨Ï½Ğ«ö h, "
+    switch(tolower(vmsg("æƒ³æ›æˆç›®å‰åœ¨ç·šä¸Šçš„å°å¤©ä½¿è«‹æŒ‰ h, "
 #ifdef BN_NEWBIE
-                    "¶i·s¤âªO½Ğ«ö p, "
+                    "é€²æ–°æ‰‹æ¿è«‹æŒ‰ p, "
 #endif
-                    "¨ä¥¦¥ô·NÁäÂ÷¶}"))) {
+                    "å…¶å®ƒä»»æ„éµé›¢é–‹"))) {
         case 'h':
             move(b_lines - 4, 0); clrtobot();
             do_changeangel(1);
@@ -858,16 +858,16 @@ TalkToAngel(){
     char msg_fn[PATHLEN];
 
     if (strcmp(cuser.myangel, "-") == 0){
-	NoAngelFound("§A¨S¦³¤p¤Ñ¨Ï");
+	NoAngelFound("ä½ æ²’æœ‰å°å¤©ä½¿");
 	return;
     }
 
     if (HasUserRole(ROLE_ANGEL_CIA))
         supervisor = 1;
 
-    // ­Y¨Ï¥ÎªÌ¦h­«µn¤J¨Ã¤À¶}©I¥s«h¥i¯à·|³sÄò´«¦h­Ó¤p¤Ñ¨Ï¡C
-    // ©Ò¥H !AngelPermChecked ®É reload user data.
-    // Å¥¨Ó«Ü¸£´İ¦ı¬O¦ü¥G¯uªº¦³¨Ï¥ÎªÌ·|³o¼Ë¡C
+    // è‹¥ä½¿ç”¨è€…å¤šé‡ç™»å…¥ä¸¦åˆ†é–‹å‘¼å«å‰‡å¯èƒ½æœƒé€£çºŒæ›å¤šå€‹å°å¤©ä½¿ã€‚
+    // æ‰€ä»¥ !AngelPermChecked æ™‚ reload user data.
+    // è½ä¾†å¾ˆè…¦æ®˜ä½†æ˜¯ä¼¼ä¹çœŸçš„æœ‰ä½¿ç”¨è€…æœƒé€™æ¨£ã€‚
     if (!AngelPermChecked) {
         pwcuReload();
     }
@@ -906,8 +906,8 @@ TalkToAngel(){
         if (ret <= 0) {
             lastuent = NULL;
             NoAngelFound(
-                (ret < 0) ? "©êºp¡A¤Ñ¨Ï¨t²Î¬G»Ù¡A½Ğ¦Ü" BN_BUGREPORT "¦^³ø¡C" :
-                            "²{¦b¨S¦³¤p¤Ñ¨Ï¦b½u¤W");
+                (ret < 0) ? "æŠ±æ­‰ï¼Œå¤©ä½¿ç³»çµ±æ•…éšœï¼Œè«‹è‡³" BN_BUGREPORT "å›å ±ã€‚" :
+                            "ç¾åœ¨æ²’æœ‰å°å¤©ä½¿åœ¨ç·šä¸Š");
             return;
         }
     }
@@ -956,8 +956,8 @@ TalkToAngel(){
 
     {
 	char xnick[IDLEN+1], prompt[IDLEN*2];
-	snprintf(xnick, sizeof(xnick), "%s¤p¤Ñ¨Ï", _myangel_nick);
-	snprintf(prompt, sizeof(prompt), "°İ%s¤p¤Ñ¨Ï: ", _myangel_nick);
+	snprintf(xnick, sizeof(xnick), "%så°å¤©ä½¿", _myangel_nick);
+	snprintf(prompt, sizeof(prompt), "å•%så°å¤©ä½¿: ", _myangel_nick);
 	// if success, record uent.
 	if (my_write(uent->pid, prompt, xnick, WATERBALL_ANGEL, uent)) {
 	    lastuent = uent;
@@ -995,9 +995,9 @@ pressanykey_or_callangel(){
     outs(VCLR_PAUSE_PAD " ");
     w -= 1 + 38;
     vpad(w / 2, VMSG_PAUSE_PAD);
-    outs(VCLR_PAUSE     " ½Ğ«ö " ANSI_COLOR(36) "ªÅ¥ÕÁä"
-           VCLR_PAUSE     " Ä~Äò¡A©Î " ANSI_COLOR(36) "H"
-           VCLR_PAUSE     " ©I¥s¤p¤Ñ¨Ï¨ó§U " VCLR_PAUSE_PAD);
+    outs(VCLR_PAUSE     " è«‹æŒ‰ " ANSI_COLOR(36) "ç©ºç™½éµ"
+           VCLR_PAUSE     " ç¹¼çºŒï¼Œæˆ– " ANSI_COLOR(36) "H"
+           VCLR_PAUSE     " å‘¼å«å°å¤©ä½¿å”åŠ© " VCLR_PAUSE_PAD);
     vpad(w - w / 2, VMSG_PAUSE_PAD);
     outs(" " ANSI_RESET);
 

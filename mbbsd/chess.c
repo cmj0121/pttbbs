@@ -41,10 +41,10 @@
     } while(0)
 
 static const char * const ChessHintStr[] = {
-    "  q      ª{øÈ¬˜∂}",
-    "  p      ≠n®D©M¥—",
-    "§Ë¶V¡‰   ≤æ∞ πCº–",
-    "Enter    øÔæ‹/≤æ∞ "
+    "  q      Ë™çËº∏Èõ¢Èñã",
+    "  p      Ë¶ÅÊ±ÇÂíåÊ£ã",
+    "ÊñπÂêëÈçµ   ÁßªÂãïÈÅäÊ®ô",
+    "Enter    ÈÅ∏Êìá/ÁßªÂãï"
 };
 
 struct ChessReplayMap_t {
@@ -138,37 +138,37 @@ ChessDrawHelpLine(const ChessInfo* info)
 {
     static const char* const HelpStr[] =
     {
-	/* CHESS_MODE_VERSUS, πÔ´≥ */
-	ANSI_COLOR(1;33;42) " §U¥— "
-	ANSI_COLOR(;31;47) " (°ˆ°Ù°ı°˜)" ANSI_COLOR(30) " ≤æ∞  "
-	ANSI_COLOR(31) "(™≈•’¡‰/ENTER)" ANSI_COLOR(30) " §U§l "
-	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "ª{øÈ "
-	ANSI_COLOR(31) "(p)" ANSI_COLOR(30) "µÍ§‚/©M¥— "
-	ANSI_COLOR(31) "(u)" ANSI_COLOR(30) "Æ¨¥— "
+	/* CHESS_MODE_VERSUS, Â∞çÂ•ï */
+	ANSI_COLOR(1;33;42) " ‰∏ãÊ£ã "
+	ANSI_COLOR(;31;47) " (‚Üê‚Üë‚Üì‚Üí)" ANSI_COLOR(30) " ÁßªÂãï "
+	ANSI_COLOR(31) "(Á©∫ÁôΩÈçµ/ENTER)" ANSI_COLOR(30) " ‰∏ãÂ≠ê "
+	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "Ë™çËº∏ "
+	ANSI_COLOR(31) "(p)" ANSI_COLOR(30) "ËôõÊâã/ÂíåÊ£ã "
+	ANSI_COLOR(31) "(u)" ANSI_COLOR(30) "ÊÇîÊ£ã "
 	ANSI_RESET,
 
-	/* CHESS_MODE_WATCH, ∆[¥— */
-	ANSI_COLOR(1;33;42) " ∆[¥— "
-	ANSI_COLOR(;31;47) " (°ˆ°˜)" ANSI_COLOR(30) " ´e´·§@®B   "
-	ANSI_COLOR(31) "(°Ù°ı)" ANSI_COLOR(30) " ´e´·§Q®B  "
-	ANSI_COLOR(31) "(PGUP/PGDN)" ANSI_COLOR(30) " ≥Ã™Ï/•ÿ´eΩL≠±  "
-	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "¬˜∂} "
+	/* CHESS_MODE_WATCH, ËßÄÊ£ã */
+	ANSI_COLOR(1;33;42) " ËßÄÊ£ã "
+	ANSI_COLOR(;31;47) " (‚Üê‚Üí)" ANSI_COLOR(30) " ÂâçÂæå‰∏ÄÊ≠•   "
+	ANSI_COLOR(31) "(‚Üë‚Üì)" ANSI_COLOR(30) " ÂâçÂæåÂçÅÊ≠•  "
+	ANSI_COLOR(31) "(PGUP/PGDN)" ANSI_COLOR(30) " ÊúÄÂàù/ÁõÆÂâçÁõ§Èù¢  "
+	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "Èõ¢Èñã "
 	ANSI_RESET,
 
-	/* CHESS_MODE_PERSONAL, •¥√– */
-	ANSI_COLOR(1;33;42) " •¥√– "
-	ANSI_COLOR(;31;47) " (°ˆ°Ù°ı°˜)" ANSI_COLOR(30) " ≤æ∞  "
-	ANSI_COLOR(31) "(™≈•’¡‰/ENTER)" ANSI_COLOR(30) " §U§l "
-	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "¬˜∂} "
-	ANSI_COLOR(31) "(u)" ANSI_COLOR(30) "Æ¨¥— "
+	/* CHESS_MODE_PERSONAL, ÊâìË≠ú */
+	ANSI_COLOR(1;33;42) " ÊâìË≠ú "
+	ANSI_COLOR(;31;47) " (‚Üê‚Üë‚Üì‚Üí)" ANSI_COLOR(30) " ÁßªÂãï "
+	ANSI_COLOR(31) "(Á©∫ÁôΩÈçµ/ENTER)" ANSI_COLOR(30) " ‰∏ãÂ≠ê "
+	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "Èõ¢Èñã "
+	ANSI_COLOR(31) "(u)" ANSI_COLOR(30) "ÊÇîÊ£ã "
 	ANSI_RESET,
 
-	/* CHESS_MODE_REPLAY, ¨›√– */
-	ANSI_COLOR(1;33;42) " ¨›√– "
-	ANSI_COLOR(;31;47) " (°ˆ°˜)" ANSI_COLOR(30) " ´e´·§@®B  "
-	ANSI_COLOR(31) "(°Ù°ı)" ANSI_COLOR(30) " ´e´·§Q®B  "
-	ANSI_COLOR(31) "(PGUP/PGDN)" ANSI_COLOR(30) " ≥Ã™Ï/•ÿ´eΩL≠±  "
-	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "¬˜∂} "
+	/* CHESS_MODE_REPLAY, ÁúãË≠ú */
+	ANSI_COLOR(1;33;42) " ÁúãË≠ú "
+	ANSI_COLOR(;31;47) " (‚Üê‚Üí)" ANSI_COLOR(30) " ÂâçÂæå‰∏ÄÊ≠•  "
+	ANSI_COLOR(31) "(‚Üë‚Üì)" ANSI_COLOR(30) " ÂâçÂæåÂçÅÊ≠•  "
+	ANSI_COLOR(31) "(PGUP/PGDN)" ANSI_COLOR(30) " ÊúÄÂàù/ÁõÆÂâçÁõ§Èù¢  "
+	ANSI_COLOR(31) "(q)" ANSI_COLOR(30) "Èõ¢Èñã "
 	ANSI_RESET,
     };
 
@@ -404,12 +404,12 @@ ChessAnswerRequest(ChessInfo* info, const char* req_name)
     char msg[64];
 
     snprintf(info->warnmsg, sizeof(info->warnmsg),
-	    ANSI_COLOR(1;31) "≠n®D%s!" ANSI_RESET, req_name);
+	    ANSI_COLOR(1;31) "Ë¶ÅÊ±Ç%s!" ANSI_RESET, req_name);
     ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
     bell();
 
     snprintf(msg, sizeof(msg),
-	    "πÔ§Ë≠n®D%s°A¨Oß_±µ®¸?(y/N)", req_name);
+	    "Â∞çÊñπË¶ÅÊ±Ç%sÔºåÊòØÂê¶Êé•Âèó?(y/N)", req_name);
     DO_WITHOUT_PEER(30,
     getdata(b_lines, 0, msg, buf, sizeof(buf), DOECHO),
     buf[0] = 'n');
@@ -466,10 +466,10 @@ ChessPlayFuncMy(ChessInfo* info)
 		    game_result = CHESS_RESULT_TIE;
 		    endturn = 1;
 		} else if (result == CHESS_STEP_TIE_REJ) {
-		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "®D©M≥Q©⁄!" ANSI_RESET);
+		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "Ê±ÇÂíåË¢´Êãí!" ANSI_RESET);
 		    ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
 		} else if (result == CHESS_STEP_UNDO) {
-		    if (ChessAnswerRequest(info, "Æ¨¥—")) {
+		    if (ChessAnswerRequest(info, "ÊÇîÊ£ã")) {
 			ChessMessageSend(info, CHESS_STEP_UNDO_ACC);
 
 			info->actions->init_board(info->board);
@@ -543,8 +543,8 @@ ChessPlayFuncMy(ChessInfo* info)
 		    DO_WITHOUT_PEER(30,
 		    getdata(b_lines, 0,
 			    info->mode == CHESS_MODE_PERSONAL ?
-			    "¨Oß_Øu™∫≠n¬˜∂}?(y/N)" :
-			    "¨Oß_Øu™∫≠nª{øÈ?(y/N)",
+			    "ÊòØÂê¶ÁúüÁöÑË¶ÅÈõ¢Èñã?(y/N)" :
+			    "ÊòØÂê¶ÁúüÁöÑË¶ÅË™çËº∏?(y/N)",
 			    buf, sizeof(buf), DOECHO),
 		    buf[0] = 'n');
 		    ChessDrawHelpLine(info);
@@ -560,7 +560,7 @@ ChessPlayFuncMy(ChessInfo* info)
 		if (info->constants->pass_is_step) {
 		    ChessStepType type = CHESS_STEP_PASS;
 		    ChessHistoryAppend(info, &type);
-		    strcpy(info->last_movestr, "µÍ§‚");
+		    strcpy(info->last_movestr, "ËôõÊâã");
 
 		    info->pass[(int) info->turn] = 1;
 		    ChessMessageSend(info, CHESS_STEP_PASS);
@@ -569,7 +569,7 @@ ChessPlayFuncMy(ChessInfo* info)
 		    char buf[4];
 
 		    DO_WITHOUT_PEER(30,
-		    getdata(b_lines, 0, "¨Oß_Øu™∫≠n©M¥—?(y/N)",
+		    getdata(b_lines, 0, "ÊòØÂê¶ÁúüÁöÑË¶ÅÂíåÊ£ã?(y/N)",
 			    buf, sizeof(buf), DOECHO),
 		    buf[0] = 'n');
 		    ChessDrawHelpLine(info);
@@ -577,7 +577,7 @@ ChessPlayFuncMy(ChessInfo* info)
 		    if (buf[0] == 'y' || buf[1] == 'Y') {
 			ChessMessageSend(info, CHESS_STEP_TIE);
 			strlcpy(info->warnmsg,
-				ANSI_COLOR(1;33) "≠n®D©M¥—!" ANSI_RESET,
+				ANSI_COLOR(1;33) "Ë¶ÅÊ±ÇÂíåÊ£ã!" ANSI_RESET,
 				sizeof(info->warnmsg));
 			ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
 			bell();
@@ -657,7 +657,7 @@ ChessPlayFuncHis(ChessInfo* info)
 		{
 		    char buf[4];
 		    DO_WITHOUT_PEER(30,
-		    getdata(b_lines, 0, "¨Oß_Øu™∫≠nª{øÈ?(y/N)",
+		    getdata(b_lines, 0, "ÊòØÂê¶ÁúüÁöÑË¶ÅË™çËº∏?(y/N)",
 			    buf, sizeof(buf), DOECHO),
 		    buf[0] = 'n');
 		    ChessDrawHelpLine(info);
@@ -671,7 +671,7 @@ ChessPlayFuncHis(ChessInfo* info)
 
 	    case 'u':
 		if (info->history.used > 0) {
-		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "≠n®DÆ¨¥—!" ANSI_RESET);
+		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "Ë¶ÅÊ±ÇÊÇîÊ£ã!" ANSI_RESET);
 		    ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
 
 		    ChessMessageSend(info, CHESS_STEP_UNDO);
@@ -686,12 +686,12 @@ ChessPlayFuncHis(ChessInfo* info)
 		    game_result = CHESS_RESULT_WIN;
 		    endturn = 1;
 		} else if (result == CHESS_STEP_PASS) {
-		    strcpy(info->last_movestr, "µÍ§‚");
+		    strcpy(info->last_movestr, "ËôõÊâã");
 
 		    info->pass[(int) info->turn] = 1;
 		    endturn = 1;
 		} else if (result == CHESS_STEP_TIE) {
-		    if (ChessAnswerRequest(info, "©M¥—")) {
+		    if (ChessAnswerRequest(info, "ÂíåÊ£ã")) {
 			ChessMessageSend(info, CHESS_STEP_TIE_ACC);
 
 			game_result = CHESS_RESULT_TIE;
@@ -718,7 +718,7 @@ ChessPlayFuncHis(ChessInfo* info)
 		    ChessStepMade(info, 1);
 		    info->actions->drawstep(info, &info->step_tmp);
 		} else if (result == CHESS_STEP_UNDO_ACC) {
-		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "±µ®¸Æ¨¥—!" ANSI_RESET);
+		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "Êé•ÂèóÊÇîÊ£ã!" ANSI_RESET);
 
 		    info->actions->init_board(info->board);
 		    info->current_step = 0;
@@ -730,7 +730,7 @@ ChessPlayFuncHis(ChessInfo* info)
 
 		    endturn = 1;
 		} else if (result == CHESS_STEP_UNDO_REJ) {
-		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "Æ¨¥—≥Q©⁄!" ANSI_RESET);
+		    strcpy(info->warnmsg, ANSI_COLOR(1;31) "ÊÇîÊ£ãË¢´Êãí!" ANSI_RESET);
 		    ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
 		}
 
@@ -767,7 +767,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 
 	info->actions->prepare_play(info);
 	if (info->sock == -1)
-	    strlcpy(info->warnmsg, ANSI_COLOR(1;33) "¥—ßΩ§wµ≤ßÙ" ANSI_RESET,
+	    strlcpy(info->warnmsg, ANSI_COLOR(1;33) "Ê£ãÂ±ÄÂ∑≤ÁµêÊùü" ANSI_RESET,
 		    sizeof(info->warnmsg));
 
 	ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
@@ -801,11 +801,11 @@ ChessPlayFuncWatch(ChessInfo* info)
 			info->actions->drawstep(info, &info->step_tmp);
 		    }
 		} else if (result == CHESS_STEP_PASS)
-		    strcpy(info->last_movestr, "µÍ§‚");
+		    strcpy(info->last_movestr, "ËôõÊâã");
 
 		break;
 
-	    case KEY_LEFT: /* ©π´e§@®B */
+	    case KEY_LEFT: /* ÂæÄÂâç‰∏ÄÊ≠• */
 		if (info->current_step == 0)
 		    bell();
 		else {
@@ -820,7 +820,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 		}
 		break;
 
-	    case KEY_RIGHT: /* ©π´·§@®B */
+	    case KEY_RIGHT: /* ÂæÄÂæå‰∏ÄÊ≠• */
 		if (info->current_step == info->history.used)
 		    bell();
 		else {
@@ -833,7 +833,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 		}
 		break;
 
-	    case KEY_UP: /* ©π´e§Q®B */
+	    case KEY_UP: /* ÂæÄÂâçÂçÅÊ≠• */
 		if (info->current_step == 0)
 		    bell();
 		else {
@@ -849,7 +849,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 		}
 		break;
 
-	    case KEY_DOWN: /* ©π´·§Q®B */
+	    case KEY_DOWN: /* ÂæÄÂæåÂçÅÊ≠• */
 		if (info->current_step == info->history.used)
 		    bell();
 		else {
@@ -859,7 +859,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 		}
 		break;
 
-	    case KEY_PGUP: /* ∞_©lΩL≠± */
+	    case KEY_PGUP: /* Ëµ∑ÂßãÁõ§Èù¢ */
 		if (info->current_step == 0)
 		    bell();
 		else {
@@ -869,7 +869,7 @@ ChessPlayFuncWatch(ChessInfo* info)
 		}
 		break;
 
-	    case KEY_PGDN: /* ≥Ã∑sΩL≠± */
+	    case KEY_PGDN: /* ÊúÄÊñ∞Áõ§Èù¢ */
 		if (info->current_step == info->history.used)
 		    bell();
 		else {
@@ -957,12 +957,12 @@ ChessGenLogGlobal(ChessInfo* info, ChessGameResult result)
 
     fp = fopen(fname, "w");
     if (fp != NULL) {
-	strlcpy(log_header.owner, "[¥—√–æ˜æπ§H]", sizeof(log_header.owner));
-	snprintf(log_header.title, sizeof(log_header.title), "[¥—√–] %s VS %s",
+	strlcpy(log_header.owner, "[Ê£ãË≠úÊ©üÂô®‰∫∫]", sizeof(log_header.owner));
+	snprintf(log_header.title, sizeof(log_header.title), "[Ê£ãË≠ú] %s VS %s",
 		info->user1.userid, info->user2.userid);
 
-	fprintf(fp, "ß@™Ã: %s ¨›™O: %s\nº–√D: %s \n", log_header.owner, info->constants->log_board, log_header.title);
-	fprintf(fp, "Æ…∂°: %s\n", ctime4(&now));
+	fprintf(fp, "‰ΩúËÄÖ: %s ÁúãÊùø: %s\nÊ®ôÈ°å: %s \n", log_header.owner, info->constants->log_board, log_header.title);
+	fprintf(fp, "ÊôÇÈñì: %s\n", ctime4(&now));
 
 	info->actions->genlog(info, fp, result);
 	fclose(fp);
@@ -1015,8 +1015,8 @@ ChessGenLog(ChessInfo* info, ChessGameResult result)
     }
 
     a = vans(HasUserFlag(UF_DEFBACKUP) ?
-	    "¨Oß_±N¥—√–±H¶^´HΩc°H [Y/n]" :
-	    "¨Oß_±N¥—√–±H¶^´HΩc°H [y/N]");
+	    "ÊòØÂê¶Â∞áÊ£ãË≠úÂØÑÂõû‰ø°ÁÆ±Ôºü [Y/n]" :
+	    "ÊòØÂê¶Â∞áÊ£ãË≠úÂØÑÂõû‰ø°ÁÆ±Ôºü [y/N]");
 
     if (TOBACKUP(a))
 	ChessGenLogUser(info, result);
@@ -1052,7 +1052,7 @@ ChessPlay(ChessInfo* info)
 	sigset_t sigset;
 
 	if(info->mode == CHESS_MODE_VERSUS)
-	    getdata(b_lines, 0, "¨Oß_±µ®¸∆[¥—? (Y/n)", buf, sizeof(buf), DOECHO);
+	    getdata(b_lines, 0, "ÊòØÂê¶Êé•ÂèóËßÄÊ£ã? (Y/n)", buf, sizeof(buf), DOECHO);
 	if(buf[0] == 'n' || buf[0] == 'N')
 	    old_handler = Signal(SIGUSR1, SIG_IGN);
 	else
@@ -1110,26 +1110,26 @@ ChessPlay(ChessInfo* info)
     if (info->mode == CHESS_MODE_VERSUS) {
 	switch (game_result) {
 	    case CHESS_RESULT_WIN:
-		game_result_str = "πÔ§Ëª{øÈ§F!";
+		game_result_str = "Â∞çÊñπË™çËº∏‰∫Ü!";
 		break;
 
 	    case CHESS_RESULT_LOST:
-		game_result_str = "ßAª{øÈ§F!";
+		game_result_str = "‰Ω†Ë™çËº∏‰∫Ü!";
 		break;
 
 	    case CHESS_RESULT_TIE:
-		game_result_str = "©M¥—";
+		game_result_str = "ÂíåÊ£ã";
 		break;
 
 	    default:
 		assert_not_reached();
 	}
     } else if (info->mode == CHESS_MODE_WATCH)
-	game_result_str = "µ≤ßÙ∆[¥—";
+	game_result_str = "ÁµêÊùüËßÄÊ£ã";
     else if (info->mode == CHESS_MODE_PERSONAL)
-	game_result_str = "µ≤ßÙ•¥√–";
+	game_result_str = "ÁµêÊùüÊâìË≠ú";
     else if (info->mode == CHESS_MODE_REPLAY)
-	game_result_str = "µ≤ßÙ¨›√–";
+	game_result_str = "ÁµêÊùüÁúãË≠ú";
 
     if (game_result_str) {
 	strlcpy(info->warnmsg, game_result_str, sizeof(info->warnmsg));
@@ -1182,7 +1182,7 @@ ChessStartGame(char func_char, int sig, const char* title)
 
     vs_hdr(title);
     buf[0] = 0;
-    getdata(2, 0, "®œ•Œ∂«≤Œº“¶° (T), ≠≠Æ…≠≠®Bº“¶° (L) ©Œ¨O ≈™¨Ìº“¶° (C)? (T/l/c)",
+    getdata(2, 0, "‰ΩøÁî®ÂÇ≥Áµ±Ê®°Âºè (T), ÈôêÊôÇÈôêÊ≠•Ê®°Âºè (L) ÊàñÊòØ ËÆÄÁßíÊ®°Âºè (C)? (T/l/c)",
 	    buf, 3, DOECHO);
 
     if (buf[0] == 'l' || buf[0] == 'L' ||
@@ -1195,7 +1195,7 @@ ChessStartGame(char func_char, int sig, const char* title)
 	    _current_time_limit->time_mode = CHESS_TIMEMODE_COUNTING;
 
 	do {
-	    getdata_str(3, 0, "Ω–≥]©wßΩÆ… (¶€•—Æ…∂°) •H§¿ƒ¡¨∞≥Ê¶Ï:",
+	    getdata_str(3, 0, "Ë´ãË®≠ÂÆöÂ±ÄÊôÇ (Ëá™Áî±ÊôÇÈñì) ‰ª•ÂàÜÈêòÁÇ∫ÂñÆ‰Ωç:",
 		    buf, 3, DOECHO, "30");
 	    _current_time_limit->free_time = atoi(buf);
 	} while (_current_time_limit->free_time < 0 || _current_time_limit->free_time > 90);
@@ -1205,14 +1205,14 @@ ChessStartGame(char func_char, int sig, const char* title)
 	    char display_buf[128];
 
 	    do {
-		getdata_str(4, 0, "Ω–≥]©w®BÆ…, •H§¿ƒ¡¨∞≥Ê¶Ï:",
+		getdata_str(4, 0, "Ë´ãË®≠ÂÆöÊ≠•ÊôÇ, ‰ª•ÂàÜÈêòÁÇ∫ÂñÆ‰Ωç:",
 			buf, 3, DOECHO, "5");
 		_current_time_limit->limit_time = atoi(buf);
 	    } while (_current_time_limit->limit_time < 0 || _current_time_limit->limit_time > 30);
 	    _current_time_limit->limit_time *= 60; /* minute -> second */
 
 	    snprintf(display_buf, sizeof(display_buf),
-		    "Ω–≥]©w≠≠®B (®C %d §¿ƒ¡ª›®´¥X®B):",
+		    "Ë´ãË®≠ÂÆöÈôêÊ≠• (ÊØè %d ÂàÜÈêòÈúÄËµ∞ÂπæÊ≠•):",
 		    _current_time_limit->limit_time / 60);
 	    do {
 		getdata_str(5, 0, display_buf, buf, 3, DOECHO, "10");
@@ -1222,7 +1222,7 @@ ChessStartGame(char func_char, int sig, const char* title)
 	    _current_time_limit->limit_hand = 1;
 
 	    do {
-		getdata_str(4, 0, "Ω–≥]©w≈™¨Ì, •H¨Ì¨∞≥Ê¶Ï",
+		getdata_str(4, 0, "Ë´ãË®≠ÂÆöËÆÄÁßí, ‰ª•ÁßíÁÇ∫ÂñÆ‰Ωç",
 			buf, 3, DOECHO, "60");
 		_current_time_limit->limit_time = atoi(buf);
 	    } while (_current_time_limit->limit_time < 0);
@@ -1244,15 +1244,15 @@ ChessWatchGame(void (*play)(int, ChessGameMode), int game, const char* title)
 	return -1;
 
     if (uin->uid == currutmp->uid || uin->mode != game) {
-	vmsg("µL™k´ÿ•ﬂ≥sΩu");
+	vmsg("ÁÑ°Ê≥ïÂª∫Á´ãÈÄ£Á∑ö");
 	return -1;
     }
 
-    if (vans("¨Oß_∂i¶Ê∆[¥—? [N/y]") != 'y')
+    if (vans("ÊòØÂê¶ÈÄ≤Ë°åËßÄÊ£ã? [N/y]") != 'y')
 	return 0;
 
     if ((sock = make_connection_to_somebody(uin, 10)) < 0) {
-	vmsg("µL™k´ÿ•ﬂ≥sΩu");
+	vmsg("ÁÑ°Ê≥ïÂª∫Á´ãÈÄ£Á∑ö");
 	return -1;
     }
     msgsock = accept(sock, (struct sockaddr *) 0, (socklen_t *) 0);
@@ -1276,7 +1276,7 @@ ChessReplayGame(const char* fname)
     screen_backup_t oldscreen;
 
     if(fp == NULL) {
-	vmsg("¿…Æ◊µL™k∂}±“, •iØ‡≥QßR∞£§F");
+	vmsg("Ê™îÊ°àÁÑ°Ê≥ïÈñãÂïü, ÂèØËÉΩË¢´Âà™Èô§‰∫Ü");
 	return -1;
     }
 
@@ -1369,12 +1369,12 @@ ChessPhotoInitial(ChessInfo* info)
     int line;
     FILE* fp;
     static const char * const blank_photo[6] = {
-	"¢z¢w¢w¢w¢w¢w¢w¢{",
-	"¢x ™≈         ¢x",
-	"¢x    •’      ¢x",
-	"¢x       ∑”   ¢x",
-	"¢x          §˘¢x",
-	"¢|¢w¢w¢w¢w¢w¢w¢}"
+	"‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê",
+	"‚îÇ Á©∫         ‚îÇ",
+	"‚îÇ    ÁôΩ      ‚îÇ",
+	"‚îÇ       ÁÖß   ‚îÇ",
+	"‚îÇ          Áâá‚îÇ",
+	"‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò"
     };
     char country[5], level[11];
     userec_t xuser;
@@ -1410,7 +1410,7 @@ ChessPhotoInitial(ChessInfo* info)
     }
 
     if (fp == NULL) {
-	strcpy(country, "µL");
+	strcpy(country, "ÁÑ°");
 	level[0] = 0;
     } else {
 	int i, j;
@@ -1443,12 +1443,12 @@ ChessPhotoInitial(ChessInfo* info)
 	    strcpy(PHOTO(line), blank_photo[line]);
 
 	switch (line) {
-	    case 0: sprintf(genbuf, " <•N∏π> %s", xuser.userid);      break;
-	    case 1: sprintf(genbuf, " <º ∫Ÿ> %.16s", xuser.nickname); break;
-	    case 2: sprintf(genbuf, " <µn§J> %d", xuser.numlogindays);   break;
-	    case 3: sprintf(genbuf, " <§Â≥π> %d", xuser.numposts);    break;
-	    case 4: sprintf(genbuf, " <¬æ¶Ï> %-4s %s", country, level);  break;
-	    case 5: sprintf(genbuf, " <®”∑Ω> %.16s", xuser.lasthost); break;
+	    case 0: sprintf(genbuf, " <‰ª£Ëôü> %s", xuser.userid);      break;
+	    case 1: sprintf(genbuf, " <Êö±Á®±> %.16s", xuser.nickname); break;
+	    case 2: sprintf(genbuf, " <ÁôªÂÖ•> %d", xuser.numlogindays);   break;
+	    case 3: sprintf(genbuf, " <ÊñáÁ´†> %d", xuser.numposts);    break;
+	    case 4: sprintf(genbuf, " <ËÅ∑‰Ωç> %-4s %s", country, level);  break;
+	    case 5: sprintf(genbuf, " <‰æÜÊ∫ê> %.16s", xuser.lasthost); break;
 	    default: genbuf[0] = 0;
 	}
 	strcat(PHOTO(line), genbuf);
@@ -1456,11 +1456,11 @@ ChessPhotoInitial(ChessInfo* info)
     if (fp != NULL)
 	fclose(fp);
 
-    sprintf(PHOTO(6), "      %s%2.2s¥—" ANSI_RESET,
+    sprintf(PHOTO(6), "      %s%2.2sÊ£ã" ANSI_RESET,
 	    info->constants->turn_color[(int) info->myturn ^ 1],
 	    info->constants->turn_str[(int) info->myturn ^ 1]);
-    strcpy(PHOTO(7), "           ¢‰.¢·           ");
-    sprintf(PHOTO(8), "                               %s%2.2s¥—" ANSI_RESET,
+    strcpy(PHOTO(7), "           Ôº∂.Ôº≥           ");
+    sprintf(PHOTO(8), "                               %s%2.2sÊ£ã" ANSI_RESET,
 	    info->constants->turn_color[(int) info->myturn],
 	    info->constants->turn_str[(int) info->myturn]);
 
@@ -1471,7 +1471,7 @@ ChessPhotoInitial(ChessInfo* info)
     }
 
     if (fp == NULL) {
-	strcpy(country, "µL");
+	strcpy(country, "ÁÑ°");
 	level[0] = 0;
     } else {
 	int i, j;
@@ -1496,12 +1496,12 @@ ChessPhotoInitial(ChessInfo* info)
     for (line = 9; line < 15; ++line) {
 	move(line, 37);
 	switch (line - 9) {
-	    case 0: sprintf(PHOTO(line), "<•N∏π> %-16.16s ", xuser.userid);   break;
-	    case 1: sprintf(PHOTO(line), "<º ∫Ÿ> %-16.16s ", xuser.nickname); break;
-	    case 2: sprintf(PHOTO(line), "<µn§J> %-16d ", xuser.numlogindays);   break;
-	    case 3: sprintf(PHOTO(line), "<§Â≥π> %-16d ", xuser.numposts);    break;
-	    case 4: sprintf(PHOTO(line), "<¬æ¶Ï> %-4s %-10s  ", country, level); break;
-	    case 5: sprintf(PHOTO(line), "<®”∑Ω> %-16.16s ", xuser.lasthost); break;
+	    case 0: sprintf(PHOTO(line), "<‰ª£Ëôü> %-16.16s ", xuser.userid);   break;
+	    case 1: sprintf(PHOTO(line), "<Êö±Á®±> %-16.16s ", xuser.nickname); break;
+	    case 2: sprintf(PHOTO(line), "<ÁôªÂÖ•> %-16d ", xuser.numlogindays);   break;
+	    case 3: sprintf(PHOTO(line), "<ÊñáÁ´†> %-16d ", xuser.numposts);    break;
+	    case 4: sprintf(PHOTO(line), "<ËÅ∑‰Ωç> %-4s %-10s  ", country, level); break;
+	    case 5: sprintf(PHOTO(line), "<‰æÜÊ∫ê> %-16.16s ", xuser.lasthost); break;
 	}
 
 	if (fp != NULL) {
@@ -1626,26 +1626,26 @@ ChessShowRequest(void)
 {
     /* XXX */
     if (!_current_time_limit)
-	mvouts(10, 5, "®œ•Œ∂«≤Œ≠pÆ…§Ë¶°, ≥Ê®B≠≠Æ…§≠§¿ƒ¡");
+	mvouts(10, 5, "‰ΩøÁî®ÂÇ≥Áµ±Ë®àÊôÇÊñπÂºè, ÂñÆÊ≠•ÈôêÊôÇ‰∫îÂàÜÈêò");
     else if (_current_time_limit->time_mode == CHESS_TIMEMODE_MULTIHAND) {
-	mvouts(10, 5, "®œ•Œ≠≠Æ…≠≠®B≥W´h:");
+	mvouts(10, 5, "‰ΩøÁî®ÈôêÊôÇÈôêÊ≠•Ë¶èÂâá:");
 	move(12, 8);
-	prints("ßΩÆ… (¶€•—Æ…∂°): %2d §¿ %02d ¨Ì",
+	prints("Â±ÄÊôÇ (Ëá™Áî±ÊôÇÈñì): %2d ÂàÜ %02d Áßí",
 		_current_time_limit->free_time / 60,
 		_current_time_limit->free_time % 60);
 	move(13, 8);
-	prints("≠≠Æ…®BÆ…:        %2d §¿ %02d ¨Ì / %2d §‚",
+	prints("ÈôêÊôÇÊ≠•ÊôÇ:        %2d ÂàÜ %02d Áßí / %2d Êâã",
 		_current_time_limit->limit_time / 60,
 		_current_time_limit->limit_time % 60,
 		_current_time_limit->limit_hand);
     } else if (_current_time_limit->time_mode == CHESS_TIMEMODE_COUNTING) {
-	mvouts(10, 5, "®œ•Œ≈™¨Ì≥W´h:");
+	mvouts(10, 5, "‰ΩøÁî®ËÆÄÁßíË¶èÂâá:");
 	move(12, 8);
-	prints("ßΩÆ… (¶€•—Æ…∂°): %2d §¿ %02d ¨Ì",
+	prints("Â±ÄÊôÇ (Ëá™Áî±ÊôÇÈñì): %2d ÂàÜ %02d Áßí",
 		_current_time_limit->free_time / 60,
 		_current_time_limit->free_time % 60);
 	move(13, 8);
-	prints("≈™¨ÌÆ…∂°:   ®C§‚ %2d ¨Ì", _current_time_limit->limit_time);
+	prints("ËÆÄÁßíÊôÇÈñì:   ÊØèÊâã %2d Áßí", _current_time_limit->limit_time);
     }
 }
 
@@ -1675,39 +1675,39 @@ ChessDrawExtraInfo(const ChessInfo* info, int line, int space)
 		outs(info->last_movestr);
 	    else if (line == CHESS_DRAWING_PHOTOED_TURN_ROW)
 		prints(ANSI_COLOR(1;33) "%s" ANSI_RESET,
-			info->myturn == info->turn ? "Ω¸®ÏßA§U¥—§F" : "µ•´›πÔ§Ë§U¥—");
+			info->myturn == info->turn ? "Ëº™Âà∞‰Ω†‰∏ãÊ£ã‰∫Ü" : "Á≠âÂæÖÂ∞çÊñπ‰∏ãÊ£ã");
 	    else if (line == CHESS_DRAWING_PHOTOED_TIME_ROW1) {
 		if (info->mode == CHESS_MODE_WATCH) {
 		    if (!info->timelimit)
-			prints("®C§‚≠≠Æ…§≠§¿ƒ¡");
+			prints("ÊØèÊâãÈôêÊôÇ‰∫îÂàÜÈêò");
 		    else
-			prints("ßΩÆ…: %5s",
+			prints("Â±ÄÊôÇ: %5s",
 				ChessTimeStr(info->timelimit->free_time));
 		} else if (info->lefthand[0])
-		    prints("ß⁄§Ë≥—ælÆ…∂° %s / %2d ®B",
+		    prints("ÊàëÊñπÂâ©È§òÊôÇÈñì %s / %2d Ê≠•",
 			    ChessTimeStr(info->lefttime[0]),
 			    info->lefthand[0]);
 		else
-		    prints("ß⁄§Ë≥—ælÆ…∂° %s",
+		    prints("ÊàëÊñπÂâ©È§òÊôÇÈñì %s",
 			    ChessTimeStr(info->lefttime[0]));
 	    } else if (line == CHESS_DRAWING_PHOTOED_TIME_ROW2) {
 		if (info->mode == CHESS_MODE_WATCH) {
 		    if (info->timelimit) {
 			if (info->timelimit->time_mode ==
 				CHESS_TIMEMODE_MULTIHAND)
-			    prints("®BÆ…: %s / %2d ®B",
+			    prints("Ê≠•ÊôÇ: %s / %2d Ê≠•",
 				    ChessTimeStr(info->timelimit->limit_time),
 				    info->timelimit->limit_hand);
 			else
-			    prints("≈™¨Ì: %5d ¨Ì",
+			    prints("ËÆÄÁßí: %5d Áßí",
 				    info->timelimit->limit_time);
 		    }
 		} else if (info->lefthand[1])
-		    prints("πÔ§Ë≥—ælÆ…∂° %s / %2d ®B",
+		    prints("Â∞çÊñπÂâ©È§òÊôÇÈñì %s / %2d Ê≠•",
 			    ChessTimeStr(info->lefttime[1]),
 			    info->lefthand[1]);
 		else
-		    prints("πÔ§Ë≥—ælÆ…∂° %s",
+		    prints("Â∞çÊñπÂâ©È§òÊôÇÈñì %s",
 			    ChessTimeStr(info->lefttime[1]));
 	    } else if (line == CHESS_DRAWING_PHOTOED_WARN_ROW)
 		outs(info->warnmsg);
@@ -1717,45 +1717,45 @@ ChessDrawExtraInfo(const ChessInfo* info, int line, int space)
 	if (line >= 3 && line < 3 + (int)dim(ChessHintStr)) {
 	    outs(ChessHintStr[line - 3]);
 	} else if (line == CHESS_DRAWING_SIDE_ROW) {
-	    prints(ANSI_COLOR(1) "ßA¨O%s%s" ANSI_RESET,
+	    prints(ANSI_COLOR(1) "‰Ω†ÊòØ%s%s" ANSI_RESET,
 		    info->constants->turn_color[(int) info->myturn],
 		    info->constants->turn_str[(int) info->myturn]);
 	} else if (line == CHESS_DRAWING_REAL_TURN_ROW) {
 	    prints(ANSI_COLOR(1;33) "%s" ANSI_RESET,
 		    info->myturn == info->turn ?
-		    "Ω¸®ÏßA§U¥—§F" : "µ•´›πÔ§Ë§U¥—");
+		    "Ëº™Âà∞‰Ω†‰∏ãÊ£ã‰∫Ü" : "Á≠âÂæÖÂ∞çÊñπ‰∏ãÊ£ã");
 	} else if (line == CHESS_DRAWING_REAL_STEP_ROW && info->last_movestr) {
 	    outs(info->last_movestr);
 	} else if (line == CHESS_DRAWING_REAL_TIME_ROW1) {
 	    if (info->lefthand[0])
-		prints("ß⁄§Ë≥—ælÆ…∂° %s / %2d ®B",
+		prints("ÊàëÊñπÂâ©È§òÊôÇÈñì %s / %2d Ê≠•",
 			ChessTimeStr(info->lefttime[0]),
 			info->lefthand[0]);
 	    else
-		prints("ß⁄§Ë≥—ælÆ…∂° %s",
+		prints("ÊàëÊñπÂâ©È§òÊôÇÈñì %s",
 			ChessTimeStr(info->lefttime[0]));
 	} else if (line == CHESS_DRAWING_REAL_TIME_ROW2) {
 	    if (info->lefthand[1])
-		prints("πÔ§Ë≥—ælÆ…∂° %s / %2d ®B",
+		prints("Â∞çÊñπÂâ©È§òÊôÇÈñì %s / %2d Ê≠•",
 			ChessTimeStr(info->lefttime[1]),
 			info->lefthand[1]);
 	    else
-		prints("πÔ§Ë≥—ælÆ…∂° %s",
+		prints("Â∞çÊñπÂâ©È§òÊôÇÈñì %s",
 			ChessTimeStr(info->lefttime[1]));
 	} else if (line == CHESS_DRAWING_REAL_WARN_ROW) {
 	    outs(info->warnmsg);
 	} else if (line == CHESS_DRAWING_MYWIN_ROW) {
 	    prints(ANSI_COLOR(1;33) "%12.12s    "
-		    ANSI_COLOR(1;31) "%2d" ANSI_COLOR(37) "≥” "
-		    ANSI_COLOR(34) "%2d" ANSI_COLOR(37) "±— "
-		    ANSI_COLOR(36) "%2d" ANSI_COLOR(37) "©M" ANSI_RESET,
+		    ANSI_COLOR(1;31) "%2d" ANSI_COLOR(37) "Âãù "
+		    ANSI_COLOR(34) "%2d" ANSI_COLOR(37) "Êïó "
+		    ANSI_COLOR(36) "%2d" ANSI_COLOR(37) "Âíå" ANSI_RESET,
 		    info->user1.userid,
 		    info->user1.win, info->user1.lose - 1, info->user1.tie);
 	} else if (line == CHESS_DRAWING_HISWIN_ROW) {
 	    prints(ANSI_COLOR(1;33) "%12.12s    "
-		    ANSI_COLOR(1;31) "%2d" ANSI_COLOR(37) "≥” "
-		    ANSI_COLOR(34) "%2d" ANSI_COLOR(37) "±— "
-		    ANSI_COLOR(36) "%2d" ANSI_COLOR(37) "©M" ANSI_RESET,
+		    ANSI_COLOR(1;31) "%2d" ANSI_COLOR(37) "Âãù "
+		    ANSI_COLOR(34) "%2d" ANSI_COLOR(37) "Êïó "
+		    ANSI_COLOR(36) "%2d" ANSI_COLOR(37) "Âíå" ANSI_RESET,
 		    info->user2.userid,
 		    info->user2.win, info->user2.lose, info->user2.tie);
 	}

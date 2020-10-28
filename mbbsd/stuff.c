@@ -61,7 +61,7 @@ gettime(int line, time4_t dt, const char* head)
     endtime = ptime;
     snprintf(yn, sizeof(yn), "%4d", ptime.tm_year + 1900);
     move(line, 0); SOLVE_ANSI_CACHE(); clrtoeol();
-    snprintf(prompt, sizeof(prompt), "%s ¦è¤¸¦~:", head);
+    snprintf(prompt, sizeof(prompt), "%s è¥¿å…ƒå¹´:", head);
     do {
 	getdata_buf(line, 0, prompt, yn, 5, NUMECHO);
 	// signed:   limited on (2037, ...)
@@ -69,25 +69,25 @@ gettime(int line, time4_t dt, const char* head)
 	// let's restrict inside the boundary.
     } while ((endtime.tm_year = atoi(yn) - 1900) < 70 || endtime.tm_year > 135);
     strlcat(prompt, yn, sizeof(prompt));
-    strlcat(prompt, " ¤ë:", sizeof(prompt));
+    strlcat(prompt, " æœˆ:", sizeof(prompt));
     snprintf(yn, sizeof(yn), "%d", ptime.tm_mon + 1);
     do {
 	getdata_buf(line, 0, prompt, yn, 3, NUMECHO);
     } while ((endtime.tm_mon = atoi(yn) - 1) < 0 || endtime.tm_mon > 11);
     strlcat(prompt, yn, sizeof(prompt));
-    strlcat(prompt, " ¤é:", sizeof(prompt));
+    strlcat(prompt, " æ—¥:", sizeof(prompt));
     snprintf(yn, sizeof(yn), "%d", ptime.tm_mday);
     do {
 	getdata_buf(line, 0, prompt, yn, 3, NUMECHO);
     } while ((endtime.tm_mday = atoi(yn)) < 1 || endtime.tm_mday > 31);
     snprintf(yn, sizeof(yn), "%d", ptime.tm_hour);
     strlcat(prompt, yn, sizeof(prompt));
-    strlcat(prompt, " ®É(0-23):", sizeof(prompt));
+    strlcat(prompt, " æ™‚(0-23):", sizeof(prompt));
     do {
 	getdata_buf(line, 0, prompt, yn, 3, NUMECHO);
     } while ((endtime.tm_hour = atoi(yn)) < 0 || endtime.tm_hour > 23);
     strlcat(prompt, yn, sizeof(prompt));
-    strlcat(prompt, " ¤À(0-59):", sizeof(prompt));
+    strlcat(prompt, " åˆ†(0-59):", sizeof(prompt));
     snprintf(yn, sizeof(yn), "%d", ptime.tm_min);
     do {
 	getdata_buf(line, 0, prompt, yn, 3, NUMECHO);
@@ -127,14 +127,14 @@ wait_penalty(int sec)
 // TODO
 // move this function to vtuikit.c
 /**
- * ±q²Ä y ¦C¶}©l show ¥X filename ÀÉ®×¤¤ªº«e lines ¦æ¡C
- * mode ¬° output ªº¼Ò¦¡¡A°Ñ¼Æ¦P strip_ansi¡C
+ * å¾žç¬¬ y åˆ—é–‹å§‹ show å‡º filename æª”æ¡ˆä¸­çš„å‰ lines è¡Œã€‚
+ * mode ç‚º output çš„æ¨¡å¼ï¼Œåƒæ•¸åŒ strip_ansiã€‚
  * @param filename: the file to show
  * @param y:	    starting line on screen
  * @param lines:    max lines to be displayed
  * @param mode:	    SHOWFILE_*, see modes.h
- * @return ¥¢±Ñ¶Ç¦^ 0¡A§_«h¬° 1¡C
- *         2 ªí¥Ü¦³ PttPrints ½X
+ * @return å¤±æ•—å‚³å›ž 0ï¼Œå¦å‰‡ç‚º 1ã€‚
+ *         2 è¡¨ç¤ºæœ‰ PttPrints ç¢¼
  */
 int
 show_file(const char *filename, int y, int lines, int mode)
@@ -197,7 +197,7 @@ search_num(int ch, int max)
 
     genbuf[0] = ch; genbuf[1] = 0;
     clen = getdata_buf(y, 0,
-	    " ¸õ¦Ü²Ä´X¶µ: ", genbuf, sizeof(genbuf)-1, NUMECHO);
+	    " è·³è‡³ç¬¬å¹¾é …: ", genbuf, sizeof(genbuf)-1, NUMECHO);
 
     move(y, 0); clrtoeol();
     genbuf[clen] = '\0';
@@ -312,9 +312,9 @@ show_help(const char * const helptext[])
     clear();
     for (i = 0; (str = helptext[i]); i++) {
 	if (*str == '\0')
-	    prints(ANSI_COLOR(1) "¡i %s ¡j" ANSI_RESET "\n", str + 1);
+	    prints(ANSI_COLOR(1) "ã€ %s ã€‘" ANSI_RESET "\n", str + 1);
 	else if (*str == '\01')
-	    prints("\n" ANSI_COLOR(36) "¡i %s ¡j" ANSI_RESET "\n", str + 1);
+	    prints("\n" ANSI_COLOR(36) "ã€ %s ã€‘" ANSI_RESET "\n", str + 1);
 	else
 	    prints("        %s\n", str);
     }
@@ -522,8 +522,8 @@ char *aidu2aidc(char *buf, aidu_t aidu)
   *(sp --) = '\0';
   while(sp >= buf)
   {
-    /* FIXME: ¯à«OÃÒ aidu2aidc_tablesize ¬O 2 ªº¾­¦¸ªº¸Ü¡A
-              ³o¸Ì¥i¥H§ï¥Î bitwise operation °µ */
+    /* FIXME: èƒ½ä¿è­‰ aidu2aidc_tablesize æ˜¯ 2 çš„å†ªæ¬¡çš„è©±ï¼Œ
+              é€™è£¡å¯ä»¥æ”¹ç”¨ bitwise operation åš */
     v = aidu % aidu2aidc_tablesize;
     aidu = aidu / aidu2aidc_tablesize;
     *(sp --) = aidu2aidc_table[v];
@@ -558,7 +558,7 @@ aidu_t aidc2aidu(const char *aidc)
   while(*sp != '\0' && /* ignore trailing spaces */ *sp != ' ')
   {
     aidu_t v = 0;
-    /* FIXME: ¬dªíªk·|¤£·|¤ñ¸û§Ö¡H */
+    /* FIXME: æŸ¥è¡¨æ³•æœƒä¸æœƒæ¯”è¼ƒå¿«ï¼Ÿ */
     if(*sp >= '0' && *sp <= '9')
       v = *sp - '0';
     else if(*sp >= 'A' && *sp <= 'Z')

@@ -1,14 +1,14 @@
 #include "bbs.h"
 
 /* ------------------------------------- */
-/* ¯S§O¦W³æ                              */
+/* ç‰¹åˆ¥åå–®                              */
 /* ------------------------------------- */
 
-/* Ptt ¨ä¥L¯S§O¦W³æªºÀÉ¦W */
+/* Ptt å…¶ä»–ç‰¹åˆ¥åå–®çš„æª”å */
 static char     special_list[7] = "list.0";
 static char     special_des[7] = "ldes.0";
 
-/* ¯S§O¦W³æªº¤W­­ */
+/* ç‰¹åˆ¥åå–®çš„ä¸Šé™ */
 static const unsigned int friend_max[8] = {
     MAX_FRIEND,     /* FRIEND_OVERRIDE */
     MAX_REJECT,     /* FRIEND_REJECT   */
@@ -19,31 +19,31 @@ static const unsigned int friend_max[8] = {
     MAX_FRIEND,     /* BOARD_WATER     */
     MAX_FRIEND,     /* BOARD_VISABLE   */
 };
-/* ÁöµM¦n¤Í¸òÃa¤H¦W³æ³£¬O * 2 ¦ý¬O¤@¦¸³Ì¦hload¨ìshm¥u¯à¦³128 */
+/* é›–ç„¶å¥½å‹è·Ÿå£žäººåå–®éƒ½æ˜¯ * 2 ä½†æ˜¯ä¸€æ¬¡æœ€å¤šloadåˆ°shmåªèƒ½æœ‰128 */
 
 
-/* Ptt ¦UºØ¯S§O¦W³æªº¸É­z */
+/* Ptt å„ç¨®ç‰¹åˆ¥åå–®çš„è£œè¿° */
 static char    * const friend_desc[8] = {
-    "¤Í½Ë´y­z¡G",
-    "´c§Î´cª¬¡G",
+    "å‹èª¼æè¿°ï¼š",
+    "æƒ¡å½¢æƒ¡ç‹€ï¼š",
     "",
     "",
-    "´y­z¤@¤U¡G",
-    "§ë²¼ªÌ´y­z¡G",
-    "´c§Î´cª¬¡G",
-    "¬ÝªO·|­û´y­z"
+    "æè¿°ä¸€ä¸‹ï¼š",
+    "æŠ•ç¥¨è€…æè¿°ï¼š",
+    "æƒ¡å½¢æƒ¡ç‹€ï¼š",
+    "çœ‹æ¿æœƒå“¡æè¿°"
 };
 
-/* Ptt ¦UºØ¯S§O¦W³æªº¤¤¤å±Ô­z */
+/* Ptt å„ç¨®ç‰¹åˆ¥åå–®çš„ä¸­æ–‡æ•˜è¿° */
 static char    * const friend_list[8] = {
-    "¦n¤Í¦W³æ",
-    "Ãa¤H¦W³æ",
-    "¤W½u³qª¾",
+    "å¥½å‹åå–®",
+    "å£žäººåå–®",
+    "ä¸Šç·šé€šçŸ¥",
     "",
-    "¨ä¥¦¯S§O¦W³æ",
-    "¨p¤H§ë²¼¦W³æ",
-    "¬ÝªOÂÂ¤ô±í¦W³æ",
-    "¬ÝªO·|­û¦W³æ"
+    "å…¶å®ƒç‰¹åˆ¥åå–®",
+    "ç§äººæŠ•ç¥¨åå–®",
+    "çœ‹æ¿èˆŠæ°´æ¡¶åå–®",
+    "çœ‹æ¿æœƒå“¡åå–®"
 };
 
 /* sized in screen width */
@@ -122,7 +122,7 @@ friend_special(void)
 	clrtoeol();
 	outs(genbuf);
     }
-    getdata(22, 0, "½Ð¿ï¾Ü²Ä´X¸¹¯S§O¦W³æ (0~9)[0]?", genbuf, 3, LCECHO);
+    getdata(22, 0, "è«‹é¸æ“‡ç¬¬å¹¾è™Ÿç‰¹åˆ¥åå–® (0~9)[0]?", genbuf, 3, LCECHO);
     if (genbuf[0] >= '0' && genbuf[0] <= '9') {
 	special_list[5] = genbuf[0];
 	special_des[5] = genbuf[0];
@@ -148,7 +148,7 @@ friend_append(int type, int count)
     do {
 	move(2, 0);
 	clrtobot();
-	outs("­n¤Þ¤J­þ¤@­Ó¦W³æ?\n");
+	outs("è¦å¼•å…¥å“ªä¸€å€‹åå–®?\n");
 
         // TODO make the selection algorithm better here.
 	for (j = i = 0; i < 4; i++)
@@ -160,13 +160,13 @@ friend_append(int type, int count)
 	    for (; i < 8; ++i)
 		if (i != type) {
 		    ++j;
-		    prints("  (%d) %s ªOªº %s\n", j, currboard,
+		    prints("  (%d) %s æ¿çš„ %s\n", j, currboard,
 			     friend_list[(int)i]);
 		}
 	if (HasUserPerm(PERM_SYSOP))
-	    outs("  (S) ¿ï¾Ü¨ä¥L¬ÝªOªº¯S§O¦W³æ");
+	    outs("  (S) é¸æ“‡å…¶ä»–çœ‹æ¿çš„ç‰¹åˆ¥åå–®");
 
-	getdata(11, 0, "½Ð¿ï¾Ü ©Î ª½±µ[Enter] ©ñ±ó:", buf, 3, LCECHO);
+	getdata(11, 0, "è«‹é¸æ“‡ æˆ– ç›´æŽ¥[Enter] æ”¾æ£„:", buf, 3, LCECHO);
 	if (!buf[0])
 	    return;
 
@@ -383,7 +383,7 @@ friend_editdesc(const char *uident, int type)
 		fputs(genbuf, nfp);
 	    else if (!strncmp(genbuf, uident, length)) {
 		char buf[MAX_DESCLEN];
-		getdata(2, 0, "­×§ï´y­z¡G", buf, MAX_DESCLEN, DOECHO);
+		getdata(2, 0, "ä¿®æ”¹æè¿°ï¼š", buf, MAX_DESCLEN, DOECHO);
 		fprintf(nfp, "%-13s%s\n", uident, buf);
 	    }
 	}
@@ -414,7 +414,7 @@ static inline void friend_load_real(int tosort, int maxf,
 	char *strtok_pos;
 	tarray = (int *)malloc(sizeof(int) * maxf);
 	assert(tarray);
-	--maxf; /* ¦]¬°³Ì«á¤@­Ó­n¶ñ 0, ©Ò¥H¥ý¦©¤@­Ó¦^¨Ó */
+	--maxf; /* å› ç‚ºæœ€å¾Œä¸€å€‹è¦å¡« 0, æ‰€ä»¥å…ˆæ‰£ä¸€å€‹å›žä¾† */
 	while( fgets(genbuf, STRLEN, fp) && nFriends < maxf )
 	    if( (p = strtok_r(genbuf, str_space, &strtok_pos)) &&
 		(uid = searchuser(p, NULL)) )
@@ -449,7 +449,7 @@ void friend_load(int type, int do_login)
 
 static void
 friend_water(const char *message, int type)
-{				/* ¸sÅé¤ô²y added by Ptt */
+{				/* ç¾¤é«”æ°´çƒ added by Ptt */
     char            fpath[PATHLEN], line[STRLEN], userid[IDLEN + 1];
     FILE           *fp;
 
@@ -495,7 +495,7 @@ friend_edit(int type)
 	/* TODO move (0, 40) just won't really work as it hints.
 	 * The ANSI secapes will change x coordinate. */
 	move(0, 40);
-	prints("(¦W³æ¤W­­: %d ¤H)", friend_max[type]);
+	prints("(åå–®ä¸Šé™: %d äºº)", friend_max[type]);
 	count = 0;
 	Vector_clear(&namelist, IDLEN + 1);
 
@@ -519,9 +519,9 @@ friend_edit(int type)
 	    fclose(fp);
 	}
 	getdata(1, 0, (count ?
-		    "(A)¼W¥[(D)§R°£(E)­×§ï(P)¤Þ¤J(L)¦C¥X(K)²MªÅ"
-		    "(C)¾ã²z¦³®Ä¦W³æ(W)¤ô²y(Q)µ²§ô?[Q] " :
-		    "(A)¼W¥[ (P)¤Þ¤J¨ä¥L¦W³æ (Q)µ²§ô?[Q] "),
+		    "(A)å¢žåŠ (D)åˆªé™¤(E)ä¿®æ”¹(P)å¼•å…¥(L)åˆ—å‡º(K)æ¸…ç©º"
+		    "(C)æ•´ç†æœ‰æ•ˆåå–®(W)æ°´çƒ(Q)çµæŸ?[Q] " :
+		    "(A)å¢žåŠ  (P)å¼•å…¥å…¶ä»–åå–® (Q)çµæŸ?[Q] "),
 		uident, 3, LCECHO);
 	if (uident[0] == 'a') {
 	    move(1, 0);
@@ -535,28 +535,28 @@ friend_edit(int type)
 
             move(1, 0); clrtobot();
             // we have seen some BM hit this accidentally.. so ask again.
-            outs("¾ã²z¦W³æ¥i²M°£¤w®ø¥¢¡B¹L´Á¡B©Î¤w¦³°h¤åªº±b¸¹¡C\n\n");
+            outs("æ•´ç†åå–®å¯æ¸…é™¤å·²æ¶ˆå¤±ã€éŽæœŸã€æˆ–å·²æœ‰é€€æ–‡çš„å¸³è™Ÿã€‚\n\n");
 
 	    getdata(2, 0,
-		    "­n±q¦W³æ¤¤²M°£´X­Ó¤ë¨S¤W¯¸ªº¨Ï¥ÎªÌ¡H (0=¤£²M°£)[0] ",
+		    "è¦å¾žåå–®ä¸­æ¸…é™¤å¹¾å€‹æœˆæ²’ä¸Šç«™çš„ä½¿ç”¨è€…ï¼Ÿ (0=ä¸æ¸…é™¤)[0] ",
 		    uident, 4, NUMECHO);
 	    expire = atoi(uident);
 #ifdef ASSESS
 	    getdata(3, 0,
-		    "­n±q¦W³æ¤¤²M°£¦³´X½g¥H¤W°h¤åªº¨Ï¥ÎªÌ¡H (0=¤£²M°£)[0] ",
+		    "è¦å¾žåå–®ä¸­æ¸…é™¤æœ‰å¹¾ç¯‡ä»¥ä¸Šé€€æ–‡çš„ä½¿ç”¨è€…ï¼Ÿ (0=ä¸æ¸…é™¤)[0] ",
 		    uident, 4, NUMECHO);
 	    badpost = atoi(uident);
 #endif
             move(4, 0);
-            outs("±N²M°£¤U¦CÃþ§Oªº±b¸¹:\n");
-            outs(" * ¤w®ø¥¢ªº±b¸¹\n");
+            outs("å°‡æ¸…é™¤ä¸‹åˆ—é¡žåˆ¥çš„å¸³è™Ÿ:\n");
+            outs(" * å·²æ¶ˆå¤±çš„å¸³è™Ÿ\n");
             if (expire)
-                prints(" * %d ­Ó¤ë¨S¤W¯¸ªº¨Ï¥ÎªÌ\n", expire);
+                prints(" * %d å€‹æœˆæ²’ä¸Šç«™çš„ä½¿ç”¨è€…\n", expire);
             if (badpost)
-                prints(" * ¤w¦³ %d ½g°h¤åªº¨Ï¥ÎªÌ\n", badpost);
+                prints(" * å·²æœ‰ %d ç¯‡é€€æ–‡çš„ä½¿ç”¨è€…\n", badpost);
 
             getdata(9, 0,
-                    "½T©w­n°õ¦æ¶Ü? [y/N] ",
+                    "ç¢ºå®šè¦åŸ·è¡Œå—Ž? [y/N] ",
                     uident, 3, LCECHO);
             if (uident[0] != 'y')
                 break;
@@ -583,16 +583,16 @@ friend_edit(int type)
 	} else if (uident[0] == 'l' && count)
 	    more(fpath, YEA);
 	else if (uident[0] == 'k' && count) {
-	    getdata(2, 0, "§R°£¾ã¥÷¦W³æ,½T©w¶Ü (a/N)?", uident, 3,
+	    getdata(2, 0, "åˆªé™¤æ•´ä»½åå–®,ç¢ºå®šå—Ž (a/N)?", uident, 3,
 		    LCECHO);
 	    if (uident[0] == 'a')
 		unlink(fpath);
 	    dirty = 1;
 	} else if (uident[0] == 'w' && count) {
 	    char            wall[60];
-	    if (!getdata(0, 0, "¸sÅé¤ô²y:", wall, sizeof(wall), DOECHO))
+	    if (!getdata(0, 0, "ç¾¤é«”æ°´çƒ:", wall, sizeof(wall), DOECHO))
 		continue;
-	    if (getdata(0, 0, "½T©w¥á¥X¸sÅé¤ô²y? [Y]", line, 4, LCECHO) &&
+	    if (getdata(0, 0, "ç¢ºå®šä¸Ÿå‡ºç¾¤é«”æ°´çƒ? [Y]", line, 4, LCECHO) &&
 		*line == 'n')
 		continue;
 	    friend_water(wall, type);
@@ -602,7 +602,7 @@ friend_edit(int type)
     Vector_delete(&namelist);
     if (dirty) {
 	move(2, 0);
-	outs("§ó·s¸ê®Æ¤¤..½Ðµy­Ô.....");
+	outs("æ›´æ–°è³‡æ–™ä¸­..è«‹ç¨å€™.....");
 	refresh();
 	if (type == FRIEND_ALOHA) {
 	    snprintf(genbuf, sizeof(genbuf), "%s.old", fpath);
@@ -630,7 +630,7 @@ friend_edit(int type)
 		fgets(genbuf, 30, fp);
 		fclose(fp);
 	    }
-	    getdata_buf(2, 0, " ½Ð¬°¦¹¯S§O¦W³æ¨ú¤@­ÓÂ²µu¦WºÙ:", genbuf, 30,
+	    getdata_buf(2, 0, " è«‹ç‚ºæ­¤ç‰¹åˆ¥åå–®å–ä¸€å€‹ç°¡çŸ­åç¨±:", genbuf, 30,
 			DOECHO);
 	    if ((fp = fopen(line, "w"))) {
 		fputs(genbuf, fp);
@@ -671,45 +671,45 @@ t_fix_aloha()
     char fn[PATHLEN] = "";
 
     clear();
-    vs_hdr("­×¥¿¤W¯¸³qª¾");
+    vs_hdr("ä¿®æ­£ä¸Šç«™é€šçŸ¥");
 
-    outs("³o¬O¥Î¨Ó­×¥¿¬Y¨Ç¨Ï¥ÎªÌ¹J¨ì¿ù»~ªº¤W¯¸³qª¾ªº°ÝÃD¡C\n"
-	 ANSI_COLOR(1) "¦pªG§A¨S¹J¨ì¦¹Ãþ°ÝÃD¥iª½±µÂ÷¶}¡C" ANSI_RESET "\n\n"
-	 "¡¿¦pªG§A¹J¨ì¦³¤H¨S¦b§Aªº¤W¯¸³qª¾¦W³æ¤º¦ý¤S·|¥á¤W¯¸³qª¾¤ô²yµ¹§A¡A\n"
-	 "  ½Ð¿é¤J¥Lªº ID¡C\n");
+    outs("é€™æ˜¯ç”¨ä¾†ä¿®æ­£æŸäº›ä½¿ç”¨è€…é‡åˆ°éŒ¯èª¤çš„ä¸Šç«™é€šçŸ¥çš„å•é¡Œã€‚\n"
+	 ANSI_COLOR(1) "å¦‚æžœä½ æ²’é‡åˆ°æ­¤é¡žå•é¡Œå¯ç›´æŽ¥é›¢é–‹ã€‚" ANSI_RESET "\n\n"
+	 "â–¼å¦‚æžœä½ é‡åˆ°æœ‰äººæ²’åœ¨ä½ çš„ä¸Šç«™é€šçŸ¥åå–®å…§ä½†åˆæœƒä¸Ÿä¸Šç«™é€šçŸ¥æ°´çƒçµ¦ä½ ï¼Œ\n"
+	 "  è«‹è¼¸å…¥ä»–çš„ IDã€‚\n");
 
     move(7, 0);
-    usercomplete("¦³½Ö¤£¦b§Aªº³qª¾¦W³æ¤º¦ý¤S·|°e¤W¯¸³qª¾¤ô²yµ¹±z©O¡H ", xid);
+    usercomplete("æœ‰èª°ä¸åœ¨ä½ çš„é€šçŸ¥åå–®å…§ä½†åˆæœƒé€ä¸Šç«™é€šçŸ¥æ°´çƒçµ¦æ‚¨å‘¢ï¼Ÿ ", xid);
 
     if (!xid[0])
     {
-	vmsg("­×¥¿µ²§ô¡C");
+	vmsg("ä¿®æ­£çµæŸã€‚");
 	return 0;
     }
 
     // check by xid
     move(9, 0);
-    outs("ÀË¬d¤¤...\n");
+    outs("æª¢æŸ¥ä¸­...\n");
 
     // xid in my override list?
     setuserfile(fn, FN_ALOHAED);
     if (file_exist_record(fn, xid))
     {
-	prints(ANSI_COLOR(1;32) "[%s] ½T¹ê¦b§Aªº¤W¯¸³qª¾¦W³æ¤º¡C"
-		"½Ð½s¿è [¤W¯¸³qª¾¦W³æ]¡C" ANSI_RESET "\n", xid);
-	vmsg("¤£»Ý­×¥¿¡C");
+	prints(ANSI_COLOR(1;32) "[%s] ç¢ºå¯¦åœ¨ä½ çš„ä¸Šç«™é€šçŸ¥åå–®å…§ã€‚"
+		"è«‹ç·¨è¼¯ [ä¸Šç«™é€šçŸ¥åå–®]ã€‚" ANSI_RESET "\n", xid);
+	vmsg("ä¸éœ€ä¿®æ­£ã€‚");
 	return 0;
     }
 
     sethomefile(fn, xid, FN_ALOHA);
     if (delete_friend_from_file(fn, cuser.userid, 0))
     {
-	outs(ANSI_COLOR(1;33) "¤w§ä¨ì¿ù»~¨Ã­×´_§¹¦¨¡C" ANSI_RESET "\n");
+	outs(ANSI_COLOR(1;33) "å·²æ‰¾åˆ°éŒ¯èª¤ä¸¦ä¿®å¾©å®Œæˆã€‚" ANSI_RESET "\n");
     } else {
-	outs(ANSI_COLOR(1;31) "§ä¤£¨ì¿ù»~... ¥´¿ù ID ¤F¡H" ANSI_RESET "\n");
+	outs(ANSI_COLOR(1;31) "æ‰¾ä¸åˆ°éŒ¯èª¤... æ‰“éŒ¯ ID äº†ï¼Ÿ" ANSI_RESET "\n");
     }
 
-    vmsg("­Y¤W¯¸³qª¾¿ù»~¤´«ùÄòµo¥Í½Ð³qª¾¯¸¤è³B²z¡C");
+    vmsg("è‹¥ä¸Šç«™é€šçŸ¥éŒ¯èª¤ä»æŒçºŒç™¼ç”Ÿè«‹é€šçŸ¥ç«™æ–¹è™•ç†ã€‚");
     return 0;
 }
 

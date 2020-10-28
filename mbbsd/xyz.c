@@ -61,7 +61,7 @@ Goodbye(void)
 {
     char            genbuf[STRLEN];
 
-    getdata(b_lines - 1, 0, "±z½T©w­nÂ÷¶}¡i " BBSNAME " ¡j¶Ü(Y/N)¡H[N] ",
+    getdata(b_lines - 1, 0, "æ‚¨ç¢ºå®šè¦é›¢é–‹ã€ " BBSNAME " ã€‘å—(Y/N)ï¼Ÿ[N] ",
 	    genbuf, 3, LCECHO);
 
     if (*genbuf != 'y')
@@ -71,11 +71,11 @@ Goodbye(void)
     show_80x24_screen("etc/Logout");
     {
 	int diff = (now - login_start_time) / 60;
-	snprintf(genbuf, sizeof(genbuf), "¦¹¦¸°±¯d®É¶¡: %d ¤p®É %2d ¤À",
+	snprintf(genbuf, sizeof(genbuf), "æ­¤æ¬¡åœç•™æ™‚é–“: %d å°æ™‚ %2d åˆ†",
 		diff / 60, diff % 60);
     }
     if(!HasUserPerm(PERM_LOGINOK))
-	vmsg("©|¥¼§¹¦¨µù¥Uµ{§Ç¡C");
+	vmsg("å°šæœªå®Œæˆè¨»å†Šç¨‹åºã€‚");
     else
 	vmsg(genbuf);
 

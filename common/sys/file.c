@@ -15,11 +15,11 @@
 
 
 /* ----------------------------------------------------- */
-/* ÀÉ®×ÀË¬d¨ç¼Æ¡GÀÉ®×¡B¥Ø¿ı¡BÄİ©ó                        */
+/* æª”æ¡ˆæª¢æŸ¥å‡½æ•¸ï¼šæª”æ¡ˆã€ç›®éŒ„ã€å±¬æ–¼                        */
 /* ----------------------------------------------------- */
 
 /**
- * ¶Ç¦^ fname ªºÀÉ®×¤j¤p
+ * å‚³å› fname çš„æª”æ¡ˆå¤§å°
  * @param fname
  */
 off_t
@@ -34,7 +34,7 @@ dashs(const char *fname)
 }
 
 /**
- * ¶Ç¦^ fname ªº mtime
+ * å‚³å› fname çš„ mtime
  * @param fname
  */
 time4_t
@@ -49,7 +49,7 @@ dasht(const char *fname)
 }
 
 /**
- * ¶Ç¦^ fname ªº ctime
+ * å‚³å› fname çš„ ctime
  * @param fname
  */
 time4_t
@@ -64,7 +64,7 @@ dashc(const char *fname)
 }
 
 /**
- * ¶Ç¦^ fname ¬O§_¬° symbolic link
+ * å‚³å› fname æ˜¯å¦ç‚º symbolic link
  * @param fname
  */
 int
@@ -76,7 +76,7 @@ dashl(const char *fname)
 }
 
 /**
- * ¶Ç¦^ fname ¬O§_¬°¤@¯ëªºÀÉ®×
+ * å‚³å› fname æ˜¯å¦ç‚ºä¸€èˆ¬çš„æª”æ¡ˆ
  * @param fname
  */
 int
@@ -88,7 +88,7 @@ dashf(const char *fname)
 }
 
 /**
- * ¶Ç¦^ fname ¬O§_¬°¥Ø¿ı
+ * å‚³å› fname æ˜¯å¦ç‚ºç›®éŒ„
  * @param fname
  */
 int
@@ -100,7 +100,7 @@ dashd(const char *fname)
 }
 
 /* ----------------------------------------------------- */
-/* ÀÉ®×¾Ş§@¨ç¼Æ¡G½Æ»s¡B·h²¾¡Bªş¥[                        */
+/* æª”æ¡ˆæ“ä½œå‡½æ•¸ï¼šè¤‡è£½ã€æ¬ç§»ã€é™„åŠ                         */
 /* ----------------------------------------------------- */
 
 #define BUFFER_SIZE	8192
@@ -350,7 +350,7 @@ OpenCreate(const char *path, int flags)
 }
 
 /* ----------------------------------------------------- */
-/* ÀÉ®×¤º®e³B²z¨ç¼Æ¡G¥H¡u¦æ¡v¬°³æ¦ì                      */
+/* æª”æ¡ˆå…§å®¹è™•ç†å‡½æ•¸ï¼šä»¥ã€Œè¡Œã€ç‚ºå–®ä½                      */
 /* ----------------------------------------------------- */
 
 #define LINEBUFSZ (PATH_MAX)
@@ -358,7 +358,7 @@ OpenCreate(const char *path, int flags)
 
 
 /**
- * ¶Ç¦^ file ÀÉªº¦æ¼Æ
+ * å‚³å› file æª”çš„è¡Œæ•¸
  * @param file
  */
 int file_count_line(const char *file)
@@ -379,10 +379,10 @@ int file_count_line(const char *file)
 }
 
 /**
- * ±N string append ¨ìÀÉ®× file «áºİ (¤£¥[´«¦æ)
- * @param file ­n³Q append ªºÀÉ
+ * å°‡ string append åˆ°æª”æ¡ˆ file å¾Œç«¯ (ä¸åŠ æ›è¡Œ)
+ * @param file è¦è¢« append çš„æª”
  * @param string
- * @return ¦¨¥\¶Ç¦^ 0¡A¥¢±Ñ¶Ç¦^ -1¡C
+ * @return æˆåŠŸå‚³å› 0ï¼Œå¤±æ•—å‚³å› -1ã€‚
  */
 int file_append_line(const char *file, const char *string)
 {
@@ -397,10 +397,10 @@ int file_append_line(const char *file, const char *string)
 }
 
 /**
- * ±N "$key\n" append ¨ìÀÉ®× file «áºİ
- * @param file ­n³Q append ªºÀÉ
- * @param key ¨S¦³´«¦æªº¦r¦ê
- * @return ¦¨¥\¶Ç¦^ 0¡A¥¢±Ñ¶Ç¦^ -1¡C
+ * å°‡ "$key\n" append åˆ°æª”æ¡ˆ file å¾Œç«¯
+ * @param file è¦è¢« append çš„æª”
+ * @param key æ²’æœ‰æ›è¡Œçš„å­—ä¸²
+ * @return æˆåŠŸå‚³å› 0ï¼Œå¤±æ•—å‚³å› -1ã€‚
  */
 int file_append_record(const char *file, const char *key)
 {
@@ -417,7 +417,7 @@ int file_append_record(const char *file, const char *key)
 }
 
 /**
- * ¶Ç¦^ÀÉ®× file ¤¤ key ©Ò¦b¦æ¼Æ
+ * å‚³å›æª”æ¡ˆ file ä¸­ key æ‰€åœ¨è¡Œæ•¸
  */
 int file_find_record(const char *file, const char *key)
 {
@@ -441,7 +441,7 @@ int file_find_record(const char *file, const char *key)
 }
 
 /**
- * ¶Ç¦^ÀÉ®× file ¤¤¬O§_¦³ key
+ * å‚³å›æª”æ¡ˆ file ä¸­æ˜¯å¦æœ‰ key
  */
 int file_exist_record(const char *file, const char *key)
 {
@@ -449,16 +449,16 @@ int file_exist_record(const char *file, const char *key)
 }
 
 /**
- * §R°£ÀÉ®× file ¤¤¥H string ¶}ÀYªº¦æ
- * @param file ­n³B²zªºÀÉ®×
- * @param string ´M§äªº key name
- * @param case_sensitive ¬O§_­n³B²z¤j¤p¼g
- * @return ¦¨¥\¶Ç¦^ 0¡A¥¢±Ñ¶Ç¦^ -1¡C
+ * åˆªé™¤æª”æ¡ˆ file ä¸­ä»¥ string é–‹é ­çš„è¡Œ
+ * @param file è¦è™•ç†çš„æª”æ¡ˆ
+ * @param string å°‹æ‰¾çš„ key name
+ * @param case_sensitive æ˜¯å¦è¦è™•ç†å¤§å°å¯«
+ * @return æˆåŠŸå‚³å› 0ï¼Œå¤±æ•—å‚³å› -1ã€‚
  */
 int
 file_delete_record(const char *file, const char *string, int case_sensitive)
 {
-    // TODO nfp ¥Î tmpfile() ¤ñ¸û¦n¡H ¤£¹L Rename ·|ÅÜºC...
+    // TODO nfp ç”¨ tmpfile() æ¯”è¼ƒå¥½ï¼Ÿ ä¸é Rename æœƒè®Šæ…¢...
     FILE *fp = NULL, *nfp = NULL;
     char fnew[PATH_MAX];
     char buf[LINEBUFSZ + 1];
@@ -518,11 +518,11 @@ file_delete_record(const char *file, const char *string, int case_sensitive)
 }
 
 /**
- * ¹ï¨C¤@µ§ record °µ func ³o¥ó¨Æ¡C
+ * å°æ¯ä¸€ç­† record åš func é€™ä»¶äº‹ã€‚
  * @param file
- * @param func ³B²z¨Cµ§ record ªº handler¡A¬°¤@ function pointer¡C
- *        ²Ä¤@­Ó°Ñ¼Æ¬OÀÉ®×¤¤ªº¤@¦æ¡A²Ä¤G­Ó°Ñ¼Æ¬° info¡C
- * @param info ¤@­ÓÃB¥~ªº°Ñ¼Æ¡C
+ * @param func è™•ç†æ¯ç­† record çš„ handlerï¼Œç‚ºä¸€ function pointerã€‚
+ *        ç¬¬ä¸€å€‹åƒæ•¸æ˜¯æª”æ¡ˆä¸­çš„ä¸€è¡Œï¼Œç¬¬äºŒå€‹åƒæ•¸ç‚º infoã€‚
+ * @param info ä¸€å€‹é¡å¤–çš„åƒæ•¸ã€‚
  */
 int file_foreach_entry(const char *file, int (*func)(char *, int), int info)
 {

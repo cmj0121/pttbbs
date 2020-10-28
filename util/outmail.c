@@ -248,7 +248,7 @@ int main(int argc, char **argv, char **envp) {
 	smtpport = 25;
     }
 
-    qp_encode(disclaimer, sizeof(disclaimer), "[" BBSNAME "]¹ï¥»«H¤º®e®¤¤£­t³d", "big5");
+    qp_encode(disclaimer, sizeof(disclaimer), "[" BBSNAME "]å°æœ¬ä¿¡å…§å®¹æ•ä¸è² è²¬", "big5");
     for(;;) {
 	sendMail();
 	setproctitle("outmail: sleeping");

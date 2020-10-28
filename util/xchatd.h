@@ -28,7 +28,7 @@
 /*   No defined semantics				 */
 /* ----------------------------------------------------- */
 
-/* ¨Ñ·sª© client ¨Ï¥Î */
+/* ä¾›æ–°ç‰ˆ client ä½¿ç”¨ */
 
 #define MSG_LOGINOK     100
 #define MSG_VERSION     103

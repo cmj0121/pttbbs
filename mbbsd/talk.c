@@ -4,10 +4,10 @@
 #define QCAST   int (*)(const void *, const void *)
 
 static char    * const sig_des[] = {
-    "", "¥æ½Í", "", "¤­¤l´Ñ", "¶H´Ñ", "·t´Ñ", "³ò´Ñ", "¶Â¥Õ´Ñ", "¤»¤lºX",
+    "", "äº¤è«‡", "", "äº”å­æ£‹", "è±¡æ£‹", "æš—æ£‹", "åœæ£‹", "é»‘ç™½æ£‹", "å…­å­æ——",
 };
 static char    * const withme_str[] = {
-  "½Í¤Ñ", "¤­¤l´Ñ", "", "¶H´Ñ", "·t´Ñ", "³ò´Ñ", "¶Â¥Õ´Ñ", "¤»¤lºX", NULL
+  "è«‡å¤©", "äº”å­æ£‹", "", "è±¡æ£‹", "æš—æ£‹", "åœæ£‹", "é»‘ç™½æ£‹", "å…­å­æ——", NULL
 };
 
 #define MAX_SHOW_MODE 7
@@ -59,11 +59,11 @@ isvisible_stat(const userinfo_t * me, const userinfo_t * uentp, int fri_stat)
     if (uentp->mode == DEBUGSLEEPING)
 	return 0;
 
-    if (PERM_HIDE(uentp) && !(PERM_HIDE(me)))	/* ¹ï¤èµµ¦âÁô§Î¦Ó§A¨S¦³ */
+    if (PERM_HIDE(uentp) && !(PERM_HIDE(me)))	/* å°æ–¹ç´«è‰²éš±å½¢è€Œä½ æ²’æœ‰ */
 	return 0;
     else if ((me->userlevel & PERM_SYSOP) ||
 	     ((fri_stat & HRM) && (fri_stat & HFM)))
-	/* ¯¸ªø¬İªº¨£¥ô¦ó¤H */
+	/* ç«™é•·çœ‹çš„è¦‹ä»»ä½•äºº */
 	return 1;
 
     if (uentp->invisible && !(me->userlevel & PERM_SEECLOAK))
@@ -97,7 +97,7 @@ const char           *
 modestring(const userinfo_t * uentp, int simple)
 {
     static char     modestr[40];
-    const char *    notonline = "¤£¦b¯¸¤W";
+    const char *    notonline = "ä¸åœ¨ç«™ä¸Š";
     register int    mode = uentp->mode;
     register char  *word;
     int             fri_stat;
@@ -121,14 +121,14 @@ modestring(const userinfo_t * uentp, int simple)
 	word = modestr;
     } else if (!mode && *uentp->chatid == 1) {
 	if (!simple)
-	    snprintf(modestr, sizeof(modestr), "¦^À³ %s",
+	    snprintf(modestr, sizeof(modestr), "å›æ‡‰ %s",
 		    isvisible_uid(uentp->destuid) ?
-		    getuserid(uentp->destuid) : "ªÅ®ğ");
+		    getuserid(uentp->destuid) : "ç©ºæ°£");
 	else
-	    snprintf(modestr, sizeof(modestr), "¦^À³©I¥s");
+	    snprintf(modestr, sizeof(modestr), "å›æ‡‰å‘¼å«");
     }
     else if (!mode && *uentp->chatid == 3)
-	snprintf(modestr, sizeof(modestr), "¤ô²y·Ç³Æ¤¤");
+	snprintf(modestr, sizeof(modestr), "æ°´çƒæº–å‚™ä¸­");
     else if (
 #ifdef NOKILLWATERBALL
 	     uentp->msgcount > 0
@@ -138,14 +138,14 @@ modestring(const userinfo_t * uentp, int simple)
 	     )
 	if (uentp->msgcount < 10) {
 	    const char *cnum[10] =
-	    {"", "¤@", "¨â", "¤T", "¥|", "¤­",
-		 "¤»", "¤C", "¤K", "¤E"};
+	    {"", "ä¸€", "å…©", "ä¸‰", "å››", "äº”",
+		 "å…­", "ä¸ƒ", "å…«", "ä¹"};
 	    snprintf(modestr, sizeof(modestr),
-		     "¤¤%sÁû¤ô²y", cnum[(int)(uentp->msgcount)]);
+		     "ä¸­%sé¡†æ°´çƒ", cnum[(int)(uentp->msgcount)]);
 	} else
-	    snprintf(modestr, sizeof(modestr), "¤£¦æ¤F @_@");
+	    snprintf(modestr, sizeof(modestr), "ä¸è¡Œäº† @_@");
     else if (!mode)
-	return (uentp->destuid == 6) ? uentp->chatid : "µo§b¤¤";
+	return (uentp->destuid == 6) ? uentp->chatid : "ç™¼å‘†ä¸­";
 
     else if (simple)
 	return word;
@@ -153,14 +153,14 @@ modestring(const userinfo_t * uentp, int simple)
 	snprintf(modestr, sizeof(modestr), "%s (%s)", word, uentp->chatid);
     else if (mode == TALK || mode == M_FIVE || mode == CHC || mode == UMODE_GO
 	    || mode == DARK || mode == M_CONN6) {
-	if (!isvisible_uid(uentp->destuid))	/* Leeym ¹ï¤è(µµ¦â)Áô§Î */
-	    snprintf(modestr, sizeof(modestr), "%s ªÅ®ğ", word);
-	/* Leeym * ¤j®a¦Û¤vµo´§§a¡I */
+	if (!isvisible_uid(uentp->destuid))	/* Leeym å°æ–¹(ç´«è‰²)éš±å½¢ */
+	    snprintf(modestr, sizeof(modestr), "%s ç©ºæ°£", word);
+	/* Leeym * å¤§å®¶è‡ªå·±ç™¼æ®å§ï¼ */
 	else
 	    snprintf(modestr, sizeof(modestr),
 		     "%s %s", word, getuserid(uentp->destuid));
     } else if (mode == CHESSWATCHING) {
-	snprintf(modestr, sizeof(modestr), "Æ[´Ñ");
+	snprintf(modestr, sizeof(modestr), "è§€æ£‹");
     } else if (mode != PAGE && mode != TQUERY)
 	return word;
     else
@@ -177,15 +177,15 @@ set_friend_bit(const userinfo_t * me, const userinfo_t * ui)
     unsigned int hit = 0;
     const int *myfriends;
 
-    /* §PÂ_¹ï¤è¬O§_¬°§ÚªºªB¤Í ? */
+    /* åˆ¤æ–·å°æ–¹æ˜¯å¦ç‚ºæˆ‘çš„æœ‹å‹ ? */
     if( intbsearch(ui->uid, me->myfriend, me->nFriends) )
 	hit = IFH;
 
-    /* §PÂ_§Ú¬O§_¬°¹ï¤èªºªB¤Í ? */
+    /* åˆ¤æ–·æˆ‘æ˜¯å¦ç‚ºå°æ–¹çš„æœ‹å‹ ? */
     if( intbsearch(me->uid, ui->myfriend, ui->nFriends) )
 	hit |= HFM;
 
-    /* §PÂ_¹ï¤è¬O§_¬°§Úªº¤³¤H ? */
+    /* åˆ¤æ–·å°æ–¹æ˜¯å¦ç‚ºæˆ‘çš„ä»‡äºº ? */
     myfriends = me->reject;
     while ((unum = *myfriends++)) {
 	if (unum == ui->uid) {
@@ -194,7 +194,7 @@ set_friend_bit(const userinfo_t * me, const userinfo_t * ui)
 	}
     }
 
-    /* §PÂ_§Ú¬O§_¬°¹ï¤èªº¤³¤H ? */
+    /* åˆ¤æ–·æˆ‘æ˜¯å¦ç‚ºå°æ–¹çš„ä»‡äºº ? */
     myfriends = ui->reject;
     while ((unum = *myfriends++)) {
 	if (unum == me->uid) {
@@ -257,7 +257,7 @@ int sync_outta_server(int sfd, int do_login)
 
     if(res==2) {
 	close(sfd);
-	outs("µn¤J¤ÓÀWÁc, ¬°Á×§K¨t²Î­t²ü¹L­«, ½Ğµy«á¦A¸Õ\n");
+	outs("ç™»å…¥å¤ªé »ç¹, ç‚ºé¿å…ç³»çµ±è² è·éé‡, è«‹ç¨å¾Œå†è©¦\n");
 	refresh();
 	log_usies("REJECTLOGIN", NULL);
         // We can't do u_exit because some resources like friends are not ready.
@@ -291,7 +291,7 @@ int sync_outta_server(int sfd, int do_login)
     }
 
     if(res==1) {
-	vmsg("½Ğ¤ÅÀWÁcµn¤J¥H§K³y¦¨¨t²Î¹L«×­t²ü");
+	vmsg("è«‹å‹¿é »ç¹ç™»å…¥ä»¥å…é€ æˆç³»çµ±éåº¦è² è·");
     }
     return 0;
 }
@@ -308,7 +308,7 @@ void login_friend_online(int do_login)
     int sfd;
     /* UTMPD is TOO slow, let's prompt user here. */
     move(b_lines-2, 0); clrtobot();
-    outs("\n¥¿¦b§ó·s»P¦P¨B½u¤W¨Ï¥ÎªÌ¤Î¦n¤Í¦W³æ¡A¨t²Î­t²ü¶q¤j®É·|»İ®É¸û¤[...\n");
+    outs("\næ­£åœ¨æ›´æ–°èˆ‡åŒæ­¥ç·šä¸Šä½¿ç”¨è€…åŠå¥½å‹åå–®ï¼Œç³»çµ±è² è·é‡å¤§æ™‚æœƒéœ€æ™‚è¼ƒä¹…...\n");
     refresh();
 
     sfd = toconnect(UTMPD_ADDR);
@@ -377,7 +377,7 @@ friend_stat(const userinfo_t * me, const userinfo_t * ui)
 {
     int             i, j;
     unsigned int    hit = 0;
-    /* ¬İªO¦n¤Í (¦b¦P¬İªOªº¨ä¥¦¨Ï¥ÎªÌ) */
+    /* çœ‹æ¿å¥½å‹ (åœ¨åŒçœ‹æ¿çš„å…¶å®ƒä½¿ç”¨è€…) */
     if (me->brc_id && ui->brc_id == me->brc_id) {
 	hit = IBH;
     }
@@ -403,7 +403,7 @@ isvisible_uid(int tuid)
     return isvisible(currutmp, uentp);
 }
 
-/* ¯u¹ê°Ê§@ */
+/* çœŸå¯¦å‹•ä½œ */
 static void
 my_kick(userinfo_t * uentp)
 {
@@ -417,7 +417,7 @@ my_kick(userinfo_t * uentp)
 	log_usies("KICK ", genbuf);
 	if ((uentp->pid <= 0 || kill(uentp->pid, SIGHUP) == -1) && (errno == ESRCH))
 	    purge_utmp(uentp);
-	outs("½ğ¥X¥hÅo");
+	outs("è¸¢å‡ºå»å›‰");
     } else
 	outs(msg_cancel);
     pressanykey();
@@ -448,13 +448,13 @@ my_query(const char *uident)
 
 	// ------------------------------------------------------------
 
-	prints( "¡m¢×¢Ò¼ÊºÙ¡n%s (%s)%*s",
+	prints( "ã€Šï¼©ï¼¤æš±ç¨±ã€‹%s (%s)%*s",
 	       muser.userid,
 	       muser.nickname,
 	       strlen(muser.userid) + strlen(muser.nickname) >= 25 ? 0 :
 		   (int)(25 - strlen(muser.userid) - strlen(muser.nickname)), "");
 
-	prints( "¡m¸gÀÙª¬ªp¡n%s",
+	prints( "ã€Šç¶“æ¿Ÿç‹€æ³ã€‹%s",
 	       money_level(muser.money));
 	if (uentp && ((fri_stat & HFM && !uentp->invisible) || is_self))
 	    prints(" ($%d)", muser.money);
@@ -462,52 +462,52 @@ my_query(const char *uident)
 
 	// ------------------------------------------------------------
 
-	prints("¡m" STR_LOGINDAYS "¡n%d " STR_LOGINDAYS_QTY, muser.numlogindays);
+	prints("ã€Š" STR_LOGINDAYS "ã€‹%d " STR_LOGINDAYS_QTY, muser.numlogindays);
 #ifdef SHOW_LOGINOK
 	if (!(muser.userlevel & PERM_LOGINOK))
-	    outs(" (©|¥¼³q¹L»{ÃÒ)");
+	    outs(" (å°šæœªé€šéèªè­‰)");
         else
 #endif
-            outs(" (¦P¤Ñ¤º¥u­p¤@¦¸)");
+            outs(" (åŒå¤©å…§åªè¨ˆä¸€æ¬¡)");
 
 	move(vgety(), 40);
-	prints("¡m¦³®Ä¤å³¹¡n%d ½g", muser.numposts);
+	prints("ã€Šæœ‰æ•ˆæ–‡ç« ã€‹%d ç¯‡", muser.numposts);
 #ifdef ASSESS
-	prints(" (°h:%d)", muser.badpost);
+	prints(" (é€€:%d)", muser.badpost);
 #endif
 	outc('\n');
 
 	// ------------------------------------------------------------
 
-	prints(ANSI_COLOR(1;33) "¡m¥Ø«e°ÊºA¡n%-28.28s" ANSI_RESET,
+	prints(ANSI_COLOR(1;33) "ã€Šç›®å‰å‹•æ…‹ã€‹%-28.28s" ANSI_RESET,
 	       (uentp && isvisible_stat(currutmp, uentp, fri_stat)) ?
-		   modestring(uentp, 0) : "¤£¦b¯¸¤W");
+		   modestring(uentp, 0) : "ä¸åœ¨ç«™ä¸Š");
 
 	if ((uentp && ISNEWMAIL(uentp)) || load_mailalert(muser.userid))
-	    outs("¡m¨p¤H«H½c¡n¦³·s¶i«H¥óÁÙ¨S¬İ\n");
+	    outs("ã€Šç§äººä¿¡ç®±ã€‹æœ‰æ–°é€²ä¿¡ä»¶é‚„æ²’çœ‹\n");
 	else
-	    outs("¡m¨p¤H«H½c¡n³ÌªñµL·s«H¥ó\n");
+	    outs("ã€Šç§äººä¿¡ç®±ã€‹æœ€è¿‘ç„¡æ–°ä¿¡ä»¶\n");
 
 	// ------------------------------------------------------------
         if (muser.role & ROLE_HIDE_FROM) {
             // do nothing
         } else {
-            prints("¡m¤W¦¸¤W¯¸¡n%-28.28s¡m¤W¦¸¬G¶m¡n",
-                   PERM_HIDE(&muser) ? "¯µ±K" :
+            prints("ã€Šä¸Šæ¬¡ä¸Šç«™ã€‹%-28.28sã€Šä¸Šæ¬¡æ•…é„‰ã€‹",
+                   PERM_HIDE(&muser) ? "ç§˜å¯†" :
                    Cdate(muser.lastseen ? &muser.lastseen : &muser.lastlogin));
             // print out muser.lasthost
 #ifdef USE_MASKED_FROMHOST
             if(!HasUserPerm(PERM_SYSOP|PERM_ACCOUNTS))
                 obfuscate_ipstr(muser.lasthost);
 #endif // !USE_MASKED_FROMHOST
-            outs(muser.lasthost[0] ? muser.lasthost : "(¤£¸Ô)");
+            outs(muser.lasthost[0] ? muser.lasthost : "(ä¸è©³)");
             outs("\n");
         }
 
 	// ------------------------------------------------------------
 
-	prints("¡m ¤­¤l´Ñ ¡n%5d ³Ó %5d ±Ñ %5d ©M  "
-	       "¡m¶H´Ñ¾ÔÁZ¡n%5d ³Ó %5d ±Ñ %5d ©M\n",
+	prints("ã€Š äº”å­æ£‹ ã€‹%5d å‹ %5d æ•— %5d å’Œ  "
+	       "ã€Šè±¡æ£‹æˆ°ç¸¾ã€‹%5d å‹ %5d æ•— %5d å’Œ\n",
 	       muser.five_win, muser.five_lose, muser.five_tie,
 	       muser.chc_win, muser.chc_lose, muser.chc_tie);
 
@@ -517,7 +517,7 @@ my_query(const char *uident)
 
 	if(HasUserPerm(PERM_SYSOP|PERM_POLICE) )
 	{
-          if(vmsg("T: ¶}¥ß»@³æ")=='T')
+          if(vmsg("T: é–‹ç«‹ç½°å–®")=='T')
 		  violate_law(&muser, tuid);
 	}
 	else
@@ -545,7 +545,7 @@ void check_water_init(void)
 	memset(water, 0, sizeof(water_t) * (WB_OFO_USER_NUM + 1));
 	water_which = &water[0];
 
-	strlcpy(water[0].userid, " ¥ş³¡ ", sizeof(water[0].userid));
+	strlcpy(water[0].userid, " å…¨éƒ¨ ", sizeof(water[0].userid));
     }
 }
 
@@ -564,11 +564,11 @@ ofo_water_scr(const water_t * tw, int which, char type)
 	    move(16 + i, 4);
             SOLVE_ANSI_CACHE();
 	    if (tw->msg[(tw->top - i + 4) % 5].last_call_in[0] != 0)
-		prints("   " ANSI_COLOR(1;%d;44) "¡¹%-64s" ANSI_RESET "   \n",
+		prints("   " ANSI_COLOR(1;%d;44) "â˜…%-64s" ANSI_RESET "   \n",
 		       colors[i],
 		       tw->msg[(tw->top - i + 4) % 5].last_call_in);
 	    else
-		outs("¡@\n");
+		outs("ã€€\n");
 	}
 
 	move(21, 4);
@@ -581,15 +581,15 @@ ofo_water_scr(const water_t * tw, int which, char type)
 	clrtoeol();
 #ifdef PLAY_ANGEL
 	if (tw->msg[0].msgmode == MSGMODE_TOANGEL)
-	    outs("¦^µª¤p¥D¤H: ");
+	    outs("å›ç­”å°ä¸»äºº: ");
 	else
 #endif
-	prints("¤ÏÀ» %s: ", tw->userid);
+	prints("åæ“Š %s: ", tw->userid);
     } else {
 
 	move(8 + which, 28);
 	SOLVE_ANSI_CACHE();
-	prints(ANSI_COLOR(0;1;37;44) "  %c %-13s¡@" ANSI_RESET,
+	prints(ANSI_COLOR(0;1;37;44) "  %c %-13sã€€" ANSI_RESET,
 	       tw->uin ? ' ' : 'x',
 	       tw->userid);
     }
@@ -624,7 +624,7 @@ ofo_my_write(void)
     refresh();
 #endif
     mvouts(WB_OFO_USER_TOP, WB_OFO_USER_LEFT,
-           ANSI_COLOR(1;33;46) " ¡ô ¤ô²y¤ÏÀ»¹ï¶H ¡õ" ANSI_RESET);
+           ANSI_COLOR(1;33;46) " â†‘ æ°´çƒåæ“Šå°è±¡ â†“" ANSI_RESET);
     for (i = 0; i < WB_OFO_USER_NUM; ++i)
 	if (swater[i] == NULL || swater[i]->pid == 0)
 	    break;
@@ -636,13 +636,13 @@ ofo_my_write(void)
 	    ofo_water_scr(swater[i], i, 0);
 	}
     move(WB_OFO_MSG_TOP, WB_OFO_MSG_LEFT);
-    outs(ANSI_RESET " " ANSI_COLOR(1;35) "¡º" ANSI_COLOR(1;36)
-         "¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w"
-         ANSI_COLOR(1;35) "¡º" ANSI_RESET " ");
+    outs(ANSI_RESET " " ANSI_COLOR(1;35) "â—‡" ANSI_COLOR(1;36)
+         "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
+         ANSI_COLOR(1;35) "â—‡" ANSI_RESET " ");
     move(WB_OFO_MSG_BOTTOM, WB_OFO_MSG_LEFT);
-    outs(" " ANSI_COLOR(1;35) "¡º" ANSI_COLOR(1;36)
-         "¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w"
-         ANSI_COLOR(1;35) "¡º" ANSI_RESET " ");
+    outs(" " ANSI_COLOR(1;35) "â—‡" ANSI_COLOR(1;36)
+         "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
+         ANSI_COLOR(1;35) "â—‡" ANSI_RESET " ");
     ofo_water_scr(swater[0], 0, 1);
     refresh();
 
@@ -685,8 +685,8 @@ ofo_my_write(void)
 	    if (!tw->uin)
 		break;
 
-            // TODO(piaip) ³o¸Ì«Ü¦MÀI¡C¨Ï¥ÎªÌ¥i¯à¶X¾÷¶Ã¶ëªF¦è¶i buf.
-            // ¥t¥~ KEY_UP ¤§Ãşªº¬O >0xFF ©Ò¥H©Î³\§Ú­Ì¸Ó¹ı¬d¤@¤U isascii ªº§PÂ_¡C
+            // TODO(piaip) é€™è£¡å¾ˆå±éšªã€‚ä½¿ç”¨è€…å¯èƒ½è¶æ©Ÿäº‚å¡æ±è¥¿é€² buf.
+            // å¦å¤– KEY_UP ä¹‹é¡çš„æ˜¯ >0xFF æ‰€ä»¥æˆ–è¨±æˆ‘å€‘è©²å¾¹æŸ¥ä¸€ä¸‹ isascii çš„åˆ¤æ–·ã€‚
             if ((ch < 0x100 && !isascii(ch)) || isprint(ch)) {
 		msg[0] = ch, msg[1] = 0;
 	    } else
@@ -699,22 +699,22 @@ ofo_my_write(void)
             switch(tw->msg[0].msgmode) {
                 case MSGMODE_WRITE:
                 case MSGMODE_ALOHA:
-                    snprintf(genbuf, sizeof(genbuf), "§ğÀ» %s:", tw->userid);
+                    snprintf(genbuf, sizeof(genbuf), "æ”»æ“Š %s:", tw->userid);
                     i = WATERBALL_CONFIRM;
                     break;
 
                 case MSGMODE_TOANGEL:
-                    strlcpy(genbuf, "¦^µª¤p¥D¤H:", sizeof(genbuf));
+                    strlcpy(genbuf, "å›ç­”å°ä¸»äºº:", sizeof(genbuf));
                     i = WATERBALL_CONFIRM_ANSWER;
                     break;
 
                 case MSGMODE_FROMANGEL:
-                    strlcpy(genbuf, "¦A°İ¥L¤@¦¸¡G", sizeof(genbuf));
+                    strlcpy(genbuf, "å†å•ä»–ä¸€æ¬¡ï¼š", sizeof(genbuf));
                     i = WATERBALL_CONFIRM_ANGEL;
                     break;
             }
 #else
-	    snprintf(genbuf, sizeof(genbuf), "§ğÀ» %s:", tw->userid);
+	    snprintf(genbuf, sizeof(genbuf), "æ”»æ“Š %s:", tw->userid);
 	    i = WATERBALL_CONFIRM;
 #endif
 	    if (!getdata_buf(0, 0, genbuf, msg,
@@ -739,22 +739,22 @@ ofo_my_write(void)
 }
 
 /*
- * ³Q©I¥sªº®É¾÷:
- * 1. ¥á¸s²Õ¤ô²y flag = WATERBALL_PREEDIT, 1 (pre-edit)
- * 2. ¦^¤ô²y     flag = WATERBALL_GENERAL, 0
- * 3. ¤W¯¸aloha  flag = WATERBALL_ALOHA,   2 (pre-edit)
- * 4. ¼s¼½       flag = WATERBALL_SYSOP,   3 if SYSOP
+ * è¢«å‘¼å«çš„æ™‚æ©Ÿ:
+ * 1. ä¸Ÿç¾¤çµ„æ°´çƒ flag = WATERBALL_PREEDIT, 1 (pre-edit)
+ * 2. å›æ°´çƒ     flag = WATERBALL_GENERAL, 0
+ * 3. ä¸Šç«™aloha  flag = WATERBALL_ALOHA,   2 (pre-edit)
+ * 4. å»£æ’­       flag = WATERBALL_SYSOP,   3 if SYSOP
  *               flag = WATERBALL_PREEDIT, 1 otherwise
- * 5. ¥á¤ô²y     flag = WATERBALL_GENERAL, 0
+ * 5. ä¸Ÿæ°´çƒ     flag = WATERBALL_GENERAL, 0
  * 6. ofo_my_write  flag = WATERBALL_CONFIRM, 4 (pre-edit but confirm)
  * 7. (when defined PLAY_ANGEL)
- *    ©I¥s¤p¤Ñ¨Ï flag = WATERBALL_ANGEL,   5 (id = "¤p¤Ñ¨Ï")
+ *    å‘¼å«å°å¤©ä½¿ flag = WATERBALL_ANGEL,   5 (id = "å°å¤©ä½¿")
  * 8. (when defined PLAY_ANGEL)
- *    ¦^µª¤p¥D¤H flag = WATERBALL_ANSWER,  6 (ÁôÂÃ id)
+ *    å›ç­”å°ä¸»äºº flag = WATERBALL_ANSWER,  6 (éš±è— id)
  * 9. (when defined PLAY_ANGEL)
- *    ©I¥s¤p¤Ñ¨Ï flag = WATERBALL_CONFIRM_ANGEL, 7 (pre-edit)
+ *    å‘¼å«å°å¤©ä½¿ flag = WATERBALL_CONFIRM_ANGEL, 7 (pre-edit)
  * 10. (when defined PLAY_ANGEL)
- *    ¦^µª¤p¥D¤H flag = WATERBALL_CONFIRM_ANSWER, 8 (pre-edit)
+ *    å›ç­”å°ä¸»äºº flag = WATERBALL_CONFIRM_ANSWER, 8 (pre-edit)
  */
 int
 my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * puin)
@@ -778,7 +778,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 #endif
             )
 	    && water_which->count > 0)) {
-	vmsg("ÁV¿|! ¹ï¤è¤w¸¨¶]¤F(¤£¦b¯¸¤W)! ");
+	vmsg("ç³Ÿç³•! å°æ–¹å·²è½è·‘äº†(ä¸åœ¨ç«™ä¸Š)! ");
 	watermode = -1;
 	return 0;
     }
@@ -791,7 +791,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 	    || flag == WATERBALL_ANGEL || flag == WATERBALL_ANSWER
 #endif
 	    ) {
-	/* ¤@¯ë¤ô²y */
+	/* ä¸€èˆ¬æ°´çƒ */
 	watermode = 0;
 
 	switch(currutmp->pager)
@@ -802,12 +802,12 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
                     // Admins are free to bother people.
                     move(1, 0);  clrtoeol();
                     outs(ANSI_COLOR(1;31)
-                         "§Aªº©I¥s¾¹¥Ø«e¤£±µ¨ü§O¤H¥á¤ô²y¡A¹ï¤è¥i¯àµLªk¦^¸Ü¡C"
+                         "ä½ çš„å‘¼å«å™¨ç›®å‰ä¸æ¥å—åˆ¥äººä¸Ÿæ°´çƒï¼Œå°æ–¹å¯èƒ½ç„¡æ³•å›è©±ã€‚"
                          ANSI_RESET);
                 } else {
                     // Normal users should not bother people.
-                    if ('n' == vans("±zªº©I¥s¾¹¥Ø«e³]©w¬°Ãö³¬¡C"
-                                    "­n¥´¶}¥¦¶Ü?[Y/n] "))
+                    if ('n' == vans("æ‚¨çš„å‘¼å«å™¨ç›®å‰è¨­å®šç‚ºé—œé–‰ã€‚"
+                                    "è¦æ‰“é–‹å®ƒå—?[Y/n] "))
                         return 0;
                     // enable pager
                     currutmp->pager = PAGER_ON;
@@ -816,7 +816,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 
 	    case PAGER_FRIENDONLY:
 #if 0
-		// ¦pªG¹ï¤è¥¿¦b¤U¯¸¡A³o­Ó¦n¹³¤£¤ÓÃ­·| crash (?) */
+		// å¦‚æœå°æ–¹æ­£åœ¨ä¸‹ç«™ï¼Œé€™å€‹å¥½åƒä¸å¤ªç©©æœƒ crash (?) */
 		if (uin && uin->userid[0])
 		{
 		    fri_stat = friend_stat(currutmp, uin);
@@ -825,7 +825,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 		}
 #endif
 		move(1, 0);  clrtoeol();
-		outs(ANSI_COLOR(1;31) "§Aªº©I¥s¾¹¥Ø«e¥u±µ¨ü¦n¤Í¥á¤ô²y¡A­Y¹ï¤è«D¦n¤Í«h¥i¯àµLªk¦^¸Ü¡C" ANSI_RESET);
+		outs(ANSI_COLOR(1;31) "ä½ çš„å‘¼å«å™¨ç›®å‰åªæ¥å—å¥½å‹ä¸Ÿæ°´çƒï¼Œè‹¥å°æ–¹éå¥½å‹å‰‡å¯èƒ½ç„¡æ³•å›è©±ã€‚" ANSI_RESET);
 		break;
 	}
 
@@ -853,7 +853,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 	    strlcpy(destid, water_which->msg[i].userid, sizeof(destid));
 	}
     } else {
-	/* pre-edit ªº¤ô²y */
+	/* pre-edit çš„æ°´çƒ */
 	strlcpy(msg, prompt, sizeof(msg));
 	len = strlen(msg);
     }
@@ -868,7 +868,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 #endif
 	     ))
     {
-	snprintf(buf, sizeof(buf), "¥á %s: %s [Y/n]?", destid, msg);
+	snprintf(buf, sizeof(buf), "ä¸Ÿ %s: %s [Y/n]?", destid, msg);
 
 	getdata(0, 0, buf, genbuf, 3, LCECHO);
 	if (genbuf[0] == 'n') {
@@ -891,7 +891,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 #endif
 	    )) {
 	bell();
-	vmsg("ÁV¿|! ¹ï¤è¤w¸¨¶]¤F(¤£¦b¯¸¤W)! ");
+	vmsg("ç³Ÿç³•! å°æ–¹å·²è½è·‘äº†(ä¸åœ¨ç«™ä¸Š)! ");
 	currutmp->chatid[0] = c0;
 	currutmp->mode = mode0;
 	currstat = currstat0;
@@ -901,8 +901,8 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 	fri_stat = friend_stat(currutmp, uin);
     // else, fri_stat was already calculated. */
 
-    if (flag != WATERBALL_ALOHA) {	/* aloha ªº¤ô²y¤£¥Î¦s¤U¨Ó */
-	/* ¦s¨ì¦Û¤vªº¤ô²yÀÉ */
+    if (flag != WATERBALL_ALOHA) {	/* aloha çš„æ°´çƒä¸ç”¨å­˜ä¸‹ä¾† */
+	/* å­˜åˆ°è‡ªå·±çš„æ°´çƒæª” */
 	if (!fp_writelog) {
 	    sethomefile(genbuf, cuser.userid, fn_writelog);
 	    fp_writelog = fopen(genbuf, "a");
@@ -912,12 +912,12 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 		    destid, msg, Cdatelite(&now));
 	    snprintf(t_last_write, 66, "To %s: %s", destid, msg);
 	} else {
-            vmsg("©êºp¡A¥Ø«e¨t²Î²§±`¡A¼È®ÉµLªk¶Ç°e¸ê®Æ¡C");
+            vmsg("æŠ±æ­‰ï¼Œç›®å‰ç³»çµ±ç•°å¸¸ï¼Œæš«æ™‚ç„¡æ³•å‚³é€è³‡æ–™ã€‚");
             return 0;
         }
     }
     if (flag == WATERBALL_SYSOP && uin->msgcount) {
-	/* ¤£À´ */
+	/* ä¸æ‡‚ */
 	uin->destuip = currutmp - &SHM->uinfo[0];
 	uin->sig = 2;
 	if (uin->pid > 0)
@@ -941,7 +941,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 		   && angel_reject_me(uin))
 #endif
 	       ) {
-	outmsg(ANSI_COLOR(1;33;41) "ÁV¿|! ¹ï¤è¨¾¤ô¤F! " ANSI_COLOR(37) "~>_<~" ANSI_RESET);
+	outmsg(ANSI_COLOR(1;33;41) "ç³Ÿç³•! å°æ–¹é˜²æ°´äº†! " ANSI_COLOR(37) "~>_<~" ANSI_RESET);
     } else {
 	int     write_pos = uin->msgcount; /* try to avoid race */
 	if ( write_pos < (MAX_MSGS - 1) ) { /* race here */
@@ -986,7 +986,7 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
             }
 	    uin->pager = pager0;
 	} else if (flag != WATERBALL_ALOHA)
-	    outmsg(ANSI_COLOR(1;33;41) "ÁV¿|! ¹ï¤è¤£¦æ¤F! (¦¬¨ì¤Ó¦h¤ô²y) " ANSI_COLOR(37) "@_@" ANSI_RESET);
+	    outmsg(ANSI_COLOR(1;33;41) "ç³Ÿç³•! å°æ–¹ä¸è¡Œäº†! (æ”¶åˆ°å¤ªå¤šæ°´çƒ) " ANSI_COLOR(37) "@_@" ANSI_RESET);
 
 	if (uin->msgcount >= 1 &&
 #ifdef NOKILLWATERBALL
@@ -995,12 +995,12 @@ my_write(pid_t pid, const char *prompt, const char *id, int flag, userinfo_t * p
 	    (uin->pid <= 0 || kill(uin->pid, SIGUSR2) == -1)
 #endif
 	    && flag != WATERBALL_ALOHA)
-	    outmsg(ANSI_COLOR(1;33;41) "ÁV¿|! ¨S¥´¤¤! " ANSI_COLOR(37) "~>_<~" ANSI_RESET);
+	    outmsg(ANSI_COLOR(1;33;41) "ç³Ÿç³•! æ²’æ‰“ä¸­! " ANSI_COLOR(37) "~>_<~" ANSI_RESET);
 	else if (uin->msgcount == 1 && flag != WATERBALL_ALOHA)
-	    outmsg(ANSI_COLOR(1;33;44) "¤ô²y¯{¹L¥h¤F! " ANSI_COLOR(37) "*^o^*" ANSI_RESET);
+	    outmsg(ANSI_COLOR(1;33;44) "æ°´çƒç ¸éå»äº†! " ANSI_COLOR(37) "*^o^*" ANSI_RESET);
 	else if (uin->msgcount > 1 && uin->msgcount < MAX_MSGS &&
 		flag != WATERBALL_ALOHA)
-	    outmsg(ANSI_COLOR(1;33;44) "¦A¸É¤W¤@²É! " ANSI_COLOR(37) "*^o^*" ANSI_RESET);
+	    outmsg(ANSI_COLOR(1;33;44) "å†è£œä¸Šä¸€ç²’! " ANSI_COLOR(37) "*^o^*" ANSI_RESET);
 
 #if defined(NOKILLWATERBALL) && defined(PLAY_ANGEL)
 	/* Questioning and answering should better deliver immediately. */
@@ -1050,10 +1050,10 @@ t_display_new(void)
 
     if (water[0].count && watermode > 0) {
 	move(1, 0);
-	outs("¢w¢w¢w¢w¢w¢w¢w¤ô¢w²y¢w¦^¢wÅU¢w¢w¢w");
+	outs("â”€â”€â”€â”€â”€â”€â”€æ°´â”€çƒâ”€å›â”€é¡§â”€â”€â”€");
 	outs(PAGER_UI_IS(PAGER_UI_ORIG) ?
-	     "¢w¢w¢w¢w¢w¢w¥Î[Ctrl-R Ctrl-T]Áä¤Á´«¢w¢w¢w¢w¢w" :
-	     "¥Î[Ctrl-R Ctrl-T Ctrl-F Ctrl-G ]Áä¤Á´«¢w¢w¢w¢w");
+	     "â”€â”€â”€â”€â”€â”€ç”¨[Ctrl-R Ctrl-T]éµåˆ‡æ›â”€â”€â”€â”€â”€" :
+	     "ç”¨[Ctrl-R Ctrl-T Ctrl-F Ctrl-G ]éµåˆ‡æ›â”€â”€â”€â”€");
 	if (PAGER_UI_IS(PAGER_UI_NEW)) {
 	    move(2, 0);
 	    clrtoeol();
@@ -1074,7 +1074,7 @@ t_display_new(void)
 		    } else
 			outs("              ");
 		else
-		    prints("%s ¥ş³¡  " ANSI_RESET,
+		    prints("%s å…¨éƒ¨  " ANSI_RESET,
 			   water_which == &water[0] ? ANSI_COLOR(1;33;47) " " :
 			   " "
 			);
@@ -1109,8 +1109,8 @@ t_display_new(void)
 	    i++;
 	}
 	move(i + off, 0);
-	outs("¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w"
-	     "¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w");
+	outs("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
+	     "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 	if (PAGER_UI_IS(PAGER_UI_NEW))
 	    while (i++ <= water[0].count) {
 		move(i + off, 0);
@@ -1131,31 +1131,31 @@ t_display(void) {
     }
     setuserfile(genbuf, fn_writelog);
     if (more(genbuf, YEA) == -1) {
-        vmsg("¼ÈµL°T®§°O¿ı");
+        vmsg("æš«ç„¡è¨Šæ¯è¨˜éŒ„");
         return FULLUPDATE;
     } else {
 	grayout(0, b_lines-5, GRAYOUT_DARK);
 	move(b_lines - 4, 0);
 	clrtobot();
-	outs(ANSI_COLOR(1;33;45) "¡¹¤ô²y¾ã²zµ{¦¡ " ANSI_RESET "\n"
-	     "´£¿ô±z: ¥i±N¤ô²y¦s¤J«H½c(M)«á, ¨ì¡i¶l¥ó¿ï³æ¡j¸Ó«H¥ó«e«ö u,\n"
-	     "¨t²Î·|±N¤ô²y¬ö¿ı­«·s¾ã²z«á±H°eµ¹±z­ò! " ANSI_RESET "\n");
+	outs(ANSI_COLOR(1;33;45) "â˜…æ°´çƒæ•´ç†ç¨‹å¼ " ANSI_RESET "\n"
+	     "æé†’æ‚¨: å¯å°‡æ°´çƒå­˜å…¥ä¿¡ç®±(M)å¾Œ, åˆ°ã€éƒµä»¶é¸å–®ã€‘è©²ä¿¡ä»¶å‰æŒ‰ u,\n"
+	     "ç³»çµ±æœƒå°‡æ°´çƒç´€éŒ„é‡æ–°æ•´ç†å¾Œå¯„é€çµ¦æ‚¨å”·! " ANSI_RESET "\n");
 
-	getdata(b_lines - 1, 0, "²M°£(C) ¦s¤J«H½c(M) «O¯d(R) (C/M/R)?[R]",
+	getdata(b_lines - 1, 0, "æ¸…é™¤(C) å­˜å…¥ä¿¡ç®±(M) ä¿ç•™(R) (C/M/R)?[R]",
 		ans, sizeof(ans), LCECHO);
 	if (*ans == 'm') {
 	    // only delete if success because the file can be re-used.
-	    if (mail_log2id(cuser.userid, "¼ö½u°O¿ı", genbuf, "[³Æ.§Ñ.¿ı]", 0, 1) == 0)
+	    if (mail_log2id(cuser.userid, "ç†±ç·šè¨˜éŒ„", genbuf, "[å‚™.å¿˜.éŒ„]", 0, 1) == 0)
 		unlink(genbuf);
 	    else
-		vmsg("«H½cÀx¦s¥¢±Ñ¡C");
+		vmsg("ä¿¡ç®±å„²å­˜å¤±æ•—ã€‚");
 	} else if (*ans == 'c') {
-	    getdata(b_lines - 1, 0, "½T©w²M°£¡H(y/N) [N] ",
+	    getdata(b_lines - 1, 0, "ç¢ºå®šæ¸…é™¤ï¼Ÿ(y/N) [N] ",
 	            ans, sizeof(ans), LCECHO);
 	    if(*ans == 'Y' || *ans == 'y')
 	        unlink(genbuf);
 	    else
-	        vmsg("¨ú®ø²M°£¡C");
+	        vmsg("å–æ¶ˆæ¸…é™¤ã€‚");
 	}
 	return FULLUPDATE;
     }
@@ -1204,7 +1204,7 @@ int make_connection_to_somebody(userinfo_t *uin, int timeout){
     if (pid > 0)
 	kill(pid, SIGUSR1);
     clear();
-    prints("¥¿©I¥s %s.....\nÁä¤J Ctrl-D ¤¤¤î....", uin->userid);
+    prints("æ­£å‘¼å« %s.....\néµå…¥ Ctrl-D ä¸­æ­¢....", uin->userid);
 
     if(listen(sock, 1)<0) {
 	close(sock);
@@ -1221,7 +1221,7 @@ int make_connection_to_somebody(userinfo_t *uin, int timeout){
 	    if (!ch && uin->chatid[0] == 1 &&
 		    uin->destuip == currutmp - &SHM->uinfo[0]) {
 		bell();
-		outmsg("¹ï¤è¦^À³¤¤...");
+		outmsg("å°æ–¹å›æ‡‰ä¸­...");
 		refresh();
 	    } else if (ch == EDITING || ch == TALK || ch == CHATING ||
 		    ch == PAGE || ch == MAILALL || ch == MONITOR ||
@@ -1231,14 +1231,14 @@ int make_connection_to_somebody(userinfo_t *uin, int timeout){
 		vkey_detach();
 		close(sock);
 		currutmp->sockactive = currutmp->destuid = 0;
-		vmsg("¤H®a¦b¦£°Õ");
+		vmsg("äººå®¶åœ¨å¿™å•¦");
 		unlockutmpmode();
 		return -1;
 	    } else {
 		// change to longer timeout
 		timeout = 20;
 		move(0, 0);
-		outs("¦A");
+		outs("å†");
 		bell();
 		refresh();
 
@@ -1290,7 +1290,7 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 	    ch == M_CONN6 || ch == CHESSWATCHING || ch == REVERSI) {
 	    sock = make_connection_to_somebody(uin, 20);
 	    if (sock < 0)
-		vmsg("µLªk«Ø¥ß³s½u");
+		vmsg("ç„¡æ³•å»ºç«‹é€£ç·š");
 	    else {
 		msgsock = accept(sock, (struct sockaddr *) 0, (socklen_t *) 0);
 		if (msgsock == -1) {
@@ -1325,17 +1325,17 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 	    }
 	}
 	else
-	    outs("¤H®a¦b¦£°Õ");
+	    outs("äººå®¶åœ¨å¿™å•¦");
     } else if (!HasUserPerm(PERM_SYSOP) &&
 	       (((fri_stat & HRM) && !(fri_stat & HFM)) ||
 		((!uin->pager) && !(fri_stat & HFM)))) {
-	outs("¹ï¤èÃö±¼©I¥s¾¹¤F");
+	outs("å°æ–¹é—œæ‰å‘¼å«å™¨äº†");
     } else if (!HasUserPerm(PERM_SYSOP) &&
 	     (((fri_stat & HRM) && !(fri_stat & HFM)) || uin->pager == PAGER_DISABLE)) {
-	outs("¹ï¤è©Ş±¼©I¥s¾¹¤F");
+	outs("å°æ–¹æ‹”æ‰å‘¼å«å™¨äº†");
     } else if (!HasUserPerm(PERM_SYSOP) &&
 	       !(fri_stat & HFM) && uin->pager == PAGER_FRIENDONLY) {
-	outs("¹ï¤è¥u±µ¨ü¦n¤Íªº©I¥s");
+	outs("å°æ–¹åªæ¥å—å¥½å‹çš„å‘¼å«");
     } else if (!(pid = uin->pid) /* || (kill(pid, 0) == -1) */ ) {
 	//resetutmpent();
 	outs(msg_usr_left);
@@ -1348,9 +1348,9 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 	    for(i=0;i<2;i++) {
 		if(uin->withme & (WITHME_ALLFLAG<<i)) {
 		    if(i==0)
-			outs("Åwªï¸ò§Ú¡G");
+			outs("æ­¡è¿è·Ÿæˆ‘ï¼š");
 		    else
-			outs("½Ğ§O§ä§Ú¡G");
+			outs("è«‹åˆ¥æ‰¾æˆ‘ï¼š");
 		    for(j=0; j<32 && withme_str[j/2]; j+=2)
 			if(uin->withme & (1<<(j+i)))
 			    if(withme_str[j/2]) {
@@ -1361,9 +1361,9 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 		}
 	    }
 	    move(4, 0);
-	    outs("­n©M¥L(¦o) (T)½Í¤Ñ(F)¤­¤l´Ñ"
-		    "(C)¶H´Ñ(D)·t´Ñ(G)³ò´Ñ(R)¶Â¥Õ´Ñ(6)¤»¤lºX");
-	    getdata(5, 0, "           (N)¨S¨Æ§ä¿ù¤H¤F?[N] ", genbuf, 4, LCECHO);
+	    outs("è¦å’Œä»–(å¥¹) (T)è«‡å¤©(F)äº”å­æ£‹"
+		    "(C)è±¡æ£‹(D)æš—æ£‹(G)åœæ£‹(R)é»‘ç™½æ£‹(6)å…­å­æ——");
+	    getdata(5, 0, "           (N)æ²’äº‹æ‰¾éŒ¯äººäº†?[N] ", genbuf, 4, LCECHO);
 	}
 
 	switch (*genbuf) {
@@ -1403,7 +1403,7 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 
 	sock = make_connection_to_somebody(uin, 5);
 	if(sock==-1) {
-	    vmsg("µLªk«Ø¥ß³s½u");
+	    vmsg("ç„¡æ³•å»ºç«‹é€£ç·š");
 	    return;
 	}
 
@@ -1467,41 +1467,41 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 	    }
 	} else {
 	    move(9, 9);
-	    outs("¡i¦^­µ¡j ");
+	    outs("ã€å›éŸ³ã€‘ ");
 	    switch (c) {
 	    case 'a':
-		outs("§Ú²{¦b«Ü¦£¡A½Ğµ¥¤@·|¨à¦A call §Ú¡A¦n¶Ü¡H");
+		outs("æˆ‘ç¾åœ¨å¾ˆå¿™ï¼Œè«‹ç­‰ä¸€æœƒå…’å† call æˆ‘ï¼Œå¥½å—ï¼Ÿ");
 		break;
 	    case 'b':
-		prints("¹ï¤£°_¡A§Ú¦³¨Æ±¡¤£¯à¸ò§A %s....", sig_des[uin->sig]);
+		prints("å°ä¸èµ·ï¼Œæˆ‘æœ‰äº‹æƒ…ä¸èƒ½è·Ÿä½  %s....", sig_des[uin->sig]);
 		break;
 	    case 'd':
-		outs("§Ú­nÂ÷¯¸Åo..¤U¦¸¦A²á§a..........");
+		outs("æˆ‘è¦é›¢ç«™å›‰..ä¸‹æ¬¡å†èŠå§..........");
 		break;
 	    case 'c':
-		outs("½Ğ¤£­n§n§Ú¦n¶Ü¡H");
+		outs("è«‹ä¸è¦åµæˆ‘å¥½å—ï¼Ÿ");
 		break;
 	    case 'e':
-		outs("§ä§Ú¦³¨Æ¶Ü¡H½Ğ¥ı¨Ó«H­ò....");
+		outs("æ‰¾æˆ‘æœ‰äº‹å—ï¼Ÿè«‹å…ˆä¾†ä¿¡å”·....");
 		break;
 	    case 'f':
 		{
 		    char            msgbuf[60];
 
 		    read(msgsock, msgbuf, 60);
-		    prints("¹ï¤£°_¡A§Ú²{¦b¤£¯à¸ò§A %s¡A¦]¬°\n", sig_des[uin->sig]);
+		    prints("å°ä¸èµ·ï¼Œæˆ‘ç¾åœ¨ä¸èƒ½è·Ÿä½  %sï¼Œå› ç‚º\n", sig_des[uin->sig]);
 		    move(10, 18);
 		    outs(msgbuf);
 		}
 		break;
 	    case '1':
-		prints("%s¡H¥ı®³$100¨Ó..", sig_des[uin->sig]);
+		prints("%sï¼Ÿå…ˆæ‹¿$100ä¾†..", sig_des[uin->sig]);
 		break;
 	    case '2':
-		prints("%s¡H¥ı®³$1000¨Ó..", sig_des[uin->sig]);
+		prints("%sï¼Ÿå…ˆæ‹¿$1000ä¾†..", sig_des[uin->sig]);
 		break;
 	    default:
-		prints("§Ú²{¦b¤£·Q %s °Õ.....:)", sig_des[uin->sig]);
+		prints("æˆ‘ç¾åœ¨ä¸æƒ³ %s å•¦.....:)", sig_des[uin->sig]);
 	    }
 	    close(msgsock);
 	}
@@ -1512,7 +1512,7 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
     pressanykey();
 }
 
-/* ¿ï³æ¦¡²á¤Ñ¤¶­± */
+/* é¸å–®å¼èŠå¤©ä»‹é¢ */
 #define US_PICKUP       1234
 #define US_RESORT       1233
 #define US_ACTION       1232
@@ -1520,66 +1520,66 @@ my_talk(userinfo_t * uin, int fri_stat, char defact)
 
 static const char
 *hlp_talkbasic[] = {
-    "¡i²¾°Ê´å¼Ğ¡j", NULL,
-    "  ©¹¤W¤@¦æ", "¡ô k",
-    "  ©¹¤U¤@¦æ", "¡õ j n",
-    "  ©¹«eÂ½­¶", "^B PgUp",
-    "  ©¹«áÂ½­¶", "^F PgDn ªÅ¥ÕÁä",
-    "  ¦Cªí¶}ÀY", "Home 0",
-    "  ¦Cªíµ²§À", "End  $",
-    "  ¸õ¦Ü...",  "1-9¼Æ¦rÁä",
-    "  ·j´MID",	  "s",
-    "  µ²§ôÂ÷¶}", "¡ö   e",
+    "ã€ç§»å‹•æ¸¸æ¨™ã€‘", NULL,
+    "  å¾€ä¸Šä¸€è¡Œ", "â†‘ k",
+    "  å¾€ä¸‹ä¸€è¡Œ", "â†“ j n",
+    "  å¾€å‰ç¿»é ", "^B PgUp",
+    "  å¾€å¾Œç¿»é ", "^F PgDn ç©ºç™½éµ",
+    "  åˆ—è¡¨é–‹é ­", "Home 0",
+    "  åˆ—è¡¨çµå°¾", "End  $",
+    "  è·³è‡³...",  "1-9æ•¸å­—éµ",
+    "  æœå°‹ID",	  "s",
+    "  çµæŸé›¢é–‹", "â†   e",
     NULL,
 },
 *hlp_talkcfg[] = {
-    "¡i­×§ï¸ê®Æ¡j", NULL,
-    "  ­×§ï¼ÊºÙ",    "N",
-    "  ¤Á´«Áô¨­",    "C",
-    "  ¤Á´«©I¥s¾¹",  "p",
-    "  ¤ô²y¼Ò¦¡",    "^W",
-    "  ¼W¥[¦n¤Í",    "a",
-    "  §R°£¦n¤Í",    "d",
-    "  ­×§ï¦n¤Í",    "o",
-    "  ¤¬°Ê¦^À³¤è¦¡","y",
+    "ã€ä¿®æ”¹è³‡æ–™ã€‘", NULL,
+    "  ä¿®æ”¹æš±ç¨±",    "N",
+    "  åˆ‡æ›éš±èº«",    "C",
+    "  åˆ‡æ›å‘¼å«å™¨",  "p",
+    "  æ°´çƒæ¨¡å¼",    "^W",
+    "  å¢åŠ å¥½å‹",    "a",
+    "  åˆªé™¤å¥½å‹",    "d",
+    "  ä¿®æ”¹å¥½å‹",    "o",
+    "  äº’å‹•å›æ‡‰æ–¹å¼","y",
     NULL,
 },
 *hlp_talkdisp[] = {
-    "¡i¬d¸ß¸ê°T¡j", NULL,
-    "  ¬d¸ß¦¹¤H",    "q",
-    "  ¿é¤J¬d¸ßID",  "Q",
-    "  ¬d¸ßÃdª«",    "c",
+    "ã€æŸ¥è©¢è³‡è¨Šã€‘", NULL,
+    "  æŸ¥è©¢æ­¤äºº",    "q",
+    "  è¼¸å…¥æŸ¥è©¢ID",  "Q",
+    "  æŸ¥è©¢å¯µç‰©",    "c",
     "", "",
-    "¡iÅã¥Ü¤è¦¡¡j", NULL,
-    "  ½Õ¾ã±Æ§Ç",	"TAB",
-    "  ¨Ó·½/´y­z/¾ÔÁZ",	"S",
-    "  ¥ş³¡/¦n¤Í ¦Cªí",	"f",
+    "ã€é¡¯ç¤ºæ–¹å¼ã€‘", NULL,
+    "  èª¿æ•´æ’åº",	"TAB",
+    "  ä¾†æº/æè¿°/æˆ°ç¸¾",	"S",
+    "  å…¨éƒ¨/å¥½å‹ åˆ—è¡¨",	"f",
     NULL,
 },
 *hlp_talktalk[] = {
-    "¡i¥æ½Í¤¬°Ê¡j", NULL,
-    "  »P¥L²á¤Ñ",    "¡÷ t Enter",
-    "  ¼ö½u¤ô²y",    "w",
-    "  §Y®É¦^À³",    "^R (­n¥ı¦¬¨ì¤ô²y)",
-    "  ¦n¤Í¼s¼½",    " b (­n¦b¦n¤Í¦Cªí)",
-    "  ¦^ÅU°T®§",    "l",
-    "  ±H«Hµ¹¥L",    "m",
-    "  µ¹¤©" MONEYNAME,"g",
+    "ã€äº¤è«‡äº’å‹•ã€‘", NULL,
+    "  èˆ‡ä»–èŠå¤©",    "â†’ t Enter",
+    "  ç†±ç·šæ°´çƒ",    "w",
+    "  å³æ™‚å›æ‡‰",    "^R (è¦å…ˆæ”¶åˆ°æ°´çƒ)",
+    "  å¥½å‹å»£æ’­",    " b (è¦åœ¨å¥½å‹åˆ—è¡¨)",
+    "  å›é¡§è¨Šæ¯",    "l",
+    "  å¯„ä¿¡çµ¦ä»–",    "m",
+    "  çµ¦äºˆ" MONEYNAME,"g",
     NULL,
 },
 *hlp_talkmisc[] = {
-    "¡i¨ä¥¦¡j", NULL,
-    "  ¾\\Åª«H¥ó",   "r",
-    "  ¨Ï¥Î»¡©ú",    "h",
+    "ã€å…¶å®ƒã€‘", NULL,
+    "  é–±è®€ä¿¡ä»¶",   "r",
+    "  ä½¿ç”¨èªªæ˜",    "h",
     NULL,
 },
 *hlp_talkadmin[] = {
-    "¡i¯¸ªø±M¥Î¡j", NULL,
-    "  ³]©w¨Ï¥ÎªÌ",   "u",
-    "  ¤Á´«Áô§Î¼Ò¦¡", "H",
-    "  ½ğ¤H",	      "K",
+    "ã€ç«™é•·å°ˆç”¨ã€‘", NULL,
+    "  è¨­å®šä½¿ç”¨è€…",   "u",
+    "  åˆ‡æ›éš±å½¢æ¨¡å¼", "H",
+    "  è¸¢äºº",	      "K",
 #if defined(SHOWBOARD) && defined(DEBUG)
-    "  Åã¥Ü©Ò¦b¬İªO", "Y",
+    "  é¡¯ç¤ºæ‰€åœ¨çœ‹æ¿", "Y",
 #endif
     NULL,
 };
@@ -1592,7 +1592,7 @@ t_showhelp(void)
     const int  cols[3] = { 31, 25, 22 },    // column witdh
                desc[3] = { 12, 18, 16 };    // desc width
     clear();
-    showtitle("¥ğ¶¢²á¤Ñ", "¨Ï¥Î»¡©ú");
+    showtitle("ä¼‘é–’èŠå¤©", "ä½¿ç”¨èªªæ˜");
     outs("\n");
     vs_multi_T_table_simple(p1, 3, cols, desc,
 	    HLP_CATEGORY_COLOR, HLP_DESCRIPTION_COLOR, HLP_KEYLIST_COLOR);
@@ -1667,8 +1667,8 @@ descript(int show_mode, const userinfo_t * uentp, int diff, char *description, i
     case 4:
 	snprintf(description, len,
 		 "%4d %s", uentp->chess_elo_rating,
-		 (uentp->withme&WITHME_CHESS)?"§ä§Ú¤U´Ñ":
-                 (uentp->withme&WITHME_NOCHESS)?"§O§ä§Ú":"");
+		 (uentp->withme&WITHME_CHESS)?"æ‰¾æˆ‘ä¸‹æ£‹":
+                 (uentp->withme&WITHME_NOCHESS)?"åˆ¥æ‰¾æˆ‘":"");
 	return description;
     case 5:
 	snprintf(description, len, "%4d/%4d/%2d %c",
@@ -1684,8 +1684,8 @@ descript(int show_mode, const userinfo_t * uentp, int diff, char *description, i
 	return description;
     case 7:
 	snprintf(description, len, "%s",
-		 (uentp->withme&WITHME_CONN6)?"§ä§Ú¤U´Ñ":
-                 (uentp->withme&WITHME_NOCONN6)?"§O§ä§Ú":"");
+		 (uentp->withme&WITHME_CONN6)?"æ‰¾æˆ‘ä¸‹æ£‹":
+                 (uentp->withme&WITHME_NOCONN6)?"åˆ¥æ‰¾æˆ‘":"");
 	return description;
 
     default:
@@ -1698,44 +1698,44 @@ descript(int show_mode, const userinfo_t * uentp, int diff, char *description, i
 /*
  * userlist
  *
- * ¦³§O©ó¨ä¥L¤j³¡¥÷ bbs¦b¹ê§@¨Ï¥ÎªÌ¦W³æ®É, ³£¬O±N©Ò¦³ online users ¨ú¤@¥÷¨ì
- * local space ¤¤, «ö·Ó©Ò¶·­nªº¤è¦¡ sort ¦n (¦p«ö·Ó userid , ¤­¤l´Ñ, ¨Ó·½µ¥
- * µ¥) . ³o±N³y¦¨¤j¶qªº®ö¶O: ¬°¤°»ò¨C­Ó¤H³£­n¬°¤F²£¥Í³o¤@­¶¶È 20 ­Ó¤Hªº¸ê®Æ
- * ¦Ó¥h sort ¨ä¥L¤@¸U¤Hªº¸ê®Æ?
+ * æœ‰åˆ¥æ–¼å…¶ä»–å¤§éƒ¨ä»½ bbsåœ¨å¯¦ä½œä½¿ç”¨è€…åå–®æ™‚, éƒ½æ˜¯å°‡æ‰€æœ‰ online users å–ä¸€ä»½åˆ°
+ * local space ä¸­, æŒ‰ç…§æ‰€é ˆè¦çš„æ–¹å¼ sort å¥½ (å¦‚æŒ‰ç…§ userid , äº”å­æ£‹, ä¾†æºç­‰
+ * ç­‰) . é€™å°‡é€ æˆå¤§é‡çš„æµªè²»: ç‚ºä»€éº¼æ¯å€‹äººéƒ½è¦ç‚ºäº†ç”¢ç”Ÿé€™ä¸€é åƒ… 20 å€‹äººçš„è³‡æ–™
+ * è€Œå» sort å…¶ä»–ä¸€è¬äººçš„è³‡æ–™?
  *
- * ¤@¯ë¨Ó»¡, ¤@¥÷§¹¾ãªº¨Ï¥ÎªÌ¦W³æ¥i¥H¤À¦¨¡u¦n¤Í°Ï¡v©M¡u«D¦n¤Í°Ï¡v. ¤£¦P¤Hªº
- * ¡u¦n¤Í°Ï¡vÀ³¸Ó·|ªøªº¤£¤@¼Ë, ¤£¹L¡u«D¦n¤Í°Ï¡vÀ³¸Ó¬Oªøªº¤@¼Ëªº. °w¹ï³o¶µ¯S
- * ©Ê, ¨â°Ï¦³¤£¦Pªº¹ê§@¤è¦¡.
+ * ä¸€èˆ¬ä¾†èªª, ä¸€ä»½å®Œæ•´çš„ä½¿ç”¨è€…åå–®å¯ä»¥åˆ†æˆã€Œå¥½å‹å€ã€å’Œã€Œéå¥½å‹å€ã€. ä¸åŒäººçš„
+ * ã€Œå¥½å‹å€ã€æ‡‰è©²æœƒé•·çš„ä¸ä¸€æ¨£, ä¸éã€Œéå¥½å‹å€ã€æ‡‰è©²æ˜¯é•·çš„ä¸€æ¨£çš„. é‡å°é€™é …ç‰¹
+ * æ€§, å…©å€æœ‰ä¸åŒçš„å¯¦ä½œæ–¹å¼.
  *
- * + ¦n¤Í°Ï
- *   ¦n¤Í°Ï¥u¦³¦b±Æ¦C¤è¦¡¬° [¶Ù! ªB¤Í] ªº®É­Ô¡u¥i¯à¡v·|¥Î¨ì.
- *   ¨C­Ó process¥i¥H³z¹L currutmp->friend_online[]±o¨ì¤¬¬Û¶¡¦³¦n¤ÍÃö«Yªº¸ê
- *   ®Æ (¤£¥]¬AªO¤Í, ªO¤Í¬O¥t¥~¥Í¥X¨Óªº) ¤£¹L friend_online[]¬O unorderªº.
- *   ©Ò¥H¶·­n¥ı§â©Ò¦³ªº¤H®³¥X¨Ó, ­«·s sort ¤@¦¸.
- *   ¦n¤Í°Ï (¤¬¬Û¥ô¤@¤è¦³³]¦n¤Í+ ªO¤Í) ³Ì¦h¥u·|¦³ MAX_FRIENDS­Ó
- *   ¦]¬°²£¥Í¦n¤Í°Ïªº cost ¬Û·í°ª, "¯à¤£²£¥Í´N¤£­n²£¥Í"
+ * + å¥½å‹å€
+ *   å¥½å‹å€åªæœ‰åœ¨æ’åˆ—æ–¹å¼ç‚º [å—¨! æœ‹å‹] çš„æ™‚å€™ã€Œå¯èƒ½ã€æœƒç”¨åˆ°.
+ *   æ¯å€‹ processå¯ä»¥é€é currutmp->friend_online[]å¾—åˆ°äº’ç›¸é–“æœ‰å¥½å‹é—œä¿‚çš„è³‡
+ *   æ–™ (ä¸åŒ…æ‹¬æ¿å‹, æ¿å‹æ˜¯å¦å¤–ç”Ÿå‡ºä¾†çš„) ä¸é friend_online[]æ˜¯ unorderçš„.
+ *   æ‰€ä»¥é ˆè¦å…ˆæŠŠæ‰€æœ‰çš„äººæ‹¿å‡ºä¾†, é‡æ–° sort ä¸€æ¬¡.
+ *   å¥½å‹å€ (äº’ç›¸ä»»ä¸€æ–¹æœ‰è¨­å¥½å‹+ æ¿å‹) æœ€å¤šåªæœƒæœ‰ MAX_FRIENDSå€‹
+ *   å› ç‚ºç”¢ç”Ÿå¥½å‹å€çš„ cost ç›¸ç•¶é«˜, "èƒ½ä¸ç”¢ç”Ÿå°±ä¸è¦ç”¢ç”Ÿ"
  *
- * + «D¦n¤Í°Ï
- *   ³z¹L shmctl utmpsortd , ©w´Á (³q±`¤@¬í¤@¦¸) ±N¥ş¯¸ªº¤H«ö·Ó¦UºØ¤£¦Pªº¤è
- *   ¦¡ sort ¦n, ©ñ¸m¦b SHM->sorted¤¤.
+ * + éå¥½å‹å€
+ *   é€é shmctl utmpsortd , å®šæœŸ (é€šå¸¸ä¸€ç§’ä¸€æ¬¡) å°‡å…¨ç«™çš„äººæŒ‰ç…§å„ç¨®ä¸åŒçš„æ–¹
+ *   å¼ sort å¥½, æ”¾ç½®åœ¨ SHM->sortedä¸­.
  *
- * ±µ¤U¨Ó, §Ú­Ì¨C¦¸¥u±q½T©wªº°_©l¦ì¸m®³, ¯S§O¬O°£«D¦³¶·­n, ¤£µM¤£·|¥h²£¥Í¦n
- * ¤Í°Ï.
+ * æ¥ä¸‹ä¾†, æˆ‘å€‘æ¯æ¬¡åªå¾ç¢ºå®šçš„èµ·å§‹ä½ç½®æ‹¿, ç‰¹åˆ¥æ˜¯é™¤éæœ‰é ˆè¦, ä¸ç„¶ä¸æœƒå»ç”¢ç”Ÿå¥½
+ * å‹å€.
  *
- * ¦U­Ó function ºK­n
+ * å„å€‹ function æ‘˜è¦
  * sort_cmpfriend()   sort function, key: friend type
  * pickup_maxpages()  # pages of userlist
- * pickup_myfriend()  ²£¥Í¦n¤Í°Ï
- * pickup_bfriend()   ²£¥ÍªO¤Í
- * pickup()           ²£¥Í¬Y¤@­¶¨Ï¥ÎªÌ¦W³æ
- * draw_pickup()      §âµe­±¿é¥X
- * userlist()         ¥D¨ç¦¡, ­t³d©I¥s pickup()/draw_pickup() ¥H¤Î«öÁä³B²z
+ * pickup_myfriend()  ç”¢ç”Ÿå¥½å‹å€
+ * pickup_bfriend()   ç”¢ç”Ÿæ¿å‹
+ * pickup()           ç”¢ç”ŸæŸä¸€é ä½¿ç”¨è€…åå–®
+ * draw_pickup()      æŠŠç•«é¢è¼¸å‡º
+ * userlist()         ä¸»å‡½å¼, è² è²¬å‘¼å« pickup()/draw_pickup() ä»¥åŠæŒ‰éµè™•ç†
  *
  * SEE ALSO
  *     include/pttstruct.h
  *
  * BUGS
- *     ·j´Mªº®É­Ô¨S¦³¿ìªk²¾¨ì¸Ó¤H¤W­±
+ *     æœå°‹çš„æ™‚å€™æ²’æœ‰è¾¦æ³•ç§»åˆ°è©²äººä¸Šé¢
  *
  * AUTHOR
  *     in2 <in2@in2home.org>
@@ -1797,7 +1797,7 @@ pickup_myfriend(pickup_t * friends,
 	    }
 	}
     }
-    /* §â¦Û¤v¥[¤J¦n¤Í°Ï */
+    /* æŠŠè‡ªå·±åŠ å…¥å¥½å‹å€ */
     friends[ngets].ui = currutmp;
     friends[ngets++].friend = (IFH | HFM);
     return ngets;
@@ -1814,7 +1814,7 @@ pickup_bfriend(pickup_t * friends, int base)
     friends = friends + base;
     for (i = 0; i < number && ngets < MAX_FRIEND - base; ++i) {
 	uentp = &SHM->uinfo[SHM->sorted[currsorted][0][i]];
-	/* TODO isvisible() ­«½Æ¥Î¨ì¤F friend_stat() */
+	/* TODO isvisible() é‡è¤‡ç”¨åˆ°äº† friend_stat() */
 	if (uentp && uentp->pid && uentp->brc_id == currutmp->brc_id &&
 	    currutmp != uentp && isvisible(currutmp, uentp) &&
 	    (base || !(friend_stat(currutmp, uentp) & (IFH | HFM)))) {
@@ -1841,21 +1841,21 @@ pickup(pickup_t * currpickup, int pickup_way, int *page,
     if (friendtotal == 0)
 	*myfriend = *friendme = 1;
 
-    /* ²£¥Í¦n¤Í°Ï */
+    /* ç”¢ç”Ÿå¥½å‹å€ */
     which = *page * nPickups;
-    if( (HasUserFlag(UF_FRIEND)) || /* ¥uÅã¥Ü¦n¤Í¼Ò¦¡ */
-	((pickup_way == 0) &&          /* [¶Ù! ªB¤Í] mode */
+    if( (HasUserFlag(UF_FRIEND)) || /* åªé¡¯ç¤ºå¥½å‹æ¨¡å¼ */
+	((pickup_way == 0) &&          /* [å—¨! æœ‹å‹] mode */
 	 (
-	  /* §tªO¤Í, ¦n¤Í°Ï³Ì¦h¥u·|¦³ (friendtotal + ªO¤Í) ­Ó*/
+	  /* å«æ¿å‹, å¥½å‹å€æœ€å¤šåªæœƒæœ‰ (friendtotal + æ¿å‹) å€‹*/
 	  (currutmp->brc_id && which < (friendtotal + 1 +
 					getbcache(currutmp->brc_id)->nuser)) ||
 
-	  /* ¤£§tªO¤Í, ³Ì¦h¥u·|¦³ friendtotal­Ó */
+	  /* ä¸å«æ¿å‹, æœ€å¤šåªæœƒæœ‰ friendtotalå€‹ */
 	  (!currutmp->brc_id && which < friendtotal + 1)
 	  ))) {
 	pickup_t        friends[MAX_FRIEND + 1]; /* +1 include self */
 
-	/* TODO ·í friendtotal<which ®É¥u»İÅã¥ÜªO¤Í, ¤£»İ pickup_myfriend */
+	/* TODO ç•¶ friendtotal<which æ™‚åªéœ€é¡¯ç¤ºæ¿å‹, ä¸éœ€ pickup_myfriend */
 	*nfriend = pickup_myfriend(friends, myfriend, friendme, badfriend);
 
 	if (pickup_way == 0 && currutmp->brc_id != 0
@@ -1863,17 +1863,17 @@ pickup(pickup_t * currpickup, int pickup_way, int *page,
 		&& !(getbcache(currutmp->brc_id)->brdattr & BRD_COOLDOWN)
 #endif
 		){
-	    /* TODO ¥u»İ­n which+nPickups-*nfriend ­ÓªO¤Í, ¤£¤@©w­n¾ã­Ó±½¤@¹M */
+	    /* TODO åªéœ€è¦ which+nPickups-*nfriend å€‹æ¿å‹, ä¸ä¸€å®šè¦æ•´å€‹æƒä¸€é */
 	    *nfriend += pickup_bfriend(friends, *nfriend);
 	    *bfriend = SHM->bcache[currutmp->brc_id - 1].nuser;
 	}
 	else
 	    *bfriend = 0;
 	if (*nfriend > which) {
-	    /* ¥u¦³¦b­n¨q¥X¤~¦³¥²­n sort */
-	    /* TODO ¦n¤Í¸òªO¤Í¥i¥H¤À¶} sort, ¥i¯à¥u»İ­n¨ä¤@ */
-	    /* TODO ¦n¤Í¤W¤U¯¸¤~»İ­n sort ¤@¦¸, ¤£»İ­n¨C¦¸ sort.
-	     * ¥iºûÅ@¤@­Ó dirty bit ªí¥Ü¬O§_ sort ¹L.
+	    /* åªæœ‰åœ¨è¦ç§€å‡ºæ‰æœ‰å¿…è¦ sort */
+	    /* TODO å¥½å‹è·Ÿæ¿å‹å¯ä»¥åˆ†é–‹ sort, å¯èƒ½åªéœ€è¦å…¶ä¸€ */
+	    /* TODO å¥½å‹ä¸Šä¸‹ç«™æ‰éœ€è¦ sort ä¸€æ¬¡, ä¸éœ€è¦æ¯æ¬¡ sort.
+	     * å¯ç¶­è­·ä¸€å€‹ dirty bit è¡¨ç¤ºæ˜¯å¦ sort é.
 	     * suggested by WYchuang@ptt */
 	    qsort(friends, *nfriend, sizeof(pickup_t), sort_cmpfriend);
 	    size = *nfriend - which;
@@ -1895,7 +1895,7 @@ pickup(pickup_t * currpickup, int pickup_way, int *page,
 	    u = &SHM->uinfo[ulist[which]];
 
 	    friend = friend_stat(currutmp, u);
-	    /* TODO isvisible() ­«½Æ¥Î¨ì¤F friend_stat() */
+	    /* TODO isvisible() é‡è¤‡ç”¨åˆ°äº† friend_stat() */
 	    if ((pickup_way ||
 		 (currutmp != u && !(friend & ST_FRIEND))) &&
 		isvisible(currutmp, u)) {
@@ -1913,14 +1913,14 @@ pickup(pickup_t * currpickup, int pickup_way, int *page,
 
 // userlist column definition
 static const VCOL ulist_coldef[ULISTCOLS] = {
-    {NULL, 8, 9, 0, {0, 1}},	// "½s¸¹" ¦]¬°´å¼Ğ¾a³o©Ò¥H¤]¤£¸Óªø¤Ó¤j
+    {NULL, 8, 9, 0, {0, 1}},	// "ç·¨è™Ÿ" å› ç‚ºæ¸¸æ¨™é é€™æ‰€ä»¥ä¹Ÿä¸è©²é•·å¤ªå¤§
     {NULL, 2, 2, 0, {0, 0, 1}}, // "P" (pager, no border)
-    {NULL, IDLEN+1, IDLEN+3}, // "¥N¸¹"
-    {NULL, 17,25, 2}, // "¼ÊºÙ", sizeof(userec_t::nickname)
-    {NULL, 17,27, 1}, // "¬G¶m/´ÑÃş¾ÔÁZ/µ¥¯Å¤À"
-    {NULL, 12,23, 1}, // "°ÊºA" (³Ì¤j¦h¤Ö¤~¦X²z¡H) modestring size=40 ¦ı...
-    {NULL, 4, 4, 0, {0, 0, 1}}, // "<³q½r>" (­ì¤ß±¡)
-    {NULL, 6, 6, -1, {0, 1, 1}}, // "µo§b" (optional?)
+    {NULL, IDLEN+1, IDLEN+3}, // "ä»£è™Ÿ"
+    {NULL, 17,25, 2}, // "æš±ç¨±", sizeof(userec_t::nickname)
+    {NULL, 17,27, 1}, // "æ•…é„‰/æ£‹é¡æˆ°ç¸¾/ç­‰ç´šåˆ†"
+    {NULL, 12,23, 1}, // "å‹•æ…‹" (æœ€å¤§å¤šå°‘æ‰åˆç†ï¼Ÿ) modestring size=40 ä½†...
+    {NULL, 4, 4, 0, {0, 0, 1}}, // "<é€šç·>" (åŸå¿ƒæƒ…)
+    {NULL, 6, 6, -1, {0, 1, 1}}, // "ç™¼å‘†" (optional?)
     {NULL, 0, VCOL_MAXW, -1}, // for middle alignment
 };
 
@@ -1930,12 +1930,12 @@ draw_pickup(int drawall, pickup_t * pickup, int pickup_way,
 	    int show_pid, int myfriend, int friendme, int bfriend, int badfriend)
 {
     char           *msg_pickup_way[PICKUP_WAYS] = {
-        "¶Ù! ªB¤Í", "ºô¤Í¥N¸¹", "ºô¤Í°ÊºA", "µo§b®É¶¡", "¨Ó¦Û¦ó¤è",
-        " ¤­¤l´Ñ ", "  ¶H´Ñ  ", "  ³ò´Ñ  ",
+        "å—¨! æœ‹å‹", "ç¶²å‹ä»£è™Ÿ", "ç¶²å‹å‹•æ…‹", "ç™¼å‘†æ™‚é–“", "ä¾†è‡ªä½•æ–¹",
+        " äº”å­æ£‹ ", "  è±¡æ£‹  ", "  åœæ£‹  ",
     };
     char           *MODE_STRING[MAX_SHOW_MODE] = {
-	"¬G¶m", "¦n¤Í´y­z", "¤­¤l´Ñ¾ÔÁZ", "¶H´Ñ¾ÔÁZ", "¶H´Ñµ¥¯Å¤À", "³ò´Ñ¾ÔÁZ",
-        "·t´Ñ¾ÔÁZ",
+	"æ•…é„‰", "å¥½å‹æè¿°", "äº”å­æ£‹æˆ°ç¸¾", "è±¡æ£‹æˆ°ç¸¾", "è±¡æ£‹ç­‰ç´šåˆ†", "åœæ£‹æˆ°ç¸¾",
+        "æš—æ£‹æˆ°ç¸¾",
     };
     char            pagerchar[6] = "* -Wf";
 
@@ -1965,21 +1965,21 @@ draw_pickup(int drawall, pickup_t * pickup, int pickup_way,
     }
 
     if (drawall) {
-	showtitle((HasUserFlag(UF_FRIEND)) ? "¦n¤Í¦Cªí" : "¥ğ¶¢²á¤Ñ",
+	showtitle((HasUserFlag(UF_FRIEND)) ? "å¥½å‹åˆ—è¡¨" : "ä¼‘é–’èŠå¤©",
 		  BBSName);
 
 	move(2, 0);
 	outs(ANSI_REVERSE);
 	vs_cols(ulist_coldef, cols, ULISTCOLS,
                 // Columns Header (9 args)
-		show_uid ? "UID" : "½s¸¹",
+		show_uid ? "UID" : "ç·¨è™Ÿ",
 		"P",
-                "¥N¸¹",
-                "¼ÊºÙ",
+                "ä»£è™Ÿ",
+                "æš±ç¨±",
 		MODE_STRING[show_mode],
-		show_board ? "¬İªO" : "°ÊºA",
+		show_board ? "çœ‹æ¿" : "å‹•æ…‹",
 		show_pid ? "PID" : "",
-                idletime ? "µo§b": "",
+                idletime ? "ç™¼å‘†": "",
 		"");
 	outs(ANSI_RESET);
 
@@ -1988,31 +1988,31 @@ draw_pickup(int drawall, pickup_t * pickup, int pickup_way,
 	{
 	    // modes should match ANGELPAUSE*
 	    static const char *modestr[ANGELPAUSE_MODES] = {
-		ANSI_COLOR(0;30;47) "¶}©ñ",
-		ANSI_COLOR(0;32;47) "°±¦¬",
-		ANSI_COLOR(0;31;47) "Ãö³¬",
+		ANSI_COLOR(0;30;47) "é–‹æ”¾",
+		ANSI_COLOR(0;32;47) "åœæ”¶",
+		ANSI_COLOR(0;31;47) "é—œé–‰",
 	    };
 	    // reduced version
 	    // TODO use vs_footer to replace.
 	    move(b_lines, 0);
-	    vbarf( ANSI_COLOR(34;46) " ¥ğ¶¢²á¤Ñ "
-		   ANSI_COLOR(31;47) " (TAB/f)" ANSI_COLOR(30) "±Æ§Ç/¦n¤Í "
-		   ANSI_COLOR(31) "(p)" ANSI_COLOR(30) "¤@¯ë©I¥s¾¹ "
-		   ANSI_COLOR(31) "(^P)" ANSI_COLOR(30) "¯«¿Ù©I¥s¾¹\t"
-		   ANSI_COLOR(1;30;47) "[¯«¿Ù©I¥s¾¹] %s ",
+	    vbarf( ANSI_COLOR(34;46) " ä¼‘é–’èŠå¤© "
+		   ANSI_COLOR(31;47) " (TAB/f)" ANSI_COLOR(30) "æ’åº/å¥½å‹ "
+		   ANSI_COLOR(31) "(p)" ANSI_COLOR(30) "ä¸€èˆ¬å‘¼å«å™¨ "
+		   ANSI_COLOR(31) "(^P)" ANSI_COLOR(30) "ç¥è«­å‘¼å«å™¨\t"
+		   ANSI_COLOR(1;30;47) "[ç¥è«­å‘¼å«å™¨] %s ",
 		   modestr[currutmp->angelpause % ANGELPAUSE_MODES]);
 	} else
 #endif
-	vs_footer(" ¥ğ¶¢²á¤Ñ ",
-		" (TAB/f)±Æ§Ç/¦n¤Í (a/o)¥æ¤Í (q/w)¬d¸ß/¥á¤ô²y (t/m)²á¤Ñ/¼g«H\t(h)»¡©ú");
+	vs_footer(" ä¼‘é–’èŠå¤© ",
+		" (TAB/f)æ’åº/å¥½å‹ (a/o)äº¤å‹ (q/w)æŸ¥è©¢/ä¸Ÿæ°´çƒ (t/m)èŠå¤©/å¯«ä¿¡\t(h)èªªæ˜");
     }
 
     move(1, 0);
-    prints("  ±Æ§Ç:[%s] ¤W¯¸¤H¼Æ:%-4d "
-	    ANSI_COLOR(1;32) "§ÚªºªB¤Í:%-3d "
-	   ANSI_COLOR(33) "»P§Ú¬°¤Í:%-3d "
-	   ANSI_COLOR(36) "ªO¤Í:%-4d "
-	   ANSI_COLOR(31) "Ãa¤H:%-2d"
+    prints("  æ’åº:[%s] ä¸Šç«™äººæ•¸:%-4d "
+	    ANSI_COLOR(1;32) "æˆ‘çš„æœ‹å‹:%-3d "
+	   ANSI_COLOR(33) "èˆ‡æˆ‘ç‚ºå‹:%-3d "
+	   ANSI_COLOR(36) "æ¿å‹:%-4d "
+	   ANSI_COLOR(31) "å£äºº:%-2d"
 	   ANSI_RESET "\n",
 	   msg_pickup_way[pickup_way], SHM->UTMPnumber,
 	   myfriend, friendme, currutmp->brc_id ? bfriend : 0, badfriend);
@@ -2031,7 +2031,7 @@ draw_pickup(int drawall, pickup_t * pickup, int pickup_way,
 
 	if (!uentp->pid) {
 	    vs_cols(ulist_coldef, cols, 3,
-		    "", "", "< Â÷¯¸¤¤..>");
+		    "", "", "< é›¢ç«™ä¸­..>");
 	    continue;
 	}
 
@@ -2060,7 +2060,7 @@ draw_pickup(int drawall, pickup_t * pickup, int pickup_way,
 #endif
 
 	if ((uentp->userlevel & PERM_VIOLATELAW))
-            mind = ANSI_COLOR(1;31) "¹H³W";
+            mind = ANSI_COLOR(1;31) "é•è¦";
 
 	snprintf(num, sizeof(num), "%d",
 #ifdef SHOWUID
@@ -2113,14 +2113,14 @@ void set_withme_flag(void)
             if (!*withme_str[i])
                 continue;
 	    if(currutmp->withme&(1<<(i*2)))
-		prints("[%c] §Ú«Ü·Q¸ò¤H%s, Åwªï¥ô¦ó¤H§ä§Ú\n",'a'+i, withme_str[i]);
+		prints("[%c] æˆ‘å¾ˆæƒ³è·Ÿäºº%s, æ­¡è¿ä»»ä½•äººæ‰¾æˆ‘\n",'a'+i, withme_str[i]);
 	    else if(currutmp->withme&(1<<(i*2+1)))
-		prints("[%c] §Ú¤£¤Ó·Q%s\n",'a'+i, withme_str[i]);
+		prints("[%c] æˆ‘ä¸å¤ªæƒ³%s\n",'a'+i, withme_str[i]);
 	    else
-		prints("[%c] (%s)¨S·N¨£\n",'a'+i, withme_str[i]);
+		prints("[%c] (%s)æ²’æ„è¦‹\n",'a'+i, withme_str[i]);
 	    line++;
 	}
-	getdata(line,0,"¥Î¦r¥À¤Á´« [·Q/¤£·Q/¨S·N¨£]",genbuf, sizeof(genbuf), DOECHO);
+	getdata(line,0,"ç”¨å­—æ¯åˆ‡æ› [æƒ³/ä¸æƒ³/æ²’æ„è¦‹]",genbuf, sizeof(genbuf), DOECHO);
 	for(i=0;genbuf[i];i++) {
 	    int ch=genbuf[i];
 	    ch=tolower(ch);
@@ -2144,7 +2144,7 @@ call_in(const userinfo_t * uentp, int fri_stat)
 {
     if (iswritable_stat(uentp, fri_stat)) {
 	char            genbuf[60];
-	snprintf(genbuf, sizeof(genbuf), "¥á %s ¤ô²y: ", uentp->userid);
+	snprintf(genbuf, sizeof(genbuf), "ä¸Ÿ %s æ°´çƒ: ", uentp->userid);
 	my_write(uentp->pid, genbuf, uentp->userid, WATERBALL_GENERAL, NULL);
 	return 1;
     }
@@ -2173,10 +2173,10 @@ userlist(void)
     leave = 0;
     redrawall = 1;
     /*
-     * ¦U­Ó flag :
-     * redraw:    ­«·s pickup(), draw_pickup() (¶È¤¤¶¡°Ï, ¤£§t¼ĞÃD¦Cµ¥µ¥)
-     * redrawall: ¥ş³¡­«µe (§t¼ĞÃD¦Cµ¥µ¥, ¶·¦A«ü©w redraw ¤~·|¦³®Ä)
-     * leave:     Â÷¶}¨Ï¥ÎªÌ¦W³æ
+     * å„å€‹ flag :
+     * redraw:    é‡æ–° pickup(), draw_pickup() (åƒ…ä¸­é–“å€, ä¸å«æ¨™é¡Œåˆ—ç­‰ç­‰)
+     * redrawall: å…¨éƒ¨é‡ç•« (å«æ¨™é¡Œåˆ—ç­‰ç­‰, é ˆå†æŒ‡å®š redraw æ‰æœƒæœ‰æ•ˆ)
+     * leave:     é›¢é–‹ä½¿ç”¨è€…åå–®
      */
     while (!leave && !ZA_Waiting()) {
 	if( !skippickup )
@@ -2187,9 +2187,9 @@ userlist(void)
 		    myfriend, friendme, bfriend, badfriend);
 
 	/*
-	 * ¦pªG¦]¬°´«­¶ªº®É­Ô, ³o¤@­¶¦³ªº¤H¼Æ¤ñ¸û¤Ö,
-	 * (³q±`³£¬O³Ì«á¤@­¶¤H¼Æ¤£º¡ªº®É­Ô) ¨º­n­«·s­pºâ offset
-	 * ¥H§K«ü¨ì¨S¦³¤Hªº¦a¤è
+	 * å¦‚æœå› ç‚ºæ›é çš„æ™‚å€™, é€™ä¸€é æœ‰çš„äººæ•¸æ¯”è¼ƒå°‘,
+	 * (é€šå¸¸éƒ½æ˜¯æœ€å¾Œä¸€é äººæ•¸ä¸æ»¿çš„æ™‚å€™) é‚£è¦é‡æ–°è¨ˆç®— offset
+	 * ä»¥å…æŒ‡åˆ°æ²’æœ‰äººçš„åœ°æ–¹
 	 */
 	if (offset == -1 || currpickup[offset].ui == NULL) {
 	    for (offset = (offset == -1 ? nPickups - 1 : offset);
@@ -2304,7 +2304,7 @@ userlist(void)
 
 	    case '/':
 		/*
-		 * getdata_buf(b_lines-1,0,"½Ğ¿é¤J¼ÊºÙÃöÁä¦r:", keyword,
+		 * getdata_buf(b_lines-1,0,"è«‹è¼¸å…¥æš±ç¨±é—œéµå­—:", keyword,
 		 * sizeof(keyword), DOECHO); state = US_PICKUP;
 		 */
 		break;
@@ -2316,8 +2316,8 @@ userlist(void)
 		    char            swid[IDLEN + 1];
 		    move(1, 0);
 
-		    // XXX si ¤w¸g¼g¦º¤F pickup_way = 0
-		    // ­Y¨Ï¥ÎªÌ¦b pickup_way != 0 ®É«ö 's'...
+		    // XXX si å·²ç¶“å¯«æ­»äº† pickup_way = 0
+		    // è‹¥ä½¿ç”¨è€…åœ¨ pickup_way != 0 æ™‚æŒ‰ 's'...
 
 		    si = CompleteOnlineUser(msg_uid, swid);
 		    if (si >= 0) {
@@ -2376,13 +2376,13 @@ userlist(void)
 	    case '7':
 	    case '8':
 	    case '9':
-		{		/* Thor: ¥i¥H¥´¼Æ¦r¸õ¨ì¸Ó¤H */
+		{		/* Thor: å¯ä»¥æ‰“æ•¸å­—è·³åˆ°è©²äºº */
 		    int             tmp;
 		    if ((tmp = search_num(ch, SHM->UTMPnumber)) >= 0) {
 			if (tmp / nPickups == page) {
 			    /*
-			     * in2:¥Øªº¦b¥Ø«e³o¤@­¶, ª½±µ §ó·s offset ,
-			     * ¤£¥Î­«µeµe­±
+			     * in2:ç›®çš„åœ¨ç›®å‰é€™ä¸€é , ç›´æ¥ æ›´æ–° offset ,
+			     * ä¸ç”¨é‡ç•«ç•«é¢
 			     */
 			    offset = tmp % nPickups;
 			} else {
@@ -2421,19 +2421,19 @@ userlist(void)
 
 	    case 'b':		/* broadcast */
 		if (HasUserFlag(UF_FRIEND) || HasUserPerm(PERM_SYSOP)) {
-		    char            genbuf[60]="[¼s¼½]";
+		    char            genbuf[60]="[å»£æ’­]";
 		    char            ans[4];
 
-		    if (!getdata(0, 0, "¼s¼½°T®§:", genbuf+6, 54, DOECHO))
+		    if (!getdata(0, 0, "å»£æ’­è¨Šæ¯:", genbuf+6, 54, DOECHO))
 			break;
 
-		    if (!getdata(0, 0, "½T©w¼s¼½? [N]",
+		    if (!getdata(0, 0, "ç¢ºå®šå»£æ’­? [N]",
 				ans, sizeof(ans), LCECHO) ||
 			ans[0] != 'y')
 			break;
 		    if (!(HasUserFlag(UF_FRIEND)) && HasUserPerm(PERM_SYSOP)) {
 			msgque_t msg;
-			getdata(1, 0, "¦A¦¸½T©w¯¸ªø¼s¼½? [N]",
+			getdata(1, 0, "å†æ¬¡ç¢ºå®šç«™é•·å»£æ’­? [N]",
 				ans, sizeof(ans), LCECHO);
 			if( ans[0] != 'y'){
 			    vmsg("abort");
@@ -2443,7 +2443,7 @@ userlist(void)
 			msg.pid = currpid;
 			strlcpy(msg.userid, cuser.userid, sizeof(msg.userid));
 			snprintf(msg.last_call_in, sizeof(msg.last_call_in),
-				 "[¼s¼½]%s", genbuf);
+				 "[å»£æ’­]%s", genbuf);
 			for (i = 0; i < SHM->UTMPnumber; ++i) {
 			    // XXX why use sorted list?
 			    //     can we just scan uinfo with proper checking?
@@ -2497,7 +2497,7 @@ userlist(void)
 		}
 		break;
 
-	    case 'S':		/* Åã¥Ü¦n¤Í´y­z */
+	    case 'S':		/* é¡¯ç¤ºå¥½å‹æè¿° */
 #ifdef HAVE_DARK_CHESS_LOG
 		show_mode = (show_mode+1) % MAX_SHOW_MODE;
 #else
@@ -2518,11 +2518,11 @@ userlist(void)
 		redrawall = redraw = 1;
 		break;
 
-	    case 'u':		/* ½u¤W­×§ï¸ê®Æ */
+	    case 'u':		/* ç·šä¸Šä¿®æ”¹è³‡æ–™ */
 		if (HasUserPerm(PERM_ACCOUNTS|PERM_SYSOP)) {
 		    int             id;
 		    userec_t        muser;
-		    vs_hdr("¨Ï¥ÎªÌ³]©w");
+		    vs_hdr("ä½¿ç”¨è€…è¨­å®š");
 		    move(1, 0);
 		    if ((id = getuser(uentp->userid, &muser)) > 0) {
 			user_display(&muser, 1);
@@ -2564,7 +2564,7 @@ userlist(void)
 		break;
 	    case 'a':
 		if (HasBasicUserPerm(PERM_LOGINOK) && !(fri_stat & IFH)) {
-		    if (vans("½T©w­n¥[¤J¦n¤Í¶Ü [N/y]") == 'y') {
+		    if (vans("ç¢ºå®šè¦åŠ å…¥å¥½å‹å— [N/y]") == 'y') {
 			friend_add(uentp->userid, FRIEND_OVERRIDE,uentp->nickname);
 			friend_load(FRIEND_OVERRIDE, 0);
 		    }
@@ -2574,7 +2574,7 @@ userlist(void)
 
 	    case 'd':
 		if (HasBasicUserPerm(PERM_LOGINOK) && (fri_stat & IFH)) {
-		    if (vans("½T©w­n§R°£¦n¤Í¶Ü [N/y]") == 'y') {
+		    if (vans("ç¢ºå®šè¦åˆªé™¤å¥½å‹å— [N/y]") == 'y') {
 			friend_delete(uentp->userid, FRIEND_OVERRIDE);
 			friend_load(FRIEND_OVERRIDE, 0);
 		    }
@@ -2619,8 +2619,8 @@ userlist(void)
 		if (HasBasicUserPerm(PERM_LOGINOK)) {
 		    char   userid[IDLEN + 1];
 		    strlcpy(userid, uentp->userid, sizeof(userid));
-		    vs_hdr("±H  «H");
-		    prints("[±H«H] ¦¬«H¤H¡G%s", userid);
+		    vs_hdr("å¯„  ä¿¡");
+		    prints("[å¯„ä¿¡] æ”¶ä¿¡äººï¼š%s", userid);
 		    my_send(userid);
 		    setutmpmode(LUSERS);
 		    redrawall = redraw = 1;
@@ -2676,16 +2676,16 @@ userlist(void)
 
 	    case Ctrl('W'):
 		if (HasBasicUserPerm(PERM_LOGINOK)) {
-		    static const char *wm[PAGER_UI_TYPES] = {"¤@¯ë", "¶i¶¥", "¥¼¨Ó"};
+		    static const char *wm[PAGER_UI_TYPES] = {"ä¸€èˆ¬", "é€²éš", "æœªä¾†"};
 
 		    pwcuSetPagerUIType((cuser.pager_ui_type +1) % PAGER_UI_TYPES_USER);
 		    /* vmsg cannot support multi lines */
 		    move(b_lines - 4, 0);
 		    clrtobot();
 		    move(b_lines - 3, 0);
-		    outs("¨t²Î´£¨Ñ¼ÆºØ¤ô²y¼Ò¦¡¥i¨Ñ¿ï¾Ü\n"
-		    "¦b¤Á´««á½Ğ¥¿±`¤U½u¦A­«·sµn¤J, ¥H½T«Oµ²ºc¥¿½T\n");
-		    vmsgf( "¥Ø«e¤Á´«¨ì [%s] ¤ô²y¼Ò¦¡", wm[cuser.pager_ui_type%PAGER_UI_TYPES]);
+		    outs("ç³»çµ±æä¾›æ•¸ç¨®æ°´çƒæ¨¡å¼å¯ä¾›é¸æ“‡\n"
+		    "åœ¨åˆ‡æ›å¾Œè«‹æ­£å¸¸ä¸‹ç·šå†é‡æ–°ç™»å…¥, ä»¥ç¢ºä¿çµæ§‹æ­£ç¢º\n");
+		    vmsgf( "ç›®å‰åˆ‡æ›åˆ° [%s] æ°´çƒæ¨¡å¼", wm[cuser.pager_ui_type%PAGER_UI_TYPES]);
 		    redrawall = redraw = 1;
 		}
 		break;
@@ -2703,7 +2703,7 @@ userlist(void)
 	    case 'N':
 		if (HasBasicUserPerm(PERM_LOGINOK)) {
 		    char tmp_nick[sizeof(cuser.nickname)];
-		    if (getdata_str(1, 0, "·sªº¼ÊºÙ: ",
+		    if (getdata_str(1, 0, "æ–°çš„æš±ç¨±: ",
 				tmp_nick, sizeof(tmp_nick), DOECHO, cuser.nickname) > 0)
 		    {
 			pwcuSetNickname(tmp_nick);
@@ -2771,7 +2771,7 @@ t_qchicken(void)
 {
     char            uident[STRLEN];
 
-    vs_hdr("¬d¸ßÃdª«");
+    vs_hdr("æŸ¥è©¢å¯µç‰©");
     usercomplete(msg_uid, uident);
     if (uident[0])
 	chicken_query(uident);
@@ -2783,7 +2783,7 @@ t_query(void)
 {
     char            uident[STRLEN];
 
-    vs_hdr("¬d¸ßºô¤Í");
+    vs_hdr("æŸ¥è©¢ç¶²å‹");
     usercomplete(msg_uid, uident);
     if (uident[0])
 	my_query(uident);
@@ -2798,10 +2798,10 @@ t_talk(void)
     userinfo_t     *uentp;
     char            genbuf[4];
     /*
-     * if (count_ulist() <= 1){ outs("¥Ø«e½u¤W¥u¦³±z¤@¤H¡A§ÖÁÜ½ĞªB¤Í¨Ó¥úÁ{¡i"
-     * BBSNAME "¡j§a¡I"); return XEASY; }
+     * if (count_ulist() <= 1){ outs("ç›®å‰ç·šä¸Šåªæœ‰æ‚¨ä¸€äººï¼Œå¿«é‚€è«‹æœ‹å‹ä¾†å…‰è‡¨ã€"
+     * BBSNAME "ã€‘å§ï¼"); return XEASY; }
      */
-    vs_hdr("¥´¶}¸Ü§X¤l");
+    vs_hdr("æ‰“é–‹è©±åŒ£å­");
     CompleteOnlineUser(msg_uid, uident);
     if (uident[0] == '\0')
 	return 0;
@@ -2815,9 +2815,9 @@ t_talk(void)
     /* multi-login check */
     unum = 1;
     while ((ucount = count_logins(tuid, 0)) > 1) {
-	outs("(0) ¤£·Q talk ¤F...\n");
+	outs("(0) ä¸æƒ³ talk äº†...\n");
 	count_logins(tuid, 1);
-	getdata(1, 33, "½Ğ¿ï¾Ü¤@­Ó¥æ½Í¹ï¶H [0]¡G", genbuf, 4, DOECHO);
+	getdata(1, 33, "è«‹é¸æ“‡ä¸€å€‹äº¤è«‡å°è±¡ [0]ï¼š", genbuf, 4, DOECHO);
 	unum = atoi(genbuf);
 	if (unum == 0)
 	    return 0;
@@ -2840,7 +2840,7 @@ reply_connection_request(const userinfo_t *uip)
 
     if (uip->mode != PAGE) {
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s ¤w°±¤î©I¥s¡A«öEnterÄ~Äò...", uip->userid);
+		 "%s å·²åœæ­¢å‘¼å«ï¼ŒæŒ‰Enterç¹¼çºŒ...", uip->userid);
 	getdata(0, 0, genbuf, buf, sizeof(buf), LCECHO);
 	return -1;
     }
@@ -2870,7 +2870,7 @@ establish_talk_connection(const userinfo_t *uip)
     return a;
 }
 
-/* ¦³¤H¨Ó¦êªù¤l¤F¡A¦^À³©I¥s¾¹ */
+/* æœ‰äººä¾†ä¸²é–€å­äº†ï¼Œå›æ‡‰å‘¼å«å™¨ */
 void
 talkreply(void)
 {
@@ -2885,7 +2885,7 @@ talkreply(void)
 
     uip = &SHM->uinfo[currutmp->destuip];
     currutmp->destuid = uip->uid;
-    currstat = REPLY;		/* Á×§K¥X²{°Êµe */
+    currstat = REPLY;		/* é¿å…å‡ºç¾å‹•ç•« */
 
     is_chess = (sig == SIG_CHC || sig == SIG_GOMO || sig == SIG_CONN6 ||
 		sig == SIG_GO || sig == SIG_REVERSI);
@@ -2904,25 +2904,25 @@ talkreply(void)
     outs("\n\n");
     // FIXME CRASH here
     assert(sig>=0 && sig<(int)(sizeof(sig_des)/sizeof(sig_des[0])));
-    prints("       (Y) Åı§Ú­Ì %s §a¡I"
-	   "       (A) §Ú²{¦b«Ü¦£¡A½Ğµ¥¤@·|¨à¦A call §Ú\n", sig_des[sig]);
-    prints("       (N) §Ú²{¦b¤£·Q %s "
-	   "       (B) ¹ï¤£°_¡A§Ú¦³¨Æ±¡¤£¯à¸ò§A %s\n",
+    prints("       (Y) è®“æˆ‘å€‘ %s å§ï¼"
+	   "       (A) æˆ‘ç¾åœ¨å¾ˆå¿™ï¼Œè«‹ç­‰ä¸€æœƒå…’å† call æˆ‘\n", sig_des[sig]);
+    prints("       (N) æˆ‘ç¾åœ¨ä¸æƒ³ %s "
+	   "       (B) å°ä¸èµ·ï¼Œæˆ‘æœ‰äº‹æƒ…ä¸èƒ½è·Ÿä½  %s\n",
 	    sig_des[sig], sig_des[sig]);
-    prints("       (C) ½Ğ¤£­n§n§Ú¦n¶Ü¡H"
-	   "       (D) §Ú­nÂ÷¯¸Åo..¤U¦¸¦A²á§a.......\n");
-    prints("       (E) ¦³¨Æ¶Ü¡H½Ğ¥ı¨Ó«H"
-	   "       (F) " ANSI_COLOR(1;33) "<¦Û¦æ¿é¤J²z¥Ñ>..." ANSI_RESET "\n");
-    prints("       (1) %s¡H¥ı®³$100¨Ó"
-	   "       (2) %s¡H¥ı®³$1000¨Ó..\n\n", sig_des[sig], sig_des[sig]);
+    prints("       (C) è«‹ä¸è¦åµæˆ‘å¥½å—ï¼Ÿ"
+	   "       (D) æˆ‘è¦é›¢ç«™å›‰..ä¸‹æ¬¡å†èŠå§.......\n");
+    prints("       (E) æœ‰äº‹å—ï¼Ÿè«‹å…ˆä¾†ä¿¡"
+	   "       (F) " ANSI_COLOR(1;33) "<è‡ªè¡Œè¼¸å…¥ç†ç”±>..." ANSI_RESET "\n");
+    prints("       (1) %sï¼Ÿå…ˆæ‹¿$100ä¾†"
+	   "       (2) %sï¼Ÿå…ˆæ‹¿$1000ä¾†..\n\n", sig_des[sig], sig_des[sig]);
 
     getuser(uip->userid, &xuser);
     currutmp->msgs[0].pid = uip->pid;
     strlcpy(currutmp->msgs[0].userid, uip->userid, sizeof(currutmp->msgs[0].userid));
-    strlcpy(currutmp->msgs[0].last_call_in, "©I¥s¡B©I¥s¡AÅ¥¨ì½Ğ¦^µª (Ctrl-R)",
+    strlcpy(currutmp->msgs[0].last_call_in, "å‘¼å«ã€å‘¼å«ï¼Œè½åˆ°è«‹å›ç­” (Ctrl-R)",
 	    sizeof(currutmp->msgs[0].last_call_in));
     currutmp->msgs[0].msgmode = MSGMODE_TALK;
-    prints("¹ï¤è¨Ó¦Û [%s]¡A" STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "¡A¤å³¹¦@ %d ½g\n",
+    prints("å°æ–¹ä¾†è‡ª [%s]ï¼Œ" STR_LOGINDAYS " %d " STR_LOGINDAYS_QTY "ï¼Œæ–‡ç« å…± %d ç¯‡\n",
 	    uip->from, xuser.numlogindays, xuser.numposts);
 
     if (is_chess)
@@ -2933,7 +2933,7 @@ talkreply(void)
     }
 
     snprintf(genbuf, sizeof(genbuf),
-	    "§A·Q¸ò %s (%s) %s¶Ü¡H½Ğ¿ï¾Ü[N]: ",
+	    "ä½ æƒ³è·Ÿ %s (%s) %så—ï¼Ÿè«‹é¸æ“‡[N]: ",
 	    uip->userid, uip->nickname, sig_des[sig]);
     getdata(0, 0, genbuf, buf, sizeof(buf), LCECHO);
 
@@ -2943,8 +2943,8 @@ talkreply(void)
     sig_pipe_handle = Signal(SIGPIPE, SIG_IGN);
     r = write(a, buf, 1);
     if (buf[0] == 'f' || buf[0] == 'F') {
-	if (!getdata(b_lines, 0, "¤£¯àªº­ì¦]¡G", genbuf, 60, DOECHO))
-	    strlcpy(genbuf, "¤£§i¶D§A«¨ !! ^o^", sizeof(genbuf));
+	if (!getdata(b_lines, 0, "ä¸èƒ½çš„åŸå› ï¼š", genbuf, 60, DOECHO))
+	    strlcpy(genbuf, "ä¸å‘Šè¨´ä½ å’§ !! ^o^", sizeof(genbuf));
 	r = write(a, genbuf, 60);
     }
     Signal(SIGPIPE, sig_pipe_handle);
@@ -2952,7 +2952,7 @@ talkreply(void)
     if (r == -1) {
 	close(a);
 	snprintf(genbuf, sizeof(genbuf),
-		 "%s ¤w°±¤î©I¥s¡A«öEnterÄ~Äò...", uip->userid);
+		 "%s å·²åœæ­¢å‘¼å«ï¼ŒæŒ‰Enterç¹¼çºŒ...", uip->userid);
 	getdata(0, 0, genbuf, buf, sizeof(buf), LCECHO);
 	clear();
 	currstat = currstat0;
@@ -2999,27 +2999,27 @@ t_chat(void)
     int    fd;
 
     if (!HasBasicUserPerm(PERM_CHAT)) {
-	vmsg("Åv­­¤£¨¬¡AµLªk¶i¤J²á¤Ñ«Ç¡C");
+	vmsg("æ¬Šé™ä¸è¶³ï¼Œç„¡æ³•é€²å…¥èŠå¤©å®¤ã€‚");
 	return -1;
     }
 
     if(HasUserPerm(PERM_VIOLATELAW))
     {
-       vmsg("½Ğ¥ıÃº»@³æ¤~¯à¨Ï¥Î²á¤Ñ«Ç!");
+       vmsg("è«‹å…ˆç¹³ç½°å–®æ‰èƒ½ä½¿ç”¨èŠå¤©å®¤!");
        return -1;
     }
 
 #ifdef CHAT_GAPMINS
     if ((now - lastEnter)/60 < CHAT_GAPMINS)
     {
-       vmsg("±z¤~­èÂ÷¶}²á¤Ñ«Ç¡A¸Ì­±¥¿¦b¾ã²z¤¤¡C½Ğµy«á¦A¸Õ¡C");
+       vmsg("æ‚¨æ‰å‰›é›¢é–‹èŠå¤©å®¤ï¼Œè£¡é¢æ­£åœ¨æ•´ç†ä¸­ã€‚è«‹ç¨å¾Œå†è©¦ã€‚");
        return 0;
     }
 #endif
 
 #ifdef CHAT_REGDAYS
     if (cuser.numlogindays < CHAT_REGDAYS) {
-	vmsgf("±z©|¥¼¹F¨ì¶i¤J±ø¥ó­­¨î (" STR_LOGINDAYS ": %d, »İ­n: %d)",
+	vmsgf("æ‚¨å°šæœªé”åˆ°é€²å…¥æ¢ä»¶é™åˆ¶ (" STR_LOGINDAYS ": %d, éœ€è¦: %d)",
               cuser.numlogindays, CHAT_REGDAYS);
 	return 0;
     }
@@ -3028,12 +3028,12 @@ t_chat(void)
     // start to create connection.
     syncnow();
     move(b_lines, 0); clrtoeol();
-    outs(" ¥¿¦b»P²á¤Ñ«Ç³s½u... ");
+    outs(" æ­£åœ¨èˆ‡èŠå¤©å®¤é€£ç·š... ");
     refresh();
     fd = toconnect(XCHATD_ADDR);
     move(b_lines-1, 0); clrtobot();
     if (fd < 0) {
-	outs(" ²á¤Ñ«Ç¥¿¦b¾ã²z¤¤¡A½Ğµy­Ô¦A¸Õ¡C");
+	outs(" èŠå¤©å®¤æ­£åœ¨æ•´ç†ä¸­ï¼Œè«‹ç¨å€™å†è©¦ã€‚");
 	system("bin/xchatd");
 	pressanykey();
 	return -1;

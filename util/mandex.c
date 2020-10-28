@@ -11,7 +11,7 @@ typedef struct {
 static const char *color[4] = {"[1;33m", "[1;32m", "[1;36m", "[1;37m"};
 static const char *fn_index = ".index";
 static const char *fn_new = ".index.new";
-static const char *index_title = "¡· ºëµØ°Ï¥Ø¿ı¯Á¤Ş";;
+static const char *index_title = "â— ç²¾è¯å€ç›®éŒ„ç´¢å¼•";;
 
 int sortbyname(const void *a, const void *b)
 {
@@ -99,9 +99,9 @@ man_index(const char * brdname)
     if ((fp_index = fopen(buf, "w")) == NULL)
 	return;
 
-    fprintf(fp_index, "[1;32m§Ç¸¹\t\t\tºëµØ°Ï¥DÃD[m\n"
-	    "[36m¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w"
-	    "¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w[m\n");
+    fprintf(fp_index, "[1;32måºè™Ÿ\t\t\tç²¾è¯å€ä¸»é¡Œ[m\n"
+	    "[36mâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
+	    "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€[m\n");
     printf("%s ", fpath);
     mandex(0, "", fpath);
     fclose(fp_index);
@@ -142,7 +142,7 @@ man_index(const char * brdname)
     stamplink(buf, &fhdr);
     unlink(buf);
     symlink(fn_index, buf);
-    strlcpy(fhdr.owner, "¨C¤Ñ¦Û°Ê§ó·s", sizeof(fhdr.owner));
+    strlcpy(fhdr.owner, "æ¯å¤©è‡ªå‹•æ›´æ–°", sizeof(fhdr.owner));
     snprintf(fhdr.title, sizeof(fhdr.title), "%s (%.1fk)", index_title, st.st_size / 1024.);
     fhdr.filemode = filemode;
 
@@ -174,8 +174,8 @@ output_chart(const boardinfo_t * board, const int nbrds)
     if (!(fp = fopen(BBSHOME "/etc/topboardman", "w")))
 	return;
 
-    fprintf(fp, "[1;44m±Æ¦W[47;30m        ¬İ ªO  ¥Ø¿ı¼Æ   ÀÉ®×¼Æ"
-	    "     byte¼Æ [30m  Á` ¤À     ªO   ¥D          [m\n");
+    fprintf(fp, "[1;44mæ’å[47;30m        çœ‹ æ¿  ç›®éŒ„æ•¸   æª”æ¡ˆæ•¸"
+	    "     byteæ•¸ [30m  ç¸½ åˆ†     æ¿   ä¸»          [m\n");
 
     for (i = 0; i < nbrds; i++) {
 	if ((n = getbnum(board[i].bname)) == 0)
@@ -185,7 +185,7 @@ output_chart(const boardinfo_t * board, const int nbrds)
 	if (strcmp(board[i].bname, bptr->brdname) != 0)
 	    continue;
 
-        // ÁôªO¤F§O¤H¬İ¤£¨ìÁÙ¦³¤°»ò¦n»¡ªº¡H
+        // éš±æ¿äº†åˆ¥äººçœ‹ä¸åˆ°é‚„æœ‰ä»€éº¼å¥½èªªçš„ï¼Ÿ
 	if (bptr->brdattr & (BRD_NOCREDIT | BRD_NOCOUNT | BRD_HIDE))
 	    continue;
 
@@ -226,16 +226,16 @@ int main(int argc, char* argv[])
 		break;
 	    case 'h':
 		printf("NAME\n"
-		       "     mandex - ºëµØ°Ï¯Á¤Şµ{¦¡ (man index)\n"
+		       "     mandex - ç²¾è¯å€ç´¢å¼•ç¨‹å¼ (man index)\n"
 		       "\n"
 		       "SYNOPSIS\n"
 		       "     mandex [-x] [board] ...\n"
 		       "\n"
 		       "DESCRIPTION\n"
-		       "ºëµØ°Ï¯Á¤Ş (man index)\n\n"
-		       "-x    ¥u¦³§t¦³ .rebuildªº¥Ø¿ı¤~­«»s\n"
-		       /* "-v    Åã¥Ü¥ş³¡¸ô®|\n" */
-		       "board ¥ş³¡ªºªO (default to all)\n\n");
+		       "ç²¾è¯å€ç´¢å¼• (man index)\n\n"
+		       "-x    åªæœ‰å«æœ‰ .rebuildçš„ç›®éŒ„æ‰é‡è£½\n"
+		       /* "-v    é¡¯ç¤ºå…¨éƒ¨è·¯å¾‘\n" */
+		       "board å…¨éƒ¨çš„æ¿ (default to all)\n\n");
 		return 0;
 	}
     }

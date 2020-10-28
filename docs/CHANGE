@@ -1,76 +1,76 @@
 Version 1.0.2	2001/07/17
 
-* ·s¼W util/merge_passwd
-* ·s¼W util/merge_board
-* ­×¥¿ load fromcache ¶W¹L 300 ¦æ·| segfault ªº bug
-* ­×¥¿¨Ó·½¦r¦ê¦b FreeBSD ¤U·|¦³¶Ã½Xªº°İÃD
-* ­×¥¿ mbbsd ¤¤ select() ¤£¦nªº¥Îªk
-* ­×¥¿ more.c ¤¤ªº¦w¥ş°İÃD (by kcwu)
+* æ–°å¢ util/merge_passwd
+* æ–°å¢ util/merge_board
+* ä¿®æ­£ load fromcache è¶…é 300 è¡Œæœƒ segfault çš„ bug
+* ä¿®æ­£ä¾†æºå­—ä¸²åœ¨ FreeBSD ä¸‹æœƒæœ‰äº‚ç¢¼çš„å•é¡Œ
+* ä¿®æ­£ mbbsd ä¸­ select() ä¸å¥½çš„ç”¨æ³•
+* ä¿®æ­£ more.c ä¸­çš„å®‰å…¨å•é¡Œ (by kcwu)
 
 --------------------------------------------------
 Version 1.0.1	2001/04/26
 
-* ±N¤å¥ó·h¦Ü docs ¥Ø¿ı¤U
-* ­×§ï config.h ¤¤ªº MAX_ACTIVE, MAX_CPULOAD
-  ¨Ã¥[¤J FORCE_PROCESS_REGISTER_FORM ªº¿ï¶µ
-* ·s¼W­×´_¿ò¥¢¬İªOªº¥\¯à (press 'R')
-* ­×¥¿°T®§ªº¿ù»~
-* ­×¥¿«ÕÆF¤ô²y
-* ²¾°£¦b¨Ï¥ÎªÌ¦W³æ«ö'N'­×§ï¼ÊºÙªº¥\¯à, ¸Ó¥\¯à¥i¯à¦³bug¦s¦b
-* ·s¼W util/shmsweep
+* å°‡æ–‡ä»¶æ¬è‡³ docs ç›®éŒ„ä¸‹
+* ä¿®æ”¹ config.h ä¸­çš„ MAX_ACTIVE, MAX_CPULOAD
+  ä¸¦åŠ å…¥ FORCE_PROCESS_REGISTER_FORM çš„é¸é …
+* æ–°å¢ä¿®å¾©éºå¤±çœ‹æ¿çš„åŠŸèƒ½ (press 'R')
+* ä¿®æ­£è¨Šæ¯çš„éŒ¯èª¤
+* ä¿®æ­£å¹½éˆæ°´çƒ
+* ç§»é™¤åœ¨ä½¿ç”¨è€…åå–®æŒ‰'N'ä¿®æ”¹æš±ç¨±çš„åŠŸèƒ½, è©²åŠŸèƒ½å¯èƒ½æœ‰bugå­˜åœ¨
+* æ–°å¢ util/shmsweep
 
 --------------------------------------------------
 Version 1.0.0	2000/09/16
 
-* ­×¥¿ Select ¬İªOªº bug
-* ·s¼W Reaper, §R°£¹L´Á±b¸¹
-* ·s¼W chickens ¨ì sample ¤¤
-* ·s¼W initbbs ªº¥\¯à: ªì©l¤Æ°ÊºA¬İªO, ½d¥»ºëÆF
-* ·s¼W FAQ
+* ä¿®æ­£ Select çœ‹æ¿çš„ bug
+* æ–°å¢ Reaper, åˆªé™¤éæœŸå¸³è™Ÿ
+* æ–°å¢ chickens åˆ° sample ä¸­
+* æ–°å¢ initbbs çš„åŠŸèƒ½: åˆå§‹åŒ–å‹•æ…‹çœ‹æ¿, ç¯„æœ¬ç²¾éˆ
+* æ–°å¢ FAQ
 
 --------------------------------------------------
 Version 0.9.7	2000/08/31
 
-* ·s¼W tunepasswd
-* ­×¥¿ innbbsd ªº bug
-* xchatd ¹B§@¥¿±`
-* ¾ã¦X buildir
-* ­×¥¿ Makefile ¦b¬Y¨Ç Linux ¤WµLªk¥¿±`¤u§@ªº bug
-* ¦b sample ªº¥Ø¿ı¤U¥´ make install §Y¥i¦Û°Ê¦w¸Ë sample ³]©wÀÉ
+* æ–°å¢ tunepasswd
+* ä¿®æ­£ innbbsd çš„ bug
+* xchatd é‹ä½œæ­£å¸¸
+* æ•´åˆ buildir
+* ä¿®æ­£ Makefile åœ¨æŸäº› Linux ä¸Šç„¡æ³•æ­£å¸¸å·¥ä½œçš„ bug
+* åœ¨ sample çš„ç›®éŒ„ä¸‹æ‰“ make install å³å¯è‡ªå‹•å®‰è£ sample è¨­å®šæª”
 
 --------------------------------------------------
 Version 0.9.6	2000/06/28
 
-* ­×¥¿¨Ï¥Î¼È¦sÀÉ·|·í±¼ªº bug
-* ¾ã¦X FreeBSD ©M Linux ªº Makefile, ¤£»İ­n¦A¤â°Ê­×§ï
-* §â pttbbs.conf ±q include ·h¨ì pttsrc ¤U
-* ·s¼W outmail ¨ú¥N bmda
-* ¾ã¦X xchatd  (¥¼´ú¸Õ)
-* ¾ã¦X innbbsd (¥¼´ú¸Õ)
+* ä¿®æ­£ä½¿ç”¨æš«å­˜æª”æœƒç•¶æ‰çš„ bug
+* æ•´åˆ FreeBSD å’Œ Linux çš„ Makefile, ä¸éœ€è¦å†æ‰‹å‹•ä¿®æ”¹
+* æŠŠ pttbbs.conf å¾ include æ¬åˆ° pttsrc ä¸‹
+* æ–°å¢ outmail å–ä»£ bmda
+* æ•´åˆ xchatd  (æœªæ¸¬è©¦)
+* æ•´åˆ innbbsd (æœªæ¸¬è©¦)
 
 --------------------------------------------------
 Version 0.9.5	2000/06/07
 
-* ­×¥¿¦b Linux µLªk talk ªº bug
-* ¦pªG¬İªO¦Cªí¬OªÅªºªº¸Ü, ¦Û°Ê¶i¤J¶}ªO¥\¯à
-* ·s¼W initbbs ¤u¨ãµ{¦¡
-* ·s¼W BBSHOME environment variable ªº¨Ï¥Î (¨£ INSTALL)
-* ·h²¾³¡¥÷³]©w¨ì include/pttbbs.conf
-* ­×¥¿¦bFreeBSD¤WµLªk¨ú±o swapinfo ªº bug
+* ä¿®æ­£åœ¨ Linux ç„¡æ³• talk çš„ bug
+* å¦‚æœçœ‹æ¿åˆ—è¡¨æ˜¯ç©ºçš„çš„è©±, è‡ªå‹•é€²å…¥é–‹æ¿åŠŸèƒ½
+* æ–°å¢ initbbs å·¥å…·ç¨‹å¼
+* æ–°å¢ BBSHOME environment variable çš„ä½¿ç”¨ (è¦‹ INSTALL)
+* æ¬ç§»éƒ¨ä»½è¨­å®šåˆ° include/pttbbs.conf
+* ä¿®æ­£åœ¨FreeBSDä¸Šç„¡æ³•å–å¾— swapinfo çš„ bug
 
 --------------------------------------------------
 Version 0.9.4	2000/06/03
 
-* §âµ{¦¡¤¤¦³¥Î¨ì ncurses ªº¦a¤è²¾°£, ¤£¦A»İ­n -ltermcap, -lncurses
-* ­×¥¿¤@­Ó³y¦¨µL½a°j°éªº Bug
-* ²¾°£¥H¨Ï¥ÎªÌ¦WºÙ·j´M¥ş¯¸¤å³¹ªº¥\¯à
+* æŠŠç¨‹å¼ä¸­æœ‰ç”¨åˆ° ncurses çš„åœ°æ–¹ç§»é™¤, ä¸å†éœ€è¦ -ltermcap, -lncurses
+* ä¿®æ­£ä¸€å€‹é€ æˆç„¡çª®è¿´åœˆçš„ Bug
+* ç§»é™¤ä»¥ä½¿ç”¨è€…åç¨±æœå°‹å…¨ç«™æ–‡ç« çš„åŠŸèƒ½
 
 --------------------------------------------------
 Version 0.9.3	2000/05/23
 
-* ­×¥¿¦b Linux ¤W Makefile ªº°İÃD
+* ä¿®æ­£åœ¨ Linux ä¸Š Makefile çš„å•é¡Œ
 
 --------------------------------------------------
 Version 0.9.2	2000/05/20
 
-* port ¨ì Linux ¤W
+* port åˆ° Linux ä¸Š

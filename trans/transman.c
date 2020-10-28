@@ -30,11 +30,11 @@ int transman(char *path)
          unlink(filename);
          if(dashd(direct))
                  {
-                  sprintf(fh.title, "¡» %s", name);
+                  sprintf(fh.title, "â—† %s", name);
                   transman(direct);     
                  }
          else
-                  sprintf(fh.title, "¡º %s", name);
+                  sprintf(fh.title, "â—‡ %s", name);
          rename(direct, filename);
          append_record(".DIR", &fh, sizeof(fh)); 
         }

@@ -66,7 +66,7 @@ int ip_desc_db_reload(const char * cfgfile)
 
 	// description
 	if ( (ip = strtok_r(NULL, " \t\n", &strtok_p)) == NULL ) {
-	    strcpy(new_db[new_db_len].desc, "¶³²`¤£ª¾³B");
+	    strcpy(new_db[new_db_len].desc, "é›²æ·±ä¸çŸ¥è™•");
 	}
 	else {
 	    strlcpy(new_db[new_db_len].desc, ip,

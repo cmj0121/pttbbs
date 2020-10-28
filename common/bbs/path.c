@@ -120,7 +120,7 @@ setbnfile(char *buf, const char *boardname, const char *fname, int n)
 /*
  * input	direct
  * output	buf: copy direct
- * 		fname: direct ªºÀÉ¦W³¡¤À
+ * 		fname: direct çš„æª”åéƒ¨åˆ†
  */
 void
 setdirpath(char *buf, const char *direct, const char *fname)

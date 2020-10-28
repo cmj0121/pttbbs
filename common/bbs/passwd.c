@@ -221,7 +221,11 @@ checkpasswd(const char *passwd, char *plain)
     pw = fcrypt(plain, passwd);
     if(pw && strcmp(pw, passwd)==0)
 	ok = 1;
+#ifdef explicit_bzero
     explicit_bzero(plain, strlen(plain));
+#else
+    bzero(plain, strlen(plain));
+#endif /* explicit_bzero */
 
     return ok;
 }

@@ -1,9 +1,9 @@
 Introduction
 ============
 
-³o­Óµ{¦¡¥i¥H±q C ªºµ{¦¡½X¤¤¡A¦C¥X©Ò¦³ statis/non-static ªº functions¡C
+é€™å€‹ç¨‹å¼å¯ä»¥å¾ C çš„ç¨‹å¼ç¢¼ä¸­ï¼Œåˆ—å‡ºæ‰€æœ‰ statis/non-static çš„ functionsã€‚
 
-¨C­Ó function «e­±¥i¥H¦³ javadoc-style ªºµù¸Ñ¡C½d¨Ò¦p¤U¡G
+æ¯å€‹ function å‰é¢å¯ä»¥æœ‰ javadoc-style çš„è¨»è§£ã€‚ç¯„ä¾‹å¦‚ä¸‹ï¼š
 
 /**
  * Function of the function func.
@@ -16,9 +16,9 @@ void func(int x)
     ...
 }
 
-¦pªG¦³µù¸Ñ¤§«á¨S¦³±µ function ªº¸Ü¡A·|­ì«Ê¤£°Ê¥á¥X¨Ó¡C
+å¦‚æœæœ‰è¨»è§£ä¹‹å¾Œæ²’æœ‰æ¥ function çš„è©±ï¼ŒæœƒåŸå°ä¸å‹•ä¸Ÿå‡ºä¾†ã€‚
 
 Usage
 =====
-    make ²£¥Í documents
-    make clean ²M°£ documents
+    make ç”¢ç”Ÿ documents
+    make clean æ¸…é™¤ documents

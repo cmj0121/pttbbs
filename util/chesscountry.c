@@ -1,7 +1,7 @@
 /*-------------------------------------------------------*/
 /* copied from util/cchess.c    ( NTU FPG BBS Ver 1.00 ) */
 /*-------------------------------------------------------*/
-/* target : ´Ñ°ê³]©wÀÉ¦Û°Ê§ó·sµ{¦¡                       */
+/* target : æ£‹åœ‹è¨­å®šæª”è‡ªå‹•æ›´æ–°ç¨‹å¼                       */
 /*-------------------------------------------------------*/
 
 #define CHESSCOUNTRY /* This tool is built with CHESSCOUNTRY defined */
@@ -37,7 +37,7 @@ main(void)
     FILE  *fp, *ftmp;
     int   i = 0, num;
     // char  *currboard[3] = {"CCK-CHUHEN", "CCK-GENERAL", "CCK-FREE"};
-    // char  *kingdom[3] = {"·¡º~¬Ó´Â", "±N«Ó«ÒÁp", "³p»»¤ı´Â"};
+    // char  *kingdom[3] = {"æ¥šæ¼¢çš‡æœ", "å°‡å¸¥å¸è¯", "é€é™ç‹æœ"};
     char  file1[80], file2[80], line[256], str[256];
     time_t dtime;
     boardheader_t brd;
@@ -67,19 +67,19 @@ main(void)
 	switch(brd.chesscountry){
 	    case CHESSCODE_FIVE:
 		photo_fname = "photo_fivechess";
-		chess_name = "¤­¤l´Ñ";
+		chess_name = "äº”å­æ£‹";
 		break;
 	    case CHESSCODE_CCHESS:
 		photo_fname = "photo_cchess";
-		chess_name = "¶H´Ñ";
+		chess_name = "è±¡æ£‹";
 		break;
 	    case CHESSCODE_GO:
 		photo_fname = "photo_go";
-		chess_name = "³ò´Ñ";
+		chess_name = "åœæ£‹";
 		break;
 	    case CHESSCODE_REVERSI:
 		photo_fname = "photo_reversi";
-		chess_name = "¶Â¥Õ´Ñ";
+		chess_name = "é»‘ç™½æ£‹";
 		break;
 	    default:
 		continue;
@@ -135,7 +135,7 @@ main(void)
 		    else
 			i = 0;
 		}
-		if (!strcmp("°£¦W", name))
+		if (!strcmp("é™¤å", name))
 		{
 		    sethomefile(buf, userid, photo_fname);
 		    unlink(buf);
@@ -168,26 +168,26 @@ main(void)
 				sprintf(buf, "%s/chess_photo/%s", str, item.filename);
 				f_suck6(fp1, buf);
 				fprintf(fp1, "%d\n", bid);
-				if (strcmp("«R¸¸", name))
-				    fprintf(fp1, "<©ÒÄİ¤ı°ê> %s (%s)\n", kingdom_name, chess_name);
+				if (strcmp("ä¿˜è™œ", name))
+				    fprintf(fp1, "<æ‰€å±¬ç‹åœ‹> %s (%s)\n", kingdom_name, chess_name);
 				else
-				    fprintf(fp1, "<«R¸¸¤ı°ê> %s\n", kingdom_name);
-				fprintf(fp1, "<²{¦b¶¥¯Å> %s\n", name);
-				fprintf(fp1, "<¥[¤J¤é´Á> %s\n", date);
-				if (strcmp("«R¸¸", name))
+				    fprintf(fp1, "<ä¿˜è™œç‹åœ‹> %s\n", kingdom_name);
+				fprintf(fp1, "<ç¾åœ¨éšç´š> %s\n", name);
+				fprintf(fp1, "<åŠ å…¥æ—¥æœŸ> %s\n", date);
+				if (strcmp("ä¿˜è™œ", name))
 				{
 				    int level;
-				    fprintf(fp1, "<¤ı°êµ¥¯Å> ");
+				    fprintf(fp1, "<ç‹åœ‹ç­‰ç´š> ");
 				    level = atoi(other);
 				    for (i = 0; i < level; i++)
-					fprintf(fp1, "%s", "¡¹");
+					fprintf(fp1, "%s", "â˜…");
 				}
 				else
 				{
 				    chomp(other);
-				    fprintf(fp1, "<³Q½Ö«R¸¸> %s", other);
+				    fprintf(fp1, "<è¢«èª°ä¿˜è™œ> %s", other);
 				}
-				fprintf(fp1, "\n<¦Û§Ú»¡©ú> \n");
+				fprintf(fp1, "\n<è‡ªæˆ‘èªªæ˜> \n");
 				fclose(fp1);
 			    }
 			    break;

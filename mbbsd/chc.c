@@ -55,37 +55,37 @@ static const char * const turn_color[2]={BLACK_COLOR, RED_COLOR};
 /* some constant variable definition */
 
 static const char * const num_str[2][10] = {
-    {"", "¢°", "¢±", "¢²", "¢³", "¢´", "¢µ", "¢¶", "¢·", "¢¸"},
-    {"", "¤@", "¤G", "¤T", "¥|", "¤­", "¤»", "¤C", "¤K", "¤E"},
+    {"", "ï¼‘", "ï¼’", "ï¼“", "ï¼”", "ï¼•", "ï¼–", "ï¼—", "ï¼˜", "ï¼™"},
+    {"", "ä¸€", "äºŒ", "ä¸‰", "å››", "äº”", "å…­", "ä¸ƒ", "å…«", "ä¹"},
 };
 
 static const char * const chess_str[2][8] = {
     /* 0     1     2     3     4     5     6     7 */
-    {"  ", "±N", "¤h", "¶H", "¨®", "°¨", "¥]", "¨ò"},
-    {"  ", "«Ó", "¥K", "¬Û", "¨®", "ØX", "¬¶", "§L"}
+    {"  ", "å°‡", "å£«", "è±¡", "è»Š", "é¦¬", "åŒ…", "å’"},
+    {"  ", "å¸¥", "ä»•", "ç›¸", "è»Š", "å‚Œ", "ç‚®", "å…µ"}
 };
 
 static const char * const chess_brd[BRD_ROW * 2 - 1] = {
     /* 0   1   2   3   4   5   6   7   8 */
-    "¢z¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢{",	/* 0 */
-    "¢x  ¢x  ¢x  ¢x¢@¢x¡ş¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 1 */
-    "¢x  ¢x  ¢x  ¢x¡ş¢x¢@¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 2 */
-    "¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 3 */
-    "¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢t",	/* 4 */
-    "¢x  ·¡    ªe          º~    ¬É  ¢x",
-    "¢u¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢s¢w¢t",	/* 5 */
-    "¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 6 */
-    "¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 7 */
-    "¢x  ¢x  ¢x  ¢x¢@¢x¡ş¢x  ¢x  ¢x  ¢x",
-    "¢u¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢q¢w¢t",	/* 8 */
-    "¢x  ¢x  ¢x  ¢x¡ş¢x¢@¢x  ¢x  ¢x  ¢x",
-    "¢|¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢r¢w¢}"	/* 9 */
+    "â”Œâ”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”",	/* 0 */
+    "â”‚  â”‚  â”‚  â”‚ï¼¼â”‚ï¼â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 1 */
+    "â”‚  â”‚  â”‚  â”‚ï¼â”‚ï¼¼â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 2 */
+    "â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 3 */
+    "â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”¤",	/* 4 */
+    "â”‚  æ¥š    æ²³          æ¼¢    ç•Œ  â”‚",
+    "â”œâ”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¬â”€â”¤",	/* 5 */
+    "â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 6 */
+    "â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 7 */
+    "â”‚  â”‚  â”‚  â”‚ï¼¼â”‚ï¼â”‚  â”‚  â”‚  â”‚",
+    "â”œâ”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¼â”€â”¤",	/* 8 */
+    "â”‚  â”‚  â”‚  â”‚ï¼â”‚ï¼¼â”‚  â”‚  â”‚  â”‚",
+    "â””â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”´â”€â”˜"	/* 9 */
 };
 
 static const ChessActions chc_actions = {
@@ -111,7 +111,7 @@ static const ChessConstants chc_constants = {
     BRD_ROW,
     BRD_COL,
     0,
-    "·¡ªeº~¬É",
+    "æ¥šæ²³æ¼¢ç•Œ",
     "photo_cchess",
 #ifdef BN_CCHESS_LOG
     BN_CCHESS_LOG,
@@ -119,7 +119,7 @@ static const ChessConstants chc_constants = {
     NULL,
 #endif
     { BLACK_COLOR, RED_COLOR },
-    {"¶Âªº", "¬õªº"}
+    {"é»‘çš„", "ç´…çš„"}
 };
 
 /*
@@ -140,7 +140,7 @@ getstep(board_t board, const rc_t *from, const rc_t *to, char buf[])
     int		    len = 0;
 
     turn = CHE_O(board[from->r][from->c]);
-    if(CHE_P(board[from->r][from->c] != KIND_P)) { // TODO ¥Ø«e¤£ºŞ§L¨ò«e«á
+    if(CHE_P(board[from->r][from->c] != KIND_P)) { // TODO ç›®å‰ä¸ç®¡å…µå’å‰å¾Œ
 	int i;
 	for(i=0;i<10;i++)
 	    if(board[i][from->c]==board[from->r][from->c]) {
@@ -153,7 +153,7 @@ getstep(board_t board, const rc_t *from, const rc_t *to, char buf[])
     fc = (turn == BLK ? from->c + 1 : 9 - from->c);
     tc = (turn == BLK ? to->c + 1 : 9 - to->c);
     if (from->r == to->r)
-	dir = "¥­";
+	dir = "å¹³";
     else {
 	if (from->c == to->c)
 	    tc = from->r - to->r;
@@ -162,28 +162,28 @@ getstep(board_t board, const rc_t *from, const rc_t *to, char buf[])
 
 	if ((turn == BLK && to->r > from->r) ||
 	    (turn == RED && to->r < from->r))
-	    dir = "¶i";
+	    dir = "é€²";
 	else
-	    dir = "°h";
+	    dir = "é€€";
     }
 
 
     len=sprintf(buf, "%s", turn_color[turn]);
-    /* ØX¤G|«eØX */
+    /* å‚ŒäºŒ|å‰å‚Œ */
     if(twin) {
 	len+=sprintf(buf+len, "%s%s",
-		((from->r>twin_r)==(turn==(BLK)))?"«e":"«á",
+		((from->r>twin_r)==(turn==(BLK)))?"å‰":"å¾Œ",
 		chess_str[turn][CHE_P(board[from->r][from->c])]);
     } else {
 	len+=sprintf(buf+len, "%s%s",
 		chess_str[turn][CHE_P(board[from->r][from->c])],
 		num_str[turn][fc]);
     }
-    /* ¶i¤T */
+    /* é€²ä¸‰ */
     len+=sprintf(buf+len, "%s%s" ANSI_RESET, dir, num_str[turn][tc]);
-    /* ¡G¶H */
+    /* ï¼šè±¡ */
     if(board[to->r][to->c]) {
-	len+=sprintf(buf+len,"¡G%s%s" ANSI_RESET,
+	len+=sprintf(buf+len,"ï¼š%s%s" ANSI_RESET,
 		turn_color[turn^1],
 		chess_str[turn^1][CHE_P(board[to->r][to->c])]);
     }
@@ -198,10 +198,10 @@ chc_drawline(const ChessInfo* info, int line)
     chc_tag_data_t *tag = info->tag;
 
     if (line == 0) {
-	prints(ANSI_COLOR(1;46) "   ¶H´Ñ¹ï¾Ô   " ANSI_COLOR(45)
+	prints(ANSI_COLOR(1;46) "   è±¡æ£‹å°æˆ°   " ANSI_COLOR(45)
 		"%30s VS %-20s%10s" ANSI_RESET,
 	       info->user1.userid, info->user2.userid,
-	       info->mode == CHESS_MODE_WATCH ? "[Æ[´Ñ¼Ò¦¡]" : "");
+	       info->mode == CHESS_MODE_WATCH ? "[è§€æ£‹æ¨¡å¼]" : "");
     } else if (line >= 3 && line <= 21) {
 	outs("   ");
 	for (i = 0; i < 9; i++) {
@@ -305,7 +305,7 @@ chc_genlog(ChessInfo* info, FILE* fp, ChessGameResult result)
     board_t   board;
     int i;
 
-    fprintf(fp, "«ö z ¥i¶i¤J¥´ÃĞ¼Ò¦¡\n");
+    fprintf(fp, "æŒ‰ z å¯é€²å…¥æ‰“è­œæ¨¡å¼\n");
     fprintf(fp, "\n");
 
     if (info->myturn == RED)
@@ -334,11 +334,11 @@ chc_genlog(ChessInfo* info, FILE* fp, ChessGameResult result)
     }
 
     if (result == CHESS_RESULT_TIE)
-	fprintf(fp, "=> ©M§½\n");
+	fprintf(fp, "=> å’Œå±€\n");
     else if (result == CHESS_RESULT_WIN || result == CHESS_RESULT_LOST)
-	fprintf(fp, "=> %s ³Ó\n",
+	fprintf(fp, "=> %s å‹\n",
 		(info->myturn == RED) == (result== CHESS_RESULT_WIN) ?
-		"¬õ" : "¶Â");
+		"ç´…" : "é»‘");
 
     /* generate machine readable log.
      * http://www.elephantbase.net/protocol/cchess_pgn.htm */
@@ -415,23 +415,23 @@ static void
 chc_init_board(board_t board)
 {
     memset(board, 0, sizeof(board_t));
-    board[0][4] = CHE(KIND_K, BLK);	/* ±N */
-    board[0][3] = board[0][5] = CHE(KIND_A, BLK);	/* ¤h */
-    board[0][2] = board[0][6] = CHE(KIND_E, BLK);	/* ¶H */
-    board[0][0] = board[0][8] = CHE(KIND_R, BLK);	/* ¨® */
-    board[0][1] = board[0][7] = CHE(KIND_H, BLK);	/* °¨ */
-    board[2][1] = board[2][7] = CHE(KIND_C, BLK);	/* ¥] */
+    board[0][4] = CHE(KIND_K, BLK);	/* å°‡ */
+    board[0][3] = board[0][5] = CHE(KIND_A, BLK);	/* å£« */
+    board[0][2] = board[0][6] = CHE(KIND_E, BLK);	/* è±¡ */
+    board[0][0] = board[0][8] = CHE(KIND_R, BLK);	/* è»Š */
+    board[0][1] = board[0][7] = CHE(KIND_H, BLK);	/* é¦¬ */
+    board[2][1] = board[2][7] = CHE(KIND_C, BLK);	/* åŒ… */
     board[3][0] = board[3][2] = board[3][4] =
-	board[3][6] = board[3][8] = CHE(KIND_P, BLK);	/* ¨ò */
+	board[3][6] = board[3][8] = CHE(KIND_P, BLK);	/* å’ */
 
-    board[9][4] = CHE(KIND_K, RED);	/* «Ó */
-    board[9][3] = board[9][5] = CHE(KIND_A, RED);	/* ¥K */
-    board[9][2] = board[9][6] = CHE(KIND_E, RED);	/* ¬Û */
-    board[9][0] = board[9][8] = CHE(KIND_R, RED);	/* ¨® */
-    board[9][1] = board[9][7] = CHE(KIND_H, RED);	/* ØX */
-    board[7][1] = board[7][7] = CHE(KIND_C, RED);	/* ¬¶ */
+    board[9][4] = CHE(KIND_K, RED);	/* å¸¥ */
+    board[9][3] = board[9][5] = CHE(KIND_A, RED);	/* ä»• */
+    board[9][2] = board[9][6] = CHE(KIND_E, RED);	/* ç›¸ */
+    board[9][0] = board[9][8] = CHE(KIND_R, RED);	/* è»Š */
+    board[9][1] = board[9][7] = CHE(KIND_H, RED);	/* å‚Œ */
+    board[7][1] = board[7][7] = CHE(KIND_C, RED);	/* ç‚® */
     board[6][0] = board[6][2] = board[6][4] =
-	board[6][6] = board[6][8] = CHE(KIND_P, RED);	/* §L */
+	board[6][6] = board[6][8] = CHE(KIND_P, RED);	/* å…µ */
 }
 
 static void
@@ -460,7 +460,7 @@ chc_drawstep(ChessInfo* info, const drc_t* move)
     ChessDrawLine(info, LTR(info, move->to.r));
 }
 
-/* ¨D¨â®y¼Ğ¦æ©Î¦C(rowcol)ªº¶ZÂ÷ */
+/* æ±‚å…©åº§æ¨™è¡Œæˆ–åˆ—(rowcol)çš„è·é›¢ */
 static int
 dist(rc_t from, rc_t to, int rowcol)
 {
@@ -470,7 +470,7 @@ dist(rc_t from, rc_t to, int rowcol)
     return d > 0 ? d : -d;
 }
 
-/* ¨â®y¼Ğ(¦æ©Î¦Crowcol)¤¤¶¡¦³´XÁû´Ñ¤l */
+/* å…©åº§æ¨™(è¡Œæˆ–åˆ—rowcol)ä¸­é–“æœ‰å¹¾é¡†æ£‹å­ */
 static int
 between(board_t board, rc_t from, rc_t to, int rowcol)
 {
@@ -515,7 +515,7 @@ chc_canmove(board_t board, rc_t from, rc_t to)
 
     /* individual check */
     switch (CHE_P(board[from.r][from.c])) {
-    case KIND_K:		/* ±N «Ó */
+    case KIND_K:		/* å°‡ å¸¥ */
 	if (!(rd == 1 && cd == 0) &&
 	    !(rd == 0 && cd == 1))
 	    return 0;
@@ -524,7 +524,7 @@ chc_canmove(board_t board, rc_t from, rc_t to)
 	    to.c < 3 || to.c > 5)
 	    return 0;
 	break;
-    case KIND_A:		/* ¤h ¥K */
+    case KIND_A:		/* å£« ä»• */
 	if (!(rd == 1 && cd == 1))
 	    return 0;
 	if ((turn == BLK && to.r > 2) ||
@@ -532,28 +532,28 @@ chc_canmove(board_t board, rc_t from, rc_t to)
 	    to.c < 3 || to.c > 5)
 	    return 0;
 	break;
-    case KIND_E:		/* ¶H ¬Û */
+    case KIND_E:		/* è±¡ ç›¸ */
 	if (!(rd == 2 && cd == 2))
 	    return 0;
 	if ((turn == BLK && to.r > 4) ||
 	    (turn == RED && to.r < 5))
 	    return 0;
-	/* ©ä¶H»L */
+	/* æ‹è±¡è…¿ */
 	if (board[CENTER(from.r, to.r)][CENTER(from.c, to.c)])
 	    return 0;
 	break;
-    case KIND_R:		/* ¨® */
+    case KIND_R:		/* è»Š */
 	if (!(rd > 0 && cd == 0) &&
 	    !(rd == 0 && cd > 0))
 	    return 0;
 	if (between(board, from, to, rd == 0))
 	    return 0;
 	break;
-    case KIND_H:		/* °¨ ØX */
+    case KIND_H:		/* é¦¬ å‚Œ */
 	if (!(rd == 2 && cd == 1) &&
 	    !(rd == 1 && cd == 2))
 	    return 0;
-	/* ©ä°¨¸} */
+	/* æ‹é¦¬è…³ */
 	if (rd == 2) {
 	    if (board[CENTER(from.r, to.r)][from.c])
 		return 0;
@@ -562,7 +562,7 @@ chc_canmove(board_t board, rc_t from, rc_t to)
 		return 0;
 	}
 	break;
-    case KIND_C:		/* ¥] ¬¶ */
+    case KIND_C:		/* åŒ… ç‚® */
 	if (!(rd > 0 && cd == 0) &&
 	    !(rd == 0 && cd > 0))
 	    return 0;
@@ -572,7 +572,7 @@ chc_canmove(board_t board, rc_t from, rc_t to)
 	    (i == 0 && board[to.r][to.c]))
 	    return 0;
 	break;
-    case KIND_P:		/* ¨ò §L */
+    case KIND_P:		/* å’ å…µ */
 	if (!(rd == 1 && cd == 0) &&
 	    !(rd == 0 && cd == 1))
 	    return 0;
@@ -588,7 +588,7 @@ chc_canmove(board_t board, rc_t from, rc_t to)
     return 1;
 }
 
-/* §ä turn's king ªº®y¼Ğ */
+/* æ‰¾ turn's king çš„åº§æ¨™ */
 static int
 findking(board_t board, int turn, rc_t * buf)
 {
@@ -666,7 +666,7 @@ static int
 chc_prepare_play(ChessInfo* info)
 {
     if (chc_ischeck((board_p) info->board, info->turn)) {
-	strlcpy(info->warnmsg, ANSI_COLOR(1;31) "±N­x!" ANSI_RESET,
+	strlcpy(info->warnmsg, ANSI_COLOR(1;31) "å°‡è»!" ANSI_RESET,
 		sizeof(info->warnmsg));
 	bell();
     } else
@@ -714,7 +714,7 @@ chc_select(ChessInfo* info, rc_t scrloc, ChessGameResult* result)
 	int valid_step = 1;
 
 	if (CHE_P(board[loc.r][loc.c]) == KIND_K)
-	    /* ²¾¨ì¹ï¤è±N«Ó */
+	    /* ç§»åˆ°å°æ–¹å°‡å¸¥ */
 	    *result = CHESS_RESULT_WIN;
 	else {
 	    memcpy(tmpbrd, board, sizeof(board_t));
@@ -735,9 +735,9 @@ chc_select(ChessInfo* info, rc_t scrloc, ChessGameResult* result)
 	    tag->selected = 0;
 	    return 1;
 	} else {
-	    /* ¤ı¨£¤ı */
+	    /* ç‹è¦‹ç‹ */
 	    strlcpy(info->warnmsg,
-		    ANSI_COLOR(1;33) "¤£¥i¥H¤ı¨£¤ı" ANSI_RESET,
+		    ANSI_COLOR(1;33) "ä¸å¯ä»¥ç‹è¦‹ç‹" ANSI_RESET,
 		    sizeof(info->warnmsg));
 	    bell();
 	    ChessDrawLine(info, CHESS_DRAWING_WARN_ROW);
@@ -795,11 +795,11 @@ count_chess_elo_rating(ChessUser* user1, const ChessUser* user2, double myres)
 }
 
 
-/* ¶H´Ñ¥\¯à¶i¤JÂI:
- * chc_main: ¹ï«³
- * chc_personal: ¥´ÃĞ
- * chc_watch: Æ[´Ñ
- * talk.c: ¹ï«³
+/* è±¡æ£‹åŠŸèƒ½é€²å…¥é»:
+ * chc_main: å°å¥•
+ * chc_personal: æ‰“è­œ
+ * chc_watch: è§€æ£‹
+ * talk.c: å°å¥•
  */
 void
 chc(int s, ChessGameMode mode)
@@ -840,8 +840,8 @@ chc_gameend(ChessInfo* info, ChessGameResult result)
 
     if (info->mode == CHESS_MODE_VERSUS) {
 	if (info->myturn == RED) {
-	    /* ¥Ñ¬õ¤è§@ log. °Oªº¬O¤U´Ñ«eªº­ì©l¤À¼Æ */
-	    /* NOTE, ­Y¬õ¤èÂ_½u«hµL log */
+	    /* ç”±ç´…æ–¹ä½œ log. è¨˜çš„æ˜¯ä¸‹æ£‹å‰çš„åŸå§‹åˆ†æ•¸ */
+	    /* NOTE, è‹¥ç´…æ–¹æ–·ç·šå‰‡ç„¡ log */
 	    time_t t = time(NULL);
 	    char buf[100];
 	    uint16_t lose1 = user1->lose, lose2 = user2->lose;
@@ -851,8 +851,8 @@ chc_gameend(ChessInfo* info, ChessGameResult result)
 		    ctime(&t),
 		    user1->userid, user1->rating, user1->win,
 		    user1->tie, lose1,
-		    (result == CHESS_RESULT_TIE ? "©M" :
-		     result == CHESS_RESULT_WIN ? "³Ó" : "­t"),
+		    (result == CHESS_RESULT_TIE ? "å’Œ" :
+		     result == CHESS_RESULT_WIN ? "å‹" : "è² "),
 		    user2->userid, user2->rating, user2->win,
 		    user2->tie, lose2);
 	    buf[24] = ' '; // replace '\n'
@@ -885,7 +885,7 @@ chc_gameend(ChessInfo* info, ChessGameResult result)
 int
 chc_main(void)
 {
-    return ChessStartGame('c', SIG_CHC, "·¡ªeº~¬É¤§ª§");
+    return ChessStartGame('c', SIG_CHC, "æ¥šæ²³æ¼¢ç•Œä¹‹çˆ­");
 }
 
 int
@@ -898,7 +898,7 @@ chc_personal(void)
 int
 chc_watch(void)
 {
-    return ChessWatchGame(&chc, CHC, "·¡ªeº~¬É¤§ª§");
+    return ChessWatchGame(&chc, CHC, "æ¥šæ²³æ¼¢ç•Œä¹‹çˆ­");
 }
 
 ChessInfo*

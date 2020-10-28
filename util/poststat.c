@@ -1,4 +1,4 @@
-/* ²Î­p¤µ¤é¡B¶g¡B¤ë¡B¦~¼öªù¸ÜÃD */
+/* çµ±è¨ˆä»Šæ—¥ã€é€±ã€æœˆã€å¹´ç†±é–€è©±é¡Œ */
 
 #include "bbs.h"
 #include "fnv_hash.h"
@@ -10,7 +10,7 @@ int mycount[4] =
 int mytop[] =
 {10, 50, 100, 100};
 char *mytitle[] =
-{"¤é¤Q", "¶g¤­¤Q", "¤ë¦Ê", "¦~«×¦Ê"};
+{"æ—¥å", "é€±äº”å", "æœˆç™¾", "å¹´åº¦ç™¾"};
 
 
 #define HASHSIZE 1024
@@ -69,7 +69,7 @@ search(t)
     if (found)
     {
 	p->number += t->number;
-	if (p->date < t->date)	/* ¨ú¸ûªñ¤é´Á */
+	if (p->date < t->date)	/* å–è¼ƒè¿‘æ—¥æœŸ */
 	    p->date = t->date;
     }
     else
@@ -138,7 +138,7 @@ filter(board)
     if (bh.brdattr & BRD_NOCOUNT)
 	return 1;
 
-    /* ªO¥D³]©w¤£¦C¤J°O¿ý */
+    /* æ¿ä¸»è¨­å®šä¸åˆ—å…¥è¨˜éŒ„ */
     if (bh.brdattr & BRD_HIDE && !(bh.brdattr & BRD_BMCOUNT))
 	return 1;
 /*
@@ -232,7 +232,7 @@ poststat(mytype)
     {
 	int max, cnt;
 
-	fprintf(fp, "\t\t[1;34m-----[37m=====[41m ¥»%s¤j¼öªù¸ÜÃD [40m=====[34m-----[0m\n\n", mytitle[mytype]);
+	fprintf(fp, "\t\t[1;34m-----[37m=====[41m æœ¬%så¤§ç†±é–€è©±é¡Œ [40m=====[34m-----[0m\n\n", mytitle[mytype]);
 
 	max = mytop[mytype];
 	p = buf + 4;
@@ -245,8 +245,8 @@ poststat(mytype)
 	    strcpy(buf, ctime4(&(tp->date)));
 	    buf[20] = 0;
 	    fprintf(fp,
-		    "[1;31m%3d. [33m¬ÝªO : [32m%-16s[35m¡m %s¡n[36m%4d ½g[33m%16s\n"
-		    "     [33m¼ÐÃD : [0;44;37m%-60.60s[40m\n"
+		    "[1;31m%3d. [33mçœ‹æ¿ : [32m%-16s[35mã€Š %sã€‹[36m%4d ç¯‡[33m%16s\n"
+		    "     [33mæ¨™é¡Œ : [0;44;37m%-60.60s[40m\n"
 		    ,++cnt, tp->board, p, tp->number, tp->author, tp->title);
 	}
 	fclose(fp);

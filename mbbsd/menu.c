@@ -1,6 +1,6 @@
 #include "bbs.h"
 
-// UNREGONLY §ï¬°¥Ñ BASIC ¨Ó§PÂ_¬O§_¬° guest.
+// UNREGONLY æ”¹ç‚ºç”± BASIC ä¾†åˆ¤æ–·æ˜¯å¦ç‚º guest.
 
 #define CheckMenuPerm(x) \
     ( (x == MENU_UNREGONLY)? \
@@ -14,9 +14,9 @@ extern char    *boardprefix;
 extern struct utmpfile_t *utmpshm;
 
 static const char *title_tail_msgs[] = {
-    "¬İªO",
-    "¨t¦C",
-    "¤åºK",
+    "çœ‹æ¿",
+    "ç³»åˆ—",
+    "æ–‡æ‘˜",
 };
 static const char *title_tail_attrs[] = {
     ANSI_COLOR(37),
@@ -29,37 +29,37 @@ enum {
     TITLE_TAIL_DIGEST,
 };
 
-// ¥Ñ©ó¾ú¥v¦]¯À¡A³o¸Ì·|¥X²{¤TºØ½s¸¹:
-// MODE (©w¸q©ó modes.h)    ¬O BBS ¹ï¦UºØ¥\¯à¦b utmp ªº½s¸¹ (var.c ­n¥[¦r¦ê)
-// Menu Index (M_*)	    ¬O menu.c ¤º³¡¤À¿ë¿ï³æ­n¹ïÀ³­ş­Ó mode ªº index
-// AdBanner Index	    ¬O°ÊºA¬İª©­nÅã¥Ü¤°»òªº­È
-// ±q«e³o¬O¥Î¨â­Ó mode map ¨ÓÂà´«ªº (¥O¤H¬İ±oº¡ÀYÃú¤ô)
-// ­«¾ã«á Menu Index ¸ò AdBanner Index ¦X¤@¡A½Ğ¨£¤U­±ªº»¡©ú
+// ç”±æ–¼æ­·å²å› ç´ ï¼Œé€™è£¡æœƒå‡ºç¾ä¸‰ç¨®ç·¨è™Ÿ:
+// MODE (å®šç¾©æ–¼ modes.h)    æ˜¯ BBS å°å„ç¨®åŠŸèƒ½åœ¨ utmp çš„ç·¨è™Ÿ (var.c è¦åŠ å­—ä¸²)
+// Menu Index (M_*)	    æ˜¯ menu.c å…§éƒ¨åˆ†è¾¨é¸å–®è¦å°æ‡‰å“ªå€‹ mode çš„ index
+// AdBanner Index	    æ˜¯å‹•æ…‹çœ‹ç‰ˆè¦é¡¯ç¤ºä»€éº¼çš„å€¼
+// å¾å‰é€™æ˜¯ç”¨å…©å€‹ mode map ä¾†è½‰æ›çš„ (ä»¤äººçœ‹å¾—æ»¿é ­éœ§æ°´)
+// é‡æ•´å¾Œ Menu Index è·Ÿ AdBanner Index åˆä¸€ï¼Œè«‹è¦‹ä¸‹é¢çš„èªªæ˜
 ///////////////////////////////////////////////////////////////////////
-// AdBanner (SHM->notes) «e´Xµ§¬O Note ªOºëµØ°Ï¡u<¨t²Î> °ÊºA¬İªO¡v(SYS)
-// ¥Ø¿ı¤Uªº¤å³¹¡A©Ò¥H½s±Æ Menu (M_*) ®É­n·Ó¨ä¶¶§Ç¡G
-// ºëµØ°Ï½s¸¹     => Menu Index => MODE
+// AdBanner (SHM->notes) å‰å¹¾ç­†æ˜¯ Note æ¿ç²¾è¯å€ã€Œ<ç³»çµ±> å‹•æ…‹çœ‹æ¿ã€(SYS)
+// ç›®éŒ„ä¸‹çš„æ–‡ç« ï¼Œæ‰€ä»¥ç·¨æ’ Menu (M_*) æ™‚è¦ç…§å…¶é †åºï¼š
+// ç²¾è¯å€ç·¨è™Ÿ     => Menu Index => MODE
 // (AdBannerIndex)
 // ====================================
-// 00Â÷¯¸µe­±     =>  M_GOODBYE
-// 01¥D¿ï³æ       =>  M_MMENU   => MMENU
-// 02¨t²ÎºûÅ@°Ï   =>  M_ADMIN   => ADMIN
-// 03¨p¤H«H¥ó°Ï   =>  M_MAIL    => MAIL
-// 04¥ğ¶¢²á¤Ñ°Ï   =>  M_TMENU   => TMENU
-// 05­Ó¤H³]©w°Ï   =>  M_UMENU   => UMENU
-// 06¨t²Î¤u¨ã°Ï   =>  M_XMENU   => XMENU
-// 07®T¼Ö»P¥ğ¶¢   =>  M_PMENU   => PMENU
-// 08¢Ştt·j´M¾¹   =>  M_SREG    => SREG
-// 09¢Ştt¶q³c©±   =>  M_PSALE   => PSALE
-// 10¢Ştt¹C¼Ö³õ   =>  M_AMUSE   => AMUSE
-// 11¢Ştt´Ñ°|     =>  M_CHC     => CHC
-// 12¯S§O¦W³æ     =>  M_NMENU   => NMENU
+// 00é›¢ç«™ç•«é¢     =>  M_GOODBYE
+// 01ä¸»é¸å–®       =>  M_MMENU   => MMENU
+// 02ç³»çµ±ç¶­è­·å€   =>  M_ADMIN   => ADMIN
+// 03ç§äººä¿¡ä»¶å€   =>  M_MAIL    => MAIL
+// 04ä¼‘é–’èŠå¤©å€   =>  M_TMENU   => TMENU
+// 05å€‹äººè¨­å®šå€   =>  M_UMENU   => UMENU
+// 06ç³»çµ±å·¥å…·å€   =>  M_XMENU   => XMENU
+// 07å¨›æ¨‚èˆ‡ä¼‘é–’   =>  M_PMENU   => PMENU
+// 08ï¼°ttæœå°‹å™¨   =>  M_SREG    => SREG
+// 09ï¼°tté‡è²©åº—   =>  M_PSALE   => PSALE
+// 10ï¼°ttéŠæ¨‚å ´   =>  M_AMUSE   => AMUSE
+// 11ï¼°ttæ£‹é™¢     =>  M_CHC     => CHC
+// 12ç‰¹åˆ¥åå–®     =>  M_NMENU   => NMENU
 ///////////////////////////////////////////////////////////////////////
-// ¥Ñ©ó MODE »P menu ªº¶¶§Ç²{¦b¤w¤£¤@­P (³Ì¦­¥i¯à¬O¤@­Pªº)¡A©Ò¥H¤¤¶¡ªº
-// Âà´«¬O¾a menu_mode_map ¨Ó³B²z¡C
-// ­n©w¸q·s Menu ®É¡A½Ğ¦b M_MENU_MAX ¤§«e¥[¤J·s­È¡A¨Ã¦b menu_mode_map
-// ¥[¤J¹ïÀ³ªº MODE ­È¡C ¥t¥~¡A¦b Notes ¤U¤]­n¼W¥[¹ïÀ³ªº AdBanner ¹Ï¤ù
-// ­Y¤£·Q¥[¹Ï¤ù«h­n­×§ï N_SYSADBANNER
+// ç”±æ–¼ MODE èˆ‡ menu çš„é †åºç¾åœ¨å·²ä¸ä¸€è‡´ (æœ€æ—©å¯èƒ½æ˜¯ä¸€è‡´çš„)ï¼Œæ‰€ä»¥ä¸­é–“çš„
+// è½‰æ›æ˜¯é  menu_mode_map ä¾†è™•ç†ã€‚
+// è¦å®šç¾©æ–° Menu æ™‚ï¼Œè«‹åœ¨ M_MENU_MAX ä¹‹å‰åŠ å…¥æ–°å€¼ï¼Œä¸¦åœ¨ menu_mode_map
+// åŠ å…¥å°æ‡‰çš„ MODE å€¼ã€‚ å¦å¤–ï¼Œåœ¨ Notes ä¸‹ä¹Ÿè¦å¢åŠ å°æ‡‰çš„ AdBanner åœ–ç‰‡
+// è‹¥ä¸æƒ³åŠ åœ–ç‰‡å‰‡è¦ä¿®æ”¹ N_SYSADBANNER
 ///////////////////////////////////////////////////////////////////////
 
 enum {
@@ -68,9 +68,9 @@ enum {
     M_UMENU,     M_XMENU, M_PMENU,M_SREG,
     M_PSALE,	 M_AMUSE, M_CHC,  M_NMENU,
 
-    M_MENU_MAX,			// ³o¬O menu (M_*) ªº³Ì¤j­È
-    N_SYSADBANNER = M_MENU_MAX, // ©w¸q M_* ¨ì¦h¤Ö¦³¹ïÀ³ªº ADBANNER
-    M_MENU_REFRESH= -1,		// ¨t²Î¥Î¤£¨ìªº index ­È (¥iÅã¥Ü¨ä¥¦¬¡°Ê»PÂIºq)
+    M_MENU_MAX,			// é€™æ˜¯ menu (M_*) çš„æœ€å¤§å€¼
+    N_SYSADBANNER = M_MENU_MAX, // å®šç¾© M_* åˆ°å¤šå°‘æœ‰å°æ‡‰çš„ ADBANNER
+    M_MENU_REFRESH= -1,		// ç³»çµ±ç”¨ä¸åˆ°çš„ index å€¼ (å¯é¡¯ç¤ºå…¶å®ƒæ´»å‹•èˆ‡é»æ­Œ)
 };
 
 static const int menu_mode_map[M_MENU_MAX] = {
@@ -113,7 +113,7 @@ showtitle(const char *title, const char *mid)
     }
 #else
     if (ISNEWMAIL(currutmp)) {
-	mid = "    §A¦³·s«H¥ó    ";
+	mid = "    ä½ æœ‰æ–°ä¿¡ä»¶    ";
 	mid_attr = ANSI_COLOR(41;5);
     } else if ( HasUserPerm(PERM_ACCTREG) ) {
 	// TODO cache this value?
@@ -121,7 +121,7 @@ showtitle(const char *title, const char *mid)
 	if(nreg > 100)
 	{
 	    nreg -= (nreg % 10);
-	    sprintf(buf, "  ¶W¹L %03d ½g¥¼¼f®Ö  ", nreg);
+	    sprintf(buf, "  è¶…é %03d ç¯‡æœªå¯©æ ¸  ", nreg);
 	    mid_attr = ANSI_COLOR(41;5);
 	    mid = buf;
 	}
@@ -151,9 +151,9 @@ showtitle(const char *title, const char *mid)
 
     /* first, print left. */
     clear();
-    outs(TITLE_COLOR "¡i");
+    outs(TITLE_COLOR "ã€");
     outs(title);
-    outs("¡j");
+    outs("ã€‘");
     pos = llen + 4;
 
     /* print mid */
@@ -173,13 +173,13 @@ showtitle(const char *title, const char *mid)
 	    outc(' ');
 	outs(title_tail_attrs[tail_type]);
 	outs(title_tail_msgs[tail_type]);
-	outs("¡m");
+	outs("ã€Š");
 
 	if (is_currboard_special)
 	    outs(ANSI_COLOR(32));
 	outs(currboard);
 	outs(title_tail_attrs[tail_type]);
-	outs("¡n" ANSI_RESET "\n");
+	outs("ã€‹" ANSI_RESET "\n");
     } else {
 	// just pad it.
 	while(pos++ < t_columns)
@@ -219,8 +219,8 @@ ZA_Select(void)
         return 0;
 
     // TODO refresh status bar?
-    vs_footer(VCLR_ZA_CAPTION " ¡¹§Ö³t¤Á´«: ",
-	    " (b)¤å³¹¦Cªí (c)¤ÀÃş (t)¼öªù (f)§Úªº³Ì·R (m)«H½c (u)¨Ï¥ÎªÌ¦W³æ");
+    vs_footer(VCLR_ZA_CAPTION " â˜…å¿«é€Ÿåˆ‡æ›: ",
+	    " (b)æ–‡ç« åˆ—è¡¨ (c)åˆ†é¡ (t)ç†±é–€ (f)æˆ‘çš„æœ€æ„› (m)ä¿¡ç®± (u)ä½¿ç”¨è€…åå–®");
     k = vkey();
 
     if (k < ' ' || k >= 'z') return 0;
@@ -269,7 +269,7 @@ ZA_Enter(void)
     }
 }
 
-/* °Êµe³B²z */
+/* å‹•ç•«è™•ç† */
 #define FILMROW 11
 static unsigned short menu_row = 12;
 static unsigned short menu_column = 20;
@@ -294,16 +294,16 @@ show_status(void)
 {
     int i;
     struct tm      ptime;
-    char           *myweek = "¤Ñ¤@¤G¤T¥|¤­¤»";
+    char           *myweek = "å¤©ä¸€äºŒä¸‰å››äº”å…­";
 
     localtime4_r(&now, &ptime);
     i = ptime.tm_wday << 1;
     move(b_lines, 0);
-    vbarf(ANSI_COLOR(34;46) "[%d/%d ¬P´Á%c%c %d:%02d]"
+    vbarf(ANSI_COLOR(34;46) "[%d/%d æ˜ŸæœŸ%c%c %d:%02d]"
 	  ANSI_COLOR(1;33;45) "%-14s"
-	  ANSI_COLOR(30;47) " ½u¤W" ANSI_COLOR(31)
-	  "%d" ANSI_COLOR(30) "¤H, §Ú¬O" ANSI_COLOR(31) "%s"
-	  ANSI_COLOR(30) "\t[©I¥s¾¹]" ANSI_COLOR(31) "%s ",
+	  ANSI_COLOR(30;47) " ç·šä¸Š" ANSI_COLOR(31)
+	  "%d" ANSI_COLOR(30) "äºº, æˆ‘æ˜¯" ANSI_COLOR(31) "%s"
+	  ANSI_COLOR(30) "\t[å‘¼å«å™¨]" ANSI_COLOR(31) "%s ",
 	  ptime.tm_mon + 1, ptime.tm_mday, myweek[i], myweek[i + 1],
 	  ptime.tm_hour, ptime.tm_min, SHM->today_is,
 	  SHM->UTMPnumber, cuser.userid,
@@ -314,7 +314,7 @@ show_status(void)
  * current caller of adbanner:
  *   xyz.c:   adbanner_goodbye();   // logout
  *   menu.c:  adbanner(cmdmode);    // ...
- *   board.c: adbanner(0);	    // «á¨ÓÅÜ¦b board.c ¸Ì¦Û¤v³B²z(À³¸Ó¬O¨º°¦³½)
+ *   board.c: adbanner(0);	    // å¾Œä¾†è®Šåœ¨ board.c è£¡è‡ªå·±è™•ç†(æ‡‰è©²æ˜¯é‚£éš»é­š)
  */
 
 void
@@ -373,11 +373,11 @@ adbanner(int menu_index)
     i %= MAX_ADBANNER;
 
     move(1, 0);
-    clrtoln(1 + FILMROW);	/* ²M±¼¤W¦¸ªº */
+    clrtoln(1 + FILMROW);	/* æ¸…æ‰ä¸Šæ¬¡çš„ */
 #ifdef LARGETERM_CENTER_MENU
-    out_lines(SHM->notes[i], 11, (t_columns - 80)/2);	/* ¥u¦L11¦æ´N¦n */
+    out_lines(SHM->notes[i], 11, (t_columns - 80)/2);	/* åªå°11è¡Œå°±å¥½ */
 #else
-    out_lines(SHM->notes[i], 11, 0);	/* ¥u¦L11¦æ´N¦n */
+    out_lines(SHM->notes[i], 11, 0);	/* åªå°11è¡Œå°±å¥½ */
 #endif
     outs(ANSI_RESET);
 #ifdef DEBUG
@@ -409,12 +409,12 @@ show_menu(int menu_index, const commands_t * p)
         // we have one more extra line to display ADBANNER_USONG!
         int alert_column = menu_column;
         move(row, 0);
-        vpad(t_columns-2, "¢w");
+        vpad(t_columns-2, "â”€");
         if (alert_column > 2)
             alert_column -= 2;
         alert_column -= alert_column % 2;
         move(row++, alert_column);
-        outs(" ¤W¤è¬°¨Ï¥ÎªÌ¤ß±¡ÂI¼½¯d¨¥°Ï¡A¤£¥Nªí¥»¯¸¥ß³õ ");
+        outs(" ä¸Šæ–¹ç‚ºä½¿ç”¨è€…å¿ƒæƒ…é»æ’­ç•™è¨€å€ï¼Œä¸ä»£è¡¨æœ¬ç«™ç«‹å ´ ");
     }
     assert(row == decide_menu_row(p));
 #endif
@@ -559,7 +559,7 @@ domenu(int menu_index, const char *cmdtitle, int cmd, const commands_t cmdtable[
 
 	if (refscreen) {
 	    showtitle(cmdtitle, BBSName);
-	    // menu ³]©w M_MENU_REFRESH ¥iÅı ADBanner Åã¥Ü§Oªº¸ê°T
+	    // menu è¨­å®š M_MENU_REFRESH å¯è®“ ADBanner é¡¯ç¤ºåˆ¥çš„è³‡è¨Š
 	    show_menu(M_MENU_REFRESH, cmdtable);
 	    show_status();
 	    refscreen = NA;
@@ -585,13 +585,13 @@ view_user_money_log() {
     char userid[IDLEN+1];
     char fpath[PATHLEN];
 
-    vs_hdr("ÀËµø¨Ï¥ÎªÌ¥æ©ö°O¿ı");
-    usercomplete("½Ğ¿é¤J­nÀËµøªºID: ", userid);
+    vs_hdr("æª¢è¦–ä½¿ç”¨è€…äº¤æ˜“è¨˜éŒ„");
+    usercomplete("è«‹è¼¸å…¥è¦æª¢è¦–çš„ID: ", userid);
     if (!is_validuserid(userid))
         return 0;
     sethomefile(fpath, userid, FN_RECENTPAY);
     if (more(fpath, YEA) < 0)
-        vmsgf("¨Ï¥ÎªÌ %s µL³Ìªñ¥æ©ö°O¿ı", userid);
+        vmsgf("ä½¿ç”¨è€… %s ç„¡æœ€è¿‘äº¤æ˜“è¨˜éŒ„", userid);
     return 0;
 }
 
@@ -600,13 +600,13 @@ view_user_login_log() {
     char userid[IDLEN+1];
     char fpath[PATHLEN];
 
-    vs_hdr("ÀËµø¨Ï¥ÎªÌ³Ìªñ¤W½u°O¿ı");
-    usercomplete("½Ğ¿é¤J­nÀËµøªºID: ", userid);
+    vs_hdr("æª¢è¦–ä½¿ç”¨è€…æœ€è¿‘ä¸Šç·šè¨˜éŒ„");
+    usercomplete("è«‹è¼¸å…¥è¦æª¢è¦–çš„ID: ", userid);
     if (!is_validuserid(userid))
         return 0;
     sethomefile(fpath, userid, FN_RECENTLOGIN);
     if (more(fpath, YEA) < 0)
-        vmsgf("¨Ï¥ÎªÌ %s µL³Ìªñ¤W½u°O¿ı", userid);
+        vmsgf("ä½¿ç”¨è€… %s ç„¡æœ€è¿‘ä¸Šç·šè¨˜éŒ„", userid);
     return 0;
 }
 
@@ -614,36 +614,36 @@ static int x_admin_money(void);
 static int x_admin_user(void);
 
 static int deprecate_userlist() {
-    vs_hdr2(" " BBSNAME " ", " ¤w²¾¦Ü¨Ï¥ÎªÌ¦W³æ");
+    vs_hdr2(" " BBSNAME " ", " å·²ç§»è‡³ä½¿ç”¨è€…åå–®");
     outs("\n"
-         "¦¹¥\\¯à¤w²¾¦Ü¨Ï¥ÎªÌ¦W³æ°Ï¡C\n"
-         "½Ğ¦Ü¨Ï¥ÎªÌ¦W³æ (Ctrl-U) ¨Ã«ö¤U¹ïÀ³ªºÁä¡C\n"
-         "(¦b¨Ï¥ÎªÌ¦W³æ«ö h ·|¦³§¹¾ã»¡©ú)\n\n"
-         "¤Á´«©I¥s¾¹:     Ctrl-U p\n"
-         "Áô¨­³N:         Ctrl-U C\n"
-         "Åã¥Ü¤W´X¦¸¼ö°T: Ctrl-U l\n");
+         "æ­¤åŠŸèƒ½å·²ç§»è‡³ä½¿ç”¨è€…åå–®å€ã€‚\n"
+         "è«‹è‡³ä½¿ç”¨è€…åå–® (Ctrl-U) ä¸¦æŒ‰ä¸‹å°æ‡‰çš„éµã€‚\n"
+         "(åœ¨ä½¿ç”¨è€…åå–®æŒ‰ h æœƒæœ‰å®Œæ•´èªªæ˜)\n\n"
+         "åˆ‡æ›å‘¼å«å™¨:     Ctrl-U p\n"
+         "éš±èº«è¡“:         Ctrl-U C\n"
+         "é¡¯ç¤ºä¸Šå¹¾æ¬¡ç†±è¨Š: Ctrl-U l\n");
     pressanykey();
     return 0;
 }
 
 // ----------------------------------------------------------- MENU DEFINITION
-// ª`·N¨C­Ó menu ³Ì¦h¤£¯à¦P®ÉÅã¥Ü¶W¹L 11 ¶µ (80x24 ¼Ğ·Ç¤j¤pªº­­¨î)
+// æ³¨æ„æ¯å€‹ menu æœ€å¤šä¸èƒ½åŒæ™‚é¡¯ç¤ºè¶…é 11 é … (80x24 æ¨™æº–å¤§å°çš„é™åˆ¶)
 
 static const commands_t m_admin_money[] = {
     {view_user_money_log, PERM_SYSOP|PERM_ACCOUNTS,
-                                                "View Log      ÀËµø¥æ©ö°O¿ı"},
-    {give_money, PERM_SYSOP|PERM_VIEWSYSOP,	"Givemoney     ¬õ¥]Âû"},
+                                                "View Log      æª¢è¦–äº¤æ˜“è¨˜éŒ„"},
+    {give_money, PERM_SYSOP|PERM_VIEWSYSOP,	"Givemoney     ç´…åŒ…é›"},
     {NULL, 0, NULL}
 };
 
 static const commands_t m_admin_user[] = {
     {view_user_money_log, PERM_SYSOP|PERM_ACCOUNTS,
-                                        "Money Log      ³Ìªñ¥æ©ö°O¿ı"},
+                                        "Money Log      æœ€è¿‘äº¤æ˜“è¨˜éŒ„"},
     {view_user_login_log, PERM_SYSOP|PERM_ACCOUNTS|PERM_BOARD,
-                                        "OLogin Log     ³Ìªñ¤W½u°O¿ı"},
-    {u_list, PERM_SYSOP,		"Users List     ¦C¥Xµù¥U¦W³æ"},
+                                        "OLogin Log     æœ€è¿‘ä¸Šç·šè¨˜éŒ„"},
+    {u_list, PERM_SYSOP,		"Users List     åˆ—å‡ºè¨»å†Šåå–®"},
     {search_user_bybakpwd, PERM_SYSOP|PERM_ACCOUNTS,
-                                        "DOld User data ¬d¾\\³Æ¥÷¨Ï¥ÎªÌ¸ê®Æ"},
+                                        "DOld User data æŸ¥é–±å‚™ä»½ä½¿ç”¨è€…è³‡æ–™"},
     {NULL, 0, NULL}
 };
 
@@ -652,12 +652,12 @@ static const commands_t adminlist[] = {
     {m_user, PERM_SYSOP,		"User          ¨Ï¥ÎªÌ¸ê®Æ"},
     {m_board, PERM_BOARD,		"Board         ³]©w¬İªO"},
     {m_register,
-	PERM_ACCOUNTS|PERM_ACCTREG,	"Register      ¼f®Öµù¥Uªí³æ"},
-    {x_file, PERM_SYSOP|PERM_VIEWSYSOP,	"Xfile         ½s¿è¨t²ÎÀÉ®×"},
+	PERM_ACCOUNTS|PERM_ACCTREG,	"Register      å¯©æ ¸è¨»å†Šè¡¨å–®"},
+    {x_file, PERM_SYSOP|PERM_VIEWSYSOP,	"Xfile         ç·¨è¼¯ç³»çµ±æª”æ¡ˆ"},
     {x_admin_money, PERM_SYSOP|PERM_ACCOUNTS|PERM_VIEWSYSOP,
-                                        "Money         ¡i" MONEYNAME "¬ÛÃö¡j"},
+                                        "Money         ã€" MONEYNAME "ç›¸é—œã€‘"},
     {x_admin_user, PERM_SYSOP|PERM_ACCOUNTS|PERM_BOARD|PERM_POLICE_MAN,
-                                        "LUser Log     ¡i¨Ï¥ÎªÌ¸ê®Æ°O¿ı¡j"},
+                                        "LUser Log     ã€ä½¿ç”¨è€…è³‡æ–™è¨˜éŒ„ã€‘"},
     {search_user_bypwd,
 	PERM_ACCOUNTS|PERM_POLICE_MAN,	"Search User    ¯S®í·j´M¨Ï¥ÎªÌ"},
 #ifdef USE_VERIFYDB
@@ -670,55 +670,55 @@ static const commands_t adminlist[] = {
 
 /* mail menu */
 static const commands_t maillist[] = {
-    {m_read, PERM_READMAIL,     "Read          §Úªº«H½c"},
-    {m_send, PERM_LOGINOK,      "Send          ¯¸¤º±H«H"},
-    {mail_list, PERM_LOGINOK,   "Mail List     ¸s²Õ±H«H"},
-    {setforward, PERM_LOGINOK,  "Forward       ³]©w«H½c¦Û°ÊÂà±H" },
-    {mail_mbox, PERM_INTERNET,  "Zip UserHome  §â©Ò¦³¨p¤H¸ê®Æ¥´¥]¦^¥h"},
+    {m_read, PERM_READMAIL,     "Read          æˆ‘çš„ä¿¡ç®±"},
+    {m_send, PERM_LOGINOK,      "Send          ç«™å…§å¯„ä¿¡"},
+    {mail_list, PERM_LOGINOK,   "Mail List     ç¾¤çµ„å¯„ä¿¡"},
+    {setforward, PERM_LOGINOK,  "Forward       è¨­å®šä¿¡ç®±è‡ªå‹•è½‰å¯„" },
+    {mail_mbox, PERM_INTERNET,  "Zip UserHome  æŠŠæ‰€æœ‰ç§äººè³‡æ–™æ‰“åŒ…å›å»"},
     {built_mail_index,
-	PERM_LOGINOK,		"Savemail      ­««Ø«H½c¯Á¤Ş"},
-    {mail_all, PERM_SYSOP,      "All           ±H«Hµ¹©Ò¦³¨Ï¥ÎªÌ"},
+	PERM_LOGINOK,		"Savemail      é‡å»ºä¿¡ç®±ç´¢å¼•"},
+    {mail_all, PERM_SYSOP,      "All           å¯„ä¿¡çµ¦æ‰€æœ‰ä½¿ç”¨è€…"},
 #ifdef USE_MAIL_ACCOUNT_SYSOP
-    {mail_account_sysop, 0,     "Contact AM    ±H«Hµ¹±b¸¹¯¸ªø"},
+    {mail_account_sysop, 0,     "Contact AM    å¯„ä¿¡çµ¦å¸³è™Ÿç«™é•·"},
 #endif
     {NULL, 0, NULL}
 };
 
 #ifdef PLAY_ANGEL
 static const commands_t angelmenu[] = {
-    {a_angelmsg, PERM_ANGEL,"Leave message ¯d¨¥µ¹¤p¥D¤H"},
-    {a_angelmsg2,PERM_ANGEL,"Call screen   ©I¥sµe­±­Ó©Ê¯d¨¥"},
+    {a_angelmsg, PERM_ANGEL,"Leave message ç•™è¨€çµ¦å°ä¸»äºº"},
+    {a_angelmsg2,PERM_ANGEL,"Call screen   å‘¼å«ç•«é¢å€‹æ€§ç•™è¨€"},
     {angel_check_master,PERM_ANGEL,
-                            "Master check  ¬d¸ß¤p¥D¤Hª¬ºA"},
+                            "Master check  æŸ¥è©¢å°ä¸»äººç‹€æ…‹"},
     // Cannot use R because r is reserved for Read/Mail due to TMENU.
-    {a_angelreport, 0,      "PReport       ½u¤W¤Ñ¨Ïª¬ºA³ø§i"},
+    {a_angelreport, 0,      "PReport       ç·šä¸Šå¤©ä½¿ç‹€æ…‹å ±å‘Š"},
     {NULL, 0, NULL}
 };
 
 static int menu_angelbeats() {
-    domenu(M_TMENU, "Angel Beats! ¤Ñ¨Ï¤½·|", 'L', angelmenu);
+    domenu(M_TMENU, "Angel Beats! å¤©ä½¿å…¬æœƒ", 'L', angelmenu);
     return 0;
 }
 #endif
 
 /* Talk menu */
 static const commands_t talklist[] = {
-    {t_users, 0,            "Users         ½u¤W¨Ï¥ÎªÌ¦Cªí"},
-    {t_query, 0,            "Query         ¬d¸ßºô¤Í"},
-    // PERM_PAGE - ¤ô²y³£­n PERM_LOGIN ¤F
-    // ¨S¹D²z¥i¥H talk ¤£¯à¤ô²y¡C
-    {t_talk, PERM_LOGINOK,  "Talk          §ä¤H²á²á"},
-    // PERM_CHAT «D login ¤]¦³¡A·|¦³¤H¥Î¦¹§n§O¤H¡C
-    {t_chat, PERM_LOGINOK,  "Chat          ¡i" BBSMNAME2 "¦h¤H²á¤Ñ«Ç¡j"},
-    {deprecate_userlist, 0, "Pager         ¤Á´«©I¥s¾¹"},
-    {t_qchicken, 0,         "Watch Pet     ¬d¸ßÃdª«"},
+    {t_users, 0,            "Users         ç·šä¸Šä½¿ç”¨è€…åˆ—è¡¨"},
+    {t_query, 0,            "Query         æŸ¥è©¢ç¶²å‹"},
+    // PERM_PAGE - æ°´çƒéƒ½è¦ PERM_LOGIN äº†
+    // æ²’é“ç†å¯ä»¥ talk ä¸èƒ½æ°´çƒã€‚
+    {t_talk, PERM_LOGINOK,  "Talk          æ‰¾äººèŠèŠ"},
+    // PERM_CHAT é login ä¹Ÿæœ‰ï¼Œæœƒæœ‰äººç”¨æ­¤åµåˆ¥äººã€‚
+    {t_chat, PERM_LOGINOK,  "Chat          ã€" BBSMNAME2 "å¤šäººèŠå¤©å®¤ã€‘"},
+    {deprecate_userlist, 0, "Pager         åˆ‡æ›å‘¼å«å™¨"},
+    {t_qchicken, 0,         "Watch Pet     æŸ¥è©¢å¯µç‰©"},
 #ifdef PLAY_ANGEL
     {a_changeangel,
-	PERM_LOGINOK,	    "AChange Angel §ó´«¤p¤Ñ¨Ï"},
+	PERM_LOGINOK,	    "AChange Angel æ›´æ›å°å¤©ä½¿"},
     {menu_angelbeats, PERM_ANGEL|PERM_SYSOP,
-                            "BAngel Beats! ¤Ñ¨Ï¤½·|"},
+                            "BAngel Beats! å¤©ä½¿å…¬æœƒ"},
 #endif
-    {t_display, 0,          "Display       Åã¥Ü¤W´X¦¸¼ö°T"},
+    {t_display, 0,          "Display       é¡¯ç¤ºä¸Šå¹¾æ¬¡ç†±è¨Š"},
     {NULL, 0, NULL}
 };
 
@@ -734,11 +734,11 @@ static int t_special() {
 }
 
 static const commands_t namelist[] = {
-    {t_override, PERM_LOGINOK,"OverRide      ¦n¤Í¦W³æ"},
-    {t_reject, PERM_LOGINOK,  "Black         Ãa¤H¦W³æ"},
-    {t_aloha,PERM_LOGINOK,    "ALOHA         ¤W¯¸³qª¾¦W³æ"},
-    {t_fix_aloha,PERM_LOGINOK,"XFixALOHA     ­×¥¿¤W¯¸³qª¾"},
-    {t_special,PERM_LOGINOK,  "Special       ¨ä¥L¯S§O¦W³æ"},
+    {t_override, PERM_LOGINOK,"OverRide      å¥½å‹åå–®"},
+    {t_reject, PERM_LOGINOK,  "Black         å£äººåå–®"},
+    {t_aloha,PERM_LOGINOK,    "ALOHA         ä¸Šç«™é€šçŸ¥åå–®"},
+    {t_fix_aloha,PERM_LOGINOK,"XFixALOHA     ä¿®æ­£ä¸Šç«™é€šçŸ¥"},
+    {t_special,PERM_LOGINOK,  "Special       å…¶ä»–ç‰¹åˆ¥åå–®"},
     {NULL, 0, NULL}
 };
 
@@ -754,8 +754,8 @@ static int u_view_recentpay()
 {
     char fn[PATHLEN];
     clear();
-    mvouts(10, 5, "ª`·N: ¦¹³B¤º®e¶È¨Ñ°Ñ¦Ò¡A¹ê»Ú" MONEYNAME
-                        "²§°Ê¥H¯¸¤è¤º³¡¸ê®Æ¬°·Ç");
+    mvouts(10, 5, "æ³¨æ„: æ­¤è™•å…§å®¹åƒ…ä¾›åƒè€ƒï¼Œå¯¦éš›" MONEYNAME
+                        "ç•°å‹•ä»¥ç«™æ–¹å…§éƒ¨è³‡æ–™ç‚ºæº–");
     pressanykey();
     setuserfile(fn, FN_RECENTPAY);
     return more(fn, YEA);
@@ -763,15 +763,15 @@ static int u_view_recentpay()
 #endif
 
 static const commands_t myfilelist[] = {
-    {u_editplan,    PERM_LOGINOK,   "QueryEdit     ½s¿è¦W¤ùÀÉ"},
-    {u_editsig,	    PERM_LOGINOK,   "Signature     ½s¿èÃ±¦WÀÉ"},
+    {u_editplan,    PERM_LOGINOK,   "QueryEdit     ç·¨è¼¯åç‰‡æª”"},
+    {u_editsig,	    PERM_LOGINOK,   "Signature     ç·¨è¼¯ç°½åæª”"},
     {NULL, 0, NULL}
 };
 
 static const commands_t myuserlog[] = {
-    {u_view_recentlogin, 0,   "LRecent Login  ³Ìªñ¤W¯¸°O¿ı"},
+    {u_view_recentlogin, 0,   "LRecent Login  æœ€è¿‘ä¸Šç«™è¨˜éŒ„"},
 #ifdef USE_RECENTPAY
-    {u_view_recentpay,   0,   "PRecent Pay    ³Ìªñ¥æ©ö°O¿ı"},
+    {u_view_recentpay,   0,   "PRecent Pay    æœ€è¿‘äº¤æ˜“è¨˜éŒ„"},
 #endif
     {NULL, 0, NULL}
 };
@@ -779,14 +779,14 @@ static const commands_t myuserlog[] = {
 static int
 u_myfiles()
 {
-    domenu(M_UMENU, "­Ó¤HÀÉ®×", 'Q', myfilelist);
+    domenu(M_UMENU, "å€‹äººæª”æ¡ˆ", 'Q', myfilelist);
     return 0;
 }
 
 static int
 u_mylogs()
 {
-    domenu(M_UMENU, "­Ó¤H°O¿ı", 'L', myuserlog);
+    domenu(M_UMENU, "å€‹äººè¨˜éŒ„", 'L', myuserlog);
     return 0;
 }
 
@@ -802,16 +802,16 @@ u_customize()
 
 /* User menu */
 static const commands_t userlist[] = {
-    {u_customize,   PERM_BASIC,	    "UCustomize    ­Ó¤H¤Æ³]©w"},
-    {u_info,	    PERM_BASIC,     "Info          ³]©w­Ó¤H¸ê®Æ»P±K½X"},
-    {u_loginview,   PERM_BASIC,     "VLogin View   ¿ï¾Ü¶i¯¸µe­±"},
-    {u_myfiles,	    PERM_LOGINOK,   "My Files      ¡i­Ó¤HÀÉ®×¡j (¦W¤ù,Ã±¦WÀÉ...)"},
-    {u_mylogs,	    PERM_LOGINOK,   "LMy Logs      ¡i­Ó¤H°O¿ı¡j (³Ìªñ¤W½u...)"},
-    {u_register,    MENU_UNREGONLY, "Register      ¶ñ¼g¡mµù¥U¥Ó½Ğ³æ¡n"},
+    {u_customize,   PERM_BASIC,	    "UCustomize    å€‹äººåŒ–è¨­å®š"},
+    {u_info,	    PERM_BASIC,     "Info          è¨­å®šå€‹äººè³‡æ–™èˆ‡å¯†ç¢¼"},
+    {u_loginview,   PERM_BASIC,     "VLogin View   é¸æ“‡é€²ç«™ç•«é¢"},
+    {u_myfiles,	    PERM_LOGINOK,   "My Files      ã€å€‹äººæª”æ¡ˆã€‘ (åç‰‡,ç°½åæª”...)"},
+    {u_mylogs,	    PERM_LOGINOK,   "LMy Logs      ã€å€‹äººè¨˜éŒ„ã€‘ (æœ€è¿‘ä¸Šç·š...)"},
+    {u_register,    MENU_UNREGONLY, "Register      å¡«å¯«ã€Šè¨»å†Šç”³è«‹å–®ã€‹"},
 #ifdef ASSESS
-    {u_cancelbadpost,PERM_LOGINOK,  "Bye BadPost   ¥Ó½Ğ§R°£°h¤å"},
+    {u_cancelbadpost,PERM_LOGINOK,  "Bye BadPost   ç”³è«‹åˆªé™¤é€€æ–‡"},
 #endif // ASSESS
-    {deprecate_userlist,       0,   "KCloak        Áô¨­³N"},
+    {deprecate_userlist,       0,   "KCloak        éš±èº«è¡“"},
     {NULL, 0, NULL}
 };
 
@@ -830,14 +830,14 @@ x_admin_money(void)
     char init = 'V';
     if (HasUserPerm(PERM_VIEWSYSOP))
         init = 'G';
-    domenu(M_XMENU, "ª÷¿ú¬ÛÃöºŞ²z", init, m_admin_money);
+    domenu(M_XMENU, "é‡‘éŒ¢ç›¸é—œç®¡ç†", init, m_admin_money);
     return 0;
 }
 
 static int
 x_admin_user(void)
 {
-    domenu(M_XMENU, "¨Ï¥ÎªÌ°O¿ıºŞ²z", 'O', m_admin_user);
+    domenu(M_XMENU, "ä½¿ç”¨è€…è¨˜éŒ„ç®¡ç†", 'O', m_admin_user);
     return 0;
 }
 
@@ -886,109 +886,109 @@ int _debug_reportstruct()
 
 /* XYZ tool sub menu */
 static const commands_t m_xyz_hot[] = {
-    {x_week, 0,      "Week          ¡m¥»¶g¤­¤Q¤j¼öªù¸ÜÃD¡n"},
-    {x_issue, 0,     "Issue         ¡m¤µ¤é¤Q¤j¼öªù¸ÜÃD¡n"},
-    {x_boardman,0,   "Man Boards    ¡m¬İªOºëµØ°Ï±Æ¦æº]¡n"},
+    {x_week, 0,      "Week          ã€Šæœ¬é€±äº”åå¤§ç†±é–€è©±é¡Œã€‹"},
+    {x_issue, 0,     "Issue         ã€Šä»Šæ—¥åå¤§ç†±é–€è©±é¡Œã€‹"},
+    {x_boardman,0,   "Man Boards    ã€Šçœ‹æ¿ç²¾è¯å€æ’è¡Œæ¦œã€‹"},
     {NULL, 0, NULL}
 };
 
 /* XYZ tool sub menu */
 static const commands_t m_xyz_user[] = {
-    {x_user100 ,0,   "Users         ¡m¨Ï¥ÎªÌ¦Ê¤j±Æ¦æº]¡n"},
+    {x_user100 ,0,   "Users         ã€Šä½¿ç”¨è€…ç™¾å¤§æ’è¡Œæ¦œã€‹"},
     {topsong,PERM_LOGINOK,
-	             "GTop Songs    ¡m¨Ï¥ÎªÌ¤ß±¡ÂI¼½±Æ¦æ¡n"},
-    {x_today, 0,     "Today         ¡m¤µ¤é¤W½u¤H¦¸²Î­p¡n"},
-    {x_yesterday, 0, "Yesterday     ¡m¬Q¤é¤W½u¤H¦¸²Î­p¡n"},
+	             "GTop Songs    ã€Šä½¿ç”¨è€…å¿ƒæƒ…é»æ’­æ’è¡Œã€‹"},
+    {x_today, 0,     "Today         ã€Šä»Šæ—¥ä¸Šç·šäººæ¬¡çµ±è¨ˆã€‹"},
+    {x_yesterday, 0, "Yesterday     ã€Šæ˜¨æ—¥ä¸Šç·šäººæ¬¡çµ±è¨ˆã€‹"},
     {NULL, 0, NULL}
 };
 
 static int
 x_hot(void)
 {
-    domenu(M_XMENU, "¼öªù¸ÜÃD»P¬İªO", 'W', m_xyz_hot);
+    domenu(M_XMENU, "ç†±é–€è©±é¡Œèˆ‡çœ‹æ¿", 'W', m_xyz_hot);
     return 0;
 }
 
 static int
 x_users(void)
 {
-    domenu(M_XMENU, "¨Ï¥ÎªÌ²Î­p¸ê°T", 'U', m_xyz_user);
+    domenu(M_XMENU, "ä½¿ç”¨è€…çµ±è¨ˆè³‡è¨Š", 'U', m_xyz_user);
     return 0;
 }
 
 /* XYZ tool menu */
 static const commands_t xyzlist[] = {
-    {x_hot,  0,      "THot Topics   ¡m¼öªù¸ÜÃD»P¬İªO¡n"},
-    {x_users,0,      "Users         ¡m¨Ï¥ÎªÌ¬ÛÃö²Î­p¡n"},
+    {x_hot,  0,      "THot Topics   ã€Šç†±é–€è©±é¡Œèˆ‡çœ‹æ¿ã€‹"},
+    {x_users,0,      "Users         ã€Šä½¿ç”¨è€…ç›¸é—œçµ±è¨ˆã€‹"},
 #ifndef DEBUG
     /* All these are useless in debug mode. */
 #ifdef HAVE_USERAGREEMENT
-    {x_agreement,0,  "Agreement     ¡m¥»¯¸¨Ï¥ÎªÌ±ø´Ú¡n"},
+    {x_agreement,0,  "Agreement     ã€Šæœ¬ç«™ä½¿ç”¨è€…æ¢æ¬¾ã€‹"},
 #endif
 #ifdef  HAVE_LICENSE
-    {x_gpl, 0,       "ILicense       GNU ¨Ï¥Î°õ·Ó"},
+    {x_gpl, 0,       "ILicense       GNU ä½¿ç”¨åŸ·ç…§"},
 #endif
 #ifdef HAVE_INFO
-    {x_program, 0,   "Program       ¥»µ{¦¡¤§ª©¥»»Pª©Åv«Å§i"},
+    {x_program, 0,   "Program       æœ¬ç¨‹å¼ä¹‹ç‰ˆæœ¬èˆ‡ç‰ˆæ¬Šå®£å‘Š"},
 #endif
-    {x_history, 0,   "History       ¡m§Ú­Ìªº¦¨ªø¡n"},
-    {x_login,0,      "System        ¡m¨t²Î­«­n¤½§i¡n"},
+    {x_history, 0,   "History       ã€Šæˆ‘å€‘çš„æˆé•·ã€‹"},
+    {x_login,0,      "System        ã€Šç³»çµ±é‡è¦å…¬å‘Šã€‹"},
 #ifdef HAVE_SYSUPDATES
-    {x_sys_updates,0,"LUpdates      ¡m¥»¯¸¨t²Îµ{¦¡§ó·s¬ö¿ı¡n"},
+    {x_sys_updates,0,"LUpdates      ã€Šæœ¬ç«™ç³»çµ±ç¨‹å¼æ›´æ–°ç´€éŒ„ã€‹"},
 #endif
 
 #else // !DEBUG
     {_debug_reportstruct, 0,
-	    	     "ReportStruct  ³ø§i¦UºØµ²ºcªº¤j¤p"},
+	    	     "ReportStruct  å ±å‘Šå„ç¨®çµæ§‹çš„å¤§å°"},
 #endif // !DEBUG
 
-    {p_sysinfo, 0,   "Xinfo         ¡m¬d¬İ¨t²Î¸ê°T¡n"},
+    {p_sysinfo, 0,   "Xinfo         ã€ŠæŸ¥çœ‹ç³»çµ±è³‡è¨Šã€‹"},
     {NULL, 0, NULL}
 };
 
 /* Ptt money menu */
 static const commands_t moneylist[] = {
-    {p_give, 0,         "0Give        µ¹¨ä¥L¤H" MONEYNAME},
-    {save_violatelaw, 0,"1ViolateLaw  Ãº»@³æ"},
-    {p_from, 0,         "2From        ¼È®É­×§ï¬G¶m"},
-    {ordersong,0,       "3OSong       ¤ß±¡ÂI¼½¾÷"},
+    {p_give, 0,         "0Give        çµ¦å…¶ä»–äºº" MONEYNAME},
+    {save_violatelaw, 0,"1ViolateLaw  ç¹³ç½°å–®"},
+    {p_from, 0,         "2From        æš«æ™‚ä¿®æ”¹æ•…é„‰"},
+    {ordersong,0,       "3OSong       å¿ƒæƒ…é»æ’­æ©Ÿ"},
     {NULL, 0, NULL}
 };
 
 static const commands_t      cmdlist[] = {
     {admin, PERM_SYSOP|PERM_ACCOUNTS|PERM_BOARD|PERM_VIEWSYSOP|PERM_ACCTREG|PERM_POLICE_MAN,
-				"0Admin       ¡i ¨t²ÎºûÅ@°Ï ¡j"},
-    {Announce,	0,		"Announce     ¡i ºëµØ¤½§GÄæ ¡j"},
+				"0Admin       ã€ ç³»çµ±ç¶­è­·å€ ã€‘"},
+    {Announce,	0,		"Announce     ã€ ç²¾è¯å…¬ä½ˆæ¬„ ã€‘"},
 #ifdef DEBUG
-    {Favorite,	0,		"Favorite     ¡i §Úªº³Ì¤£·R ¡j"},
+    {Favorite,	0,		"Favorite     ã€ æˆ‘çš„æœ€ä¸æ„› ã€‘"},
 #else
-    {Favorite,	0,		"Favorite     ¡i §Ú ªº ³Ì·R ¡j"},
+    {Favorite,	0,		"Favorite     ã€ æˆ‘ çš„ æœ€æ„› ã€‘"},
 #endif
-    {Class,	0,		"Class        ¡i ¤À²Õ°Q½×°Ï ¡j"},
-    // TODO ¥Ø«e«Ü¦h¤H³Q°±Åv®É·|ÅÜ¦¨ -R-1-3 (PERM_LOGINOK, PERM_VIOLATELAW,
-    // PERM_NOREGCODE) ¨S¦³ PERM_READMAIL¡A¦ı³o¼Ë³Â·Ğªº¬O¥L­Ì´N·d¤£À´µo¥Í¤°»ò¨Æ
-    {Mail, 	PERM_BASIC,     "Mail         ¡i ¨p¤H«H¥ó°Ï ¡j"},
-    // ¦³¨Ç bot ³ßÅw¾ã¤Ñ query online accounts, ©Ò¥H²á¤Ñ§ï¬° LOGINOK
-    {Talk, 	PERM_LOGINOK,	"Talk         ¡i ¥ğ¶¢²á¤Ñ°Ï ¡j"},
-    {User, 	PERM_BASIC,	"User         ¡i ­Ó¤H³]©w°Ï ¡j"},
-    {Xyz, 	0,		"Xyz          ¡i ¨t²Î¸ê°T°Ï ¡j"},
-    {Play_Play, PERM_LOGINOK, 	"Play         ¡i ®T¼Ö»P¥ğ¶¢ ¡j"},
-    {Name_Menu, PERM_LOGINOK,	"Namelist     ¡i ½s¯S§O¦W³æ ¡j"},
+    {Class,	0,		"Class        ã€ åˆ†çµ„è¨è«–å€ ã€‘"},
+    // TODO ç›®å‰å¾ˆå¤šäººè¢«åœæ¬Šæ™‚æœƒè®Šæˆ -R-1-3 (PERM_LOGINOK, PERM_VIOLATELAW,
+    // PERM_NOREGCODE) æ²’æœ‰ PERM_READMAILï¼Œä½†é€™æ¨£éº»ç…©çš„æ˜¯ä»–å€‘å°±æä¸æ‡‚ç™¼ç”Ÿä»€éº¼äº‹
+    {Mail, 	PERM_BASIC,     "Mail         ã€ ç§äººä¿¡ä»¶å€ ã€‘"},
+    // æœ‰äº› bot å–œæ­¡æ•´å¤© query online accounts, æ‰€ä»¥èŠå¤©æ”¹ç‚º LOGINOK
+    {Talk, 	PERM_LOGINOK,	"Talk         ã€ ä¼‘é–’èŠå¤©å€ ã€‘"},
+    {User, 	PERM_BASIC,	"User         ã€ å€‹äººè¨­å®šå€ ã€‘"},
+    {Xyz, 	0,		"Xyz          ã€ ç³»çµ±è³‡è¨Šå€ ã€‘"},
+    {Play_Play, PERM_LOGINOK, 	"Play         ã€ å¨›æ¨‚èˆ‡ä¼‘é–’ ã€‘"},
+    {Name_Menu, PERM_LOGINOK,	"Namelist     ã€ ç·¨ç‰¹åˆ¥åå–® ã€‘"},
 #ifdef DEBUG
-    {Goodbye, 	0, 		"Goodbye      ¦A¨£¦A¨£¦A¨£¦A¨£"},
+    {Goodbye, 	0, 		"Goodbye      å†è¦‹å†è¦‹å†è¦‹å†è¦‹"},
 #else
-    {Goodbye, 	0, 		"Goodbye         Â÷¶}¡A¦A¨£¡K "},
+    {Goodbye, 	0, 		"Goodbye         é›¢é–‹ï¼Œå†è¦‹â€¦ "},
 #endif
     {NULL, 	0, 		NULL}
 };
 
 int main_menu(void) {
-    domenu(M_MMENU, "¥D¥\\¯àªí", (ISNEWMAIL(currutmp) ? 'M' : 'C'), cmdlist);
+    domenu(M_MMENU, "ä¸»åŠŸèƒ½è¡¨", (ISNEWMAIL(currutmp) ? 'M' : 'C'), cmdlist);
     return 0;
 }
 
 static int p_money() {
-    domenu(M_PSALE, BBSMNAME2 "¶q³c©±", '0', moneylist);
+    domenu(M_PSALE, BBSMNAME2 "é‡è²©åº—", '0', moneylist);
     return 0;
 };
 
@@ -996,43 +996,43 @@ static int chessroom();
 
 /* Ptt Play menu */
 static const commands_t playlist[] = {
-    {p_money, PERM_LOGINOK,  "Pay         ¡i " BBSMNAME2 "¶q³c©± ¡j"},
+    {p_money, PERM_LOGINOK,  "Pay         ã€ " BBSMNAME2 "é‡è²©åº— ã€‘"},
     {chicken_main, PERM_LOGINOK,
-			     "Chicken     ¡i " BBSMNAME2 "¾iÂû³õ ¡j"},
+			     "Chicken     ã€ " BBSMNAME2 "é¤Šé›å ´ ã€‘"},
     {ticket_main, PERM_LOGINOK,
-                             "Gamble      ¡i " BBSMNAME2 "±m¨é   ¡j"},
-    {chessroom, PERM_LOGINOK,"BChess      ¡i " BBSMNAME2 "´Ñ°|   ¡j"},
+                             "Gamble      ã€ " BBSMNAME2 "å½©åˆ¸   ã€‘"},
+    {chessroom, PERM_LOGINOK,"BChess      ã€ " BBSMNAME2 "æ£‹é™¢   ã€‘"},
     {NULL, 0, NULL}
 };
 
 static const commands_t conn6list[] = {
-    {conn6_main,       PERM_LOGINOK, "1Conn6Fight    ¡i" ANSI_COLOR(1;33) "¤»¤l´ÑÁÜ§½" ANSI_RESET "¡j"},
-    {conn6_personal,   PERM_LOGINOK, "2Conn6Self     ¡i" ANSI_COLOR(1;34) "¤»¤l´Ñ¥´ÃĞ" ANSI_RESET "¡j"},
-    {conn6_watch,      PERM_LOGINOK, "3Conn6Watch    ¡i" ANSI_COLOR(1;35) "¤»¤l´ÑÆ[´Ñ" ANSI_RESET "¡j"},
+    {conn6_main,       PERM_LOGINOK, "1Conn6Fight    ã€" ANSI_COLOR(1;33) "å…­å­æ£‹é‚€å±€" ANSI_RESET "ã€‘"},
+    {conn6_personal,   PERM_LOGINOK, "2Conn6Self     ã€" ANSI_COLOR(1;34) "å…­å­æ£‹æ‰“è­œ" ANSI_RESET "ã€‘"},
+    {conn6_watch,      PERM_LOGINOK, "3Conn6Watch    ã€" ANSI_COLOR(1;35) "å…­å­æ£‹è§€æ£‹" ANSI_RESET "ã€‘"},
     {NULL, 0, NULL}
 };
 
 static int conn6_menu() {
-    domenu(M_CHC, BBSMNAME2 "¤»¤l´Ñ", '1', conn6list);
+    domenu(M_CHC, BBSMNAME2 "å…­å­æ£‹", '1', conn6list);
     return 0;
 }
 
 static const commands_t chesslist[] = {
-    {chc_main,         PERM_LOGINOK, "1CChessFight   ¡i" ANSI_COLOR(1;33) " ¶H´ÑÁÜ§½ " ANSI_RESET "¡j"},
-    {chc_personal,     PERM_LOGINOK, "2CChessSelf    ¡i" ANSI_COLOR(1;34) " ¶H´Ñ¥´ÃĞ " ANSI_RESET "¡j"},
-    {chc_watch,        PERM_LOGINOK, "3CChessWatch   ¡i" ANSI_COLOR(1;35) " ¶H´ÑÆ[´Ñ " ANSI_RESET "¡j"},
-    {gomoku_main,      PERM_LOGINOK, "4GomokuFight   ¡i" ANSI_COLOR(1;33) "¤­¤l´ÑÁÜ§½" ANSI_RESET "¡j"},
-    {gomoku_personal,  PERM_LOGINOK, "5GomokuSelf    ¡i" ANSI_COLOR(1;34) "¤­¤l´Ñ¥´ÃĞ" ANSI_RESET "¡j"},
-    {gomoku_watch,     PERM_LOGINOK, "6GomokuWatch   ¡i" ANSI_COLOR(1;35) "¤­¤l´ÑÆ[´Ñ" ANSI_RESET "¡j"},
-    {gochess_main,     PERM_LOGINOK, "7GoChessFight  ¡i" ANSI_COLOR(1;33) " ³ò´ÑÁÜ§½ " ANSI_RESET "¡j"},
-    {gochess_personal, PERM_LOGINOK, "8GoChessSelf   ¡i" ANSI_COLOR(1;34) " ³ò´Ñ¥´ÃĞ " ANSI_RESET "¡j"},
-    {gochess_watch,    PERM_LOGINOK, "9GoChessWatch  ¡i" ANSI_COLOR(1;35) " ³ò´ÑÆ[´Ñ " ANSI_RESET "¡j"},
-    {conn6_menu,       PERM_LOGINOK, "CConnect6      ¡i" ANSI_COLOR(1;33) "  ¤»¤l´Ñ  " ANSI_RESET "¡j"},
+    {chc_main,         PERM_LOGINOK, "1CChessFight   ã€" ANSI_COLOR(1;33) " è±¡æ£‹é‚€å±€ " ANSI_RESET "ã€‘"},
+    {chc_personal,     PERM_LOGINOK, "2CChessSelf    ã€" ANSI_COLOR(1;34) " è±¡æ£‹æ‰“è­œ " ANSI_RESET "ã€‘"},
+    {chc_watch,        PERM_LOGINOK, "3CChessWatch   ã€" ANSI_COLOR(1;35) " è±¡æ£‹è§€æ£‹ " ANSI_RESET "ã€‘"},
+    {gomoku_main,      PERM_LOGINOK, "4GomokuFight   ã€" ANSI_COLOR(1;33) "äº”å­æ£‹é‚€å±€" ANSI_RESET "ã€‘"},
+    {gomoku_personal,  PERM_LOGINOK, "5GomokuSelf    ã€" ANSI_COLOR(1;34) "äº”å­æ£‹æ‰“è­œ" ANSI_RESET "ã€‘"},
+    {gomoku_watch,     PERM_LOGINOK, "6GomokuWatch   ã€" ANSI_COLOR(1;35) "äº”å­æ£‹è§€æ£‹" ANSI_RESET "ã€‘"},
+    {gochess_main,     PERM_LOGINOK, "7GoChessFight  ã€" ANSI_COLOR(1;33) " åœæ£‹é‚€å±€ " ANSI_RESET "ã€‘"},
+    {gochess_personal, PERM_LOGINOK, "8GoChessSelf   ã€" ANSI_COLOR(1;34) " åœæ£‹æ‰“è­œ " ANSI_RESET "ã€‘"},
+    {gochess_watch,    PERM_LOGINOK, "9GoChessWatch  ã€" ANSI_COLOR(1;35) " åœæ£‹è§€æ£‹ " ANSI_RESET "ã€‘"},
+    {conn6_menu,       PERM_LOGINOK, "CConnect6      ã€" ANSI_COLOR(1;33) "  å…­å­æ£‹  " ANSI_RESET "ã€‘"},
     {NULL, 0, NULL}
 };
 
 static int chessroom() {
-    domenu(M_CHC, BBSMNAME2 "´Ñ°|", '1', chesslist);
+    domenu(M_CHC, BBSMNAME2 "æ£‹é™¢", '1', chesslist);
     return 0;
 }
 
@@ -1052,49 +1052,49 @@ admin(void)
     else if (HasUserPerm(PERM_POLICE_MAN))
         init = 'S';
 
-    domenu(M_ADMIN, "¨t²ÎºûÅ@", init, adminlist);
+    domenu(M_ADMIN, "ç³»çµ±ç¶­è­·", init, adminlist);
     return 0;
 }
 
 int
 Mail(void)
 {
-    domenu(M_MAIL, "¹q¤l¶l¥ó", 'R', maillist);
+    domenu(M_MAIL, "é›»å­éƒµä»¶", 'R', maillist);
     return 0;
 }
 
 int
 Talk(void)
 {
-    domenu(M_TMENU, "²á¤Ñ»¡¸Ü", 'U', talklist);
+    domenu(M_TMENU, "èŠå¤©èªªè©±", 'U', talklist);
     return 0;
 }
 
 int
 User(void)
 {
-    domenu(M_UMENU, "­Ó¤H³]©w", 'U', userlist);
+    domenu(M_UMENU, "å€‹äººè¨­å®š", 'U', userlist);
     return 0;
 }
 
 int
 Xyz(void)
 {
-    domenu(M_XMENU, "¤u¨ãµ{¦¡", 'T', xyzlist);
+    domenu(M_XMENU, "å·¥å…·ç¨‹å¼", 'T', xyzlist);
     return 0;
 }
 
 int
 Play_Play(void)
 {
-    domenu(M_PMENU, "ºô¸ô¹C¼Ö³õ", 'G', playlist);
+    domenu(M_PMENU, "ç¶²è·¯éŠæ¨‚å ´", 'G', playlist);
     return 0;
 }
 
 int
 Name_Menu(void)
 {
-    domenu(M_NMENU, "¦W³æ½s¿è", 'O', namelist);
+    domenu(M_NMENU, "åå–®ç·¨è¼¯", 'O', namelist);
     return 0;
 }
 

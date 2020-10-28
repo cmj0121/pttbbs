@@ -1,25 +1,21 @@
-# $Id: Makefile 3673 2007-12-12 01:42:23Z kcwu $
-# Usually you won't build everything for upgrading, so we let you decide what to run.
+include Makefile.in
 
-SRCROOT=	..
-.include "$(SRCROOT)/pttbbs.mk"
+SRC := $(wildcard r*.c)
+OBJ := $(subst .c,.o,$(SRC))
+BIN := $(subst .o,,$(OBJ))
 
-CFLAGS+= -DPTTBBS_UTIL
+CFLAGS  := $(CFLAGS) -DPTTBBS_UTIL
+LDFLAGS := $(LDFLAGS) $(COMMON_LIB)
 
-BBSBASE=	$(SRCROOT)/include/var.h
+.PHONY: all clean
 
-UTIL_OBJS=	../util/util_var.o
+all: $(BIN)
 
-LDLIBS:=  $(UTIL_OBJS) \
-	  $(SRCROOT)/common/bbs/libcmbbs.a \
-	  $(SRCROOT)/common/sys/libcmsys.a \
-	  $(SRCROOT)/common/osdep/libosdep.a \
-	  $(LDLIBS)
+clean:
+	rm -f $(BIN)
 
-all:
-	@echo "Usually you won't build everything for upgrading, "
-	@echo "        so we let you decide what to run."
-	@echo "Please type make rDDDD_XXXX to build your upgrade program."
+account: $(MBBSD_UTIL_OBJ)
 
-#$(SRCROOT)/include/var.h: $(SRCROOT)/mbbsd/var.c
-#	cd $(SRCROOT)/mbbsd; $(MAKE) $(SRCROOT)/include/var.h
+%: %.c
+	echo $^
+	# $(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)

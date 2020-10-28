@@ -1,19 +1,24 @@
-# $Id$
+include Makefile.in
 
-SRCROOT=	../..
-.include "$(SRCROOT)/pttbbs.mk"
+SRC := $(wildcard *.c) big5.c
+OBJ := $(subst .c,.o,$(SRC))
+LIB := libsys.a
 
-SRCS:=	daemon.c file.c lock.c log.c net.c sort.c string.c time.c \
-	crypt.c record.c vector.c telnet.c vbuf.c vtkbd.c \
-	utf8.c big5.c buffer.c thttp.c
+.PHONY: all clean
 
-LIB:=	cmsys
+all: $(LIB)		# build all necessary
 
-all: .depend
+clean: 			# clean-up temporary file
+	rm -f $(LIB) $(OBJ)
 
-big5.c: big5data.tar.bz2 big5_gen.py
-	./big5_gen.py > big5.c
+help:  			# show this message
+	@printf "Usage: make [OPTION]\n"
+	@printf "\n"
+	@perl -nle 'print $$& if m{^[\w-]+:.*?#.*$$}' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?#"} {printf "    %-18s %s\n", $$1, $$2}'
 
-install:
+$(LIB): $(OBJ)
+	$(AR) -csr $@ $^
 
-.include <bsd.lib.mk>
+big5.c:
+	./big5_gen.py > $@

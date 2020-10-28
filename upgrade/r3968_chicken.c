@@ -7,64 +7,64 @@ typedef struct {
     				 * use revision number of project to denote.*/
 
     char    userid[IDLEN + 1];	/* ID */
-    char    realname[20];	/* ¯u¹ê©m¦W */
-    char    nickname[24];	/* ¼ÊºÙ */
-    char    passwd[PASSLEN];	/* ±K½X */
+    char    realname[20];	/* çœŸå¯¦å§“å */
+    char    nickname[24];	/* æš±ç¨± */
+    char    passwd[PASSLEN];	/* å¯†ç¢¼ */
     char    padx;
-    unsigned int    uflag;	/* ²ßºD1 , see uflags.h */
-    unsigned int    uflag2;	/* ²ßºD2 , see uflags.h */
-    unsigned int    userlevel;	/* Åv­­ */
-    unsigned int    numlogins;	/* ¤W¯¸¦¸¼Æ */
-    unsigned int    numposts;	/* ¤å³¹½g¼Æ */
-    time4_t firstlogin;		/* µù¥U®É¶¡ */
-    time4_t lastlogin;		/* ³Ìªñ¤W¯¸®É¶¡ */
-    char    lasthost[16];	/* ¤W¦¸¤W¯¸¨Ó·½ */
-    int     money;		/* Ptt¹ô */
-    char    remoteuser[3];	/* «O¯d ¥Ø«e¨S¥Î¨ìªº */
-    char    proverb;		/* ®y¥k»Ê (unused) */
+    unsigned int    uflag;	/* ç¿’æ…£1 , see uflags.h */
+    unsigned int    uflag2;	/* ç¿’æ…£2 , see uflags.h */
+    unsigned int    userlevel;	/* æ¬Šé™ */
+    unsigned int    numlogins;	/* ä¸Šç«™æ¬¡æ•¸ */
+    unsigned int    numposts;	/* æ–‡ç« ç¯‡æ•¸ */
+    time4_t firstlogin;		/* è¨»å†Šæ™‚é–“ */
+    time4_t lastlogin;		/* æœ€è¿‘ä¸Šç«™æ™‚é–“ */
+    char    lasthost[16];	/* ä¸Šæ¬¡ä¸Šç«™ä¾†æº */
+    int     money;		/* Pttå¹£ */
+    char    remoteuser[3];	/* ä¿ç•™ ç›®å‰æ²’ç”¨åˆ°çš„ */
+    char    proverb;		/* åº§å³éŠ˜ (unused) */
     char    email[50];		/* Email */
-    char    address[50];	/* ¦í§} */
-    char    justify[REGLEN + 1];    /* ¼f®Ö¸ê®Æ */
-    unsigned char   month;	/* ¥Í¤é ¤ë */
-    unsigned char   day;	/* ¥Í¤é ¤é */
-    unsigned char   year;	/* ¥Í¤é ¦~ */
-    unsigned char   sex;	/* ©Ê§O */
+    char    address[50];	/* ä½å€ */
+    char    justify[REGLEN + 1];    /* å¯©æ ¸è³‡æ–™ */
+    unsigned char   month;	/* ç”Ÿæ—¥ æœˆ */
+    unsigned char   day;	/* ç”Ÿæ—¥ æ—¥ */
+    unsigned char   year;	/* ç”Ÿæ—¥ å¹´ */
+    unsigned char   sex;	/* æ€§åˆ¥ */
     unsigned char   state;	/* TODO unknown (unused ?) */
-    unsigned char   pager;	/* ©I¥s¾¹ª¬ºA */
-    unsigned char   invisible;	/* Áô§Îª¬ºA */
+    unsigned char   pager;	/* å‘¼å«å™¨ç‹€æ…‹ */
+    unsigned char   invisible;	/* éš±å½¢ç‹€æ…‹ */
     char    padxx[2];
-    unsigned int    exmailbox;	/* ÁÊ¶R«H½c¼Æ TODO short ´N°÷¤F */
-    chicken_t       mychicken;	/* Ãdª« */
-    time4_t lastsong;		/* ¤W¦¸ÂIºq®É¶¡ */
-    unsigned int    loginview;	/* ¶i¯¸µe­± */
+    unsigned int    exmailbox;	/* è³¼è²·ä¿¡ç®±æ•¸ TODO short å°±å¤ äº† */
+    chicken_t       mychicken;	/* å¯µç‰© */
+    time4_t lastsong;		/* ä¸Šæ¬¡é»æ­Œæ™‚é–“ */
+    unsigned int    loginview;	/* é€²ç«™ç•«é¢ */
     unsigned char   channel;	/* TODO unused */
     char    padxxx;
-    unsigned short  vl_count;	/* ¹Hªk°O¿ı ViolateLaw counter */
-    unsigned short  five_win;	/* ¤­¤l´Ñ¾ÔÁZ ³Ó */
-    unsigned short  five_lose;	/* ¤­¤l´Ñ¾ÔÁZ ±Ñ */
-    unsigned short  five_tie;	/* ¤­¤l´Ñ¾ÔÁZ ©M */
-    unsigned short  chc_win;	/* ¶H´Ñ¾ÔÁZ ³Ó */
-    unsigned short  chc_lose;	/* ¶H´Ñ¾ÔÁZ ±Ñ */
-    unsigned short  chc_tie;	/* ¶H´Ñ¾ÔÁZ ©M */
-    int     mobile;		/* ¤â¾÷¸¹½X */
-    char    mind[4];		/* ¤ß±¡ not a null-terminate string */
-    unsigned short  go_win;	/* ³ò´Ñ¾ÔÁZ ³Ó */
-    unsigned short  go_lose;	/* ³ò´Ñ¾ÔÁZ ±Ñ */
-    unsigned short  go_tie;	/* ³ò´Ñ¾ÔÁZ ©M */
-    char    pad0[5];		/* ±q«e©ñ ident ¨­¥÷ÃÒ¦r¸¹¡A²{¦b¥i¥H®³¨Ó°µ§Oªº¨Æ¤F¡A
-				   ¤£¹L³Ì¦n°O±o­n¥ı²M¦¨ 0 */
-    unsigned char   signature;	/* ºD¥ÎÃ±¦WÀÉ */
+    unsigned short  vl_count;	/* é•æ³•è¨˜éŒ„ ViolateLaw counter */
+    unsigned short  five_win;	/* äº”å­æ£‹æˆ°ç¸¾ å‹ */
+    unsigned short  five_lose;	/* äº”å­æ£‹æˆ°ç¸¾ æ•— */
+    unsigned short  five_tie;	/* äº”å­æ£‹æˆ°ç¸¾ å’Œ */
+    unsigned short  chc_win;	/* è±¡æ£‹æˆ°ç¸¾ å‹ */
+    unsigned short  chc_lose;	/* è±¡æ£‹æˆ°ç¸¾ æ•— */
+    unsigned short  chc_tie;	/* è±¡æ£‹æˆ°ç¸¾ å’Œ */
+    int     mobile;		/* æ‰‹æ©Ÿè™Ÿç¢¼ */
+    char    mind[4];		/* å¿ƒæƒ… not a null-terminate string */
+    unsigned short  go_win;	/* åœæ£‹æˆ°ç¸¾ å‹ */
+    unsigned short  go_lose;	/* åœæ£‹æˆ°ç¸¾ æ•— */
+    unsigned short  go_tie;	/* åœæ£‹æˆ°ç¸¾ å’Œ */
+    char    pad0[5];		/* å¾å‰æ”¾ ident èº«ä»½è­‰å­—è™Ÿï¼Œç¾åœ¨å¯ä»¥æ‹¿ä¾†åšåˆ¥çš„äº‹äº†ï¼Œ
+				   ä¸éæœ€å¥½è¨˜å¾—è¦å…ˆæ¸…æˆ 0 */
+    unsigned char   signature;	/* æ…£ç”¨ç°½åæª” */
 
-    unsigned char   goodpost;	/* µû»ù¬°¦n¤å³¹¼Æ */
-    unsigned char   badpost;	/* µû»ù¬°Ãa¤å³¹¼Æ */
-    unsigned char   goodsale;	/* Äv¼Ğ ¦nªºµû»ù  */
-    unsigned char   badsale;	/* Äv¼Ğ Ãaªºµû»ù  */
-    char    myangel[IDLEN+1];	/* §Úªº¤p¤Ñ¨Ï */
+    unsigned char   goodpost;	/* è©•åƒ¹ç‚ºå¥½æ–‡ç« æ•¸ */
+    unsigned char   badpost;	/* è©•åƒ¹ç‚ºå£æ–‡ç« æ•¸ */
+    unsigned char   goodsale;	/* ç«¶æ¨™ å¥½çš„è©•åƒ¹  */
+    unsigned char   badsale;	/* ç«¶æ¨™ å£çš„è©•åƒ¹  */
+    char    myangel[IDLEN+1];	/* æˆ‘çš„å°å¤©ä½¿ */
     char    pad2;
-    unsigned short  chess_elo_rating;	/* ¶H´Ñµ¥¯Å¤À */
-    unsigned int    withme;	/* §Ú·Q§ä¤H¤U´Ñ¡A²á¤Ñ.... */
-    time4_t timeremovebadpost;  /* ¤W¦¸§R°£¦H¤å®É¶¡ */
-    time4_t timeviolatelaw; /* ³Q¶}»@³æ®É¶¡ */
+    unsigned short  chess_elo_rating;	/* è±¡æ£‹ç­‰ç´šåˆ† */
+    unsigned int    withme;	/* æˆ‘æƒ³æ‰¾äººä¸‹æ£‹ï¼ŒèŠå¤©.... */
+    time4_t timeremovebadpost;  /* ä¸Šæ¬¡åˆªé™¤åŠ£æ–‡æ™‚é–“ */
+    time4_t timeviolatelaw; /* è¢«é–‹ç½°å–®æ™‚é–“ */
     char    pad[28];
 } old_userec_t;
 

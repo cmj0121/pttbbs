@@ -7,8 +7,8 @@
         EXPAND_AND_QUOTE(ANGELBEATS_PERF_MIN_PERIOD)
 #define die(format...) { fprintf(stderr, format); exit(1); }
 
-#define REPORT_AUTHOR   "[�ѨϤ��|]"
-#define REPORT_SUBJECT  "�p�Ѩϲέp���"
+#define REPORT_AUTHOR   "[天使公會]"
+#define REPORT_SUBJECT  "小天使統計資料"
 
 #ifndef PLAY_ANGEL
 int main(){ return 0; }
@@ -115,15 +115,15 @@ int generateReport(FILE *fp, AngelRecord *rec, int num_recs, int delete_file) {
     time4_t t = time4(NULL);
     int i;
 
-    fprintf(fp, "�@��: %s\n���D: %s\n�ɶ�: %s\n",
+    fprintf(fp, "作者: %s\n標題: %s\n時間: %s\n",
             REPORT_AUTHOR, REPORT_SUBJECT, ctime4(&t));
 
-    fprintf(fp, "�{�b�����p�ѨϦ� %d ��:\n", num_recs);
+    fprintf(fp, "現在全站小天使有 %d 位:\n", num_recs);
     fprintf(fp,
-            " (�᭱�Ʀr�������p�D�H�� |  7�Ѥ� | 30�Ѥ� | 90�Ѥ� |  120�� |  180��\n"
-            "  �����D�p�D�H��(�b�Ӭq�ɶ������ǰe�T�������@�p�ѨϪ��D�H)\n"
-	    "  ���`�N�ثe���D�p�D�H�Ȳέp�u�D�H���e�T���v�A�L�k�o���p�Ѩ�\n"
-	    "  �O�_���� - �ҥH�аt�X��d���G�����C)\n");
+            " (後面數字為全部小主人數 |  7天內 | 30天內 | 90天內 |  120天 |  180天\n"
+            "  的活躍小主人數(在該段時間內有傳送訊息給任一小天使的主人)\n"
+	    "  但注意目前活躍小主人僅統計「主人有送訊息」，無法得知小天使\n"
+	    "  是否掛站 - 所以請配合抽查結果評估。)\n");
     for (i = 0; i < num_recs; i++)
         fprintf(fp, "%15s | %6d | %6d | %6d | %6d | %6d | %6d\n",
                 getuserid(rec[i].uid),
@@ -137,23 +137,23 @@ int generateReport(FILE *fp, AngelRecord *rec, int num_recs, int delete_file) {
     fputs("\n", fp);
 
     appendLogFile(fp, "log/angel_perf.txt",
-                  "\n== ���P�p�ѨϬ��ʸ�ưO�� ==\n"
-                  " (����: Start �O�}�l�έp���ɶ�\n"
-                  "        Duration �O�X���έp�@��\n"
-                  "        Sample �����O�C���έp�ɤѨϦb�u�W������\n"
-                  "        Pause1 �����O Sample �����X�����٩I�s���]����\n"
-                  "        Pause2 �����O Sample �����X�����٩I�s���]����)\n",
+                  "\n== 本周小天使活動資料記錄 ==\n"
+                  " (說明: Start 是開始統計的時間\n"
+                  "        Duration 是幾秒統計一次\n"
+                  "        Sample 指的是每次統計時天使在線上的次數\n"
+                  "        Pause1 指的是 Sample 中有幾次神諭呼叫器設停收\n"
+                  "        Pause2 指的是 Sample 中有幾次神諭呼叫器設關閉)\n",
                   delete_file);
 
     appendLogFile(fp, "log/change_angel_nick.log",
-                  "\n== ���P�p�Ѩϼʺ��ܧ�O�� ==\n",
+                  "\n== 本周小天使暱稱變更記錄 ==\n",
                   delete_file);
 
     appendLogFile(fp, "log/changeangel.log",
-                  "\n== ���P�󴫤p�ѨϰO�� ==\n",
+                  "\n== 本周更換小天使記錄 ==\n",
                   delete_file);
 
-    fprintf(fp, "\n--\n  ����ƥ�%s%s�۰ʲ���\n\n", BBSNAME, REPORT_AUTHOR);
+    fprintf(fp, "\n--\n  本資料由%s%s自動產生\n\n", BBSNAME, REPORT_AUTHOR);
     return 0;
 }
 

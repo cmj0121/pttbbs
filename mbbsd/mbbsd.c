@@ -182,7 +182,7 @@ log_usies(const char *mode, const char *mesg)
                  "%s %s %-12s %s\n",
                  Cdate(&now), mode, cuser.userid, mesg);
 
-    /* °lÂÜ¨Ï¥ÎªÌ */
+    /* è¿½è¹¤ä½¿ç”¨è€… */
     if (HasUserPerm(PERM_LOGUSER))
         log_user("logout");
 }
@@ -276,13 +276,13 @@ abort_bbs_debug(int sig)
 
     fprintf(stderr, "%d %d %d %.12s\n", (int)time4(NULL), getpid(), sig, cuser.userid);
 #define CRASH_MSG ANSI_RESET \
-    "\r\nµ{¦¡²§±`, ¥ß¨èÂ_½u. \r\n" \
-    "½Ğ¬¢ " BN_BUGREPORT " ªO¸Ô­z°İÃDµo¥Í¸g¹L¡C\r\n"
+    "\r\nç¨‹å¼ç•°å¸¸, ç«‹åˆ»æ–·ç·š. \r\n" \
+    "è«‹æ´½ " BN_BUGREPORT " æ¿è©³è¿°å•é¡Œç™¼ç”Ÿç¶“éã€‚\r\n"
 
 #define XCPU_MSG ANSI_RESET \
-    "\r\nµ{¦¡¯Ó¥Î¹L¦h­pºâ¸ê·½, ¥ß¨èÂ_½u¡C\r\n" \
-    "¥i¯à¬O (a)°õ¦æ¤Ó¦h¯Ó¥Î¸ê·½ªº°Ê§@ ©Î (b)µ{¦¡±¼¤JµL½a°j°é. "\
-    "½Ğ¬¢ " BN_BUGREPORT " ªO¸Ô­z°İÃDµo¥Í¸g¹L¡C\r\n"
+    "\r\nç¨‹å¼è€—ç”¨éå¤šè¨ˆç®—è³‡æº, ç«‹åˆ»æ–·ç·šã€‚\r\n" \
+    "å¯èƒ½æ˜¯ (a)åŸ·è¡Œå¤ªå¤šè€—ç”¨è³‡æºçš„å‹•ä½œ æˆ– (b)ç¨‹å¼æ‰å…¥ç„¡çª®è¿´åœˆ. "\
+    "è«‹æ´½ " BN_BUGREPORT " æ¿è©³è¿°å•é¡Œç™¼ç”Ÿç¶“éã€‚\r\n"
 
     if(sig==SIGXCPU)
 	write(1, XCPU_MSG, sizeof(XCPU_MSG));
@@ -336,7 +336,7 @@ signal_xcpu_handler(int sig)
     if (last_time_exceeded == 0)
 	last_time_exceeded = login_start_time;
     assert(last_time_exceeded);
-    // ¤£¥Î (time(0) - login_start_time) ¨Ó¥­§¡, Á×§K¥Î¦n´X¤Ñ¤§«á¬ğµM¨g¦Y cpu ªºª¬ªp.
+    // ä¸ç”¨ (time(0) - login_start_time) ä¾†å¹³å‡, é¿å…ç”¨å¥½å¹¾å¤©ä¹‹å¾Œçªç„¶ç‹‚åƒ cpu çš„ç‹€æ³.
     if (time(0) - last_time_exceeded < DAY_SECONDS)
 	give_more_time = false;
     last_time_exceeded = time(0);
@@ -357,7 +357,7 @@ signal_xcpu_handler(int sig)
 }
 #endif
 
-/* µn¿ı BBS µ{¦¡ */
+/* ç™»éŒ„ BBS ç¨‹å¼ */
 static void
 mysrand(void)
 {
@@ -377,10 +377,10 @@ talk_request(int sig GCC_UNUSED)
 	syncnow();
 	move(0, 0);
 	clrtoeol();
-	prints(ANSI_COLOR(33;41) "¡¹%s" ANSI_COLOR(34;47) " [%s] %s " ANSI_RESET,
+	prints(ANSI_COLOR(33;41) "â˜…%s" ANSI_COLOR(34;47) " [%s] %s " ANSI_RESET,
 		 SHM->uinfo[currutmp->destuip].userid, Cdatelite(&now),
-		 (currutmp->sig == 2) ? "­«­n®ø®§¼s¼½¡I(½ĞCtrl-U,l¬d¬İ¼ö°T°O¿ı)"
-		 : "©I¥s¡B©I¥s¡AÅ¥¨ì½Ğ¦^µª");
+		 (currutmp->sig == 2) ? "é‡è¦æ¶ˆæ¯å»£æ’­ï¼(è«‹Ctrl-U,læŸ¥çœ‹ç†±è¨Šè¨˜éŒ„)"
+		 : "å‘¼å«ã€å‘¼å«ï¼Œè½åˆ°è«‹å›ç­”");
 	refresh();
     } else {
 	unsigned char   mode0 = currutmp->mode;
@@ -405,7 +405,7 @@ show_call_in(int save, int which)
 
 #ifdef PLAY_ANGEL
     if (mode == MSGMODE_TOANGEL) {
-        snprintf(buf, sizeof(buf), ANSI_COLOR(1;37;46) "¡¹%s" ANSI_COLOR(37;45)
+        snprintf(buf, sizeof(buf), ANSI_COLOR(1;37;46) "â˜…%s" ANSI_COLOR(37;45)
                  " %s " ANSI_RESET,
                  currutmp->msgs[which].userid,
                  currutmp->msgs[which].last_call_in);
@@ -414,7 +414,7 @@ show_call_in(int save, int which)
         angel_notify_activity(currutmp->msgs[which].userid);
     } else
 #endif
-    snprintf(buf, sizeof(buf), ANSI_COLOR(1;33;46) "¡¹%s" ANSI_COLOR(37;45)
+    snprintf(buf, sizeof(buf), ANSI_COLOR(1;33;46) "â˜…%s" ANSI_COLOR(37;45)
              " %s " ANSI_RESET, currutmp->msgs[which].userid,
              currutmp->msgs[which].last_call_in);
     outmsg(buf);
@@ -512,21 +512,21 @@ write_request(int sig)
     syncnow();
     check_water_init();
     if (PAGER_UI_IS(PAGER_UI_OFO)) {
-	/* ¦pªG¥Ø«e¥¿¦b¦^¤ô²y¼Ò¦¡ªº¸Ü, ´N¤£¯à¶i¦æ add_history() ,
-	   ¦]¬°·|§ï¼g water[], ¦Ó¨Ï¦^¤ô²y¥ØªºÄê±¼, ©Ò¥H¤À¦¨´XºØ±¡ªp¦Ò¼{.
-	   sig != 0ªí¯uªº¦³¤ô²y¶i¨Ó, ¬GÅã¥Ü.
-	   sig == 0ªí¥Ü¨S¦³¤ô²y¶i¨Ó, ¤£¹L¤§«e©|¦³¤ô²yÁÙ¨S¼g¨ì water[].
+	/* å¦‚æœç›®å‰æ­£åœ¨å›æ°´çƒæ¨¡å¼çš„è©±, å°±ä¸èƒ½é€²è¡Œ add_history() ,
+	   å› ç‚ºæœƒæ”¹å¯« water[], è€Œä½¿å›æ°´çƒç›®çš„çˆ›æ‰, æ‰€ä»¥åˆ†æˆå¹¾ç¨®æƒ…æ³è€ƒæ…®.
+	   sig != 0è¡¨çœŸçš„æœ‰æ°´çƒé€²ä¾†, æ•…é¡¯ç¤º.
+	   sig == 0è¡¨ç¤ºæ²’æœ‰æ°´çƒé€²ä¾†, ä¸éä¹‹å‰å°šæœ‰æ°´çƒé‚„æ²’å¯«åˆ° water[].
 	*/
 	static  int     alreadyshow = 0;
 
-	if( sig ){ /* ¯uªº¦³¤ô²y¶i¨Ó */
+	if( sig ){ /* çœŸçš„æœ‰æ°´çƒé€²ä¾† */
 
-	    /* ­Y­ì¨Ó¥¿¦b REPLYING , «h§ï¦¨ RECVINREPLYING,
-	       ³o¼Ë¦b¦^¤ô²yµ²§ô«á, ·|¦A©I¥s¤@¦¸ write_request(0) */
+	    /* è‹¥åŸä¾†æ­£åœ¨ REPLYING , å‰‡æ”¹æˆ RECVINREPLYING,
+	       é€™æ¨£åœ¨å›æ°´çƒçµæŸå¾Œ, æœƒå†å‘¼å«ä¸€æ¬¡ write_request(0) */
 	    if( wmofo == REPLYING )
 		wmofo = RECVINREPLYING;
 
-	    /* Åã¥Ü */
+	    /* é¡¯ç¤º */
 	    for( ; alreadyshow < currutmp->msgcount && alreadyshow < MAX_MSGS
 		     ; ++alreadyshow ){
 		bell();
@@ -535,8 +535,8 @@ write_request(int sig)
 	    }
 	}
 
-	/* ¬İ¬İ¬O¤£¬O­n§â currutmp->msg ®³¦^ water[] (by add_history())
-	   ¶·­n¬O¤£¦b¦^¤ô²y¤¤ (NOTREPLYING) */
+	/* çœ‹çœ‹æ˜¯ä¸æ˜¯è¦æŠŠ currutmp->msg æ‹¿å› water[] (by add_history())
+	   é ˆè¦æ˜¯ä¸åœ¨å›æ°´çƒä¸­ (NOTREPLYING) */
 	if( wmofo == NOTREPLYING &&
 	    (msgcount = currutmp->msgcount) > 0 ){
 	    for( i = 0 ; i < msgcount ; ++i )
@@ -640,8 +640,8 @@ multi_user_check(void)
 	    return;
 
 	move(b_lines-3, 0); clrtobot();
-	outs("\n" ANSI_COLOR(1) "ª`·N: ±z¦³¨ä¥¦³s½u¤wµn¤J¦¹±b¸¹¡C" ANSI_RESET);
-	getdata(b_lines - 1, 0, "±z·Q§R°£¨ä¥L­«½Æµn¤Jªº³s½u¶Ü¡H[Y/n] ",
+	outs("\n" ANSI_COLOR(1) "æ³¨æ„: æ‚¨æœ‰å…¶å®ƒé€£ç·šå·²ç™»å…¥æ­¤å¸³è™Ÿã€‚" ANSI_RESET);
+	getdata(b_lines - 1, 0, "æ‚¨æƒ³åˆªé™¤å…¶ä»–é‡è¤‡ç™»å…¥çš„é€£ç·šå—ï¼Ÿ[Y/n] ",
 		genbuf, 3, LCECHO);
 
 	usleep(random()%5000000); // 0~5s
@@ -673,7 +673,7 @@ multi_user_check(void)
 	/* allow multiple guest user */
 	if (search_ulistn(usernum, MAX_GUEST) != NULL) {
 	    sleep(1);
-	    vmsg("©êºp¡A¥Ø«e¤w¦³¤Ó¦h guest ¦b¯¸¤W, ½Ğ¥Înewµù¥U¡C");
+	    vmsg("æŠ±æ­‰ï¼Œç›®å‰å·²æœ‰å¤ªå¤š guest åœ¨ç«™ä¸Š, è«‹ç”¨newè¨»å†Šã€‚");
 	    exit(1);
 	}
     }
@@ -751,7 +751,7 @@ load_current_user(const char *uid)
             if (!HasUserPerm(PERM_SYSOP | PERM_BBSADM | PERM_BOARD |
                              PERM_ACCOUNTS | PERM_CHATROOM |
                              PERM_VIEWSYSOP | PERM_PRG)) {
-                puts("\r\nÅv­­¤£¨¬¡A½Ğ´«¨ä¥¦ port ³s½u¡C\r\n");
+                puts("\r\næ¬Šé™ä¸è¶³ï¼Œè«‹æ›å…¶å®ƒ port é€£ç·šã€‚\r\n");
                 exit(0);
             }
         }
@@ -762,12 +762,12 @@ load_current_user(const char *uid)
 	if (strcasecmp(str_sysop, cuser.userid) == 0){
 #ifdef NO_SYSOP_ACCOUNT
 	    exit(0);
-#else /* ¦Û°Ê¥[¤W¦U­Ó¥D­nÅv­­ */
+#else /* è‡ªå‹•åŠ ä¸Šå„å€‹ä¸»è¦æ¬Šé™ */
 	    // TODO only allow in local connection?
 	    pwcuInitAdminPerm();
 #endif
 	}
-	/* ¦­¸Ó¦³ home ¤F, ¤£ª¾¹D¬°¦ó¦³ªº±b¸¹·|¨S¦³, ³Q¬å±¼¤F? */
+	/* æ—©è©²æœ‰ home äº†, ä¸çŸ¥é“ç‚ºä½•æœ‰çš„å¸³è™Ÿæœƒæ²’æœ‰, è¢«ç æ‰äº†? */
 	mkuserdir(cuser.userid);
 	logattempt(cuser.userid, ' ', login_start_time, fromhost);
 	ensure_user_agreement_version();
@@ -782,7 +782,7 @@ static void
 login_query(char *ruid)
 {
 #ifdef CONVERT
-    /* uid ¥[¤@¦ì, for gb login */
+    /* uid åŠ ä¸€ä½, for gb login */
     char            uid[IDLEN + 2];
     int		    len;
 #else
@@ -816,11 +816,11 @@ login_query(char *ruid)
 	prints("current pid: %d ", getpid());
 #endif
 
-	if (getdata(20, 0, "½Ğ¿é¤J¥N¸¹¡A©Î¥H guest °ÑÆ[¡A©Î¥H new µù¥U: ",
+	if (getdata(20, 0, "è«‹è¼¸å…¥ä»£è™Ÿï¼Œæˆ–ä»¥ guest åƒè§€ï¼Œæˆ–ä»¥ new è¨»å†Š: ",
 		uid, sizeof(uid), DOECHO) < 1)
 	{
 	    // got nothing
-	    outs("½Ğ­«·s¿é¤J¡C\n");
+	    outs("è«‹é‡æ–°è¼¸å…¥ã€‚\n");
 	    continue;
 	}
 	telnet_turnoff_client_detect();
@@ -854,9 +854,9 @@ login_query(char *ruid)
 #ifdef STR_REGNEW
 	} else if (strcasecmp(uid, STR_REGNEW) == 0) {
 # ifndef LOGINASNEW
-	    outs("¥»¨t²Î¥Ø«eµLªk¥H " STR_REGNEW " µù¥U"
+	    outs("æœ¬ç³»çµ±ç›®å‰ç„¡æ³•ä»¥ " STR_REGNEW " è¨»å†Š"
 #  ifdef STR_GUEST
-		 ", ½Ğ¥Î " STR_GUEST " ¶i¤J"
+		 ", è«‹ç”¨ " STR_GUEST " é€²å…¥"
 #  endif  // STR_GUEST
 		 "\n");
 	    continue;
@@ -887,7 +887,7 @@ login_query(char *ruid)
             /* check if the user is forced to login via secure connection. */
             if (valid_user &&
                 (passwd_require_secure_connection(&cuser) && !is_secure_connection)) {
-                outs("©êºp¡A¦¹±b¸¹¤w³]©w¬°¥u¯à¨Ï¥Î¦w¥ş³s½u(¦pssh)µn¤J¡C\n");
+                outs("æŠ±æ­‰ï¼Œæ­¤å¸³è™Ÿå·²è¨­å®šç‚ºåªèƒ½ä½¿ç”¨å®‰å…¨é€£ç·š(å¦‚ssh)ç™»å…¥ã€‚\n");
                 doupdate();
                 sleep(5);
                 continue;
@@ -899,7 +899,7 @@ login_query(char *ruid)
 	    passbuf[8] = '\0';
 
 	    move (22, 0); clrtoeol();
-	    outs("¥¿¦bÀË¬d±K½X...");
+	    outs("æ­£åœ¨æª¢æŸ¥å¯†ç¢¼...");
 	    move(22, 0); refresh();
 
 	    /* prepare for later */
@@ -915,7 +915,7 @@ login_query(char *ruid)
 	    } else {
 
 		strlcpy(ruid, cuser.userid, IDLEN+1);
-		outs("±K½X¥¿½T¡I ¶}©lµn¤J¨t²Î...");
+		outs("å¯†ç¢¼æ­£ç¢ºï¼ é–‹å§‹ç™»å…¥ç³»çµ±...");
 		move(22, 0); refresh();
 		clrtoeol();
 		break;
@@ -944,15 +944,15 @@ check_BM(void)
     // disable BM permission
     pwcuBitDisableLevel(PERM_BM);
     clear();
-    outs("\n¥Ñ©ó±z¤w¦³¤@¬q®É¶¡¥¼¦A¾á¥ô¥ô¦ó¬İªOªO¥D¡A\n"
-         "\nªO¥DÅv(¥]§t¶i¤JBMªO¤Î¥[¤j«H½cµ¥)¤w³Q¦¬¦^¡C\n");
+    outs("\nç”±æ–¼æ‚¨å·²æœ‰ä¸€æ®µæ™‚é–“æœªå†æ“”ä»»ä»»ä½•çœ‹æ¿æ¿ä¸»ï¼Œ\n"
+         "\næ¿ä¸»æ¬Š(åŒ…å«é€²å…¥BMæ¿åŠåŠ å¤§ä¿¡ç®±ç­‰)å·²è¢«æ”¶å›ã€‚\n");
     pressanykey();
 }
 
 static void
 setup_utmp(int mode)
 {
-    /* NOTE, ¦b getnewutmpent ¤§«e¤£À³¸Ó¦³¥ô¦ó slow/blocking function */
+    /* NOTE, åœ¨ getnewutmpent ä¹‹å‰ä¸æ‡‰è©²æœ‰ä»»ä½• slow/blocking function */
     userinfo_t      uinfo = {0};
     uinfo.pid	    = currpid = getpid();
     uinfo.uid	    = usernum;
@@ -991,7 +991,7 @@ setup_utmp(int mode)
     getnewutmpent(&uinfo);
 
     //////////////////////////////////////////////////////////////////
-    // ¥H¤U¥i¥H¶i¦æ¤ñ¸ûªá®É¶¡ªº¹Bºâ¡C
+    // ä»¥ä¸‹å¯ä»¥é€²è¡Œæ¯”è¼ƒèŠ±æ™‚é–“çš„é‹ç®—ã€‚
     //////////////////////////////////////////////////////////////////
 
     currmode = MODE_STARTED;
@@ -1030,7 +1030,7 @@ setup_utmp(int mode)
 #endif // WHERE
 
     /* Very, very slow friend_load. */
-    if( strcmp(cuser.userid, STR_GUEST) != 0 ) // guest ¤£³B²z¦n¤Í
+    if( strcmp(cuser.userid, STR_GUEST) != 0 ) // guest ä¸è™•ç†å¥½å‹
 	friend_load(0, 1);
 
     nice(3);
@@ -1038,8 +1038,8 @@ setup_utmp(int mode)
 
 inline static void welcome_msg(void)
 {
-    prints(ANSI_RESET "      Åwªï±z¦A«×«ô³X¡A¤W¦¸±z¬O±q "
-	    ANSI_COLOR(1;33) "%s" ANSI_COLOR(0;37) " ³s©¹¥»¯¸¡C"
+    prints(ANSI_RESET "      æ­¡è¿æ‚¨å†åº¦æ‹œè¨ªï¼Œä¸Šæ¬¡æ‚¨æ˜¯å¾ "
+	    ANSI_COLOR(1;33) "%s" ANSI_COLOR(0;37) " é€£å¾€æœ¬ç«™ã€‚"
 	    ANSI_CLRTOEND "\n", cuser.lasthost);
     pressanykey();
 }
@@ -1050,10 +1050,10 @@ inline static void check_bad_login(void)
     setuserfile(genbuf, FN_BADLOGIN);
     if (more(genbuf, NA) != -1) {
 	move(b_lines - 3, 0);
-	outs("³q±`¨Ã¨S¦³¿ìªkª¾¹D¸Óip¬O½Ö©Ò¦³, "
-		"¥H¤Î¨ä·N¹Ï(¬O¤£¤p¤ß«ö¿ù©Î¦³·N´ú±z±K½X)\n"
-		"­Y±z¦³±b¸¹³Qµs¥ÎºÃ¼{, ½Ğ¸g±`§ó§ï±zªº±K½X©Î¨Ï¥Î¥[±K³s½u");
-	if (vans("±z­n§R°£¥H¤W¿ù»~¹Á¸Õªº°O¿ı¶Ü? [Y/n] ") != 'n')
+	outs("é€šå¸¸ä¸¦æ²’æœ‰è¾¦æ³•çŸ¥é“è©²ipæ˜¯èª°æ‰€æœ‰, "
+		"ä»¥åŠå…¶æ„åœ–(æ˜¯ä¸å°å¿ƒæŒ‰éŒ¯æˆ–æœ‰æ„æ¸¬æ‚¨å¯†ç¢¼)\n"
+		"è‹¥æ‚¨æœ‰å¸³è™Ÿè¢«ç›œç”¨ç–‘æ…®, è«‹ç¶“å¸¸æ›´æ”¹æ‚¨çš„å¯†ç¢¼æˆ–ä½¿ç”¨åŠ å¯†é€£ç·š");
+	if (vans("æ‚¨è¦åˆªé™¤ä»¥ä¸ŠéŒ¯èª¤å˜—è©¦çš„è¨˜éŒ„å—? [Y/n] ") != 'n')
 	    unlink(genbuf);
     }
 }
@@ -1073,10 +1073,10 @@ check_bad_clients(void) {
     if (dashf(dest))
 	return;
 
-    vs_hdr2("¦w¥ş¨t²Î", "²§±`µo¤å½T»{");
+    vs_hdr2("å®‰å…¨ç³»çµ±", "ç•°å¸¸ç™¼æ–‡ç¢ºèª");
     outs(ANSI_COLOR(1;33)
-	 "¿Ë·Rªº¨Ï¥ÎªÌ±z¦n¡A§Ú­Ìµo²{±z´¿¦b SYSOP ¬İªO¦³¦p¤Uªº¦^¤å¡A\n"
-	 "¬İ°_¨Ó¹³¬O¨Ï¥Î¤F¬Y¨Ç¤£¥¿±`ªºµ{¦¡¾É­Pµo¤åµ²ªG²§±`: \n" ANSI_RESET);
+	 "è¦ªæ„›çš„ä½¿ç”¨è€…æ‚¨å¥½ï¼Œæˆ‘å€‘ç™¼ç¾æ‚¨æ›¾åœ¨ SYSOP çœ‹æ¿æœ‰å¦‚ä¸‹çš„å›æ–‡ï¼Œ\n"
+	 "çœ‹èµ·ä¾†åƒæ˜¯ä½¿ç”¨äº†æŸäº›ä¸æ­£å¸¸çš„ç¨‹å¼å°è‡´ç™¼æ–‡çµæœç•°å¸¸: \n" ANSI_RESET);
     fp = fopen(src, "rt");
     for (i = 0; i < (t_lines - 7) && fgets(buf, sizeof(buf), fp); i++) {
 	outs(buf);
@@ -1084,40 +1084,40 @@ check_bad_clients(void) {
     fclose(fp);
     SOLVE_ANSI_CACHE();
     outs(ANSI_RESET ANSI_COLOR(1;31) "\n"
-	 "¬°¤FÁ×§KÃş¦üªº°İÃD¦A«×µo¥Í¡A§Ú­Ì¥²¶·½Ğ±z¦^µª¤U¦C°İÃD:" ANSI_RESET
+	 "ç‚ºäº†é¿å…é¡ä¼¼çš„å•é¡Œå†åº¦ç™¼ç”Ÿï¼Œæˆ‘å€‘å¿…é ˆè«‹æ‚¨å›ç­”ä¸‹åˆ—å•é¡Œ:" ANSI_RESET
          "\n");
     y = vgety();
 
     do {
-	mvouts(y, 0, "½Ğ°İ±zµo¤å®É¨Ï¥Îªºµ{¦¡¬O¡H(¨Ò: MiuPTT, BBSReader,... "
-               ANSI_COLOR(1;33) "­Y¬O¤â¾÷½Ğ§iª¾§¹¾ãApp¦WºÙ" ANSI_RESET ")\n");
-	getdata(y+1, 0, "µo¤åµ{¦¡: ", buf, DISP_TTLEN, DOECHO);
+	mvouts(y, 0, "è«‹å•æ‚¨ç™¼æ–‡æ™‚ä½¿ç”¨çš„ç¨‹å¼æ˜¯ï¼Ÿ(ä¾‹: MiuPTT, BBSReader,... "
+               ANSI_COLOR(1;33) "è‹¥æ˜¯æ‰‹æ©Ÿè«‹å‘ŠçŸ¥å®Œæ•´Appåç¨±" ANSI_RESET ")\n");
+	getdata(y+1, 0, "ç™¼æ–‡ç¨‹å¼: ", buf, DISP_TTLEN, DOECHO);
 	trim(buf);
-        if (strcasecmp(buf, "¤â¾÷App") == 0 || strcasecmp(buf, "¤â¾÷ App") ==0 ||
+        if (strcasecmp(buf, "æ‰‹æ©ŸApp") == 0 || strcasecmp(buf, "æ‰‹æ©Ÿ App") ==0 ||
             strcasecmp(buf, "App") == 0) {
-            vmsgf("­n§¹¾ã¦WºÙ¡A¤£¯à¼g %s", buf);
+            vmsgf("è¦å®Œæ•´åç¨±ï¼Œä¸èƒ½å¯« %s", buf);
             *buf = 0;
         }
     } while (strlen(buf) < 2);
-    mvprints(y-1, 0, "µo¤åµ{¦¡: %s\n", buf); clrtobot();
+    mvprints(y-1, 0, "ç™¼æ–‡ç¨‹å¼: %s\n", buf); clrtobot();
     log_filef(dest, LOG_CREAT, "%s program: %s\n", Cdatelite(&now), buf);
 
     do {
-	getdata(y, 0, "µo¤å®É§A¬O¦b«H½c(m)¦^¤åÁÙ¬O¦b¬İªO(b)¤W¦^¤å¡H [m/b]: ",
+	getdata(y, 0, "ç™¼æ–‡æ™‚ä½ æ˜¯åœ¨ä¿¡ç®±(m)å›æ–‡é‚„æ˜¯åœ¨çœ‹æ¿(b)ä¸Šå›æ–‡ï¼Ÿ [m/b]: ",
 		buf, 3, LCECHO);
     } while (*buf != 'm' && *buf != 'b');
-    mvprints(y++, 0, "µo¤å¦ì¸m: %s", *buf == 'm' ? "«H½c" : "¬İªO");
+    mvprints(y++, 0, "ç™¼æ–‡ä½ç½®: %s", *buf == 'm' ? "ä¿¡ç®±" : "çœ‹æ¿");
     log_filef(dest, LOG_CREAT, "%s location: %c %s\n", Cdatelite(&now),
 	      *buf, *buf == 'm' ? "mailbox" : "board");
 
     do {
-	mvouts(y, 0, "·í®É¦³¥ô¦ó²§±`ªº¸ê°T¥i¥H´£¨Ñµ¹§Ú­Ì°Ñ¦Ò¶Ü¡H");
-	getdata(y+1, 0, "¨ä¥¦: ", buf, DISP_TTLEN, DOECHO);
+	mvouts(y, 0, "ç•¶æ™‚æœ‰ä»»ä½•ç•°å¸¸çš„è³‡è¨Šå¯ä»¥æä¾›çµ¦æˆ‘å€‘åƒè€ƒå—ï¼Ÿ");
+	getdata(y+1, 0, "å…¶å®ƒ: ", buf, DISP_TTLEN, DOECHO);
 	trim(buf);
     } while (0);
     log_filef(dest, LOG_CREAT, "%s info: %s\n", Cdatelite(&now),  buf);
 
-    vmsg("ÁÂÁÂ±zªº¦X§@¡C¦pªG±z·Q´£¨Ñ§ó¦h¸ê°TÅwªï¦Ü" BN_BUGREPORT "³ø§i");
+    vmsg("è¬è¬æ‚¨çš„åˆä½œã€‚å¦‚æœæ‚¨æƒ³æä¾›æ›´å¤šè³‡è¨Šæ­¡è¿è‡³" BN_BUGREPORT "å ±å‘Š");
 }
 
 inline static void append_log_recent_login()
@@ -1160,11 +1160,11 @@ static void init_guest_info(void)
 inline static void foreign_warning(void){
     if ((HasUserFlag(UF_FOREIGN)) && !(HasUserFlag(UF_LIVERIGHT))){
 	if (login_start_time - cuser.firstlogin > (FOREIGN_REG_DAY - 5) * 24 * 3600){
-	    mail_muser(cuser, "[¥X¤J¹ÒºŞ²z§½]", "etc/foreign_expired_warn");
+	    mail_muser(cuser, "[å‡ºå…¥å¢ƒç®¡ç†å±€]", "etc/foreign_expired_warn");
 	}
 	else if (login_start_time - cuser.firstlogin > FOREIGN_REG_DAY * 24 * 3600){
 	    pwcuBitDisableLevel(PERM_LOGINOK | PERM_POST);
-	    vmsg("Äµ§i¡G½Ğ¦Ü¥X¤J¹ÒºŞ²z§½¥Ó½Ğ¥Ã¤[©~¯d");
+	    vmsg("è­¦å‘Šï¼šè«‹è‡³å‡ºå…¥å¢ƒç®¡ç†å±€ç”³è«‹æ°¸ä¹…å±…ç•™");
 	}
     }
 }
@@ -1179,10 +1179,10 @@ user_login(void)
     struct tm       ptime, lasttime;
     int             nowusers, i;
 
-    /* NOTE! ¦b setup_utmp ¤§«e, ¤£À³¸Ó¦³¥ô¦ó blocking/slow function,
-     * §_«h¥iÂÇ¾÷ race condition ¹F¨ì multi-login */
+    /* NOTE! åœ¨ setup_utmp ä¹‹å‰, ä¸æ‡‰è©²æœ‰ä»»ä½• blocking/slow function,
+     * å¦å‰‡å¯è—‰æ©Ÿ race condition é”åˆ° multi-login */
 
-    /* ªì©l¤Æ uinfo¡Bflag¡Bmode */
+    /* åˆå§‹åŒ– uinfoã€flagã€mode */
     setup_utmp(LOGIN);
 
     /* log usies */
@@ -1225,7 +1225,7 @@ user_login(void)
         !HasUserRole(ROLE_HIDE_FROM) && !currutmp->invisible) {
 	/* do_aloha is costly. do it later? And don't alert if previous
          * login was just minutes ago... */
-	do_aloha("<<¤W¯¸³qª¾>> -- §Ú¨Ó°Õ¡I");
+	do_aloha("<<ä¸Šç«™é€šçŸ¥>> -- æˆ‘ä¾†å•¦ï¼");
     }
 
     if (SHM->loginmsg.pid){
@@ -1247,22 +1247,22 @@ user_login(void)
 #endif
 	check_register();
 	pwcuLoginSave();	// is_first_login_of_today is only valid after pwcuLoginSave.
-	// cuser.lastlogin ¥Ñ pwcuLoginSave «á­È´NÅÜ¤F¡A­n¬İ last_login_time
+	// cuser.lastlogin ç”± pwcuLoginSave å¾Œå€¼å°±è®Šäº†ï¼Œè¦çœ‹ last_login_time
 	restore_backup();
 	check_mailbox_quota();
 
         if (!HasUserPerm(PERM_BASIC)) {
-            vs_hdr2(" °±Åv³qª¾ ", " ³¡¥÷¥\\¯à¤w³Q¼È°±¨Ï¥Î");
-            outs(ANSI_COLOR(1;31) "\n\n\t©êºp¡A§Aªº±b¸¹¤w³Q°±Åv¡C\n"
-                 "\t¸Ô±¡½Ğ¦Ü ViolateLaw ¬İªO·j´M§Aªº ID¡C\n" ANSI_RESET);
+            vs_hdr2(" åœæ¬Šé€šçŸ¥ ", " éƒ¨ä»½åŠŸèƒ½å·²è¢«æš«åœä½¿ç”¨");
+            outs(ANSI_COLOR(1;31) "\n\n\tæŠ±æ­‰ï¼Œä½ çš„å¸³è™Ÿå·²è¢«åœæ¬Šã€‚\n"
+                 "\tè©³æƒ…è«‹è‡³ ViolateLaw çœ‹æ¿æœå°‹ä½ çš„ IDã€‚\n" ANSI_RESET);
             pressanykey();
         }
 
-	// XXX ³o­Ó check ªá¤£¤Ö®É¶¡¡A¦³ÂI¶¡¹j¤ñ¸û¦n
+	// XXX é€™å€‹ check èŠ±ä¸å°‘æ™‚é–“ï¼Œæœ‰é»é–“éš”æ¯”è¼ƒå¥½
 	if (HasUserPerm(PERM_BM) &&
 	    (cuser.numlogindays % 10 == 0) &&	// when using numlogindays, check with is_first_login_of_today
 	    is_first_login_of_today )
-	    check_BM();		/* ¦Û°Ê¨ú¤UÂ÷Â¾ªO¥DÅv¤O */
+	    check_BM();		/* è‡ªå‹•å–ä¸‹é›¢è·æ¿ä¸»æ¬ŠåŠ› */
 
 	// XXX only for temporary...
 #ifdef ADBANNER_USONG_TIMEBOMB
@@ -1277,10 +1277,10 @@ user_login(void)
             setuserfile(fwd_path, FN_FORWARD);
             if (dashf(fwd_path) && dasht(fwd_path) < UNTRUSTED_FORWARD_TIMEBOMB)
             {
-                vs_hdr("¦Û°ÊÂà±H³]©w¤wÅÜ§ó");
+                vs_hdr("è‡ªå‹•è½‰å¯„è¨­å®šå·²è®Šæ›´");
                 unlink(fwd_path);
-                outs("\n¥Ñ©ó¨t²Î½Õ¾ã¡A±zªº¦Û°ÊÂà±H¤w³Q­«³]¡A\n"
-                     "¦p¦³»İ¨D½Ğ­«·s³]©w¡C\n");
+                outs("\nç”±æ–¼ç³»çµ±èª¿æ•´ï¼Œæ‚¨çš„è‡ªå‹•è½‰å¯„å·²è¢«é‡è¨­ï¼Œ\n"
+                     "å¦‚æœ‰éœ€æ±‚è«‹é‡æ–°è¨­å®šã€‚\n");
                 pressanykey();
             }
         }
@@ -1294,7 +1294,7 @@ user_login(void)
     } else {
 	// XXX no userlevel, no guest - what is this?
 	clear();
-	outs("©êºp¡A±zªº±b¸¹¸ê®Æ²§±`©Î¤w³Q°±Åv¡C\n");
+	outs("æŠ±æ­‰ï¼Œæ‚¨çš„å¸³è™Ÿè³‡æ–™ç•°å¸¸æˆ–å·²è¢«åœæ¬Šã€‚\n");
 	pressanykey();
 	exit(1);
     }
@@ -1325,7 +1325,7 @@ user_login(void)
 	    int num;
 	    num = updatenewfav(1);
 	    if (num > NEW_FAV_THRESHOLD &&
-		vansf("§ä¨ì %d ­Ó·s¬İªO¡A½T©w­n¥[¤J§Úªº³Ì·R¶Ü¡H[y/N]", num) != 'y') {
+		vansf("æ‰¾åˆ° %d å€‹æ–°çœ‹æ¿ï¼Œç¢ºå®šè¦åŠ å…¥æˆ‘çš„æœ€æ„›å—ï¼Ÿ[y/N]", num) != 'y') {
 		fav_free();
 		fav_load();
 	    }
@@ -1432,7 +1432,7 @@ start_client(struct ProgramOption *option)
     Signal(SIGALRM, abort_bbs);
     alarm(600);
 
-    mysrand(); /* ªì©l¤Æ: random number ¼W¥[user¸ò®É¶¡ªº®t²§ */
+    mysrand(); /* åˆå§‹åŒ–: random number å¢åŠ userè·Ÿæ™‚é–“çš„å·®ç•° */
     now = time(0);
 
     // if flag_user contains an uid, it is already authorized.
@@ -1447,7 +1447,7 @@ start_client(struct ProgramOption *option)
 
     m_init();			/* init the user mail path */
     user_login();
-    auto_close_polls();		/* ¦Û°Ê¶}²¼ */
+    auto_close_polls();		/* è‡ªå‹•é–‹ç¥¨ */
 
     Signal(SIGALRM, SIG_IGN);
     return 0;
@@ -1828,7 +1828,7 @@ main(int argc, char *argv[], char *envp[])
 	// to flush output...
 	output(ANSI_RESET, sizeof(ANSI_RESET)-1);
 	move(b_lines-1, 0);
-	outs("µn¤J¤¤¡A½Ğµy­Ô...");
+	outs("ç™»å…¥ä¸­ï¼Œè«‹ç¨å€™...");
 	doupdate();
     }
 
@@ -1874,7 +1874,7 @@ shell_login(char *argv0, struct ProgramOption *option)
 	strlcpy(fromhost, frombuf, sizeof(fromhost));
     }
 
-    // XXX shell_login ®É load banip table ¤ñ¸ûºC, ©Ò¥H¥Î cache.
+    // XXX shell_login æ™‚ load banip table æ¯”è¼ƒæ…¢, æ‰€ä»¥ç”¨ cache.
     banip = cached_banip_list(FN_CONF_BANIP, "tmp/banip.cache");
     if (check_ban_and_load(0, option, banip, INADDR_ANY, fromhost)) {
 	sleep(10);
@@ -2158,7 +2158,7 @@ check_ban_and_load(int fd, struct ProgramOption *option,
     // if you don't want anny benner, define NO_INSCREEN
 #ifndef NO_INSCREEN
 # ifndef   INSCREEN
-#  define  INSCREEN "¡i" BBSNAME "¡j¡·(" MYHOSTNAME ", " MYIP ") \r\n"
+#  define  INSCREEN "ã€" BBSNAME "ã€‘â—(" MYHOSTNAME ", " MYIP ") \r\n"
 # endif
     write(fd, INSCREEN, sizeof(INSCREEN));
 #endif
@@ -2192,9 +2192,9 @@ check_ban_and_load(int fd, struct ProgramOption *option,
 #endif
 
     if(overload == 1)
-	write(fd, "¨t²Î¹L¸ü, ½Ğµy«á¦A¨Ó\r\n", 22);
+	write(fd, "ç³»çµ±éè¼‰, è«‹ç¨å¾Œå†ä¾†\r\n", 22);
     else if(overload == 2)
-	write(fd, "¥Ñ©ó¤H¼Æ¹L¦h¡A½Ğ±zµy«á¦A¨Ó¡C", 28);
+	write(fd, "ç”±æ–¼äººæ•¸éå¤šï¼Œè«‹æ‚¨ç¨å¾Œå†ä¾†ã€‚", 28);
     else if (banned && (fp = fopen(BBSHOME "/" BAN_FILE, "r"))) {
 	char     buf[256];
 	while (fgets(buf, sizeof(buf), fp))

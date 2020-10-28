@@ -2,54 +2,54 @@
 #include "bbs.h"
 
 const char * const str_permid[] = {
-    "°ò¥»Åv¤O",			/* PERM_BASIC */
-    "¶i¤J²á¤Ñ«Ç",		/* PERM_CHAT */
-    "§ä¤H²á¤Ñ",			/* PERM_PAGE */
-    "µoªí¤å³¹",			/* PERM_POST */
-    "µù¥Uµ{§Ç»{ÃÒ",		/* PERM_LOGINOK */
-    "«H¥óµL¤W­­",		/* PERM_MAILLIMIT */
-    "Áô¨­³N",			/* PERM_CLOAK */
-    "¬İ¨£§ÔªÌ",			/* PERM_SEECLOAK */
-    "¥Ã¤[«O¯d±b¸¹",		/* PERM_XEMPT */
-    "¯¸ªøÁô¨­³N",		/* PERM_DENYPOST */
-    "ªO¥D",			/* PERM_BM */
-    "±b¸¹Á`ºŞ",			/* PERM_ACCOUNTS */
-    "²á¤Ñ«ÇÁ`ºŞ",		/* PERM_CHATCLOAK */
-    "¬İªOÁ`ºŞ",			/* PERM_BOARD */
-    "¯¸ªø",			/* PERM_SYSOP */
+    "åŸºæœ¬æ¬ŠåŠ›",			/* PERM_BASIC */
+    "é€²å…¥èŠå¤©å®¤",		/* PERM_CHAT */
+    "æ‰¾äººèŠå¤©",			/* PERM_PAGE */
+    "ç™¼è¡¨æ–‡ç« ",			/* PERM_POST */
+    "è¨»å†Šç¨‹åºèªè­‰",		/* PERM_LOGINOK */
+    "ä¿¡ä»¶ç„¡ä¸Šé™",		/* PERM_MAILLIMIT */
+    "éš±èº«è¡“",			/* PERM_CLOAK */
+    "çœ‹è¦‹å¿è€…",			/* PERM_SEECLOAK */
+    "æ°¸ä¹…ä¿ç•™å¸³è™Ÿ",		/* PERM_XEMPT */
+    "ç«™é•·éš±èº«è¡“",		/* PERM_DENYPOST */
+    "æ¿ä¸»",			/* PERM_BM */
+    "å¸³è™Ÿç¸½ç®¡",			/* PERM_ACCOUNTS */
+    "èŠå¤©å®¤ç¸½ç®¡",		/* PERM_CHATCLOAK */
+    "çœ‹æ¿ç¸½ç®¡",			/* PERM_BOARD */
+    "ç«™é•·",			/* PERM_SYSOP */
     "BBSADM",			/* PERM_POSTMARK */
-    "¤£¦C¤J±Æ¦æº]",		/* PERM_NOTOP */
-    "¹Hªk³q½r¤¤",		/* PERM_VIOLATELAW */
+    "ä¸åˆ—å…¥æ’è¡Œæ¦œ",		/* PERM_NOTOP */
+    "é•æ³•é€šç·ä¸­",		/* PERM_VIOLATELAW */
 #ifdef PLAY_ANGEL
-    "¥i¾á¥ô¤p¤Ñ¨Ï",		/* PERM_ANGEL */
+    "å¯æ“”ä»»å°å¤©ä½¿",		/* PERM_ANGEL */
 #else
-    "¤p¤Ñ¨Ï(¥»¯¸µL®Ä)",
+    "å°å¤©ä½¿(æœ¬ç«™ç„¡æ•ˆ)",
 #endif
-    "¤£¤¹³\\»{ÃÒ½Xµù¥U",	/* PERM_NOREGCODE */
-    "µøÄ±¯¸ªø",			/* PERM_VIEWSYSOP */
-    "Æ[¹î¨Ï¥ÎªÌ¦æÂÜ",		/* PERM_LOGUSER */
-    "æÍ¹Ü¤½Åv",		        /* PERM_NOCITIZEN */
-    "¸s²Õªø",			/* PERM_SYSSUPERSUBOP */
-    "±b¸¹¼f®Ö²Õ",		/* PERM_ACCTREG */
-    "µ{¦¡²Õ",			/* PERM_PRG */
-    "¬¡°Ê²Õ",			/* PERM_ACTION */
-    "¬ü¤u²Õ",			/* PERM_PAINT */
-    "Äµ¹îÁ`ºŞ",			/* PERM_POLICE_MAN */
-    "¤p²Õªø",			/* PERM_SYSSUBOP */
-    "°h¥ğ¯¸ªø",			/* PERM_OLDSYSOP */
-    "Äµ¹î"			/* PERM_POLICE */
+    "ä¸å…è¨±èªè­‰ç¢¼è¨»å†Š",	/* PERM_NOREGCODE */
+    "è¦–è¦ºç«™é•·",			/* PERM_VIEWSYSOP */
+    "è§€å¯Ÿä½¿ç”¨è€…è¡Œè¹¤",		/* PERM_LOGUSER */
+    "ç¦ å¥ªå…¬æ¬Š",		        /* PERM_NOCITIZEN */
+    "ç¾¤çµ„é•·",			/* PERM_SYSSUPERSUBOP */
+    "å¸³è™Ÿå¯©æ ¸çµ„",		/* PERM_ACCTREG */
+    "ç¨‹å¼çµ„",			/* PERM_PRG */
+    "æ´»å‹•çµ„",			/* PERM_ACTION */
+    "ç¾å·¥çµ„",			/* PERM_PAINT */
+    "è­¦å¯Ÿç¸½ç®¡",			/* PERM_POLICE_MAN */
+    "å°çµ„é•·",			/* PERM_SYSSUBOP */
+    "é€€ä¼‘ç«™é•·",			/* PERM_OLDSYSOP */
+    "è­¦å¯Ÿ"			/* PERM_POLICE */
 };
 
 const char * const str_roleid[] = {
-    "(¤Ñ¨Ï)«~ºŞ±b¸¹(CIA)",	/* 0x00000001 ROLE_ANGEL_CIA */
-    "(¤Ñ¨Ï)¬¡°Ê¥Î±b¸¹",         /* 0x00000002 ROLE_ANGEL_ACTIVITY */
+    "(å¤©ä½¿)å“ç®¡å¸³è™Ÿ(CIA)",	/* 0x00000001 ROLE_ANGEL_CIA */
+    "(å¤©ä½¿)æ´»å‹•ç”¨å¸³è™Ÿ",         /* 0x00000002 ROLE_ANGEL_ACTIVITY */
     "",		                /* 0x00000004 */
     "",		                /* 0x00000008 */
     "",		                /* 0x00000010 */
     "",		                /* 0x00000020 */
     "",		                /* 0x00000040 */
-    "(¤Ñ¨Ï)¤j¤Ñ¨Ï",	        /* 0x00000080 ROLE_ANGEL_ARCHANGEL */
-    "(Äµ¹î)°Î¦WÄµ¹î",           /* 0x00000100 ROLE_POLICE_ANONYMOUS */
+    "(å¤©ä½¿)å¤§å¤©ä½¿",	        /* 0x00000080 ROLE_ANGEL_ARCHANGEL */
+    "(è­¦å¯Ÿ)åŒ¿åè­¦å¯Ÿ",           /* 0x00000100 ROLE_POLICE_ANONYMOUS */
     "",		                /* 0x00000200 */
     "",		                /* 0x00000400 */
     "",		                /* 0x00000800 */
@@ -76,56 +76,56 @@ const char * const str_roleid[] = {
 };
 
 const char * const str_permboard[] = {
-    "(µL§@¥Î)",			/* deprecated: BRD_NOZAP */
-    "¤£¦C¤J²Î­p",		/* BRD_NOCOUNT */
-    "(µL§@¥Î)",			/* deprecated: BRD_NOTRAN */
-    "¸s²ÕªO",			/* BRD_GROUPBOARD */
-    "ÁôÂÃªO",			/* BRD_HIDE */
-    "­­¨î(¤£»İ³]©w)",		/* BRD_POSTMASK */
-    "°Î¦WªO",			/* BRD_ANONYMOUS */
-    "¹w³]°Î¦WªO",		/* BRD_DEFAULTANONYMOUS */
-    "µo¤åµL¼úÀy",		/* BRD_NOCREDIT, was: BRD_BAD */
-    "³s¸p±M¥Î¬İªO",		/* BRD_VOTEBOARD */
-    "¤wÄµ§i­n¼o°£",		/* BRD_WARNEL */
-    "¼öªù¬İªO¸s²Õ",		/* BRD_TOP */
-    "¤£¥i±ÀÂË",                 /* BRD_NORECOMMEND */
-    "¤p¤Ñ¨Ï¥i°Î¦W",		/* BRD_ANGELANONYMOUS */
-    "ªO¥D³]©w¦C¤J°O¿ı",		/* BRD_BMCOUNT */
-    "³sµ²¬İªO",                 /* BRD_SYMBOLIC */
-    "¤£¥i¼N",                   /* BRD_NOBOO */
-    "(µL§@¥Î)",                 /* deprecated: BRD_LOCALSAVE */
-    "­­¬İªO·|­ûµo¤å",           /* BRD_RESTRICTEDPOST */
-    "Guest¥i¥Hµoªí",            /* BRD_GUESTPOST */
+    "(ç„¡ä½œç”¨)",			/* deprecated: BRD_NOZAP */
+    "ä¸åˆ—å…¥çµ±è¨ˆ",		/* BRD_NOCOUNT */
+    "(ç„¡ä½œç”¨)",			/* deprecated: BRD_NOTRAN */
+    "ç¾¤çµ„æ¿",			/* BRD_GROUPBOARD */
+    "éš±è—æ¿",			/* BRD_HIDE */
+    "é™åˆ¶(ä¸éœ€è¨­å®š)",		/* BRD_POSTMASK */
+    "åŒ¿åæ¿",			/* BRD_ANONYMOUS */
+    "é è¨­åŒ¿åæ¿",		/* BRD_DEFAULTANONYMOUS */
+    "ç™¼æ–‡ç„¡çå‹µ",		/* BRD_NOCREDIT, was: BRD_BAD */
+    "é€£ç½²å°ˆç”¨çœ‹æ¿",		/* BRD_VOTEBOARD */
+    "å·²è­¦å‘Šè¦å»¢é™¤",		/* BRD_WARNEL */
+    "ç†±é–€çœ‹æ¿ç¾¤çµ„",		/* BRD_TOP */
+    "ä¸å¯æ¨è–¦",                 /* BRD_NORECOMMEND */
+    "å°å¤©ä½¿å¯åŒ¿å",		/* BRD_ANGELANONYMOUS */
+    "æ¿ä¸»è¨­å®šåˆ—å…¥è¨˜éŒ„",		/* BRD_BMCOUNT */
+    "é€£çµçœ‹æ¿",                 /* BRD_SYMBOLIC */
+    "ä¸å¯å™“",                   /* BRD_NOBOO */
+    "(ç„¡ä½œç”¨)",                 /* deprecated: BRD_LOCALSAVE */
+    "é™çœ‹æ¿æœƒå“¡ç™¼æ–‡",           /* BRD_RESTRICTEDPOST */
+    "Guestå¯ä»¥ç™¼è¡¨",            /* BRD_GUESTPOST */
 #ifdef USE_COOLDOWN
-    "§NÀR",			/* BRD_COOLDOWN */
+    "å†·éœ",			/* BRD_COOLDOWN */
 #else
-    "§NÀR(¥»¯¸µL®Ä)",		/* BRD_COOLDOWN */
+    "å†·éœ(æœ¬ç«™ç„¡æ•ˆ)",		/* BRD_COOLDOWN */
 #endif
 #ifdef USE_AUTOCPLOG
-    "¦Û°Ê¯dÂà¿ı°O¿ı",		/* BRD_CPLOG */
+    "è‡ªå‹•ç•™è½‰éŒ„è¨˜éŒ„",		/* BRD_CPLOG */
 #else
-    "Âà¿ı°O¿ı(¥»¯¸µL®Ä)",	/* BRD_CPLOG */
+    "è½‰éŒ„è¨˜éŒ„(æœ¬ç«™ç„¡æ•ˆ)",	/* BRD_CPLOG */
 #endif
-    "¸T¤î§Ö³t±À¤å",		/* BRD_NOFASTRECMD */
-    "±À¤å°O¿ı IP",		/* BRD_IPLOGRECMD */
-    "¤Q¤K¸T",			/* BRD_OVER18 */
-    "¹ï»ô¦¡±À¤å",		/* BRD_ALIGNEDCMT */
-    "¤£¥i¦Û§R",                 /* BRD_NOSELFDELPOST */
-    "ªO¥D¥i§R¯S©w¤å¦r",         /* BRD_BM_MASK_CONTENT */
-    "¨S·Q¨ì",
-    "¨S·Q¨ì",
-    "¨S·Q¨ì",
-    "¨S·Q¨ì",
+    "ç¦æ­¢å¿«é€Ÿæ¨æ–‡",		/* BRD_NOFASTRECMD */
+    "æ¨æ–‡è¨˜éŒ„ IP",		/* BRD_IPLOGRECMD */
+    "åå…«ç¦",			/* BRD_OVER18 */
+    "å°é½Šå¼æ¨æ–‡",		/* BRD_ALIGNEDCMT */
+    "ä¸å¯è‡ªåˆª",                 /* BRD_NOSELFDELPOST */
+    "æ¿ä¸»å¯åˆªç‰¹å®šæ–‡å­—",         /* BRD_BM_MASK_CONTENT */
+    "æ²’æƒ³åˆ°",
+    "æ²’æƒ³åˆ°",
+    "æ²’æƒ³åˆ°",
+    "æ²’æƒ³åˆ°",
 };
 
 /* modes.h */
 const char * const str_pager_modes[PAGER_MODES] =
 {
-    "Ãö³¬",	// PAGER_OFF
-    "¥´¶}",	// PAGER_ON
-    "©Ş±¼",	// PAGER_DISABLE
-    "¨¾¤ô",	// PAGER_ANTIWB
-    "¦n¤Í",	// PAGER_FRIENDONLY
+    "é—œé–‰",	// PAGER_OFF
+    "æ‰“é–‹",	// PAGER_ON
+    "æ‹”æ‰",	// PAGER_DISABLE
+    "é˜²æ°´",	// PAGER_ANTIWB
+    "å¥½å‹",	// PAGER_FRIENDONLY
 };
 
 int             usernum;
@@ -165,19 +165,19 @@ const char * const fn_boardhelp = FN_BOARDHELP;
 /* are descript in userec.loginview */
 
 char           * const loginview_file[NUMVIEWFILE][2] = {
-    {"", "(«O¯d)"},
-    {FN_TOPSONG, "¤ß±¡ÂI¼½±Æ¦æº]"},
-    {"etc/topusr", "¤Q¤j±Æ¦æº]"},
-    {"etc/topusr100", "¦Ê¤j±Æ¦æº]"},
-    {"", "(«O¯d)"},
-    {"", "(«O¯d)"},
-    {"etc/day", "¤µ¤é¤Q¤j¸ÜÃD"},
-    {"etc/week", "¤@¶g¤­¤Q¤j¸ÜÃD"},
-    {"etc/today", "¤µ¤Ñ¤W¯¸¤H¦¸"},
-    {"etc/yesterday", "¬Q¤é¤W¯¸¤H¦¸"},
-    {"etc/history", "¾ú¥v¤Wªº¤µ¤Ñ"},
-    {"etc/topboardman", "ºëµØ°Ï±Æ¦æº]"},
-    {"etc/topboard.tmp", "¬İªO¤H®ğ±Æ¦æº]"},
+    {"", "(ä¿ç•™)"},
+    {FN_TOPSONG, "å¿ƒæƒ…é»æ’­æ’è¡Œæ¦œ"},
+    {"etc/topusr", "åå¤§æ’è¡Œæ¦œ"},
+    {"etc/topusr100", "ç™¾å¤§æ’è¡Œæ¦œ"},
+    {"", "(ä¿ç•™)"},
+    {"", "(ä¿ç•™)"},
+    {"etc/day", "ä»Šæ—¥åå¤§è©±é¡Œ"},
+    {"etc/week", "ä¸€é€±äº”åå¤§è©±é¡Œ"},
+    {"etc/today", "ä»Šå¤©ä¸Šç«™äººæ¬¡"},
+    {"etc/yesterday", "æ˜¨æ—¥ä¸Šç«™äººæ¬¡"},
+    {"etc/history", "æ­·å²ä¸Šçš„ä»Šå¤©"},
+    {"etc/topboardman", "ç²¾è¯å€æ’è¡Œæ¦œ"},
+    {"etc/topboard.tmp", "çœ‹æ¿äººæ°£æ’è¡Œæ¦œ"},
     {NULL, NULL}
 };
 
@@ -208,7 +208,7 @@ char           * const err_filename = ERR_FILENAME;
 char           * const str_mail_address = "." BBSUSER "@" MYHOSTNAME;
 char           * const str_reply = "Re:";
 char           * const str_forward = "Fw:";
-char           * const str_legacy_forward = "[Âà¿ı]";
+char           * const str_legacy_forward = "[è½‰éŒ„]";
 char           * const str_space = " \t\n\r";
 char           * const str_sysop = "SYSOP";
 char           * const str_author1 = STR_AUTHOR1;
@@ -220,94 +220,94 @@ char           * const BBSName = BBSNAME;
 /* MAX_MODES is defined in common.h */
 
 char           * const ModeTypeTable[] = {
-    "µo§b",			/* IDLE */
-    "¥D¿ï³æ",			/* MMENU */
-    "¨t²ÎºûÅ@",			/* ADMIN */
-    "¶l¥ó¿ï³æ",			/* MAIL */
-    "¥æ½Í¿ï³æ",			/* TMENU */
-    "¨Ï¥ÎªÌ¿ï³æ",		/* UMENU */
-    "XYZ ¿ï³æ",			/* XMENU */
-    "¤ÀÃş¬İªO",			/* CLASS */
-    "Play¿ï³æ",			/* PMENU */
-    "½s¯S§O¦W³æ",		/* NMENU */
-    BBSMNAME2 "¶q³c©±",		/* PSALE */
-    "µoªí¤å³¹",			/* POSTING */
-    "¬İªO¦Cªí",			/* READBRD */
-    "¾\\Åª¤å³¹",		/* READING */
-    "·s¤å³¹¦Cªí",		/* READNEW */
-    "¿ï¾Ü¬İªO",			/* SELECT */
-    "Åª«H",			/* RMAIL */
-    "¼g«H",			/* SMAIL */
-    "²á¤Ñ«Ç",			/* CHATING */
-    "¨ä¥L",			/* XMODE */
-    "´M§ä¦n¤Í",			/* FRIEND */
-    "¤W½u¨Ï¥ÎªÌ",		/* LAUSERS */
-    "¨Ï¥ÎªÌ¦W³æ",		/* LUSERS */
-    "°lÂÜ¯¸¤Í",			/* MONITOR */
-    "©I¥s",			/* PAGE */
-    "¬d¸ß",			/* TQUERY */
-    "¥æ½Í",			/* TALK  */
-    "½s¦W¤ùÀÉ",			/* EDITPLAN */
-    "½sÃ±¦WÀÉ",			/* EDITSIG */
-    "§ë²¼¤¤",			/* VOTING */
-    "³]©w¸ê®Æ",			/* XINFO */
-    "±Hµ¹¯¸ªø",			/* MSYSOP */
-    "¨L¨L¨L",			/* WWW */
-    "¥´¤j¦Ñ¤G",			/* BIG2 */
-    "¦^À³",			/* REPLY */
-    "³Q¤ô²y¥´¤¤",		/* HIT */
-    "¤ô²y·Ç³Æ¤¤",		/* DBACK */
-    "µ§°O¥»",			/* NOTE */
-    "½s¿è¤å³¹",			/* EDITING */
-    "µo¨t²Î³q§i",		/* MAILALL */
-    "ºN¨â°é",			/* MJ */
-    "¹q¸£¾Ü¤Í",			/* P_FRIEND */
-    "¤W¯¸³~¤¤",			/* LOGIN */
-    "¬d¦r¨å",			/* DICT */
-    "¥´¾ôµP",			/* BRIDGE */
-    "§äÀÉ®×",			/* ARCHIE */
-    "¥´¦a¹«",			/* GOPHER */
-    "¬İNews",			/* NEWS */
-    "±¡®Ñ²£¥Í¾¹",		/* LOVE */
-    "½s¿è»²§U¾¹",		/* EDITEXP */
-    "¥Ó½ĞIP¦ì§}",		/* IPREG */
-    "ºôºŞ¿ì¤½¤¤",		/* NetAdm */
-    "µêÀÀ¹ê·~§{",		/* DRINK */
-    "­pºâ¾÷",			/* CAL */
-    "½s¿è®y¥k»Ê",		/* PROVERB */
-    "¤½§GÄæ",			/* ANNOUNCE */
-    "¨è¬y¨¥ªO",			/* EDNOTE */
-    "­^º~Â½Ä¶¾÷",		/* CDICT */
-    "ÀËµø¦Û¤vª««~",		/* LOBJ */
-    "¤ß±¡ÂI¼½",			/* OSONG */
-    "»PÃdª«¦P¼Ö",		/* CHICKEN */
-    "ª±±m¨é",			/* TICKET */
-    "²q¼Æ¦r",			/* GUESSNUM */
-    "¹C¼Ö³õ",			/* AMUSE */
-    "³æ¤H¶Â¥Õ´Ñ",		/* OTHELLO */
-    "ª±»ë¤l",			/* DICE */
-    "µo²¼¹ï¼ú",			/* VICE */
-    "¹G¹Gáàing",		/* BBCALL */
-    "Ãº»@³æ",			/* CROSSPOST */
-    "¤­¤l´Ñ",			/* M_FIVE */
-    "21ÂIing",			/* JACK_CARD */
-    "10ÂI¥bing",		/* TENHALF */
-    "¶W¯Å¤E¤Q¤E",		/* CARD_99 */
-    "¤õ¨®¬d¸ß",			/* RAIL_WAY */
-    "·j´M¿ï³æ",			/* SREG */
-    "¤U¶H´Ñ",			/* CHC */
-    "¤U·t´Ñ",			/* DARK */
-    "NBA¤j²q´ú",		/* TMPJACK */
-    BBSMNAME2 "¬dº]¨t²Î",		/* JCEE */
-    "­«½s¤å³¹",			/* REEDIT */
-    "³¡¸¨®æ",                   /* BLOGGING */
-    "¬İ´Ñ",			/* CHESSWATCHING */
-    "¤U³ò´Ñ",			/* UMODE_GO */
-    "[¨t²Î¿ù»~]",		/* DEBUGSLEEPING */
-    "³s¤»´Ñ",			/* UMODE_CONN6 */
-    "¶Â¥Õ´Ñ",			/* REVERSI */
+    "ç™¼å‘†",			/* IDLE */
+    "ä¸»é¸å–®",			/* MMENU */
+    "ç³»çµ±ç¶­è­·",			/* ADMIN */
+    "éƒµä»¶é¸å–®",			/* MAIL */
+    "äº¤è«‡é¸å–®",			/* TMENU */
+    "ä½¿ç”¨è€…é¸å–®",		/* UMENU */
+    "XYZ é¸å–®",			/* XMENU */
+    "åˆ†é¡çœ‹æ¿",			/* CLASS */
+    "Playé¸å–®",			/* PMENU */
+    "ç·¨ç‰¹åˆ¥åå–®",		/* NMENU */
+    BBSMNAME2 "é‡è²©åº—",		/* PSALE */
+    "ç™¼è¡¨æ–‡ç« ",			/* POSTING */
+    "çœ‹æ¿åˆ—è¡¨",			/* READBRD */
+    "é–±è®€æ–‡ç« ",			/* READING */
+    "æ–°æ–‡ç« åˆ—è¡¨",		/* READNEW */
+    "é¸æ“‡çœ‹æ¿",			/* SELECT */
+    "è®€ä¿¡",			/* RMAIL */
+    "å¯«ä¿¡",			/* SMAIL */
+    "èŠå¤©å®¤",			/* CHATING */
+    "å…¶ä»–",			/* XMODE */
+    "å°‹æ‰¾å¥½å‹",			/* FRIEND */
+    "ä¸Šç·šä½¿ç”¨è€…",		/* LAUSERS */
+    "ä½¿ç”¨è€…åå–®",		/* LUSERS */
+    "è¿½è¹¤ç«™å‹",			/* MONITOR */
+    "å‘¼å«",			/* PAGE */
+    "æŸ¥è©¢",			/* TQUERY */
+    "äº¤è«‡",			/* TALK  */
+    "ç·¨åç‰‡æª”",			/* EDITPLAN */
+    "ç·¨ç°½åæª”",			/* EDITSIG */
+    "æŠ•ç¥¨ä¸­",			/* VOTING */
+    "è¨­å®šè³‡æ–™",			/* XINFO */
+    "å¯„çµ¦ç«™é•·",			/* MSYSOP */
+    "æ±ªæ±ªæ±ª",			/* WWW */
+    "æ‰“å¤§è€äºŒ",			/* BIG2 */
+    "å›æ‡‰",			/* REPLY */
+    "è¢«æ°´çƒæ‰“ä¸­",		/* HIT */
+    "æ°´çƒæº–å‚™ä¸­",		/* DBACK */
+    "ç­†è¨˜æœ¬",			/* NOTE */
+    "ç·¨è¼¯æ–‡ç« ",			/* EDITING */
+    "ç™¼ç³»çµ±é€šå‘Š",		/* MAILALL */
+    "æ‘¸å…©åœˆ",			/* MJ */
+    "é›»è…¦æ“‡å‹",			/* P_FRIEND */
+    "ä¸Šç«™é€”ä¸­",			/* LOGIN */
+    "æŸ¥å­—å…¸",			/* DICT */
+    "æ‰“æ©‹ç‰Œ",			/* BRIDGE */
+    "æ‰¾æª”æ¡ˆ",			/* ARCHIE */
+    "æ‰“åœ°é¼ ",			/* GOPHER */
+    "çœ‹News",			/* NEWS */
+    "æƒ…æ›¸ç”¢ç”Ÿå™¨",		/* LOVE */
+    "ç·¨è¼¯è¼”åŠ©å™¨",		/* EDITEXP */
+    "ç”³è«‹IPä½å€",		/* IPREG */
+    "ç¶²ç®¡è¾¦å…¬ä¸­",		/* NetAdm */
+    "è™›æ“¬å¯¦æ¥­åŠ",		/* DRINK */
+    "è¨ˆç®—æ©Ÿ",			/* CAL */
+    "ç·¨è¼¯åº§å³éŠ˜",		/* PROVERB */
+    "å…¬ä½ˆæ¬„",			/* ANNOUNCE */
+    "åˆ»æµè¨€æ¿",			/* EDNOTE */
+    "è‹±æ¼¢ç¿»è­¯æ©Ÿ",		/* CDICT */
+    "æª¢è¦–è‡ªå·±ç‰©å“",		/* LOBJ */
+    "å¿ƒæƒ…é»æ’­",			/* OSONG */
+    "èˆ‡å¯µç‰©åŒæ¨‚",		/* CHICKEN */
+    "ç©å½©åˆ¸",			/* TICKET */
+    "çŒœæ•¸å­—",			/* GUESSNUM */
+    "éŠæ¨‚å ´",			/* AMUSE */
+    "å–®äººé»‘ç™½æ£‹",		/* OTHELLO */
+    "ç©éª°å­",			/* DICE */
+    "ç™¼ç¥¨å°ç",			/* VICE */
+    "é€¼é€¼æ‘³ing",		/* BBCALL */
+    "ç¹³ç½°å–®",			/* CROSSPOST */
+    "äº”å­æ£‹",			/* M_FIVE */
+    "21é»ing",			/* JACK_CARD */
+    "10é»åŠing",		/* TENHALF */
+    "è¶…ç´šä¹åä¹",		/* CARD_99 */
+    "ç«è»ŠæŸ¥è©¢",			/* RAIL_WAY */
+    "æœå°‹é¸å–®",			/* SREG */
+    "ä¸‹è±¡æ£‹",			/* CHC */
+    "ä¸‹æš—æ£‹",			/* DARK */
+    "NBAå¤§çŒœæ¸¬",		/* TMPJACK */
+    BBSMNAME2 "æŸ¥æ¦œç³»çµ±",		/* JCEE */
+    "é‡ç·¨æ–‡ç« ",			/* REEDIT */
+    "éƒ¨è½æ ¼",                   /* BLOGGING */
+    "çœ‹æ£‹",			/* CHESSWATCHING */
+    "ä¸‹åœæ£‹",			/* UMODE_GO */
+    "[ç³»çµ±éŒ¯èª¤]",		/* DEBUGSLEEPING */
+    "é€£å…­æ£‹",			/* UMODE_CONN6 */
+    "é»‘ç™½æ£‹",			/* REVERSI */
     "BBS-Lua",			/* UMODE_BBSLUA */
-    "¼½©ñ°Êµe",			/* UMODE_ASCIIMOVIE */
+    "æ’­æ”¾å‹•ç•«",			/* UMODE_ASCIIMOVIE */
     "",
     "",
     "", // 90
@@ -354,7 +354,7 @@ char           * const ModeTypeTable[] = {
 /* term.c */
 int             b_lines = 23; // bottom line of screen (= t_lines - 1)
 int             t_lines = 24; // term lines
-int             p_lines = 20; // ¦©±¼ header(3), footer(1), µe­±¤W¥i¥HÅã¥Ü¸ê®Æªº¦æ¼Æ
+int             p_lines = 20; // æ‰£æ‰ header(3), footer(1), ç•«é¢ä¸Šå¯ä»¥é¡¯ç¤ºè³‡æ–™çš„è¡Œæ•¸
 int             t_columns = 80;
 
 /* refer to ansi.h for *len */
@@ -378,18 +378,18 @@ int             wmofo = NOTREPLYING;
 /*
  * PAGER_UI_IS(PAGER_UI_ORIG) | PAGER_UI_IS(PAGER_UI_NEW):
  * ????????????????????
- * Ptt ¤ô²y¦^ÅU   (FIXME: guessed by scw)
- * watermode = -1 ¨S¦b¦^¤ô²y
- *           = 0   ¦b¦^¤W¤@Áû¤ô²y  (Ctrl-R)
- *           > 0   ¦b¦^«e n Áû¤ô²y (Ctrl-R Ctrl-R)
+ * Ptt æ°´çƒå›é¡§   (FIXME: guessed by scw)
+ * watermode = -1 æ²’åœ¨å›æ°´çƒ
+ *           = 0   åœ¨å›ä¸Šä¸€é¡†æ°´çƒ  (Ctrl-R)
+ *           > 0   åœ¨å›å‰ n é¡†æ°´çƒ (Ctrl-R Ctrl-R)
  *
  * PAGER_UI_IS(PAGER_UI_OFO)  by in2
- * wmofo     = NOTREPLYING     ¨S¦b¦^¤ô²y
- *           = REPLYING        ¥¿¦b¦^¤ô²y
- *           = RECVINREPLYING  ¦^¤ô²y¶¡¤S±µ¨ì¤ô²y
+ * wmofo     = NOTREPLYING     æ²’åœ¨å›æ°´çƒ
+ *           = REPLYING        æ­£åœ¨å›æ°´çƒ
+ *           = RECVINREPLYING  å›æ°´çƒé–“åˆæ¥åˆ°æ°´çƒ
  *
- * wmofo     >=0  ®É¦¬¨ì¤ô²y±N¥uÅã¥Ü, ¤£·|¨ìwater[]¸Ì,
- *                «İ¦^§¹¤ô²yªº®É­Ô¤@¦¸¼g¤J.
+ * wmofo     >=0  æ™‚æ”¶åˆ°æ°´çƒå°‡åªé¡¯ç¤º, ä¸æœƒåˆ°water[]è£¡,
+ *                å¾…å›å®Œæ°´çƒçš„æ™‚å€™ä¸€æ¬¡å¯«å…¥.
  */
 
 
@@ -437,10 +437,10 @@ char            roll = 0;
 char		msg_occupied = 0;
 
 /* gomo.c */
-const char     * const bw_chess[] = {"¡³", "¡´", "¡C", "¡E"};
+const char     * const bw_chess[] = {"â—‹", "â—", "ã€‚", "â€¢"};
 
 /* friend.c */
-/* Ptt ¦UºØ¯S§O¦W³æªºÀÉ¦W */
+/* Ptt å„ç¨®ç‰¹åˆ¥åå–®çš„æª”å */
 char           *friend_file[8] = {
     FN_OVERRIDES,
     FN_REJECT,

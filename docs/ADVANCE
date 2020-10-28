@@ -1,66 +1,66 @@
-§Ú­Ì¦b³o­Óª©¥»¸Ì­±¥[¤J¤F¤@¨Ç¦nª±ªºªF¦è,
-³Ì¥D­n¬O§Æ±æ¥i¥H°½Ãi°µ¤@¨Ç¨Æ±¡.
+æˆ‘å€‘åœ¨é€™å€‹ç‰ˆæœ¬è£¡é¢åŠ å…¥äº†ä¸€äº›å¥½ç©çš„æ±è¥¿,
+æœ€ä¸»è¦æ˜¯å¸Œæœ›å¯ä»¥å·æ‡¶åšä¸€äº›äº‹æƒ….
 
 bbsctl
 ------
-bbsctl¬O¤@­Ó«Ü¯S§Oªºµ{¦¡, ¦w¸Ë¦³ÂI½ÆÂø.
-	1.¥ı¥Î bbsadm ªºÅv­­¦b util/¤U make bbsctl
-	2.§ï¦¨ root ªºÅv­­¦b util/¤U make installbbsctl
-¦p¦¹·|§â bbsctl ¦w¸Ë¨ì $(BBSHOME)/bin/bbsctl¤U.
-§Ú­Ì·|«ØÄ³±z±N bbsctl ©Ò¦b¥Ø¿ı¥[¶i±zªº path ¸Ì­±,
-©Î¬O«Ø¥ß symbolic link§â bbsctl ©ñ¨ì¤@­Ó¦³³] path ªº¥Ø¿ı
- (¹³¬O /usr/local/bin ±N¬O¤@­Ó²Å¦X FreeBSDµ{¦¡¸m©ñ¸ô®|ªº¥Ø¿ı)
-±z¥i¥H¥Î ln -s $(BBSHOME)/bbs/bbsctl /usr/local/bin/bbsctl
- (¨ä¤¤ $(BBSHOME) ½Ğ¥Î±z©Ò³]ªº bbs¸ô®|¥N´À, ¦p /home/bbs)
-¦p¦¹±z±N¥i¥H¦b¥ô¦ó¤@­Ó¥Ø¿ı¤U¨Ï¥Î bbsctl
+bbsctlæ˜¯ä¸€å€‹å¾ˆç‰¹åˆ¥çš„ç¨‹å¼, å®‰è£æœ‰é»è¤‡é›œ.
+	1.å…ˆç”¨ bbsadm çš„æ¬Šé™åœ¨ util/ä¸‹ make bbsctl
+	2.æ”¹æˆ root çš„æ¬Šé™åœ¨ util/ä¸‹ make installbbsctl
+å¦‚æ­¤æœƒæŠŠ bbsctl å®‰è£åˆ° $(BBSHOME)/bin/bbsctlä¸‹.
+æˆ‘å€‘æœƒå»ºè­°æ‚¨å°‡ bbsctl æ‰€åœ¨ç›®éŒ„åŠ é€²æ‚¨çš„ path è£¡é¢,
+æˆ–æ˜¯å»ºç«‹ symbolic linkæŠŠ bbsctl æ”¾åˆ°ä¸€å€‹æœ‰è¨­ path çš„ç›®éŒ„
+ (åƒæ˜¯ /usr/local/bin å°‡æ˜¯ä¸€å€‹ç¬¦åˆ FreeBSDç¨‹å¼ç½®æ”¾è·¯å¾‘çš„ç›®éŒ„)
+æ‚¨å¯ä»¥ç”¨ ln -s $(BBSHOME)/bbs/bbsctl /usr/local/bin/bbsctl
+ (å…¶ä¸­ $(BBSHOME) è«‹ç”¨æ‚¨æ‰€è¨­çš„ bbsè·¯å¾‘ä»£æ›¿, å¦‚ /home/bbs)
+å¦‚æ­¤æ‚¨å°‡å¯ä»¥åœ¨ä»»ä½•ä¸€å€‹ç›®éŒ„ä¸‹ä½¿ç”¨ bbsctl
 
 
-!!½Ğª`·N,  bbsctl ¬O¦³ root setuidªº, ³o¥i¯à·|¦³¦w¥ş¤Wªº°İÃD!!
+!!è«‹æ³¨æ„,  bbsctl æ˜¯æœ‰ root setuidçš„, é€™å¯èƒ½æœƒæœ‰å®‰å…¨ä¸Šçš„å•é¡Œ!!
 
 
-¨ä¤¤ bbsctl ³]­p¬O¥u¦³¸Ó±b¸¹¦³¥[¤J bbsadm ³o­Ó groupªº¤H¤~¯à¨Ï¥Î.
- (Ãö©ó¦p¦ó³]©w group½Ğ¨£ FAQ)
-±zÀ³¸Ó¦Ü¤Ö­n±N bbs©M bbsadm ³o¨â­Ó±b¸¹¥[¤J bbsadm ³o­Ó group
+å…¶ä¸­ bbsctl è¨­è¨ˆæ˜¯åªæœ‰è©²å¸³è™Ÿæœ‰åŠ å…¥ bbsadm é€™å€‹ groupçš„äººæ‰èƒ½ä½¿ç”¨.
+ (é—œæ–¼å¦‚ä½•è¨­å®š groupè«‹è¦‹ FAQ)
+æ‚¨æ‡‰è©²è‡³å°‘è¦å°‡ bbså’Œ bbsadm é€™å…©å€‹å¸³è™ŸåŠ å…¥ bbsadm é€™å€‹ group
 
 
-±z¥i¥Hª½±µ¥´ bbsctl ¨Ó¬İ¦³¤°»ò¥\¯à.
-¥D­nªº¥\¯à»¡©ú¦p¤U:
+æ‚¨å¯ä»¥ç›´æ¥æ‰“ bbsctl ä¾†çœ‹æœ‰ä»€éº¼åŠŸèƒ½.
+ä¸»è¦çš„åŠŸèƒ½èªªæ˜å¦‚ä¸‹:
 1.bbsctl start
-  ¥Î©ó±Ò°Ê mbbsd (¶·¥ı¶] shmctl init)
-  ¥H©¹¦]¬°­n bind port 23 ¶·­n root ©Ò¥H­n¤â°Ê su ,
-  ¤£¹L²{¦b¦³ bbsctl with setuid ,
-  ½Ğª½±µ¨Ï¥Î bbsctl start , §Y¥i±N mbbsd¶]°_¨Ó.
+  ç”¨æ–¼å•Ÿå‹• mbbsd (é ˆå…ˆè·‘ shmctl init)
+  ä»¥å¾€å› ç‚ºè¦ bind port 23 é ˆè¦ root æ‰€ä»¥è¦æ‰‹å‹• su ,
+  ä¸éç¾åœ¨æœ‰ bbsctl with setuid ,
+  è«‹ç›´æ¥ä½¿ç”¨ bbsctl start , å³å¯å°‡ mbbsdè·‘èµ·ä¾†.
 2.bbsctl stop
-  ·|±N©Ò¦³¥¿¦b listen ªº mbbsd³£¬å±¼
+  æœƒå°‡æ‰€æœ‰æ­£åœ¨ listen çš„ mbbsdéƒ½ç æ‰
 3.bbsctl restart
-  §Y bbsctl stop; bbsctl start
-  ¥D­n¬O¦pªGµ{¦¡§ó·sªº¸Ü, ¥i¥H³z¹L³o­Ó¨Óª½±µ­«¶].
+  å³ bbsctl stop; bbsctl start
+  ä¸»è¦æ˜¯å¦‚æœç¨‹å¼æ›´æ–°çš„è©±, å¯ä»¥é€éé€™å€‹ä¾†ç›´æ¥é‡è·‘.
 4.bbsctl bbsadm
-  ­Y¸Ó¨Ï¥ÎªÌ¦³¥[¤J bbsadm ¸s²Õ, «h¦P©óª½±µ su ¦¨ bbsadm
-   (¤£¶·±K½X)
-  ¦p¦¹±z¥i¥H±N¬Y¨Ç¦³ºŞ²zÅv­­ªº¨Ï¥ÎªÌ,
-  ³z¹L /etc/group ©ñ¶i bbsadm ªº¸s²Õ,
-  Åı¦o­Ì¦b login«á¥i¥Hª½±µ¥Î bbsctl bbsadm¨Ó´«¦¨ bbsadm ªºÅv­­.
+  è‹¥è©²ä½¿ç”¨è€…æœ‰åŠ å…¥ bbsadm ç¾¤çµ„, å‰‡åŒæ–¼ç›´æ¥ su æˆ bbsadm
+   (ä¸é ˆå¯†ç¢¼)
+  å¦‚æ­¤æ‚¨å¯ä»¥å°‡æŸäº›æœ‰ç®¡ç†æ¬Šé™çš„ä½¿ç”¨è€…,
+  é€é /etc/group æ”¾é€² bbsadm çš„ç¾¤çµ„,
+  è®“å¥¹å€‘åœ¨ loginå¾Œå¯ä»¥ç›´æ¥ç”¨ bbsctl bbsadmä¾†æ›æˆ bbsadm çš„æ¬Šé™.
 
 
 
 shmctl
 ------
-³o°¦µ{¦¡¥D­n¬O¥~³¡¥Î¨Ó»²§U shared-memory¥¿±`¹B§@ªº.
+é€™éš»ç¨‹å¼ä¸»è¦æ˜¯å¤–éƒ¨ç”¨ä¾†è¼”åŠ© shared-memoryæ­£å¸¸é‹ä½œçš„.
 1.shmctl utmpfix
-  ±N shared-memory¤¤ utmp ¤£¥¿½Tªº record ²M±¼.
-  «ØÄ³¦Ü¤Ö¨C¤p®É¶]¤@¦¸.
-  ¥t¥~¥i¥H¥Î³o­Ó¨Ó¥~³¡³]©w idle ¦h¤[«á´N½ğ¤H.
+  å°‡ shared-memoryä¸­ utmp ä¸æ­£ç¢ºçš„ record æ¸…æ‰.
+  å»ºè­°è‡³å°‘æ¯å°æ™‚è·‘ä¸€æ¬¡.
+  å¦å¤–å¯ä»¥ç”¨é€™å€‹ä¾†å¤–éƒ¨è¨­å®š idle å¤šä¹…å¾Œå°±è¸¢äºº.
 
 Makefile of mbbsd/
 ------------------
 1.make all
-  ¦Û°Ê¥[¤W -O ªº³Ì¨Î¤Æ°Ñ¼Æ
+  è‡ªå‹•åŠ ä¸Š -O çš„æœ€ä½³åŒ–åƒæ•¸
 2.make DEBUG=1
-  ¤@¯ë¥Î¨Ó debugªº±¡ªp¤U·|¥Î¨ì,
-  ·|¶}±Ò¤@¨Ç DEBUGªºµ{¦¡½X,
-   gcc¤£¥Î -O ¦Ó§ï¥[¤W -g ,
-   menu title Åã¥Ü¥Ø«eªº pid,
-  ¥H¤è«K¥Î gdb¨Ó attach.
+  ä¸€èˆ¬ç”¨ä¾† debugçš„æƒ…æ³ä¸‹æœƒç”¨åˆ°,
+  æœƒé–‹å•Ÿä¸€äº› DEBUGçš„ç¨‹å¼ç¢¼,
+   gccä¸ç”¨ -O è€Œæ”¹åŠ ä¸Š -g ,
+   menu title é¡¯ç¤ºç›®å‰çš„ pid,
+  ä»¥æ–¹ä¾¿ç”¨ gdbä¾† attach.
 3.make NO_FORK=1
-  ³o³q±`³£¬O«Ü¯S§Oªº±¡ªp¤~·|¥Î¨ì.
+  é€™é€šå¸¸éƒ½æ˜¯å¾ˆç‰¹åˆ¥çš„æƒ…æ³æ‰æœƒç”¨åˆ°.

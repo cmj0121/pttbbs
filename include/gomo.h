@@ -3,12 +3,12 @@
 #ifndef INCLUDE_GOMO_H
 #define INCLUDE_GOMO_H
 
-#define BBLANK (-1)  /* ªÅ¥Õ */
-#define BWHITE (0)  /* ¥Õ¤l, «á¤â */
-#define BBLACK (1)  /* ¶Â¤l, ¥ı¤â */
-#define MAX_TIME (300) /*³Ìªøidle¬í¼Æ*/
+#define BBLANK (-1)  /* ç©ºç™½ */
+#define BWHITE (0)  /* ç™½å­, å¾Œæ‰‹ */
+#define BBLACK (1)  /* é»‘å­, å…ˆæ‰‹ */
+#define MAX_TIME (300) /*æœ€é•·idleç§’æ•¸*/
 #ifndef BRDSIZ
-#define BRDSIZ (15) /* ´Ñ½L³æÃä¤j¤p */
+#define BRDSIZ (15) /* æ£‹ç›¤å–®é‚Šå¤§å° */
 #endif
 
 /*

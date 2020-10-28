@@ -55,19 +55,19 @@ reverse_friend_stat(int stat)
 static int set_friend_bit(int me, int ui)
 {
     int     hit = 0;
-    /* §PÂ_¹ï¤è¬O§_¬°§ÚªºªB¤Í ? */
+    /* åˆ¤æ–·å°æ–¹æ˜¯å¦ç‚ºæˆ‘çš„æœ‹å‹ ? */
     if( intbsearch(utmp[ui].uid, utmp[me].friend, utmp[me].nFriends) )
         hit = IFH;
 
-    /* §PÂ_§Ú¬O§_¬°¹ï¤èªºªB¤Í ? */
+    /* åˆ¤æ–·æˆ‘æ˜¯å¦ç‚ºå°æ–¹çš„æœ‹å‹ ? */
     if( intbsearch(utmp[me].uid, utmp[ui].friend, utmp[ui].nFriends) )
         hit |= HFM;
 
-    /* §PÂ_¹ï¤è¬O§_¬°§Úªº¤³¤H ? */
+    /* åˆ¤æ–·å°æ–¹æ˜¯å¦ç‚ºæˆ‘çš„ä»‡äºº ? */
     if( intbsearch(utmp[ui].uid, utmp[me].reject, utmp[me].nRejects) )
 	hit |= IRH;
 
-    /* §PÂ_§Ú¬O§_¬°¹ï¤èªº¤³¤H ? */
+    /* åˆ¤æ–·æˆ‘æ˜¯å¦ç‚ºå°æ–¹çš„ä»‡äºº ? */
     if( intbsearch(utmp[me].uid, utmp[ui].reject, utmp[ui].nRejects) )
 	hit |= HRM;
 
@@ -107,8 +107,8 @@ static void processlogin(int cfd, int uid, int index)
 {
     if( toread(cfd, utmp[index].friend, sizeof(utmp[index].friend)) > 0 &&
 	toread(cfd, utmp[index].reject, sizeof(utmp[index].reject)) > 0 ){
-	/* ¦]¬° logout ªº®É­Ô¨Ã¤£·|³qª¾ utmpserver , ¥i¯à·|¬d¨ì¤@¨Ç
-	   ¤w¸g logout ªº±b¸¹¡C©Ò¥H¤£¯à¥u¨ú MAX_FRIEND ¦Ó­n¦h¨ú¤@¨Ç */
+	/* å› ç‚º logout çš„æ™‚å€™ä¸¦ä¸æœƒé€šçŸ¥ utmpserver , å¯èƒ½æœƒæŸ¥åˆ°ä¸€äº›
+	   å·²ç¶“ logout çš„å¸³è™Ÿã€‚æ‰€ä»¥ä¸èƒ½åªå– MAX_FRIEND è€Œè¦å¤šå–ä¸€äº› */
 #define MAX_FS   (2 * MAX_FRIEND)
 	int     iu, nFrs, stat, rstat;
 	ocfs_t  fs[MAX_FS];
@@ -145,7 +145,7 @@ static void flushwaitqueue(void)
 }
 #endif
 
-/* XXX ¨ã¦³³Q DoS ªº¥i¯à, ½Ğ¥Î firewall ¤§Ãş¾×°_¨Ó */
+/* XXX å…·æœ‰è¢« DoS çš„å¯èƒ½, è«‹ç”¨ firewall ä¹‹é¡æ“‹èµ·ä¾† */
 int main(int argc, char **argv)
 {
     struct  sockaddr_in     clientaddr;

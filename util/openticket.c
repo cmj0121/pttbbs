@@ -1,12 +1,12 @@
-/* ¶}¼úªº utility */
+/* é–‹ççš„ utility */
 #define _UTIL_C_
 #include "bbs.h"
 
-#define MAX_ITEM	8	//³Ì¤j ½ä¶µ(item) ­Ó¼Æ
-#define MAX_ITEM_LEN	30	//³Ì¤j ¨C¤@½ä¶µ¦W¦rªø«×
-#define MAX_DISP_LEN    8       //¨C¶µÅã¥Ü³Ì¤jªø«×
+#define MAX_ITEM	8	//æœ€å¤§ è³­é …(item) å€‹æ•¸
+#define MAX_ITEM_LEN	30	//æœ€å¤§ æ¯ä¸€è³­é …åå­—é•·åº¦
+#define MAX_DISP_LEN    8       //æ¯é …é¡¯ç¤ºæœ€å¤§é•·åº¦
 #define PRICE           100     //Default price
-#define MAX_DES 7		/* ³Ì¤j«O¯d¼ú¼Æ */
+#define MAX_DES 7		/* æœ€å¤§ä¿ç•™çæ•¸ */
 #define VALID_UNUM(u) ((u) > 0 && (u) < MAX_USERS)
 
 #if (MAX_ITEM_LEN < IDLEN)
@@ -178,10 +178,10 @@ int main()
 	fclose(fp);
     }
 
-    /* ²{¦b¶}¼ú¸¹½X¨Ã¨S¥Î¨ì random function.
-     * ¤p¯¸ªº UTMPnumber ¥iµø¬°©w­È, ¥B UTMPnumber ¹w³]¤@¬í¤~§ó·s¤@¦¸
-     * ¶}¯¸¤@¬q®É¶¡ªº¶}¼ú pid À³¸ÓµLªk¹w´ú.
-     * ­Y¬O¤p¯¸·í¯¸¶}¼ú«e¶}¯¸, «h¦³³Q²q¤¤ªº¥i¯à */
+    /* ç¾åœ¨é–‹çè™Ÿç¢¼ä¸¦æ²’ç”¨åˆ° random function.
+     * å°ç«™çš„ UTMPnumber å¯è¦–ç‚ºå®šå€¼, ä¸” UTMPnumber é è¨­ä¸€ç§’æ‰æ›´æ–°ä¸€æ¬¡
+     * é–‹ç«™ä¸€æ®µæ™‚é–“çš„é–‹ç pid æ‡‰è©²ç„¡æ³•é æ¸¬.
+     * è‹¥æ˜¯å°ç«™ç•¶ç«™é–‹çå‰é–‹ç«™, å‰‡æœ‰è¢«çŒœä¸­çš„å¯èƒ½ */
     bet = (SHM->UTMPnumber + getpid()) % MAX_ITEM;
 
     log_filef(FN_LOGFILE, LOG_CREAT, "%s bet=%d\n", Cdatelite(&now), bet);
@@ -199,7 +199,7 @@ int main()
 	    fputs(des[n], fp);
 	}
 
-        printf("\n\n¶}¼ú®É¶¡: %s\n±m¨é¶µ¥Ø:\n", Cdatelite(&now));
+        printf("\n\né–‹çæ™‚é–“: %s\nå½©åˆ¸é …ç›®:\n", Cdatelite(&now));
         for (n = 0; n < MAX_ITEM; n++) {
             printf(" %d.%-*s", n + 1, IDLEN, betname[n]);
             if ((n + 1) % (MAX_ITEM / 2) == 0)
@@ -207,14 +207,14 @@ int main()
         }
 
 	printf("\n"
-               "¶}¼úµ²ªG: %d. %s\n\n"
-	       "¤Uª`Á`ÃB: %d00\n"
-	       "¤¤¼ú¤ñ¨Ò: %d±i/%d±i  (%f)\n"
-	       "¨C±i¤¤¼ú±m²¼¥i±o %d " MONEYNAME "\n\n",
+               "é–‹ççµæœ: %d. %s\n\n"
+	       "ä¸‹æ³¨ç¸½é¡: %d00\n"
+	       "ä¸­çæ¯”ä¾‹: %då¼µ/%då¼µ  (%f)\n"
+	       "æ¯å¼µä¸­çå½©ç¥¨å¯å¾— %d " MONEYNAME "\n\n",
 	       bet + 1, betname[bet], total, ticket[bet], total,
 	       (float) ticket[bet] / total, money);
 
-	fprintf(fp, "%s ¶}¥X:%d.%s Á`ÃB:%d00 ±mª÷/±i:%d ¾÷²v:%1.2f\n",
+	fprintf(fp, "%s é–‹å‡º:%d.%s ç¸½é¡:%d00 å½©é‡‘/å¼µ:%d æ©Ÿç‡:%1.2f\n",
 		Cdatelite(&now), bet + 1, betname[bet], total, money,
 		(float) ticket[bet] / total);
 	fclose(fp);
@@ -232,7 +232,7 @@ int main()
 	    if (mybet == bet)
 	    {
                 int oldm, newm;
-		printf("®¥³ß %-*s ¶R¤F%9d ±i %s, Àò±o %d " MONEYNAME "\n",
+		printf("æ­å–œ %-*s è²·äº†%9d å¼µ %s, ç²å¾— %d " MONEYNAME "\n",
                        IDLEN, userid, num, betname[mybet], money * num);
                 if((uid=searchuser(userid, userid))==0 ||
                     !is_validuserid(userid)) 
@@ -243,21 +243,21 @@ int main()
                 newm = moneyof(uid);
                 {
                     char reason[256];
-                    sprintf(reason, "±m¨é¤¤¼ú (%s x %d)", betname[mybet], num);
+                    sprintf(reason, "å½©åˆ¸ä¸­ç (%s x %d)", betname[mybet], num);
                     sethomefile(genbuf, userid, FN_RECENTPAY);
                     log_payment(genbuf, -money * num, oldm, newm, reason, now);
                 }
                 sethomepath(genbuf, userid);
 		stampfile(genbuf, &mymail);
 		strcpy(mymail.owner, BBSNAME);
-		sprintf(mymail.title, "[%s] ¤¤¼úÅo! $ %d", Cdatelite(&now), money * num);
+		sprintf(mymail.title, "[%s] ä¸­çå›‰! $ %d", Cdatelite(&now), money * num);
 		unlink(genbuf);
 		Link("etc/ticket", genbuf);
                 sethomedir(genbuf, userid);
 		append_record(genbuf, &mymail, sizeof(mymail));
                 sendalert_uid(uid, ALERT_NEW_MAIL);
 	    } else {
-                printf("     %-*s ¶R¤F%9d ±i %s\n", IDLEN, userid, num, betname[mybet]);
+                printf("     %-*s è²·äº†%9d å¼µ %s\n", IDLEN, userid, num, betname[mybet]);
             }
 	}
     }

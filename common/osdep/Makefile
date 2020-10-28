@@ -1,13 +1,21 @@
-# $Id$
+include Makefile.in
 
-SRCROOT=	../..
-.include "$(SRCROOT)/pttbbs.mk"
+SRC := $(wildcard *.c)
+OBJ := $(subst .c,.o,$(SRC))
+LIB := libosdep.a
 
-SRCS:=	cpuload.c proctitle.c strlcat.c strlcpy.c memusage.c
-LIB:=	osdep
+.PHONY: all clean
 
-all: .depend
+all: $(LIB)		# build all necessary
 
-install:
+clean: 			# clean-up temporary file
+	rm -f $(LIB) $(OBJ)
 
-.include <bsd.lib.mk>
+help:  			# show this message
+	@printf "Usage: make [OPTION]\n"
+	@printf "\n"
+	@perl -nle 'print $$& if m{^[\w-]+:.*?#.*$$}' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*?#"} {printf "    %-18s %s\n", $$1, $$2}'
+
+$(LIB): $(OBJ)
+	$(AR) -csr $@ $^

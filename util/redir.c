@@ -12,7 +12,7 @@ int in_spam(const fileheader_t *fh) {
 
 	   // let's also remove dangerous birthday links
 	   (strcmp(fh->owner, BBSNAME) == 0 &&
-	    strcmp(fh->title, "!! �ͤ�ּ� !!") == 0) ||
+	    strcmp(fh->title, "!! 生日快樂 !!") == 0) ||
 	   0;
 }
 

@@ -43,7 +43,7 @@ get_sum_records(const char *fpath, int size)
  */
 int
 getindex_m(const char *direct, fileheader_t *fhdr, int end, int isloadmoney)
-{ // Ptt: ±q«e­±§ä«Ü¶O¤O ¤Ó¼É¤O
+{ // Ptt: å¾žå‰é¢æ‰¾å¾ˆè²»åŠ› å¤ªæš´åŠ›
     int             fd = -1, begin = 1, i, s, times, stamp;
     fileheader_t    fh;
 
@@ -52,7 +52,7 @@ getindex_m(const char *direct, fileheader_t *fhdr, int end, int isloadmoney)
            end = n;
     stamp = atoi(fhdr->filename + 2);
     for( i = (begin + end ) / 2, times = 0 ;
-	 end >= begin  && times < 20    ; /* ³Ì¦h¥u§ä 20 ¦¸ */
+	 end >= begin  && times < 20    ; /* æœ€å¤šåªæ‰¾ 20 æ¬¡ */
 	 i = (begin + end ) / 2, ++times ){
         if( get_record_keep(direct, &fh, sizeof(fileheader_t), i, &fd)==-1 ||
 	    !fh.filename[0] )
@@ -93,9 +93,9 @@ substitute_ref_record(const char *direct, fileheader_t * fhdr, int ent)
     char            fname[PATHLEN];
     int             num = 0;
 
-    // Note: ³o¬q¸£´Ý code ¹J¤W FILE_ANONYMOUS ©Î FILE_VOTE ´N·|Ãz¬µ¡C
+    // Note: é€™æ®µè…¦æ®˜ code é‡ä¸Š FILE_ANONYMOUS æˆ– FILE_VOTE å°±æœƒçˆ†ç‚¸ã€‚
 
-    /* rocker.011018: ¦ê±µ¼Ò¦¡¥Îreference¼W¶i®Ä²v */
+    /* rocker.011018: ä¸²æŽ¥æ¨¡å¼ç”¨referenceå¢žé€²æ•ˆçŽ‡ */
     if (!(fhdr->filemode & FILE_BOTTOM) &&  (fhdr->multi.refer.flag) &&
 	    (num = fhdr->multi.refer.ref)){
 	setdirpath(fname, direct, FN_DIR);
@@ -117,14 +117,14 @@ substitute_ref_record(const char *direct, fileheader_t * fhdr, int ent)
 }
 
 
-/* rocker.011022: Á×§KlockÀÉ¶}±Ò®É¤£¥¿±`Â_½u,³y¦¨¥Ã¤[lock */
+/* rocker.011022: é¿å…lockæª”é–‹å•Ÿæ™‚ä¸æ­£å¸¸æ–·ç·š,é€ æˆæ°¸ä¹…lock */
 int
 force_open(const char *fname)
 {
     int             fd;
     time4_t          expire;
 
-    expire = now - 3600;	/* lock ¦s¦b¶W¹L¤@­Ó¤p®É´N¬O¦³°ÝÃD! */
+    expire = now - 3600;	/* lock å­˜åœ¨è¶…éŽä¸€å€‹å°æ™‚å°±æ˜¯æœ‰å•é¡Œ! */
 
     if (dasht(fname) > expire)
 	return -1;
@@ -165,8 +165,8 @@ void safe_delete_range(const char *fpath, int id1, int id2)
 		  sizeof(fileheader_t)) ; ++i ){
 	strcpy(t, fhdr.filename);
 	/* rocker.011018: add new tag delete */
-	if (!((fhdr.filemode & FILE_MARKED) ||	/* ¼Ð°O */
-	      (fhdr.filemode & FILE_DIGEST) ||	/* ¤åºK */
+	if (!((fhdr.filemode & FILE_MARKED) ||	/* æ¨™è¨˜ */
+	      (fhdr.filemode & FILE_DIGEST) ||	/* æ–‡æ‘˜ */
 	      (id1 && (i < id1 || i > id2)) ||	/* range */
 	      (!id1 && !FindTaggedItem(&fhdr)))) /* TagList */
 	    safe_article_delete(i, &fhdr, fpath, NULL);
@@ -215,9 +215,9 @@ delete_range(const char *fpath, int id1, int id2)
 
 	/* rocker.011018: add new tag delete */
 	if (
-	    (fhdr.filemode & FILE_MARKED) ||	/* ¼Ð°O */
+	    (fhdr.filemode & FILE_MARKED) ||	/* æ¨™è¨˜ */
 	    ((fhdr.filemode & FILE_DIGEST) && (currstat != RMAIL) )||
-	    /* ¤åºK , FILE_DIGEST is used as REPLIED in mail menu.*/
+	    /* æ–‡æ‘˜ , FILE_DIGEST is used as REPLIED in mail menu.*/
 	    (id1 && (count < id1 || count > id2)) ||	/* range */
 	    (!id1 && !FindTaggedItem(&fhdr))) {	/* TagList */
 	    if ((safewrite(fdw, &fhdr, sizeof(fileheader_t)) == -1)) {
@@ -384,8 +384,8 @@ delete_file_content2(const char *direct, const fileheader_t *fh,
         // FIXME maybe for non-board files we should do this by simply touching
         // file instead of full log.
         if (reason && *reason)
-            log_filef(fpath,  LOG_CREAT, "\n¡° §R°£­ì¦]: %s", reason);
-        log_filef(fpath,  LOG_CREAT, "\n¡° Deleted by: %s (%s) %s\n",
+            log_filef(fpath,  LOG_CREAT, "\nâ€» åˆªé™¤åŽŸå› : %s", reason);
+        log_filef(fpath,  LOG_CREAT, "\nâ€» Deleted by: %s (%s) %s\n",
                   cuser.userid, fromhost, Cdatelite(&now));
 
         // TODO or only memcpy(&backup, fh, sizeof(backup)); ?
@@ -574,7 +574,7 @@ append_record_forward(char *fpath, fileheader_t * record, int size, const char *
     // does not understand they've set auto-forward,
     // let's mark this in the title.
     snprintf(fwd_title, sizeof(fwd_title)-1,
-             "[¦Û°ÊÂà±H] %s", record->title);
+             "[è‡ªå‹•è½‰å¯„] %s", record->title);
     bsmtp(buf, fwd_title, address, origid);
     LOG_IF(LOG_CONF_INTERNETMAIL,
            log_filef("log/internet_mail.log", LOG_CREAT,

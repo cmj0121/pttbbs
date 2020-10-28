@@ -32,7 +32,7 @@
 #define RET_EDITPOST	    (988)
 #define RET_EDITTITLE	    (987)
 
-/* user ¾Ş§@ª¬ºA»P¼Ò¦¡ */
+/* user æ“ä½œç‹€æ…‹èˆ‡æ¨¡å¼ */
 #define IDLE            0
 #define MMENU           1       /* menu mode */
 #define ADMIN           2
@@ -109,11 +109,11 @@
 // #define RAIL_WAY        73
 #define SREG            74
 #define CHC             75      /* Chinese chess */
-#define DARK            76      /* ¤¤°ê·t´Ñ */
+#define DARK            76      /* ä¸­åœ‹æš—æ£‹ */
 // #define TMPJACK         77
 // #define JCEE		78
 #define REEDIT		79
-// #define BLOGGING        80	/* ¤w°±¥Î */
+// #define BLOGGING        80	/* å·²åœç”¨ */
 #define CHESSWATCHING	81
 #define UMODE_GO        82
 #define DEBUGSLEEPING	83
@@ -121,26 +121,26 @@
 #define REVERSI		85
 #define UMODE_BBSLUA	86
 #define UMODE_ASCIIMOVIE 87
-#define MODE_MAX        88      /* ©Ò¦³¨ä¥L¿ï³æ°ÊºA¶·¦b¦¹¤§«e */
+#define MODE_MAX        88      /* æ‰€æœ‰å…¶ä»–é¸å–®å‹•æ…‹é ˆåœ¨æ­¤ä¹‹å‰ */
 
-/* menu.c ¤¤ªº¼Ò¦¡ */
+/* menu.c ä¸­çš„æ¨¡å¼ */
 #define QUIT    0x666           /* Return value to abort recursive functions */
 #define XEASY   0x333           /* Return value to un-redraw screen */
 
 /* for currmode */
-#define MODE_STARTED     0x0001    /* ¬O§_¤w¸g¶i¤J¨t²Î */
-#define MODE_POST        0x0002    /* ¬O§_¥i¥H¦b currboard µoªí¤å³¹ */
-#define MODE_POSTCHECKED 0x0004    /* ¬O§_¤wÀË¬d¦b currboard µoªí¤å³¹ªºÅv­­ */
-#define MODE_BOARD       0x0008    /* ¬O§_¥i¥H¦b currboard §R°£¡Bmark¤å³¹ */
-#define MODE_GROUPOP     0x0010    /* ¬O§_¬°¤p²Õªø (¥i¥H¦b MENU ¶}ªO) */
-#define MODE_DIGEST      0x0020    /* ¬O§_¬° digest mode */
-#define MODE_SELECT      0x0080    /* ·j´M¨Ï¥ÎªÌ¼ĞÃD */
-#define MODE_DIRTY       0x0100    /* ¬O§_§ó°Ê¹L userflag */
+#define MODE_STARTED     0x0001    /* æ˜¯å¦å·²ç¶“é€²å…¥ç³»çµ± */
+#define MODE_POST        0x0002    /* æ˜¯å¦å¯ä»¥åœ¨ currboard ç™¼è¡¨æ–‡ç«  */
+#define MODE_POSTCHECKED 0x0004    /* æ˜¯å¦å·²æª¢æŸ¥åœ¨ currboard ç™¼è¡¨æ–‡ç« çš„æ¬Šé™ */
+#define MODE_BOARD       0x0008    /* æ˜¯å¦å¯ä»¥åœ¨ currboard åˆªé™¤ã€markæ–‡ç«  */
+#define MODE_GROUPOP     0x0010    /* æ˜¯å¦ç‚ºå°çµ„é•· (å¯ä»¥åœ¨ MENU é–‹æ¿) */
+#define MODE_DIGEST      0x0020    /* æ˜¯å¦ç‚º digest mode */
+#define MODE_SELECT      0x0080    /* æœå°‹ä½¿ç”¨è€…æ¨™é¡Œ */
+#define MODE_DIRTY       0x0100    /* æ˜¯å¦æ›´å‹•é userflag */
 
-/* read.c ¤¤ªº¼Ò¦¡ */
-#define TAG_NIN         0       /* ¤£Äİ©ó TagList */
-#define TAG_TOGGLE      1       /* ¤Á´« Taglist */
-#define TAG_INSERT      2       /* ¥[¤J TagList */
+/* read.c ä¸­çš„æ¨¡å¼ */
+#define TAG_NIN         0       /* ä¸å±¬æ–¼ TagList */
+#define TAG_TOGGLE      1       /* åˆ‡æ› Taglist */
+#define TAG_INSERT      2       /* åŠ å…¥ TagList */
 
 
 #define RS_FORWARD      0x01    /* backward */
@@ -177,7 +177,7 @@
 #define SIG_REVERSI	7
 #define SIG_CONN6	8
 
-/* talk.c ¤¤ªº¼Ò¦¡ */
+/* talk.c ä¸­çš„æ¨¡å¼ */
 #define WATERBALL_GENERAL 0
 #define WATERBALL_PREEDIT 1
 #define WATERBALL_ALOHA   2

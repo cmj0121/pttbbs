@@ -3,7 +3,7 @@
 #define BTLEN    48             /* Length of board title */
 #define NAMELEN  40             /* Length of username/realname */
 //#define FNLEN    33             /* Length of filename  */
-//                                /* XXX Ptt »¡³o¸Ì¦³bug*/
+//                                /* XXX Ptt èªªé€™è£¡æœ‰bug*/
 #define IDLEN    12             /* Length of bid/uid */
 #define PASSLEN  14             /* Length of encrypted passwd field */
 #define REGLEN   38             /* Length of registration data */
@@ -20,53 +20,53 @@ typedef unsigned int	usint;	/* length = 4 */
 /* ----------------------------------------------------- */
 struct sobuserec
 {
-  char userid[IDLEN + 1];         /* ¨Ï¥ÎªÌ¦WºÙ  13 bytes */
-  char realname[20];              /* ¯u¹ê©m¦W    20 bytes */
-  char username[24];              /* ¼ÊºÙ        24 bytes */
-  char passwd[PASSLEN];           /* ±K½X        14 bytes */
-  uschar uflag;                   /* ¨Ï¥ÎªÌ¿ï¶µ   1 byte  */
-  usint userlevel;                /* ¨Ï¥ÎªÌÅv­­   4 bytes */
-  ushort numlogins;               /* ¤W¯¸¦¸¼Æ     2 bytes */
-  ushort numposts;                /* POST¦¸¼Æ     2 bytes */
-  time4_t firstlogin;              /* µù¥U®É¶¡     4 bytes */
-  time4_t lastlogin;               /* «e¦¸¤W¯¸     4 bytes */
-  char lasthost[24];              /* ¤W¯¸¦aÂI    24 bytes */
-  char vhost[24];                 /* µêÀÀºô§}    24 bytes */
+  char userid[IDLEN + 1];         /* ä½¿ç”¨è€…åç¨±  13 bytes */
+  char realname[20];              /* çœŸå¯¦å§“å    20 bytes */
+  char username[24];              /* æš±ç¨±        24 bytes */
+  char passwd[PASSLEN];           /* å¯†ç¢¼        14 bytes */
+  uschar uflag;                   /* ä½¿ç”¨è€…é¸é …   1 byte  */
+  usint userlevel;                /* ä½¿ç”¨è€…æ¬Šé™   4 bytes */
+  ushort numlogins;               /* ä¸Šç«™æ¬¡æ•¸     2 bytes */
+  ushort numposts;                /* POSTæ¬¡æ•¸     2 bytes */
+  time4_t firstlogin;              /* è¨»å†Šæ™‚é–“     4 bytes */
+  time4_t lastlogin;               /* å‰æ¬¡ä¸Šç«™     4 bytes */
+  char lasthost[24];              /* ä¸Šç«™åœ°é»    24 bytes */
+  char vhost[24];                 /* è™›æ“¬ç¶²å€    24 bytes */
   char email[50];                 /* E-MAIL      50 bytes */
-  char address[50];               /* ¦a§}        50 bytes */
-  char justify[REGLEN + 1];       /* µù¥U¸ê®Æ    39 bytes */
-  uschar month;                   /* ¥X¥Í¤ë¥÷     1 byte  */
-  uschar day;                     /* ¥X¥Í¤é´Á     1 byte  */
-  uschar year;                    /* ¥X¥Í¦~¥÷     1 byte  */
-  uschar sex;                     /* ©Ê§O         1 byte  */
-  uschar state;                   /* ª¬ºA??       1 byte  */
-  usint habit;                    /* ³ß¦n³]©w     4 bytes */
-  uschar pager;                   /* ¤ß±¡ÃC¦â     1 bytes */
-  uschar invisible;               /* Áô¨­¼Ò¦¡     1 bytes */
-  usint exmailbox;                /* «H½c«Ê¼Æ     4 bytes */
-  usint exmailboxk;               /* «H½cK¼Æ      4 bytes */
-  usint toquery;                  /* ¦n©_«×       4 bytes */
-  usint bequery;                  /* ¤H®ğ«×       4 bytes */
-  char toqid[IDLEN + 1];          /* «e¦¸¬d½Ö    13 bytes */
-  char beqid[IDLEN + 1];          /* «e¦¸³Q½Ö¬d  13 bytes */
-  uslong totaltime;		  /* ¤W½uÁ`®É¼Æ   8 bytes */
-  usint sendmsg;                  /* µo°T®§¦¸¼Æ   4 bytes */
-  usint receivemsg;               /* ¦¬°T®§¦¸¼Æ   4 bytes */
-  usint goldmoney;                /* ­·¹Ğª÷¹ô     8 bytes */
-  usint silvermoney;              /* »È¹ô         8 bytes */
-  usint exp;                      /* ¸gÅç­È       8 bytes */
-  time4_t dtime;                   /* ¦s´Ú®É¶¡     4 bytes */
-  int scoretimes;                 /* µû¤À¦¸¼Æ     4 bytes */
-  uschar rtimes;                  /* ¶ñµù¥U³æ¦¸¼Æ 1 bytes */
-  int award;                      /* ¼úÃg§PÂ_     4 bytes */
-  int pagermode;                  /* ©I¥s¾¹ªù¸¹   4 bytes */
-  char pagernum[7];               /* ©I¥s¾¹¸¹½X   7 bytes */
-  char feeling[5];                /* ¤ß±¡«ü¼Æ     5 bytes */
-  char title[20];                 /* ºÙ¿×(«Ê¸¹)  20 bytes */
+  char address[50];               /* åœ°å€        50 bytes */
+  char justify[REGLEN + 1];       /* è¨»å†Šè³‡æ–™    39 bytes */
+  uschar month;                   /* å‡ºç”Ÿæœˆä»½     1 byte  */
+  uschar day;                     /* å‡ºç”Ÿæ—¥æœŸ     1 byte  */
+  uschar year;                    /* å‡ºç”Ÿå¹´ä»½     1 byte  */
+  uschar sex;                     /* æ€§åˆ¥         1 byte  */
+  uschar state;                   /* ç‹€æ…‹??       1 byte  */
+  usint habit;                    /* å–œå¥½è¨­å®š     4 bytes */
+  uschar pager;                   /* å¿ƒæƒ…é¡è‰²     1 bytes */
+  uschar invisible;               /* éš±èº«æ¨¡å¼     1 bytes */
+  usint exmailbox;                /* ä¿¡ç®±å°æ•¸     4 bytes */
+  usint exmailboxk;               /* ä¿¡ç®±Kæ•¸      4 bytes */
+  usint toquery;                  /* å¥½å¥‡åº¦       4 bytes */
+  usint bequery;                  /* äººæ°£åº¦       4 bytes */
+  char toqid[IDLEN + 1];          /* å‰æ¬¡æŸ¥èª°    13 bytes */
+  char beqid[IDLEN + 1];          /* å‰æ¬¡è¢«èª°æŸ¥  13 bytes */
+  uslong totaltime;		  /* ä¸Šç·šç¸½æ™‚æ•¸   8 bytes */
+  usint sendmsg;                  /* ç™¼è¨Šæ¯æ¬¡æ•¸   4 bytes */
+  usint receivemsg;               /* æ”¶è¨Šæ¯æ¬¡æ•¸   4 bytes */
+  usint goldmoney;                /* é¢¨å¡µé‡‘å¹£     8 bytes */
+  usint silvermoney;              /* éŠ€å¹£         8 bytes */
+  usint exp;                      /* ç¶“é©—å€¼       8 bytes */
+  time4_t dtime;                   /* å­˜æ¬¾æ™‚é–“     4 bytes */
+  int scoretimes;                 /* è©•åˆ†æ¬¡æ•¸     4 bytes */
+  uschar rtimes;                  /* å¡«è¨»å†Šå–®æ¬¡æ•¸ 1 bytes */
+  int award;                      /* çæ‡²åˆ¤æ–·     4 bytes */
+  int pagermode;                  /* å‘¼å«å™¨é–€è™Ÿ   4 bytes */
+  char pagernum[7];               /* å‘¼å«å™¨è™Ÿç¢¼   7 bytes */
+  char feeling[5];                /* å¿ƒæƒ…æŒ‡æ•¸     5 bytes */
+  char title[20];                 /* ç¨±è¬‚(å°è™Ÿ)  20 bytes */
   usint five_win;
   usint five_lost;
   usint five_draw;
-  char pad[91];                  /* ªÅµÛ¶ñº¡¦Ü512¥Î      */
+  char pad[91];                  /* ç©ºè‘—å¡«æ»¿è‡³512ç”¨      */
 };
 
 typedef struct sobuserec sobuserec;

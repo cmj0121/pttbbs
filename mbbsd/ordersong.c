@@ -33,17 +33,17 @@ do_order_song(void)
     char save_title[STRLEN];
     const char *override_receiver = NULL;
 
-    // �ѩ��ܧK�O�F�A�令�n�ݰh���n�J�Ѽ�
+    // 由於變免費了，改成要看退文跟登入天數
 #if defined(ORDERSONG_MAX_BADPOST) && defined(ASSESS)
     if (cuser.badpost > ORDERSONG_MAX_BADPOST) {
-        vmsgf("���קK�ݥΡA�d���e�Х������h��O���� %d �g�H�U",
+        vmsgf("為避免濫用，留言前請先消除退文記錄至 %d 篇以下",
                 ORDERSONG_MAX_BADPOST);
         return 0;
     }
 #endif
 #ifdef ORDERSONG_MIN_NUMLOGINDAYS
     if (cuser.numlogindays < ORDERSONG_MIN_NUMLOGINDAYS) {
-        vmsgf("���קK�ݥΡA�d���e�n����%s %d %s",
+        vmsgf("為避免濫用，留言前要先有%s %d %s",
                 STR_LOGINDAYS, ORDERSONG_MIN_NUMLOGINDAYS, STR_LOGINDAYS_QTY);
         return 0;
     }
@@ -53,10 +53,10 @@ do_order_song(void)
     lockreturn0(OSONG, LOCK_MULTI);
     pwcuReload();
 
-    /* Jaky �@�H�@���I�@�� */
+    /* Jaky 一人一天點一首 */
     if (!strcmp(buf, Cdatedate(&cuser.lastsong)) && !HasUserPerm(PERM_SYSOP)) {
 	move(22, 0);
-	vmsg("�A���Ѥw�g�d�L���o�A���ѦA�ӧa....");
+	vmsg("你今天已經留過言囉，明天再來吧....");
 	unlockutmpmode();
 	return 0;
     }
@@ -65,32 +65,32 @@ do_order_song(void)
 	char ans[4];
 	move(12, 0);
 	clrtobot();
-	prints("�˷R�� %s �w��Ө�߱��I���d���t��\n\n", cuser.userid);
-	outs(ANSI_COLOR(1) "�`�N�߱��I�����e�ФůA����| �H������ �T��"
-	     "���M�V�d ����\n"
-	     "�Y���W�z�H�W���ΡA����N�O�d�M�w�O�_���}���e���v�Q\n"
-             "�B�H�W�̱N�����ΦW�O�@(�� ID �i�Q���G�󤽶}�ݪO)\n"
-	     "�p���P�N�Ы� (3) ���}�C" ANSI_RESET "\n");
+	prints("親愛的 %s 歡迎來到心情點播留言系統\n\n", cuser.userid);
+	outs(ANSI_COLOR(1) "注意心情點播內容請勿涉及謾罵 人身攻擊 猥褻"
+	     "公然侮辱 誹謗\n"
+	     "若有上述違規情形，站方將保留決定是否公開內容的權利\n"
+             "且違規者將不受匿名保護(其 ID 可被公佈於公開看板)\n"
+	     "如不同意請按 (3) 離開。" ANSI_RESET "\n");
 	getdata(18, 0,
-		"�п�� " ANSI_COLOR(1) "1)" ANSI_RESET " �}�l�d���B"
-		ANSI_COLOR(1) "2)" ANSI_RESET " �ݽd���B"
-		"�άO " ANSI_COLOR(1) "3)" ANSI_RESET " ���}: ",
+		"請選擇 " ANSI_COLOR(1) "1)" ANSI_RESET " 開始留言、"
+		ANSI_COLOR(1) "2)" ANSI_RESET " 看範本、"
+		"或是 " ANSI_COLOR(1) "3)" ANSI_RESET " 離開: ",
 		ans, sizeof(ans), DOECHO);
 
 	if (ans[0] == '1')
 	    break;
 	else if (ans[0] == '2') {
-	    a_menu("�d���d��", SONGBOOK, 0, 0, NULL, NULL);
+	    a_menu("留言範本", SONGBOOK, 0, 0, NULL, NULL);
 	    clear();
 	}
 	else if (ans[0] == '3') {
-	    vmsg("���¥��{ :)");
+	    vmsg("謝謝光臨 :)");
 	    unlockutmpmode();
 	    return 0;
         }
     }
 
-    getdata_str(19, 0, "�d����(�i�ΦW): ", sender, sizeof(sender), DOECHO,
+    getdata_str(19, 0, "留言者(可匿名): ", sender, sizeof(sender), DOECHO,
                 cuser.userid);
 
 #ifdef USE_ANGEL_SONG
@@ -98,14 +98,14 @@ do_order_song(void)
 #endif
 
     if (!*receiver)
-        getdata(20, 0, "�d����(�i�ΦW): ", receiver, sizeof(receiver), DOECHO);
+        getdata(20, 0, "留言給(可匿名): ", receiver, sizeof(receiver), DOECHO);
 
     do {
-	getdata(21, 0, "�Q�n�n��L/�o��..:", say, sizeof(say), DOECHO);
+	getdata(21, 0, "想要要對他/她說..:", say, sizeof(say), DOECHO);
 	reduce_blank(say, say);
 	if (!say[0]) {
 	    bell();
-	    mvouts(22, 0, "�Э��s��J�Q�������e");
+	    mvouts(22, 0, "請重新輸入想說的內容");
 	}
     } while (!say[0]);
 
@@ -115,23 +115,23 @@ do_order_song(void)
         *address = 0;
     } else do {
         move(22, 0); clrtobot();
-        getdata_str(22, 0, "�H��֪��H�c(�����u��ID)?",
+        getdata_str(22, 0, "寄到誰的信箱(站內真實ID)?",
                     address, sizeof(address), LCECHO, receiver);
         if (!*address)
             break;
         if (searchuser(address, address)) {
             if (is_rejected(address)) {
-                vmsg("���ڦ�");
+                vmsg("對方拒收");
                 continue;
             } else {
                 break;
             }
         }
-        vmsg("�п�J���� ID �Ϊ��� ENTER");
+        vmsg("請輸入站內 ID 或直接 ENTER");
     } while (1);
 
-    vmsg("���ۭn��d���o...");
-    a_menu("�d���d��", SONGBOOK, 0, 0, trans_buffer, NULL);
+    vmsg("接著要選範本囉...");
+    a_menu("留言範本", SONGBOOK, 0, 0, trans_buffer, NULL);
     if (!trans_buffer[0] || strstr(trans_buffer, "home") ||
 	strstr(trans_buffer, "boards") || !(fp = fopen(trans_buffer, "r"))) {
 	unlockutmpmode();
@@ -149,13 +149,13 @@ do_order_song(void)
 	unlockutmpmode();
 	return 0;
     }
-    strlcpy(mail.owner, "[�߱��I��]", sizeof(mail.owner));
-    snprintf(mail.title, sizeof(mail.title), "�� %s �d���� %s ", sender,
+    strlcpy(mail.owner, "[心情點播]", sizeof(mail.owner));
+    snprintf(mail.title, sizeof(mail.title), "◇ %s 留言給 %s ", sender,
              receiver);
 
     while (fgets(buf, sizeof(buf), fp)) {
 	char           *po;
-	if (!strncmp(buf, "���D: ", 6)) {
+	if (!strncmp(buf, "標題: ", 6)) {
 	    clear();
 	    move(10, 10);
 	    outs(buf);
@@ -176,7 +176,7 @@ do_order_song(void)
 	while ((po = strstr(buf, "<~Des~>"))) {
             const char *r = receiver;
 #ifdef PLAY_ANGEL
-            if (strstr(po, "�p�Ѩ�") && strstr(receiver, "�p�Ѩ�") &&
+            if (strstr(po, "小天使") && strstr(receiver, "小天使") &&
                 override_receiver) {
                 r = override_receiver;
             }
@@ -196,7 +196,7 @@ do_order_song(void)
     fclose(fp);
 
     log_filef("etc/osong.log",  LOG_CREAT,
-              "id: %-12s �� %s �d���� %s : \"%s\", ��H�� %s\n",
+              "id: %-12s ◇ %s 留言給 %s : \"%s\", 轉寄至 %s\n",
               cuser.userid, sender, receiver, say, address);
 
     LOG_IF(LOG_CONF_OSONG_VERBOSE,
@@ -212,13 +212,13 @@ do_order_song(void)
 
     if (append_record(OSONGPATH "/" FN_DIR, &mail, sizeof(mail)) != -1) {
 	pwcuSetLastSongTime(now);
-	/* Jaky �W�L MAX_ADBANNER ���q�N�}�l�� */
-	// XXX ���J�����Ƿ|���o���O:
-	// 3. �� <�t��> �ʺA�ݪO   SYSOP [01/23/08]
-	// 4. �� <�I�q> �ʺA�ݪO   Ptt   [08/26/09]
-	// 5. �� <�s�i> �ʺA�ݪO   SYSOP [08/22/09]
-	// 6. �� <�ݪO> �ʺA�ݪO   SYSOP [04/16/09]
-	// �ѩ��I�q������O�����J���A���ઽ���� MAX_ADBANNER ���M�᭱���S�o���C
+	/* Jaky 超過 MAX_ADBANNER 首歌就開始砍 */
+	// XXX 載入的順序會長得像是:
+	// 3. ◆ <系統> 動態看板   SYSOP [01/23/08]
+	// 4. ◆ <點歌> 動態看板   Ptt   [08/26/09]
+	// 5. ◆ <廣告> 動態看板   SYSOP [08/22/09]
+	// 6. ◆ <看板> 動態看板   SYSOP [04/16/09]
+	// 由於點歌部份算是早載入的，不能直接用 MAX_ADBANNER 不然後面都沒得玩。
 	nsongs = get_num_records(OSONGPATH "/" FN_DIR, sizeof(mail));
 	if (nsongs > MAX_SONGS) {
 	    // XXX race condition
@@ -236,13 +236,13 @@ do_order_song(void)
 
     clear();
     outs(
-	 "\n\n  ���߱z�����o...\n"
-	 "  �@�p�ɤ��ʺA�ݪO�|�۰ʭ��s��s�A\n"
-	 "  �j�a�N�i�H�ݨ�z���߱��I���d���o�I\n\n"
-	 "  ��������D�i�H�� " BN_NOTE " �O����ذϧ䵪�סA\n"
-	 "  �]�i�b " BN_NOTE " �O��ذϬݨ�ۤv���d���O���C\n"
-	 "  �������_�Q���N���]�w��� " BN_NOTE " �ݪO���X�A\n"
-	 "  ���ˤ����O�D���z�A�ȡC\n");
+	 "\n\n  恭喜您完成囉...\n"
+	 "  一小時內動態看板會自動重新更新，\n"
+	 "  大家就可以看到您的心情點播留言囉！\n\n"
+	 "  有任何問題可以到 " BN_NOTE " 板的精華區找答案，\n"
+	 "  也可在 " BN_NOTE " 板精華區看到自己的留言記錄。\n"
+	 "  有任何寶貴的意見也歡迎到 " BN_NOTE " 看板提出，\n"
+	 "  讓親切的板主為您服務。\n");
     pressanykey();
     sortsong();
     topsong();
@@ -300,7 +300,7 @@ sortsong(void)
 	return;
     }
     totalcount = 0;
-    /* XXX: ���F�e MAX_SONGS ��, �ѤU���|�Ƨ� */
+    /* XXX: 除了前 MAX_SONGS 首, 剩下不會排序 */
     while (fgets(buf, 200, fp)) {
 	chomp(buf);
 	strip_blank(cbuf, buf);
@@ -317,9 +317,9 @@ sortsong(void)
     }
     qsort(songs, MAX_SONGS, sizeof(songcmp_t), (QCAST) count_cmp);
     fprintf(fo,
-	    "    " ANSI_COLOR(36) "�w�w" ANSI_COLOR(37) "�W��" ANSI_COLOR(36) "�w�w�w�w�w�w" ANSI_COLOR(37)
-	    "�d��" ANSI_COLOR(36) "�w�w�w�w�w�w�w�w�w�w�w" ANSI_COLOR(37) "����" ANSI_COLOR(36)
-	    "�w�w" ANSI_COLOR(32) "�@%d��" ANSI_COLOR(36) "�w�w" ANSI_RESET "\n", totalcount);
+	    "    " ANSI_COLOR(36) "──" ANSI_COLOR(37) "名次" ANSI_COLOR(36) "──────" ANSI_COLOR(37)
+	    "範本" ANSI_COLOR(36) "───────────" ANSI_COLOR(37) "次數" ANSI_COLOR(36)
+	    "──" ANSI_COLOR(32) "共%d次" ANSI_COLOR(36) "──" ANSI_RESET "\n", totalcount);
     for (n = 0; n < 100 && songs[n].name[0]; n++) {
 	fprintf(fo, "      %5d. %-38.38s %4d " ANSI_COLOR(32) "[%.2f]" ANSI_RESET "\n", n + 1,
 		songs[n].name, songs[n].count,

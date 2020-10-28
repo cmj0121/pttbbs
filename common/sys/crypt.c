@@ -1,11 +1,11 @@
 /* This file is crypt.c taken from ssh 1.2.33, only modified for compile */
 /**
- * FreeBSD ¤Î Linux glibc ªşªº crypt() ³£·|¥Î¨ì¤j table ¥[³t¦h¦¸ crypt().
- * ¦ı bbs ¶È¤W¯¸ÀË¬d±K½X®É¨Ï¥Î¤@¦¸, ¤£­È±o¬°¦¹ªá 100kb memory. (non-const memory)
- * libdes ªº crypt() ¶È»İ 4kb ªº constant lookup table.
+ * FreeBSD åŠ Linux glibc é™„çš„ crypt() éƒ½æœƒç”¨åˆ°å¤§ table åŠ é€Ÿå¤šæ¬¡ crypt().
+ * ä½† bbs åƒ…ä¸Šç«™æª¢æŸ¥å¯†ç¢¼æ™‚ä½¿ç”¨ä¸€æ¬¡, ä¸å€¼å¾—ç‚ºæ­¤èŠ± 100kb memory. (non-const memory)
+ * libdes çš„ crypt() åƒ…éœ€ 4kb çš„ constant lookup table.
  *
- * ¤£¹L­nª`·N libdes 4.01 ªº license ¸ò GPL ¤£¦X, ¦]¦¹¦¹³B±Ä¥Î ssh 1.2.33 ¸ÌÀY
- * ªşªº crypt.c derived from libdes 3.06, ¸Óª©ªº libdes ¬O GPL ªº.
+ * ä¸éè¦æ³¨æ„ libdes 4.01 çš„ license è·Ÿ GPL ä¸åˆ, å› æ­¤æ­¤è™•æ¡ç”¨ ssh 1.2.33 è£¡é ­
+ * é™„çš„ crypt.c derived from libdes 3.06, è©²ç‰ˆçš„ libdes æ˜¯ GPL çš„.
  */
 #define PROTO
 /* This file is fcrypt.c taken from SSLeay-0.4.3a.  This file is only compiled
