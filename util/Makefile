@@ -8,7 +8,7 @@ CFLAGS  := $(CFLAGS) -DPTTBBS_UTIL
 LDFLAGS := $(COMMON_LIB) $(LDFLAGS)
 
 # the binary that could NOT build success
-SKIP_BIN := cleanpasswd reaper uhash_loader writemoney
+SKIP_BIN := cleanpasswd reaper
 
 BIN := $(filter-out $(SKIP_BIN),$(BIN))
 
