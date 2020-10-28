@@ -2,7 +2,7 @@ include Makefile.in
 
 SUBDIR := common mbbsd util
 
-.PHONY: all clean help $(SUBDIR)
+.PHONY: all clean help install $(SUBDIR)
 
 all: $(SUBDIR)		# build all necessary
 
@@ -31,3 +31,12 @@ build:	# build the docker image
 
 run:	# run the pttbbs in docker
 	docker run -it pttbbs sh
+
+start:	# run the pttbbs in docker
+	docker run -it pttbbs
+
+install:	# install
+	install -Dm755 util/initbbs       $(PREFIX)/initbbs
+	install -Dm755 util/shmctl        $(PREFIX)/shmctl
+	install -Dm755 util/uhash_loader  $(PREFIX)/uhash_loader
+	install -Dm755 mbbsd/mbbsd        $(PREFIX)/mbbsd
