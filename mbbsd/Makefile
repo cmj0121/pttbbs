@@ -22,7 +22,7 @@ LIB := libmbbsd.a
 BIN := mbbsd
 
 CFLAGS  := $(CFLAGS)
-LDFLAGS := $(LDFLAGS) -liconv $(COMMON_LIB)
+LDFLAGS := $(LDFLAGS) $(COMMON_LIB)
 
 .PHONY: all clean
 

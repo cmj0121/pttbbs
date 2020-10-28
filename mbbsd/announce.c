@@ -271,7 +271,7 @@ a_showmenu(menu_t * pm)
     }
     else
     {		// normal user
-	vs_footer(" 【功\能鍵】 ",
+	vs_footer(" 【功能鍵】 ",
 		" (k↑j↓)移動游標 (enter/→)讀取資料\t(q/←)離開 (h)說明");
     }
     return 1;
